@@ -1,0 +1,39 @@
+.ablocks-block--notice {
+    border: 2px solid #EFEFF0;
+
+}
+.ablocks-block--notice .ablocks-notice-header {
+    min-height: 50px;
+    padding: 24px;
+    justify-content: space-between !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.ablocks-block--notice .ablocks-notice-title {
+    width: 100% !important;
+    display: flex;
+    justify-content: left;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 26px;
+    color: #13191B;
+    margin: 0;
+    align-items: center;
+}
+
+
+.ablocks-block--notice .ablocks-icon-wrap {
+    padding-right: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.ablocks-block--notice .ablocks-block--paragraph{
+    font-size: 16px;
+    padding: 24px;
+    font-weight: 400;
+    line-height: 24px;
+}

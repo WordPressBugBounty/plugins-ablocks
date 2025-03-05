@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ablocks/toggle-child",
+  "version": "0.1.0",
+  "title": "Toggle child",
+  "category": "ablocks",
+  "description": "Easily add conditional content",
+  "example": [],
+  "supports": {
+    "html": true,
+    "anchor": true
+  },
+  "parent": [
+    "ablocks/toggle"
+  ],
+  "textdomain": "ablocks",
+  "editorStyle": [
+    "ablocks-animate-style",
+    "ablocks-common-style",
+    "file:./style.css"
+  ],
+  "editorScript": [
+    "ablocks-common-script"
+  ],
+  "attributes": {
+    "block_id": {
+      "type": "string",
+      "default": ""
+    }
+  }
+}

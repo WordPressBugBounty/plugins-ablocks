@@ -1,0 +1,35 @@
+.ablocks-block--price-menu .ablocks-block-container,.ablocks-block--price-menu .ablocks-block-container .block-editor-inner-blocks .block-editor-block-list__layout{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+
+.ablocks-block--price-menu-item{
+    display: flex;
+}
+
+.ablocks-block--price-menu .ablocks-block-container .block-editor-inner-blocks .block-editor-block-list__layout .block-list-appender{
+    display: none;
+}
+
+.ablocks-price-menu-add-button{
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    background-color: #13191B;
+    width: fit-content;
+    border-radius: 8px;
+    padding: 12px 20px 12px 20px;
+    border: 0;
+    margin-top: 20px;
+}
+
+.ablocks-price-menu-add-button span{
+    margin-right: 8px;
+}
+
+.ablocks-price-menu-add-button .ablocks-icon--plus::before{
+    color: white !important;
+}

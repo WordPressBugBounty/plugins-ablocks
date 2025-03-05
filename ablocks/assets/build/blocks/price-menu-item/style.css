@@ -1,0 +1,231 @@
+
+.ablocks-price-menu-item{
+    width: 100%;
+    display: flex;
+    width: fit-content;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.ablocks-price-menu-item-details{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+}
+
+.ablocks-price-menu-item-details-title,.ablocks-price-menu-item-price{
+    min-width: fit-content !important;
+}
+
+.ablocks-price-menu-item-details-brief{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ablocks-price-menu-item-details-title,.ablocks-price-menu-item-price,.ablocks-price-menu-item-details-des{
+    margin: 0 !important;
+}
+
+
+.ablocks-price-menu-item-selection{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.ablocks-price-menu-item-separator{
+    width: 100px;
+    height: 2px;
+    /* margin-top: 12px; */
+    background-color: black;
+}
+
+
+.ablocks-block--divider {
+	width: 100%;
+    flex-grow: 1;
+}
+.ablocks-block--divider .ablocks-block-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 50px;
+}
+/* Divider Patterns-mask */
+.ablocks-price-menu-divider__pattern-mask {
+    display: flex;
+    align-items: center;
+    background-color: var(--ablocks-divider-pattern-color);
+    mask-image: var(--ablocks-divider-pattern-url);
+    -webkit-mask-image: var(--ablocks-divider-pattern-url);
+    min-height: var(--ablocks-divider-pattern-height);
+    height: 100%;
+    width: 100%;
+    mask-repeat: repeat-x;
+    -webkit-mask-repeat: repeat-x;
+}
+/* Divider Patterns-mask */
+
+
+
+/* Divider Patterns-mask with Icons and Text Aligned center */
+.ablocks-price-menu-divider__pattern-mask-element-icon--center,
+.ablocks-price-menu-divider__pattern-mask-element-text--center {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    min-height: var(--ablocks-divider-pattern-height);
+    height: auto;
+}
+
+.ablocks-price-menu-divider__pattern-mask-element-icon--center::before,
+.ablocks-price-menu-divider__pattern-mask-element-icon--center::after,
+.ablocks-price-menu-divider__pattern-mask-element-text--center::before,
+.ablocks-price-menu-divider__pattern-mask-element-text--center::after {
+    content: "";
+    display: flex;
+    align-items: center;
+    height: var(--ablocks-divider-pattern-height);
+    background-color: var(--ablocks-divider-pattern-color);
+    mask-image: var(--ablocks-divider-pattern-url);
+    -webkit-mask-image: var(--ablocks-divider-pattern-url);
+    mask-repeat: repeat-x;
+    -webkit-mask-repeat: repeat-x;
+    -webkit-mask-position-y: center;
+}
+/* Divider Patterns-mask with Icons and Text Aligned center */
+
+
+/* Divider Patterns-mask with Icons and Text Aligned left */
+.ablocks-price-menu-divider__pattern-mask-element-icon--left,
+.ablocks-price-menu-divider__pattern-mask-element-text--left {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    min-height: var(--ablocks-divider-pattern-height);
+    height: auto;
+}
+
+
+.ablocks-price-menu-divider__pattern-mask-element-icon--left::after,
+.ablocks-price-menu-divider__pattern-mask-element-text--left::after {
+    content: "";
+    display: flex;
+    align-items: center;
+    height: var(--ablocks-divider-pattern-height);
+    background-color: var(--ablocks-divider-pattern-color);
+    mask-image: var(--ablocks-divider-pattern-url);
+    -webkit-mask-image: var(--ablocks-divider-pattern-url);
+    mask-repeat: repeat-x;
+    -webkit-mask-repeat: repeat-x;
+    -webkit-mask-position-y: center;
+}
+/* Divider Patterns-mask with Icons and Text Aligned left */
+
+
+/* Divider Patterns-mask with Icons and Text Aligned right */
+.ablocks-price-menu-divider__pattern-mask-element-icon--right,
+.ablocks-price-menu-divider__pattern-mask-element-text--right {
+    width: 100%;
+    display: grid;
+    grid-template-columns:  1fr auto;
+    align-items: center;
+    min-height: var(--ablocks-divider-pattern-height);
+    height: auto;
+}
+
+
+.ablocks-price-menu-divider__pattern-mask-element-icon--right::before,
+.ablocks-price-menu-divider__pattern-mask-element-text--right::before {
+    content: "";
+    display: flex;
+    align-items: center;
+    height: var(--ablocks-divider-pattern-height);
+    background-color: var(--ablocks-divider-pattern-color);
+    mask-image: var(--ablocks-divider-pattern-url);
+    -webkit-mask-image: var(--ablocks-divider-pattern-url);
+    mask-repeat: repeat-x;
+    -webkit-mask-repeat: repeat-x;
+    -webkit-mask-position-y: center;
+}
+/* Divider Patterns-mask with Icons and Text Aligned right */
+
+
+
+/* Divider Patterns-css */
+.ablocks-price-menu-divider__pattern-css {
+    border-block-start: var(--ablocks-divider-pattern-weight) var(--ablocks-divider-pattern-style) var(--ablocks-divider-pattern-color);
+    /* width: 100%; */
+}
+
+
+/* Divider Patterns-css with Icons and Text Aligned center */
+.ablocks-price-menu-divider__pattern-css-element-icon--center,
+.ablocks-price-menu-divider__pattern-css-element-text--center {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+}
+
+.ablocks-price-menu-divider__pattern-css-element-icon--center::before,
+.ablocks-price-menu-divider__pattern-css-element-icon--center::after,
+.ablocks-price-menu-divider__pattern-css-element-text--center::before,
+.ablocks-price-menu-divider__pattern-css-element-text--center::after {
+    content: "";
+    display: flex;
+    align-items: center;
+    border-block-start: var(--ablocks-divider-pattern-weight) var(--ablocks-divider-pattern-style) var(--ablocks-divider-pattern-color);
+}
+/* Divider Patterns-css with Icons and Text Aligned center */
+
+
+
+/* Divider Patterns-css with Icons and Text Aligned Left */
+.ablocks-price-menu-divider__pattern-css-element-icon--left,
+.ablocks-price-menu-divider__pattern-css-element-text--left {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+}
+
+.ablocks-price-menu-divider__pattern-css-element-icon--left::after,
+.ablocks-price-menu-divider__pattern-css-element-text--left::after {
+    content: "";
+    display: flex;
+    align-items: center;
+    border-block-start: var(--ablocks-divider-pattern-weight) var(--ablocks-divider-pattern-style) var(--ablocks-divider-pattern-color);
+}
+/* Divider Patterns-css with Icons and Text Aligned Left */
+
+
+
+/* Divider Patterns-css with Icons and Text Aligned  Right */
+.ablocks-price-menu-divider__pattern-css-element-icon--right,
+.ablocks-price-menu-divider__pattern-css-element-text--right {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+}
+
+.ablocks-price-menu-divider__pattern-css-element-icon--right::before,
+.ablocks-price-menu-divider__pattern-css-element-text--right::before {
+    content: "";
+    display: flex;
+    align-items: center;
+    border-block-start: var(--ablocks-divider-pattern-weight) var(--ablocks-divider-pattern-style) var(--ablocks-divider-pattern-color);
+}
+/* Divider Patterns-css with Icons and Text Aligned  Right */
+
+ .ablocks-block--divider .ablocks-divider__element-icon {
+    display: inline-block;
+    line-height: 1;
+}

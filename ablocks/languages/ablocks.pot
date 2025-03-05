@@ -1,0 +1,5505 @@
+# Copyright (C) 2025 Academy LMS
+# This file is distributed under the GPL-3.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: aBlocks 1.6.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-02-03T12:30:11+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: ablocks\n"
+
+#. Plugin Name of the plugin
+#: ablocks.php
+#: includes/admin/menu.php:45
+#: assets/build/dashboard.js:1
+msgid "aBlocks"
+msgstr ""
+
+#. Description of the plugin
+#: ablocks.php
+msgid "The WordPress plugin for creating beautiful and functional websites using the Gutenberg editor, with a variety of customizable blocks to design website pages."
+msgstr ""
+
+#. Author of the plugin
+#: ablocks.php
+#: includes/blocks.php:127
+msgid "Academy LMS"
+msgstr ""
+
+#. Author URI of the plugin
+#: ablocks.php
+msgid "https://ablocks.pro/"
+msgstr ""
+
+#: includes/admin.php:47
+msgid "Docs"
+msgstr ""
+
+#: includes/admin.php:48
+msgid "View Academy documentation"
+msgstr ""
+
+#: includes/admin.php:52
+msgid "Video Tutorials"
+msgstr ""
+
+#: includes/admin.php:53
+msgid "See Video Tutorials"
+msgstr ""
+
+#: includes/admin.php:57
+msgid "Community Support"
+msgstr ""
+
+#: includes/admin.php:58
+msgid "Visit community forums"
+msgstr ""
+
+#: includes/admin.php:62
+msgid "Rate the plugin ★★★★★"
+msgstr ""
+
+#: includes/admin.php:63
+msgid "Rate the plugin."
+msgstr ""
+
+#: includes/admin.php:79
+#: includes/helper.php:87
+#: assets/build/dashboard.js:1
+#: assets/build/dashboard.js:4
+msgid "Settings"
+msgstr ""
+
+#: includes/admin.php:84
+msgid "Get aBlocks Pro"
+msgstr ""
+
+#: includes/ajax/dashboard.php:40
+msgid "You do not have sufficient permissions to install plugins."
+msgstr ""
+
+#: includes/ajax/dashboard.php:48
+#: includes/ajax/dashboard.php:58
+msgid "Plugin installed and activated successfully!"
+msgstr ""
+
+#: includes/ajax/dashboard.php:50
+msgid "Sorry, failed to download."
+msgstr ""
+
+#: includes/ajax/dashboard.php:63
+#: includes/ajax/dashboard.php:101
+msgid "Argument should not be empty."
+msgstr ""
+
+#: includes/ajax/form-builder.php:66
+msgid "You have logged in successfully. Redirecting..."
+msgstr ""
+
+#: includes/ajax/form-builder.php:113
+msgid "Registration completed successfully. Redirecting..."
+msgstr ""
+
+#: includes/ajax/settings.php:52
+msgid "Block Name missing"
+msgstr ""
+
+#: includes/assets.php:154
+msgctxt "Google font: on or off"
+msgid "on"
+msgstr ""
+
+#: includes/blocks.php:123
+msgid "ABlocks"
+msgstr ""
+
+#: includes/blocks/news-ticker/block.php:413
+msgid "No %s found in the selection"
+msgstr ""
+
+#: includes/blocks/news-ticker/block.php:418
+#: assets/build/blocks.js:1
+msgid "No items selected"
+msgstr ""
+
+#: includes/blocks/tabs/attributes.php:25
+#: assets/build/blocks.js:1
+msgid "Tab 1"
+msgstr ""
+
+#: includes/blocks/tabs/attributes.php:26
+#: assets/build/blocks.js:1
+msgid "Tab 2"
+msgstr ""
+
+#: includes/blocks/tabs/attributes.php:27
+#: assets/build/blocks.js:1
+msgid "Tab 3"
+msgstr ""
+
+#: includes/blocks/tabs/attributes.php:33
+#: assets/build/blocks.js:1
+msgid "Subtitle 1 Content: This tab provides general information about our company"
+msgstr ""
+
+#: includes/blocks/tabs/attributes.php:34
+#: assets/build/blocks.js:1
+msgid "Subtitle 2 Content: This tab provides general information about our company"
+msgstr ""
+
+#: includes/blocks/tabs/attributes.php:35
+#: assets/build/blocks.js:1
+msgid "Subtitle 3 Content: This tab provides general information about our company"
+msgstr ""
+
+#: includes/classes/file-upload.php:20
+msgid "Error occurred, please try again"
+msgstr ""
+
+#: includes/classes/file-upload.php:30
+msgid "Invalid file extension"
+msgstr ""
+
+#: includes/frontend/template.php:48
+msgid "aBlocks Full Width"
+msgstr ""
+
+#: includes/helper.php:82
+msgid "Dashboard"
+msgstr ""
+
+#: includes/helper.php:93
+#: assets/build/dashboard.js:1
+msgid "Get Pro"
+msgstr ""
+
+#: includes/helper.php:103
+msgid "Loading..."
+msgstr ""
+
+#. translators: %s template
+#: includes/helper.php:346
+msgid "%s does not exist."
+msgstr ""
+
+#: includes/helper.php:364
+msgid "action_args should not be overwritten when calling ablocks/get_template."
+msgstr ""
+
+#: includes/import/parsers/wxr-parser-regex.php:104
+#: includes/import/parsers/wxr-parser-simple-xml.php:49
+#: includes/import/parsers/wxr-parser-simple-xml.php:55
+#: includes/import/parsers/wxr-parser-xml.php:109
+msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr ""
+
+#: includes/import/parsers/wxr-parser-simple-xml.php:36
+#: includes/import/parsers/wxr-parser-simple-xml.php:44
+msgid "There was an error when reading this WXR file"
+msgstr ""
+
+#: includes/import/wp-import.php:83
+msgid "File not found"
+msgstr ""
+
+#: includes/import/wp-import.php:794
+msgid "Fetching attachments is not enabled"
+msgstr ""
+
+#: includes/import/wp-import.php:812
+msgid "Invalid file type"
+msgstr ""
+
+#: includes/import/wp-import.php:857
+msgid "Could not create temporary file."
+msgstr ""
+
+#. translators: 1: The WordPress error message. 2: The WordPress error code.
+#: includes/import/wp-import.php:880
+msgid "Request failed due to an error: %1$s (%2$s)"
+msgstr ""
+
+#. translators: 1: The HTTP error message. 2: The HTTP error code.
+#: includes/import/wp-import.php:899
+msgid "Remote server returned the following unexpected result: %1$s (%2$s)"
+msgstr ""
+
+#: includes/import/wp-import.php:914
+msgid "Remote server did not respond"
+msgstr ""
+
+#: includes/import/wp-import.php:924
+msgid "Zero size file downloaded"
+msgstr ""
+
+#: includes/import/wp-import.php:932
+msgid "Downloaded file has incorrect size"
+msgstr ""
+
+#: includes/import/wp-import.php:941
+msgid "Remote file is too large, limit is %s"
+msgstr ""
+
+#: includes/import/wp-import.php:973
+msgid "Sorry, this file type is not permitted for security reasons."
+msgstr ""
+
+#: includes/import/wp-import.php:991
+msgid "The uploaded file could not be moved"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks/form-builder/view.js:1
+#: assets/build/dashboard.js:1
+msgid "Normal Text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:4
+msgid "Default"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Full Width (100%)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Inline (auto)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Custom"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Top"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Right"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Bottom"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Left"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Link Value Together"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Custom Width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Normal"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hover"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Back To Default"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Rotate"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "3D Rotate"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Rotate X"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Rotate Y"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Perspective"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Scale"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Keep Proportions"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Scale X"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Scale Y"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Offset"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Offset X"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Offset Y"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Skew"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Skew X"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Skew Y"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Flip Horizontal"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Flip Vertical"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Transition Duration (ms)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "X Anchor Point"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Y Anchor Point"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Active Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add….."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Border Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Border color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Border Radius"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Horizontal Orientation"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Vertical Orientation"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Replace Image"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Choose Image…"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Image"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Image Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Attachment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Repeat"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Display size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Start"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Specify a start time (in seconds)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "End"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Specify a end time (in seconds)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Background fallback"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "This cover image will replace the background video in case that the video could not be loaded"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Play once"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Privacy mode"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Autoplay"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Mute"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Loop"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Player controls"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Download button"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Replace Video"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Choose Video…"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "None"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Vimeo"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Youtube"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Self hosted"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Source"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Link"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "External link"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Video"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Background color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Background"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Transition Duration"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Blur"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Brightness"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Contrast"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Saturate"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hue"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Type"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Opacity"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Blend mode"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Fit"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Fill"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Circle"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Flower"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Sketch"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Triangle"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Blob"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Shape"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Center Center"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Center Left"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Center Right"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Top Center"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Top Left"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Top Right"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Bottom Center"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Bottom Left"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Bottom Right"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "X Position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Y Position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Run Animation Again"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Duration"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Delay"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Shadow"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "shadowType"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Horizontal"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Vertical"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Spread"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Transition Duration (s)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Display Condition"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+#: assets/build/dashboard.js:4
+msgid "PRO"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "This feature is available only in the Pro version. Please upgrade to access it and unlock advanced functionality."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Tooltip"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Get advanced tooltip with Ablocks Pro, including parallax, rotation, and more!"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Layout"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Margin"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Padding"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Z-Index"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "CSS ID"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "CSS Classes"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Display Conditions"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Motion Effects"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Scrolling Effects"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Mouse Effects"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Sticky"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Entrance Animation"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Floating Effects"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Enable"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Transform"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Background Overlay"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Border"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Box shadow"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Mask"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Responsive"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "General"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Advanced"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Container"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:4
+msgid "Container Width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Full Width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Boxed"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Content Width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Overflow"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Direction"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Row"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Column"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Row Reverse"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Column Reverse"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Justify"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Flex Start"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Center"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Flex End"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Space Between"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Space Around"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Space Evenly"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Align Items"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Stretch"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Columns Gap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Rows Gap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Wrap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "No Wrap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Wrap Reverse"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "100 (Thin)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "200 (Extra Light)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "300 (Light)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "400 (Normal)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "500 (Medium)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "600 (Semi Bold)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "700 (Bold)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "800 (Extra Bold)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "900 (Black)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Uppercase"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Lowercase"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Capitalize"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Italic"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Oblique"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Underline"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Overline"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Line Through"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "All icons"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Animations"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Award & reward"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Bookmark & logo"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Favorite"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Business"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Cloth Accessories"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Date & Time"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Device"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "E-commerce"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Educations"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Select or Upload Media"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Use this media"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "aBlocks Copy Styles (cmd+shift+c)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "aBlocks Paste Styles (cmd+shift+v)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Choose Container Layout"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Select a container layout to start with."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Reset"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Text Shadow"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Blur Shadow"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Horizontal Shadow"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Vertical shadow"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Text Stroke"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Stroke color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Stroke width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add…"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Typography"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Family"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Weight"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Decoration"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Line-Height"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Letter Spacing"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Word spacing"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Content"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Title"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "HTML Tag"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Enter your heading.."
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Dual Button"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Gap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Sizes"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add Button"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon Library"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Upload Image"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Image sizes"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "View"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "search icons…"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:4
+msgid "All"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Solid"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Brands"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "All Icons"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Primary color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Border width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Border radius"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Link Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Open in new window"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add nofollow"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Custom Attributes"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Button"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon spacing"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Lists"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Marker type"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon Position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Emoji"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Vertical alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Horizontal alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Text color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Marker color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Marker size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Space Between Horizontal"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Space Between Vertical"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Divider Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Primary Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add item"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Aspect ratio"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Height"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Object fit"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Image link"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Open in new tab"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Alt Text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "clear"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "On Hover image"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "CSS Filters"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Transition duration(ms)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Caption"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Captions"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Caption text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Image caption text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add caption"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Edit image"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Use this image for all devices"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "skip"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Upload an image file, pick one from your media library, or add one with a URL."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Orientation"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Swap Imgaes"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Move on Hover"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Handle"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Labels"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Slider Position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Before Image Label"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "After Image Label"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Label position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show only on Hover"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Label with Overlay"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Text Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Background Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Overlay Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Handle Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Slider Bar Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Slider Icon Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Slider Icon Border Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "The images have different dimensions. Would you like to balance them?"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Balance Images"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Skip"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "An error occurred while balancing the images. Please try again."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Try Again"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Cancel"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Before Image"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Drag an image, upload a new one or select a file from your library."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "After Image"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Start Rating"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Rating"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Rating number"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Spacing"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Unmarked Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Rating Number"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Divider"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add Element"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Divider Text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Divider Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Comma"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Dot"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "WhiteSpace"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Apostrophe"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Number"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Bar"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Left Of Number"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Right Of Number"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Stacked"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Framed"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Inner"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Counter"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Starting Number"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Ending Number"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Total Number"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Animation Duration(ms)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Animation Repeat"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Decimal places"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Number Prefix"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Number Suffix"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Thousand Separator"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Heading"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Circle size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Stroke size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Progress Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Heading position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add your paragraph text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Notification"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Notice Close"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Choose \"Permanent\" to hide the notice permanently after dismissing. Choose \"One Time\" to hide it only for the current session."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Notice Title"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Spacer"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Preload"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "When you turn on privacy mode YouTube Vimeo won\"t store information about visitors on your website unless they play the video."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Intro title"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Intro portrait"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Intro byline"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Poster"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Absolute"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Fixed"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Search"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Variant"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Classic"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Minimal"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Button Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Search source"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Any"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Post"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Product"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:4
+msgid "Page"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Search Field"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Placeholder"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Search Button"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Button type"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Both"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Search Result Container"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "List width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Search Result Item"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Item width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Carousel"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Choose Effect"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Reverse Direction"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Grab Cursor"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Mousewheel"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Vertical Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Pagination"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Pagination Clickable"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Autoplay Reverse"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Autoplay Pause On Hover"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Navigation"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Left Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Right Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Explore Carousel Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Carousel blocks settings for customizing slides effortlessly."
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Toggle"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Space"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Toggle Label"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Left Label"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Right Label"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Toggle Control"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Toggle Width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Toggle Height"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Toggle Bar"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Explore Toggle Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Access the toggle settings to customize collapsible content easily."
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Accordion"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Initial Open"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "This feature works on the frontend only."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Item Space"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Accordion Title"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Heading Tag"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Active Background"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Toggle Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Left Active Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Left Close Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Right Active Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Right Close Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Accordion Content"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add Accordion"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Explore Accordion Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Customize accordion block settings to your design and content needs."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Single Accordion"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:4
+msgid "Active"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Square"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Tab Menu"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Menu Position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Menu Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Menu Content Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Tabs Change Effect"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Enable Auto Change"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Tabs Gap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Active Border Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Subtitle"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Auto Change Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Active Duration"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Tab Content"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Move tab up"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Move tab down"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Remove tab"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Title…"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Subtitle…"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add tab"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Explore Tabs Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Access the tabs settings to organize and customize content easily."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Enroll Form Option"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Select Course"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Start Button Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Enroll Button Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hide"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Message"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Message & Hide Countdown"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Redirect"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid ":"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "/"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "?"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "|"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Transparent"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Countdown"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Select Date"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Day"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Hour"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Minute"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Second"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Separator"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Box Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Label Position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Number and Label Gap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Label"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Days"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hours"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Minute"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Second"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Separator"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Images Sizes"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Image Scroll Option"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Speed (s)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Image Scroll"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Nav"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hamburger Menu Device"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Tablet"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Mobile"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Mobile Hamburger"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hamburger Width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hamburger Height"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Menu Item"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Menu Responsive"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Explore Menu Blocks Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Access the Menu block setting to customize menus for easy navigation."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Enable Link"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Sub Menu"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Mega Menu"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "height"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "PositionX"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Panel"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Place popup on top of page"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Top Offset"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Content Position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Backdrop BG"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Trigger settings"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Use hover trigger instead of click"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Enable Auto Trigger Timer (s)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Disable Trigger Element"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Close Button"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Disable Button"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Location Search…"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Draggable Marker, Your can easily change your marker position by Dragging"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Latitude"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "longitude"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Popup Title"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Popup Content"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "HTML Supported"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Save & Close"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Marker Settings"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Choose Icon Type"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Default Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Custom Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon Width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon Height"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Upload Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Replace Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Remove Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Map Settings"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Choose Map"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Google Map"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Open Street map"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Satellite Map"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Zoom Level"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Enable Scroll Wheel Zoom"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Map Marker"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "+ Add Marker"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Marker Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Front"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Back"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Flip Box"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Side"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Transition Speed"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Flip Direction"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Explore Flip Box Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Customize the Flip Box block to create interactive hover effects."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Price menu"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Column gap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Items Direction"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Gap around elements"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Place divider"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Place price"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Titles"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Descriptions"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Dividers"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Prices"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Explore Price Menu Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Access the price menu settings to customize its styles effortlessly."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Description"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Price"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Table setting"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Cell Border Types"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Header Setting"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Background Hover"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Body setting"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Row odd Background"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Row Even Background"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Row Odd Background Hover"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Row Even Background Hover"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Footer Setting"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Background Color Hover"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Edit Table"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add Top Row"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Insert Bottom Row"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Insert Left Column"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add Right Column"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Explore Table Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Access the table settings to customize tabular data effortlessly."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Cell setting"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Row Span"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Cols Span"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Delete"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add after row"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add Before row"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add after column"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add Before column"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Delete column"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Deleted Row"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Row Edit"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Row setting"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Background Hover Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Social Share"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Stack"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon Round color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Text backgroun color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon Hover Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Text background Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Space between"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Share Bar"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Share Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Share Icon Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Share Items"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Share Item Icon Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Text Width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Text Height"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Animation Duration"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Badge"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Sub Heading"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Marked Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Button Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Info Box"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon placement"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon Gap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Content Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Content Gap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Enter your subHeading.."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Enter your text.."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Select, Customize, Shine Bright!"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hidden Coupon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Simple Coupon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Coupon Overlay"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Coupon Code"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Coupon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Borders"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Coupon Button"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Button Text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "After Copy Text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Content Timeline"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Arrow Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Date"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Item Gap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Date"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Date Format"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Date Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Date Typography"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Date Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Date Background"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Connectors"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon Background Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Connector Thickness"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Connector Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Animation"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Connector Animation Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Animation color only work at frontend."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon Background Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Explore Content Timeline Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Access content timeline settings to display events in order."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Content Timeline Child"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Date (mm/dd/yyyy)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Change Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Table of Content Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Title"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "H1"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "H2"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "H3"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "H4"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "H5"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "H6"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Header Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Title Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Title Typography"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Header Background"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Lists Settings"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Marker View"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "List Gap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Collapsible Settings"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Make Content Collapsible"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Open Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Close Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Align text left"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Align text center"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Align text right"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Align text justify"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Puls Effect"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Soft Beat"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Glow"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "On Hover"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "On Click"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Fade In"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Fade Grow"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Slide In Top"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Slide In Bottom"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Slide In Left"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Slide In Right"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Full"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Large"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Medium"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Thumbnail"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Trigger"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hotspot"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Color Effect"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hover Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hotspot Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Effect Size(on Hover)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Horizontal Position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Vertical Position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hotspot Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Background Image"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hotspot Child"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Speed (Slow To Fast)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Pause On Hover"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Position sticky"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Select Position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Label"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Navigator"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Time"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Query Builder"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Query Type"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Selected Posts"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Post Link"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Selected Pages"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Page Link"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Ticker Navigator"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Navigator Position"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Ticker Label"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Sticky Label"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Ticker Shape"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Label Tag"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Ticker Body"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Ticker List Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Content Height"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Breaking News"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "start"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "center"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "end"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "space-between"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Checkout"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Donation"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Subscription"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "USD"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "AUD"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "BRL"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "CAD"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "CNY"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "CZK"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "DKK"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "EUR"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "HKD"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "HUF"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "ILS"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "JPY"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "MYR"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "MXN"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "TWD"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "NZD"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "NOK"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "PHP"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "PLN"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "GBP"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "SGD"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "SEK"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "CHF"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "THB"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Pricing & Payments"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "PayPal Account"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Transaction Type"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Item Name"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Amount"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Currency"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Quantity"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Shipping Price"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Tax (%)"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Fixed Amount"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Auto Renewal"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Billing Cycle"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Additional Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Redirection After Payment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Sandbox Mode"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Sandbox Email"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Open in New Tab"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Custom Message"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Error Message"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Small"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Extra Large"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Collect Submission"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Email"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Email2"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Redirected"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Form Name"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Rows Spacing"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Label Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Input Text Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Register"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Redirect After Register"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Login"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Redirect After Login"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Labels"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Input"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Placeholder Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Submit Button"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Button Label"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Button Sizes"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Success Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Success color only work at frontend."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Action After Submit"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Action Types"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Please Select a Form Type"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Username"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "first_name"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "last_name"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "custom"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Explore Form Builder Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Design and customize forms easily for login, registration, and more."
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Field type"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Email Type"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Name"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Helper Text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Required"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Icon Space"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "100%"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "75%"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "50%"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "33%"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "25%"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "textarea"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "bio"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Text Area"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Custom Name"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Rows"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Checkbox"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Label Name"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Default Checked"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Radio Block Settings"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Password"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Password Type"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Password Show & Hide Toggle"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Password Show & Hide Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Password Show"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Password Hide"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "2"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "3"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "4"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "6"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "12"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Beginner"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Intermediate"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Expert"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Free"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Paid"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Product Title"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Modified Date"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Descending"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Ascending"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Layout Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Course Columns"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Courses Per Page"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Difficulty Level"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Price Type"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Order By"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Order"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hover color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Form Settings"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Form Title Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Input Field Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Button Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Form Footer Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Form Input Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Form Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Form Button Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Search Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "PDF Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Form Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Form Title"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Username Label"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Reset Button Label"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Login Label"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Form Header & Footer"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Entire Page"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Selector"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Progress Tracker"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Progress relative to"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "#id"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Percentage"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Certificate Background"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Select a Certificate Image"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Certificate Layout"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Page Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Page Orientation"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Certificate Padding"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Verification ID Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Customize certificate with these values: %1$s, %2$s, %3$s, %4$s, %5$s, %6$s"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Academy LMS Pro Codes: %s"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Enter your title…"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Copy Block Styles"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Paste Block Styles"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:4
+msgid "Pro"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Full screen"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Small screen"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Dependencies list"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Installed"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Yes"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "No"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Activated"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "You're good to go"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "All dependencies are not installed and activated"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Import"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Install & activate"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Live Preview"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Something went wrong!"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Page inserted successful!"
+msgstr ""
+
+#. translators: %s: selectedTab
+#: assets/build/blocks.js:4
+msgid "%s inserted successfully!"
+msgstr ""
+
+#: assets/build/blocks.js:4
+msgid "No results found"
+msgstr ""
+
+#: assets/build/blocks.js:4
+msgid "Pattern"
+msgstr ""
+
+#: assets/build/blocks.js:4
+msgid "Template"
+msgstr ""
+
+#: assets/build/blocks.js:4
+msgid "Import Templates"
+msgstr ""
+
+#: assets/build/blocks.js:4
+msgid "Import Template"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "License"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "logo"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Welcome"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+#: assets/build/dashboard.js:4
+msgid "Blocks/ Extensions"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Welcome to aBlocks"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Power Up Your Gutenberg Editor Website Building Experience With aBlocks."
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Create New Page"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Visit Our Website"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Technical Support"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Get instant support from our expert support team."
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Get Support →"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Join Community"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Join our growing community to get all the updates and information instantly."
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Join →"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Rate Us"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "We’d love to hear your feedback! Please take a moment to rate our plugin and share your thoughts."
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Submit Review →"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Paragraph"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "spacer"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Star Ratings"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Modal"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "List"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Tabs"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Map"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Table Of Contents"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Image Comparison"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Table"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "SVG Draw"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Menu"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Price Menu"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Form Builder"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Image Hotspot"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Loop Builder"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Paypal Button"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "News Ticker"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Stripe"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Facebook Like"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Facebook Embed"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Playlist"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Gallery"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Breadcrumb"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Lottie Animation"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Course Grid"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Login Form"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Enroll Form"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Student Reg. Form"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Instructor Reg. Form"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Course Search"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "PDF Embed"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Password Reset Form"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Certificate Builder"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+#: assets/build/dashboard.js:4
+msgid "Plugin Required"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+#: assets/build/dashboard.js:4
+msgid "Install Academy LMS to unlock this Block!"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+#: assets/build/dashboard.js:4
+msgid "Install Academy LMS"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Deactivate"
+msgstr ""
+
+#. translators: %1$s: AddonName, %2$s: AddonStatus
+#: assets/build/dashboard.js:4
+msgid "%1$s successfully %2$s"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Live Demo"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "In Dev"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Coming Soon"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Sorry, you can't disable required block."
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Inactive"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Search…"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Core Blocks"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Core Blocks not found!"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Academy LMS Integration Blocks"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Academy LMS Integration Blocks not found!"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Settings Saved!"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Failed to save settings."
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Editor Options"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Set a default container width to ensure consistent layout and design."
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Container Padding"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Define the default padding for containers."
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Copy & Paste Block Styles"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Duplicate your block designs on same blocks across websites. (Works only on blocks from aBlocks)."
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Asset Generation"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Enable asset file generation"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Turn on this option to enable asset file generation."
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Regenerate Assets"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Assets Successfully Regenerated!"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Performance"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Font Selection Control"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Limit font options to only the selected ones from 1500+ Google fonts."
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Select Fonts"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Site Visibility"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Enable Coming Soon Mode"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Display a 'Coming Soon' page while your site or any page is under development."
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Coming Soon Page"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Enable Maintenance Mode"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Temporarily take your site offline with a 503 status code for maintenance."
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Maintenance Page"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Save"
+msgstr ""
+
+#: assets/build/blocks/academy-certificate-id/block.json
+msgctxt "block title"
+msgid "Academy Certificate ID"
+msgstr ""
+
+#: assets/build/blocks/academy-certificate-id/block.json
+msgctxt "block description"
+msgid "Academy Certificate ID."
+msgstr ""
+
+#: assets/build/blocks/academy-certificate-text/block.json
+msgctxt "block title"
+msgid "Academy Certificate Text"
+msgstr ""
+
+#: assets/build/blocks/academy-certificate-text/block.json
+msgctxt "block description"
+msgid "Academy Certificate Text"
+msgstr ""
+
+#: assets/build/blocks/academy-certificate/block.json
+msgctxt "block title"
+msgid "Academy Certificate"
+msgstr ""
+
+#: assets/build/blocks/academy-certificate/block.json
+msgctxt "block description"
+msgid "Academy Certificate Block"
+msgstr ""
+
+#: assets/build/blocks/academy-course-search/block.json
+msgctxt "block title"
+msgid "Academy Course Searchbar"
+msgstr ""
+
+#: assets/build/blocks/academy-course-search/block.json
+msgctxt "block description"
+msgid "Course search bar for Academy LMS."
+msgstr ""
+
+#: assets/build/blocks/academy-course-search/block.json
+#: assets/build/blocks/academy-courses/block.json
+#: assets/build/blocks/academy-enroll-form/block.json
+#: assets/build/blocks/academy-instructor-registration-form/block.json
+#: assets/build/blocks/academy-login-form/block.json
+#: assets/build/blocks/academy-password-reset-form/block.json
+#: assets/build/blocks/academy-pdf/block.json
+#: assets/build/blocks/academy-student-registration-form/block.json
+#: assets/build/blocks/accordion/block.json
+#: assets/build/blocks/button/block.json
+#: assets/build/blocks/container/block.json
+#: assets/build/blocks/container/deprecated/block.json
+#: assets/build/blocks/countdown/block.json
+#: assets/build/blocks/counter/block.json
+#: assets/build/blocks/coupon/block.json
+#: assets/build/blocks/divider/block.json
+#: assets/build/blocks/heading/block.json
+#: assets/build/blocks/icon/block.json
+#: assets/build/blocks/image-scroll/block.json
+#: assets/build/blocks/image/block.json
+#: assets/build/blocks/info-box/block.json
+#: assets/build/blocks/lists/block.json
+#: assets/build/blocks/paragraph/block.json
+#: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/search/block.json
+#: assets/build/blocks/spacer/block.json
+#: assets/build/blocks/star-ratings/block.json
+#: assets/build/blocks/svg-draw/block.json
+#: assets/build/blocks/tabs/block.json
+#: assets/build/blocks/toggle/block.json
+#: assets/build/blocks/video/block.json
+msgctxt "block keyword"
+msgid "ablocks"
+msgstr ""
+
+#: assets/build/blocks/academy-course-search/block.json
+#: assets/build/blocks/academy-courses/block.json
+#: assets/build/blocks/academy-enroll-form/block.json
+#: assets/build/blocks/academy-instructor-registration-form/block.json
+#: assets/build/blocks/academy-login-form/block.json
+#: assets/build/blocks/academy-password-reset-form/block.json
+#: assets/build/blocks/academy-pdf/block.json
+#: assets/build/blocks/academy-student-registration-form/block.json
+msgctxt "block keyword"
+msgid "academy"
+msgstr ""
+
+#: assets/build/blocks/academy-course-search/block.json
+#: assets/build/blocks/academy-courses/block.json
+#: assets/build/blocks/academy-enroll-form/block.json
+#: assets/build/blocks/academy-instructor-registration-form/block.json
+#: assets/build/blocks/academy-login-form/block.json
+#: assets/build/blocks/academy-password-reset-form/block.json
+#: assets/build/blocks/academy-pdf/block.json
+#: assets/build/blocks/academy-student-registration-form/block.json
+msgctxt "block keyword"
+msgid "academy lms"
+msgstr ""
+
+#: assets/build/blocks/academy-course-search/block.json
+#: assets/build/blocks/info-box/block.json
+#: assets/build/blocks/search/block.json
+msgctxt "block keyword"
+msgid "search"
+msgstr ""
+
+#: assets/build/blocks/academy-courses/block.json
+msgctxt "block title"
+msgid "Academy Courses"
+msgstr ""
+
+#: assets/build/blocks/academy-courses/block.json
+msgctxt "block description"
+msgid "Showcase Academy LMS courses attractively."
+msgstr ""
+
+#: assets/build/blocks/academy-courses/block.json
+#: assets/build/blocks/academy-enroll-form/block.json
+msgctxt "block keyword"
+msgid "course"
+msgstr ""
+
+#: assets/build/blocks/academy-courses/block.json
+msgctxt "block keyword"
+msgid "course grid"
+msgstr ""
+
+#: assets/build/blocks/academy-enroll-form/block.json
+msgctxt "block title"
+msgid "Academy Enroll Form"
+msgstr ""
+
+#: assets/build/blocks/academy-enroll-form/block.json
+msgctxt "block description"
+msgid "Showcase Academy LMS Enroll Form attractively."
+msgstr ""
+
+#: assets/build/blocks/academy-enroll-form/block.json
+msgctxt "block keyword"
+msgid "course enroll"
+msgstr ""
+
+#: assets/build/blocks/academy-instructor-registration-form/block.json
+msgctxt "block title"
+msgid "Academy Instructor Registration Form"
+msgstr ""
+
+#: assets/build/blocks/academy-instructor-registration-form/block.json
+msgctxt "block description"
+msgid "Showcase Academy LMS instructor registration form attractively."
+msgstr ""
+
+#: assets/build/blocks/academy-instructor-registration-form/block.json
+#: assets/build/blocks/academy-student-registration-form/block.json
+msgctxt "block keyword"
+msgid "registration"
+msgstr ""
+
+#: assets/build/blocks/academy-instructor-registration-form/block.json
+msgctxt "block keyword"
+msgid "registration form"
+msgstr ""
+
+#: assets/build/blocks/academy-instructor-registration-form/block.json
+msgctxt "block keyword"
+msgid "instructor"
+msgstr ""
+
+#: assets/build/blocks/academy-login-form/block.json
+msgctxt "block title"
+msgid "Academy Login Form"
+msgstr ""
+
+#: assets/build/blocks/academy-login-form/block.json
+msgctxt "block description"
+msgid "Showcase Academy LMS login form attractively."
+msgstr ""
+
+#: assets/build/blocks/academy-login-form/block.json
+#: assets/build/blocks/academy-password-reset-form/block.json
+msgctxt "block keyword"
+msgid "login"
+msgstr ""
+
+#: assets/build/blocks/academy-login-form/block.json
+#: assets/build/blocks/academy-password-reset-form/block.json
+msgctxt "block keyword"
+msgid "login form"
+msgstr ""
+
+#: assets/build/blocks/academy-password-reset-form/block.json
+msgctxt "block title"
+msgid "Academy Password Reset"
+msgstr ""
+
+#: assets/build/blocks/academy-password-reset-form/block.json
+msgctxt "block description"
+msgid "Showcase Academy LMS password reset form attractively."
+msgstr ""
+
+#: assets/build/blocks/academy-pdf/block.json
+msgctxt "block title"
+msgid "Academy PDF"
+msgstr ""
+
+#: assets/build/blocks/academy-pdf/block.json
+msgctxt "block description"
+msgid "Showcase Academy LMS PDF attractively."
+msgstr ""
+
+#: assets/build/blocks/academy-pdf/block.json
+msgctxt "block keyword"
+msgid "pdf"
+msgstr ""
+
+#: assets/build/blocks/academy-student-registration-form/block.json
+msgctxt "block title"
+msgid "Academy Student Registration Form"
+msgstr ""
+
+#: assets/build/blocks/academy-student-registration-form/block.json
+msgctxt "block description"
+msgid "Showcase Academy LMS Student Registration form attractively."
+msgstr ""
+
+#: assets/build/blocks/academy-student-registration-form/block.json
+msgctxt "block keyword"
+msgid "student"
+msgstr ""
+
+#: assets/build/blocks/accordion/block.json
+msgctxt "block title"
+msgid "Accordion"
+msgstr ""
+
+#: assets/build/blocks/accordion/block.json
+msgctxt "block description"
+msgid "Organize content into collapsible sections."
+msgstr ""
+
+#: assets/build/blocks/accordion/block.json
+msgctxt "block keyword"
+msgid "accordion"
+msgstr ""
+
+#: assets/build/blocks/accordion/block.json
+msgctxt "block keyword"
+msgid "faq"
+msgstr ""
+
+#: assets/build/blocks/accordion/block.json
+msgctxt "block keyword"
+msgid "collapsible"
+msgstr ""
+
+#: assets/build/blocks/accordion/block.json
+msgctxt "block keyword"
+msgid "expandable"
+msgstr ""
+
+#: assets/build/blocks/button/block.json
+msgctxt "block title"
+msgid "Button"
+msgstr ""
+
+#: assets/build/blocks/button/block.json
+msgctxt "block description"
+msgid "Design stylish call-to-action buttons."
+msgstr ""
+
+#: assets/build/blocks/button/block.json
+#: assets/build/blocks/paypal-button/block.json
+msgctxt "block keyword"
+msgid "button"
+msgstr ""
+
+#: assets/build/blocks/button/block.json
+#: assets/build/blocks/paypal-button/block.json
+msgctxt "block keyword"
+msgid "anchor"
+msgstr ""
+
+#: assets/build/blocks/button/block.json
+#: assets/build/blocks/paypal-button/block.json
+msgctxt "block keyword"
+msgid "link"
+msgstr ""
+
+#: assets/build/blocks/button/block.json
+#: assets/build/blocks/paypal-button/block.json
+msgctxt "block keyword"
+msgid "cta"
+msgstr ""
+
+#: assets/build/blocks/carousel-child/block.json
+msgctxt "block title"
+msgid "Carousel Child"
+msgstr ""
+
+#: assets/build/blocks/carousel-child/block.json
+#: assets/build/blocks/carousel/block.json
+msgctxt "block description"
+msgid "Make attractive image presentation with carousel"
+msgstr ""
+
+#: assets/build/blocks/carousel/block.json
+msgctxt "block title"
+msgid "Carousel"
+msgstr ""
+
+#: assets/build/blocks/container/block.json
+#: assets/build/blocks/container/deprecated/block.json
+msgctxt "block title"
+msgid "Container"
+msgstr ""
+
+#: assets/build/blocks/container/block.json
+#: assets/build/blocks/container/deprecated/block.json
+msgctxt "block description"
+msgid "Create responsive, customizable layout containers."
+msgstr ""
+
+#: assets/build/blocks/container/block.json
+#: assets/build/blocks/container/deprecated/block.json
+msgctxt "block keyword"
+msgid "container"
+msgstr ""
+
+#: assets/build/blocks/container/block.json
+#: assets/build/blocks/container/deprecated/block.json
+msgctxt "block keyword"
+msgid "grid"
+msgstr ""
+
+#: assets/build/blocks/container/block.json
+#: assets/build/blocks/container/deprecated/block.json
+msgctxt "block keyword"
+msgid "layout"
+msgstr ""
+
+#: assets/build/blocks/container/block.json
+#: assets/build/blocks/container/deprecated/block.json
+msgctxt "block keyword"
+msgid "section"
+msgstr ""
+
+#: assets/build/blocks/container/block.json
+#: assets/build/blocks/container/deprecated/block.json
+msgctxt "block keyword"
+msgid "content box"
+msgstr ""
+
+#: assets/build/blocks/content-timeline-child/block.json
+msgctxt "block title"
+msgid "Content Timeline Child"
+msgstr ""
+
+#: assets/build/blocks/content-timeline-child/block.json
+msgctxt "block description"
+msgid "Design stylish call-to-action content-timeline-child."
+msgstr ""
+
+#: assets/build/blocks/content-timeline/block.json
+msgctxt "block title"
+msgid "Content Timeline"
+msgstr ""
+
+#: assets/build/blocks/content-timeline/block.json
+msgctxt "block description"
+msgid "Design stylish call-to-action Content Timeline."
+msgstr ""
+
+#: assets/build/blocks/countdown/block.json
+msgctxt "block title"
+msgid "Countdown"
+msgstr ""
+
+#: assets/build/blocks/countdown/block.json
+msgctxt "block description"
+msgid "Add countdown timers for events."
+msgstr ""
+
+#: assets/build/blocks/countdown/block.json
+msgctxt "block keyword"
+msgid "countdown"
+msgstr ""
+
+#: assets/build/blocks/countdown/block.json
+msgctxt "block keyword"
+msgid "count"
+msgstr ""
+
+#: assets/build/blocks/countdown/block.json
+msgctxt "block keyword"
+msgid "notice"
+msgstr ""
+
+#: assets/build/blocks/counter/block.json
+msgctxt "block title"
+msgid "Counter"
+msgstr ""
+
+#: assets/build/blocks/counter/block.json
+msgctxt "block description"
+msgid "Display animated counters for stats."
+msgstr ""
+
+#: assets/build/blocks/counter/block.json
+msgctxt "block keyword"
+msgid "counter"
+msgstr ""
+
+#: assets/build/blocks/counter/block.json
+msgctxt "block keyword"
+msgid "fun fact"
+msgstr ""
+
+#: assets/build/blocks/counter/block.json
+msgctxt "block keyword"
+msgid "number counter"
+msgstr ""
+
+#: assets/build/blocks/counter/block.json
+msgctxt "block keyword"
+msgid "circle counter"
+msgstr ""
+
+#: assets/build/blocks/counter/block.json
+msgctxt "block keyword"
+msgid "bar counter"
+msgstr ""
+
+#: assets/build/blocks/counter/block.json
+msgctxt "block keyword"
+msgid "line counter"
+msgstr ""
+
+#: assets/build/blocks/coupon/block.json
+msgctxt "block title"
+msgid "Coupon"
+msgstr ""
+
+#: assets/build/blocks/coupon/block.json
+msgctxt "block description"
+msgid "Add clickable coupons that copy codes instantly."
+msgstr ""
+
+#: assets/build/blocks/coupon/block.json
+msgctxt "block keyword"
+msgid "coupon"
+msgstr ""
+
+#: assets/build/blocks/coupon/block.json
+msgctxt "block keyword"
+msgid "coupon-code"
+msgstr ""
+
+#: assets/build/blocks/coupon/block.json
+msgctxt "block keyword"
+msgid "discount"
+msgstr ""
+
+#: assets/build/blocks/coupon/block.json
+msgctxt "block keyword"
+msgid "offer"
+msgstr ""
+
+#: assets/build/blocks/coupon/block.json
+msgctxt "block keyword"
+msgid "promo"
+msgstr ""
+
+#: assets/build/blocks/coupon/block.json
+msgctxt "block keyword"
+msgid "promotion"
+msgstr ""
+
+#: assets/build/blocks/divider/block.json
+msgctxt "block title"
+msgid "Divider"
+msgstr ""
+
+#: assets/build/blocks/divider/block.json
+msgctxt "block description"
+msgid "Add stylish content section dividers."
+msgstr ""
+
+#: assets/build/blocks/divider/block.json
+msgctxt "block keyword"
+msgid "divider"
+msgstr ""
+
+#: assets/build/blocks/divider/block.json
+msgctxt "block keyword"
+msgid "line"
+msgstr ""
+
+#: assets/build/blocks/divider/block.json
+msgctxt "block keyword"
+msgid "section divider"
+msgstr ""
+
+#: assets/build/blocks/divider/block.json
+msgctxt "block keyword"
+msgid "separator"
+msgstr ""
+
+#: assets/build/blocks/dual-button/block.json
+msgctxt "block title"
+msgid "Dual Button"
+msgstr ""
+
+#: assets/build/blocks/dual-button/block.json
+msgctxt "block description"
+msgid "Craft beautiful, fully customizable Dual Button."
+msgstr ""
+
+#: assets/build/blocks/flip-box-child/block.json
+msgctxt "block title"
+msgid "Flip Box child"
+msgstr ""
+
+#: assets/build/blocks/flip-box-child/block.json
+msgctxt "block description"
+msgid "Engaging content flip effect"
+msgstr ""
+
+#: assets/build/blocks/flip-box/block.json
+msgctxt "block title"
+msgid "Flip Box"
+msgstr ""
+
+#: assets/build/blocks/flip-box/block.json
+msgctxt "block description"
+msgid "Engaging content flip effect."
+msgstr ""
+
+#: assets/build/blocks/form-builder/block.json
+msgctxt "block title"
+msgid "Form Builder"
+msgstr ""
+
+#: assets/build/blocks/form-builder/block.json
+#: assets/build/blocks/form-multi-step-child/block.json
+#: assets/build/blocks/form-multi-step/block.json
+msgctxt "block description"
+msgid "Add customizable, impactful forms."
+msgstr ""
+
+#: assets/build/blocks/form-checkbox/block.json
+msgctxt "block title"
+msgid "Checkbox"
+msgstr ""
+
+#: assets/build/blocks/form-checkbox/block.json
+#: assets/build/blocks/form-input/block.json
+#: assets/build/blocks/form-password/block.json
+#: assets/build/blocks/form-radio/block.json
+#: assets/build/blocks/form-select/block.json
+#: assets/build/blocks/form-textarea/block.json
+#: assets/build/blocks/spacer/block.json
+msgctxt "block description"
+msgid "Easily add adjustable layout spacing."
+msgstr ""
+
+#: assets/build/blocks/form-input/block.json
+msgctxt "block title"
+msgid "Input"
+msgstr ""
+
+#: assets/build/blocks/form-multi-step-child/block.json
+msgctxt "block title"
+msgid "Multi Step Child"
+msgstr ""
+
+#: assets/build/blocks/form-multi-step/block.json
+msgctxt "block title"
+msgid "Multi Step"
+msgstr ""
+
+#: assets/build/blocks/form-password/block.json
+msgctxt "block title"
+msgid "Password"
+msgstr ""
+
+#: assets/build/blocks/form-radio/block.json
+msgctxt "block title"
+msgid "Radio"
+msgstr ""
+
+#: assets/build/blocks/form-select/block.json
+msgctxt "block title"
+msgid "Select"
+msgstr ""
+
+#: assets/build/blocks/form-textarea/block.json
+msgctxt "block title"
+msgid "Textarea"
+msgstr ""
+
+#: assets/build/blocks/heading/block.json
+msgctxt "block title"
+msgid "Heading"
+msgstr ""
+
+#: assets/build/blocks/heading/block.json
+#: assets/build/blocks/info-box/block.json
+msgctxt "block description"
+msgid "Add customizable, impactful headings."
+msgstr ""
+
+#: assets/build/blocks/heading/block.json
+msgctxt "block keyword"
+msgid "heading"
+msgstr ""
+
+#: assets/build/blocks/heading/block.json
+msgctxt "block keyword"
+msgid "headline"
+msgstr ""
+
+#: assets/build/blocks/heading/block.json
+#: assets/build/blocks/info-box/block.json
+msgctxt "block keyword"
+msgid "title"
+msgstr ""
+
+#: assets/build/blocks/heading/block.json
+#: assets/build/blocks/info-box/block.json
+msgctxt "block keyword"
+msgid "sub title"
+msgstr ""
+
+#: assets/build/blocks/icon/block.json
+msgctxt "block title"
+msgid "Icon"
+msgstr ""
+
+#: assets/build/blocks/icon/block.json
+msgctxt "block description"
+msgid "Enhance content with a diverse library of icons."
+msgstr ""
+
+#: assets/build/blocks/icon/block.json
+#: assets/build/blocks/svg-draw/block.json
+msgctxt "block keyword"
+msgid "icon"
+msgstr ""
+
+#: assets/build/blocks/icon/block.json
+msgctxt "block keyword"
+msgid "symbol"
+msgstr ""
+
+#: assets/build/blocks/icon/block.json
+#: assets/build/blocks/image-scroll/block.json
+#: assets/build/blocks/image/block.json
+msgctxt "block keyword"
+msgid "image"
+msgstr ""
+
+#: assets/build/blocks/image-comparison/block.json
+msgctxt "block title"
+msgid "Image Comparison"
+msgstr ""
+
+#: assets/build/blocks/image-comparison/block.json
+msgctxt "block description"
+msgid "Compare two images easily."
+msgstr ""
+
+#: assets/build/blocks/image-hotspot-child/block.json
+msgctxt "block title"
+msgid "Image Hotspot Child"
+msgstr ""
+
+#: assets/build/blocks/image-hotspot-child/block.json
+msgctxt "block description"
+msgid "Add customizable, impactful image hotspot-child."
+msgstr ""
+
+#: assets/build/blocks/image-hotspot/block.json
+msgctxt "block title"
+msgid "Image Hotspot"
+msgstr ""
+
+#: assets/build/blocks/image-hotspot/block.json
+msgctxt "block description"
+msgid "Add customizable, impactful image hotspot."
+msgstr ""
+
+#: assets/build/blocks/image-scroll/block.json
+msgctxt "block title"
+msgid "Image Scroll"
+msgstr ""
+
+#: assets/build/blocks/image-scroll/block.json
+#: assets/build/blocks/image/block.json
+msgctxt "block description"
+msgid "Insert and style customizable images."
+msgstr ""
+
+#: assets/build/blocks/image-scroll/block.json
+#: assets/build/blocks/image/block.json
+msgctxt "block keyword"
+msgid "media"
+msgstr ""
+
+#: assets/build/blocks/image-scroll/block.json
+#: assets/build/blocks/image/block.json
+msgctxt "block keyword"
+msgid "photo"
+msgstr ""
+
+#: assets/build/blocks/image-scroll/block.json
+msgctxt "block keyword"
+msgid "image-scroll"
+msgstr ""
+
+#: assets/build/blocks/image/block.json
+msgctxt "block title"
+msgid "Image"
+msgstr ""
+
+#: assets/build/blocks/info-box/block.json
+msgctxt "block title"
+msgid "Info Box"
+msgstr ""
+
+#: assets/build/blocks/info-box/block.json
+msgctxt "block keyword"
+msgid "information"
+msgstr ""
+
+#: assets/build/blocks/info-box/block.json
+msgctxt "block keyword"
+msgid "info"
+msgstr ""
+
+#: assets/build/blocks/info-box/block.json
+msgctxt "block keyword"
+msgid "details"
+msgstr ""
+
+#: assets/build/blocks/lists/block.json
+msgctxt "block title"
+msgid "List"
+msgstr ""
+
+#: assets/build/blocks/lists/block.json
+msgctxt "block description"
+msgid "Design customizable, organized lists."
+msgstr ""
+
+#: assets/build/blocks/lists/block.json
+msgctxt "block keyword"
+msgid "lists"
+msgstr ""
+
+#: assets/build/blocks/lists/block.json
+msgctxt "block keyword"
+msgid "list"
+msgstr ""
+
+#: assets/build/blocks/lists/block.json
+msgctxt "block keyword"
+msgid "icon list"
+msgstr ""
+
+#: assets/build/blocks/lists/block.json
+msgctxt "block keyword"
+msgid "point"
+msgstr ""
+
+#: assets/build/blocks/map/block.json
+msgctxt "block title"
+msgid "Map"
+msgstr ""
+
+#: assets/build/blocks/map/block.json
+msgctxt "block description"
+msgid "Show google map or OpenStreet map"
+msgstr ""
+
+#: assets/build/blocks/menu-child-mega/block.json
+msgctxt "block title"
+msgid "Mega Menu"
+msgstr ""
+
+#: assets/build/blocks/menu-child-mega/block.json
+#: assets/build/blocks/menu-child-sub/block.json
+#: assets/build/blocks/menu-item/block.json
+msgctxt "block description"
+msgid "Show Submenu"
+msgstr ""
+
+#: assets/build/blocks/menu-child-sub/block.json
+msgctxt "block title"
+msgid "Sub Menu"
+msgstr ""
+
+#: assets/build/blocks/menu-item/block.json
+msgctxt "block title"
+msgid "Menu Item"
+msgstr ""
+
+#: assets/build/blocks/menu/block.json
+msgctxt "block title"
+msgid "Menu"
+msgstr ""
+
+#: assets/build/blocks/menu/block.json
+msgctxt "block description"
+msgid "Show Navigation"
+msgstr ""
+
+#: assets/build/blocks/modal-panel/block.json
+msgctxt "block title"
+msgid "Modal Panel"
+msgstr ""
+
+#: assets/build/blocks/modal-panel/block.json
+msgctxt "block description"
+msgid "Modal block panel element"
+msgstr ""
+
+#: assets/build/blocks/modal-trigger/block.json
+msgctxt "block title"
+msgid "Modal Trigger"
+msgstr ""
+
+#: assets/build/blocks/modal-trigger/block.json
+msgctxt "block description"
+msgid "Modal block trigger element"
+msgstr ""
+
+#: assets/build/blocks/modal/block.json
+msgctxt "block title"
+msgid "Modal"
+msgstr ""
+
+#: assets/build/blocks/modal/block.json
+msgctxt "block description"
+msgid "Create customizable modal popups."
+msgstr ""
+
+#: assets/build/blocks/news-ticker/block.json
+msgctxt "block title"
+msgid "News Ticker"
+msgstr ""
+
+#: assets/build/blocks/news-ticker/block.json
+msgctxt "block description"
+msgid "Add your news ticker"
+msgstr ""
+
+#: assets/build/blocks/notice/block.json
+msgctxt "block title"
+msgid "Notification"
+msgstr ""
+
+#: assets/build/blocks/notice/block.json
+msgctxt "block description"
+msgid " A customizable notification block for displaying important messages ."
+msgstr ""
+
+#: assets/build/blocks/paragraph/block.json
+msgctxt "block title"
+msgid "Paragraph"
+msgstr ""
+
+#: assets/build/blocks/paragraph/block.json
+msgctxt "block description"
+msgid "Craft beautiful, fully customizable paragraphs."
+msgstr ""
+
+#: assets/build/blocks/paragraph/block.json
+msgctxt "block keyword"
+msgid "paragraph"
+msgstr ""
+
+#: assets/build/blocks/paragraph/block.json
+msgctxt "block keyword"
+msgid "text"
+msgstr ""
+
+#: assets/build/blocks/paragraph/block.json
+msgctxt "block keyword"
+msgid "content"
+msgstr ""
+
+#: assets/build/blocks/paypal-button/block.json
+msgctxt "block title"
+msgid "PayPal Button"
+msgstr ""
+
+#: assets/build/blocks/paypal-button/block.json
+msgctxt "block description"
+msgid "Add PayPal payment functionality to your site."
+msgstr ""
+
+#: assets/build/blocks/paypal-button/block.json
+msgctxt "block keyword"
+msgid "paypal"
+msgstr ""
+
+#: assets/build/blocks/paypal-button/block.json
+msgctxt "block keyword"
+msgid "payment"
+msgstr ""
+
+#: assets/build/blocks/paypal-button/block.json
+msgctxt "block keyword"
+msgid "pay"
+msgstr ""
+
+#: assets/build/blocks/price-menu-item/block.json
+msgctxt "block title"
+msgid "Price Menu Item"
+msgstr ""
+
+#: assets/build/blocks/price-menu-item/block.json
+msgctxt "block description"
+msgid "Craft beautiful, fully customizable price-menu-item."
+msgstr ""
+
+#: assets/build/blocks/price-menu/block.json
+msgctxt "block title"
+msgid "Price Menu"
+msgstr ""
+
+#: assets/build/blocks/price-menu/block.json
+msgctxt "block description"
+msgid "Craft beautiful, fully customizable price-menu."
+msgstr ""
+
+#: assets/build/blocks/progress-tracker/block.json
+msgctxt "block title"
+msgid "Progress Tracker"
+msgstr ""
+
+#: assets/build/blocks/progress-tracker/block.json
+msgctxt "block description"
+msgid "Add customizable, impactful Progress"
+msgstr ""
+
+#: assets/build/blocks/search/block.json
+msgctxt "block title"
+msgid "Search"
+msgstr ""
+
+#: assets/build/blocks/search/block.json
+msgctxt "block description"
+msgid "Add customizable, impactful search."
+msgstr ""
+
+#: assets/build/blocks/search/block.json
+msgctxt "block keyword"
+msgid "result"
+msgstr ""
+
+#: assets/build/blocks/single-accordion/block.json
+msgctxt "block title"
+msgid "Single Accordion"
+msgstr ""
+
+#: assets/build/blocks/single-accordion/block.json
+msgctxt "block description"
+msgid "Show Accordion Item"
+msgstr ""
+
+#: assets/build/blocks/social-shares/block.json
+msgctxt "block title"
+msgid "Social Shares"
+msgstr ""
+
+#: assets/build/blocks/social-shares/block.json
+msgctxt "block description"
+msgid "Add customizable social media share buttons"
+msgstr ""
+
+#: assets/build/blocks/spacer/block.json
+msgctxt "block title"
+msgid "Spacer"
+msgstr ""
+
+#: assets/build/blocks/spacer/block.json
+msgctxt "block keyword"
+msgid "spacer"
+msgstr ""
+
+#: assets/build/blocks/spacer/block.json
+msgctxt "block keyword"
+msgid "empty"
+msgstr ""
+
+#: assets/build/blocks/spacer/block.json
+msgctxt "block keyword"
+msgid "empty space"
+msgstr ""
+
+#: assets/build/blocks/spacer/block.json
+msgctxt "block keyword"
+msgid "gap"
+msgstr ""
+
+#: assets/build/blocks/spacer/block.json
+msgctxt "block keyword"
+msgid "margin"
+msgstr ""
+
+#: assets/build/blocks/spacer/block.json
+msgctxt "block keyword"
+msgid "padding"
+msgstr ""
+
+#: assets/build/blocks/star-ratings/block.json
+msgctxt "block title"
+msgid "Star Ratings"
+msgstr ""
+
+#: assets/build/blocks/star-ratings/block.json
+msgctxt "block description"
+msgid "Display reviews with star ratings."
+msgstr ""
+
+#: assets/build/blocks/star-ratings/block.json
+msgctxt "block keyword"
+msgid "star-ratings"
+msgstr ""
+
+#: assets/build/blocks/star-ratings/block.json
+msgctxt "block keyword"
+msgid "star-rating"
+msgstr ""
+
+#: assets/build/blocks/star-ratings/block.json
+msgctxt "block keyword"
+msgid "reviews"
+msgstr ""
+
+#: assets/build/blocks/star-ratings/block.json
+msgctxt "block keyword"
+msgid "review"
+msgstr ""
+
+#: assets/build/blocks/star-ratings/block.json
+msgctxt "block keyword"
+msgid "feedback"
+msgstr ""
+
+#: assets/build/blocks/svg-draw/block.json
+msgctxt "block title"
+msgid "SVG Draw"
+msgstr ""
+
+#: assets/build/blocks/svg-draw/block.json
+msgctxt "block description"
+msgid "Add customizable, impactful SVG Draw."
+msgstr ""
+
+#: assets/build/blocks/svg-draw/block.json
+msgctxt "block keyword"
+msgid "svg-draw"
+msgstr ""
+
+#: assets/build/blocks/svg-draw/block.json
+msgctxt "block keyword"
+msgid "svg"
+msgstr ""
+
+#: assets/build/blocks/svg-draw/block.json
+msgctxt "block keyword"
+msgid "animate"
+msgstr ""
+
+#: assets/build/blocks/table-body/block.json
+msgctxt "block title"
+msgid "Table Body"
+msgstr ""
+
+#: assets/build/blocks/table-body/block.json
+msgctxt "block description"
+msgid "Create a fully customizable, responsive table. Supports multiple rows and columns."
+msgstr ""
+
+#: assets/build/blocks/table-cell/block.json
+msgctxt "block title"
+msgid "table-cell"
+msgstr ""
+
+#: assets/build/blocks/table-cell/block.json
+#: assets/build/blocks/table-footer/block.json
+#: assets/build/blocks/table-header/block.json
+#: assets/build/blocks/table-row/block.json
+#: assets/build/blocks/table/block.json
+msgctxt "block description"
+msgid "Create a fully customizable, responsive table. Supports multiple rows and columns"
+msgstr ""
+
+#: assets/build/blocks/table-footer/block.json
+msgctxt "block title"
+msgid "Tablet Footer"
+msgstr ""
+
+#: assets/build/blocks/table-header/block.json
+msgctxt "block title"
+msgid "Table Head"
+msgstr ""
+
+#: assets/build/blocks/table-of-content/block.json
+msgctxt "block title"
+msgid "Table Of Content"
+msgstr ""
+
+#: assets/build/blocks/table-of-content/block.json
+msgctxt "block description"
+msgid "Easily organize your content for quick navigation."
+msgstr ""
+
+#: assets/build/blocks/table-row/block.json
+msgctxt "block title"
+msgid "table-row"
+msgstr ""
+
+#: assets/build/blocks/table/block.json
+msgctxt "block title"
+msgid "Table"
+msgstr ""
+
+#: assets/build/blocks/tabs-child/block.json
+msgctxt "block title"
+msgid "Tabs Child"
+msgstr ""
+
+#: assets/build/blocks/tabs-child/block.json
+msgctxt "block description"
+msgid "Design stylish call-to-action tabs-child."
+msgstr ""
+
+#: assets/build/blocks/tabs/block.json
+msgctxt "block title"
+msgid "Tabs"
+msgstr ""
+
+#: assets/build/blocks/tabs/block.json
+msgctxt "block description"
+msgid "Display content in tabbed sections."
+msgstr ""
+
+#: assets/build/blocks/tabs/block.json
+msgctxt "block keyword"
+msgid "tabs"
+msgstr ""
+
+#: assets/build/blocks/tabs/block.json
+msgctxt "block keyword"
+msgid "tab"
+msgstr ""
+
+#: assets/build/blocks/tabs/block.json
+msgctxt "block keyword"
+msgid "multi tab"
+msgstr ""
+
+#: assets/build/blocks/toggle-child/block.json
+msgctxt "block title"
+msgid "Toggle child"
+msgstr ""
+
+#: assets/build/blocks/toggle-child/block.json
+msgctxt "block description"
+msgid "Easily add conditional content"
+msgstr ""
+
+#: assets/build/blocks/toggle/block.json
+msgctxt "block title"
+msgid "Toggle"
+msgstr ""
+
+#: assets/build/blocks/toggle/block.json
+msgctxt "block description"
+msgid "Create interactive toggle sections."
+msgstr ""
+
+#: assets/build/blocks/toggle/block.json
+msgctxt "block keyword"
+msgid "toggle"
+msgstr ""
+
+#: assets/build/blocks/toggle/block.json
+msgctxt "block keyword"
+msgid "switch"
+msgstr ""
+
+#: assets/build/blocks/toggle/block.json
+msgctxt "block keyword"
+msgid "switcher"
+msgstr ""
+
+#: assets/build/blocks/toggle/block.json
+msgctxt "block keyword"
+msgid "Pricing Plan"
+msgstr ""
+
+#: assets/build/blocks/video/block.json
+msgctxt "block title"
+msgid "Video"
+msgstr ""
+
+#: assets/build/blocks/video/block.json
+msgctxt "block description"
+msgid " Embed responsive, customizable video."
+msgstr ""
+
+#: assets/build/blocks/video/block.json
+msgctxt "block keyword"
+msgid "video"
+msgstr ""
+
+#: assets/build/blocks/video/block.json
+msgctxt "block keyword"
+msgid "youtube"
+msgstr ""
+
+#: assets/build/blocks/video/block.json
+msgctxt "block keyword"
+msgid "vimeo"
+msgstr ""
+
+#: assets/build/blocks/video/block.json
+msgctxt "block keyword"
+msgid "embedded"
+msgstr ""

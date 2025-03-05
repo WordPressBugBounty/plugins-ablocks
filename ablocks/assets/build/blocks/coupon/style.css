@@ -1,0 +1,127 @@
+.ablocks-block--coupon{
+  display: flex !important;
+}
+
+.ablocks-coupon-clipboard{
+  min-width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.ablocks-coupon-code {
+  display: flex;
+  align-items: center;
+  min-width: 150px;
+  justify-content: center;
+  gap: 4px;
+}
+
+
+/* style 1 */
+.ablocks-block--coupon > .ablocks-block-container{
+  display: flex;
+  width: fit-content;
+}
+
+.ablocks-block--coupon .ablocks-coupon-code {
+  border: 1px dashed #000;
+  padding: 10px;
+  min-width: 150px;
+  border-right: 0;
+}
+
+.ablocks-block--coupon .ablocks-coupon-clipboard {
+  min-width: 150px;
+  padding: 10px;
+  border: 1px dashed #000;
+  border-left: 0;
+  cursor: pointer;
+}
+
+/* style2 */
+.ablocks-block---coupon-layout-two > .ablocks-block-container {
+  position: relative;
+  display: inline-block; 
+  width: fit-content;
+}
+
+.ablocks-block---coupon-layout-two .ablocks-coupon-code {
+  display: inline-block;
+  border: 1px dashed #000;
+  min-width: 150px;
+  padding: 10px;
+}
+
+.ablocks-block---coupon-layout-two .ablocks-coupon-clipboard {
+  min-width: 150px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  clip-path: polygon(0 0, 80% 0, 100% 100%, 0 100%);
+  overflow: hidden;
+}
+
+.ablocks-block---coupon-layout-two .ablocks-coupon-clipboard-text{
+  padding-right: 10px;
+}
+
+
+/* style 3 */
+.ablocks-block---coupon-layout-three > .ablocks-block-container{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ablocks-block---coupon-layout-three .ablocks-coupon-code {
+  padding: 10px;
+  border: 1px dashed #000;
+  min-width: 150px;
+}
+
+
+/* style 4 */
+.ablocks-block---coupon-layout-four > .ablocks-block-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.ablocks-block---coupon-layout-four .ablocks-coupon-code {
+  display: inline-block;
+  padding: 10px;
+  min-width: 150px;
+  border: 1px dashed #000;
+  text-align: center;
+}
+
+/* Button overlay */
+.ablocks-block---coupon-layout-four .ablocks-coupon-clipboard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border: 0px solid #000;
+  cursor: pointer;
+  text-align: center;
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  padding: 0px;
+}
+
+.ablocks-coupon-code:hover .ablocks-coupon-clipboard {
+  width: 80%;
+}

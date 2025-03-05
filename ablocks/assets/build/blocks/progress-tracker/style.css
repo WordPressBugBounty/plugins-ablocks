@@ -1,0 +1,55 @@
+.ablocks-block--progress-tracker .ablocks-block-container {
+  width: 100%;
+}
+
+/* bar style */
+.ablocks-block-progress-bar-track {
+  width: 100%;
+  z-index: 1;
+  display: flex;
+}
+.ablocks-block-progress-bar {
+  display: flex;
+  position: relative;
+  align-items: center;
+  overflow-x: hidden;
+}
+/* Left and Right Alignments */
+.ablocks-block-progress-bar-track.ablocks-block-progress-bar-left {
+  justify-content: start;
+}
+.ablocks-block-progress-bar-track.ablocks-block-progress-bar-right {
+  justify-content: end;
+}
+
+.ablocks-block-progress--fixed {
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+.ablocks-block-progress--absolute {
+  position: absolute;
+  width: 100%;
+}
+
+.ablocks-block-progress__text {
+  color: white;
+  font-size: 16px;
+  position: absolute;
+}
+/* circle style*/
+.ablocks-block-progress-circle__svg {
+  overflow: visible;
+
+}
+.ablocks-block-progress-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ablocks-block-progress-circle__wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

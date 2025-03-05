@@ -1,0 +1,11 @@
+.ablocks-block--map .leaflet-popup-content h6 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.ablocks-block--map .leaflet-popup-content p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.ablocks-block--map{
+    width: 100% !important;
+}

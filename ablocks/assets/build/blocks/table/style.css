@@ -1,0 +1,240 @@
+/* create table  */
+.ablocks-block--table .ablocks-table-input-form {   
+    padding: 20px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+}
+
+.ablocks-table-input-form .ablocks-table-input-form--iconText {
+    display: flex;
+    gap: 8;
+}
+.ablocks-table-input-form  .ablocks-table-input-form--text {
+    overflow: hidden;
+    color: #0F0E16;
+    text-align: center;
+    text-overflow: ellipsis;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    margin: -6px;
+    margin-left: 8px
+
+
+}
+
+.ablocks-table-input-form .ablocks-table-input-form--title {
+    color: #595959;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    padding-bottom: 16px;
+}
+
+.ablocks-table-input-from--input-container {
+    display: flex;
+}
+
+.ablocks-table-input-from--input-container div {
+    display: flex;
+    flex-direction: column;
+}
+
+.ablocks-table-input-from--input-container .ablocks-table-input label {
+    color: #454D54;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    margin-bottom: 6px;
+}
+
+.ablocks-table-input-from--input-container .ablocks-table-input input {
+    display: flex;
+    margin-right: 8px;
+    height: 36px;
+    padding: 0px 10px;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid #DDDDDF;
+}
+
+ .ablocks-table-input-from--check-box {
+    display: flex;
+    gap: 7px;
+    margin-top: 10px;
+}
+.ablocks-table-input-from--check-box div{
+    display: flex;
+    align-items: center;
+}
+
+.ablocks-table-input-from--check-box label {
+    color: #454D54;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    margin-right: 8px;
+    margin-top: -5px;
+    
+
+}
+
+.ablocks-table-input-from--check-box input {
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #A7AAAD;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+    border-radius: 0px;
+}
+
+.ablocks-table-input-from--check-box  input:checked {
+    background-color: #000;
+    border-radius: 0px;
+    border: none;
+    outline: none;
+}
+
+.ablocks-table-input-from--check-box  input:checked::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 11px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+.ablocks-table-input-form-button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.ablocks-table-input-form-button:hover {
+    background-color: #333;
+}
+/* -------- */
+.ablocks-block--table .ablocks-block-container table th , .ablocks-block--table .ablocks-block-container table td {
+    padding: 8px;
+}
+.ablocks-block--table .ablocks-block-container table th p , .ablocks-block--table .ablocks-block-container table td p{
+    margin: 0;
+}
+
+.ablocks-block--table>.ablocks-block-container {
+    overflow-y: auto;  
+}
+.ablocks-block--table table {
+    width: 100%;
+    margin: 0;
+}
+.ablocks-block--table table,
+.ablocks-block--table-header .ablocks-block--table-cell,
+.ablocks-block--table .ablocks-block--table-cell {
+    border: 1px solid #242222;
+}
+
+.ablocks-block--table .ablocks-block--table-header .ablocks-block--table-cel,
+.ablocks-block--table .ablocks-block--table-cell {
+    padding: 8px;
+}
+.ablocks-block--table-row .ablocks-block--table-cell {
+    min-height: 40px;
+}
+.ablocks-block--table .ablocks-block--table-header{
+    background-color: #565c56;
+}
+.ablocks-block--table .ablocks-block--table-footer{
+    background-color: #565c56;
+}
+.ablocks-block--table.ablocks-block--table-row:hover {
+    background-color: #f1f1f1;
+}
+.ablocks-block--table-cell .block-list-appender.wp-block {
+    width: 100%;
+    position: relative;
+}
+.ablocks-block--table-cell.ablocks-table-td:hover .ablocks-table-icon-td {
+    display: flex;
+}
+
+.ablocks-block--table .ablocks-table-cell {
+    padding: 0px;
+}
+
+.ablocks-block--table .ablocks-block--table-header .ablocks-block--table-cel,
+.ablocks-block--table .ablocks-block--table-cell {
+    padding: 0px;
+}
+.ablocks-block--table .ablocks-block--table-header .block-editor-block-list__block , .ablocks-block--table .ablocks-block--table-body .block-editor-block-list__block ,.ablocks-block--table .ablocks-block--table-footer .block-editor-block-list__block {
+    font-size: 15px;
+}
+
+/* ----icon ---- */
+.ablocks-block--table-cell .ablocks-table-icon-td {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+.ablocks-block--table-cell .ablocks-icon{
+    background: black;
+    border: none;
+
+}
+.ablocks-block--table-cell .ablocks-icon--delete:before , .ablocks-block--table-cell .ablocks-icon--edit:before {
+    color: white;
+    height: 16px;
+    margin-left: -5px;
+    width: 13px   
+}
+.ablocks-block--table-cell .ablocks-icon{
+    border-radius: 0px 0px 8px 0px;
+   
+}
+/* ---toolbar style--- */
+.ablocks-table-dropdown-toolbar {
+    display: flex; 
+    align-items: center;
+}
+.ablocks-table-toolbar-cell-delete{
+    margin-top: 5px;
+}
+/* ------------------------ */
+.ablocks-table-dropdown-toolbar-menu div{
+    width: 136px;
+}
+/* ----hover style cell ---- */
+.ablocks-block--table .ablocks-block--table-cell .block-editor-block-list__block[data-empty=true] [data-rich-text-placeholder] {
+    opacity: 0;
+    border: 1px solid transparent;
+    padding: 4px;
+}
+.ablocks-block--table .ablocks-block--table-cell .block-editor-block-list__block[data-empty=true]:hover [data-rich-text-placeholder] {
+    opacity: 1;
+    border: 1px solid gainsboro;
+    padding: 4px;
+}
+.ablocks-block--table  .ablocks-block--table-cell .block-list-appender.wp-block {
+    width: 100%;
+    position: absolute;
+}

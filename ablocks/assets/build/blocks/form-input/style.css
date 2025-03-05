@@ -1,0 +1,80 @@
+
+
+.ablocks-form-builder-input {
+    width: 100%;
+}
+
+.ablocks-form-builder__label {
+    text-transform: capitalize;
+    display: block;
+}
+.ablocks-form-builder__label--required::after {
+    content:"*";
+    color: red;
+}
+.ablocks-form-builder__field .ablocks-form-builder__helper-text{
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    color:hsl( from #1E1E1E h s l / 0.65);
+}
+.ablocks-form-builder__field.error-msg .ablocks-form-builder-input{
+   border-color: red;
+}
+.ablocks-form-builder__field .ablocks-block-error-msg{
+    visibility: hidden;
+}
+.ablocks-form-builder__field.error-msg .ablocks-block-error-msg{
+    visibility: visible;
+    color: #dc2626;
+    font-size: 14px;
+    font-weight: 500;
+}
+.ablocks-form-builder__input-icon {
+    position: absolute;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 18px; /* Adjust the size of the emoji */
+}
+/* .ablocks-form-builder__input-show-icon{
+    padding: 10px 10px 10px 40px !important;
+} */
+input.ablocks-form-builder__input{ 
+    width: 100%; 
+    padding: 10px 16px;
+    box-sizing: border-box;
+}
+.ablocks-block-error-wrap{
+    height: 16px;
+}
+ .ablocks-form-builder__input-toggle--show-password,
+ .ablocks-form-builder__input-toggle--hide-password{
+    position: absolute;
+    right: 10px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none; 
+    cursor: pointer; 
+    color: #007cba; 
+    font-size: 14px;
+    padding: 0; 
+    transition: color 0.3s; 
+    visibility: hidden;
+    opacity: 0;
+}
+.ablocks-form-builder__input-toggle--hide-password--active,
+.ablocks-form-builder__input-toggle--show-password--active {
+    visibility: visible;
+    opacity: 1;
+}
+.ablocs-block-error-wrap{
+    height: 16px;
+}
+/* end show hide code  */
+input.ablocks-form-builder__input::placeholder {
+    opacity: 0.8;
+}
+/* input.ablocks-form-builder__input:focus {
+    outline: none;
+    border: none;
+} */

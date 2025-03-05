@@ -1,0 +1,67 @@
+.ablocks-block--video > .ablocks-block-container {
+	max-width: 100%;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1.77777;
+}
+
+.ablocks-block-container video,
+iframe {
+	max-width: 100%;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	margin: 0;
+	background-color: #000000;
+}
+
+.ablocks-video-player {
+	max-width: 100%;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.ablocks-vimeo-video-player {
+	max-width: 100%;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border: none;
+	background-color: #000000;
+}
+
+.ablocks-control-field-description {
+	font-size: 11px;
+	font-style: italic;
+	line-height: 1.4;
+}
+.ablocks-prevent-select {
+	position: relative;
+}
+.ablocks-prevent-select::after {
+	position: absolute;
+	content: "";
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #00000000;
+}
+
+.ablocks-video--times-wrapper {
+	display: flex;
+	flex-direction: column;
+	margin: 8px 0;
+}
+
+.ablocks-video--times-wrapper > .ablocks-control {
+	margin-bottom: 0;
+}
+
+.ablocks-video--times-wrapper > .ablocks-control-field-description {
+	margin-bottom: 8px;
+	margin-top: 4px;
+}

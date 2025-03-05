@@ -1,0 +1,81 @@
+.ablocks-block--flip-box {
+  perspective: 1000px;
+}
+
+.ablocks-block--flip-box-child {
+  width: 100%;
+}
+
+.ablocks-block--flip-box-child.ablocks-flipbox__front > .ablocks-block-container,
+.ablocks-block--flip-box-child.ablocks-flipbox__back > .ablocks-block-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 10px;
+  padding: 20px;
+}
+
+.ablocks-flipbox__front > .ablocks-block-container,
+.ablocks-flipbox__back > .ablocks-block-container {
+  padding: 20px;
+}
+
+.ablocks-flipbox--transform-top .ablocks-flipbox__back,
+.ablocks-flipbox--transform-bottom .ablocks-flipbox__back {
+  transform: rotateX(180deg);
+}
+
+.ablocks-flipbox--transform-right .ablocks-flipbox__back,
+.ablocks-flipbox--transform-left .ablocks-flipbox__back {
+  transform: rotateY(180deg);
+}
+
+/* container of flipbox__front & flipbox__back */
+.ablocks-block--flip-box > div:nth-child(1) {
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.ablocks-block--flip-box > div:nth-child(1) .ablocks-flipbox__front,
+.ablocks-block--flip-box > div:nth-child(1) .ablocks-flipbox__back {
+  display: block;
+  width: 100%;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.ablocks-block--flip-box > div:nth-child(1) .ablocks-flipbox__front {
+  position: relative;
+}
+
+/* transformation style */
+.ablocks-block--flip-box > div:nth-child(1) .ablocks-flipbox__back {
+  position: absolute;
+  transform: rotateY(-180deg);
+}
+
+.ablocks-flipbox--transform-top > div:nth-child(1) .ablocks-flipbox__back,
+.ablocks-flipbox--transform-bottom > div:nth-child(1) .ablocks-flipbox__back {
+  transform: rotateX(-180deg);
+}
+
+/* flip direction on hover */
+.ablocks-block--flip-box:hover > div:nth-child(1) {
+  transform: rotateY(-180deg) !important;
+}
+
+.ablocks-flipbox--transform-right:hover > div:nth-child(1) {
+  transform: rotateY(180deg) !important;
+}
+
+.ablocks-flipbox--transform-top:hover > div:nth-child(1) {
+  transform: rotateX(180deg) !important;
+}
+
+.ablocks-flipbox--transform-bottom:hover > div:nth-child(1) {
+  transform: rotateX(-180deg) !important;
+}

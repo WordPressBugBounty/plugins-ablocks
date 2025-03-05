@@ -1,0 +1,25 @@
+.ablocks-block--countdown .ablocks-block-container {
+	display: flex;
+}
+.ablocks-block--countdown .ablocks-countdown__item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+}
+.ablocks-block--countdown .ablocks-countdown-value {
+	font-size: 3em;
+	width: 100%;
+}
+.ablocks-block--countdown .ablocks-countdown-label{
+	width: 100%;
+}
+.ablocks-block--countdown .ablocks-countdown__separator {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 40px;
+	color: black;
+}
+

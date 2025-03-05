@@ -1,0 +1,102 @@
+.ablocks-block--counter--bar .ablocks-block-container {
+    width: 100%;
+}
+
+
+.ablocks-counter__icon {
+    display: inline-flex;
+}
+
+.ablocks-counter__content {
+    font-size: 40px;
+    z-index: 1;
+  
+}
+
+.ablocks-counter__text {
+    font-size: 16px;
+}
+
+/* number counter */
+.ablocks-block--counter--circle,
+.ablocks-block--counter--bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* circle counter design */
+.ablocks-block--counter--circle 
+.ablocks-circle-counter__outer {
+    position: relative;
+    
+}
+
+.ablocks-block--counter--circle 
+.ablocks-circle-counter__inner{
+    width: 100% !important;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+}
+
+
+.ablocks-block--counter--circle 
+.ablocks-circle-counter__svg {
+    border-radius: 50%;
+}
+
+.ablocks-block--counter--circle 
+.ablocks-circle-counter__progress {
+    stroke: black;
+    fill: none;
+}
+.ablocks-block--counter--circle 
+.ablocks-circle-counter__background {
+    stroke: #d6d6d6;
+    fill: none;
+}
+
+/* circle counter design */
+
+
+
+
+/* bar counter design */
+
+.ablocks-block--counter--bar {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.ablocks-block--counter--bar .ablocks-bar-counter__background {
+    height: 100%;
+    width: 100%;
+    background-color: #dadada;
+}
+.ablocks-block--counter--bar .ablocks-bar-counter__progress {
+    height: 100%;
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+.ablocks-block--counter--bar  .ablocks-counter__content{
+    font-size: 16px;
+    color: white;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+}

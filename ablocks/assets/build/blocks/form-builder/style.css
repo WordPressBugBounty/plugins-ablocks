@@ -1,0 +1,201 @@
+.ablocks-block--form-builder {
+    padding: 20px;
+}
+
+.ablocks-block--form-builder .block-editor-button-block-appender {
+    padding: 15px 100px !important;
+    margin: 10px 0;
+}
+
+.ablocks-block--form-builder .block-list-appender {
+    position: static;
+}
+
+.ablocks-form-builder .ablocks-form-builder__fields {
+    width: 100%;
+}
+
+.ablocks-form-builder .ablocks-form-builder__submit-button {
+    margin-top: 5px;
+}
+
+/* Default Button */
+.ablocks-form-builder .ablocks-form-builder__submit-button {
+    cursor: pointer;
+    border: none;
+}
+.ablocks-form-builder .ablocks-form-builder__submit-button--default {
+    padding: 6px 14px;
+    font-size: 14px;
+    width: 20%;
+    border-radius: 8px;
+    background: #13191B;
+    color: white;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+/* Small Button */
+.ablocks-form-builder .ablocks-form-builder__submit-button--small {
+    padding: 8px 16px;
+    font-size: 14px;
+    width: 20%;
+    border-radius: 8px;
+    background: #13191B;
+    color: white;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+/* Medium Button */
+.ablocks-form-builder .ablocks-form-builder__submit-button--medium {
+    padding: 12px 24px;
+    font-size: 16px;
+    width: 30%;
+    border-radius: 8px;
+    background: #13191B;
+    color: white;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+/* Large Button */
+.ablocks-form-builder .ablocks-form-builder__submit-button--large {
+    padding: 16px 32px;
+    font-size: 18px;
+    width: 50%;
+    border-radius: 8px;
+    background: #13191B;
+    color: white;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+/* Extra Large Button */
+.ablocks-form-builder .ablocks-form-builder__submit-button--extra-large {
+    padding: 18px 36px;
+    font-size: 20px;
+    width: 60%;
+    border-radius: 8px;
+    background: #13191B;
+    color: white;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+/* Full Width Button */
+.ablocks-form-builder .ablocks-form-builder__submit-button--full-width {
+    padding: 14px 28px;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 8px;
+    background: #13191B;
+    color: white;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+}
+
+/* Label styling */
+.ablocks-form-builder__label {
+    color: #0F0E16;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+}
+
+.ablocks-form-builder input.ablocks-form-builder__input {
+    width: 100%;
+    /* padding: 10px 16px; */
+    box-sizing: border-box;
+    height: 49px;
+    /* border: 1px solid #A7AAAD; */
+    /* border-radius: 5px; */
+    color: #0F0E16;
+}
+
+.ablocks-form-builder input.ablocks-form-builder__input::placeholder {
+    color: #A7AAAD;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+}
+
+input.ablocks-form-builder__input:focus {
+    /* border: 5px solid #007cba !important; */
+    outline: none;
+    box-shadow: none;
+}
+
+.ablocks-feedback-messag .error-msg {
+    color: #f70404;
+}
+
+.ablocks-feedback-messag .success-msg {
+    color: rgb(14, 255, 14);
+}
+
+.ablocks-form-builder button[type="submit"].loading {
+    position: relative;
+    pointer-events: none;
+    /* Prevent clicking the button again while loading */
+}
+
+.ablocks-form-builder button[type="submit"].loading::after {
+    content: "";
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #fff;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+.ablocks-form-builder-toobar-button--active {
+    color: white;
+}
+
+.ablocks-form-builder-toobar-button--active::before {
+    background-color: #007cba;
+    /* Example color */
+    border: 1px solid black;
+}
+.block-editor-block-variation-picker__variations .ablocks-icon--register::before{
+    font-size: 42px;
+}
+.block-editor-block-variation-picker__variations .ablocks-icon--login::before{
+    font-size: 42px;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

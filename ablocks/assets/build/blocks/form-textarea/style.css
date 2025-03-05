@@ -1,0 +1,57 @@
+.ablocks-block--form-builder .wp-block-ablocks-form-textarea{
+    width: 100%;
+}
+.ablocks-form-builder__field {
+    width: 100%;
+
+    box-sizing: border-box;
+}
+.ablocks-form-builder__field.error-msg .ablocks-form-builder__field__text{
+    border-color: red;
+ }
+ .ablocks-form-builder__field .ablocks-block-error-msg{
+     visibility: hidden;
+ }
+ .ablocks-form-builder__field.error-msg .ablocks-block-error-msg{
+     visibility: visible;
+     color: #dc2626;
+     font-size: 14px;
+     font-weight: 500;
+ }
+.ablocks-form-builder-textarea .ablocks-form-builder__helper-text{
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    margin-top: -14px;
+    margin-bottom: 2px;
+    color:hsl( from #1E1E1E h s l / 0.65);
+}
+.ablocks-form-builder__field__label {
+    text-transform: capitalize;
+    display: block;
+
+}
+.ablocks-form-builder__label--required::after {
+    content:"*";
+    color: red;
+}
+
+.ablocks-form-builder__field__text {
+    display: flex;
+}
+textarea.ablocks-form-builder__field__text{
+    width: 100%;
+    padding: 12px ;
+    outline: none;
+    border: 1px solid hsla(0, 0%, 0%, 0.493);
+    border-radius: 3px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+.ablocks-form-builder__field__text textarea::placeholder {
+    opacity: 0.8;
+}
+.ablocks-form-builder__field__text textarea:focus {
+    outline: none;
+    border: none;
+}

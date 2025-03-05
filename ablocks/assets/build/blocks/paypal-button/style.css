@@ -1,0 +1,67 @@
+.ablocks-paypal-button {
+	background: #ddd;
+	color: #000000;
+	padding: 10px 20px;
+	border-radius: 6px;
+	display: inline-flex;
+	justify-content: center;
+	column-gap: 5px;
+	width: auto;
+	text-decoration: none;
+	align-items: center;
+	font-size: 16px;
+	box-sizing: border-box;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+.ablocks-paypal-button--xs {
+	font-size: 13px;
+	padding: 10px 20px;
+	border-radius: 2px;
+}
+
+.ablocks-paypal-button--sm {
+	font-size: 15px;
+	padding: 12px 24px;
+	border-radius: 3px;
+}
+
+.ablocks-paypal-button--md {
+	font-size: 16px;
+	padding: 15px 30px;
+	border-radius: 4px;
+}
+
+.ablocks-paypal-button--lg {
+	font-size: 18px;
+	padding: 20px 40px;
+	border-radius: 5px;
+}
+
+.ablocks-paypal-button--xl {
+	font-size: 20px;
+	padding: 25px 50px;
+	border-radius: 6px;
+}
+
+.ablocks-paypal-button.ablocks-paypal-button--icon-left .ablocks-icon-wrap {
+	order: 5;
+}
+
+.ablocks-paypal-button__text {
+	order: 10;
+}
+
+.ablocks-paypal-button.ablocks-paypal-button--icon-right .ablocks-icon-wrap {
+	order: 15;
+}
+
+
+/* settings style */
+.ablocks-paypal-settings-msg{
+	font-size: 11px;
+	color: #9da5ae;
+	font-style: italic;
+	line-height: 1.3;
+}

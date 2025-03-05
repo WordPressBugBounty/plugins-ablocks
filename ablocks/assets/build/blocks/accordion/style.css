@@ -1,0 +1,116 @@
+.ablocks-block--accordion {
+    position: relative;
+    padding: 10px 15px 60px; 
+}
+
+.ablocks-block--accordion .ablocks-block-accordion-appender-button {
+    font-size: 14px;
+    padding: 12px 10px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    background-color: #13191B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ablocks-block--accordion .ablocks-block-accordion-appender-button .ablocks-icon--plus {
+    font-weight: 600;
+}
+
+.ablocks-block--accordion .ablocks-block-accordion-appender-button .ablocks-icon--plus:before {
+    color: #FFFFFF !important;
+}
+
+.ablocks-block--accordion .block-list-appender {
+    left: 12px !important;
+    right: auto !important;
+    bottom: -50px;
+}
+.ablocks-block--single-accordion .block-list-appender {
+    left: 12px !important;
+    right: auto !important;
+    bottom: 15px;
+}
+
+.ablocks-block--single-accordion {
+    overflow: hidden;
+}
+.ablocks-block--single-accordion__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px 15px;
+    border: none;
+}
+
+.ablocks-block--single-accordion__heading-rightSide {
+    display: flex;
+    align-items: center;
+    width: 90%;
+}
+
+.ablocks-block--single-accordion__heading-rightSide .ablocks-block-accordion-title {
+    margin: 0;
+    margin-left: 10px;
+}
+
+.ablocks-block--single-accordion__heading .ablocks-single-accordion-right-side-icon {
+    margin-right: 10px;
+}
+
+.ablocks-block--accordion .ablocks-block--single-accordion .block-list-appender {
+    position: relative;
+}
+
+.ablocks-block--accordion .ablocks-block--single-accordion svg.ablocks-svg-icon {
+    width: 1em;
+    height: 1em;
+}
+
+.ablocks-block--single-accordion .ablocks-block--single-accordion__body {
+    overflow: hidden;
+    height: 0px;
+}
+.ablocks-block--single-accordion-is-selected .ablocks-block--single-accordion__body{
+    height: auto;
+} 
+.ablocks-block--single-accordion__body-content {
+    background-color: #F9F9F9;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+.ablocks-block--single-accordion__body-content .block-editor-default-block-appender .block-editor-inserter {
+    line-height: 0;
+    position: absolute;
+    right: 12px;
+    top: 10px;
+}
+.ablocks-block--single-accordion .ablocks-block--single-accordion__heading-collapse-icon-open {
+    display: none;
+}
+
+.ablocks-block--single-accordion-is-selected .ablocks-block--single-accordion__heading-collapse-icon-open {
+    display: block;
+}
+
+.ablocks-block--single-accordion .ablocks-block--single-accordion__heading-collapse-icon-off {
+    display: block;
+}
+
+.ablocks-block--single-accordion-is-selected .ablocks-block--single-accordion__heading-collapse-icon-off {
+    display: none;
+}
+/* for twenty twenty theme frontend default heading border bottom */
+.ablocks-block--single-accordion .ablocks-block--single-accordion__heading{
+  outline-style: none !important;
+}
+/* for astra block editor p tag default margin bottom */
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container p{
+    margin-bottom: 0 !important;
+}

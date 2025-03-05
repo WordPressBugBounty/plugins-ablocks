@@ -1,0 +1,97 @@
+.ablocks-block-news-ticker {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 2px solid rgba(0, 0, 0, .15);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+    height: 50px;
+    overflow: hidden;
+    position: relative;
+    will-change: transform;
+}
+
+.wp-block-ablocks-news-ticker {
+    width: 100% !important;
+}
+
+.ablocks-block-news-ticker__label {
+    color: white;
+    background-color: black;
+    padding: 0 10px;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    right: auto;
+    z-index: 1;
+    /* small polygon */
+    /* clip-path: polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%); */
+}
+
+.ablocks-block-news-ticker__marquee {
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+    flex: 1;
+    height: 100%;
+}
+
+.ablocks-block-news-ticker_marquee--content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    will-change: transform;
+    /* transform: translateX(100%); */
+}
+
+
+.ablocks-block-news-ticker_marquee--content li {
+    margin: 0 30px;
+    white-space: nowrap;
+}
+/* .ablocks-block-news-ticker_marquee--content :hover {
+    color: red;
+ } */
+
+.ablocks-block-news-ticker--icons {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: absolute;
+    right: 0;
+}
+
+.ablocks-block-news-ticker__list {
+    display: flex;
+    white-space: nowrap;
+}
+
+.ablocks-block-news-ticker--date {
+    background-color: black;
+    border-radius: 100px;
+    color: white;
+    font-size: 16px;
+    padding: 8px;
+    margin-left: 10px;
+}
+
+.ablocks-block-news-ticker--fixed {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+  }
+  .ablocks-block-news-ticker--absolute {
+    position: absolute;
+    width: 100%;
+  }  
+
+  .ablocks-block-news-ticker--auto {
+    width: 100% !important;
+  }

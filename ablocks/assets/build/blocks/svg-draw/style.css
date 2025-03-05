@@ -1,0 +1,33 @@
+.ablocks-block--svg-draw .ablocks-block-container {
+    display: flex;
+}
+
+.ablocks-block--svg-draw .ablocks-block-container .ablocks-icon-wrap > svg > path {
+    fill: transparent;
+    stroke-width: 10px;
+    stroke-dasharray: 1560;
+    stroke-dashoffset: 0;
+    animation: ablocks-svg-animate ease-in-out infinite;
+    animation-direction: reverse;
+}
+
+@keyframes ablocks-svg-animate {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    40% {
+        stroke-dashoffset: 1560;
+    }
+    80% {
+        stroke-dashoffset: 3120;
+        fill: transparent;
+    }
+    90% {
+        stroke-dashoffset: 3120;
+        fill: unset;
+    }
+    100% {
+        stroke-dashoffset: 3120; /* Keep it the same but add a delay for 5s here */
+        fill: unset;
+    }
+}

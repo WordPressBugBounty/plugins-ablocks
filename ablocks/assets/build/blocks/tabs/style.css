@@ -1,0 +1,159 @@
+.ablocks-block-tabs {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.ablocks-block-tabs li {
+    list-style: none;
+}
+.ablocks-block-tabs a {
+    text-decoration: none !important;
+}
+
+.ablocks-block-tabs__tab-panel{
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+ .ablocks-block-tabs__tab {
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.ablocks-block-tabs__tab{
+    border-width: 1px;
+    border-color: #e0e0e0;
+    border-style: solid;
+}
+
+.ablocks-block-tabs__tab--active .ablocks-block-tabs__progressbar{
+    position: absolute;
+    left: 0;
+    bottom:0;
+    height: 4px;
+}
+
+ .ablocks-block-tabs__tab-menu {
+    position: relative;
+    padding: 8px 18px;
+    display: inline-flex;
+    color: black;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.ablocks-block-tabs__tab-menu-title {
+    font-size: 20px;
+}
+
+
+
+ .ablocks-block-tabs__tab-active a {
+    background-color: #FFFFFF !important;
+    border: none;
+}
+
+/* ********************************************
+add tab icon button style
+****************************************** */
+.ablocks-block-tabs__add-tab {
+    color: black;
+    padding: 6px 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ablocks-block-tabs__add-tab .ablocks-icon--plus::before {
+    color: black !important;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.ablocks-block-tabs__tab-menu {
+    outline-style: none !important;
+    display: flex;
+    align-items: center;
+}
+
+.ablocks-block-tabs__tab-menu-content {
+    text-align:start;
+
+}
+
+.ablocks-block-tabs__tab-menu-subtitle {
+    font-size: 14px;
+    line-height: 21px;
+}
+
+/* ************************************************
+         tab body and child part style
+******************************************** */
+.ablocks-block-tabs__body {
+    position: relative;
+    max-width: 100%;
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.ablocks-block-tabs__body  .block-editor-button-block-appender {
+    height:60px;
+}
+
+
+.ablocks-block--tabs-child {
+    display: none;
+}
+
+.ablocks-block-tabs .has-child-selected{
+    display: block;
+}
+
+/*************************** 
+            toolbar css part 
+***************************/
+.ablocks-block-tabs__tab-controls {
+    display: none;
+    position: absolute;
+    top: -35px;
+    z-index: 10;
+    max-width: 100%;
+}
+
+.ablocks-block-tabs__tab--active .ablocks-block-tabs__tab-controls {
+    display: block;
+}
+
+.ablocks-block-tabs__tab-controls .components-toolbar {
+    background-color: #0a0909;
+    border: 1px solid #1e1e1e;
+    display: inline-flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    margin: 0;
+    min-height: 20px;
+}
+
+.ablocks-block-tabs .ablocks-icon--close,
+.ablocks-block-tabs .ablocks-icon--direction-row-reversed,
+.ablocks-block-tabs .ablocks-icon--direction-row-horizontal {
+    padding: 8px 2px;
+}
+
+.ablocks-block-tabs .ablocks-icon--close::before,
+.ablocks-block-tabs .ablocks-icon--direction-row-reversed::before,
+.ablocks-block-tabs .ablocks-icon--direction-row-horizontal::before {
+    color: white !important;
+    font-size: 17px;
+}
+.ablocks-block-tabs__tab--active .ablocks-block-tabs__progressbar{
+    display: block;
+}
+.ablocks-block-tabs__progressbar{
+    display: none;
+}
+.ablocks-block-tabs__progressbar-editor{
+    display: none !important;
+}
