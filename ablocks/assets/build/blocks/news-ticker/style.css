@@ -1,3 +1,6 @@
+.ablocks-block--news-ticker{
+    width: 100% !important;
+}
 .ablocks-block-news-ticker {
     display: flex;
     align-items: center;
@@ -9,12 +12,8 @@
     overflow: hidden;
     position: relative;
     will-change: transform;
+   
 }
-
-.wp-block-ablocks-news-ticker {
-    width: 100% !important;
-}
-
 .ablocks-block-news-ticker__label {
     color: white;
     background-color: black;

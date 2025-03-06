@@ -9,6 +9,7 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Background;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Border;
+use ABlocks\Components\ButtonGroup;
 
 
 $attributes = [
@@ -16,21 +17,9 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	),
-	'popupPosition' => array(
-		'type' => 'string',
-		'default' => 'popup',
-	),
-	'panelBlockPosition' => array(
-		'type' => 'string',
-		'default' => 'bottom',
-	),
 	'popupOnTop' => array(
 		'type' => 'boolean',
 		'default' => false,
-	),
-	'panelContentPosition' => array(
-		'type' => 'string',
-		'default' => 'auto',
 	),
 	'disableCloseButton' => array(
 		'type' => 'boolean',
@@ -56,14 +45,6 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	),
-	'openPanel' => array(
-		'type' => 'string',
-		'default' => 'close',
-	),
-	'closePosition' => array(
-		'type' => 'string',
-		'default' => 'right',
-	),
 	'noTrigger' => array(
 		'type' => 'boolean',
 		'default' => false,
@@ -72,6 +53,21 @@ $attributes = [
 
 $attributes = array_merge(
 	$attributes,
+	ButtonGroup::get_attribute( 'openPanel', false, [
+		'value' => 'close',
+	] ),
+	ButtonGroup::get_attribute( 'popupPosition', false, [
+		'value' => 'popup',
+	] ),
+	ButtonGroup::get_attribute( 'panelBlockPosition', false, [
+		'value' => 'bottom',
+	] ),
+	ButtonGroup::get_attribute( 'panelContentPosition', false, [
+		'value' => 'auto',
+	] ),
+	ButtonGroup::get_attribute( 'closePosition', false, [
+		'value' => 'right',
+	] ),
 	Range::get_attribute([
 		'attributeName' => 'popupTopOffset',
 		'isResponsive' => false,

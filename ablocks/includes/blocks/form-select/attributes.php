@@ -19,7 +19,7 @@ $attributes = [
 	],
 	'name' => [
 		'type' => 'string',
-		'default' => 'Message',
+		'default' => '',
 	],
 	'helperText' => [
 		'type' => 'string',

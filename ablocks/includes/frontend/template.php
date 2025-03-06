@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Academy;
 use ABlocks\Helper;
 use WP_Query;
+use ABlocks\Blocks\FormBuilder\EmailVerification;
 
 class Template {
 	public static function init() {
@@ -23,6 +24,10 @@ class Template {
 			add_action( 'template_include', array( $this, 'set_website_visibility' ), 99 );
 			add_filter( 'ablocks/is_enabled_assets_generation', '__return_false' );
 		}
+
+		// load email verification handler
+		add_action( 'template_redirect', [ $this, 'email_verification_handler' ] );
+
 	}
 
 	public function add_fse_theme_body_class( $classes ) {
@@ -56,4 +61,26 @@ class Template {
 		}
 		return $template;
 	}
+
+	public function email_verification_handler() {
+		$id = isset( $_GET['id'] ) ? sanitize_text_field( wp_unslash( $_GET['id'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$signature = isset( $_GET['signature'] ) ? sanitize_text_field( wp_unslash( $_GET['signature'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$expire = isset( $_GET['expire'] ) ? sanitize_text_field( wp_unslash( $_GET['expire'] ) ) : '';// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( empty( $id ) || empty( $signature ) || empty( $expire ) ) {
+			return;
+		}
+		// Sanitize input before usage
+		$get_data = [
+			'id'        => $id,
+			'signature' => $signature,
+			'expire'    => $expire,
+		];
+		// Verify method has a sanitization system inside.
+		$msg = EmailVerification::verify( $get_data );
+		if ( is_array( $msg ) && ! empty( $msg['success'] ) ) {
+			\ABlocks\Helper::get_template( 'verification/verification-success.php' );
+			wp_die( esc_html__( 'Verification successful.', 'ablocks' ) );
+		}
+	}
+
 }

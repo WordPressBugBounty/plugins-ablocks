@@ -74,17 +74,17 @@ class Block extends BlockBaseAbstract {
 	public function get_countdown_items_css( $attributes, $device = '' ) {
 		$css = [];
 
-		if ( ! empty( $attributes[ 'direction' . $device ] ) ) {
-			$css['flex-direction'] = $attributes[ 'direction' . $device ];
+		if ( ! empty( $attributes['orient'][ 'value' . $device ] ) ) {
+			$css['flex-direction'] = $attributes['orient'][ 'value' . $device ];
 		}
-		if ( ! empty( $attributes[ 'justify' . $device ] ) ) {
-			$css['justify-content'] = $attributes[ 'justify' . $device ];
+		if ( ! empty( $attributes['justifyDep'][ 'value' . $device ] ) ) {
+			$css['justify-content'] = $attributes['justifyDep'][ 'value' . $device ];
 		}
-		if ( ! empty( $attributes[ 'align' . $device ] ) ) {
-			$css['align-items'] = $attributes[ 'align' . $device ];
+		if ( ! empty( $attributes['alignment'][ 'value' . $device ] ) ) {
+			$css['align-items'] = $attributes['alignment'][ 'value' . $device ];
 		}
-		if ( ! empty( $attributes[ 'wrap' . $device ] ) ) {
-			$css['flex-wrap'] = $attributes[ 'wrap' . $device ];
+		if ( ! empty( $attributes['wrapping'][ 'value' . $device ] ) ) {
+			$css['flex-wrap'] = $attributes['wrapping'][ 'value' . $device ];
 		}
 		if ( ! empty( $attributes['boxColumnGap'][ 'value' . $device ] ) ) {
 			$css['column-gap'] = $attributes['boxColumnGap'][ 'value' . $device ]

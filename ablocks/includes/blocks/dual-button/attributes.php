@@ -9,16 +9,13 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\TextShadow;
+use ABlocks\Controls\GroupButton;
 use ABlocks\Controls\Range;
 
 $attributes = [
 	'block_id' => [
 		'type' => 'string',
 		'default' => '',
-	],
-	'stack' => [
-		'type' => 'string',
-		'default' => 'horizontal',
 	],
 	'justifyItems' => [
 		'type' => 'string',
@@ -61,6 +58,9 @@ $attributes = array_merge(
 	Dimensions::get_attribute( 'padding', true ),
 	Typography::get_attribute( 'typography', true ),
 	TextShadow::get_attribute( 'textShadow' ),
+	GroupButton::get_attribute( 'stack', false, [
+		'value' => 'horizontal'
+	] ),
 	Range::get_attribute([
 		'attributeName' => 'gap',
 		'attributeObjectKey' => 'value',

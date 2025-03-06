@@ -10,6 +10,7 @@ $attributes = [
 		'default' => ''
 	),
 	'steps' => [
+		'type' => 'array',
 		'default' => [
 			[
 				'id' => 1,

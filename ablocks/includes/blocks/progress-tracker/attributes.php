@@ -10,6 +10,7 @@ use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
+use ABlocks\Components\ButtonGroup;
 $attributes = [
 	'block_id' => [
 		'type' => 'string',
@@ -29,10 +30,6 @@ $attributes = [
 	'trackColor' => [
 		'type' => 'string',
 		'default' => '#e0e0e0',
-	],
-	'layout' => [
-		'type' => 'string',
-		'default' => 'bar',
 	],
 	'mediaPosition' => [
 		'type' => 'string',
@@ -95,6 +92,9 @@ $attributes = array_merge(
 	TextShadow::get_attribute( 'contentTextShadow' ),
 	TextStroke::get_attribute( 'contentTextStroke', true ),
 	Border::get_attribute( 'barBorder', true ),
+	ButtonGroup::get_attribute( 'layout', false, [
+		'value' => 'bar',
+	] ),
 	Range::get_attribute( [
 		'attributeName' => 'barHeightSize',
 		'attributeObjectKey' => 'value',

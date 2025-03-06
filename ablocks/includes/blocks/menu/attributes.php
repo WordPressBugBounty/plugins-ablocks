@@ -5,6 +5,7 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\BoxShadow;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -68,7 +69,34 @@ $attributes = [
 		'type' => 'string',
 		'default' => ''
 	],
-
+	'subMenuResponsiveColor' => [
+		'type' => 'string',
+		'default' => ''
+	],
+	'subMenuResponsiveBg' => [
+		'type' => 'string',
+		'default' => ''
+	],
+	'subMenuItemTextColor' => [
+		'type' => 'string',
+		'default' => '',
+	],
+	'subMenuItemBackground' => [
+		'type' => 'string',
+		'default' => '',
+	],
+	'subMenuItemTextColorH' => [
+		'type' => 'string',
+		'default' => '',
+	],
+	'subMenuItemBackgroundH' => [
+		'type' => 'string',
+		'default' => '',
+	],
+	'subMenuItemTransition' => [
+		'type' => 'number',
+		'default' => 0,
+	],
 
 ];
 
@@ -81,6 +109,10 @@ $attributes = array_merge(
 	Border::get_attribute( 'menuItemBorder', true ),
 	Border::get_attribute( 'hamburgerBorder', true ),
 	Typography::get_attribute( 'menuItemTypography', true ),
+	// sub menu style
+	BoxShadow::get_attribute( 'subMenuBoxShadow', true ),
+	Dimensions::get_attribute( 'subMenuPadding', false ),
+	Border::get_attribute( 'subMenuBorder', true ),
 	Range::get_attribute( [
 		'attributeName' => 'hamburgerHeight',
 		'isResponsive' => false,
@@ -94,6 +126,14 @@ $attributes = array_merge(
 		'isResponsive' => false,
 		'defaultValue' => 30,
 		'attributeObjectKey' => 'value',
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+	]),
+	Range::get_attribute([
+		'attributeName' => 'subMenuWidth',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 250,
 		'hasUnit' => true,
 		'unitDefaultValue' => 'px',
 	]),

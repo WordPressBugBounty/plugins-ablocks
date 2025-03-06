@@ -4,15 +4,17 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 5.4
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.6.3
+Stable tag: 1.7.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-aBlocks is a WordPress Gutenberg plugin with customizable blocks for easy, precise website design. Create stunning websites effortlessly with aBlocks.
+aBlocks is a Gutenberg-based website builder with flexible blocks and powerful form solutions, allowing you to build any type of form effortlessly!
 
 == Description ==
 
-aBlocks is a cutting-edge Gutenberg block plugin designed to give you unprecedented control over your WordPress website. Whether you’re building a blog, a portfolio, an eLearning or an eCommerce website, aBlocks offers an array of fully customizable Gutenberg blocks that make your content shine.
+aBlocks is a Gutenberg-based website builder that gives you unmatched control over your WordPress website. Whether you're building a blog, portfolio, eLearning, or eCommerce site, aBlocks offers a powerful collection of fully customizable Gutenberg blocks to make your content stand out.  
+
+With built-in form builder, you can easily create any type of website form—from login, registration, contact, and more. Plus, the demo importer provides a vast library of pre-designed patterns and templates, allowing you to kickstart your website effortlessly without starting from scratch. 
 
 === Why aBlocks? ===
 
@@ -25,6 +27,9 @@ aBlocks offers a comprehensive collection of highly customizable Gutenberg block
 
 ==== Check our overview video of aBlocks 👇 ====
 https://youtu.be/rmYGqzHqF8U
+
+==== Check our Form Builder overview 👇 ====
+https://youtu.be/MRq5xE9A-RM
 
 === Available Blocks ===
 
@@ -58,7 +63,7 @@ https://youtu.be/rmYGqzHqF8U
 - **Simple & Mega Menu**: Customize your navigation with simple dropdowns or complex mega menus.
 - **Table Block**: Create responsive, customizable tables to display data neatly, perfect for comparison charts, schedules, and more.
 - **Modal & Popup Builder**: Create eye-catching modals and popups with full customization for user engagement, opt-ins, and announcements.
-- **Form Builder (Login, Register)**: Easily design and embed login and registration forms, enhancing user experience and streamlining access.
+- **Form Builder (Any Kind of Form)**: Effortlessly design and integrate login, registration, password recovery, contact, subscription, multi-step, and custom forms to enhance user engagement and streamline accessibility.
 - **Search**: Integrate a sleek, responsive search bar to improve site navigation and boost user discovery.
 - **Price List**: Display service or product pricing in a visually appealing list, perfect for eCommerce and business sites.
 - **Progress Tracker**: Keep users motivated by displaying completion progress in courses, projects, or tasks.
@@ -66,6 +71,13 @@ https://youtu.be/rmYGqzHqF8U
 - **Info Box**: The Info Box Block highlights key information with customizable layouts, icons, images, button and interactive hover effects for a professional, engaging presentation.
 - **PayPal**: PayPal block for Gutenberg enables easy integration of PayPal payments on your website. Accept payments or donations effortlessly with just a click.
 - **News Ticker**: Effortlessly display scrolling headlines to keep your visitors updated with the latest news.
+- **Filterable Cards Block**: Interactive and customizable cards for dynamic content filtering, enhancing user engagement and seamless navigation.
+- **Stipe Button Block**: Easily integrate secure Stripe payment buttons for seamless transactions directly within your WordPress site.
+- **Advance List Block**: Create highly customizable and dynamic lists with icons, colors, and layouts for better content organization.
+- **Logout Block**: Add a simple, customizable logout button to allow users to securely log out from your site.
+- **Marquee Block**: Create eye-catching, customizable scrolling text or content for announcements, highlights, or dynamic visual effects.
+- **Stacked Cards Blocks [PRO]**: Add customizable, impactful Stacked Cards.
+
 - **Demo Importer**: Quickly set up and replicate demo designs with a single click for a seamless start.
 
 === Figma to WordPress: Simplify Your Design Workflow ===
@@ -88,22 +100,9 @@ Unlock the full potential of your eLearning website with aBlocks, designed to in
 
 *Note: Academy LMS plugin is required to use these blocks.*
 
-=== In Development: Coming Soon Blocks ===
-- **Loop Builder**: Customize the display of posts or products with control over layout and content.
-- **Paypal & Stripe**: Add payment options directly into your pages.
-- **Image Scroller & Hotspot**: Create interactive image experiences with scrolling effects and clickable hotspots.
-- **News Ticker**: Display scrolling announcements or news updates.
-
-=== Coming Soon: More Powerful Blocks ===
-- **Facebook Like & Embed**: Integrate Facebook likes and content embeds.
-- **Playlist**: Organize media content into customizable playlists.
-- **Breadcrumb**: Add breadcrumb trails for better navigation.
-- **Lottie Animation**: Add engaging Lottie animations to your website.
-
 Don’t settle for ordinary. Download aBlocks today and start building extraordinary WordPress websites with the power of Gutenberg!
 
 Get started with aBlocks and take your WordPress website to the next level!
-
 
 
 ## 🔥 WHAT’S NEXT
@@ -112,7 +111,16 @@ If you like aBlocks, then consider checking out our other WordPress Plugins for 
 🔝 [Academy LMS](https://wordpress.org/plugins/academy/) –  eLearning and online course solution for WordPress
 🔝 [WP Map Block](https://wordpress.org/plugins/wp-map-block/) –  Gutenberg Map Block for Google Map and OpenStreet Map
 
+## 🤝 Join the thriving aBlocks community today!
+Unlock a powerful network of website creators, designers, developers, and WordPress enthusiasts with aBlocks. Join us in revolutionizing website building with seamless design and advanced block features! 🚀
 
+Connect with us on social media for the latest news and updates:
+
+👉 [Our Official Facebook Page](https://www.facebook.com/ablocksteam/)
+👉 [Join our Facebook Group](https://www.facebook.com/groups/386840187678401)
+👉 [Follow us on Twitter](https://x.com/aBlocksTeam)
+👉 [Connect in our Linkedin](https://www.linkedin.com/showcase/ablocksteam/)
+👉 [Our Official Support](https://kodezen.com/support/)
 
 == Frequently Asked Questions ==
 
@@ -142,6 +150,27 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 8. Instant Style Copy-Paste
 
 == Changelog ==
+
+= 1.7.0 - 05/03/2025 =
+* Added - New Form Builder Subscription, Contact, format password, reset password and custom form
+* Added - Full Site Demo Importer 
+* Added - One Click Demo Importing option for theme developer 
+* Added - Custom CSS 
+* Added - New Filterable Cards Block 
+* Added - New Stipe Button Block
+* Added - Menu Block Parent Block Settings option
+* Added - New Advance List Block
+* Added - New Logout Block
+* Added - New Button Group Control
+* Updated - Every Block Icon Responsive control
+* Updated - Every block Button Group Control and added responsive option
+* Fixed - Modal Block Scroll issue
+* Fixed - Social Share Block Icon height issue
+* Fixed - List Block Range Control issue
+* Fixed - Tabs Block Image size issue
+* Fixed - Select Control Dropdown issue
+* Fixed - Google Fonts API unnecessary loading issue
+* Fixed - Coupon Block Style issue
 
 = 1.6.3 - 07/02/2025 =
 * Fixed - WP File System error solved
@@ -399,4 +428,5 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 * Initial beta release
 
 == Upgrade Notice ==
-Please do not use this plugin on the production site; it is for beta testing purposes only.
+= 1.7.0 =
+This is a major update with breaking changes. Please back up your site before proceeding with the update.

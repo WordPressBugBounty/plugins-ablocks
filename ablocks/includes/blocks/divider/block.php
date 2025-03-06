@@ -59,11 +59,27 @@ class Block extends BlockBaseAbstract {
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-divider__element-icon .ablocks-icon-wrap img.ablocks-image-icon',
-			Icon::get_element_image_css( $attributes )
+			Icon::get_element_image_css( $attributes ),
+			Icon::get_element_image_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-divider__element-icon .ablocks-icon-wrap img.ablocks-image-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-divider__element-icon .ablocks-icon-wrap svg.ablocks-svg-icon',
 			Icon::get_element_css( $attributes ),
+			Icon::get_element_css( $attributes, 'Tablet' ),
+			Icon::get_element_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-divider__element-icon .ablocks-icon-wrap svg.ablocks-svg-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
 		);
 		return $css_generator->generate_css();
 	}
@@ -139,7 +155,7 @@ class Block extends BlockBaseAbstract {
 	public function get_divider_css( $attributes, $device = '' ) {
 		$css = [];
 
-		$preparedContainer = Range::get_css([
+		$prepared_container = Range::get_css([
 			'attributeValue' => $attributes['width'],
 			'attributeObjectKey' => 'value',
 			'isResponsive' => true,
@@ -149,8 +165,8 @@ class Block extends BlockBaseAbstract {
 			'property' => 'value',
 			'device' => $device,
 		]);
-		if ( ! empty( $preparedContainer['value'] ) && ( '100%' !== $preparedContainer['value'] . $preparedContainer['valueUnit'] || $device !== '' ) ) {
-			$css['max-width'] = "min(100%, {$preparedContainer['value']}{$preparedContainer['valueUnit']})";
+		if ( ! empty( $prepared_container['value'] ) && ( '100%' !== $prepared_container['value'] . $prepared_container['valueUnit'] || $device !== '' ) ) {
+			$css['max-width'] = "min(100%, {$prepared_container['value']}{$prepared_container['valueUnit']})";
 		}
 		return array_merge(
 			$css

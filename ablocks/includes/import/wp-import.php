@@ -2,7 +2,8 @@
 
 namespace ABlocks\import;
 
-use ABlocks\import\parsers\WXR_Parser;
+use ABlocks\Helper;
+use ABlocks\import\XmlParsers\WXR_Parser;
 use WP_Error;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,8 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * WordPress importer class.
  */
 class WP_Import extends \WP_Importer {
-
-	public $max_wxr_version = 1.2;
 
 	public $id;
 
@@ -46,17 +45,20 @@ class WP_Import extends \WP_Importer {
 	 * The main controller for the actual import stage.
 	 *
 	 * @param string $file Path to the WXR file for importing.
+	 * @param bool   $with_attachments with attachments ?.
 	 */
-	public function import( string $file ) {
+	public function import( string $file, bool $with_attachments = true ) {
 		add_filter( 'import_post_meta_key', array( $this, 'is_valid_meta_key' ) );
 		add_filter( 'http_request_timeout', array( &$this, 'bump_request_timeout' ) );
+
+		$this->fetch_attachments = $with_attachments;
 
 		$result = $this->import_start( $file );
 		if ( is_wp_error( $result ) ) {
 			return $result;
 		}
 
-		wp_suspend_cache_invalidation( true );
+		wp_suspend_cache_invalidation();
 		$this->process_categories();
 		$this->process_tags();
 		$this->process_terms();
@@ -78,10 +80,15 @@ class WP_Import extends \WP_Importer {
 	 *
 	 * @param string $file Path to the WXR file for importing.
 	 */
-	public function import_start( $file ) {
+	public function import_start( string $file ) {
 		if ( ! is_file( $file ) ) {
 			return new WP_Error( 'file_not_found', __( 'File not found', 'ablocks' ) );
 		}
+
+		Helper::emit_sse_message( [
+			'action' => 'log',
+			'message' => __( 'Import process started...', 'ablocks' )
+		] );
 
 		$import_data = $this->parse( $file );
 
@@ -103,7 +110,7 @@ class WP_Import extends \WP_Importer {
 		wp_defer_term_counting( true );
 		wp_defer_comment_counting( true );
 
-		do_action( 'import_start' );
+		do_action( 'ablocks/template_import_start' );
 
 		return true;
 	}
@@ -123,7 +130,13 @@ class WP_Import extends \WP_Importer {
 		wp_defer_term_counting( false );
 		wp_defer_comment_counting( false );
 
-		do_action( 'import_end' );
+		do_action( 'ablocks/template_import_end' );
+
+		Helper::emit_sse_message( [
+			'action' => 'log',
+			'level' => 'info',
+			'message' => __( 'Import process Finished.', 'ablocks' ),
+		] );
 	}
 
 	/**
@@ -132,7 +145,7 @@ class WP_Import extends \WP_Importer {
 	 *
 	 * @return bool False if error uploading or invalid file, true otherwise
 	 */
-	public function handle_upload() {
+	public function handle_upload(): bool {
 		$file = wp_import_handle_upload();
 
 		if ( isset( $file['error'] ) || ! file_exists( $file['file'] ) ) {
@@ -186,7 +199,7 @@ class WP_Import extends \WP_Importer {
 	 * Doesn't create a new category if its slug already exists
 	 */
 	public function process_categories() {
-		$this->categories = apply_filters( 'wp_import_categories', $this->categories );
+		$this->categories = apply_filters( 'ablocks/template_import_categories', $this->categories );
 
 		if ( empty( $this->categories ) ) {
 			return;
@@ -227,6 +240,12 @@ class WP_Import extends \WP_Importer {
 			$this->process_termmeta( $cat, $id );
 		}//end foreach
 
+		Helper::emit_sse_message( [
+			'action' => 'log',
+			'level' => 'info',
+			'message' => __( 'Categories imported', 'ablocks' ),
+		] );
+
 		unset( $this->categories );
 	}
 
@@ -236,7 +255,7 @@ class WP_Import extends \WP_Importer {
 	 * Doesn't create a tag if its slug already exists
 	 */
 	public function process_tags() {
-		$this->tags = apply_filters( 'wp_import_tags', $this->tags );
+		$this->tags = apply_filters( 'ablocks/template_import_tags', $this->tags );
 
 		if ( empty( $this->tags ) ) {
 			return;
@@ -273,6 +292,12 @@ class WP_Import extends \WP_Importer {
 			$this->process_termmeta( $tag, $id['term_id'] );
 		}//end foreach
 
+		Helper::emit_sse_message( [
+			'action' => 'log',
+			'level' => 'info',
+			'message' => __( 'Tags imported', 'ablocks' ),
+		] );
+
 		unset( $this->tags );
 	}
 
@@ -282,7 +307,7 @@ class WP_Import extends \WP_Importer {
 	 * Doesn't create a term its slug already exists
 	 */
 	public function process_terms() {
-		$this->terms = apply_filters( 'wp_import_terms', $this->terms );
+		$this->terms = apply_filters( 'ablocks/template_import_terms', $this->terms );
 
 		if ( empty( $this->terms ) ) {
 			return;
@@ -329,6 +354,12 @@ class WP_Import extends \WP_Importer {
 			$this->process_termmeta( $term, $id['term_id'] );
 		}//end foreach
 
+		Helper::emit_sse_message( [
+			'action' => 'log',
+			'level' => 'info',
+			'message' => __( 'Terms imported', 'ablocks' ),
+		] );
+
 		unset( $this->terms );
 	}
 
@@ -354,7 +385,7 @@ class WP_Import extends \WP_Importer {
 		 *
 		 * @since 0.6.2
 		 */
-		$term['termmeta'] = apply_filters( 'wp_import_term_meta', $term['termmeta'], $term_id, $term );
+		$term['termmeta'] = apply_filters( 'ablocks/template_import_term_meta', $term['termmeta'], $term_id, $term );
 
 		if ( empty( $term['termmeta'] ) ) {
 			return;
@@ -402,13 +433,13 @@ class WP_Import extends \WP_Importer {
 	 * Note that new/updated terms, comments and meta are imported for the last of the above.
 	 */
 	public function process_posts() {
-		$this->posts = apply_filters( 'wp_import_posts', $this->posts );
+		$this->posts = apply_filters( 'ablocks/template_import_posts', $this->posts );
 
 		foreach ( $this->posts as $post ) {
-			$post = apply_filters( 'wp_import_post_data_raw', $post );
+			$post = apply_filters( 'ablocks/template_import_post_data_raw', $post );
 
 			if ( ! post_type_exists( $post['post_type'] ) ) {
-				do_action( 'wp_import_post_exists', $post );
+				do_action( 'ablocks/template_import_post_exists', $post );
 				continue;
 			}
 
@@ -441,7 +472,7 @@ class WP_Import extends \WP_Importer {
 			 * @see post_exists()
 			 * @since 0.6.2
 			 */
-			$post_exists = apply_filters( 'wp_import_existing_post', $post_exists, $post );
+			$post_exists = apply_filters( 'ablocks/template_import_existing_post', $post_exists, $post );
 
 			if ( $post_exists && get_post_type( $post_exists ) === $post['post_type'] ) {
 				$comment_post_id                                     = $post_exists;
@@ -493,7 +524,7 @@ class WP_Import extends \WP_Importer {
 				}
 
 				$original_post_id = $post['post_id'];
-				$postdata         = apply_filters( 'wp_import_post_data_processed', $postdata, $post );
+				$postdata         = apply_filters( 'ablocks/template_import_post_data_processed', $postdata, $post );
 
 				$postdata = wp_slash( $postdata );
 
@@ -519,27 +550,48 @@ class WP_Import extends \WP_Importer {
 				} else {
 					$comment_post_id = wp_insert_post( $postdata, true );
 					$post_id         = $comment_post_id;
-					do_action( 'wp_import_insert_post', $post_id, $original_post_id, $postdata, $post );
+					do_action( 'ablocks/template_import_insert_post', $post_id, $original_post_id, $postdata, $post );
 				}//end if
 
 				if ( is_wp_error( $post_id ) ) {
+					Helper::emit_sse_message( [
+						'action' => 'log',
+						'level' => 'warning',
+						'message' => "Failed to import: {$post['post_type']} - {$post['post_title']}",
+					] );
 					continue;
 				}
 
 				if ( 1 === (int) $post['is_sticky'] ) {
 					stick_post( $post_id );
 				}
+
+				Helper::emit_sse_message( [
+					'action' => 'log',
+					'level' => 'info',
+					'message' => "{$post['post_type']} - {$post['post_title']} imported.",
+				] );
 			}//end if
 
 			// update reading settings.
-			if ( 'page' === $this->show_on_front ) {
+			if ( 'page' === $this->show_on_front && 'page' === $post['post_type'] ) {
 				update_option( 'show_on_front', 'page' );
-				if ( $this->page_on_front === $post['post_id'] && 'page' === $post['post_type'] ) {
+				if ( $this->page_on_front === $post['post_id'] ) {
 					update_option( 'page_on_front', $post_id );
+					Helper::emit_sse_message( [
+						'action' => 'log',
+						'level' => 'info',
+						'message' => __( 'Front page setting\'s updated.', 'ablocks' ),
+					] );
 				} elseif ( $post['post_id'] === $this->page_for_posts ) {
 					update_option( 'page_for_posts', $post_id );
+					Helper::emit_sse_message( [
+						'action' => 'log',
+						'level' => 'info',
+						'message' => __( 'Posts page setting\'s updated.', 'ablocks' ),
+					] );
 				}
-			}
+			}//end if
 
 			// map pre-import ID to local ID
 			$this->processed_posts[ intval( $post['post_id'] ) ] = (int) $post_id;
@@ -548,7 +600,7 @@ class WP_Import extends \WP_Importer {
 				$post['terms'] = array();
 			}
 
-			$post['terms'] = apply_filters( 'wp_import_post_terms', $post['terms'], $post_id, $post );
+			$post['terms'] = apply_filters( 'ablocks/template_import_post_terms', $post['terms'], $post_id, $post );
 
 			// add categories, tags and other terms
 			if ( ! empty( $post['terms'] ) ) {
@@ -556,15 +608,20 @@ class WP_Import extends \WP_Importer {
 				foreach ( $post['terms'] as $term ) {
 					// back compat with WXR 1.0 map 'tag' to 'post_tag'
 					$taxonomy    = ( 'tag' === $term['domain'] ) ? 'post_tag' : $term['domain'];
+					if ( 'wp_theme' === $taxonomy ) {
+						$term['name'] = wp_get_theme()->get_stylesheet();
+						$term['slug'] = wp_get_theme()->get_stylesheet();
+					}
 					$term_exists = term_exists( $term['slug'], $taxonomy );
 					$term_id     = is_array( $term_exists ) ? $term_exists['term_id'] : $term_exists;
+
 					if ( ! $term_id ) {
 						$t = wp_insert_term( $term['name'], $taxonomy, array( 'slug' => $term['slug'] ) );
 						if ( ! is_wp_error( $t ) ) {
 							$term_id = $t['term_id'];
-							do_action( 'wp_import_insert_term', $t, $term, $post_id, $post );
+							do_action( 'ablocks/template_import_insert_term', $t, $term, $post_id, $post );
 						} else {
-							do_action( 'wp_import_insert_term_failed', $t, $term, $post_id, $post );
+							do_action( 'ablocks/template_import_insert_term_failed', $t, $term, $post_id, $post );
 							continue;
 						}
 					}
@@ -573,7 +630,7 @@ class WP_Import extends \WP_Importer {
 
 				foreach ( $terms_to_set as $tax => $ids ) {
 					$tt_ids = wp_set_post_terms( $post_id, $ids, $tax );
-					do_action( 'wp_import_set_post_terms', $tt_ids, $ids, $tax, $post_id, $post );
+					do_action( 'ablocks/template_import_set_post_terms', $tt_ids, $ids, $tax, $post_id, $post );
 				}
 				unset( $post['terms'], $terms_to_set );
 			}//end if
@@ -582,7 +639,7 @@ class WP_Import extends \WP_Importer {
 				$post['comments'] = array();
 			}
 
-			$post['comments'] = apply_filters( 'wp_import_post_comments', $post['comments'], $post_id, $post );
+			$post['comments'] = apply_filters( 'ablocks/template_import_post_comments', $post['comments'], $post_id, $post );
 
 			// add/update comments
 			if ( ! empty( $post['comments'] ) ) {
@@ -621,7 +678,7 @@ class WP_Import extends \WP_Importer {
 
 						$inserted_comments[ $key ] = wp_insert_comment( $comment_data );
 
-						do_action( 'wp_import_insert_comment', $inserted_comments[ $key ], $comment, $comment_post_id, $post );
+						do_action( 'ablocks/template_import_insert_comment', $inserted_comments[ $key ], $comment, $comment_post_id, $post );
 
 						foreach ( $comment['commentmeta'] as $meta ) {
 							$value = maybe_unserialize( $meta['value'] );
@@ -639,7 +696,7 @@ class WP_Import extends \WP_Importer {
 				$post['postmeta'] = array();
 			}
 
-			$post['postmeta'] = apply_filters( 'wp_import_post_meta', $post['postmeta'], $post_id, $post );
+			$post['postmeta'] = apply_filters( 'ablocks/template_import_post_meta', $post['postmeta'], $post_id, $post );
 
 			// add/update post meta
 			if ( ! empty( $post['postmeta'] ) ) {
@@ -688,6 +745,11 @@ class WP_Import extends \WP_Importer {
 		foreach ( $styles as $style ) {
 			wp_delete_post( $style );
 		}
+		Helper::emit_sse_message( [
+			'action' => 'log',
+			'level' => 'info',
+			'message' => __( 'Existence gutenberg styles removed.', 'ablocks' ),
+		] );
 	}
 
 	/**
@@ -871,6 +933,7 @@ class WP_Import extends \WP_Importer {
 		);
 
 		if ( is_wp_error( $remote_response ) ) {
+			// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 			@unlink( $tmp_file_name );
 
 			return new WP_Error(
@@ -937,7 +1000,7 @@ class WP_Import extends \WP_Importer {
 			if ( file_exists( $tmp_file_name ) ) {
 				unlink( $tmp_file_name );
 			}
-			
+
 			// Translators: %s is the file size limit for the remote file import
 			return new WP_Error( 'import_file_error', sprintf( __( 'Remote file is too large, limit is %s', 'ablocks' ), size_format( $max_size ) ) );
 		}
@@ -1079,6 +1142,12 @@ class WP_Import extends \WP_Importer {
 			// remap enclosure urls
 			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->postmeta} SET meta_value = REPLACE(meta_value, %s, %s) WHERE meta_key='enclosure'", $from_url, $to_url ) );
 		}
+
+		Helper::emit_sse_message( [
+			'action' => 'log',
+			'level' => 'info',
+			'message' => __( 'Old attachment URLs have been updated.', 'ablocks' ),
+		] );
 	}
 
 	/**
@@ -1095,6 +1164,11 @@ class WP_Import extends \WP_Importer {
 				}
 			}
 		}
+		Helper::emit_sse_message( [
+			'action' => 'log',
+			'level' => 'info',
+			'message' => __( 'Imported posts `_thumbnail_id` updated.', 'ablocks' ),
+		] );
 	}
 
 	/**
@@ -1104,7 +1178,7 @@ class WP_Import extends \WP_Importer {
 	 *
 	 * @return array|WP_Error Information gathered from the WXR file.
 	 */
-	public function parse( $file ) {
+	public function parse( string $file ) {
 		$parser = new WXR_Parser();
 
 		return $parser->parse( $file );
@@ -1128,33 +1202,12 @@ class WP_Import extends \WP_Importer {
 	}
 
 	/**
-	 * Decide whether the importer is allowed to create users.
-	 * Default is true, can be filtered via import_allow_create_users
-	 *
-	 * @return bool True if creating users is allowed
-	 */
-	public function allow_create_users() {
-		return apply_filters( 'import_allow_create_users', true );
-	}
-
-	/**
-	 * Decide whether or not the importer should attempt to download attachment files.
-	 * Default is true, can be filtered via import_allow_fetch_attachments. The choice
-	 * made at the import options screen must also be true, false here hides that checkbox.
-	 *
-	 * @return bool True if downloading attachments is allowed
-	 */
-	public function allow_fetch_attachments() {
-		return apply_filters( 'import_allow_fetch_attachments', true );
-	}
-
-	/**
 	 * Decide what the maximum file size for downloaded attachments is.
 	 * Default is 0 (unlimited), can be filtered via import_attachment_size_limit
 	 *
 	 * @return int Maximum attachment file size to import
 	 */
-	public function max_attachment_size() {
+	public function max_attachment_size(): int {
 		return apply_filters( 'import_attachment_size_limit', 0 );
 	}
 
@@ -1165,11 +1218,11 @@ class WP_Import extends \WP_Importer {
 	 *
 	 * @return int 60
 	 */
-	public function bump_request_timeout( $val ) {
+	public function bump_request_timeout( $val ): int {
 		return 60;
 	}
 
-	public function cmpr_strlen( $a, $b ) {
+	public function cmpr_strlen( $a, $b ): int {
 		// return the difference in length between two strings.
 		return strlen( $b ) - strlen( $a );
 	}

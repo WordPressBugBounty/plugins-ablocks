@@ -157,7 +157,7 @@ class Block extends BlockBaseAbstract {
 	}
 
 
-	function get_label_color_hover_css( $attributes ) {
+	public function get_label_color_hover_css( $attributes ) {
 		$labelColorHoverCSS = [];
 
 		if ( ! empty( $attributes['labelColorH'] ) ) {
@@ -213,7 +213,7 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 
-	function get_ticker_list_styles_css( $attributes, $device = '' ) {
+	public function get_ticker_list_styles_css( $attributes, $device = '' ) {
 		$ticker_list_styles_css = [];
 		if ( isset( $attributes['tickerListStyle'] ) ) {
 			switch ( $attributes['tickerListStyle'] ) {
@@ -242,7 +242,7 @@ class Block extends BlockBaseAbstract {
 		$textStrokeCss );
 	}
 
-	function get_ticker_color_css( $attributes ) {
+	public function get_ticker_color_css( $attributes ) {
 		$tickerColorCSS = [];
 
 		if ( isset( $attributes['tickerColor'] ) && ! empty( $attributes['tickerColor'] ) ) {
@@ -256,7 +256,7 @@ class Block extends BlockBaseAbstract {
 		return $tickerColorCSS;
 	}
 
-	function get_ticker_color_hover_css( $attributes ) {
+	public function get_ticker_color_hover_css( $attributes ) {
 		$tickerColorHoverCSS = [];
 
 		if ( isset( $attributes['tickerColorH'] ) && ! empty( $attributes['tickerColorH'] ) ) {
@@ -349,15 +349,13 @@ class Block extends BlockBaseAbstract {
 		ob_start();
 		?>
 		<div class="ablocks-block-news-ticker"
-			 data-slide-speed="<?php echo esc_attr( $slide_speed ); ?>"
-			 data-slide-direction="<?php echo esc_attr( $attributes['slideDirection'] ); ?>"
-			 data-pause-on-hover="<?php echo esc_attr( $is_pause_on_over ? 'true' : 'false' ); ?>"
-			 data-navigator-color="<?php echo esc_attr( $attributes['navigatorColor'] ); ?>">
-	
+			data-slide-speed="<?php echo esc_attr( $slide_speed ); ?>"
+			data-slide-direction="<?php echo esc_attr( $attributes['slideDirection'] ); ?>"
+			data-pause-on-hover="<?php echo esc_attr( $is_pause_on_over ? 'true' : 'false' ); ?>"
+			data-navigator-color="<?php echo esc_attr( $attributes['navigatorColor'] ); ?>">
 			<<?php echo esc_attr( $sticky_label_tag ); ?> class="ablocks-block-news-ticker__label">
 				<?php echo esc_html( $sticky_label ); ?>
 			</<?php echo esc_attr( $sticky_label_tag ); ?>>
-	
 			<div class="ablocks-block-news-ticker__marquee">
 				<div class="ablocks-block-news-ticker_marquee--content">
 					<ul class="ablocks-block-news-ticker__list">
@@ -409,10 +407,10 @@ class Block extends BlockBaseAbstract {
 	else :
 		?>
 		<li>
-			<?php 
+			<?php
 			// translators: %s is the post type (e.g., 'post', 'page', etc.)
-			echo esc_html( sprintf( __( 'No %s found in the selection', 'ablocks' ), $post_type . 's' ) ); 
-		?></li>
+			echo esc_html( sprintf( __( 'No %s found in the selection', 'ablocks' ), $post_type . 's' ) );
+			?></li>
 	<?php endif; ?>
 
 
@@ -421,12 +419,11 @@ class Block extends BlockBaseAbstract {
 						<?php endif; ?>
 					</ul>
 				</div>
-	
 				<?php if ( $show_ticker_navigator ) : ?>
 				<div class="ablocks-block-news-ticker--icons">
 					<button class="ablocks-block-news-ticker--icons__prev">
 						<svg width="24" height="50" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M18.119 22.1309C18.2003 22.2122 18.2648 22.3087 18.3088 22.415C18.3528 22.5212 18.3755 22.635 18.3755 22.75C18.3755 22.865 18.3528 22.9788 18.3088 23.085C18.2648 23.1913 18.2003 23.2878 18.119 23.3691C18.0378 23.4504 17.9412 23.5148 17.835 23.5588C17.7288 23.6028 17.615 23.6255 17.5 23.6255C17.385 23.6255 17.2712 23.6028 17.165 23.5588C17.0587 23.5148 16.9622 23.4504 16.8809 23.3691L8.13092 14.6191C8.04957 14.5378 7.98503 14.4413 7.941 14.3351C7.89696 14.2288 7.8743 14.115 7.8743 14C7.8743 13.885 7.89696 13.7712 7.941 13.6649C7.98503 13.5587 8.04957 13.4622 8.13092 13.3809L16.8809 4.63094C17.0451 4.46675 17.2678 4.37451 17.5 4.37451C17.7322 4.37451 17.9549 4.46675 18.119 4.63094C18.2832 4.79512 18.3755 5.01781 18.3755 5.25C18.3755 5.48219 18.2832 5.70488 18.119 5.86906L9.98702 14L18.119 22.1309Z" fill="<?php echo esc_attr($navigator_color); ?>" />
+							<path d="M18.119 22.1309C18.2003 22.2122 18.2648 22.3087 18.3088 22.415C18.3528 22.5212 18.3755 22.635 18.3755 22.75C18.3755 22.865 18.3528 22.9788 18.3088 23.085C18.2648 23.1913 18.2003 23.2878 18.119 23.3691C18.0378 23.4504 17.9412 23.5148 17.835 23.5588C17.7288 23.6028 17.615 23.6255 17.5 23.6255C17.385 23.6255 17.2712 23.6028 17.165 23.5588C17.0587 23.5148 16.9622 23.4504 16.8809 23.3691L8.13092 14.6191C8.04957 14.5378 7.98503 14.4413 7.941 14.3351C7.89696 14.2288 7.8743 14.115 7.8743 14C7.8743 13.885 7.89696 13.7712 7.941 13.6649C7.98503 13.5587 8.04957 13.4622 8.13092 13.3809L16.8809 4.63094C17.0451 4.46675 17.2678 4.37451 17.5 4.37451C17.7322 4.37451 17.9549 4.46675 18.119 4.63094C18.2832 4.79512 18.3755 5.01781 18.3755 5.25C18.3755 5.48219 18.2832 5.70488 18.119 5.86906L9.98702 14L18.119 22.1309Z" fill="<?php echo esc_attr( $navigator_color ); ?>" />
 						</svg>
 					</button>
 					<button class="ablocks-block-news-ticker--icons__pause">
@@ -436,7 +433,7 @@ class Block extends BlockBaseAbstract {
 					</button>
 					<button class="ablocks-block-news-ticker--icons__next">
 						<svg width="24" height="50" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M19.8691 14.6191L11.1191 23.3691C11.0378 23.4504 10.9413 23.5148 10.835 23.5588C10.7288 23.6028 10.615 23.6255 10.5 23.6255C10.385 23.6255 10.2712 23.6028 10.165 23.5588C10.0587 23.5148 9.96223 23.4504 9.88094 23.3691C9.79964 23.2878 9.73515 23.1913 9.69115 23.085C9.64716 22.9788 9.62451 22.865 9.62451 22.75C9.62451 22.635 9.64716 22.5212 9.69115 22.415C9.73515 22.3087 9.79964 22.2122 9.88094 22.1309L18.013 14L9.88094 5.86906C9.71675 5.70488 9.62451 5.48219 9.62451 5.25C9.62451 5.01781 9.71675 4.79512 9.88094 4.63094C10.0451 4.46675 10.2678 4.37451 10.5 4.37451C10.7322 4.37451 10.9549 4.46675 11.1191 4.63094L19.8691 13.3809C19.9504 13.4622 20.015 13.5587 20.059 13.6649C20.103 13.7712 20.1257 13.885 20.1257 14C20.1257 14.115 20.103 14.2288 20.059 14.3351C20.015 14.4413 19.9504 14.5378 19.8691 14.6191Z" fill="<?php echo esc_attr($navigator_color); ?>" />
+							<path d="M19.8691 14.6191L11.1191 23.3691C11.0378 23.4504 10.9413 23.5148 10.835 23.5588C10.7288 23.6028 10.615 23.6255 10.5 23.6255C10.385 23.6255 10.2712 23.6028 10.165 23.5588C10.0587 23.5148 9.96223 23.4504 9.88094 23.3691C9.79964 23.2878 9.73515 23.1913 9.69115 23.085C9.64716 22.9788 9.62451 22.865 9.62451 22.75C9.62451 22.635 9.64716 22.5212 9.69115 22.415C9.73515 22.3087 9.79964 22.2122 9.88094 22.1309L18.013 14L9.88094 5.86906C9.71675 5.70488 9.62451 5.48219 9.62451 5.25C9.62451 5.01781 9.71675 4.79512 9.88094 4.63094C10.0451 4.46675 10.2678 4.37451 10.5 4.37451C10.7322 4.37451 10.9549 4.46675 11.1191 4.63094L19.8691 13.3809C19.9504 13.4622 20.015 13.5587 20.059 13.6649C20.103 13.7712 20.1257 13.885 20.1257 14C20.1257 14.115 20.103 14.2288 20.059 14.3351C20.015 14.4413 19.9504 14.5378 19.8691 14.6191Z" fill="<?php echo esc_attr( $navigator_color ); ?>" />
 						</svg>
 					</button>
 				</div>

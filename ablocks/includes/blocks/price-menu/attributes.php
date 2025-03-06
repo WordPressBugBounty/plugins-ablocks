@@ -122,9 +122,7 @@ $attributes = array_merge(
 	Alignment::get_attribute( 'descriptionAlignment', true, [ 'value' => 'left' ] ),
 	Alignment::get_attribute( 'priceAlignment', true, [ 'value' => 'left' ] ),
 	GroupButton::get_attribute( 'itemsDirection', true, [
-		'value' => 'row',
-		'valueTablet' => 'row',
-		'valueMobile' => 'row'
+		'value' => 'row'
 	] ),
 	Border::get_attribute( 'itemBorder', true ),
 	Dimensions::get_attribute( 'itemPadding', true ),

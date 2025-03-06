@@ -112,20 +112,10 @@ ul {
   line-height: 14px;
 }
 
-.ablocks-block--search-result{
-  position: absolute;
-  top: 48px;
-  left: 0;
-  z-index: 1000;
-  background: white;
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-}
+
 
 .ablocks-block--search-empty-result {
-  display: none;
+  display: none !important;
 }
 
 .result-item {
@@ -169,6 +159,7 @@ ul {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  
 }
 
 .full-screen-search-input {
@@ -199,27 +190,68 @@ ul {
   font-size: 20px;
   cursor: pointer;
 }
-li.ablocks-block--search-result__list {
-  display: flex;
-  align-items: center;
-  padding: 5px;
-}
-a.ablocks-block--search-result__list-title {
-  padding: 10px;
-  font-size: 16px;
-}
 p.ablocks-block--search-result__list-no-data {
   padding: 10px;
   margin: 0px;
 }
-.loading-spinner{
-  display: none;
-}
-.ablocks-block--search-result__list-thumbnail{
-  width: 100px;
-  height: 70px;
+
+.ablocks-block--search-result {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  top: 100%;
+  margin-top: 10px;
+  left: 0;
+  z-index: 1000;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  flex-direction: column;
 }
 
+.ablocks-block--search-result .ablocks-block--search-result__list {
+  display: flex;
+  align-items: center;
+  margin: 10px ;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  gap: 24px;
+  padding: 9px;
+}
+.ablocks-block--search-result .ablocks-block--search-result__list a{
+  display: flex;
+  align-items: center;
+ 
+}
+
+.ablocks-block--search-result .ablocks-block--search-result__list:hover {
+  background: #F5F5F5;
+  padding: 9px;
+  border-radius: 8px
+}
+
+.ablocks-block--search-result__list img {
+  border-radius: 10px;
+  object-fit: cover;
+  height: auto;
+  width: auto;
+}
+
+.ablocks-block--search-result__list .ablocks-block--search-result__list-title {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; 
+  text-decoration: none;
+}
+.loading-spinner {
+  display: none;
+  text-align: center;
+  padding: 20px;
+}
 @keyframes spin {
   to {
     transform: rotate(360deg);

@@ -5,6 +5,7 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
+use ABlocks\Components\ButtonGroup;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -81,17 +82,9 @@ $attributes = [
 		'type' => 'string',
 		'default' => '#000000',
 	],
-	'stack' => [
-		'type' => 'string',
-		'default' => 'vertical',
-	],
 	'belowItem' => [
 		'type' => 'number',
 		'default' => 0,
-	],
-	'verticalAlignment' => [
-		'type' => 'string',
-		'default' => 'flex-start',
 	],
 	'divider' => [
 		'type' => 'boolean',
@@ -114,6 +107,12 @@ $attributes = array_merge(
 	Dimensions::get_attribute( 'padding', false ),
 	Border::get_attribute( 'border', true ),
 	Typography::get_attribute( 'typography', true ),
+	ButtonGroup::get_attribute( 'verticalAlignment', false, [
+		'value' => 'flex-start',
+	] ),
+	ButtonGroup::get_attribute( 'stack', false, [
+		'value' => 'vertical',
+	] ),
 	Range::get_attribute([
 		'attributeName' => 'iconSize',
 		'attributeObjectKey' => 'value',

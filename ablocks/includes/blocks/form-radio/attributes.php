@@ -5,29 +5,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $attributes = [
-	'block_id' => array(
+	'block_id' => [
 		'type' => 'string',
 		'default' => ''
-	),
-	'inputWidth' => [
+	],
+	'inputType' => [
+		'type' => 'string',
+		'default' => ''
+	],
+	'optionWidth' => [
 		'type' => 'number',
-		'default' => 100
+		'default' => 50
 	],
 	'label' => [
 		'type' => 'string',
-		'default' => 'What\'s your favorite programming lang?',
+		'default' => 'What\'s your favorite programming lang?'
 	],
+
 	'helperText' => [
 		'type' => 'string',
 		'default' => '',
 	],
+	'inputWidth' => [
+		'type' => 'number',
+		'default' => 100
+	],
 	'name' => [
 		'type' => 'string',
-		'default' => 'Message',
+		'default' => '',
 	],
 	'isRequired' => [
 		'type' => 'boolean',
-		'default' => true
+		'default' => true,
 	],
 	'errorMsg' => [
 		'type' => 'string',

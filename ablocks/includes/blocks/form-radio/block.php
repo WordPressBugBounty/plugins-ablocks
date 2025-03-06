@@ -26,7 +26,20 @@ class Block extends BlockBaseAbstract {
 			$this->get_input_block_main_wrapper( $attributes, 'Tablet' ),
 			$this->get_input_block_main_wrapper( $attributes, 'Mobile' ),
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-form-builder__radio-option',
+			$this->get_radio_dynamic_width_css( $attributes ),
+			$this->get_radio_dynamic_width_css( $attributes, 'Tablet' ),
+			$this->get_radio_dynamic_width_css( $attributes, 'Mobile' )
+		);
 		return $css_generator->generate_css();
+	}
+	public function get_radio_dynamic_width_css( $attributes, $device = '' ) {
+		$css = [];
+		if ( isset( $attributes['optionWidth'] ) ) {
+			$css['width'] = ( $attributes['optionWidth'] - 6 ) . '%';
+		}
+		return $css;
 	}
 	public function get_wrapper_css() {
 		return [];

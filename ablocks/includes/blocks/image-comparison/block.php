@@ -291,7 +291,6 @@ class Block extends BlockBaseAbstract {
 		$label_border_hover = isset( $attributes['labelBorderHover'] ) ? $attributes['labelBorderHover'] : [];
 
 		return array_merge(
-			// Border::get_hover_css( isset( $attributes['labelBorder'] ) ? $attributes['labelBorder'] : null, $device ),
 			Border::get_hover_css( $attributes['labelBorder'], '', $device ),
 			[
 				'background' => $label_hover_bg_color,

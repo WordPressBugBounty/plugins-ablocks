@@ -16,6 +16,7 @@ class Assets {
 	public static function init() {
 		$self = new self();
 		add_action( 'admin_enqueue_scripts', [ $self, 'dashboard_scripts' ], 10 );
+		add_action( 'admin_enqueue_scripts', [ $self, 'demo_importer_scripts' ], 10 );
 		add_action( 'enqueue_block_assets', [ $self, 'block_editor_assets' ] );
 		add_action( 'enqueue_block_assets', [ $self, 'register_scripts' ] );
 		add_action( 'wp_enqueue_scripts', [ $self, 'front_end_google_fonts' ] );
@@ -87,6 +88,7 @@ class Assets {
 				'selected_fonts' => (array) Helper::get_settings( 'selected_fonts', [] ),
 			],
 			'is_gutenberg_editor' => Helper::is_gutenberg_editor(),
+			'has_required_block_attribute_migration' => get_option( 'ablocks_has_required_block_attribute_migration' ),
 			'third_party_plugin_status' => [
 				'academy_lms' => Helper::is_active_academy(),
 				'storeengine' => Helper::is_active_storeengine(),
@@ -103,7 +105,8 @@ class Assets {
 	}
 
 	public function dashboard_scripts( $hook ) {
-		if ( strpos( $hook, '_page_' . ABLOCKS_PLUGIN_SLUG ) !== false ) {
+		$demo_config = Helper::get_theme_demo_config();
+		if ( strpos( $hook, '_page_' . ABLOCKS_PLUGIN_SLUG ) !== false && strpos( $hook, $demo_config['menu_slug'] ) === false ) {
 			// Remove Notices
 			remove_all_actions( 'admin_notices' );
 			// dequeue third party plugin assets
@@ -149,6 +152,54 @@ class Assets {
 		}//end if
 	}
 
+	public function demo_importer_scripts( $hook ) {
+		$demo_config = Helper::get_theme_demo_config();
+		if ( strpos( $hook, $demo_config['menu_slug'] ) !== false ) {
+			// Remove Notices
+			remove_all_actions( 'admin_notices' );
+			// dequeue third party plugin assets
+			add_action(
+				'wp_print_scripts',
+				function () {
+					$isSkip = apply_filters( 'ablocks/skip_no_conflict_demo_importer_scripts', Helper::is_dev_mode_enable() );
+
+					if ( $isSkip ) {
+						return;
+					}
+
+					global $wp_scripts;
+					if ( ! $wp_scripts ) {
+						return;
+					}
+
+					$pluginUrl = plugins_url();
+					foreach ( $wp_scripts->queue as $script ) {
+						$src = $wp_scripts->registered[ $script ]->src;
+						if ( strpos( $src, $pluginUrl ) !== false && ! strpos( $src, ABLOCKS_PLUGIN_SLUG ) !== false ) {
+							wp_dequeue_script( $wp_scripts->registered[ $script ]->handle );
+						}
+					}
+				},
+				1
+			);
+
+			wp_enqueue_style( 'ablocks-fonts', $this->web_fonts_url( 'Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap' ), array(), ABLOCKS_VERSION );
+			wp_enqueue_style( 'ablocks-icon', ABLOCKS_ASSETS_URL . 'library/css/ablocks-icon/style.css', array( 'wp-components' ), filemtime( ABLOCKS_ASSETS_PATH . 'library/css/ablocks-icon/style.css' ), 'all' );
+			wp_enqueue_style( 'ablocks-dashboard-style', ABLOCKS_ASSETS_URL . 'build/demo-import.css', array( 'wp-components' ), filemtime( ABLOCKS_ASSETS_PATH . 'build/demo-import.css' ), 'all' );
+
+			$dependencies = include ABLOCKS_ASSETS_PATH . 'build/demo-import.asset.php';
+			wp_enqueue_script(
+				'ablocks-demo-import-scripts',
+				ABLOCKS_ASSETS_URL . 'build/demo-import.js',
+				$dependencies['dependencies'],
+				$dependencies['version'],
+				true
+			);
+			wp_localize_script( 'ablocks-demo-import-scripts', 'ABlocksGlobal', $this->get_dashboard_localize_script_data() );
+			wp_set_script_translations( 'ablocks-demo-import-scripts', 'ablocks', ABLOCKS_ROOT_DIR_PATH . 'languages' );
+		}//end if
+	}
+
 	public function web_fonts_url( $font ) {
 		$font_url = '';
 		if ( 'off' !== _x( 'on', 'Google font: on or off', 'ablocks' ) ) {
@@ -180,7 +231,7 @@ class Assets {
 		// Generate the URL using the web_fonts_url method
 		$google_fonts_url = $this->web_fonts_url( implode( '|', $font_families ) ) . '&display=swap';
 
-		wp_enqueue_style( 'ablocks-frontend-google-fonts', esc_url( $google_fonts_url ), array(), ABLOCKS_VERSION );
+		wp_register_style( 'ablocks-frontend-google-fonts', esc_url( $google_fonts_url ), array(), ABLOCKS_VERSION );
 	}
 
 
@@ -218,8 +269,10 @@ class Assets {
 			$css_file_path = $FileUpload->get_file_path( get_the_ID() . '.min.css' );
 			if ( file_exists( $css_file_path ) ) {
 				$css_file_url = $FileUpload->get_file_url( get_the_ID() . '.min.css' );
+				// Enqueue google fonts
+				wp_enqueue_style( 'ablocks-frontend-google-fonts' );
+				// Combine CSS
 				wp_enqueue_style( 'ablocks-blocks-combine-style', $css_file_url, array(), filemtime( $css_file_path ), 'all' );
-
 			}
 			$js_file_path = $FileUpload->get_file_path( get_the_ID() . '.min.js' );
 			if ( file_exists( $js_file_path ) ) {

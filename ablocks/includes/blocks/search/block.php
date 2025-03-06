@@ -156,7 +156,6 @@ class Block extends BlockBaseAbstract {
 	public function get_search_result_list( $attributes, $device = '' ) {
 		$css = [];
 		$defaultUnit = 'px';
-		$css['top'] = '65px';
 		$offset_top = Range::get_css([
 			'attributeValue' => $attributes['verticalOffset'],
 			'attribute_object_key' => 'value',
@@ -197,7 +196,7 @@ class Block extends BlockBaseAbstract {
 			'property' => 'right',
 			'device' => $device,
 		]);
-		 // Set the position property
+		// Set the position property
 		if ( ! empty( $attributes['position'] ) ) {
 			$css['position'] = $attributes['position'];
 		}
@@ -213,8 +212,8 @@ class Block extends BlockBaseAbstract {
 				'attribute_object_key' => 'value',
 				'isResponsive' => true,
 				'hasUnit' => true,
-				'defaultValue' => 230,
-				'unitDefaultValue' => 'px',
+				'defaultValue' => '',
+				'unitDefaultValue' => '%',
 				'property' => 'width',
 				'device' => $device,
 			]),
@@ -252,7 +251,7 @@ class Block extends BlockBaseAbstract {
 				'attribute_object_key' => 'value',
 				'isResponsive' => true,
 				'hasUnit' => true,
-				'defaultValue' => 230,
+				'defaultValue' => '',
 				'unitDefaultValue' => 'px',
 				'property' => 'width',
 				'device' => $device,
@@ -262,7 +261,7 @@ class Block extends BlockBaseAbstract {
 				'attribute_object_key' => 'value',
 				'isResponsive' => true,
 				'hasUnit' => true,
-				'defaultValue' => 0,
+				'defaultValue' => '',
 				'unitDefaultValue' => 'px',
 				'property' => 'gap',
 				'device' => $device,
@@ -288,7 +287,7 @@ class Block extends BlockBaseAbstract {
 				'attribute_object_key' => 'value',
 				'isResponsive' => true,
 				'hasUnit' => true,
-				'defaultValue' => 100,
+				'defaultValue' => '',
 				'unitDefaultValue' => '%',
 				'property' => 'width',
 				'device' => $device,
@@ -298,7 +297,7 @@ class Block extends BlockBaseAbstract {
 				'attribute_object_key' => 'value',
 				'isResponsive' => true,
 				'hasUnit' => true,
-				'defaultValue' => 70,
+				'defaultValue' => '',
 				'unitDefaultValue' => 'px',
 				'property' => 'height',
 				'device' => $device,
@@ -346,12 +345,12 @@ class Block extends BlockBaseAbstract {
 		// Sanitize and escape input attributes
 		$currentPostID = isset( $attributes['currentPostID'] ) ? (int) sanitize_text_field( $attributes['currentPostID'] ) : '';
 		$source = isset( $attributes['source'] ) ? sanitize_text_field( $attributes['source'] ) : '';
-		$placeholder = isset( $attributes['placeholder'] ) ? sanitize_text_field( $attributes['placeholder'] ) : esc_html__('Write anything...', 'ablocks');
+		$placeholder = isset( $attributes['placeholder'] ) ? sanitize_text_field( $attributes['placeholder'] ) : esc_html__( 'Write anything...', 'ablocks' );
 		$variant = isset( $attributes['variant'] ) ? sanitize_key( $attributes['variant'] ) : 'classic';
 		$isIcon = isset( $attributes['isIcon'] ) ? sanitize_key( $attributes['isIcon'] ) : 'icon';
-		$buttonText = isset( $attributes['buttonText'] ) ? sanitize_text_field( $attributes['buttonText'] ) : esc_html__('Search', 'ablocks');
+		$buttonText = isset( $attributes['buttonText'] ) ? sanitize_text_field( $attributes['buttonText'] ) : esc_html__( 'Search', 'ablocks' );
 		$buttonAlignment = isset( $attributes['buttonAlignment']['value'] ) ? sanitize_key( $attributes['buttonAlignment']['value'] ) : 'left';
-	
+
 		ob_start();
 		?>
 		<div class="ablocks-block--search-bar <?php echo esc_attr( $variant ); ?>">
@@ -361,13 +360,13 @@ class Block extends BlockBaseAbstract {
 						<span class="button-content">
 							<?php
 								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-								echo $this->render_button( $isIcon, $buttonText ); 
+								echo $this->render_button( $isIcon, $buttonText );
 							?>
 						</span>
 						<span class="loading-spinner">
 							<?php
 								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-								echo $this->loading_spinner(); 
+								echo $this->loading_spinner();
 							?>
 						</span>
 					</button>
@@ -378,13 +377,13 @@ class Block extends BlockBaseAbstract {
 						<span class="button-content">
 							<?php
 								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-								echo $this->render_button( $isIcon, $buttonText ); 
+								echo $this->render_button( $isIcon, $buttonText );
 							?>
 						</span>
 						<span class="loading-spinner">
 							<?php
 								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
-								echo $this->loading_spinner(); 
+								echo $this->loading_spinner();
 							?>
 						</span>
 					</button>
@@ -399,14 +398,14 @@ class Block extends BlockBaseAbstract {
 		<?php
 		return ob_get_clean();
 	}
-	
-	
+
+
 	private function render_button( $isIcon, $buttonText ) {
 		$search_icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
 							<circle cx="11" cy="11" r="8"></circle>
 							<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
 						</svg>';
-	
+
 		if ( 'icon' === $isIcon ) {
 			return $search_icon;
 		} elseif ( 'text' === $isIcon ) {
@@ -415,7 +414,7 @@ class Block extends BlockBaseAbstract {
 			return $search_icon . '<span>' . esc_html( $buttonText ) . '</span>';
 		}
 	}
-	
+
 	private function loading_spinner() {
 		$spinner = '<svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
 			<circle class="ablocks-search-block__spin" cx="400" cy="400" fill="none"

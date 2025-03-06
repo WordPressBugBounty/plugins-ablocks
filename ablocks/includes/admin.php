@@ -13,6 +13,8 @@ class Admin {
 
 	public function dispatch_hooks() {
 		Admin\Menu::init();
+		\ABlocks\CreatePage\page\ShowPageState::init();
+		Admin\Export::init();
 		add_filter( 'allowed_redirect_hosts', array( $this, 'add_white_listed_redirect_hosts' ) );
 		add_action( 'current_screen', array( $this, 'conditional_loaded' ) );
 		add_filter( 'plugin_action_links_' . ABLOCKS_PLUGIN_BASENAME, array( $this, 'plugin_action_links' ) );

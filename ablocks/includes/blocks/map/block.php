@@ -102,7 +102,7 @@ class Block extends BlockBaseAbstract {
 		<div 
 			data-settings='<?php
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo htmlspecialchars( wp_json_encode( $settings ), ENT_QUOTES, 'UTF-8' ); 
+				echo htmlspecialchars( wp_json_encode( $settings ), ENT_QUOTES, 'UTF-8' );
 			?>' 
 			class="ablocks-map-block"
 		>

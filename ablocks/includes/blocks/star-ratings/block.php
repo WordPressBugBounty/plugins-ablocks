@@ -40,7 +40,9 @@ class Block extends BlockBaseAbstract {
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-icon-wrap img.ablocks-image-icon',
-			Icon::get_element_image_css( $attributes )
+			Icon::get_element_image_css( $attributes ),
+			Icon::get_element_image_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_css( $attributes, 'Mobile' ),
 		);
 
 		// rating icon spacing css

@@ -2,14 +2,11 @@
 
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Icon;
+use ABlocks\Components\ButtonGroup;
 $attributes = [
 	'block_id'          => [
 		'type'          => 'string',
 		'default'       => ''
-	],
-	'verticalAlignment' => [
-		'type' => 'string',
-		'default' => 'center'
 	],
 	'effect' => [
 		'type' => 'string',
@@ -91,6 +88,9 @@ $attributes = [
 
 $attributes = array_merge(
 	$attributes,
+	ButtonGroup::get_attribute( 'verticalAlignment', false, [
+		'value' => 'center',
+	] ),
 	Range::get_attribute([
 		'attributeName' => 'carouselHeight',
 		'attributeObjectKey' => 'value',

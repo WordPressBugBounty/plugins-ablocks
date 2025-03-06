@@ -8,11 +8,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 use ABlocks\Classes\AssetsGenerator;
 
 class CssGenerator {
+	private $custom_css = '';
 	private $parent_class;
 	private $class_styles = [];
 
 	public function __construct( $attributes = [] ) {
 		$this->parent_class = '.ablocks-block-' . $attributes['block_id'];
+		if ( isset( $attributes['_custom_css'] ) ) {
+			$this->custom_css = $attributes['_custom_css'];
+		}
 		// Alert - don't touch here
 		if ( isset( $attributes['_margin'] ) ) { // check has advanced tab or not
 			$this->add_class_styles(
@@ -81,9 +85,13 @@ class CssGenerator {
 			$css_output .= implode( "\n\n", $css_blocks ) . "\n\n";
 		}
 
+		$css_output .= $this->get_custom_css();
+
 		return preg_replace( '/\s+/', ' ', $css_output );
 	}
-
+	public function get_custom_css() {
+		return preg_replace( '/\bselector\b/', $this->parent_class, $this->custom_css );
+	}
 	public function generate_css_for_media_query( $media_query, $styles ) {
 		if ( empty( $styles ) ) {
 			return '';

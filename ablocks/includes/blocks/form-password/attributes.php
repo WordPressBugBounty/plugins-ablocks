@@ -4,6 +4,7 @@ namespace ABlocks\Blocks\FormBuilder;
 use ABlocks\Controls\Icon;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
+use ABlocks\Components\ButtonGroup;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -36,10 +37,6 @@ $attributes = [
 	'inputType' => [
 		'type' => 'string',
 		'default' => ''
-	],
-	'passwordType' => [
-		'type' => 'string',
-		'default' => 'password'
 	],
 	'isRequired' => [
 		'type' => 'boolean',
@@ -93,6 +90,9 @@ $attributes = array_merge(
 		'viewBox' => '0 0 576 512',
 		'className' => 'far fa-eye',
 		'hasNoSelectorOrSource' => true,
+	] ),
+	ButtonGroup::get_attribute( 'passwordType', false, [
+		'value' => 'password',
 	] ),
 	Range::get_attribute( [
 		'attributeName' => 'passwordShowHideIconSize',

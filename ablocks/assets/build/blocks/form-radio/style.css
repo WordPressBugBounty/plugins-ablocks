@@ -1,8 +1,42 @@
 .ablocks-block--form-builder .wp-block-ablocks-form-radio{
   width: 100%;
 }
+.ablocks-form-builder__radio-all-options{
+  display: flex;
+  flex-wrap: wrap;
+}
+.ablocks-form-builder__radio-option{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap:8px;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 10px 12px;
+  color:#1E1E1E;
+  border: hsl( from #1E1E1E h s l / 0.25) solid 1px;
+  border-radius: 6px;
+  margin: 4px;
+  cursor: pointer;
+}
+.ablocks-form-builder__radio-content{
+  display: flex;
+  align-items: center;
+  gap:5px;
+}
+.ablocks-form-builder__radio-content .ablocks-icon-wrap{
+  font-size:20px;
+}
+.ablocks-form-builder__radio-option {
+  background-color: white; /* Set to your desired default color */
+}
+
+.ablocks-form-builder__radio-option.checked {
+  background-color: green; /* Set the color for checked options */
+}
+
 /* editor css */
-.ablocks-block--form-radio .ablocks-form-builder__helper-text{
+.ablocks-form-builder__radio-field .ablocks-form-builder__helper-text{
   display: block;
   font-size: 13px;
   font-weight: 400;
@@ -26,18 +60,7 @@
 	margin: 10px 0;
 	border-radius: 4px;
 }
-.ablocks-form-builder__field .ablocks-block-error-msg{
-  visibility: hidden;
-}
-.ablocks-form-builder__field.error-msg .ablocks-block-error-msg{
-  visibility: visible;
-  color: #dc2626;
-  font-size: 14px;
-  font-weight: 500;
-}
-.ablocks-block-error-wrap{
-  height: 16px;
-}
+
 .ablocks-editor-radio__content-wrapper {
 	display: flex;
 	gap: 10px;

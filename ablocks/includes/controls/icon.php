@@ -104,6 +104,36 @@ class Icon {
 				'defaultValue' => 0,
 			]),
 			Range::get_attribute([
+				'attributeName' => $attribute_prefix . 'Sizing',
+				'attributeObjectKey' => 'value',
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'defaultValue' => $default_args['size'],
+
+			]),
+			Range::get_attribute([
+				'attributeName' => $attribute_prefix . 'Rotated',
+				'attributeObjectKey' => 'value',
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'deg',
+				'defaultValue' => 0,
+			]),
+			Range::get_attribute([
+				'attributeName' => $attribute_prefix . 'RotateHover',
+				'attributeObjectKey' => 'value',
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'deg',
+				'defaultValue' => 0,
+			] ),
+			Range::get_attribute([
+				'attributeName' => $attribute_prefix . 'transitionDuration',
+				'isResponsive' => false,
+				'defaultValue' => 0,
+			] ),
+			Range::get_attribute([
 				'attributeName' => $attribute_prefix . 'ImageWidth',
 				'isResponsive' => false,
 				'defaultValue' => 0,
@@ -145,7 +175,7 @@ class Icon {
 					$iconViewCSS = [
 						'background' => $backgroundColor ? $backgroundColor : 'transparent',
 						'padding' => '.5em',
-						'border-radius' => '50px',
+						'border-radius' => '50%',
 						'border' => '2px solid ' . ( $primaryColor ? $primaryColor : '#69727d' ),
 					];
 				} elseif ( $iconShape === 'square' ) {
@@ -158,8 +188,15 @@ class Icon {
 			}//end if
 		}//end if
 
-		if ( ! empty( $attributes[ $attributePrefix . 'Size' ] ) && empty( $attributes[ $attributePrefix . 'ImageUrl' ] ) ) {
-			$iconViewCSS['font-size'] = $attributes[ $attributePrefix . 'Size' ] . 'px';
+		if ( ! empty( $attributes[ $attributePrefix . 'Sizing' ] ) && empty( $attributes[ $attributePrefix . 'ImageUrl' ] ) ) {
+			$sizeValue = isset( $attributes[ $attributePrefix . 'Sizing' ][ 'value' . $device ] ) ? $attributes[ $attributePrefix . 'Sizing' ][ 'value' . $device ] : $attributes[ $attributePrefix . 'Sizing' ]['value'];
+			$sizeUnit = isset( $attributes[ $attributePrefix . 'Sizing' ][ 'valueUnit' . $device ] ) ? $attributes[ $attributePrefix . 'Sizing' ][ 'valueUnit' . $device ] : ( isset( $attributes[ $attributePrefix . 'Sizing' ]['valueUnit'] ) ? $attributes[ $attributePrefix . 'Sizing' ]['valueUnit'] : '' );
+
+			if ( empty( $sizeUnit ) ) {
+				$sizeUnit = 'px';
+			}
+
+			$iconViewCSS['font-size'] = $sizeValue . $sizeUnit;
 		}
 		// Remove font size for fixing
 		if ( isset( $attributes[ $attributePrefix . 'ImageUrl' ] ) && ! empty( $attributes[ $attributePrefix . 'ImageUrl' ] ) ) {
@@ -181,8 +218,12 @@ class Icon {
 		$iconType = $attributes[ $attributePrefix . 'Type' ] ?? 'default';
 		$iconShape = $attributes[ $attributePrefix . 'Shape' ] ?? '';
 		$primaryColor = $attributes[ $attributePrefix . 'Color' ] ?? '#69727d';
-		$rotate = $attributes[ $attributePrefix . 'Rotate' ] ?? 0;
+		$rotate = ! empty( $attributes[ $attributePrefix . 'Rotated' ][ 'value' . $device ] ) ?? 0;
 		$iconViewCSS = [];
+
+		if ( ! empty( $attributes[ $attributePrefix . 'Rotated' ][ 'value' . $device ] ) ) {
+			$rotate = $attributes[ $attributePrefix . 'Rotated' ][ 'value' . $device ];
+		}
 
 		if ( $iconType !== 'default' ) {
 			$iconViewCSS['fill'] = $primaryColor;
@@ -199,18 +240,57 @@ class Icon {
 	}
 
 	public static function get_element_image_css( $attributes, $device = '', $attributePrefix = 'icon' ) {
-		$rotate = $attributes[ $attributePrefix . 'Rotate' ] ?? 0;
+		$rotate = ! empty( $attributes[ $attributePrefix . 'Rotated' ][ 'value' . $device ] ) ?? 0;
 		$iconViewCSS = [];
+
+		if ( isset( $attributes[ $attributePrefix . 'Rotated' ][ 'value' . $device ] ) ) {
+			$rotate = $attributes[ $attributePrefix . 'Rotated' ][ 'value' . $device ];
+		}
 
 		if ( $rotate ) {
 			$iconViewCSS['transform'] = 'rotate(' . $rotate . 'deg)';
 		}
+		if ( isset( $attributes[ $attributePrefix . 'ImageUrl' ] ) ) {
+			$image_size_value = isset( $attributes[ $attributePrefix . 'Sizing' ][ 'value' . $device ] )
+				? $attributes[ $attributePrefix . 'Sizing' ][ 'value' . $device ]
+				: $attributes[ $attributePrefix . 'Sizing' ]['value'];
+
+			$image_size_unit = isset( $attributes[ $attributePrefix . 'Sizing' ][ 'valueUnit' . $device ] )
+				? $attributes[ $attributePrefix . 'Sizing' ][ 'valueUnit' . $device ]
+				: ( isset( $attributes[ $attributePrefix . 'Sizing' ]['valueUnit'] )
+					? $attributes[ $attributePrefix . 'Sizing' ]['valueUnit']
+					: '' );
+
+			if ( empty( $image_size_unit ) ) {
+				$image_size_unit = 'px';
+			}
+
+			$iconViewCSS['width'] = "{$image_size_value}{$image_size_unit}";
+		}
 
 		return array_merge(
 			[
-				'width' => $attributes[ $attributePrefix . 'Size' ] . 'px',
 				'height' => 'auto'
 			],
+			$iconViewCSS
+		);
+	}
+
+	public static function get_element_image_hover_css( $attributes, $device = '', $attributePrefix = 'icon' ) {
+		$rotateHover = $attributes[ $attributePrefix . 'RotateHover' ][ 'value' . $device ] ?? 0;
+		$transitionHover = $attributes[ $attributePrefix . 'transitionDuration' ] ?? 0;
+		$iconViewCSS = [];
+		if ( isset( $attributes[ $attributePrefix . 'RotateHover' ][ 'value' . $device ] ) ) {
+			$rotateHover = $attributes[ $attributePrefix . 'RotateHover' ][ 'value' . $device ];
+		}
+		if ( $rotateHover ) {
+			$iconViewCSS['transform'] = 'rotate(' . $rotateHover . 'deg)';
+		}
+		if ( $transitionHover ) {
+			$iconViewCSS['transition'] = $transitionHover . 's';
+		}
+
+		return array_merge(
 			$iconViewCSS
 		);
 	}

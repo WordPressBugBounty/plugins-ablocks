@@ -2,6 +2,8 @@
 
 namespace ABlocks\traits;
 
+use ABlocks\Helper;
+use ABlocks\import\ImageParserFactory;
 use ABlocks\import\WP_Import;
 use Plugin_Upgrader;
 use Theme_Upgrader;
@@ -72,10 +74,11 @@ trait Importer {
 	 * Import template from remote XML file url.
 	 *
 	 * @param string $file_url File url.
+	 * @param bool   $with_attachments with attachments ?.
 	 *
 	 * @return true|WP_Error
 	 */
-	public static function import_template( string $file_url ) {
+	public static function import_template( string $file_url, bool $with_attachments = true ) {
 		require_once ABSPATH . 'wp-admin/includes/class-wp-importer.php';
 
 		// Download the remote XML file.
@@ -86,9 +89,7 @@ trait Importer {
 
 		// Import the XML file.
 		$importer = new WP_Import();
-		ob_start();
-		$result = $importer->import( $tmp_file );
-		ob_end_clean();
+		$result = $importer->import( $tmp_file, $with_attachments );
 
 		// Delete the temporary file if it exists using wp_delete_file.
 		if ( file_exists( $tmp_file ) ) {
@@ -228,6 +229,69 @@ trait Importer {
 		}
 
 		return $directory . '/' . $plugin_root_file;
+	}
+
+	/**
+	 * Get theme demos config with raw demo data.
+	 *
+	 * @return false|array
+	 */
+	public static function get_theme_demo_config() {
+		$demo = apply_filters( 'ablocks/register_theme', [
+			'menu_title' => __( 'aBlocks Templates', 'ablocks' ),
+			'page_title' => __( 'aBlocks Templates', 'ablocks' ),
+			'menu_slug'  => ABLOCKS_PLUGIN_SLUG . '-demo-import',
+			'preloaded_demo' => true,
+			'preloaded_demo_category' => [
+				[
+					'label' => 'LMS',
+					'slug' => 'lms',
+				],
+				[
+					'label' => 'eCommerce',
+					'slug' => 'e-commerce',
+				],
+				[
+					'label' => 'Business',
+					'slug' => 'business',
+				],
+			], // set blank array for all.
+			'demos' => [],
+		] );
+		return $demo;
+	}
+
+	/**
+	 * Parse remote images from serialized blocks content.
+	 *
+	 * @param string $block_content Serialized block content.
+	 *
+	 * @return string
+	 */
+	public static function parse_remote_images( string $block_content ): string {
+		$blocks = parse_blocks( $block_content );
+		$blocks = ImageParserFactory::instance()->parse( $blocks );
+
+		$serialized_blocks = '';
+		foreach ( $blocks as $block ) {
+			$serialized_blocks .= serialize_block( $block );
+		}
+		return $serialized_blocks;
+	}
+
+	/**
+	 * Emit a Server-Sent Events message.
+	 *
+	 * @param mixed $data Data to be JSON-encoded and sent in the message.
+	 */
+	public static function emit_sse_message( $data ) {
+		echo "event: message\n";
+		echo 'data: ' . wp_json_encode( $data ) . "\n\n";
+
+		// Extra padding.
+		echo esc_html( ':' . str_repeat( ' ', 2048 ) . "\n\n" );
+
+		flush();
 	}
 
 	/**

@@ -4,7 +4,7 @@ namespace ABlocks\Blocks\FormBuilder;
 use ABlocks\Controls\Icon;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
-
+use ABlocks\Components\ButtonGroup;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -40,7 +40,7 @@ $attributes = [
 	],
 	'name' => [
 		'type' => 'string',
-		'default' => 'first_name'
+		'default' => ''
 	],
 	'placeholder' => [
 		'type' => 'string',
@@ -49,10 +49,6 @@ $attributes = [
 	'inputType' => [
 		'type' => 'string',
 		'default' => ''
-	],
-	'emailType' => [
-		'type' => 'string',
-		'default' => 'email'
 	],
 	'isRequired' => [
 		'type' => 'boolean',
@@ -75,10 +71,12 @@ $attributes = [
 $attributes = array_merge(
 	$attributes,
 	Border::get_attribute( 'border', true ),
-	Icon::get_attribute('icon',[
-		"size"=>28,
-	]
-	),
+	Icon::get_attribute('icon', [
+		'size' => 28,
+	] ),
+	ButtonGroup::get_attribute( 'emailType', false, [
+		'value' => 'email',
+	] ),
 	Range::get_attribute( [
 		'attributeName' => 'inputIconSize',
 		'isResponsive' => false,

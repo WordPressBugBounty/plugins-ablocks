@@ -71,17 +71,17 @@ class Block extends BlockBaseAbstract {
 	public function get_inner_blocks_closest_parent_css( $attributes, $device = '' ) {
 		$css = [];
 
-		if ( ! empty( $attributes[ 'direction' . $device ] ) ) {
-			$css['flex-direction'] = $attributes[ 'direction' . $device ];
+		if ( ! empty( $attributes['dir'][ 'value' . $device ] ) ) {
+			$css['flex-direction'] = $attributes['dir'][ 'value' . $device ];
 		}
-		if ( ! empty( $attributes[ 'justify' . $device ] ) ) {
-			$css['justify-content'] = $attributes[ 'justify' . $device ];
+		if ( ! empty( $attributes['justification'][ 'value' . $device ] ) ) {
+			$css['justify-content'] = $attributes['justification'][ 'value' . $device ];
 		}
-		if ( ! empty( $attributes[ 'align' . $device ] ) ) {
-			$css['align-items'] = $attributes[ 'align' . $device ];
+		if ( ! empty( $attributes['alignment'][ 'value' . $device ] ) ) {
+			$css['align-items'] = $attributes['alignment'][ 'value' . $device ];
 		}
-		if ( ! empty( $attributes[ 'wrap' . $device ] ) ) {
-			$css['flex-wrap'] = $attributes[ 'wrap' . $device ];
+		if ( ! empty( $attributes['wrapping'][ 'value' . $device ] ) ) {
+			$css['flex-wrap'] = $attributes['wrapping'][ 'value' . $device ];
 		}
 		return array_merge(
 			$css,
@@ -120,7 +120,7 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_container_inner_blocks_row_column_display_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( 'row' === $attributes[ 'direction' . $device ] || 'row-reverse' === $attributes[ 'direction' . $device ] ) {
+		if ( ! empty( $attributes['dir'][ 'value' . $device ] ) && ( 'row' === $attributes['dir'][ 'value' . $device ] || 'row-reverse' === $attributes['dir'][ 'value' . $device ] ) ) {
 			$css['display'] = 'inline-block';
 			$css['width'] = 'auto';
 		}
@@ -175,7 +175,7 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_main_wrapper_css( $attributes, $device = '' ) {
 		$css = [];
-		$preparedContainer = Range::get_css([
+		$prepared_container = Range::get_css([
 			'attributeValue' => $attributes['containerWidth'],
 			'attributeObjectKey' => 'value',
 			'isResponsive' => true,
@@ -187,11 +187,11 @@ class Block extends BlockBaseAbstract {
 		]);
 
 		$is_root_container = isset( $attributes['isRootContainer'] ) ? $attributes['isRootContainer'] : false;
-		if ( ( ! $is_root_container || 'custom' === $attributes['containerWidthType'] ) && ! empty( $preparedContainer['value'] ) ) {
-			$css['max-width'] = "min(100%, {$preparedContainer['value']}{$preparedContainer['valueUnit']}) !important";
+		if ( ( ! $is_root_container || 'custom' === $attributes['containerWidthType'] ) && ! empty( $prepared_container['value'] ) ) {
+			$css['max-width'] = "min(100%, {$prepared_container['value']}{$prepared_container['valueUnit']}) !important";
 		}
 
-		if ( 'custom' === $attributes['containerWidthType'] && ! empty( $preparedContainer['value'] ) && $is_root_container ) {
+		if ( 'custom' === $attributes['containerWidthType'] && ! empty( $prepared_container['value'] ) && $is_root_container ) {
 			$css['margin-left'] = 'auto !important';
 			$css['margin-right'] = 'auto !important';
 		}

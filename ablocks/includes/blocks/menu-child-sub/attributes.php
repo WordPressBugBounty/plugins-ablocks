@@ -144,7 +144,6 @@ $attributes = array_merge(
 		'attributeName' => 'width',
 		'attributeObjectKey' => 'value',
 		'isResponsive' => true,
-		'defaultValue' => 250,
 		'hasUnit' => true,
 		'unitDefaultValue' => 'px',
 	]),

@@ -4,6 +4,7 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Background;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
+use ABlocks\Components\ButtonGroup;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -14,18 +15,16 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
-	'flipDirection' => [
-		'type' => 'string',
-		'default' => 'left',
-	],
-	'showSide' => [
-		'type' => 'string',
-		'default' => 'front',
-	],
 ];
 
 $attributes = array_merge(
 	$attributes,
+	ButtonGroup::get_attribute( 'flipDirection', false, [
+		'value' => 'left',
+	] ),
+	ButtonGroup::get_attribute( 'showSide', false, [
+		'value' => 'front',
+	] ),
 	Range::get_attribute([
 		'attributeName' => 'transitionSpeed',
 		'attributeObjectKey' => 'value',

@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 use ABlocks\Controls\Range;
 use ABlocks\Controls\BackgroundOverlay;
+use ABlocks\Components\ButtonGroup;
 
 $attributes = [
 	'block_id' => array(
@@ -22,15 +23,7 @@ $attributes = [
 		'type' => 'boolean',
 		'default' => false,
 	],
-	'containerWidthType' => [
-		'type' => 'string',
-		'default' => 'boxed',
-	],
-	'overflow' => [
-		'type' => 'string',
-		'default' => 'visible',
-	],
-	// flex direction start
+
 	'direction' => [
 		'type' => 'string',
 		'default' => 'column',
@@ -43,7 +36,6 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
-	// flex 'justify content' start
 	'justify' => [
 		'type' => 'string',
 		'default' => '',
@@ -56,7 +48,6 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
-	// flex 'align items" start
 	'align' => [
 		'type' => 'string',
 		'default' => '',
@@ -69,7 +60,6 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
-	// flex 'wrap" start
 	'wrap' => [
 		'type' => 'string',
 		'default' => '',
@@ -111,6 +101,24 @@ $attributes = array_merge(
 			'default' => array_merge( $columnGap['gap']['default'], $rowGap['gap']['default'] ),
 		]
 	],
+	ButtonGroup::get_attribute( 'containerWidthType', false, [
+		'value' => 'boxed',
+	] ),
+	ButtonGroup::get_attribute( 'overflow', false, [
+		'value' => 'visible',
+	] ),
+	ButtonGroup::get_attribute( 'dir', true, [
+		'value' => 'column',
+	] ),
+	ButtonGroup::get_attribute( 'justification', true, [
+		'value' => '',
+	] ),
+	ButtonGroup::get_attribute( 'alignment', true, [
+		'value' => '',
+	] ),
+	ButtonGroup::get_attribute( 'wrapping', true, [
+		'value' => '',
+	] ),
 	Range::get_attribute( [
 		'attributeName' => 'minimumHeight',
 		'attributeObjectKey' => 'value',

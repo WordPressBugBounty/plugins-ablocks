@@ -5,11 +5,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit(); // Exit if accessed directly.
 }
 
-// use ABlocks\Helper;
-// use ABlocks\Classes\FileUpload;
 use ABlocks\Classes\AssetsGenerator;
 use ABlocks\Helper;
 use ABlocks\Classes\FileUpload;
+use ABlocks\Blocks\FormBuilder\BlockAttrSanitizer\Sanitizer as BlockSanitizer;
+use ABlocks\Blocks\FormBuilder\Helper as FormBuilderHelper;
 
 class Blocks {
 	public static function init() {
@@ -20,6 +20,9 @@ class Blocks {
 		add_filter( 'block_categories_all', [ $self, 'register_block_category' ], 10, 2 );
 		// Assets Generator
 		add_action( 'save_post', [ $self, 'generate_block_assets' ], 10, 3 );
+
+		$self->register_block_sanitizer();
+		$self->form_builder_default_data();
 	}
 
 	public function blocks_init() {
@@ -78,6 +81,7 @@ class Blocks {
 		new \ABlocks\Blocks\MenuItem\Block();
 		new \ABlocks\Blocks\MenuChildSub\Block();
 		new \ABlocks\Blocks\MenuChildMega\Block();
+		new \ABlocks\Blocks\StripeButton\Block();
 		new \ABlocks\Blocks\PaypalButton\Block();
 
 		new \ABlocks\Blocks\Table\Block();
@@ -103,6 +107,13 @@ class Blocks {
 		new \ABlocks\Blocks\SocialShares\Block();
 		new \ABlocks\Blocks\Notice\Block();
 		new \ABlocks\Blocks\SvgDraw\Block();
+		// new \ABlocks\Blocks\Marquee\Block();
+		// new \ABlocks\Blocks\MarqueeChild\Block();
+		new \ABlocks\Blocks\Logout\Block();
+		new \ABlocks\Blocks\FilterableCards\Block();
+		new \ABlocks\Blocks\FilterableCardsItem\Block();
+		new \ABlocks\Blocks\AdvanceLists\Block();
+		new \ABlocks\Blocks\AdvanceListItem\Block();
 		// Form Builder
 		new \ABlocks\Blocks\FormBuilder\Block();
 		new \ABlocks\Blocks\FormInput\Block();
@@ -162,5 +173,15 @@ class Blocks {
 		}
 
 		AssetsGenerator::write_frontend_css_in_uploads_folder( $post_id );
+	}
+
+	public function form_builder_default_data(): void {
+		add_filter(
+			'ablocks/assets/editor_scripts_data',
+			[ FormBuilderHelper::class, 'form_builder_default_data' ]
+		);
+	}
+	public function register_block_sanitizer(): void {
+		BlockSanitizer::init();
 	}
 }

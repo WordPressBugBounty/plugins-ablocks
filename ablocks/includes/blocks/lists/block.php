@@ -165,8 +165,8 @@ class Block extends BlockBaseAbstract {
 			if ( $stack === 'horizontal' ) {
 				$width_value = isset( $attributes['width'][ 'value' . $device ] ) ? $attributes['width'][ 'value' . $device ] : '0';
 			} else {
-				$width_value = isset( $attributes['width'][ 'value' . $device ] ) ? $attributes['width'][ 'value' . $device ] : '%';
-				$width_unit = isset( $attributes['width'][ 'valueUnit' . $device ] ) ? $attributes['width'][ 'valueUnit' . $device ] : '100%';
+				$width_value = isset( $attributes['width'][ 'value' . $device ] ) ? $attributes['width'][ 'value' . $device ] : '100';
+				$width_unit = isset( $attributes['width'][ 'valueUnit' . $device ] ) ? $attributes['width'][ 'valueUnit' . $device ] : '%';
 				$css['width'] = "{$width_value}{$width_unit}";
 			}
 		}//end if

@@ -75,11 +75,27 @@ class Block extends BlockBaseAbstract {
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-icon-wrap img.ablocks-image-icon',
-			Icon::get_element_image_css( $attributes )
+			Icon::get_element_image_css( $attributes ),
+			Icon::get_element_image_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_css( $attributes, 'Tablet' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-icon-wrap img.ablocks-image-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-icon-wrap svg.ablocks-svg-icon',
 			Icon::get_element_css( $attributes ),
+			Icon::get_element_css( $attributes, 'Tablet' ),
+			Icon::get_element_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-icon-wrap svg.ablocks-svg-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
 		);
 
 		return $css_generator->generate_css();

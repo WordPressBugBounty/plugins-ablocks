@@ -12,6 +12,7 @@ use ABlocks\Controls\Range;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\TextStroke;
+use ABlocks\Components\ButtonGroup;
 
 $attributes = [
 	'block_id'               => [
@@ -138,17 +139,13 @@ $attributes = [
 		'type' => 'string',
 		'default' => '#170a1b',
 	],
-	'stack'                 => [
-		'type'              => 'string',
-		'default'           => 'horizontal',
+	'shareButtonIconColorH' => [
+		'type' => 'string',
+		'default' => '',
 	],
 	'belowItem'             => [
 		'type'              => 'number',
 		'default'           => 0,
-	],
-	'verticalAlignment'   => [
-		'type'              => 'string',
-		'default'           => 'flex-start',
 	],
 ];
 $attributes = array_merge(
@@ -161,6 +158,12 @@ $attributes = array_merge(
 	Dimensions::get_attribute( 'radius', false ),
 	Border::get_attribute( 'border', true ),
 	Border::get_attribute( 'itemBorder', true ),
+	ButtonGroup::get_attribute( 'stack', false, [
+		'value' => 'horizontal',
+	] ),
+	ButtonGroup::get_attribute( 'verticalAlignment', false, [
+		'value' => 'flex-start',
+	] ),
 	Range::get_attribute( [
 		'attributeName' => 'spaceBetween',
 		'attributeObjectKey' => 'value',

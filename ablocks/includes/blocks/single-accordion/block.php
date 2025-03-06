@@ -91,7 +91,6 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_item_css( $attributes, $device = '' ) {
 		$css = [];
-	
 		return array_merge(
 			Range::get_css([
 				'attributeValue' => $attributes['itemSpace'],
@@ -99,9 +98,9 @@ class Block extends BlockBaseAbstract {
 				'isResponsive' => false,
 				'property' => 'margin-bottom',
 				'hasUnit' => false,
-				'unitDefaultValue'=> 'px',
+				'unitDefaultValue' => 'px',
 				'device' => $device,
-			]),
+			] ),
 			$css,
 			Border::get_css( $attributes['itemBorder'], '', $device )
 		);
@@ -175,20 +174,20 @@ class Block extends BlockBaseAbstract {
 			$css,
 		);
 	}
-	public function get_icon_css( $attributes ,$device = '') {
+	public function get_icon_css( $attributes, $device = '' ) {
 		$css = [];
-		
 		if ( ! empty( $attributes['iconColor'] ) ) {
 			$css['fill'] = $attributes['iconColor'] . ' !important';
 		}
-		return array_merge( $css ,
-		Range::get_css([
-			'attributeValue' => $attributes['iconSize'],
-			'attribute_object_key' => 'value',
-			'isResponsive' => false,
-			'property' => 'font-size',
-			'device' => $device,
-		]),);
+		return array_merge( $css,
+			Range::get_css( [
+				'attributeValue' => $attributes['iconSize'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => false,
+				'property' => 'font-size',
+				'device' => $device,
+			] )
+		);
 	}
 
 	public function get_icon_hover_css( $attributes ) {

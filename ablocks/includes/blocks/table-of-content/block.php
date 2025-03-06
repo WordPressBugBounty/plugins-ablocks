@@ -163,9 +163,9 @@ class Block extends BlockBaseAbstract {
 		if ( ! $post ) {
 			return '';
 		}
-	
+
 		add_filter( 'the_content', [ $this, 'add_toc_to_post_content' ] );
-	
+
 		// Sanitize and escape icon attributes
 		$open_icon_attributes = array(
 			'path'      => esc_attr( $attributes['openIconSvgPath'] ),
@@ -181,11 +181,11 @@ class Block extends BlockBaseAbstract {
 			'width'     => '20',
 			'height'    => '20',
 		);
-	
+
 		$post_content = $post->post_content;
 		preg_match_all( '/<h([1-6])[^>]*>(.*?)<\/h\1>/', $post_content, $matches, PREG_SET_ORDER );
 		$toc = '';
-	
+
 		// Build TOC header
 		if ( (bool) $attributes['hideTitle'] === true ) :
 			$toc = '<div class="ablocks-toc__header">';
@@ -198,10 +198,10 @@ class Block extends BlockBaseAbstract {
 			endif;
 			$toc .= '</div>';
 		endif;
-	
+
 		$headings = [];
 		$unique_anchors = [];
-	
+
 		// Process headings
 		foreach ( $matches as $match ) {
 			$level = intval( $match[1] );
@@ -209,21 +209,21 @@ class Block extends BlockBaseAbstract {
 			$base_anchor = strtolower( sanitize_title( $heading ) );
 			$anchor = $base_anchor;
 			$count = 1;
-	
+
 			// Ensure unique anchors
 			while ( in_array( $anchor, $unique_anchors, true ) ) {
 				$anchor = $base_anchor . '-' . $count;
 				$count++;
 			}
-	
+
 			// Add heading if enabled in attributes
-			if ( ( ( $level === 1 && $attributes['H1'] ) ||
-				   ( $level === 2 && $attributes['H2'] ) ||
-				   ( $level === 3 && $attributes['H3'] ) ||
-				   ( $level === 4 && $attributes['H4'] ) ||
-				   ( $level === 5 && $attributes['H5'] ) ||
-				   ( $level === 6 && $attributes['H6'] ) ) ) {
-	
+			if ( (
+				( $level === 1 && $attributes['H1'] ) ||
+				( $level === 2 && $attributes['H2'] ) ||
+				( $level === 3 && $attributes['H3'] ) ||
+				( $level === 4 && $attributes['H4'] ) ||
+				( $level === 5 && $attributes['H5'] ) ||
+				( $level === 6 && $attributes['H6'] ) ) ) {
 				$headings[] = [
 					'level'   => $level,
 					'heading' => esc_html( $heading ),
@@ -231,75 +231,75 @@ class Block extends BlockBaseAbstract {
 				];
 				$unique_anchors[] = $anchor;
 			}
-		}
-	
+		}//end foreach
+
 		// Build TOC body
 		$toc .= '<div class="ablocks-toc-body">';
 		$toc .= $this->generate_toc_list( $attributes, $headings );
 		$toc .= '</div>';
-	
+
 		return $toc;
 	}
-	
+
 	private function generate_toc_list( $attributes, $headings ) {
 		if ( empty( $headings ) ) {
 			return '';
 		}
-	
+
 		$toc = '';
 		$marker_view = in_array( $attributes['markerView'], [ 'ul', 'ol' ], true ) ? $attributes['markerView'] : 'ul';
 		$current_level = 0;
 		$open_lists = [];
-	
+
 		foreach ( $headings as $index => $heading ) {
 			if ( ! isset( $heading['level'], $heading['heading'], $heading['anchor'] ) ) {
 				continue;
 			}
-	
+
 			$level = (int) $heading['level'];
-	
+
 			// If the first item, open the root list
 			if ( $index === 0 ) {
 				$toc .= '<' . esc_attr( $marker_view ) . ' class="ablocks-toc-list">';
 				$open_lists[] = $marker_view;
 				$current_level = $level;
 			}
-	
+
 			// If deeper heading level, open a nested list
 			while ( $level > $current_level ) {
 				$toc .= '<' . esc_attr( $marker_view ) . ' class="ablocks-toc-list">';
 				$open_lists[] = $marker_view;
 				$current_level++;
 			}
-	
+
 			// If shallower heading level, close open lists
 			while ( $level < $current_level ) {
 				$toc .= '</' . esc_attr( array_pop( $open_lists ) ) . '>';
 				$current_level--;
 			}
-	
+
 			// Close previous <li> before adding a new one (except for the first)
 			if ( $index > 0 ) {
 				$toc .= '</li>';
 			}
-	
+
 			// Add list item
 			$toc .= '<li class="ablocks-toc-item">';
 			$toc .= '<a class="ablocks-toc-item-link" href="#' . esc_attr( $heading['anchor'] ) . '">' . esc_html( $heading['heading'] ) . '</a>';
-		}
-	
+		}//end foreach
+
 		// Close any remaining open lists
 		while ( ! empty( $open_lists ) ) {
 			$toc .= '</li></' . esc_attr( array_pop( $open_lists ) ) . '>';
 		}
-	
+
 		return $toc;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 
 
 

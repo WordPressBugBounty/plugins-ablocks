@@ -8,6 +8,7 @@ use ABlocks\Controls\Range;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Border;
+use ABlocks\Components\ButtonGroup;
 
 
 $attributes = [
@@ -164,10 +165,6 @@ $attributes = [
 		'type' => 'boolean',
 		'default' => true,
 	],
-	'separator' => [
-		'type' => 'string',
-		'default' => ':',
-	],
 	'separatorColor' => [
 		'type' => 'string',
 		'default' => 'black',
@@ -182,6 +179,21 @@ $attributes = array_merge(
 	Typography::get_attribute( 'labelTypography', true ),
 	Typography::get_attribute( 'numberTypography', true ),
 	Typography::get_attribute( 'separatorTypography', true ),
+	ButtonGroup::get_attribute( 'separator', false, [
+		'value' => ':',
+	] ),
+	ButtonGroup::get_attribute( 'orient', true, [
+		'value' => 'row',
+	] ),
+	ButtonGroup::get_attribute( 'justifyDep', true, [
+		'value' => 'center',
+	] ),
+	ButtonGroup::get_attribute( 'alignment', true, [
+		'value' => 'stretch',
+	] ),
+	ButtonGroup::get_attribute( 'wrapping', true, [
+		'value' => 'wrap',
+	] ),
 	Range::get_attribute( [
 		'attributeName' => 'boxSize',
 		'attributeObjectKey' => 'value',

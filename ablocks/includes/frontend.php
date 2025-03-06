@@ -13,6 +13,7 @@ class Frontend {
 
 	public function dispatch_hooks() {
 		Frontend\Template::init();
+		Frontend\Link::init();
 	}
 
 }

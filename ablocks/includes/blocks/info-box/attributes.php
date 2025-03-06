@@ -10,6 +10,7 @@ use ABlocks\Helper;
 use ABlocks\Controls\Icon;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
+use ABlocks\Components\ButtonGroup;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -55,10 +56,6 @@ $attributes = [
 	'allowBadgeHover' => [
 		'type' => 'boolean',
 		'default' => false,
-	],
-	'stack' => [
-		'type' => 'string',
-		'default' => '',
 	],
 	'allowButtonHover' => [
 		'type' => 'boolean',
@@ -298,6 +295,9 @@ $attributes = [
 $attributes = array_merge(
 	$attributes,
 	Alignment::get_attribute( 'alignment', true ),
+	ButtonGroup::get_attribute( 'stack', false, [
+		'value' => '',
+	] ),
 	// badge starts
 	Border::get_attribute( 'badgeBorder', true ),
 	Dimensions::get_attribute( 'badgePadding', true ),

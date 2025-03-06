@@ -9,6 +9,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Icon;
+use ABlocks\Components\ButtonGroup;
 $attributes = [
 	'block_id' => [
 		'type' => 'string',
@@ -17,10 +18,6 @@ $attributes = [
 	'isShowIcon' => [
 		'type' => 'boolean',
 		'default' => true,
-	],
-	'layout' => [
-		'type' => 'string',
-		'default' => 'number',
 	],
 	'mediaPosition' => [
 		'type' => 'string',
@@ -95,6 +92,9 @@ $attributes = array_merge(
 	Alignment::get_attribute( 'alignment', true, [ 'value' => 'center' ] ),
 	Typography::get_attribute( 'numberTypography', true ),
 	Typography::get_attribute( 'headingTypography', true ),
+	ButtonGroup::get_attribute( 'layout', false, [
+		'value' => 'number',
+	] ),
 	Range::get_attribute( [
 		'attributeName' => 'duration',
 		'isResponsive' => false,

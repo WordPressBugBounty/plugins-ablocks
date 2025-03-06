@@ -1,16 +1,22 @@
 .ablocks-block--form-builder {
     padding: 20px;
+    border: 2px solid gray;
+    background: #FFFFFF;
+    border-radius: 5px;
 }
 
 .ablocks-block--form-builder .block-editor-button-block-appender {
-    padding: 15px 100px !important;
+    height: 60px;
     margin: 10px 0;
 }
 
 .ablocks-block--form-builder .block-list-appender {
     position: static;
 }
-
+.ablocks-block--form-builder form{
+    display: flex;
+    flex-direction: column;
+}
 .ablocks-form-builder .ablocks-form-builder__fields {
     width: 100%;
 }
@@ -184,12 +190,6 @@ input.ablocks-form-builder__input:focus {
     /* Example color */
     border: 1px solid black;
 }
-.block-editor-block-variation-picker__variations .ablocks-icon--register::before{
-    font-size: 42px;
-}
-.block-editor-block-variation-picker__variations .ablocks-icon--login::before{
-    font-size: 42px;
-}
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -198,4 +198,46 @@ input.ablocks-form-builder__input:focus {
     100% {
         transform: rotate(360deg);
     }
+}
+.ablocks-form-builder-block-variation-picker .block-editor-block-variation-picker__variations>li{
+    height: 170px;
+}
+.ablocks-form-builder-block-variation-picker .block-editor-block-variation-picker__variations{
+    margin-top: 70px;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+.ablocks-form-builder-block-variation-picker .block-editor-block-variation-picker__variations span{
+    margin-top: 50px;
+    font-size: 13px;
+    font-weight: 700;
+}
+.ablocks-block--form-builder__navigator{
+    padding-top: 20px;
+    padding-left: 24px;
+    font-size: 16px;
+}
+.ablocks-block--form-builder__navigator a{
+    text-decoration: none;
+}
+.ablocks-block--form-builder__navigator .ablocks-block--form-builder__navigator-redirect-page a{
+    padding: 5px;
+}
+
+.ablocks-block--form-builder__feedback-message{
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 5px;
+    padding: 20px 10px;
+}
+.ablocks-block--form-builder__arrow-icon{
+    width: 14px;
+    padding-right: 5px;
+    fill: gray;
+}
+.ablocks-block--form-builder__feedback-message p{
+    margin: 0;
+    padding: 0;
 }

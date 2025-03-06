@@ -6,6 +6,7 @@ use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Icon;
+use ABlocks\Components\ButtonGroup;
 
 
 $attributes                = [
@@ -24,10 +25,6 @@ $attributes                = [
 	'color'                => [
 		'type'             => 'string',
 		'default'          => '#000000',
-	],
-	'element'              => [
-		'type'             => 'string',
-		'default'          => 'none',
 	],
 	'elementText'          => [
 		'type'             => 'string',
@@ -55,6 +52,9 @@ $attributes = array_merge(
 	TextStroke::get_attribute( 'elementTextStroke', true ),
 	Alignment::get_attribute( 'alignment', true, [ 'value' => 'left' ] ),
 	Icon::get_attribute(),
+	ButtonGroup::get_attribute( 'element', false, [
+		'value' => 'none',
+	] ),
 	Range::get_attribute( [
 		'attributeName' => 'width',
 		'attributeObjectKey' => 'value',

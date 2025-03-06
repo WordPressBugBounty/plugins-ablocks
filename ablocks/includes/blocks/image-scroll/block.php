@@ -111,23 +111,23 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 
 		if ( ! empty( $attributes['imageScrollOption']['value'] ) ) {
-			if ( $attributes['imageScrollOption']['value'] == 'mouse-scroll' ) {
+			if ( $attributes['imageScrollOption']['value'] === 'mouse-scroll' ) {
 				$css['position'] = 'static';
 				$css['overflow-y'] = 'scroll';
 				$css['overflow-x'] = 'hidden';
-			} elseif ( $attributes['imageScrollOption']['value'] == 'top-to-bottom' ) {
+			} elseif ( $attributes['imageScrollOption']['value'] === 'top-to-bottom' ) {
 				$css['position'] = 'static';
 				$css['overflow'] = 'hidden';
-			} elseif ( $attributes['imageScrollOption']['value'] == 'bottom-to-top' ) {
+			} elseif ( $attributes['imageScrollOption']['value'] === 'bottom-to-top' ) {
 				$css['position'] = 'static';
 				$css['overflow'] = 'hidden';
-			} elseif ( $attributes['imageScrollOption']['value'] == 'left-to-right' ) {
+			} elseif ( $attributes['imageScrollOption']['value'] === 'left-to-right' ) {
 				$css['position'] = 'static';
 				$css['overflow'] = 'hidden';
-			} elseif ( $attributes['imageScrollOption']['value'] == 'right-to-left' ) {
+			} elseif ( $attributes['imageScrollOption']['value'] === 'right-to-left' ) {
 				$css['position'] = 'static';
 				$css['overflow'] = 'hidden';
-			} elseif ( $attributes['imageScrollOption']['value'] == 'horizontal-scroll' ) {
+			} elseif ( $attributes['imageScrollOption']['value'] === 'horizontal-scroll' ) {
 				$css['position'] = 'static';
 				$css['overflow-y'] = 'hidden';
 				$css['overflow-x'] = 'scroll';
@@ -243,7 +243,6 @@ class Block extends BlockBaseAbstract {
 		if ( $aspectRatioValue && $aspectRatioValue !== 'original' ) {
 			$css['aspect-ratio'] = $aspectRatioValue;
 		}
-		// isset( $attributes['padding'] ) ? Dimensions::get_css( $attributes['padding'], 'padding', $device ) : [],
 
 		return array_merge(
 			$css,

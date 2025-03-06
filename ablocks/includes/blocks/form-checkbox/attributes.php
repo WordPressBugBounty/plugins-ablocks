@@ -11,7 +11,7 @@ $attributes = [
 	),
 	'label' => [
 		'type' => 'string',
-		'default' => 'Message',
+		'default' => '',
 	],
 	'inputWidth' => [
 		'type' => 'number',
@@ -25,13 +25,17 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'inputType' => [
+		'type' => 'string',
+		'default' => ''
+	],
 	'name' => [
 		'type' => 'string',
 		'default' => ''
 	],
 	'isRequired' => [
 		'type' => 'boolean',
-		'default' => true,
+		'default' => false,
 	],
 	'isChecked' => [
 		'type' => 'boolean',

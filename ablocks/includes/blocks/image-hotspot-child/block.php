@@ -1,5 +1,4 @@
 <?php
-
 namespace ABlocks\Blocks\ImageHotspotChild;
 
 use ABlocks\Controls\Border;
@@ -45,17 +44,20 @@ class Block extends BlockBaseAbstract {
 		$padding_css = isset( $attributes['contentPadding'] ) ? Dimensions::get_css( $attributes['contentPadding'], 'padding', $device ) : [];
 
 		// Merge border and padding styles with the main CSS
-		$css = array_merge( $css, $border_css, $padding_css ,
-		Range::get_css([
-			'attributeValue' => $attributes['contentWidth'],
-			'attribute_object_key' => 'value',
-			'isResponsive' => true,
-			'defaultValue' => '',
-			'hasUnit' => true,
-			'unitDefaultValue' => 'px',
-			'property' => 'width',
-			'device' => $device,
-		]),);
+		$css = array_merge( $css, $border_css, $padding_css,
+			Range::get_css(
+				[
+					'attributeValue' => $attributes['contentWidth'],
+					'attribute_object_key' => 'value',
+					'isResponsive' => true,
+					'defaultValue' => '',
+					'hasUnit' => true,
+					'unitDefaultValue' => 'px',
+					'property' => 'width',
+					'device' => $device,
+				]
+			)
+		);
 
 		return $css;
 	}

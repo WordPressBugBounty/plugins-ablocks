@@ -73,8 +73,8 @@ class Block extends BlockBaseAbstract {
 	public function get_wrapper_css( $attributes, $device = '' ) {
 		$alignment_key = 'value' . $device;
 		$alignment = isset( $attributes['alignment'][ $alignment_key ] )
-					 ? $attributes['alignment'][ $alignment_key ]
-					 : 'center';
+					? $attributes['alignment'][ $alignment_key ]
+					: 'center';
 		switch ( $alignment ) {
 			case 'center':
 				$justify_content_value = 'center';

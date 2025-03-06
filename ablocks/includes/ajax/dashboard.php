@@ -19,6 +19,9 @@ class Dashboard extends AbstractAjaxHandler {
 			'regenerate_assets'      => array(
 				'callback' => array( $this, 'regenerate_assets' ),
 			),
+			'clear_demo_transients'      => array(
+				'callback' => array( $this, 'clear_demo_transients' ),
+			),
 			'install_academy_lms'      => array(
 				'callback' => array( $this, 'install_academy_lms' ),
 			),
@@ -33,6 +36,18 @@ class Dashboard extends AbstractAjaxHandler {
 		$FileUpload = new FileUpload();
 		$has_delete = $FileUpload->delete_files();
 		wp_send_json_success( $has_delete );
+	}
+
+	public function clear_demo_transients() {
+		global $wpdb;
+
+		$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_ablocks_demo_%' OR option_name LIKE '_transient_timeout_ablocks_demo_%'" );
+
+		if ( ! empty( $wpdb->last_error ) ) {
+			wp_send_json_error( $wpdb->last_error );
+		}
+
+		wp_send_json_success();
 	}
 	public function install_academy_lms() {
 		// Check user permissions

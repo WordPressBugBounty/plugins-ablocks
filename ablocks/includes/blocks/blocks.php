@@ -62,8 +62,16 @@ return [
 	'image-hotspot',
 	'image-hotspot-child',
 	'info-box',
+	'filterable-cards',
+	'filterable-cards-item',
+	'stripe-button',
 	'news-ticker',
 	'paypal-button',
+	'marquee',
+	'marquee-child',
+	'logout',
+	'advance-lists',
+	'advance-list-item' .
 	// Form Builder
 	'form-builder',
 	'form-input',

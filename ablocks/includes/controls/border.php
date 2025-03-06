@@ -248,7 +248,7 @@ class Border extends ControlBaseAbstract {
 
 		// Handle transition duration
 		if ( self::has_value( $value['transitionDuration'] ) ) {
-			$css['transition'] = 'border ' . $value['transitionDuration'] . 's,' . 'border-radius ' . $value['transitionDuration'] . 's';
+			$css['transition'] = "border {$value['transitionDuration']}s, border-radius {$value['transitionDuration']}s";
 		}
 
 		return $css;

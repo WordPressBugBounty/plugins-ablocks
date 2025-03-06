@@ -69,8 +69,8 @@ class Block extends BlockBaseAbstract {
 
 	public function get_carousel_css( $attributes, $device = '' ) {
 		$carousel_css = [];
-		if ( isset( $attributes['verticalAlignment'] ) ) {
-			$carousel_css['align-items'] = $attributes['verticalAlignment'];
+		if ( ! empty( $attributes['verticalAlignment'][ 'value' . $device ] ) ) {
+			$carousel_css['align-items'] = $attributes['verticalAlignment'][ 'value' . $device ];
 		}
 
 		return array_merge(

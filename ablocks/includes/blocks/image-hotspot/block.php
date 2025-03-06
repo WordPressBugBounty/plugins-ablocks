@@ -140,22 +140,31 @@ class Block extends BlockBaseAbstract {
 			$animation_style = 'ablocks-hotspot-fadeGrow 0.5s ease';
 			switch ( $content_position ) {
 				case 'top':
-					$translateX_start = $translateX_end = '-50%';
-					$translateY_start = $translateY_end = 'calc(-100% - 40px)';
+					$translateX_end = '-50%';
+					$translateY_end = 'calc(-100% - 40px)';
+					$translateX_start = $translateX_end;
+					$translateY_start = $translateY_end;
 					break;
 				case 'bottom':
-					$translateX_start = $translateX_end = '-50%';
-					$translateY_start = $translateY_end = '40px';
+					$translateX_end = '-50%';
+					$translateY_end = '40px';
+					$translateX_start = $translateX_end;
+					$translateY_start = $translateY_end;
 					break;
 				case 'left':
-					$translateX_start = $translateX_end = 'calc(-100% - 40px)';
-					$translateY_start = $translateY_end = '-50%';
+					$translateX_end = 'calc(-100% - 40px)';
+					$translateY_end = '-50%';
+					$translateX_start = $translateX_end;
+					$translateY_start = $translateY_end;
 					break;
 				case 'right':
-					$translateX_start = $translateX_end = '40px';
-					$translateY_start = $translateY_end = '-50%';
+					$translateX_end = '40px';
+					$translateY_end = '-50%';
+					$translateX_start = $translateX_end;
+					$translateY_start = $translateY_end;
 					break;
-			}
+			}//end switch
+			// phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 		} elseif ( in_array( $content_animation, [ 'ablocks-hotspot-slideInTop', 'ablocks-hotspot-slideInBottom', 'ablocks-hotspot-slideInLeft', 'ablocks-hotspot-slideInRight' ] ) ) {
 			$animation_style = "ablocks-hotspot-slideIn {$animation_duration} {$animation_ease} forwards";
 		}//end if
@@ -163,8 +172,10 @@ class Block extends BlockBaseAbstract {
 		// Handle specific sliding animations per position
 		switch ( $content_position ) {
 			case 'top':
-				$translateX_start = $translateX_end = '-50%';
-				$translateY_start = $translateY_end = 'calc(-100% - 40px)';
+				$translateX_end = '-50%';
+				$translateY_end = 'calc(-100% - 40px)';
+				$translateX_start = $translateX_end;
+				$translateY_start = $translateY_end;
 
 				switch ( $content_animation ) {
 					case 'ablocks-hotspot-slideInLeft':
@@ -183,8 +194,10 @@ class Block extends BlockBaseAbstract {
 				break;
 
 			case 'bottom':
-				$translateX_start = $translateX_end = '-50%';
-				$translateY_start = $translateY_end = '40px';
+				$translateX_end = '-50%';
+				$translateY_end = '40px';
+				$translateX_start = $translateX_end;
+				$translateY_start = $translateY_end;
 
 				switch ( $content_animation ) {
 					case 'ablocks-hotspot-slideInLeft':
@@ -203,8 +216,10 @@ class Block extends BlockBaseAbstract {
 				break;
 
 			case 'left':
-				$translateX_start = $translateX_end = 'calc(-100% - 40px)';
-				$translateY_start = $translateY_end = '-50%';
+				$translateX_end = 'calc(-100% - 40px)';
+				$translateY_end = '-50%';
+				$translateX_start = $translateX_end;
+				$translateY_start = $translateY_end;
 
 				switch ( $content_animation ) {
 					case 'ablocks-hotspot-slideInLeft':
@@ -223,8 +238,10 @@ class Block extends BlockBaseAbstract {
 				break;
 
 			case 'right':
-				$translateX_start = $translateX_end = '40px';
-				$translateY_start = $translateY_end = '-50%';
+				$translateX_end = '40px';
+				$translateY_end = '-50%';
+				$translateX_start = $translateX_end;
+				$translateY_start = $translateY_end;
 
 				switch ( $content_animation ) {
 					case 'ablocks-hotspot-slideInLeft':

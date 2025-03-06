@@ -256,7 +256,7 @@ class Block extends BlockBaseAbstract {
 				'unitDefaultValue' => 'px',
 				'property' => '--ablocks-divider-pattern-weight',
 			]);
-		};//end if
+		}//end if
 
 		if ( ! empty( $attributes['dividerPatternUrl'] ) ) {
 			if ( $attributes['dividerType'] === 'mask-style' ) {

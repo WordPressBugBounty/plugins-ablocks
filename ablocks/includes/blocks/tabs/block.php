@@ -179,11 +179,27 @@ class Block extends BlockBaseAbstract {
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap img.ablocks-image-icon',
-			Icon::get_element_image_css( $attributes )
+			Icon::get_element_image_css( $attributes ),
+			Icon::get_element_image_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap img.ablocks-image-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap svg.ablocks-svg-icon',
 			Icon::get_element_css( $attributes ),
+			Icon::get_element_css( $attributes, 'Tablet' ),
+			Icon::get_element_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap svg.ablocks-svg-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
 		);
 
 		$css_generator->add_class_styles(
@@ -208,11 +224,11 @@ class Block extends BlockBaseAbstract {
 		$tabs_css = [];
 
 		// Determine the tabs menu position for the given device
-		$menuPosition = $attributes[ 'tabsMenuPosition' . $device ] ?? '';
+		$menuPosition = $attributes['tabsMenuPositioning'][ 'value' . $device ] ?? '';
 
 		// Apply CSS rules based on the device type and menu position
 		if ( $device === 'Mobile' ) {
-			if ( $menuPosition === 'left' || $menuPosition === 'top' ) {
+			if ( empty( $menuPosition ) || $menuPosition === 'left' || $menuPosition === 'top' ) {
 				$tabs_css['flex-direction'] = 'column';
 			} elseif ( $menuPosition === 'right' || $menuPosition === 'bottom' ) {
 				$tabs_css['flex-direction'] = 'column-reverse';
@@ -237,19 +253,19 @@ class Block extends BlockBaseAbstract {
 		$tabs_panel_css = [];
 
 		// Handle tabMenuAlign for the given device
-		if ( isset( $attributes[ 'tabMenuAlign' . $device ] ) ) {
-			$tabs_panel_css['justify-content'] = $attributes[ 'tabMenuAlign' . $device ];
+		if ( isset( $attributes['tabMenuAlignment'][ 'value' . $device ] ) ) {
+			$tabs_panel_css['justify-content'] = $attributes['tabMenuAlignment'][ 'value' . $device ];
 		}
 
 		// Determine the tabsMenuPosition and apply styles accordingly
-		$tabsMenuPosition = $attributes[ 'tabsMenuPosition' . $device ] ?? '';
+		$tabsMenuPosition = $attributes['tabsMenuPositioning'][ 'value' . $device ] ?? '';
 
 		if ( $tabsMenuPosition === 'top' || $tabsMenuPosition === 'bottom' ) {
 			// For column layout
 			$tabs_panel_css['flex-direction'] = ( $device === 'Tablet' || $device === 'Mobile' ) ? 'column' : 'row';
 			$tabs_panel_css['max-width'] = '100%';
 			$tabs_panel_css['flex-wrap'] = 'wrap';
-		} elseif ( $tabsMenuPosition === 'left' || $tabsMenuPosition === 'right' ) {
+		} elseif ( empty( $tabsMenuPosition ) || $tabsMenuPosition === 'left' || $tabsMenuPosition === 'right' ) {
 			// For row layout
 			$tabs_panel_css['flex-direction'] = 'column';
 			$tabs_panel_css['max-width'] = ( $device === 'Mobile' ) ? '100%' : '30%';
@@ -266,28 +282,28 @@ class Block extends BlockBaseAbstract {
 		// Handling icon position
 		if ( isset( $attributes['iconPosition'] ) && $attributes['iconPosition'] === 'top' ) {
 			$css['flex-direction'] = 'column';
-			if ( isset( $attributes[ 'menuContentAlign' . $device ] ) ) {
-				$css['align-items'] = $attributes[ 'menuContentAlign' . $device ];
+			if ( isset( $attributes['menuContentAlignment'][ 'value' . $device ] ) ) {
+				$css['align-items'] = $attributes['menuContentAlignment'][ 'value' . $device ];
 			}
 		}
 		if ( isset( $attributes['iconPosition'] ) && $attributes['iconPosition'] === 'bottom' ) {
 			$css['flex-direction'] = 'column-reverse';
-			if ( isset( $attributes[ 'menuContentAlign' . $device ] ) ) {
-				$css['align-items'] = $attributes[ 'menuContentAlign' . $device ];
+			if ( isset( $attributes['menuContentAlignment'][ 'value' . $device ] ) ) {
+				$css['align-items'] = $attributes['menuContentAlignment'][ 'value' . $device ];
 			}
 		}
 		if ( isset( $attributes['iconPosition'] ) && $attributes['iconPosition'] === 'left' ) {
 			$css['flex-direction'] = 'row';
 			$css['align-items'] = 'center';
-			if ( isset( $attributes[ 'menuContentAlign' . $device ] ) ) {
-				$css['justify-content'] = $attributes[ 'menuContentAlign' . $device ];
+			if ( isset( $attributes['menuContentAlignment'][ 'value' . $device ] ) ) {
+				$css['justify-content'] = $attributes['menuContentAlignment'][ 'value' . $device ];
 			}
 		}
 		if ( isset( $attributes['iconPosition'] ) && $attributes['iconPosition'] === 'right' ) {
 			$css['flex-direction'] = 'row-reverse';
 			$css['align-items'] = 'center';
-			if ( isset( $attributes[ 'menuContentAlign' . $device ] ) ) {
-				$css['justify-content'] = $attributes[ 'menuContentAlign' . $device ];
+			if ( isset( $attributes['menuContentAlignment'][ 'value' . $device ] ) ) {
+				$css['justify-content'] = $attributes['menuContentAlignment'][ 'value' . $device ];
 			}
 		}
 
@@ -298,7 +314,7 @@ class Block extends BlockBaseAbstract {
 
 		// Handling tabs gap
 		$tabs_gap_value = [];
-		$tabs_menu_position = $attributes[ 'tabsMenuPosition' . $device ] ?? '';
+		$tabs_menu_position = $attributes['tabsMenuPositioning'][ 'value' . $device ] ?? '';
 
 		if ( ( $tabs_menu_position === 'left' || $tabs_menu_position === 'right' ) ) {
 			$tabs_gap_value = array_merge(
@@ -387,8 +403,8 @@ class Block extends BlockBaseAbstract {
 
 	public function get_tabs_menu_content_active_css( $attributes, $device = '' ) {
 		$tabs_menu_content_active_css = [];
-		if ( isset( $attributes[ 'tabsMenuPosition' . $device ] ) ) {
-			switch ( $attributes[ 'tabsMenuPosition' . $device ] ) {
+		if ( isset( $attributes['tabsMenuPositioning'][ 'value' . $device ] ) ) {
+			switch ( $attributes['tabsMenuPositioning'][ 'value' . $device ] ) {
 				case 'top':
 					$tabs_menu_content_active_css['border-bottom-color'] = 'none';
 					break;
@@ -453,7 +469,7 @@ class Block extends BlockBaseAbstract {
 		$tabsSubtitleCSS = array_merge( $tabsSubtitleCSS, $typographyStyles );
 
 		// Determine width based on menu position
-		$position = $attributes[ 'tabsMenuPosition' . $device ] ?? '';
+		$position = $attributes['tabsMenuPositioning'][ 'value' . $device ] ?? '';
 		if ( $position === 'top' || $position === 'bottom' ) {
 			$tabsSubtitleCSS['width'] = '160px';
 		} else {
@@ -589,7 +605,7 @@ class Block extends BlockBaseAbstract {
 		if ( $device === 'Mobile' ) {
 			$tabs_content_css['max-width'] = '100%';
 		} else {
-			$menuPosition = $attributes[ 'tabsMenuPosition' . $device ] ?? '';
+			$menuPosition = $attributes['tabsMenuPositioning'][ 'value' . $device ] ?? '';
 			if ( $menuPosition === 'top' || $menuPosition === 'bottom' ) {
 				$tabs_content_css['max-width'] = '100% !important';
 			} elseif ( $menuPosition === 'left' || $menuPosition === 'right' ) {

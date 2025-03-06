@@ -2,21 +2,21 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 1.6.1\n"
+"Project-Id-Version: aBlocks 1.7.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-02-03T12:30:11+00:00\n"
+"POT-Creation-Date: 2025-03-06T07:31:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: ablocks\n"
 
 #. Plugin Name of the plugin
 #: ablocks.php
-#: includes/admin/menu.php:45
+#: includes/admin/menu.php:47
 #: assets/build/dashboard.js:1
 msgid "aBlocks"
 msgstr ""
@@ -28,7 +28,7 @@ msgstr ""
 
 #. Author of the plugin
 #: ablocks.php
-#: includes/blocks.php:127
+#: includes/blocks.php:138
 msgid "Academy LMS"
 msgstr ""
 
@@ -37,232 +37,532 @@ msgstr ""
 msgid "https://ablocks.pro/"
 msgstr ""
 
-#: includes/admin.php:47
+#: includes/admin.php:49
 msgid "Docs"
 msgstr ""
 
-#: includes/admin.php:48
+#: includes/admin.php:50
 msgid "View Academy documentation"
 msgstr ""
 
-#: includes/admin.php:52
+#: includes/admin.php:54
 msgid "Video Tutorials"
 msgstr ""
 
-#: includes/admin.php:53
+#: includes/admin.php:55
 msgid "See Video Tutorials"
 msgstr ""
 
-#: includes/admin.php:57
+#: includes/admin.php:59
 msgid "Community Support"
 msgstr ""
 
-#: includes/admin.php:58
+#: includes/admin.php:60
 msgid "Visit community forums"
 msgstr ""
 
-#: includes/admin.php:62
+#: includes/admin.php:64
 msgid "Rate the plugin ★★★★★"
 msgstr ""
 
-#: includes/admin.php:63
+#: includes/admin.php:65
 msgid "Rate the plugin."
 msgstr ""
 
-#: includes/admin.php:79
-#: includes/helper.php:87
+#: includes/admin.php:81
+#: includes/helper.php:92
 #: assets/build/dashboard.js:1
-#: assets/build/dashboard.js:4
+#: assets/build/dashboard.js:13
 msgid "Settings"
 msgstr ""
 
-#: includes/admin.php:84
+#: includes/admin.php:86
 msgid "Get aBlocks Pro"
 msgstr ""
 
-#: includes/ajax/dashboard.php:40
+#: includes/admin/export.php:55
+msgid "Patterns"
+msgstr ""
+
+#: includes/ajax/dashboard.php:55
 msgid "You do not have sufficient permissions to install plugins."
 msgstr ""
 
-#: includes/ajax/dashboard.php:48
-#: includes/ajax/dashboard.php:58
+#: includes/ajax/dashboard.php:63
+#: includes/ajax/dashboard.php:73
 msgid "Plugin installed and activated successfully!"
 msgstr ""
 
-#: includes/ajax/dashboard.php:50
+#: includes/ajax/dashboard.php:65
 msgid "Sorry, failed to download."
 msgstr ""
 
-#: includes/ajax/dashboard.php:63
-#: includes/ajax/dashboard.php:101
+#: includes/ajax/dashboard.php:78
+#: includes/ajax/dashboard.php:116
 msgid "Argument should not be empty."
 msgstr ""
 
-#: includes/ajax/form-builder.php:66
+#: includes/ajax/demo-import.php:92
+msgid "id is required."
+msgstr ""
+
+#: includes/ajax/entry.php:129
+#: includes/ajax/entry.php:153
+#: includes/ajax/entry.php:160
+msgid "Error"
+msgstr ""
+
+#: includes/ajax/entry.php:137
+msgid "Entry not found"
+msgstr ""
+
+#: includes/ajax/entry.php:157
+#: includes/ajax/stripe-payment-ajax.php:162
+#: includes/blocks/form-builder/actions/save-form-data.php:84
+#: includes/blocks/form-builder/actions/send-email.php:224
+msgid "Success!"
+msgstr ""
+
+#: includes/ajax/entry.php:178
+msgid "No entries deleted."
+msgstr ""
+
+#. translators: %d is the number of entries deleted
+#: includes/ajax/entry.php:185
+msgid "%d entries deleted."
+msgstr ""
+
+#: includes/ajax/entry.php:205
+#: includes/ajax/entry.php:232
+#: includes/ajax/entry.php:259
+#: includes/ajax/entry.php:283
+msgid "No entries updated."
+msgstr ""
+
+#. translators: %d is the number of entries updated
+#: includes/ajax/entry.php:212
+#: includes/ajax/entry.php:239
+msgid "%d entries updated."
+msgstr ""
+
+#: includes/ajax/entry.php:263
+msgid "Updated."
+msgstr ""
+
+#: includes/ajax/entry.php:287
+msgid "Entry updated."
+msgstr ""
+
+#: includes/ajax/form-builder.php:91
 msgid "You have logged in successfully. Redirecting..."
 msgstr ""
 
-#: includes/ajax/form-builder.php:113
+#: includes/ajax/form-builder.php:100
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+#: assets/build/dashboard.js:4
+msgid "Default"
+msgstr ""
+
+#: includes/ajax/form-builder.php:125
+msgid "User registration is turned off. Turn it on to allow user registration."
+msgstr ""
+
+#: includes/ajax/form-builder.php:131
+msgid "Error."
+msgstr ""
+
+#: includes/ajax/form-builder.php:182
 msgid "Registration completed successfully. Redirecting..."
+msgstr ""
+
+#: includes/ajax/form-builder.php:223
+msgid "email field is required."
+msgstr ""
+
+#: includes/ajax/form-builder.php:229
+msgid "provide a valid email."
+msgstr ""
+
+#: includes/ajax/form-builder.php:235
+msgid "this email is not exists."
+msgstr ""
+
+#: includes/ajax/form-builder.php:245
+msgid "Password reset email is sent."
+msgstr ""
+
+#: includes/ajax/form-builder.php:278
+msgid "Action is not defined."
+msgstr ""
+
+#: includes/ajax/form-builder.php:296
+msgid "api key is required"
+msgstr ""
+
+#: includes/ajax/form-builder.php:328
+msgid "Not a valid type"
+msgstr ""
+
+#: includes/ajax/form-builder.php:342
+msgid "Unspecified service type"
 msgstr ""
 
 #: includes/ajax/settings.php:52
 msgid "Block Name missing"
 msgstr ""
 
-#: includes/assets.php:154
+#: includes/ajax/stripe-payment-ajax.php:41
+#: includes/ajax/stripe-payment-ajax.php:73
+msgid "API KEY is required."
+msgstr ""
+
+#: includes/ajax/stripe-payment-ajax.php:138
+msgid "Error. [1]"
+msgstr ""
+
+#: includes/ajax/stripe-payment-ajax.php:157
+msgid "Error. [2]"
+msgstr ""
+
+#: includes/assets.php:205
 msgctxt "Google font: on or off"
 msgid "on"
 msgstr ""
 
-#: includes/blocks.php:123
+#: includes/blocks.php:134
 msgid "ABlocks"
 msgstr ""
 
-#: includes/blocks/news-ticker/block.php:413
+#: includes/blocks/form-builder/actions/save-form-data.php:41
+msgid "Already subscribed."
+msgstr ""
+
+#: includes/blocks/form-builder/actions/save-form-data.php:87
+msgid "Failed to save data"
+msgstr ""
+
+#: includes/blocks/form-builder/actions/send-email.php:90
+msgid "Email Verification"
+msgstr ""
+
+#. translators: %s is email
+#: includes/blocks/form-builder/actions/send-email.php:131
+msgid "You have a message from %s"
+msgstr ""
+
+#. translators: %s is email
+#: includes/blocks/form-builder/actions/send-email.php:131
+msgid "You have a message"
+msgstr ""
+
+#. translators: %s is email
+#: includes/blocks/form-builder/actions/send-email.php:200
+msgid "You have a new Subscriber  [%s]"
+msgstr ""
+
+#: includes/blocks/form-builder/actions/send-email.php:228
+msgid "Failed to send email"
+msgstr ""
+
+#: includes/blocks/form-builder/validate-form-data.php:69
+msgid "Form is empty."
+msgstr ""
+
+#: includes/blocks/logout/block.php:203
+msgid "(Log Out)"
+msgstr ""
+
+#: includes/blocks/logout/block.php:204
+msgid "(Log In)"
+msgstr ""
+
+#. translators: %s is the post type (e.g., 'post', 'page', etc.)
+#: includes/blocks/news-ticker/block.php:412
 msgid "No %s found in the selection"
 msgstr ""
 
 #: includes/blocks/news-ticker/block.php:418
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "No items selected"
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:25
+#: includes/blocks/search/block.php:348
+msgid "Write anything..."
+msgstr ""
+
+#: includes/blocks/search/block.php:351
 #: assets/build/blocks.js:1
-msgid "Tab 1"
+#: assets/build/dashboard.js:1
+msgid "Search"
+msgstr ""
+
+#: includes/blocks/stripe-button/stripe-payment.php:55
+msgid "Shipping Charge: "
 msgstr ""
 
 #: includes/blocks/tabs/attributes.php:26
 #: assets/build/blocks.js:1
-msgid "Tab 2"
+msgid "Tab 1"
 msgstr ""
 
 #: includes/blocks/tabs/attributes.php:27
 #: assets/build/blocks.js:1
-msgid "Tab 3"
+msgid "Tab 2"
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:33
+#: includes/blocks/tabs/attributes.php:28
 #: assets/build/blocks.js:1
-msgid "Subtitle 1 Content: This tab provides general information about our company"
+msgid "Tab 3"
 msgstr ""
 
 #: includes/blocks/tabs/attributes.php:34
 #: assets/build/blocks.js:1
-msgid "Subtitle 2 Content: This tab provides general information about our company"
+msgid "Subtitle 1 Content: This tab provides general information about our company"
 msgstr ""
 
 #: includes/blocks/tabs/attributes.php:35
 #: assets/build/blocks.js:1
+msgid "Subtitle 2 Content: This tab provides general information about our company"
+msgstr ""
+
+#: includes/blocks/tabs/attributes.php:36
+#: assets/build/blocks.js:1
 msgid "Subtitle 3 Content: This tab provides general information about our company"
 msgstr ""
 
-#: includes/classes/file-upload.php:20
+#: includes/classes/file-upload.php:26
 msgid "Error occurred, please try again"
 msgstr ""
 
-#: includes/classes/file-upload.php:30
+#: includes/classes/file-upload.php:36
 msgid "Invalid file extension"
 msgstr ""
 
-#: includes/frontend/template.php:48
+#: includes/frontend/template.php:53
 msgid "aBlocks Full Width"
+msgstr ""
+
+#: includes/frontend/template.php:82
+msgid "Verification successful."
 msgstr ""
 
 #: includes/helper.php:82
 msgid "Dashboard"
 msgstr ""
 
-#: includes/helper.php:93
+#: includes/helper.php:87
+msgid "Submissions"
+msgstr ""
+
+#: includes/helper.php:98
 #: assets/build/dashboard.js:1
 msgid "Get Pro"
 msgstr ""
 
-#: includes/helper.php:103
+#: includes/helper.php:108
 msgid "Loading..."
 msgstr ""
 
 #. translators: %s template
-#: includes/helper.php:346
+#: includes/helper.php:375
 msgid "%s does not exist."
 msgstr ""
 
-#: includes/helper.php:364
+#: includes/helper.php:393
 msgid "action_args should not be overwritten when calling ablocks/get_template."
 msgstr ""
 
-#: includes/import/parsers/wxr-parser-regex.php:104
-#: includes/import/parsers/wxr-parser-simple-xml.php:49
-#: includes/import/parsers/wxr-parser-simple-xml.php:55
-#: includes/import/parsers/wxr-parser-xml.php:109
-msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
-msgstr ""
-
-#: includes/import/parsers/wxr-parser-simple-xml.php:36
-#: includes/import/parsers/wxr-parser-simple-xml.php:44
-msgid "There was an error when reading this WXR file"
-msgstr ""
-
-#: includes/import/wp-import.php:83
+#: includes/import/wp-import.php:85
 msgid "File not found"
 msgstr ""
 
-#: includes/import/wp-import.php:794
+#: includes/import/wp-import.php:90
+msgid "Import process started..."
+msgstr ""
+
+#: includes/import/wp-import.php:138
+msgid "Import process Finished."
+msgstr ""
+
+#: includes/import/wp-import.php:246
+msgid "Categories imported"
+msgstr ""
+
+#: includes/import/wp-import.php:298
+msgid "Tags imported"
+msgstr ""
+
+#: includes/import/wp-import.php:360
+msgid "Terms imported"
+msgstr ""
+
+#: includes/import/wp-import.php:584
+msgid "Front page setting's updated."
+msgstr ""
+
+#: includes/import/wp-import.php:591
+msgid "Posts page setting's updated."
+msgstr ""
+
+#: includes/import/wp-import.php:751
+msgid "Existence gutenberg styles removed."
+msgstr ""
+
+#: includes/import/wp-import.php:856
 msgid "Fetching attachments is not enabled"
 msgstr ""
 
-#: includes/import/wp-import.php:812
+#: includes/import/wp-import.php:874
 msgid "Invalid file type"
 msgstr ""
 
-#: includes/import/wp-import.php:857
+#: includes/import/wp-import.php:919
 msgid "Could not create temporary file."
 msgstr ""
 
 #. translators: 1: The WordPress error message. 2: The WordPress error code.
-#: includes/import/wp-import.php:880
+#: includes/import/wp-import.php:943
 msgid "Request failed due to an error: %1$s (%2$s)"
 msgstr ""
 
 #. translators: 1: The HTTP error message. 2: The HTTP error code.
-#: includes/import/wp-import.php:899
+#: includes/import/wp-import.php:962
 msgid "Remote server returned the following unexpected result: %1$s (%2$s)"
 msgstr ""
 
-#: includes/import/wp-import.php:914
+#: includes/import/wp-import.php:977
 msgid "Remote server did not respond"
 msgstr ""
 
-#: includes/import/wp-import.php:924
+#: includes/import/wp-import.php:987
 msgid "Zero size file downloaded"
 msgstr ""
 
-#: includes/import/wp-import.php:932
+#: includes/import/wp-import.php:995
 msgid "Downloaded file has incorrect size"
 msgstr ""
 
-#: includes/import/wp-import.php:941
+#. Translators: %s is the file size limit for the remote file import
+#: includes/import/wp-import.php:1005
 msgid "Remote file is too large, limit is %s"
 msgstr ""
 
-#: includes/import/wp-import.php:973
+#: includes/import/wp-import.php:1037
 msgid "Sorry, this file type is not permitted for security reasons."
 msgstr ""
 
-#: includes/import/wp-import.php:991
+#: includes/import/wp-import.php:1055
 msgid "The uploaded file could not be moved"
+msgstr ""
+
+#: includes/import/wp-import.php:1149
+msgid "Old attachment URLs have been updated."
+msgstr ""
+
+#: includes/import/wp-import.php:1170
+msgid "Imported posts `_thumbnail_id` updated."
+msgstr ""
+
+#: includes/import/xml-parsers/wxr-parser-simple-xml.php:38
+#: includes/import/xml-parsers/wxr-parser-simple-xml.php:46
+msgid "There was an error when reading this WXR file"
+msgstr ""
+
+#: includes/import/xml-parsers/wxr-parser-simple-xml.php:51
+#: includes/import/xml-parsers/wxr-parser-simple-xml.php:57
+msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr ""
+
+#: includes/traits/importer.php:241
+#: includes/traits/importer.php:242
+msgid "aBlocks Templates"
+msgstr ""
+
+#: templates/email/contact-email.php:11
+#: templates/email/plain-text/contact-email.php:6
+msgid "New Contact Form Submission"
+msgstr ""
+
+#: templates/email/contact-email.php:13
+#: templates/email/plain-text/contact-email.php:7
+msgid "You have a new contact form submission!"
+msgstr ""
+
+#: templates/email/contact-email.php:14
+#: templates/email/plain-text/contact-email.php:8
+msgid "Email:"
+msgstr ""
+
+#: templates/email/contact-email.php:15
+#: templates/email/plain-text/contact-email.php:9
+msgid "Message:"
+msgstr ""
+
+#: templates/email/contact-email.php:17
+#: templates/email/plain-text/contact-email.php:11
+msgid "Login to your admin panel to view the submission."
+msgstr ""
+
+#: templates/email/email-table.php:8
+#: templates/email/plain-text/email-table.php:6
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "Label"
+msgstr ""
+
+#: templates/email/email-table.php:9
+#: templates/email/plain-text/email-table.php:7
+msgid "Value"
+msgstr ""
+
+#: templates/email/email-verify.php:11
+msgid "Email verification"
+msgstr ""
+
+#: templates/email/email-verify.php:13
+msgid "Hello"
+msgstr ""
+
+#: templates/email/email-verify.php:14
+msgid "Thank you for registering with us. Please click the link below to verify your email address:"
+msgstr ""
+
+#: templates/email/email-verify.php:15
+msgid "Verify Your Email"
+msgstr ""
+
+#: templates/email/email-verify.php:16
+msgid "If you did not register, please ignore this email."
+msgstr ""
+
+#: templates/email/email-verify.php:17
+msgid "Best regards"
+msgstr ""
+
+#: templates/email/new-subscriber.php:11
+msgid "You have a new subscriber"
+msgstr ""
+
+#: templates/email/new-subscriber.php:13
+msgid "You have a new subscriber from form submission!"
+msgstr ""
+
+#: templates/email/new-subscriber.php:14
+#: assets/build/blocks.js:17
+msgid "Email"
+msgstr ""
+
+#: templates/email/new-subscriber.php:15
+msgid "To manage your subscribers or contacts, log in to your WordPress admin dashboard."
 msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks/form-builder/view.js:1
+#: assets/build/blocks/stripe-button/view.js:1
 #: assets/build/dashboard.js:1
+#: assets/build/demo-import.js:1
 msgid "Normal Text"
-msgstr ""
-
-#: assets/build/blocks.js:1
-#: assets/build/dashboard.js:4
-msgid "Default"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -274,22 +574,27 @@ msgid "Inline (auto)"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Custom"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Top"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Right"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Bottom"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Left"
 msgstr ""
 
@@ -334,6 +639,7 @@ msgid "Perspective"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Scale"
 msgstr ""
 
@@ -382,6 +688,7 @@ msgid "Flip Vertical"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Transition Duration (ms)"
 msgstr ""
 
@@ -402,6 +709,10 @@ msgid "Add….."
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:23
 msgid "Color"
 msgstr ""
 
@@ -410,6 +721,9 @@ msgid "Border Style"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
 msgid "Width"
 msgstr ""
 
@@ -422,6 +736,7 @@ msgid "Border Radius"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Position"
 msgstr ""
 
@@ -442,11 +757,13 @@ msgid "Choose Image…"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:16
 #: assets/build/dashboard.js:1
 msgid "Image"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Image Size"
 msgstr ""
 
@@ -523,6 +840,7 @@ msgid "Choose Video…"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "None"
 msgstr ""
 
@@ -539,10 +857,12 @@ msgid "Self hosted"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Source"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Link"
 msgstr ""
 
@@ -556,14 +876,17 @@ msgid "Video"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Background color"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Background"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Transition Duration"
 msgstr ""
 
@@ -588,10 +911,12 @@ msgid "Hue"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Type"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:16
 msgid "Opacity"
 msgstr ""
 
@@ -608,10 +933,16 @@ msgid "Fill"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:4
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:13
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
 msgid "Size"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Circle"
 msgstr ""
 
@@ -632,6 +963,7 @@ msgid "Blob"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Shape"
 msgstr ""
 
@@ -700,10 +1032,12 @@ msgid "shadowType"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Horizontal"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Vertical"
 msgstr ""
 
@@ -720,12 +1054,16 @@ msgid "Display Condition"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:23
 #: assets/build/dashboard.js:1
 #: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
 msgid "PRO"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "This feature is available only in the Pro version. Please upgrade to access it and unlock advanced functionality."
 msgstr ""
 
@@ -738,14 +1076,33 @@ msgid "Get advanced tooltip with Ablocks Pro, including parallax, rotation, and 
 msgstr ""
 
 #: assets/build/blocks.js:1
+msgid "custom CSS"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "to style your content or add"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "the \"selector\" prefix"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "to target specific elements."
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Layout"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Margin"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Padding"
 msgstr ""
 
@@ -802,10 +1159,12 @@ msgid "Background Overlay"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Border"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Box shadow"
 msgstr ""
 
@@ -818,6 +1177,11 @@ msgid "Responsive"
 msgstr ""
 
 #: assets/build/blocks.js:1
+msgid "Custom CSS"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "General"
 msgstr ""
 
@@ -831,11 +1195,13 @@ msgid "Container"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 #: assets/build/dashboard.js:4
 msgid "Container Width"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Full Width"
 msgstr ""
 
@@ -852,22 +1218,27 @@ msgid "Overflow"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Direction"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Row"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Column"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Row Reverse"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Column Reverse"
 msgstr ""
 
@@ -876,26 +1247,32 @@ msgid "Justify"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Flex Start"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Center"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Flex End"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Space Between"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Space Around"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Space Evenly"
 msgstr ""
 
@@ -904,6 +1281,7 @@ msgid "Align Items"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Stretch"
 msgstr ""
 
@@ -1016,6 +1394,7 @@ msgid "Favorite"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/dashboard.js:4
 msgid "Business"
 msgstr ""
 
@@ -1068,6 +1447,10 @@ msgid "Reset"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:23
 msgid "Text Shadow"
 msgstr ""
 
@@ -1084,10 +1467,15 @@ msgid "Vertical shadow"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:23
 msgid "Text Stroke"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Stroke color"
 msgstr ""
 
@@ -1100,6 +1488,10 @@ msgid "Add…"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:23
 msgid "Typography"
 msgstr ""
 
@@ -1108,10 +1500,15 @@ msgid "Family"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:17
 msgid "Weight"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
 msgid "Style"
 msgstr ""
 
@@ -1132,22 +1529,34 @@ msgid "Word spacing"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Content"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:23
 msgid "Title"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:23
 msgid "HTML Tag"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:23
 msgid "Alignment"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Enter your heading.."
 msgstr ""
 
@@ -1157,10 +1566,14 @@ msgid "Dual Button"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Gap"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
 msgid "Sizes"
 msgstr ""
 
@@ -1181,6 +1594,8 @@ msgid "Image sizes"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:23
 msgid "View"
 msgstr ""
 
@@ -1189,7 +1604,10 @@ msgid "search icons…"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:23
 #: assets/build/dashboard.js:4
+#: assets/build/dashboard.js:16
+#: assets/build/demo-import.js:1
 msgid "All"
 msgstr ""
 
@@ -1234,28 +1652,35 @@ msgid "Custom Attributes"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:17
 #: assets/build/dashboard.js:1
 msgid "Icon"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 #: assets/build/dashboard.js:1
 msgid "Button"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Text"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Show Icon"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Icon position"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Icon spacing"
 msgstr ""
 
@@ -1268,18 +1693,22 @@ msgid "Marker type"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Icon Position"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:10
 msgid "Emoji"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Vertical alignment"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Horizontal alignment"
 msgstr ""
 
@@ -1312,10 +1741,13 @@ msgid "Divider Color"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Primary Color"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:17
 msgid "Add item"
 msgstr ""
 
@@ -1324,6 +1756,8 @@ msgid "Aspect ratio"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
 msgid "Height"
 msgstr ""
 
@@ -1340,10 +1774,12 @@ msgid "Open in new tab"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:16
 msgid "Alt Text"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:16
 msgid "clear"
 msgstr ""
 
@@ -1352,10 +1788,13 @@ msgid "On Hover image"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
 msgid "CSS Filters"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:16
 msgid "Transition duration(ms)"
 msgstr ""
 
@@ -1380,18 +1819,34 @@ msgid "Add caption"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:16
 msgid "Edit image"
 msgstr ""
 
 #: assets/build/blocks.js:1
+msgid "You have different image for Tablet. Do you want to use this image for all devices?"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "You have different image for Tablet & Mobile. Do you want to use this image for all devices?"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "You have different image for Mobile. Do you want to use this image for all devices?"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Use this image for all devices"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "skip"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Upload an image file, pick one from your media library, or add one with a URL."
 msgstr ""
 
@@ -1412,6 +1867,7 @@ msgid "Show Handle"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Show Labels"
 msgstr ""
 
@@ -1440,14 +1896,17 @@ msgid "Label with Overlay"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Text Color"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Background Color"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:16
 msgid "Overlay Color"
 msgstr ""
 
@@ -1488,6 +1947,7 @@ msgid "Try Again"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/dashboard.js:13
 msgid "Cancel"
 msgstr ""
 
@@ -1496,6 +1956,7 @@ msgid "Before Image"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Drag an image, upload a new one or select a file from your library."
 msgstr ""
 
@@ -1504,30 +1965,39 @@ msgid "After Image"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Start Rating"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Rating"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Show Rating number"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Spacing"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Unmarked Color"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Rating Number"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
 #: assets/build/dashboard.js:1
 msgid "Divider"
 msgstr ""
@@ -1561,10 +2031,12 @@ msgid "Apostrophe"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Number"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Bar"
 msgstr ""
 
@@ -1577,10 +2049,12 @@ msgid "Right Of Number"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Stacked"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Framed"
 msgstr ""
 
@@ -1606,6 +2080,7 @@ msgid "Total Number"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Animation Duration(ms)"
 msgstr ""
 
@@ -1630,19 +2105,23 @@ msgid "Thousand Separator"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 #: assets/build/dashboard.js:1
 msgid "Heading"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Circle size"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Stroke size"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Progress Color"
 msgstr ""
 
@@ -1651,6 +2130,7 @@ msgid "Heading position"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:16
 msgid "Add your paragraph text"
 msgstr ""
 
@@ -1708,11 +2188,6 @@ msgid "Fixed"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/dashboard.js:1
-msgid "Search"
-msgstr ""
-
-#: assets/build/blocks.js:1
 msgid "Variant"
 msgstr ""
 
@@ -1745,7 +2220,8 @@ msgid "Product"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks.js:4
+#: assets/build/blocks.js:26
+#: assets/build/dashboard.js:16
 msgid "Page"
 msgstr ""
 
@@ -1754,6 +2230,7 @@ msgid "Search Field"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Placeholder"
 msgstr ""
 
@@ -1762,6 +2239,7 @@ msgid "Search Button"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Button type"
 msgstr ""
 
@@ -1844,6 +2322,10 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 msgid "Right Icon"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "%s"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -1933,6 +2415,8 @@ msgid "Toggle Icon"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
 msgid "Icon Size"
 msgstr ""
 
@@ -2090,6 +2574,7 @@ msgid "Show Message & Hide Countdown"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Redirect"
 msgstr ""
 
@@ -2147,15 +2632,12 @@ msgid "Box Size"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Label Position"
 msgstr ""
 
 #: assets/build/blocks.js:1
 msgid "Number and Label Gap"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Label"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -2179,1725 +2661,2593 @@ msgid "Separator"
 msgstr ""
 
 #: assets/build/blocks.js:1
-msgid "Images Sizes"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Image Scroll Option"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Speed (s)"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Icon Color"
-msgstr ""
-
-#: assets/build/blocks.js:1
 #: assets/build/dashboard.js:1
-msgid "Image Scroll"
+msgid "Advance lists"
 msgstr ""
 
 #: assets/build/blocks.js:1
-msgid "Nav"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Hamburger Menu Device"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Tablet"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Mobile"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Mobile Hamburger"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Hamburger Width"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Hamburger Height"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Menu Item"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Menu Responsive"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Explore Menu Blocks Options"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Access the Menu block setting to customize menus for easy navigation."
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Enable Link"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Sub Menu"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Mega Menu"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "height"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "PositionX"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Panel"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Place popup on top of page"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Top Offset"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Content Position"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Backdrop BG"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Trigger settings"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Use hover trigger instead of click"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Enable Auto Trigger Timer (s)"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Disable Trigger Element"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Close Button"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Disable Button"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Location Search…"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Draggable Marker, Your can easily change your marker position by Dragging"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Latitude"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "longitude"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Popup Title"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Popup Content"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "HTML Supported"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Save & Close"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Marker Settings"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Choose Icon Type"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Default Icon"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Custom Icon"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Icon Width"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Icon Height"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Upload Icon"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Replace Icon"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Remove Icon"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Map Settings"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Choose Map"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Google Map"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Open Street map"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Satellite Map"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Zoom Level"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Enable Scroll Wheel Zoom"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Map Marker"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "+ Add Marker"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Marker Icon"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Front"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Back"
-msgstr ""
-
-#: assets/build/blocks.js:1
-#: assets/build/dashboard.js:1
-msgid "Flip Box"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Show Side"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Transition Speed"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Flip Direction"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Explore Flip Box Options"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Customize the Flip Box block to create interactive hover effects."
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Price menu"
-msgstr ""
-
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Column gap"
 msgstr ""
 
 #: assets/build/blocks.js:1
+msgid "Row Gap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Inner Gap"
+msgstr ""
+
+#. translators: %s marker type
+#: assets/build/blocks.js:4
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:10
+#: assets/build/blocks.js:13
+#: assets/build/blocks.js:16
+msgid "%s Position"
+msgstr ""
+
+#: assets/build/blocks.js:4
+#: assets/build/blocks.js:13
+msgid "Select Shape"
+msgstr ""
+
+#: assets/build/blocks.js:7
+msgid "Explore Advance list Options"
+msgstr ""
+
+#: assets/build/blocks.js:7
+msgid "Access the advance list settings to customize its styles effortlessly."
+msgstr ""
+
+#: assets/build/blocks.js:16
+msgid "Images Sizes"
+msgstr ""
+
+#: assets/build/blocks.js:16
+msgid "Image Scroll Option"
+msgstr ""
+
+#: assets/build/blocks.js:16
+msgid "Speed (s)"
+msgstr ""
+
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
+msgid "Icon Color"
+msgstr ""
+
+#. translators: %s represents the device type option
+#: assets/build/blocks.js:17
+msgid "You have different image for %s. Do you want to use this image for all devices?"
+msgstr ""
+
+#: assets/build/blocks.js:17
+#: assets/build/dashboard.js:1
+msgid "Image Scroll"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Nav"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Hamburger Menu Device"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Tablet"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Mobile"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Mobile Hamburger"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Hamburger Width"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Hamburger Height"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Menu Item"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Menu Responsive"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Sub Menu Responsive"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Submenu Style"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Explore Menu Blocks Options"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Access the Menu block setting to customize menus for easy navigation."
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Enable Link"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Sub Menu"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Mega Menu"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "height"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "PositionX"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Panel"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Place popup on top of page"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Top Offset"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Content Position"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Backdrop BG"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Trigger settings"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Use hover trigger instead of click"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Enable Auto Trigger Timer (s)"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Disable Trigger Element"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Close Button"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Disable Button"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Location Search…"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Draggable Marker, Your can easily change your marker position by Dragging"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Latitude"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "longitude"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Popup Title"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Popup Content"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "HTML Supported"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Save & Close"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Marker Settings"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Choose Icon Type"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Default Icon"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Custom Icon"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Icon Width"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Icon Height"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Upload Icon"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Replace Icon"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Remove Icon"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Map Settings"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Choose Map"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Google Map"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Open Street map"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Satellite Map"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Zoom Level"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Enable Scroll Wheel Zoom"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Map Marker"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "+ Add Marker"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Marker Icon"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Front"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Back"
+msgstr ""
+
+#: assets/build/blocks.js:17
+#: assets/build/dashboard.js:1
+msgid "Flip Box"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Show Side"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Transition Speed"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Flip Direction"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Explore Flip Box Options"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Customize the Flip Box block to create interactive hover effects."
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Price menu"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "Items Direction"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Gap around elements"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Place divider"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Place price"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Titles"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Descriptions"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Dividers"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Prices"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Explore Price Menu Options"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Access the price menu settings to customize its styles effortlessly."
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Description"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Price"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Table setting"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Cell Border Types"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Header Setting"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Background Hover"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Body setting"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Row odd Background"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Row Even Background"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Row Odd Background Hover"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Row Even Background Hover"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Footer Setting"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Background Color Hover"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Edit Table"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Add Top Row"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Insert Bottom Row"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Insert Left Column"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Add Right Column"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Explore Table Options"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Access the table settings to customize tabular data effortlessly."
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Cell setting"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Row Span"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Cols Span"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Delete"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Add after row"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Add Before row"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Add after column"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Add Before column"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Delete column"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Deleted Row"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Row Edit"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Row setting"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Background Hover Color"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 #: assets/build/dashboard.js:1
 msgid "Social Share"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Stack"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Icon Round color"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Text backgroun color"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Icon Hover Color"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Text background Color"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Space between"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Share Bar"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Share Size"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Share Icon Size"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Share Items"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Share Item Icon Size"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Text Width"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Text Height"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Animation Duration"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Badge"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Sub Heading"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Marked Color"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Button Icon"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 #: assets/build/dashboard.js:1
 msgid "Info Box"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Icon placement"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Icon Alignment"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Icon Gap"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Content Alignment"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Content Gap"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Enter your subHeading.."
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Enter your text.."
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Select, Customize, Shine Bright!"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Hidden Coupon"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Simple Coupon"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Coupon Overlay"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Coupon Code"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 #: assets/build/dashboard.js:1
 msgid "Coupon"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Borders"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Coupon Button"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Button Text"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "After Copy Text"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 #: assets/build/dashboard.js:1
 msgid "Content Timeline"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Arrow Alignment"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Show Date"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Item Gap"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Date"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Date Format"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Date Alignment"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Date Typography"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Date Color"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Date Background"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Connectors"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Icon Background Size"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Connector Thickness"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Connector Color"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Show Animation"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Connector Animation Color"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Animation color only work at frontend."
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Icon Background Color"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Explore Content Timeline Options"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Access content timeline settings to display events in order."
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Content Timeline Child"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Date (mm/dd/yyyy)"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Change Icon"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Table of Content Options"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Show Title"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "H1"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "H2"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "H3"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "H4"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "H5"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "H6"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Header Style"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Title Color"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Title Typography"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Header Background"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Lists Settings"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Marker View"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "List Gap"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Collapsible Settings"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Make Content Collapsible"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Open Icon"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Close Icon"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Align text left"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Align text center"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Align text right"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Align text justify"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Puls Effect"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Soft Beat"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Glow"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "On Hover"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "On Click"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Fade In"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Fade Grow"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Slide In Top"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Slide In Bottom"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Slide In Left"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Slide In Right"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Full"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Large"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Medium"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Thumbnail"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Trigger"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Hotspot"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Color Effect"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Hover Color"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Hotspot Size"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Effect Size(on Hover)"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Horizontal Position"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Vertical Position"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Hotspot Color"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Background Image"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Hotspot Child"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Speed (Slow To Fast)"
+#: assets/build/blocks.js:17
+msgid "Load More Button"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Pause On Hover"
+#: assets/build/blocks.js:17
+msgid "No More Items Label"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Position sticky"
+#: assets/build/blocks.js:17
+msgid "Number of Items"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Select Position"
+#: assets/build/blocks.js:17
+msgid "filterable Cards"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Show Label"
+#: assets/build/blocks.js:17
+msgid "Items to show"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Show Navigator"
+#: assets/build/blocks.js:17
+msgid "Columns"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Show Time"
+#: assets/build/blocks.js:17
+msgid "Grid Style"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Query Builder"
+#: assets/build/blocks.js:17
+msgid "Not Found Text"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Query Type"
+#: assets/build/blocks.js:17
+msgid "Items Height"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Selected Posts"
+#: assets/build/blocks.js:17
+msgid "Animation"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Post Link"
+#: assets/build/blocks.js:17
+msgid "Filter Style"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Selected Pages"
+#: assets/build/blocks.js:17
+msgid "Filter & Search Style"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Page Link"
+#: assets/build/blocks.js:17
+msgid "Search Placeholder"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Ticker Navigator"
+#: assets/build/blocks.js:17
+msgid "Filter Active Class"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Navigator Position"
+#: assets/build/blocks.js:17
+msgid "Filterable Controls"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Ticker Label"
+#: assets/build/blocks.js:17
+msgid "The first item is all labels."
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Sticky Label"
+#: assets/build/blocks.js:17
+msgid "Filter Name"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Ticker Shape"
+#: assets/build/blocks.js:17
+msgid "Explore Filterable Blocks Options"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Label Tag"
+#: assets/build/blocks.js:17
+msgid "Access the Filterable block setting to customize menus for easy navigation."
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Ticker Body"
+#: assets/build/blocks.js:17
+msgid "Control Name"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Ticker List Style"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Content Height"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Breaking News"
-msgstr ""
-
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "start"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "center"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "end"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "space-between"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Checkout"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Donation"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Subscription"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "USD"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "AED"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "AFN*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "ALL"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "AMD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "ANG"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "AOA*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "ARS*"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "AUD"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "BRL"
+#: assets/build/blocks.js:17
+msgid "AWG"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "AZN"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "BAM"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "BBD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "BDT"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "BGN"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "BIF"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "BMD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "BND"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "BOB*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "BRL*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "BSD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "BWP"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "BYN"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "BZD"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "CAD"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "CNY"
+#: assets/build/blocks.js:17
+msgid "CDF"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "CZK"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "DKK"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "EUR"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "HKD"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "HUF"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "ILS"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "JPY"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "MYR"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "MXN"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "TWD"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "NZD"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "NOK"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "PHP"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "PLN"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "GBP"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "SGD"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "SEK"
-msgstr ""
-
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "CHF"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "CLP*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "CNY"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "COP*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "CRC*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "CVE*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "CZK"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "DJF*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "DKK"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "DOP"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "DZD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "EGP"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "ETB"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "EUR"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "FJD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "FKP*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "GBP"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "GEL"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "GIP"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "GMD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "GNF*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "GTQ*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "GYD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "HKD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "HNL*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "HTG"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "HUF"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "IDR"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "ILS"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "INR"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "ISK"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "JMD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "JPY"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "KES"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "KGS"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "KHR"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "KMF"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "KRW"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "KYD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "KZT"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "LAK*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "LBP"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "LKR"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "LRD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "LSL"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "MAD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "MDL"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "MGA"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "MKD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "MMK"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "MNT"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "MOP"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "MUR*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "MVR"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "MWK"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "MXN"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "MYR"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "MZN"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "NAD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "NGN"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "NIO*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "NOK"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "NPR"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "NZD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "PAB*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "PEN*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "PGK"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "PHP"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "PKR"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "PLN"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "PYG*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "QAR"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "RON"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "RSD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "RUB"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "RWF"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "SAR"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "SBD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "SCR"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "SEK"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "SGD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "SHP*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "SLE"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "SOS"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "SRD*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "STD*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "SZL"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "THB"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "TJS"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "TOP"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "TRY"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "TTD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "TWD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "TZS"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "UAH"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "UGX"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "UYU*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "UZS"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "VND"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "VUV"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "WST"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "XAF"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "XCD"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "XOF*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "XPF*"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "YER"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "ZAR"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "ZMW"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "Pricing & Payments"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "PayPal Account"
+#: assets/build/blocks.js:17
+msgid "Stripe API"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Transaction Type"
-msgstr ""
-
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Item Name"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Amount"
+#: assets/build/blocks.js:17
+msgid "Product Price"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Currency"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Quantity"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Shipping Price"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Tax (%)"
+#: assets/build/blocks.js:17
+msgid "Add Tax"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Fixed Amount"
+#: assets/build/blocks.js:17
+msgid "Select Tax"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Auto Renewal"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Billing Cycle"
-msgstr ""
-
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Additional Options"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Redirection After Payment"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Sandbox Mode"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Sandbox Email"
-msgstr ""
-
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Open in New Tab"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Custom Message"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Error Message"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Small"
+#: assets/build/blocks.js:17
+msgid "Speed (Slow To Fast)"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Extra Large"
+#: assets/build/blocks.js:17
+msgid "Pause On Hover"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Collect Submission"
+#: assets/build/blocks.js:17
+msgid "Position sticky"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Email"
+#: assets/build/blocks.js:17
+msgid "Select Position"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Email2"
+#: assets/build/blocks.js:17
+msgid "Show Label"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Redirected"
+#: assets/build/blocks.js:17
+msgid "Show Navigator"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Form Name"
+#: assets/build/blocks.js:17
+msgid "Show Time"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Rows Spacing"
+#: assets/build/blocks.js:17
+msgid "Query Builder"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Label Alignment"
+#: assets/build/blocks.js:17
+msgid "Query Type"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Input Text Alignment"
+#: assets/build/blocks.js:17
+msgid "Selected Posts"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Register"
+#: assets/build/blocks.js:17
+msgid "Post Link"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Redirect After Register"
+#: assets/build/blocks.js:17
+msgid "Selected Pages"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Login"
+#: assets/build/blocks.js:17
+msgid "Page Link"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Redirect After Login"
+#: assets/build/blocks.js:17
+msgid "Ticker Navigator"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Labels"
+#: assets/build/blocks.js:17
+msgid "Navigator Position"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Input"
+#: assets/build/blocks.js:17
+msgid "Ticker Label"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Placeholder Color"
+#: assets/build/blocks.js:17
+msgid "Sticky Label"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Submit Button"
+#: assets/build/blocks.js:17
+msgid "Ticker Shape"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Button Label"
+#: assets/build/blocks.js:17
+msgid "Label Tag"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Button Sizes"
+#: assets/build/blocks.js:17
+msgid "Ticker Body"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Success Color"
+#: assets/build/blocks.js:17
+msgid "Ticker List Style"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Success color only work at frontend."
+#: assets/build/blocks.js:17
+msgid "Content Height"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Action After Submit"
+#: assets/build/blocks.js:17
+msgid "Breaking News"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Action Types"
+#: assets/build/blocks.js:17
+msgid "BRL"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Please Select a Form Type"
+#: assets/build/blocks.js:17
+msgid "PayPal Account"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Username"
+#: assets/build/blocks.js:17
+msgid "Transaction Type"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "first_name"
+#: assets/build/blocks.js:17
+msgid "Amount"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "last_name"
+#: assets/build/blocks.js:17
+msgid "Tax (%)"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "custom"
+#: assets/build/blocks.js:17
+msgid "Fixed Amount"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Explore Form Builder Options"
+#: assets/build/blocks.js:17
+msgid "Auto Renewal"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Design and customize forms easily for login, registration, and more."
+#: assets/build/blocks.js:17
+msgid "Billing Cycle"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Field type"
+#: assets/build/blocks.js:17
+msgid "Sandbox Mode"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Email Type"
+#: assets/build/blocks.js:17
+msgid "Sandbox Email"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Name"
+#: assets/build/blocks.js:17
+msgid "Current URL"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Helper Text"
+#: assets/build/blocks.js:17
+msgid "Custom URL"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Required"
+#: assets/build/blocks.js:17
+#: assets/build/dashboard.js:1
+msgid "Logout"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Icon Space"
+#: assets/build/blocks.js:17
+msgid "Logout Label"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "100%"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "75%"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "50%"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "33%"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "25%"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "textarea"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "bio"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Text Area"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Custom Name"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Rows"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Checkbox"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Label Name"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Default Checked"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Radio Block Settings"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Password"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Password Type"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Password Show & Hide Toggle"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Password Show & Hide Icon"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Password Show"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Password Hide"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "2"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "3"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "4"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "6"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "12"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Beginner"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Intermediate"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Expert"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Free"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Paid"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Product Title"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Modified Date"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Descending"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Ascending"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Layout Options"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Course Columns"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Courses Per Page"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Difficulty Level"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Price Type"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Order By"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Order"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Hover color"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Form Settings"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Form Title Style"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Input Field Style"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Button Style"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Form Footer Style"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Form Input Style"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Form Style"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Form Button Style"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Search Options"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "PDF Options"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Form Options"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Form Title"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Username Label"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Reset Button Label"
-msgstr ""
-
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Login Label"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "Show Avatar"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Show Display Name"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Redirect After Logout"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Redirect After Login"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Avatar"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Custom Blank Form"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Simple Contact Form"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Registration Form"
+msgstr ""
+
+#: assets/build/blocks.js:17
+#: assets/build/dashboard.js:1
+msgid "Login Form"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Subscription Form"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Multi Step Form"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Forget Password Form"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Small"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Extra Large"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Collect Submission"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Email2"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Mailchimp"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Mailerlite"
+msgstr ""
+
+#: assets/build/blocks.js:17
+#: assets/build/dashboard.js:10
+msgid "Drip"
+msgstr ""
+
+#: assets/build/blocks.js:17
+#: assets/build/dashboard.js:10
+msgid "GetResponse"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Convertkit"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Webhook"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "User IP"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "User Agent"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Form Name"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Select User Roles"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Rows Spacing"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Label Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Input Text Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Navigator Access"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Redirect After Register"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Home Label"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Register Label"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Forget Password Label"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Labels"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Input"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Placeholder Color"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Submit Button"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Text Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Success & Error Styles"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Demo Success"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Demo Error"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Success Color"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Success Background"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Error Color"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Error Background"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Action After Submit"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Action Types"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "To"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Subject"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Message"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Form Email"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Reply -To"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Cc"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Bcc"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Send as"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "HTML"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Plain"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Meta Data"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Redirect To"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Webhook Url"
+msgstr ""
+
+#: assets/build/blocks.js:17
+#: assets/build/dashboard.js:10
+msgid "Api Key"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Custom Api Key"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Audience"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Group"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Tags"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Add comma separated tags"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Double Opt-in"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Allow Re-Subscribe"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Account"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Form Field"
+msgstr ""
+
+#: assets/build/blocks.js:17
+#: assets/build/dashboard.js:1
+msgid "List"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Day Of Cycle"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "First Name"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Please Select a Form Type"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Username"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "first_name"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "last_name"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "custom"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Explore Form Builder Options"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Design and customize forms easily for login, registration, and more."
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Field type"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Email Type"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Name"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Helper Text"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Required"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Icon Space"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "100%"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "75%"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "50%"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "33%"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "25%"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "textarea"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "bio"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Text Area"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Custom Name"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Rows"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Checkbox"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Label Name"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Default Checked"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Multi step"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Two Columns"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Three Columns"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Four Columns"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Radio Block Settings"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Option Type"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Choice Width"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Minimum Value"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Maximum Value"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Password"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Password Type"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Password Show & Hide Toggle"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Password Show & Hide Icon"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Password Show"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Password Hide"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "2"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "3"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "4"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "6"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "12"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Beginner"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Intermediate"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Expert"
+msgstr ""
+
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:23
+msgid "Free"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Paid"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Product Title"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Modified Date"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Descending"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Ascending"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Layout Options"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Course Columns"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Courses Per Page"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Difficulty Level"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Price Type"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Order By"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Order"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Hover color"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Form Settings"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Form Title Style"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Input Field Style"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Button Style"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Form Footer Style"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Form Input Style"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Form Style"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Form Button Style"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Search Options"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "PDF Options"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Form Options"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Form Title"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Username Label"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Reset Button Label"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "Form Header & Footer"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Entire Page"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Selector"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 #: assets/build/dashboard.js:1
 msgid "Progress Tracker"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Progress relative to"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "#id"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Show Percentage"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Certificate Background"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Select a Certificate Image"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Certificate Layout"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Page Size"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Page Orientation"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Certificate Padding"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Verification ID Style"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#. translators: %1$s learner, %2$s: course title, %3$s instructor, %4$s course place, %5$s completion date, %6$s verification ID
+#: assets/build/blocks.js:20
 msgid "Customize certificate with these values: %1$s, %2$s, %3$s, %4$s, %5$s, %6$s"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#. translators: %s verification ID
+#: assets/build/blocks.js:23
 msgid "Academy LMS Pro Codes: %s"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:23
 msgid "Enter your title…"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:23
 msgid "Copy Block Styles"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:23
 msgid "Paste Block Styles"
 msgstr ""
 
-#: assets/build/blocks.js:1
-#: assets/build/blocks.js:4
+#: assets/build/blocks.js:23
+#: assets/build/blocks.js:26
+#: assets/build/dashboard.js:4
 msgid "Pro"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Full screen"
+#: assets/build/blocks.js:23
+msgid "Failed to fetch categroy."
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Small screen"
-msgstr ""
-
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:23
 msgid "Dependencies list"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Installed"
+#: assets/build/blocks.js:23
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Installed and Activated"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Yes"
+#: assets/build/blocks.js:23
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Install and Activate"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "No"
-msgstr ""
-
-#: assets/build/blocks.js:1
-#: assets/build/dashboard.js:1
-msgid "Activated"
-msgstr ""
-
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:23
 msgid "You're good to go"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:23
 msgid "All dependencies are not installed and activated"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Import"
+#: assets/build/blocks.js:23
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Import Now"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:23
 msgid "Install & activate"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:23
+msgid "Import with image"
+msgstr ""
+
+#: assets/build/blocks.js:23
+msgid "Import Theme"
+msgstr ""
+
+#: assets/build/blocks.js:23
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
 msgid "Live Preview"
 msgstr ""
 
-#: assets/build/blocks.js:1
+#: assets/build/blocks.js:23
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Import"
+msgstr ""
+
+#: assets/build/blocks.js:23
 msgid "Something went wrong!"
 msgstr ""
 
-#: assets/build/blocks.js:1
-msgid "Page inserted successful!"
-msgstr ""
-
 #. translators: %s: selectedTab
-#: assets/build/blocks.js:4
+#: assets/build/blocks.js:26
 msgid "%s inserted successfully!"
 msgstr ""
 
-#: assets/build/blocks.js:4
+#: assets/build/blocks.js:26
+msgid "Content is missing!"
+msgstr ""
+
+#: assets/build/blocks.js:26
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Import with Image"
+msgstr ""
+
+#: assets/build/blocks.js:26
 msgid "No results found"
 msgstr ""
 
-#: assets/build/blocks.js:4
+#: assets/build/blocks.js:26
 msgid "Pattern"
 msgstr ""
 
-#: assets/build/blocks.js:4
+#: assets/build/blocks.js:26
 msgid "Template"
 msgstr ""
 
-#: assets/build/blocks.js:4
+#: assets/build/blocks.js:26
 msgid "Import Templates"
 msgstr ""
 
-#: assets/build/blocks.js:4
+#: assets/build/blocks.js:26
 msgid "Import Template"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+#: assets/build/demo-import.js:1
+msgid "Close"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -3915,6 +5265,10 @@ msgstr ""
 #: assets/build/dashboard.js:1
 #: assets/build/dashboard.js:4
 msgid "Blocks/ Extensions"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Template Kits"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -3986,10 +5340,6 @@ msgid "Modal"
 msgstr ""
 
 #: assets/build/dashboard.js:1
-msgid "List"
-msgstr ""
-
-#: assets/build/dashboard.js:1
 msgid "Tabs"
 msgstr ""
 
@@ -4022,15 +5372,15 @@ msgid "Price Menu"
 msgstr ""
 
 #: assets/build/dashboard.js:1
+msgid "Filterable Cards"
+msgstr ""
+
+#: assets/build/dashboard.js:1
 msgid "Form Builder"
 msgstr ""
 
 #: assets/build/dashboard.js:1
 msgid "Image Hotspot"
-msgstr ""
-
-#: assets/build/dashboard.js:1
-msgid "Loop Builder"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -4042,7 +5392,15 @@ msgid "News Ticker"
 msgstr ""
 
 #: assets/build/dashboard.js:1
-msgid "Stripe"
+msgid "Stripe Button"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Stacked Cards"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Loop Builder"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -4058,10 +5416,6 @@ msgid "Playlist"
 msgstr ""
 
 #: assets/build/dashboard.js:1
-msgid "Gallery"
-msgstr ""
-
-#: assets/build/dashboard.js:1
 msgid "Breadcrumb"
 msgstr ""
 
@@ -4071,10 +5425,6 @@ msgstr ""
 
 #: assets/build/dashboard.js:1
 msgid "Course Grid"
-msgstr ""
-
-#: assets/build/dashboard.js:1
-msgid "Login Form"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -4118,6 +5468,10 @@ msgstr ""
 #: assets/build/dashboard.js:1
 #: assets/build/dashboard.js:4
 msgid "Install Academy LMS"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Activated"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -4170,14 +5524,85 @@ msgid "Academy LMS Integration Blocks not found!"
 msgstr ""
 
 #: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Install and Activate →"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Importing Successful"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Import Failed"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Your Theme is Importing"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Theme Importing in progress. Please do not refresh or go back. This may take a few minutes."
+msgstr ""
+
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Theme Importing is complete. You can visite website now."
+msgstr ""
+
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Theme Importing Failed. Please try again!"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Importing in Progress Please wait…"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Start Import"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "LMS"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "eCommerce"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Something went wrong! please try again."
+msgstr ""
+
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "Template sucessfully imported!"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+#: assets/build/demo-import.js:1
+msgid "No item found"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+#: assets/build/dashboard.js:16
 msgid "Settings Saved!"
 msgstr ""
 
 #: assets/build/dashboard.js:4
+#: assets/build/dashboard.js:16
 msgid "Failed to save settings."
 msgstr ""
 
 #: assets/build/dashboard.js:4
+#: assets/build/dashboard.js:13
 msgid "Editor Options"
 msgstr ""
 
@@ -4202,6 +5627,7 @@ msgid "Duplicate your block designs on same blocks across websites. (Works only 
 msgstr ""
 
 #: assets/build/dashboard.js:4
+#: assets/build/dashboard.js:13
 msgid "Asset Generation"
 msgstr ""
 
@@ -4222,6 +5648,7 @@ msgid "Assets Successfully Regenerated!"
 msgstr ""
 
 #: assets/build/dashboard.js:4
+#: assets/build/dashboard.js:13
 msgid "Performance"
 msgstr ""
 
@@ -4238,6 +5665,7 @@ msgid "Select Fonts"
 msgstr ""
 
 #: assets/build/dashboard.js:4
+#: assets/build/dashboard.js:13
 msgid "Site Visibility"
 msgstr ""
 
@@ -4265,8 +5693,245 @@ msgstr ""
 msgid "Maintenance Page"
 msgstr ""
 
-#: assets/build/dashboard.js:4
+#. translators: %s. typeOfEMail
+#: assets/build/dashboard.js:7
+msgid "%s Api key validated successfully"
+msgstr ""
+
+#. translators: %s. typeOfEMail
+#: assets/build/dashboard.js:10
+msgid "Failed to validate %s Api key"
+msgstr ""
+
+#: assets/build/dashboard.js:10
+msgid "MailChimp"
+msgstr ""
+
+#: assets/build/dashboard.js:10
+msgid "To integrate with our forms you need an&nbsp;"
+msgstr ""
+
+#: assets/build/dashboard.js:10
+msgid "Validate Api key"
+msgstr ""
+
+#: assets/build/dashboard.js:10
+msgid "ConvertKit"
+msgstr ""
+
+#: assets/build/dashboard.js:10
+msgid "To integrate with our forms you need an &nbsp;"
+msgstr ""
+
+#: assets/build/dashboard.js:10
+msgid "MailerLite"
+msgstr ""
+
+#. translators: %s: postType
+#: assets/build/dashboard.js:13
+msgid "Select a %s"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Login Page"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Search and select a Page"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Register Page"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Forget Password Page"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Integrations"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Page Setup"
+msgstr ""
+
+#: assets/build/dashboard.js:13
 msgid "Save"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Published"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Pending"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Draft"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+#: assets/build/dashboard.js:16
+msgid "Trash"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Approved"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Approve"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Processing"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Private"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Scheduled"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+#: assets/build/dashboard.js:16
+msgid "Read"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+#: assets/build/dashboard.js:16
+msgid "Unread"
+msgstr ""
+
+#. translators: %s: totalItems
+#: assets/build/dashboard.js:16
+msgid "Failed to fetch entries!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Failed to fetch entry!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Successfully updated entry!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Failed to update entry!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Successfully deleted entries!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Failed to delete entries!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Successfully marked entries as read!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Failed to mark entries as read!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Successfully marked entries as unread!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Failed to mark entries as unread!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Successfully sent entries to trash!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Failed to send entries to trash!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Successfully restored entries from trash!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Failed to restore entries from trash!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Are you sure, you want to move these item to trash!"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Restore"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Are you sure, you want to restore these items?"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Delete Permanently"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Are you sure, you want to delete these items?"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Main"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Submission Date"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Form"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Status"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Search Form"
+msgstr ""
+
+#: assets/build/dashboard.js:16
+msgid "Export CSV"
+msgstr ""
+
+#. translators: %s is submission id.
+#: assets/build/dashboard.js:19
+msgid "Submission %s"
+msgstr ""
+
+#: assets/build/dashboard.js:19
+msgid "Edit"
+msgstr ""
+
+#. translators: %s is the dynamic label for the title.
+#: assets/build/dashboard.js:22
+msgid "Title: %s"
+msgstr ""
+
+#: assets/build/dashboard.js:22
+msgid "Additional Info"
+msgstr ""
+
+#: assets/build/demo-import.js:1
+msgid "Import Demo"
+msgstr ""
+
+#: assets/build/demo-import.js:1
+msgid "Sync Templates"
 msgstr ""
 
 #: assets/build/blocks/academy-certificate-id/block.json
@@ -4318,6 +5983,7 @@ msgstr ""
 #: assets/build/blocks/academy-pdf/block.json
 #: assets/build/blocks/academy-student-registration-form/block.json
 #: assets/build/blocks/accordion/block.json
+#: assets/build/blocks/advance-lists/block.json
 #: assets/build/blocks/button/block.json
 #: assets/build/blocks/container/block.json
 #: assets/build/blocks/container/deprecated/block.json
@@ -4336,8 +6002,10 @@ msgstr ""
 #: assets/build/blocks/search/block.json
 #: assets/build/blocks/spacer/block.json
 #: assets/build/blocks/star-ratings/block.json
+#: assets/build/blocks/stripe-button/block.json
 #: assets/build/blocks/svg-draw/block.json
 #: assets/build/blocks/tabs/block.json
+#: assets/build/blocks/tabs/deprecated/block.json
 #: assets/build/blocks/toggle/block.json
 #: assets/build/blocks/video/block.json
 msgctxt "block keyword"
@@ -4529,6 +6197,55 @@ msgctxt "block keyword"
 msgid "expandable"
 msgstr ""
 
+#: assets/build/blocks/advance-list-item/block.json
+msgctxt "block title"
+msgid "Advance list item"
+msgstr ""
+
+#: assets/build/blocks/advance-list-item/block.json
+msgctxt "block description"
+msgid "Design customizable, organized advance list item."
+msgstr ""
+
+#: assets/build/blocks/advance-lists/block.json
+msgctxt "block title"
+msgid "Advance lists"
+msgstr ""
+
+#: assets/build/blocks/advance-lists/block.json
+msgctxt "block description"
+msgid "Customizable, dynamic, organized lists."
+msgstr ""
+
+#: assets/build/blocks/advance-lists/block.json
+msgctxt "block keyword"
+msgid "advance list"
+msgstr ""
+
+#: assets/build/blocks/advance-lists/block.json
+#: assets/build/blocks/lists/block.json
+msgctxt "block keyword"
+msgid "lists"
+msgstr ""
+
+#: assets/build/blocks/advance-lists/block.json
+#: assets/build/blocks/lists/block.json
+msgctxt "block keyword"
+msgid "list"
+msgstr ""
+
+#: assets/build/blocks/advance-lists/block.json
+#: assets/build/blocks/lists/block.json
+msgctxt "block keyword"
+msgid "icon list"
+msgstr ""
+
+#: assets/build/blocks/advance-lists/block.json
+#: assets/build/blocks/lists/block.json
+msgctxt "block keyword"
+msgid "point"
+msgstr ""
+
 #: assets/build/blocks/button/block.json
 msgctxt "block title"
 msgid "Button"
@@ -4541,24 +6258,28 @@ msgstr ""
 
 #: assets/build/blocks/button/block.json
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/stripe-button/block.json
 msgctxt "block keyword"
 msgid "button"
 msgstr ""
 
 #: assets/build/blocks/button/block.json
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/stripe-button/block.json
 msgctxt "block keyword"
 msgid "anchor"
 msgstr ""
 
 #: assets/build/blocks/button/block.json
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/stripe-button/block.json
 msgctxt "block keyword"
 msgid "link"
 msgstr ""
 
 #: assets/build/blocks/button/block.json
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/stripe-button/block.json
 msgctxt "block keyword"
 msgid "cta"
 msgstr ""
@@ -4784,6 +6505,26 @@ msgstr ""
 #: assets/build/blocks/dual-button/block.json
 msgctxt "block description"
 msgid "Craft beautiful, fully customizable Dual Button."
+msgstr ""
+
+#: assets/build/blocks/filterable-cards-item/block.json
+msgctxt "block title"
+msgid "Filterable Cards Item"
+msgstr ""
+
+#: assets/build/blocks/filterable-cards-item/block.json
+msgctxt "block description"
+msgid "Filterable card-based layout Child."
+msgstr ""
+
+#: assets/build/blocks/filterable-cards/block.json
+msgctxt "block title"
+msgid "Filterable Cards"
+msgstr ""
+
+#: assets/build/blocks/filterable-cards/block.json
+msgctxt "block description"
+msgid "Filterable card-based layout."
 msgstr ""
 
 #: assets/build/blocks/flip-box-child/block.json
@@ -5023,24 +6764,14 @@ msgctxt "block description"
 msgid "Design customizable, organized lists."
 msgstr ""
 
-#: assets/build/blocks/lists/block.json
-msgctxt "block keyword"
-msgid "lists"
+#: assets/build/blocks/logout/block.json
+msgctxt "block title"
+msgid "Logout"
 msgstr ""
 
-#: assets/build/blocks/lists/block.json
-msgctxt "block keyword"
-msgid "list"
-msgstr ""
-
-#: assets/build/blocks/lists/block.json
-msgctxt "block keyword"
-msgid "icon list"
-msgstr ""
-
-#: assets/build/blocks/lists/block.json
-msgctxt "block keyword"
-msgid "point"
+#: assets/build/blocks/logout/block.json
+msgctxt "block description"
+msgid "Quick user logout option."
 msgstr ""
 
 #: assets/build/blocks/map/block.json
@@ -5051,6 +6782,26 @@ msgstr ""
 #: assets/build/blocks/map/block.json
 msgctxt "block description"
 msgid "Show google map or OpenStreet map"
+msgstr ""
+
+#: assets/build/blocks/marquee-child/block.json
+msgctxt "block title"
+msgid "Marquee Child"
+msgstr ""
+
+#: assets/build/blocks/marquee-child/block.json
+msgctxt "block description"
+msgid "Auto scrolling item Child."
+msgstr ""
+
+#: assets/build/blocks/marquee/block.json
+msgctxt "block title"
+msgid "Marquee"
+msgstr ""
+
+#: assets/build/blocks/marquee/block.json
+msgctxt "block description"
+msgid "Auto scrolling item display."
 msgstr ""
 
 #: assets/build/blocks/menu-child-mega/block.json
@@ -5176,11 +6927,13 @@ msgid "paypal"
 msgstr ""
 
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/stripe-button/block.json
 msgctxt "block keyword"
 msgid "payment"
 msgstr ""
 
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/stripe-button/block.json
 msgctxt "block keyword"
 msgid "pay"
 msgstr ""
@@ -5320,6 +7073,21 @@ msgctxt "block keyword"
 msgid "feedback"
 msgstr ""
 
+#: assets/build/blocks/stripe-button/block.json
+msgctxt "block title"
+msgid "Stripe Button"
+msgstr ""
+
+#: assets/build/blocks/stripe-button/block.json
+msgctxt "block description"
+msgid "Stripe payment integration."
+msgstr ""
+
+#: assets/build/blocks/stripe-button/block.json
+msgctxt "block keyword"
+msgid "stripe"
+msgstr ""
+
 #: assets/build/blocks/svg-draw/block.json
 msgctxt "block title"
 msgid "SVG Draw"
@@ -5410,26 +7178,31 @@ msgid "Design stylish call-to-action tabs-child."
 msgstr ""
 
 #: assets/build/blocks/tabs/block.json
+#: assets/build/blocks/tabs/deprecated/block.json
 msgctxt "block title"
 msgid "Tabs"
 msgstr ""
 
 #: assets/build/blocks/tabs/block.json
+#: assets/build/blocks/tabs/deprecated/block.json
 msgctxt "block description"
 msgid "Display content in tabbed sections."
 msgstr ""
 
 #: assets/build/blocks/tabs/block.json
+#: assets/build/blocks/tabs/deprecated/block.json
 msgctxt "block keyword"
 msgid "tabs"
 msgstr ""
 
 #: assets/build/blocks/tabs/block.json
+#: assets/build/blocks/tabs/deprecated/block.json
 msgctxt "block keyword"
 msgid "tab"
 msgstr ""
 
 #: assets/build/blocks/tabs/block.json
+#: assets/build/blocks/tabs/deprecated/block.json
 msgctxt "block keyword"
 msgid "multi tab"
 msgstr ""

@@ -11,6 +11,8 @@ use ABlocks\Ajax\Dashboard;
 use ABlocks\Ajax\DemoImport;
 use ABlocks\Ajax\SearchBlock;
 use ABlocks\Ajax\FormBuilder;
+use ABlocks\Ajax\Entry;
+use ABlocks\Ajax\StripePaymentAjax;
 use ABlocks\Helper;
 
 class Ajax {
@@ -25,6 +27,8 @@ class Ajax {
 		( new Settings() )->dispatch_actions();
 		( new SearchBlock() )->dispatch_actions();
 		( new FormBuilder() )->dispatch_actions();
+		( new Entry() )->dispatch_actions();
+		( new StripePaymentAjax() )->dispatch_actions();
 		( new DemoImport() )->dispatch_actions();
 	}
 	public function get_academy_terms() {

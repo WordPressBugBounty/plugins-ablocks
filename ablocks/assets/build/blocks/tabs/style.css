@@ -47,13 +47,13 @@
     font-size: 20px;
 }
 
-
-
  .ablocks-block-tabs__tab-active a {
     background-color: #FFFFFF !important;
     border: none;
 }
-
+.ablocks-block-tabs .ablocks-block-tabs__icon .ablocks-icon-wrap img.ablocks-image-icon {
+    max-width: none !important;
+}
 /* ********************************************
 add tab icon button style
 ****************************************** */
@@ -135,7 +135,6 @@ add tab icon button style
     margin: 0;
     min-height: 20px;
 }
-
 .ablocks-block-tabs .ablocks-icon--close,
 .ablocks-block-tabs .ablocks-icon--direction-row-reversed,
 .ablocks-block-tabs .ablocks-icon--direction-row-horizontal {

@@ -9,6 +9,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Border;
+use ABlocks\Components\ButtonGroup;
 
 $attributes = [
 	'block_id' => [
@@ -31,15 +32,6 @@ $attributes = [
 		'type' => 'string',
 		'default' => ''
 	],
-	'toggleDirection' => [
-		'type' => 'string',
-		'default' => 'row'
-	],
-
-	'labelColorState' => [
-		'type' => 'string',
-		'default' => 'normal',
-	],
 	'labelNormalColor' => [
 		'type' => 'string',
 		'default' => 'black',
@@ -47,10 +39,6 @@ $attributes = [
 	'labelActiveColor' => [
 		'type' => 'string',
 		'default' => '#562DD4',
-	],
-	'toggleColorState' => [
-		'type' => 'string',
-		'default' => 'normal',
 	],
 	'toggleNormalColor' => [
 		'type' => 'string',
@@ -76,6 +64,15 @@ $attributes = array_merge(
 	Typography::get_attribute( 'labelTypography', true ),
 	Dimensions::get_attribute( 'toggleBarPadding', true ),
 	Border::get_attribute( 'toggleBarBorder', true ),
+	ButtonGroup::get_attribute( 'toggleDirection', false, [
+		'value' => 'row',
+	] ),
+	ButtonGroup::get_attribute( 'labelColorState', false, [
+		'value' => 'normal',
+	] ),
+	ButtonGroup::get_attribute( 'toggleColorState', false, [
+		'value' => 'normal',
+	] ),
 	Range::get_attribute([
 		'attributeName' => 'space',
 		'isResponsive' => true,

@@ -27,6 +27,8 @@ class Menu {
 		foreach ( Helper::get_admin_menu_list() as $item_key => $item ) {
 			add_submenu_page( $item['parent_slug'], $item['title'], $item['title'], $item['capability'], $item_key, [ $this, 'load_main_template' ] );
 		}
+
+		$this->register_theme_demo_importer_menu();
 	}
 	public function get_toplevel_menu_icon_url() {
 		// phpcs:disable
@@ -44,7 +46,32 @@ class Menu {
 	public function get_toplevel_menu_title() {
 		return apply_filters( 'ablocks/admin/toplevel_menu_title', __( 'aBlocks', 'ablocks' ) );
 	}
-	
+
+	/**
+	 * Register sub-menu for theme based demo-import.
+	 *
+	 * @return void
+	 */
+	public function register_theme_demo_importer_menu() {
+		$demo_config = Helper::get_theme_demo_config();
+		if ( !$demo_config) {
+			return;
+		}
+
+		add_submenu_page(
+			'themes.php',
+			$demo_config['page_title'],
+			$demo_config['menu_title'],
+			'manage_options',
+			$demo_config['menu_slug'],
+			[ $this, 'load_demo_importer_template' ]
+		);
+	}
+
+	public function load_demo_importer_template() {
+		echo '<div id="ablocks-theme-demo-importer"></div>';
+	}
+
 	function add_admin_menu_css() {
 		echo '<style>
 			#adminmenu li.toplevel_page_ablocks a.toplevel_page_ablocks > .wp-menu-image { 
@@ -76,5 +103,5 @@ class Menu {
 				width: calc(100% + 26px);
 			}
 		</style>';
-	}	
+	}
 }

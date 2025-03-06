@@ -27,6 +27,9 @@ class Base {
 			'coming_soon_page' => '',
 			'enabled_maintenance_page' => false,
 			'maintenance_page' => '',
+			'login_page' => '',
+			'registration_page' => '',
+			'forget_password_page' => '',
 		]);
 	}
 

@@ -95,6 +95,15 @@ class Settings extends AbstractAjaxHandler {
 			'coming_soon_page' => 'integer',
 			'enabled_maintenance_page' => 'boolean',
 			'maintenance_page' => 'integer',
+			'login_page' => 'integer',
+			'registration_page' => 'integer',
+			'forget_password_page' => 'integer',
+
+			'mailchimp_api_key' => 'string',
+			'drip_api_key' => 'string',
+			'getresponse_api_key' => 'string',
+			'convertkit_api_key' => 'string',
+			'mailerlite_api_key' => 'string',
 		], $_POST); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		$default = BaseSettings::get_default_data();
@@ -110,6 +119,15 @@ class Settings extends AbstractAjaxHandler {
 			'coming_soon_page' => $payload['coming_soon_page'] ?? $default['coming_soon_page'],
 			'enabled_maintenance_page' => $payload['enabled_maintenance_page'] ?? $default['enabled_maintenance_page'],
 			'maintenance_page' => $payload['maintenance_page'] ?? $default['maintenance_page'],
+			'login_page' => $payload['login_page'] ?? $default['login_page'],
+			'registration_page' => $payload['registration_page'] ?? $default['registration_page'],
+			'forget_password_page' => $payload['forget_password_page'] ?? $default['forget_password_page'],
+
+			'mailchimp_api_key' => $payload['mailchimp_api_key'] ?? '',
+			'drip_api_key' => $payload['drip_api_key'] ?? '',
+			'getresponse_api_key' => $payload['getresponse_api_key'] ?? '',
+			'convertkit_api_key' => $payload['convertkit_api_key'] ?? '',
+			'mailerlite_api_key' => $payload['mailerlite_api_key'] ?? '',
 		]);
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		do_action( 'ablocks/after_save_settings', $is_update, 'base', $_POST );

@@ -16,13 +16,13 @@ class SearchBlock extends AbstractAjaxHandler {
 	public function __construct() {
 		$this->actions = array(
 			'search_block_ajax_action'      => array(
-				'callback' => array( $this, 'ablocks_blocks_search_blocks_ajax_handler' ),
+				'callback' => array( $this, 'search_blocks_ajax_handler' ),
 				'allow_visitor_action' => true
 			),
 		);
 	}
 
-	public function ablocks_blocks_search_blocks_ajax_handler( $form_data ) {
+	public function search_blocks_ajax_handler( $form_data ) {
 
 		$payload = Sanitizer::sanitize_payload([
 			'current_page_id'        => 'integer',
@@ -38,7 +38,8 @@ class SearchBlock extends AbstractAjaxHandler {
 			's' => $searchQuery,
 			'posts_per_page' => -1,
 			'post_type'      => $source,
-			'post__not_in'   => array( $current_page_id )
+			'post__not_in'   => array( $current_page_id ),
+			'post_status' => 'publish'
 		);
 
 		$query = new WP_Query( $args );
@@ -51,10 +52,10 @@ class SearchBlock extends AbstractAjaxHandler {
 				$query->the_post();
 				$title = get_the_title();
 				$link = get_permalink();
-				$thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+				$thumbnail = get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' );
 
 				ob_start();
-				Helper::get_template('search-block/search-result-template.php', array(
+				Helper::get_template('search-block/search-results.php', array(
 					'title' => $title,
 					'link' => $link,
 					'thumbnail' => $thumbnail,
@@ -64,7 +65,7 @@ class SearchBlock extends AbstractAjaxHandler {
 				$results[] = array(
 					'title' => get_the_title(),
 					'link' => get_permalink(),
-					'thumbnail' => get_the_post_thumbnail_url( get_the_ID(), 'full' ),
+					'thumbnail' => get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' ),
 				);
 			}//end while
 

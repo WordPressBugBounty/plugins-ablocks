@@ -198,7 +198,7 @@ class BackgroundOverlay extends ControlBaseAbstract {
 
 		// Handle transition duration
 		if ( self::has_value( $value['transitionDuration'] ) ) {
-			$css['transition'] = 'border ' . $value['transitionDuration'] . 's,' . 'border-radius ' . $value['transitionDuration'] . 's';
+			$css['transition'] = "border {$value['transitionDuration']}s, border-radius {$value['transitionDuration']}s";
 		}
 
 		// If background is set to image
@@ -380,23 +380,23 @@ class BackgroundOverlay extends ControlBaseAbstract {
 			$device
 		);
 
-		 $css = [];
-		 $topDiffH = ! empty( $extra_border_value['commonWidthH'] ) ? intval( $extra_border_value['commonWidthH'] ) : intval( $extra_border_value['topWidth'] ?? 0 );
-		 $bottomDiffH = ! empty( $extra_border_value['commonWidthH'] ) ? intval( $extra_border_value['commonWidthH'] ) : intval( $extra_border_value['bottomWidth'] ?? 0 );
-		 $leftDiffH = ! empty( $extra_border_value['commonWidthH'] ) ? intval( $extra_border_value['commonWidthH'] ) : intval( $extra_border_value['leftWidth'] ?? 0 );
-		 $rightDiffH = ! empty( $extra_border_value['commonWidthH'] ) ? intval( $extra_border_value['commonWidthH'] ) : intval( $extra_border_value['rightWidth'] ?? 0 );
+		$css = [];
+		$topDiffH = ! empty( $extra_border_value['commonWidthH'] ) ? intval( $extra_border_value['commonWidthH'] ) : intval( $extra_border_value['topWidth'] ?? 0 );
+		$bottomDiffH = ! empty( $extra_border_value['commonWidthH'] ) ? intval( $extra_border_value['commonWidthH'] ) : intval( $extra_border_value['bottomWidth'] ?? 0 );
+		$leftDiffH = ! empty( $extra_border_value['commonWidthH'] ) ? intval( $extra_border_value['commonWidthH'] ) : intval( $extra_border_value['leftWidth'] ?? 0 );
+		$rightDiffH = ! empty( $extra_border_value['commonWidthH'] ) ? intval( $extra_border_value['commonWidthH'] ) : intval( $extra_border_value['rightWidth'] ?? 0 );
 
-		 // Radius calculations
-		 $topRadiusValueH = ! empty( $extra_border_value['commonRadiusH'] ) ? intval( $extra_border_value['commonRadiusH'] ) : intval( $extra_border_value['topRadius'] ?? 0 );
-		 $leftRadiusValueH = ! empty( $extra_border_value['commonRadiusH'] ) ? intval( $extra_border_value['commonRadiusH'] ) : intval( $extra_border_value['leftRadius'] ?? 0 );
-		 $rightRadiusValueH = ! empty( $extra_border_value['commonRadiusH'] ) ? intval( $extra_border_value['commonRadiusH'] ) : intval( $extra_border_value['rightRadius'] ?? 0 );
-		 $bottomRadiusValueH = ! empty( $extra_border_value['commonRadiusH'] ) ? intval( $extra_border_value['commonRadiusH'] ) : intval( $extra_border_value['bottomRadius'] ?? 0 );
+		// Radius calculations
+		$topRadiusValueH = ! empty( $extra_border_value['commonRadiusH'] ) ? intval( $extra_border_value['commonRadiusH'] ) : intval( $extra_border_value['topRadius'] ?? 0 );
+		$leftRadiusValueH = ! empty( $extra_border_value['commonRadiusH'] ) ? intval( $extra_border_value['commonRadiusH'] ) : intval( $extra_border_value['leftRadius'] ?? 0 );
+		$rightRadiusValueH = ! empty( $extra_border_value['commonRadiusH'] ) ? intval( $extra_border_value['commonRadiusH'] ) : intval( $extra_border_value['rightRadius'] ?? 0 );
+		$bottomRadiusValueH = ! empty( $extra_border_value['commonRadiusH'] ) ? intval( $extra_border_value['commonRadiusH'] ) : intval( $extra_border_value['bottomRadius'] ?? 0 );
 
-		 // Ensure no negative values
-		 $css['border-top-left-radius'] = max( $topRadiusValueH - $topDiffH, 0 ) . 'px';
-		 $css['border-top-right-radius'] = max( $rightRadiusValueH - $rightDiffH, 0 ) . 'px';
-		 $css['border-bottom-left-radius'] = max( $bottomRadiusValueH - $bottomDiffH, 0 ) . 'px';
-		 $css['border-bottom-right-radius'] = max( $leftRadiusValueH - $leftDiffH, 0 ) . 'px';
+		// Ensure no negative values
+		$css['border-top-left-radius'] = max( $topRadiusValueH - $topDiffH, 0 ) . 'px';
+		$css['border-top-right-radius'] = max( $rightRadiusValueH - $rightDiffH, 0 ) . 'px';
+		$css['border-bottom-left-radius'] = max( $bottomRadiusValueH - $bottomDiffH, 0 ) . 'px';
+		$css['border-bottom-right-radius'] = max( $leftRadiusValueH - $leftDiffH, 0 ) . 'px';
 
 		// If hover background is set to image
 		if ( $value['backgroundOverlayTypeH'] === 'image' ) {

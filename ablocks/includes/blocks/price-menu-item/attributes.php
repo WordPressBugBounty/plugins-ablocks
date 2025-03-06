@@ -119,8 +119,6 @@ $attributes = array_merge(
 	Alignment::get_attribute( 'priceAlignment', true, [ 'value' => '' ] ),
 	GroupButton::get_attribute( 'itemsDirection', true, [
 		'value' => 'row',
-		'valueTablet' => 'row',
-		'valueMobile' => 'row'
 	] ),
 	Range::get_attribute( [
 		'attributeName' => 'width',

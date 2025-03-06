@@ -82,6 +82,11 @@ class Helper {
 			'title'       => __( 'Dashboard', 'ablocks' ),
 			'capability'  => 'manage_options',
 		];
+		$menu[ ABLOCKS_PLUGIN_SLUG . '-submissions' ]   = [
+			'parent_slug' => ABLOCKS_PLUGIN_SLUG,
+			'title'       => __( 'Submissions', 'ablocks' ),
+			'capability'  => 'manage_options',
+		];
 		$menu[ ABLOCKS_PLUGIN_SLUG . '-settings' ]   = [
 			'parent_slug' => ABLOCKS_PLUGIN_SLUG,
 			'title'       => __( 'Settings', 'ablocks' ),
@@ -201,7 +206,7 @@ class Helper {
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			} elseif ( isset( $_GET['post'] ) ) {
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				$queried_post_type = get_post_type( sanitize_text_field(wp_unslash($_GET['post'])) );
+				$queried_post_type = get_post_type( sanitize_text_field( wp_unslash( $_GET['post'] ) ) );
 				if ( $queried_post_type === $post_type ) {
 					return true;
 				}
@@ -213,15 +218,39 @@ class Helper {
 	public static function get_block_attributes( $post_id, $block_id, $block_name ) {
 		$post_content = get_post_field( 'post_content', $post_id );
 		$blocks = parse_blocks( $post_content );
+		return self::get_block_attributes_recursive( $block_id, $block_name, $blocks );
+
+	}
+
+	public static function get_block_attributes_recursive( $block_id, $block_name, $blocks ) {
 
 		foreach ( $blocks as $block ) {
-			if ( $block['blockName'] === $block_name && $block['attrs']['block_id'] === $block_id ) {
+
+			if (
+				( $block['attrs']['block_id'] ?? '' ) === $block_id &&
+				( $block['blockName'] ?? '' ) === $block_name
+			) {
 				return [
-					'parentAttributes' => $block['attrs'],
-					'innerBlocks' => self::extract_inner_blocks( $block['innerBlocks'] ),
+					'parentAttributes' => $block['attrs'] ?? [],
+					'innerBlocks'      => self::extract_inner_blocks( $block['innerBlocks'] ?? [] ),
 				];
 			}
-		}
+
+			if (
+				array_key_exists( 'innerBlocks', $block ) &&
+				is_array( $block['innerBlocks'] ) &&
+				count( $block['innerBlocks'] ) > 0
+			) {
+				$data = self::get_block_attributes_recursive(
+					$block_id,
+					$block_name,
+					$block['innerBlocks']
+				);
+				if ( ! empty( $data ) ) {
+					return $data;
+				}
+			}
+		}//end foreach
 		return [];
 	}
 

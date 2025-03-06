@@ -18,16 +18,28 @@ class Block extends BlockBaseAbstract {
 		$css_generator = new CssGenerator( $attributes );
 		// Wrapper CSS
 		$css_generator->add_class_styles(
-			'{{WRAPPER}}',
+			'{{WRAPPER}}.ablocks-block--menu-child-sub',
 			$this->get_wrapper_css( $attributes, '' ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
 			$this->get_wrapper_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} > .ablocks-menu-item',
+			'{{WRAPPER}}.ablocks-block--menu-child-sub:hover',
+			$this->get_wrapper_hover_css( $attributes, '' ),
+			$this->get_wrapper_hover_css( $attributes, 'Tablet' ),
+			$this->get_wrapper_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--menu-child-sub .ablocks-block--menu-item',
 			$this->get_menu_item_css( $attributes, '' ),
 			$this->get_menu_item_css( $attributes, 'Tablet' ),
 			$this->get_menu_item_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--menu-child-sub .ablocks-block--menu-item:hover',
+			$this->get_menu_item_hover_css( $attributes, '' ),
+			$this->get_menu_item_hover_css( $attributes, 'Tablet' ),
+			$this->get_menu_item_hover_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} > .ablocks-menu-item > .ablocks-menu-item__link',
@@ -36,12 +48,6 @@ class Block extends BlockBaseAbstract {
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} > .ablocks-menu-item:hover > .ablocks-menu-item__link',
 			$this->get_menu_item_link_hover_css( $attributes, '' ),
-		);
-		$css_generator->add_class_styles(
-			'{{WRAPPER}} > .ablocks-menu-item:hover',
-			$this->get_menu_item_hover_css( $attributes, '' ),
-			$this->get_menu_item_hover_css( $attributes, 'Tablet' ),
-			$this->get_menu_item_hover_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles( '{{WRAPPER}} > .ablocks-menu-item .ablocks-menu-item__dropdown-icon svg', $this->get_menu_item_dropdown_icon_css( $attributes ) );
 		$css_generator->add_class_styles( '{{WRAPPER}} > .ablocks-menu-item:hover .ablocks-menu-item__dropdown-icon svg', $this->get_menu_item_dropdown_icon_hover_css( $attributes ) );
@@ -60,7 +66,6 @@ class Block extends BlockBaseAbstract {
 				'attributeValue' => $attributes['width'],
 				'attribute_object_key' => 'value',
 				'isResponsive' => true,
-				'defaultValue' => 250,
 				'hasUnit' => true,
 				'unitDefaultValue' => 'px',
 				'property' => 'width',
@@ -72,7 +77,13 @@ class Block extends BlockBaseAbstract {
 			$css
 		);
 	}
+	private function get_wrapper_hover_css( $attributes, $device = '' ) {
+		return array_merge(
+			Border::get_hover_css( $attributes['border'], '', $device ),
+			BoxShadow::get_hover_css( $attributes['boxShadow'], '', $device )
+		);
 
+	}
 	private function get_menu_item_css( $attributes, $device = '' ) {
 		$css = array_merge(
 			Border::get_css( isset( $attributes['menuItemBorder'] ) ? $attributes['menuItemBorder'] : [], '', $device ),
@@ -109,7 +120,7 @@ class Block extends BlockBaseAbstract {
 	private function get_menu_item_link_css( $attributes ) {
 		$css = [];
 		if ( ! empty( $attributes['menuItemTextColor'] ) ) {
-			$css['color'] = $attributes['menuItemTextColor'];
+			$css['color'] = $attributes['menuItemTextColor'] . '!important';
 		}
 		return $css;
 	}

@@ -1,0 +1,98 @@
+.ablocks-block-marquee[data-animated="true"] {
+	--ablocks-block-animation-direction: normal;
+	--ablocks-block-marquee-animation: ablocks-block-marquee-animation-x;
+	--ablocks-block-animation-transform: calc(-100% - var(--ablocks-block-content-gap));
+	position: relative !important;
+	display: flex !important;
+	align-items: center !important;
+	gap: var(--ablocks-block-content-gap) !important;
+	overflow: clip !important;
+	-webkit-mask: linear-gradient(90deg,
+			transparent,
+			white 20%,
+			white 80%,
+			transparent);
+	mask: linear-gradient(90deg,
+			transparent, white 20%,
+			white 80%,
+			transparent);
+}
+
+.ablocks-block-marquee__children {
+	padding-block: 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+	flex: 1 0 100%;
+	width: 100%;
+}
+
+.ablocks-block-marquee>.ablocks-block-marquee__children {
+	flex: 1 0 100%;
+	width: 100%;
+	animation: var(--ablocks-block-marquee-animation) var(--ablocks-block-animation-speed) linear infinite;
+	animation-direction: var(--ablocks-block-animation-direction);
+}
+
+.ablocks-block-marquee__children-child {
+	display: grid;
+	align-items: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ablocks-block-marquee>.ablocks-block-marquee__children {
+		animation: none !important;
+	}
+
+	.ablocks-block-marquee>.ablocks-block-marquee__item.mirror {
+		display: none;
+	}
+}
+
+.ablocks-block-marquee.orientation-x {
+	flex-direction: row;
+}
+
+.ablocks-block-marquee.orientation-x>.ablocks-block-marquee__children>* {
+	white-space: wrap;
+}
+
+
+@keyframes ablocks-block-marquee-animation-x {
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(var(--ablocks-block-animation-transform));
+	}
+}
+
+.ablocks-block-marquee__custom-btn {
+	background: #1e1e1e;
+	color: #fff;
+	height: 28px;
+	min-width: 24px;
+	padding: 0;
+}
+
+.ablocks-block-marquee__custom-btn svg {
+	fill: white;
+}
+
+.is-layout-constrained>.ablocks-block--marquee:where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+	max-width: 100% !important;
+}
+
+.ablocks-block-marquee .ablocks-block-container {
+	justify-content: center !important;
+}
+
+.ablocks-block-marquee__custom-btn .ablocks-icon--plus:before {
+	color: white;
+}
+.ablocks-block-marquee-dropdown-toolbar-menu .ablocks-icon--plus:before {
+	color: rgb(0, 0, 0);
+	font-size: 20px;
+}

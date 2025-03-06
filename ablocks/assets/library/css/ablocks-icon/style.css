@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ablocks';
-  src:  url('fonts/ablocks.eot?cnnbu3');
-  src:  url('fonts/ablocks.eot?cnnbu3#iefix') format('embedded-opentype'),
-    url('fonts/ablocks.ttf?cnnbu3') format('truetype'),
-    url('fonts/ablocks.woff?cnnbu3') format('woff'),
-    url('fonts/ablocks.svg?cnnbu3#ablocks') format('svg');
+  src:  url('fonts/ablocks.eot?6f6lyz');
+  src:  url('fonts/ablocks.eot?6f6lyz#iefix') format('embedded-opentype'),
+    url('fonts/ablocks.ttf?6f6lyz') format('truetype'),
+    url('fonts/ablocks.woff?6f6lyz') format('woff'),
+    url('fonts/ablocks.svg?6f6lyz#ablocks') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,11 +25,38 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ablocks-icon--page-setup:before {
+  content: "\e9b2";
+}
+.ablocks-icon--svg-draw:before {
+  content: "\e9af";
+}
+.ablocks-icon--image-hotspot:before {
+  content: "\e9ae";
+}
+.ablocks-icon--progress-bar:before {
+  content: "\e9b0";
+}
+.ablocks-icon--stripe:before {
+  content: "\e9b1";
+}
+.ablocks-icon--dual-button:before {
+  content: "\e9bd";
+}
+.ablocks-icon--form-builder:before {
+  content: "\e9bf";
+}
+.ablocks-icon--filterable-card:before {
+  content: "\e9ad";
+}
+.ablocks-icon--marquee:before {
+  content: "\e9ac";
+}
+.ablocks-icon--stacked-cards:before {
+  content: "\e9ab";
+}
 .ablocks-icon--integrations:before {
   content: "\e9a9";
-}
-.ablocks-icon--page-setup:before {
-  content: "\e9aa";
 }
 .ablocks-icon--reset-icon:before {
   content: "\e9a8";
@@ -421,7 +448,7 @@
 }
 .ablocks-icon--plus:before {
   content: "\e935";
-  color: #454d54;
+  color: #ffffff;
 }
 .ablocks-icon--block-countdown:before {
   content: "\e97c";

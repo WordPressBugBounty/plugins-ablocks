@@ -12,6 +12,12 @@ abstract class BlockBaseAbstract {
 
 	protected $namespace = 'ablocks';
 
+	protected $assets_url = ABLOCKS_ASSETS_URL;
+
+	protected $assets_path = ABLOCKS_ASSETS_PATH;
+
+	protected $blocks_dir_path = ABLOCKS_BLOCKS_DIR_PATH;
+
 	protected $parent_block_name = '';
 
 	protected $block_name = '';
@@ -36,7 +42,7 @@ abstract class BlockBaseAbstract {
 	}
 
 	public function register_block() {
-		$block_path = ABLOCKS_ASSETS_PATH . 'build/blocks/' . $this->block_name . '/block.json';
+		$block_path = $this->assets_path . 'build/blocks/' . $this->block_name . '/block.json';
 		// Register the block with the merged attributes and render callback
 		register_block_type( $block_path, array(
 			'render_callback' => array( $this, 'render_callback' ),
@@ -44,7 +50,7 @@ abstract class BlockBaseAbstract {
 	}
 
 	public function get_attributes() {
-		$block_attributes = include ABLOCKS_BLOCKS_DIR_PATH . $this->block_name . '/attributes.php';
+		$block_attributes = include $this->blocks_dir_path . $this->block_name . '/attributes.php';
 		return apply_filters( 'ablocks/register_block_attributes', $block_attributes, $this->block_name, $this->parent_block_name );
 	}
 
@@ -135,8 +141,8 @@ abstract class BlockBaseAbstract {
 		}
 
 		// block static css
-		if ( file_exists( ABLOCKS_ASSETS_PATH . 'build/blocks/' . $block_name . '/style.css' ) ) {
-			wp_enqueue_style( 'ablocks-' . $block_name . '-block-static-style', ABLOCKS_ASSETS_URL . 'build/blocks/' . $block_name . '/style.css', array(), filemtime( ABLOCKS_ASSETS_PATH . 'build/blocks/' . $block_name . '/style.css' ), 'all' );
+		if ( file_exists( $this->assets_path . 'build/blocks/' . $block_name . '/style.css' ) ) {
+			wp_enqueue_style( 'ablocks-' . $block_name . '-block-static-style', $this->assets_url . 'build/blocks/' . $block_name . '/style.css', array(), filemtime( $this->assets_path . 'build/blocks/' . $block_name . '/style.css' ), 'all' );
 		}
 
 		// Library
@@ -146,11 +152,11 @@ abstract class BlockBaseAbstract {
 			}
 		}
 
-		if ( file_exists( ABLOCKS_ASSETS_PATH . 'build/blocks/' . $block_name . '/view.js' ) ) {
-			$dependencies = include ABLOCKS_ASSETS_PATH . 'build/blocks/' . $block_name . '/view.asset.php';
+		if ( file_exists( $this->assets_path . 'build/blocks/' . $block_name . '/view.js' ) ) {
+			$dependencies = include $this->assets_path . 'build/blocks/' . $block_name . '/view.asset.php';
 			wp_enqueue_script(
 				'ablocks-' . $block_name . '-block-static-script',
-				ABLOCKS_ASSETS_URL . 'build/blocks/' . $block_name . '/view.js',
+				$this->assets_url . 'build/blocks/' . $block_name . '/view.js',
 				$dependencies['dependencies'],
 				$dependencies['version'],
 				true
@@ -176,9 +182,9 @@ abstract class BlockBaseAbstract {
 	}
 
 	public function get_static_css() {
-		if ( file_exists( ABLOCKS_ASSETS_PATH . 'build/blocks/' . $this->block_name . '/style.css' ) ) {
+		if ( file_exists( $this->assets_path . 'build/blocks/' . $this->block_name . '/style.css' ) ) {
 			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-			$has_static_css = file_get_contents( ABLOCKS_ASSETS_PATH . 'build/blocks/' . $this->block_name . '/style.css' );
+			$has_static_css = file_get_contents( $this->assets_path . 'build/blocks/' . $this->block_name . '/style.css' );
 			if ( $has_static_css ) {
 				return $has_static_css;
 			}
@@ -186,9 +192,9 @@ abstract class BlockBaseAbstract {
 		return '';
 	}
 	public function get_static_js() {
-		if ( file_exists( ABLOCKS_ASSETS_PATH . 'build/blocks/' . $this->block_name . '/view.js' ) ) {
+		if ( file_exists( $this->assets_path . 'build/blocks/' . $this->block_name . '/view.js' ) ) {
 			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-			$has_static_js = file_get_contents( ABLOCKS_ASSETS_PATH . 'build/blocks/' . $this->block_name . '/view.js' );
+			$has_static_js = file_get_contents( $this->assets_path . 'build/blocks/' . $this->block_name . '/view.js' );
 			if ( $has_static_js ) {
 				return $has_static_js;
 			}
@@ -196,7 +202,7 @@ abstract class BlockBaseAbstract {
 		return '';
 	}
 	public function get_style_depends() {
-		return apply_filters( 'ablocks/block_style_depends', array_merge( $this->style_depends, array( 'ablocks-animate-style', 'ablocks-common-style' ) ) );
+		return apply_filters( 'ablocks/block_style_depends', array_merge( $this->style_depends, array( 'ablocks-frontend-google-fonts', 'ablocks-animate-style', 'ablocks-common-style' ) ) );
 	}
 	public function get_script_depends() {
 		return apply_filters( 'ablocks/block_script_depends', array_merge( $this->script_depends, array( 'ablocks-common-script' ) ) );

@@ -45,6 +45,12 @@ class Block extends BlockBaseAbstract {
 				$this->get_share_icon_css( $attributes, 'Table' ),
 				$this->get_share_icon_css( $attributes, 'Mobile' ),
 			);
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-social-share > .ablocks-svg-icon:hover',
+				$this->get_share_icon_hover_css(
+					$attributes
+				),
+			);
 			// item style
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-social-share-item',
@@ -163,52 +169,55 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_share_icon_css( $attributes, $device = '' ) {
 		$css = [];
-
 		if ( ! empty( $attributes['shareButtonIconColor'] ) ) {
 			$css['fill'] = $attributes['shareButtonIconColor'] . ' !important';
 		}
-	
-	
-		return array_merge( $css, 
-		Range::get_css([
-			'attributeValue' => $attributes['shareIconSize'],
-			'attribute_object_key' => 'value',
-			'isResponsive' => false,
-			'defaultValue' => 16,
-			'hasUnit' => true,
-			'unitDefaultValue' => 'px',
-			'property' => 'width',
-			'device' => $device,
-		]),
-		Range::get_css([
-			'attributeValue' => $attributes['shareIconSize'],
-			'attribute_object_key' => 'value',
-			'isResponsive' => false,
-			'defaultValue' => 16,
-			'hasUnit' => true,
-			'unitDefaultValue' => 'px',
-			'property' => 'height',
-			'device' => $device,
-		]) );
-	}
-	public function shareItemIconSVG( $attributes, $device = '' ) {
-		return 
-			Range::get_css([
-				'attributeValue' => $attributes['shareItemIconSize'],
+		return array_merge( $css,
+			Range::get_css( [
+				'attributeValue' => $attributes['shareIconSize'],
 				'attribute_object_key' => 'value',
 				'isResponsive' => false,
-				'defaultValue' => 42,
+				'defaultValue' => 16,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'width',
+				'device' => $device,
+			] ),
+			Range::get_css( [
+				'attributeValue' => $attributes['shareIconSize'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => false,
+				'defaultValue' => 16,
 				'hasUnit' => true,
 				'unitDefaultValue' => 'px',
 				'property' => 'height',
 				'device' => $device,
-			]);
-		
+			] )
+		);
 	}
-	
+	public function get_share_icon_hover_css( $attributes, $device = '' ) {
+		$css = [];
+
+		if ( ! empty( $attributes['shareButtonIconColorH'] ) ) {
+			$css['fill'] = $attributes['shareButtonIconColorH'] . ' !important';
+		}
+		return $css;
+	}
+	public function shareItemIconSVG( $attributes, $device = '' ) {
+		return Range::get_css( [
+			'attributeValue' => $attributes['shareItemIconSize'],
+			'attribute_object_key' => 'value',
+			'isResponsive' => false,
+			'defaultValue' => 42,
+			'hasUnit' => true,
+			'unitDefaultValue' => 'px',
+			'property' => 'height',
+			'device' => $device,
+		] );
+	}
+
 	public function get_share_item_css( $attributes, $device = '' ) {
 		$css = [];
-	
 		$range_width = Range::get_css([
 			'attributeValue' => $attributes['itemIconWidth'],
 			'attribute_object_key' => 'value',
@@ -228,30 +237,14 @@ class Block extends BlockBaseAbstract {
 			'unitDefaultValue' => 'px',
 			'property' => 'height',
 			'device' => $device,
-		]);
-		
+		] );
 		return array_merge( $css, $range_width, $range_height );
 	}
 	public function get_item_border_css( $attributes, $device = '' ) {
-		$css = [];
-		$range_height = Range::get_css([
-			'attributeValue' => $attributes['itemTextHeight'],
-			'attribute_object_key' => 'value',
-			'isResponsive' => false,
-			'defaultValue' => 42,
-			'hasUnit' => true,
-			'unitDefaultValue' => 'px',
-			'property' => 'height',
-			'device' => $device,
-		]);
-
-		return array_merge(
-			$css,
-			$range_height,
-			( isset( $attributes['itemBorder'] )
-			? Border::get_css( $attributes['itemBorder'], '', $device )
-			: [] )
-		);
+		$css = ( isset( $attributes['itemBorder'] )
+		? Border::get_css( $attributes['itemBorder'], '', $device )
+		: [] );
+		return $css;
 	}
 	public function get_Item_border_hover_css( $attributes, $device = '' ) {
 		return array_merge(
@@ -270,7 +263,7 @@ class Block extends BlockBaseAbstract {
 			'property' => 'width',
 			'device' => $device,
 		]);
-		$range_height = Range::get_css([
+		$range_height = Range::get_css( [
 			'attributeValue' => $attributes['itemTextHeight'],
 			'attribute_object_key' => 'value',
 			'isResponsive' => false,
@@ -279,10 +272,10 @@ class Block extends BlockBaseAbstract {
 			'unitDefaultValue' => 'px',
 			'property' => 'height',
 			'device' => $device,
-		]);
+		] );
 		return array_merge(
 			$css,
-			$range_width, 
+			$range_width,
 			$range_height,
 			isset( $attributes['alignment'] ) ? Alignment::get_css( $attributes['alignment'], 'text-align', $device ) : [],
 			isset( $attributes['typography'] ) ? Typography::get_css( $attributes['typography'], '', $device ) : [],

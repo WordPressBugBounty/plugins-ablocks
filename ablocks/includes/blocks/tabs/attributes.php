@@ -5,6 +5,7 @@ use ABlocks\Controls\Icon;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\BoxShadow;
+use ABlocks\Components\ButtonGroup;
 
 $attributes = [
 	'block_id' => [
@@ -49,11 +50,11 @@ $attributes = [
 	],
 	'tabsMenuPositionTablet' => [
 		'type' => 'string',
-		'default' => 'left',
+		'default' => '',
 	],
 	'tabsMenuPositionMobile' => [
 		'type' => 'string',
-		'default' => 'left',
+		'default' => '',
 	],
 	'initialOpen' => [
 		'type' => 'number',
@@ -139,10 +140,6 @@ $attributes = [
 		'type' => 'boolean',
 		'default' => false
 	],
-	'iconPosition' => [
-		'type' => 'string',
-		'default' => 'left'
-	],
 	'progressBarColor' => [
 		'type' => 'string',
 		'default' => '#13191B'
@@ -200,6 +197,18 @@ $attributes = array_merge(
 		'unitDefaultValue' => 'px',
 	] ),
 	Icon::get_attribute( 'icon' ),
+	ButtonGroup::get_attribute( 'iconPosition', false, [
+		'value' => 'left',
+	] ),
+	ButtonGroup::get_attribute( 'tabsMenuPositioning', true, [
+		'value' => 'left',
+	] ),
+	ButtonGroup::get_attribute( 'tabMenuAlignment', true, [
+		'value' => '',
+	] ),
+	ButtonGroup::get_attribute( 'menuContentAlignment', true, [
+		'value' => 'center',
+	] ),
 	Dimensions::get_attribute( 'contentMargin', true ),
 	Dimensions::get_attribute( 'iconPositionMargin', true ),
 	Typography::get_attribute( 'titleTypography', true ),

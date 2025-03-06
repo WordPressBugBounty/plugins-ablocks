@@ -107,7 +107,6 @@ class Block extends BlockBaseAbstract {
 			$css['transform'] = 'translate3d(-40px, 0, 0)';
 			$css['transition'] = 'transform 0.3s';
 		}
-		// isset( $attributes['padding'] ) ? Dimensions::get_css( $attributes['padding'], 'padding', $device ) : [],
 
 		return array_merge(
 			$css,

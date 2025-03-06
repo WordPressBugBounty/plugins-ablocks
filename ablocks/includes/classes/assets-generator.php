@@ -81,7 +81,11 @@ class AssetsGenerator {
 						}
 					} elseif ( strpos( $item['blockName'], 'ablocks' ) !== false ) {
 						$block_name_class = str_replace( ' ', '', ucwords( str_replace( '-', ' ', explode( '/', $item['blockName'] )[1] ) ) );
+
 						$dynamic_class = '\\ABlocks\\Blocks\\' . $block_name_class . '\\Block';
+						if ( ! class_exists( $dynamic_class ) ) {
+							$dynamic_class = '\\ABlocksPro\\Blocks\\' . $block_name_class . '\\Block';
+						}
 
 						if ( class_exists( $dynamic_class ) ) {
 							$instance = new $dynamic_class( true );
@@ -172,42 +176,42 @@ class AssetsGenerator {
 		if ( ! is_object( $GLOBALS['wp_filesystem'] ) ) {
 			request_filesystem_credentials( '', '', true );
 		}
-	
+
 		// Initialize the WP_Filesystem object
-		$wp_filesystem = $GLOBALS['wp_filesystem'];
-	
+		$wp_file_system = $GLOBALS['wp_filesystem'];
+
 		// Open the source directory
 		$dir = opendir( $source );
-	
+
 		// Create the destination directory using WP_Filesystem
-		if ( ! $wp_filesystem->is_dir( $destination ) ) {
-			$wp_filesystem->mkdir( $destination );
+		if ( ! $wp_file_system->is_dir( $destination ) ) {
+			$wp_file_system->mkdir( $destination );
 		}
-	
-		// Loop through files and directories in the source
+
+		// phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition
 		while ( false !== ( $file = readdir( $dir ) ) ) {
 			if ( ( $file !== '.' ) && ( $file !== '..' ) ) {
 				$source_file_path = $source . '/' . $file;
 				$destination_file_path = $destination . '/' . $file;
-	
+
 				// If it's a directory, recursively copy its contents
 				if ( is_dir( $source_file_path ) ) {
 					self::recursive_copy( $source_file_path, $destination_file_path );
 				} else {
 					// Get file extension
 					$file_extension = pathinfo( $file, PATHINFO_EXTENSION );
-	
+
 					// Check if the file has a valid image extension
 					if ( in_array( strtolower( $file_extension ), $valid_extensions, true ) ) {
 						// Copy only image files
-						$wp_filesystem->copy( $source_file_path, $destination_file_path );
+						$wp_file_system->copy( $source_file_path, $destination_file_path );
 					}
 				}
 			}
 		}
-	
+
 		// Close the directory handle
 		closedir( $dir );
 	}
-	
+
 }

@@ -21,7 +21,9 @@ class Block extends BlockBaseAbstract {
 
 	public function render_static_block_content( $content, $attributes, $block_instance ) {
 		if ( $block_instance->name === $this->namespace . '/' . $this->block_name ) {
-			if ( is_user_logged_in() && ( 'login' === $attributes['formType'] || 'registration' === $attributes['formType'] ) ) {
+			if ( is_user_logged_in() &&
+				in_array( $attributes['formType'], array( 'login', 'registration', 'forget_password' ), true )
+			) {
 				return '';
 			}
 			return $content;
@@ -104,7 +106,36 @@ class Block extends BlockBaseAbstract {
 			$this->get_submit_button_hover_css( $attributes, 'Tablet' ),
 			$this->get_submit_button_hover_css( $attributes, 'Mobile' ),
 		);
-
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--form-builder__navigator',
+			$this->get_navigator_css( $attributes ),
+			$this->get_navigator_css( $attributes, 'Tablet' ),
+			$this->get_navigator_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--form-builder__navigator-redirect-page',
+			$this->get_navigator_spacing_css( $attributes ),
+			$this->get_navigator_spacing_css( $attributes, 'Tablet' ),
+			$this->get_navigator_spacing_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--form-builder__success',
+			$this->get_succsss_styles_css( $attributes ),
+			$this->get_succsss_styles_css( $attributes, 'Tablet' ),
+			$this->get_succsss_styles_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--form-builder__error',
+			$this->get_error_styles_css( $attributes ),
+			$this->get_error_styles_css( $attributes, 'Tablet' ),
+			$this->get_error_styles_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--form-builder__feedback-message',
+			$this->get_success_error_common_styles_css( $attributes ),
+			$this->get_success_error_common_styles_css( $attributes, 'Tablet' ),
+			$this->get_success_error_common_styles_css( $attributes, 'Mobile' ),
+		);
 		return $css_generator->generate_css();
 	}
 
@@ -272,7 +303,8 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_alignment_button_css( $attributes, $device = '' ) {
 		$button_alignment_css = array_merge(
-			Alignment::get_css( $attributes['buttonAlignment'], 'text-align', $device )
+			Alignment::get_css( $attributes['buttonTextAlignment'], 'text-align', $device ),
+			Alignment::get_css( $attributes['buttonAlignment'], 'align-self', $device )
 		);
 
 		return $button_alignment_css;
@@ -281,11 +313,10 @@ class Block extends BlockBaseAbstract {
 
 	public function get_submit_button_css( $attributes, $device = '' ) {
 		$button_css = array_merge(
-			Dimensions::get_css( $attributes['buttonPadding'], 'padding', $device ),
 			Border::get_css( $attributes['buttonBorder'], '', $device ),
-			Typography::get_css( $attributes['buttonTypography'], '', $device )
+			Typography::get_css( $attributes['buttonTypography'], '', $device ),
+			Dimensions::get_css( $attributes['buttonPadding'], 'padding', $device ),
 		);
-
 		if ( ! empty( $attributes['buttonColor'] ) ) {
 			$button_css['color'] = $attributes['buttonColor'];
 		}
@@ -310,4 +341,61 @@ class Block extends BlockBaseAbstract {
 
 		return $button_hover_css;
 	}
+	public function get_navigator_css( $attributes, $device = '' ) {
+		$css = [];
+		if ( ! empty( $attributes['navigatorColor'] ) ) {
+			$css['color'] = $attributes['navigatorColor'];
+		}
+		return array_merge(
+			Typography::get_css( $attributes['navigatorTypography'], '', $device ),
+			Dimensions::get_css( $attributes['navigatorPadding'], 'padding', $device ),
+			Alignment::get_css( $attributes['navigatorAlignment'], 'text-align', $device ),
+			$css
+		);
+	}
+	public function get_navigator_spacing_css( $attributes, $device = '' ) {
+			// Access the inputIconPosition attribute from the attributes array
+			$css = array_merge(
+				Range::get_css([
+					'attributeValue' => $attributes['navigatorSpacing'],
+					'isResponsive' => false,
+					'defaultValue' => 10,
+					'unitDefaultValue' => 'px',
+					'property' => 'margin-bottom',
+					'device' => $device,
+				]),
+			);
+			return $css;
+
+	}
+	public function get_succsss_styles_css( $attributes, $device = '' ) {
+		$css = [];
+		if ( ! empty( $attributes['successBackground'] ) ) {
+			$css['background'] = $attributes['successBackground'];
+		}
+		if ( ! empty( $attributes['successColor'] ) ) {
+			$css['color'] = $attributes['successColor'];
+		}
+		return $css;
+	}
+	public function get_error_styles_css( $attributes, $device = '' ) {
+		$css = [];
+		if ( ! empty( $attributes['errorBackground'] ) ) {
+			$css['background'] = $attributes['errorBackground'];
+		}
+		if ( ! empty( $attributes['errorColor'] ) ) {
+			$css['color'] = $attributes['errorColor'];
+		}
+		return $css;
+	}
+	public function get_success_error_common_styles_css( $attributes, $device = '' ) {
+		$css = [];
+		return array_merge(
+			Typography::get_css( $attributes['successErrorTypography'], '', $device ),
+			Alignment::get_css( $attributes['successErrorAlignment'], 'text-align', $device ),
+			Dimensions::get_css( $attributes['successErrorPadding'], 'padding', $device ),
+			$css,
+		);
+	}
+
 }

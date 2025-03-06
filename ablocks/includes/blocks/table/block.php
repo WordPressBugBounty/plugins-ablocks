@@ -132,7 +132,6 @@ class Block extends BlockBaseAbstract {
 		return $css;
 	}
 
-	// --header ----
 	public function get_header_css( $attributes, $device = '' ) {
 		$css = [];
 		if ( ! empty( $attributes['headerColor'] ) ) {
@@ -150,13 +149,12 @@ class Block extends BlockBaseAbstract {
 
 		return $css;
 	}
-	// ---table body----
+
 	public function get_body_css( $attributes, $device = '' ) {
 		$css = [];
 		if ( ! empty( $attributes['bodyBg'] ) ) {
 			$css['background'] = $attributes['bodyBg'] . ' !important';
 		}
-
 		return $css;
 	}
 
@@ -168,7 +166,7 @@ class Block extends BlockBaseAbstract {
 
 		return $css;
 	}
-	// -table footer
+
 	public function get_footer_css( $attributes, $device = '' ) {
 		$css = [];
 		if ( ! empty( $attributes['footerColor'] ) ) {

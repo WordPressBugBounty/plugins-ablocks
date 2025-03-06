@@ -26,11 +26,27 @@ class Block extends BlockBaseAbstract {
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap img.ablocks-image-icon',
-			Icon::get_element_image_css( $attributes )
+			Icon::get_element_image_css( $attributes ),
+			Icon::get_element_image_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap img.ablocks-image-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap svg.ablocks-svg-icon',
 			Icon::get_element_css( $attributes ),
+			Icon::get_element_css( $attributes, 'Tablet' ),
+			Icon::get_element_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap svg.ablocks-svg-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
 		);
 		// TitleText CSS
 		$css_generator->add_class_styles(
@@ -127,7 +143,7 @@ class Block extends BlockBaseAbstract {
 				'unitDefaultValue' => 'px',
 				'property' => '--ablocks-divider-pattern-weight',
 			]);
-		};//end if
+		}//end if
 
 		if ( ! empty( $attributes['dividerPatternUrl'] ) ) {
 			if ( $attributes['dividerType'] === 'mask-style' ) {

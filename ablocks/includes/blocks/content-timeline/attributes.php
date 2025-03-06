@@ -9,18 +9,12 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Icon;
+use ABlocks\Components\ButtonGroup;
+
 $attributes = [
 	'block_id' => [
 		'type' => 'string',
 		'default' => '',
-	],
-	'contentPosition' => [
-		'type' => 'string',
-		'default' => 'center'
-	],
-	'arrowAlignment' => [
-		'type' => 'string',
-		'default' => 'center',
 	],
 	'iconColor' => [
 		'type' => 'string',
@@ -53,10 +47,6 @@ $attributes = [
 	'dateColor' => [
 		'type' => 'string',
 		'default' => '#333333'
-	],
-	'dateAlign' => [
-		'type' => 'string',
-		'default' => 'left',
 	],
 	'dateFormat' => [
 		'type' => 'string',
@@ -99,6 +89,15 @@ $attributes = array_merge(
 			'className' => 'far fa-arrow-alt-circle-up',
 		]
 	),
+	ButtonGroup::get_attribute( 'contentPosition', false, [
+		'value' => 'center',
+	] ),
+	ButtonGroup::get_attribute( 'arrowAlignment', false, [
+		'value' => 'center',
+	] ),
+	ButtonGroup::get_attribute( 'dateAlign', false, [
+		'value' => 'left',
+	] ),
 	Dimensions::get_attribute( 'contentPadding', true ),
 	Typography::get_attribute( 'dateTypography', true ),
 	Dimensions::get_attribute( 'datePadding', true ),

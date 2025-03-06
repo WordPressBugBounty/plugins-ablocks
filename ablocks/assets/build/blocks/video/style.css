@@ -5,8 +5,8 @@
 	aspect-ratio: 1.77777;
 }
 
-.ablocks-block-container video,
-iframe {
+.ablocks-block--video video,
+.ablocks-block--video iframe {
 	max-width: 100%;
 	width: 100%;
 	height: 100%;
@@ -15,14 +15,14 @@ iframe {
 	background-color: #000000;
 }
 
-.ablocks-video-player {
+.ablocks-block--video .ablocks-video-player {
 	max-width: 100%;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 }
 
-.ablocks-vimeo-video-player {
+.ablocks-block--video .ablocks-vimeo-video-player {
 	max-width: 100%;
 	width: 100%;
 	height: 100%;

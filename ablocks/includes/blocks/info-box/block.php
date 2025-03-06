@@ -67,12 +67,28 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}}.ablocks-block--info-box .ablocks-block-container > .ablocks-icon-wrap img.ablocks-image-icon , {{WRAPPER}}.ablocks-block--info-box .ablocks-block-container > a .ablocks-icon-wrap img.ablocks-image-icon',
-			Icon::get_element_image_css( $attributes )
+			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-icon-wrap > img.ablocks-image-icon',
+			Icon::get_element_image_css( $attributes ),
+			Icon::get_element_image_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}}.ablocks-block--info-box .ablocks-block-container > .ablocks-icon-wrap svg.ablocks-svg-icon , {{WRAPPER}}.ablocks-block--info-box .ablocks-block-container > a .ablocks-icon-wrap svg.ablocks-svg-icon',
+			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-icon-wrap > img.ablocks-image-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-icon-wrap > svg.ablocks-svg-icon',
 			Icon::get_element_css( $attributes ),
+			Icon::get_element_css( $attributes, 'Tablet' ),
+			Icon::get_element_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-icon-wrap > svg.ablocks-svg-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box:hover .ablocks-block-container > .ablocks-icon-wrap svg.ablocks-svg-icon , {{WRAPPER}}.ablocks-block--info-box:hover .ablocks-block-container > a .ablocks-icon-wrap svg.ablocks-svg-icon',
@@ -234,6 +250,14 @@ class Block extends BlockBaseAbstract {
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-info-box-btn-link > .ablocks-icon-wrap > svg.ablocks-svg-icon',
 			Icon::get_element_css( $attributes, '', 'btnIcon' ),
+			Icon::get_element_css( $attributes, 'Tablet', 'btnIcon' ),
+			Icon::get_element_css( $attributes, 'Mobile', 'btnIcon' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-btn-link > .ablocks-icon-wrap > svg.ablocks-svg-icon:hover',
+			Icon::get_element_image_hover_css( $attributes, '', 'btnIcon' ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet', 'btnIcon' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile', 'btnIcon' ),
 		);
 
 		return $css_generator->generate_css();

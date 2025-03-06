@@ -31,6 +31,10 @@ class BlockGlobal {
 			'_hide_on_mobile' => [
 				'type' => 'boolean',
 				'default' => false,
+			],
+			'_custom_css' => [
+				'type' => 'string',
+				'default' => '',
 			]
 		];
 		$attributes = array_merge(

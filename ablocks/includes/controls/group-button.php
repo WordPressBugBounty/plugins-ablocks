@@ -10,6 +10,9 @@ use ABlocks\Classes\ControlBaseAbstract;
 class GroupButton extends ControlBaseAbstract {
 
 	public static function get_attribute_default_value( $is_responsive = false, $default = [] ) {
+		if ( ! is_array( $default ) ) {
+			$default = [];
+		}
 		if ( $is_responsive ) {
 			return array_merge( [
 				'value' => 'default',
@@ -17,14 +20,21 @@ class GroupButton extends ControlBaseAbstract {
 				'valueMobile' => '',
 			], $default );
 		}
-		return array_merge( [ 'value' => 'default' ], $default );
+		return $default['value'] ?? 'default';
 	}
 
 	public static function get_attribute( $attributeName, $isResponsive = false, $default = [] ) {
-
+		if ( $isResponsive ) {
+			return [
+				$attributeName => [
+					'type' => 'object',
+					'default' => self::get_attribute_default_value( $isResponsive, $default ),
+				],
+			];
+		}
 		return [
 			$attributeName => [
-				'type' => 'object',
+				'type' => 'string',
 				'default' => self::get_attribute_default_value( $isResponsive, $default ),
 			]
 		];

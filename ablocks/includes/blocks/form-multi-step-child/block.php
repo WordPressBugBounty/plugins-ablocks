@@ -24,6 +24,7 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_wrapper_css() {
+		// phpcs:ignore Squiz.PHP.NonExecutableCode.ReturnNotRequired
 		return;
 	}
 }
