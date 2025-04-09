@@ -107,8 +107,8 @@ class Blocks {
 		new \ABlocks\Blocks\SocialShares\Block();
 		new \ABlocks\Blocks\Notice\Block();
 		new \ABlocks\Blocks\SvgDraw\Block();
-		// new \ABlocks\Blocks\Marquee\Block();
-		// new \ABlocks\Blocks\MarqueeChild\Block();
+		new \ABlocks\Blocks\Marquee\Block();
+		new \ABlocks\Blocks\MarqueeChild\Block();
 		new \ABlocks\Blocks\Logout\Block();
 		new \ABlocks\Blocks\FilterableCards\Block();
 		new \ABlocks\Blocks\FilterableCardsItem\Block();

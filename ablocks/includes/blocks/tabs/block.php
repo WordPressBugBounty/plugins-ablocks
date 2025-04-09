@@ -215,6 +215,24 @@ class Block extends BlockBaseAbstract {
 			$this->get_tabs_content_hover_css( $attributes, 'Tablet' ),
 			$this->get_tabs_content_hover_css( $attributes, 'Mobile' )
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab-menu-content',
+			$this->get_content_css( $attributes ),
+			$this->get_content_css( $attributes, 'Tablet' ),
+			$this->get_content_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab-panel',
+			$this->get_tabs_width_css( $attributes ),
+			$this->get_tabs_width_css( $attributes, 'Tablet' ),
+			$this->get_tabs_width_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__body',
+			$this->get_content_width_css( $attributes ),
+			$this->get_content_width_css( $attributes, 'Tablet' ),
+			$this->get_content_width_css( $attributes, 'Mobile' )
+		);
 
 		return $css_generator->generate_css();
 	}
@@ -419,12 +437,20 @@ class Block extends BlockBaseAbstract {
 					break;
 			}
 		}
-		if ( isset( $attributes['tabActiveBackgroundColor'] ) ) {
-			$tabs_menu_content_active_css['background-color'] = $attributes['tabActiveBackgroundColor'];
+		$border_width = isset( $attributes['menuContentBorder']['commonWidth'] ) && ! empty( $attributes['menuContentBorder']['commonWidth'] )
+		? $attributes['menuContentBorder']['commonWidth']
+		: '2px';
+		if ( isset( $attributes['activeColorOptions'] ) && $attributes['activeColorOptions'] === 'background' ) {
+			if ( isset( $attributes['tabActiveBackgroundColor'] ) ) {
+				$tabs_menu_content_active_css['background-color'] = $attributes['tabActiveBackgroundColor'] . ' !important';
+			}
+		} elseif ( isset( $attributes['activeColorOptions'] ) && $attributes['activeColorOptions'] === 'border' ) {
+			$tabs_menu_content_active_css['border-width'] = $border_width;
+			if ( isset( $attributes['activeBorderColor'] ) ) {
+				$tabs_menu_content_active_css['border-color'] = $attributes['activeBorderColor'] . ' !important';
+			}
 		}
-		if ( isset( $attributes['activeBorderColor'] ) ) {
-			$tabs_menu_content_active_css['border-color'] = $attributes['activeBorderColor'] . '!important';
-		}
+
 		return $tabs_menu_content_active_css;
 	}
 
@@ -623,4 +649,75 @@ class Block extends BlockBaseAbstract {
 			Border::get_hover_css( $attributes['contentBorder'] ?? [], '', $device ),
 		);
 	}
+
+	public function get_content_css( $attributes, $device = '' ) {
+		$css = [];
+		return array_merge(
+			Range::get_css([
+				'attributeValue' => $attributes['contentGap'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'defaultValue' => 10,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'gap',
+				'device' => $device,
+			]),
+			$css,
+		);
+	}
+	public function get_tabs_width_css( $attributes, $device = '' ) {
+		$css = [];
+
+		if (
+		isset( $attributes['tabsMenuPositioning'][ 'value' . $device ] ) &&
+		(
+			$attributes['tabsMenuPositioning'][ 'value' . $device ] === 'top' ||
+			$attributes['tabsMenuPositioning'][ 'value' . $device ] === 'bottom'
+		)
+		) {
+			$css['max-width'] = '100% !important';
+		}
+
+		return array_merge(
+			Range::get_css([
+				'attributeValue' => $attributes['tabsWidth'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'defaultValue' => 30,
+				'hasUnit' => false,
+				'unitDefaultValue' => '%',
+				'property' => 'max-width',
+				'device' => $device,
+			]),
+			$css,
+		);
+	}
+
+	public function get_content_width_css( $attributes, $device = '' ) {
+		$css = [];
+		if (
+			isset( $attributes['tabsMenuPositioning'][ 'value' . $device ] ) &&
+			(
+				$attributes['tabsMenuPositioning'][ 'value' . $device ] === 'top' ||
+				$attributes['tabsMenuPositioning'][ 'value' . $device ] === 'bottom'
+			)
+		) {
+			$css['max-width'] = '100% !important';
+		}
+		return array_merge(
+			Range::get_css([
+				'attributeValue' => $attributes['contentWidth'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'defaultValue' => 70,
+				'hasUnit' => false,
+				'unitDefaultValue' => '%',
+				'property' => 'max-width',
+				'device' => $device,
+			]),
+			$css,
+		);
+	}
+
 }

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 1.7.0\n"
+"Project-Id-Version: aBlocks 1.8.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-03-06T07:31:46+00:00\n"
+"POT-Creation-Date: 2025-04-09T15:55:56+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: ablocks\n"
@@ -70,7 +70,7 @@ msgid "Rate the plugin."
 msgstr ""
 
 #: includes/admin.php:81
-#: includes/helper.php:92
+#: includes/helper.php:103
 #: assets/build/dashboard.js:1
 #: assets/build/dashboard.js:13
 msgid "Settings"
@@ -102,117 +102,126 @@ msgstr ""
 msgid "Argument should not be empty."
 msgstr ""
 
-#: includes/ajax/demo-import.php:92
+#: includes/ajax/demo-import.php:126
 msgid "id is required."
 msgstr ""
 
-#: includes/ajax/entry.php:129
-#: includes/ajax/entry.php:153
-#: includes/ajax/entry.php:160
+#: includes/ajax/dynamic-content.php:113
+#: includes/ajax/dynamic-content.php:131
+msgid "Sorry, Post type is required!"
+msgstr ""
+
+#: includes/ajax/dynamic-content.php:150
+msgid "Sorry, Post ID and Meta Key is required!"
+msgstr ""
+
+#: includes/ajax/entry.php:146
+#: includes/ajax/entry.php:165
+#: includes/ajax/entry.php:172
 msgid "Error"
 msgstr ""
 
-#: includes/ajax/entry.php:137
+#: includes/ajax/entry.php:154
 msgid "Entry not found"
 msgstr ""
 
-#: includes/ajax/entry.php:157
+#: includes/ajax/entry.php:169
 #: includes/ajax/stripe-payment-ajax.php:162
 #: includes/blocks/form-builder/actions/save-form-data.php:84
 #: includes/blocks/form-builder/actions/send-email.php:224
 msgid "Success!"
 msgstr ""
 
-#: includes/ajax/entry.php:178
+#: includes/ajax/entry.php:186
 msgid "No entries deleted."
 msgstr ""
 
 #. translators: %d is the number of entries deleted
-#: includes/ajax/entry.php:185
+#: includes/ajax/entry.php:193
 msgid "%d entries deleted."
 msgstr ""
 
-#: includes/ajax/entry.php:205
-#: includes/ajax/entry.php:232
-#: includes/ajax/entry.php:259
-#: includes/ajax/entry.php:283
+#: includes/ajax/entry.php:211
+#: includes/ajax/entry.php:235
+#: includes/ajax/entry.php:258
+#: includes/ajax/entry.php:278
 msgid "No entries updated."
 msgstr ""
 
 #. translators: %d is the number of entries updated
-#: includes/ajax/entry.php:212
-#: includes/ajax/entry.php:239
+#: includes/ajax/entry.php:218
+#: includes/ajax/entry.php:242
 msgid "%d entries updated."
 msgstr ""
 
-#: includes/ajax/entry.php:263
+#: includes/ajax/entry.php:262
 msgid "Updated."
 msgstr ""
 
-#: includes/ajax/entry.php:287
+#: includes/ajax/entry.php:282
 msgid "Entry updated."
 msgstr ""
 
-#: includes/ajax/form-builder.php:91
+#: includes/ajax/form-builder.php:111
 msgid "You have logged in successfully. Redirecting..."
 msgstr ""
 
-#: includes/ajax/form-builder.php:100
+#: includes/ajax/form-builder.php:120
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
 #: assets/build/dashboard.js:4
 msgid "Default"
 msgstr ""
 
-#: includes/ajax/form-builder.php:125
+#: includes/ajax/form-builder.php:135
 msgid "User registration is turned off. Turn it on to allow user registration."
 msgstr ""
 
-#: includes/ajax/form-builder.php:131
+#: includes/ajax/form-builder.php:141
 msgid "Error."
 msgstr ""
 
-#: includes/ajax/form-builder.php:182
+#: includes/ajax/form-builder.php:192
 msgid "Registration completed successfully. Redirecting..."
 msgstr ""
 
-#: includes/ajax/form-builder.php:223
+#: includes/ajax/form-builder.php:229
 msgid "email field is required."
 msgstr ""
 
-#: includes/ajax/form-builder.php:229
+#: includes/ajax/form-builder.php:235
 msgid "provide a valid email."
 msgstr ""
 
-#: includes/ajax/form-builder.php:235
+#: includes/ajax/form-builder.php:241
 msgid "this email is not exists."
 msgstr ""
 
-#: includes/ajax/form-builder.php:245
+#: includes/ajax/form-builder.php:251
 msgid "Password reset email is sent."
 msgstr ""
 
-#: includes/ajax/form-builder.php:278
+#: includes/ajax/form-builder.php:279
 msgid "Action is not defined."
 msgstr ""
 
-#: includes/ajax/form-builder.php:296
+#: includes/ajax/form-builder.php:291
 msgid "api key is required"
 msgstr ""
 
-#: includes/ajax/form-builder.php:328
+#: includes/ajax/form-builder.php:323
 msgid "Not a valid type"
 msgstr ""
 
-#: includes/ajax/form-builder.php:342
+#: includes/ajax/form-builder.php:337
 msgid "Unspecified service type"
 msgstr ""
 
-#: includes/ajax/settings.php:52
+#: includes/ajax/settings.php:81
 msgid "Block Name missing"
 msgstr ""
 
-#: includes/ajax/stripe-payment-ajax.php:41
+#: includes/ajax/stripe-payment-ajax.php:46
 #: includes/ajax/stripe-payment-ajax.php:73
 msgid "API KEY is required."
 msgstr ""
@@ -225,7 +234,7 @@ msgstr ""
 msgid "Error. [2]"
 msgstr ""
 
-#: includes/assets.php:205
+#: includes/assets.php:207
 msgctxt "Google font: on or off"
 msgid "on"
 msgstr ""
@@ -301,34 +310,60 @@ msgstr ""
 msgid "Shipping Charge: "
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:26
+#: includes/blocks/tabs/attributes.php:38
 #: assets/build/blocks.js:1
 msgid "Tab 1"
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:27
+#: includes/blocks/tabs/attributes.php:39
 #: assets/build/blocks.js:1
 msgid "Tab 2"
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:28
+#: includes/blocks/tabs/attributes.php:40
 #: assets/build/blocks.js:1
 msgid "Tab 3"
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:34
+#: includes/blocks/tabs/attributes.php:46
 #: assets/build/blocks.js:1
 msgid "Subtitle 1 Content: This tab provides general information about our company"
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:35
+#: includes/blocks/tabs/attributes.php:47
 #: assets/build/blocks.js:1
 msgid "Subtitle 2 Content: This tab provides general information about our company"
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:36
+#: includes/blocks/tabs/attributes.php:48
 #: assets/build/blocks.js:1
 msgid "Subtitle 3 Content: This tab provides general information about our company"
+msgstr ""
+
+#: includes/classes/abstract-request-handler.php:160
+#: includes/classes/abstract-request-handler.php:163
+msgid "Invalid action."
+msgstr ""
+
+#: includes/classes/abstract-request-handler.php:178
+#: includes/classes/abstract-request-handler.php:181
+msgid "Invalid nonce."
+msgstr ""
+
+#: includes/classes/abstract-request-handler.php:197
+msgid "Requested method not implemented."
+msgstr ""
+
+#: includes/classes/abstract-request-handler.php:200
+msgid "Not implemented!"
+msgstr ""
+
+#: includes/classes/abstract-request-handler.php:490
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: includes/classes/abstract-request-handler.php:493
+msgid "Insufficient permission!"
 msgstr ""
 
 #: includes/classes/file-upload.php:26
@@ -347,30 +382,134 @@ msgstr ""
 msgid "Verification successful."
 msgstr ""
 
-#: includes/helper.php:82
+#: includes/helper.php:91
 msgid "Dashboard"
 msgstr ""
 
-#: includes/helper.php:87
+#: includes/helper.php:97
 msgid "Submissions"
 msgstr ""
 
-#: includes/helper.php:98
+#: includes/helper.php:109
 #: assets/build/dashboard.js:1
 msgid "Get Pro"
 msgstr ""
 
-#: includes/helper.php:108
+#: includes/helper.php:119
 msgid "Loading..."
 msgstr ""
 
 #. translators: %s template
-#: includes/helper.php:375
+#: includes/helper.php:479
 msgid "%s does not exist."
 msgstr ""
 
-#: includes/helper.php:393
+#: includes/helper.php:497
 msgid "action_args should not be overwritten when calling ablocks/get_template."
+msgstr ""
+
+#: includes/import/customizer-importer.php:40
+msgid "Failed to import Customizer options."
+msgstr ""
+
+#: includes/import/customizer-importer.php:46
+msgid "Customizer settings import finished!"
+msgstr ""
+
+#. translators: %s - file path
+#: includes/import/customizer-importer.php:79
+msgid "Error: The customizer import file is missing! File path: %s"
+msgstr ""
+
+#. translators: %s is file path.
+#: includes/import/customizer-importer.php:94
+msgid "Can't read raw file '%s'!"
+msgstr ""
+
+#: includes/import/customizer-importer.php:107
+msgid "Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file."
+msgstr ""
+
+#: includes/import/customizer-importer.php:113
+msgid "Error: The customizer import file is not suitable for current theme. You can only import customizer settings for the same theme or a child theme."
+msgstr ""
+
+#: includes/import/theme-options/code-star.php:13
+msgid "Starting CodeStar theme options import process."
+msgstr ""
+
+#: includes/import/theme-options/code-star.php:28
+msgid "Codestar theme options imported successfully."
+msgstr ""
+
+#: includes/import/theme-options/code-star.php:34
+msgid "Codestar theme options import file not found!"
+msgstr ""
+
+#: includes/import/theme-options/redux.php:22
+msgid "The Redux plugin is not activated, so the Redux import was skipped!"
+msgstr ""
+
+#: includes/import/theme-options/redux.php:31
+msgid "Redux options import started."
+msgstr ""
+
+#: includes/import/theme-options/redux.php:39
+msgid "Redux import file does not exist."
+msgstr ""
+
+#: includes/import/theme-options/redux.php:50
+msgid "Redux import file could not be read."
+msgstr ""
+
+#. translators: %s - the name of the Redux option.
+#: includes/import/theme-options/redux.php:70
+msgid "Redux settings import for: %s finished successfully!"
+msgstr ""
+
+#. translators: %s - the name of the Redux option.
+#: includes/import/theme-options/redux.php:78
+msgid "The Redux option name: %s, was not found in this WP site, so it was not imported!"
+msgstr ""
+
+#: includes/import/widget-importer.php:31
+msgid "Importing widget"
+msgstr ""
+
+#: includes/import/widget-importer.php:77
+msgid "Error: Widget import file could not be found."
+msgstr ""
+
+#: includes/import/widget-importer.php:88
+msgid "Error: Widget import file could not be empty."
+msgstr ""
+
+#: includes/import/widget-importer.php:111
+msgid "Error: Widget import data could not be read. Please try a different file."
+msgstr ""
+
+#: includes/import/widget-importer.php:149
+msgid "Sidebar does not exist in theme (moving widget to Inactive)"
+msgstr ""
+
+#: includes/import/widget-importer.php:170
+msgid "Site does not support widget"
+msgstr ""
+
+#: includes/import/widget-importer.php:203
+msgid "Widget already exists"
+msgstr ""
+
+#: includes/import/widget-importer.php:268
+msgid "Imported"
+msgstr ""
+
+#: includes/import/widget-importer.php:271
+msgid "Imported to Inactive"
+msgstr ""
+
+#: includes/import/widget-importer.php:286
+msgid "No Title"
 msgstr ""
 
 #: includes/import/wp-import.php:85
@@ -397,20 +536,16 @@ msgstr ""
 msgid "Terms imported"
 msgstr ""
 
-#: includes/import/wp-import.php:584
+#: includes/import/wp-import.php:587
 msgid "Front page setting's updated."
 msgstr ""
 
-#: includes/import/wp-import.php:591
+#: includes/import/wp-import.php:594
 msgid "Posts page setting's updated."
 msgstr ""
 
-#: includes/import/wp-import.php:751
+#: includes/import/wp-import.php:754
 msgid "Existence gutenberg styles removed."
-msgstr ""
-
-#: includes/import/wp-import.php:856
-msgid "Fetching attachments is not enabled"
 msgstr ""
 
 #: includes/import/wp-import.php:874
@@ -456,11 +591,11 @@ msgstr ""
 msgid "The uploaded file could not be moved"
 msgstr ""
 
-#: includes/import/wp-import.php:1149
+#: includes/import/wp-import.php:1150
 msgid "Old attachment URLs have been updated."
 msgstr ""
 
-#: includes/import/wp-import.php:1170
+#: includes/import/wp-import.php:1172
 msgid "Imported posts `_thumbnail_id` updated."
 msgstr ""
 
@@ -474,8 +609,12 @@ msgstr ""
 msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
 msgstr ""
 
-#: includes/traits/importer.php:241
-#: includes/traits/importer.php:242
+#: includes/traits/importer.php:87
+msgid "Invalid content file location provided!"
+msgstr ""
+
+#: includes/traits/importer.php:253
+#: includes/traits/importer.php:254
 msgid "aBlocks Templates"
 msgstr ""
 
@@ -701,6 +840,97 @@ msgid "Y Anchor Point"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
+msgid "Type"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:26
+msgid "Time Format"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
+msgid "Date Format"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:26
+msgid "Format"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:26
+msgid "Custom Format"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:26
+msgid "Key"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:26
+msgid "Custom Key"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:26
+msgid "Taxonomy"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:26
+msgid "Separator"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:26
+msgid "Data Source"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:26
+msgid "Max Number Of Words"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:26
+msgid "Meta Key"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Parameter Name"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Field"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Shortcode"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Advanced"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Before"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "After"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:26
+msgid "Fallback"
+msgstr ""
+
+#: assets/build/blocks.js:1
 msgid "Active Color"
 msgstr ""
 
@@ -820,6 +1050,7 @@ msgid "Mute"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Loop"
 msgstr ""
 
@@ -908,11 +1139,6 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 msgid "Hue"
-msgstr ""
-
-#: assets/build/blocks.js:1
-#: assets/build/blocks.js:17
-msgid "Type"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -1186,10 +1412,6 @@ msgid "General"
 msgstr ""
 
 #: assets/build/blocks.js:1
-msgid "Advanced"
-msgstr ""
-
-#: assets/build/blocks.js:1
 #: assets/build/dashboard.js:1
 msgid "Container"
 msgstr ""
@@ -1394,7 +1616,6 @@ msgid "Favorite"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/dashboard.js:4
 msgid "Business"
 msgstr ""
 
@@ -1553,11 +1774,6 @@ msgstr ""
 #: assets/build/blocks.js:17
 #: assets/build/blocks.js:23
 msgid "Alignment"
-msgstr ""
-
-#: assets/build/blocks.js:1
-#: assets/build/blocks.js:17
-msgid "Enter your heading.."
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -2482,6 +2698,10 @@ msgid "Menu Content Alignment"
 msgstr ""
 
 #: assets/build/blocks.js:1
+msgid "Active Color Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
 msgid "Tabs Change Effect"
 msgstr ""
 
@@ -2490,7 +2710,16 @@ msgid "Enable Auto Change"
 msgstr ""
 
 #: assets/build/blocks.js:1
-msgid "Tabs Gap"
+msgid "Tabs Menu Width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Tabs Menu Gap"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "Content Gap"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -2654,10 +2883,6 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 msgid "Second"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Separator"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -3259,7 +3484,7 @@ msgid "Content Alignment"
 msgstr ""
 
 #: assets/build/blocks.js:17
-msgid "Content Gap"
+msgid "Enter your heading.."
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -3330,10 +3555,6 @@ msgstr ""
 
 #: assets/build/blocks.js:17
 msgid "Date"
-msgstr ""
-
-#: assets/build/blocks.js:17
-msgid "Date Format"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -4433,6 +4654,30 @@ msgid "Sandbox Email"
 msgstr ""
 
 #: assets/build/blocks.js:17
+msgid "Marquee"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Marquee Direction"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Loop Count"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Speed (Fast To Slow)(ms)"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Explore Marquee Options"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Marquee blocks settings for customizing marquee effortlessly."
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "Current URL"
 msgstr ""
 
@@ -4463,6 +4708,10 @@ msgstr ""
 
 #: assets/build/blocks.js:17
 msgid "Redirect After Logout"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Custom UR"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -4594,6 +4843,10 @@ msgstr ""
 
 #: assets/build/blocks.js:17
 msgid "Labels"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Helper text"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -4875,7 +5128,7 @@ msgid "Four Columns"
 msgstr ""
 
 #: assets/build/blocks.js:17
-msgid "Radio Block Settings"
+msgid "Multi Select Block Settings"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -5400,6 +5653,10 @@ msgid "Stacked Cards"
 msgstr ""
 
 #: assets/build/dashboard.js:1
+msgid "Marquee Block"
+msgstr ""
+
+#: assets/build/dashboard.js:1
 msgid "Loop Builder"
 msgstr ""
 
@@ -5566,14 +5823,6 @@ msgstr ""
 #: assets/build/dashboard.js:4
 #: assets/build/demo-import.js:1
 msgid "Start Import"
-msgstr ""
-
-#: assets/build/dashboard.js:4
-msgid "LMS"
-msgstr ""
-
-#: assets/build/dashboard.js:4
-msgid "eCommerce"
 msgstr ""
 
 #: assets/build/dashboard.js:4
@@ -6597,7 +6846,7 @@ msgstr ""
 
 #: assets/build/blocks/form-radio/block.json
 msgctxt "block title"
-msgid "Radio"
+msgid "Multi Select"
 msgstr ""
 
 #: assets/build/blocks/form-select/block.json

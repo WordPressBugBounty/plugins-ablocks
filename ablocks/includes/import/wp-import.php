@@ -529,6 +529,9 @@ class WP_Import extends \WP_Importer {
 				$postdata = wp_slash( $postdata );
 
 				if ( 'attachment' === $postdata['post_type'] ) {
+					if ( ! $this->fetch_attachments ) {
+						continue;
+					}
 					$remote_url = ! empty( $post['attachment_url'] ) ? $post['attachment_url'] : $post['guid'];
 
 					// try to use _wp_attached file for upload folder placement to ensure the same location as the export site
@@ -851,10 +854,7 @@ class WP_Import extends \WP_Importer {
 	 */
 	public function process_attachment( $post, $url ) {
 		if ( ! $this->fetch_attachments ) {
-			return new WP_Error(
-				'attachment_processing_error',
-				__( 'Fetching attachments is not enabled', 'ablocks' )
-			);
+			return;
 		}
 
 		// if the URL is absolute, but does not contain address, then upload it assuming base_site_url
@@ -1143,11 +1143,13 @@ class WP_Import extends \WP_Importer {
 			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->postmeta} SET meta_value = REPLACE(meta_value, %s, %s) WHERE meta_key='enclosure'", $from_url, $to_url ) );
 		}
 
-		Helper::emit_sse_message( [
-			'action' => 'log',
-			'level' => 'info',
-			'message' => __( 'Old attachment URLs have been updated.', 'ablocks' ),
-		] );
+		if ( ! empty( $this->url_remap ) ) {
+			Helper::emit_sse_message( [
+				'action' => 'log',
+				'level' => 'info',
+				'message' => __( 'Old attachment URLs have been updated.', 'ablocks' ),
+			] );
+		}
 	}
 
 	/**

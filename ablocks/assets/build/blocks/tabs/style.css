@@ -45,6 +45,7 @@
 
 .ablocks-block-tabs__tab-menu-title {
     font-size: 20px;
+    margin: 0;
 }
 
  .ablocks-block-tabs__tab-active a {
@@ -80,12 +81,14 @@ add tab icon button style
 
 .ablocks-block-tabs__tab-menu-content {
     text-align:start;
-
+    display: flex;
+    flex-direction: column;
 }
 
 .ablocks-block-tabs__tab-menu-subtitle {
     font-size: 14px;
     line-height: 21px;
+    margin: 0;
 }
 
 /* ************************************************

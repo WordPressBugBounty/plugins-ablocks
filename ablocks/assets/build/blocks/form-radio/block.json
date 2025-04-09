@@ -6,7 +6,7 @@
         "ablocks/form-builder"
     ],
     "version": "0.1.0",
-    "title": "Radio",
+    "title": "Multi Select",
     "category": "ablocks",
     "description": "Easily add adjustable layout spacing.",
     "example": [],

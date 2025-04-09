@@ -70,6 +70,10 @@
       "type": "string",
       "default": "#000000"
     },
+    "helperTextColor": {
+      "type": "string",
+      "default": ""
+    },
     "customForm": {
       "type": "boolean",
       "default": false
@@ -566,6 +570,14 @@
         "valueMobile": ""
       }
     },
+    "helperTextSpacing": {
+      "type": "object",
+      "default": {
+        "value": 10,
+        "valueTablet": "",
+        "valueMobile": ""
+      }
+    },
     "inputIconPosition": {
       "type": "number",
       "default": 60
@@ -601,6 +613,40 @@
       }
     },
     "labelTypography": {
+      "type": "object",
+      "default": {
+        "fontFamily": "",
+        "weight": "400",
+        "transform": "",
+        "style": "",
+        "decoration": "",
+        "fontSize": "",
+        "fontSizeUnit": "px",
+        "lineHeight": "",
+        "lineHeightUnit": "px",
+        "letterSpacing": "",
+        "letterSpacingUnit": "px",
+        "wordSpacing": "",
+        "wordSpacingUnit": "px",
+        "fontSizeTablet": "",
+        "fontSizeMobile": "",
+        "fontSizeUnitTablet": "px",
+        "fontSizeUnitMobile": "px",
+        "lineHeightTablet": "",
+        "lineHeightMobile": "",
+        "lineHeightUnitTablet": "px",
+        "lineHeightUnitMobile": "px",
+        "letterSpacingTablet": "",
+        "letterSpacingMobile": "",
+        "letterSpacingUnitTablet": "px",
+        "letterSpacingUnitMobile": "px",
+        "wordSpacingTablet": "",
+        "wordSpacingMobile": "",
+        "wordSpacingUnitTablet": "px",
+        "wordSpacingUnitMobile": "px"
+      }
+    },
+    "helperTextTypography": {
       "type": "object",
       "default": {
         "fontFamily": "",

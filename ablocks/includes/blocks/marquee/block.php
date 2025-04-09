@@ -18,7 +18,7 @@ class Block extends BlockBaseAbstract {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
 
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-block-marquee__children-child',
+			'{{WRAPPER}} .ablocks-block-marquee .ablocks-block-marquee__children',
 			$this->get_inner_block_css( $attributes ),
 			$this->get_inner_block_css( $attributes, 'Tablet' ),
 			$this->get_inner_block_css( $attributes, 'Mobile' )
@@ -41,7 +41,7 @@ class Block extends BlockBaseAbstract {
 			Range::get_css([
 				'attributeValue'       => $attributes['gap'],
 				'attribute_object_key' => 'value',
-				'isResponsive'         => false,
+				'isResponsive'         => true,
 				'defaultValue'         => 12,
 				'hasUnit'              => false,
 				'unitDefaultValue'     => 'px',
@@ -53,4 +53,3 @@ class Block extends BlockBaseAbstract {
 	}
 
 }
-

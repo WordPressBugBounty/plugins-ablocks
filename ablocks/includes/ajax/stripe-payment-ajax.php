@@ -21,18 +21,23 @@ class StripePaymentAjax extends AbstractAjaxHandler {
 		$this->actions = [
 			'stripe_get_tax_rates'      => [
 				'callback' => [ $this, 'get_tax_rates' ],
+				'fields' => array(
+					'api_key' => 'string',
+				)
 			],
 			'stripe_payment_process'    => [
 				'callback' => [ $this, 'payment_process' ],
 				'allow_visitor_action' => true,
+				'fields' => array(
+					'current_post_id' => 'integer',
+					'block_id' => 'string',
+				)
 			],
 		];
 	}
 
-	public function get_tax_rates( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'api_key' => 'string',
-		], $form_data);
+	public function get_tax_rates( $payload ) {
+
 		$api_key = $payload['api_key'] ?? '';
 		if (
 			empty( $api_key )
@@ -52,12 +57,7 @@ class StripePaymentAjax extends AbstractAjaxHandler {
 
 		wp_send_json_success( $data );
 	}
-	public function payment_process( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'current_post_id' => 'integer',
-			'block_id' => 'string',
-		], $form_data);
-
+	public function payment_process( $payload ) {
 		$block_data = Helper::get_block_attributes(
 			$payload['current_post_id'],
 			$payload['block_id'],

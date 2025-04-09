@@ -42,7 +42,7 @@ $attributes = array_merge(
 	Range::get_attribute([
 		'attributeName' => 'gap',
 		'attributeObjectKey' => 'value',
-		'isResponsive' => false,
+		'isResponsive' => true,
 		'hasUnit' => false,
 		'unitDefaultValue' => 'px',
 		'defaultValue' => 12,

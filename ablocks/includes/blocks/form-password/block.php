@@ -1,6 +1,9 @@
 <?php
 namespace ABlocks\Blocks\FormPassword;
 
+use ABlocks\Controls\Dimensions;
+use ABlocks\Controls\Border;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -34,6 +37,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_icon_wrapper_css( $attributes, 'Tablet' ),
 			$this->get_icon_wrapper_css( $attributes, 'Mobile' )
 		);
+
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-form-builder__input-show-icon',
 			$this->get_icon_space_css( $attributes ),
@@ -92,6 +96,10 @@ class Block extends BlockBaseAbstract {
 
 		if ( isset( $attributes['passwordShowHideIconSize'] ) ) {
 			$password_show_hide_icon_wrapper_css['font-size'] = $attributes['passwordShowHideIconSize'] . 'px';
+		}
+
+		if ( ! empty( $attributes['passwordIconColor'] ) ) {
+			$password_show_hide_icon_wrapper_css['fill'] = $attributes['passwordIconColor'];
 		}
 
 		return $password_show_hide_icon_wrapper_css;

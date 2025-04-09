@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 5.4
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.7.0
+Stable tag: 1.8.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -72,7 +72,7 @@ https://youtu.be/MRq5xE9A-RM
 - **PayPal**: PayPal block for Gutenberg enables easy integration of PayPal payments on your website. Accept payments or donations effortlessly with just a click.
 - **News Ticker**: Effortlessly display scrolling headlines to keep your visitors updated with the latest news.
 - **Filterable Cards Block**: Interactive and customizable cards for dynamic content filtering, enhancing user engagement and seamless navigation.
-- **Stipe Button Block**: Easily integrate secure Stripe payment buttons for seamless transactions directly within your WordPress site.
+- **Stripe Button Block**: Easily integrate secure Stripe payment buttons for seamless transactions directly within your WordPress site.
 - **Advance List Block**: Create highly customizable and dynamic lists with icons, colors, and layouts for better content organization.
 - **Logout Block**: Add a simple, customizable logout button to allow users to securely log out from your site.
 - **Marquee Block**: Create eye-catching, customizable scrolling text or content for announcements, highlights, or dynamic visual effects.
@@ -151,13 +151,23 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 
 == Changelog ==
 
+= 1.8.0 - 09/04/2025 =
+* Added - New Marquee Block
+* Added - New Dynamic Content Features
+* Fixed - Disabled block show inside editor after search 
+* Fixed - From Builder frontend width issue
+* Fixed - Slider Block navigation UI
+* Fixed - Image Block drag sizing issue
+* Fixed - Icon block link issue
+* Fixed - Filterable Block filter not selectable inside container 
+
 = 1.7.0 - 05/03/2025 =
 * Added - New Form Builder Subscription, Contact, format password, reset password and custom form
 * Added - Full Site Demo Importer 
 * Added - One Click Demo Importing option for theme developer 
 * Added - Custom CSS 
 * Added - New Filterable Cards Block 
-* Added - New Stipe Button Block
+* Added - New Stripe Button Block
 * Added - Menu Block Parent Block Settings option
 * Added - New Advance List Block
 * Added - New Logout Block

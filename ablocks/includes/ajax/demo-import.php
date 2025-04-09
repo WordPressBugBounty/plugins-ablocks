@@ -9,6 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 use ABlocks\Classes\AbstractAjaxHandler;
 use ABlocks\Classes\Sanitizer;
 use ABlocks\Helper;
+use ABlocks\import\CustomizerImporter;
+use ABlocks\import\ThemeOptions\CodeStar;
+use ABlocks\import\ThemeOptions\Redux;
+use ABlocks\import\WidgetImporter;
 
 class DemoImport extends AbstractAjaxHandler {
 
@@ -16,24 +20,54 @@ class DemoImport extends AbstractAjaxHandler {
 		$this->actions = array(
 			'get_demo_list'      => array(
 				'callback' => array( $this, 'get_demo_list' ),
+				'fields'    => array(
+					'type' => 'string',
+					'cost_type' => 'string',
+					'page' => 'integer',
+					'per_page' => 'integer',
+					'category' => 'string',
+					'dev' => 'string',
+					'q' => 'string',
+				)
 			),
 			'get_single_demo'      => array(
 				'callback' => array( $this, 'get_single_demo' ),
+				'fields'    => array(
+					'id' => 'integer',
+					'with_images' => 'string',
+				)
 			),
 			'get_demo_categories'      => array(
 				'callback' => array( $this, 'get_demo_categories' ),
+				'fields'    => array(
+					'type' => 'string',
+				)
 			),
 			'get_theme_demos'      => array(
 				'callback' => array( $this, 'get_theme_demos' ),
 			),
 			'check_dependencies'      => array(
 				'callback' => array( $this, 'check_dependencies' ),
+				'fields'    => array(
+					'dependencies' => 'array|string',
+				)
 			),
 			'install_and_active'      => array(
 				'callback' => array( $this, 'install_and_active' ),
+				'fields'    => array(
+					'dependency' => 'array|string',
+				)
 			),
 			'import_template'      => array(
 				'callback' => array( $this, 'import_template' ),
+				'fields'    => array(
+					'file_url' => 'string',
+					'customizer_file_url' => 'string',
+					'widget_file_url' => 'string',
+					'codestar_file_url' => 'string',
+					'redux_options' => 'json',
+					'with_images' => 'boolean',
+				)
 			),
 		);
 	}
@@ -148,6 +182,7 @@ class DemoImport extends AbstractAjaxHandler {
 		}
 
 		$url = 'https://' . ABLOCKS_TEMPLATE_LIB_HOST . '/wp-json/ablocks_server/v1/categories';
+		$url = add_query_arg( 'type', $type, $url );
 		$this->handle_list_response( $url, $key );
 	}
 
@@ -216,11 +251,14 @@ class DemoImport extends AbstractAjaxHandler {
 			return;
 		}
 
-		$dependencies = Sanitizer::sanitize_array_field( json_decode( $data['dependencies'], true ) );
+		$dependencies = Sanitizer::sanitize_array_field( $data['dependencies'] );
 		foreach ( $dependencies as $index => $dependency ) {
 			$type = 'check_' . ( $dependency['type'] ?? 'plugin' );
 			$status = Helper::$type( $dependency['slug'] );
 			$dependencies[ $index ]['status'] = $status;
+			if ( isset( $dependency['id'] ) ) {
+				$dependencies[ $index ]['id'] = (int) $dependency['id'];
+			}
 		}
 
 		wp_send_json_success( $dependencies );
@@ -237,8 +275,8 @@ class DemoImport extends AbstractAjaxHandler {
 		if ( ! isset( $data['dependency'] ) ) {
 			return;
 		}
-		$dependency = Sanitizer::sanitize_array_field( json_decode( $data['dependency'], true ) );
-		$method = 'install_and_active_' . $dependency['type'];
+		$dependency = Sanitizer::sanitize_array_field( $data['dependency'] );
+		$method = 'install_and_active_' . ( $dependency['type'] ?? 'plugin' );
 		$activated = Helper::$method( $dependency['slug'] );
 		if ( is_wp_error( $activated ) ) {
 			wp_send_json_error(array(
@@ -252,20 +290,24 @@ class DemoImport extends AbstractAjaxHandler {
 	/**
 	 * Import template from file url.
 	 *
+	 * @param array $data Import data.
+	 *
 	 * @return void
 	 */
-	public function import_template() {
-		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- already did nonce-verification on previous step.
-		if ( ! isset( $_GET['file_url'] ) ) {
+	public function import_template( array $data ) {
+		if ( ! isset( $data['file_url'] ) ) {
 			return;
 		}
-		$data = Sanitizer::sanitize_payload(array(
-			'file_url' => 'string',
-			'with_images' => 'boolean',
-		), wp_unslash( $_GET ));
-		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 		$file_url = $data['file_url'];
+		$content_file_path = Helper::remote_to_tmp_file( $file_url );
+
+		$customizer_file_url = $data['customizer_file_url'] ?? '';
+		$customizer_file_path = Helper::remote_to_tmp_file( $customizer_file_url );
+		$widget_file_url = $data['widget_file_url'] ?? '';
+		$widget_file_path = Helper::remote_to_tmp_file( $widget_file_url );
+		$codestar_file_url = $data['codestar_file_url'] ?? '';
+		$codestar_file_path = Helper::remote_to_tmp_file( $codestar_file_url );
 		$with_images = isset( $data['with_images'] ) && true === $data['with_images'];
 
 		// Start the event stream.
@@ -294,7 +336,23 @@ class DemoImport extends AbstractAjaxHandler {
 		wp_ob_end_flush_all();
 		flush();
 
-		$template_import = Helper::import_template( $file_url, $with_images );
+		do_action( 'ablocks/import/before_template_import_start', $data );
+		$template_import = Helper::import_template( $content_file_path, $with_images );
+		if ( ! is_wp_error( $template_import ) ) {
+			if ( ! empty( $customizer_file_path ) && ! is_wp_error( $customizer_file_path ) ) {
+				CustomizerImporter::import( $customizer_file_path );
+			}
+			if ( ! empty( $widget_file_path ) && ! is_wp_error( $widget_file_path ) ) {
+				WidgetImporter::import( $widget_file_path );
+			}
+			if ( ! empty( $codestar_file_path ) ) {
+				CodeStar::import( $codestar_file_path );
+			}
+			if ( isset( $data['redux_options'] ) && is_array( $data['redux_options'] ) && count( $data['redux_options'] ) > 0 ) {
+				Redux::import( $data['redux_options'] );
+			}
+		}
+		do_action( 'ablocks/import/template_import_finished', $data );
 
 		// Let the browser know we're done.
 		$complete = [

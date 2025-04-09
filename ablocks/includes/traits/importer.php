@@ -71,29 +71,30 @@ trait Importer {
 	}
 
 	/**
-	 * Import template from remote XML file url.
+	 * Import template from XML file.
 	 *
-	 * @param string $file_url File url.
+	 * @param string $file_path File path.
 	 * @param bool   $with_attachments with attachments ?.
 	 *
 	 * @return true|WP_Error
 	 */
-	public static function import_template( string $file_url, bool $with_attachments = true ) {
+	public static function import_template( string $file_path, bool $with_attachments = true ) {
 		require_once ABSPATH . 'wp-admin/includes/class-wp-importer.php';
 
-		// Download the remote XML file.
-		$tmp_file = download_url( $file_url );
-		if ( is_wp_error( $tmp_file ) ) {
-			return $tmp_file;
+		if ( ! file_exists( $file_path ) ) {
+			return new WP_Error(
+				'invalid_file',
+				__( 'Invalid content file location provided!', 'ablocks' ),
+			);
 		}
 
 		// Import the XML file.
 		$importer = new WP_Import();
-		$result = $importer->import( $tmp_file, $with_attachments );
+		$result = $importer->import( $file_path, $with_attachments );
 
 		// Delete the temporary file if it exists using wp_delete_file.
-		if ( file_exists( $tmp_file ) ) {
-			wp_delete_file( $tmp_file );
+		if ( file_exists( $file_path ) && dirname( $file_path ) === sys_get_temp_dir() ) {
+			wp_delete_file( $file_path );
 		}
 
 		if ( is_wp_error( $result ) ) {
@@ -101,6 +102,17 @@ trait Importer {
 		}
 
 		return true;
+	}
+
+	public static function remote_to_tmp_file( string $file_url ) {
+		$tmp_file = $file_url;
+		if ( wp_http_validate_url( $file_url ) ) {
+			$tmp_file = download_url( $file_url );
+			if ( is_wp_error( $tmp_file ) ) {
+				return $tmp_file;
+			}
+		}
+		return $tmp_file;
 	}
 
 	/**
@@ -237,28 +249,14 @@ trait Importer {
 	 * @return false|array
 	 */
 	public static function get_theme_demo_config() {
-		$demo = apply_filters( 'ablocks/register_theme', [
+		return apply_filters( 'ablocks/register_theme', [
 			'menu_title' => __( 'aBlocks Templates', 'ablocks' ),
 			'page_title' => __( 'aBlocks Templates', 'ablocks' ),
 			'menu_slug'  => ABLOCKS_PLUGIN_SLUG . '-demo-import',
 			'preloaded_demo' => true,
-			'preloaded_demo_category' => [
-				[
-					'label' => 'LMS',
-					'slug' => 'lms',
-				],
-				[
-					'label' => 'eCommerce',
-					'slug' => 'e-commerce',
-				],
-				[
-					'label' => 'Business',
-					'slug' => 'business',
-				],
-			], // set blank array for all.
+			'preloaded_demo_category' => [], // set blank array for all.
 			'demos' => [],
 		] );
-		return $demo;
 	}
 
 	/**

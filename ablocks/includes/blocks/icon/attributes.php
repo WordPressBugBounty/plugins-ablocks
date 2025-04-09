@@ -9,6 +9,7 @@ use ABlocks\Controls\Alignment;
 use ABlocks\Helper;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Icon;
+use ABlocks\Controls\Link;
 
 $attributes = [
 	'block_id' => [
@@ -20,6 +21,7 @@ $attributes = [
 $attributes = array_merge(
 	$attributes,
 	Icon::get_attribute(),
+	Link::get_attribute( 'link' ),
 	Alignment::get_attribute( 'alignment', true, [ 'value' => 'flex-start' ] ),
 );
 

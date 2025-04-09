@@ -58,6 +58,10 @@ $attributes = [
 		'type' => 'boolean',
 		'default' => false
 	],
+	'passwordIconColor' => [
+		'type' => 'string',
+		'default' => ''
+	],
 	'errorMsg' => [
 		'type' => 'string',
 		'default' => 'This field is required'

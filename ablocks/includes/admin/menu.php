@@ -54,7 +54,7 @@ class Menu {
 	 */
 	public function register_theme_demo_importer_menu() {
 		$demo_config = Helper::get_theme_demo_config();
-		if ( !$demo_config) {
+		if ( empty($demo_config['demos']) && !$demo_config['preloaded_demo']) {
 			return;
 		}
 

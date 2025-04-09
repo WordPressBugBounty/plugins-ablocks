@@ -61,6 +61,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '#000000'
 	],
+	'helperTextColor' => [
+		'type' => 'string',
+		'default' => ''
+	],
 	'customForm' => [
 		'type' => 'boolean',
 		'default' => false
@@ -531,6 +535,12 @@ $attributes = array_merge(
 		'defaultValue' => 10,
 	] ),
 	Range::get_attribute( [
+		'attributeName' => 'helperTextSpacing',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 10,
+	] ),
+	Range::get_attribute( [
 		'attributeName' => 'inputIconPosition',
 		'attributeObjectKey' => 'value',
 		'isResponsive' => false,
@@ -545,6 +555,7 @@ $attributes = array_merge(
 	Link::get_attribute( 'link' ),
 	Link::get_attribute( 'webhookLink' ),
 	Typography::get_attribute( 'labelTypography', true ),
+	Typography::get_attribute( 'helperTextTypography', true ),
 	Typography::get_attribute( 'inputTypography', true ),
 	Typography::get_attribute( 'buttonTypography', true ),
 	Typography::get_attribute( 'navigatorTypography', true ),

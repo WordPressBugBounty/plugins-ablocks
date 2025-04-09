@@ -46,6 +46,11 @@
     border: none;
     cursor: pointer;
 }
+
+.ablocks-carousel-navigation__buttons .ablocks-carousel-navigation__button .ablocks-icon-wrap{
+    box-sizing: unset;
+}
+
 .ablocks-carousel-navigation__buttons .ablocks-carousel-navigation__button--disabled {
     opacity: 0.6;
 }

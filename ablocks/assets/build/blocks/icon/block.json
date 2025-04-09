@@ -162,6 +162,19 @@
             "type": "number",
             "default": 0
         },
+        "link": {
+            "type": "object",
+            "default": {
+                "linkDestination": "",
+                "href": "",
+                "lightbox": "",
+                "linkTarget": "",
+                "rel": "",
+                "noFollow": "",
+                "keyValue": "",
+                "linkClass": ""
+            }
+        },
         "alignment": {
             "type": "object",
             "default": {

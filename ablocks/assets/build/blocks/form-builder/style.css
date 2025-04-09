@@ -15,8 +15,11 @@
 }
 .ablocks-block--form-builder form{
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 2px;
+    column-gap: 8px;
 }
+
 .ablocks-form-builder .ablocks-form-builder__fields {
     width: 100%;
 }
@@ -141,7 +144,6 @@
 .ablocks-form-builder input.ablocks-form-builder__input::placeholder {
     color: #A7AAAD;
     font-family: Roboto;
-    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 150%;

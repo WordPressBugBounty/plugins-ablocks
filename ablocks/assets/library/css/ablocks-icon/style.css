@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ablocks';
-  src:  url('fonts/ablocks.eot?6f6lyz');
-  src:  url('fonts/ablocks.eot?6f6lyz#iefix') format('embedded-opentype'),
-    url('fonts/ablocks.ttf?6f6lyz') format('truetype'),
-    url('fonts/ablocks.woff?6f6lyz') format('woff'),
-    url('fonts/ablocks.svg?6f6lyz#ablocks') format('svg');
+  src:  url('fonts/ablocks.eot?if8has');
+  src:  url('fonts/ablocks.eot?if8has#iefix') format('embedded-opentype'),
+    url('fonts/ablocks.ttf?if8has') format('truetype'),
+    url('fonts/ablocks.woff?if8has') format('woff'),
+    url('fonts/ablocks.svg?if8has#ablocks') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,44 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ablocks-icon--database:before {
+  content: "\e9ba";
+}
+.ablocks-icon--flexbox-svg-icon:before {
+  content: "\e9bb";
+  color: #dddddf;
+}
+.ablocks-icon--text-path:before {
+  content: "\e9aa";
+}
+.ablocks-icon--grid:before {
+  content: "\e9b3";
+  color: #dddddf;
+}
+.ablocks-icon--grid-1:before {
+  content: "\e9b4";
+  color: #dddddf;
+}
+.ablocks-icon--grid-2:before {
+  content: "\e9b5";
+  color: #dddddf;
+}
+.ablocks-icon--grid-3:before {
+  content: "\e9b6";
+  color: #dddddf;
+}
+.ablocks-icon--grid-4:before {
+  content: "\e9b7";
+  color: #dddddf;
+}
+.ablocks-icon--grid-5:before {
+  content: "\e9b8";
+  color: #dddddf;
+}
+.ablocks-icon--grid-6:before {
+  content: "\e9b9";
+  color: #dddddf;
+}
 .ablocks-icon--page-setup:before {
   content: "\e9b2";
 }
@@ -448,7 +486,7 @@
 }
 .ablocks-icon--plus:before {
   content: "\e935";
-  color: #ffffff;
+  color: #454d54;
 }
 .ablocks-icon--block-countdown:before {
   content: "\e97c";

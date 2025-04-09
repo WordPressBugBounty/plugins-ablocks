@@ -27,6 +27,15 @@ class Helper {
 		return $default;
 	}
 
+	public static function is_enabled_block( $block_name, $parent_block_name = '' ) {
+		global $ablocks_blocks;
+		$block_name = ! empty( $parent_block_name ) ? $parent_block_name : $block_name;
+		if ( isset( $ablocks_blocks->{$block_name} ) ) {
+			return (bool) $ablocks_blocks->{$block_name};
+		}
+		return false;
+	}
+
 
 	public static function is_plugin_installed( $path ) {
 		$installed_plugins = get_plugins();
@@ -82,11 +91,13 @@ class Helper {
 			'title'       => __( 'Dashboard', 'ablocks' ),
 			'capability'  => 'manage_options',
 		];
-		$menu[ ABLOCKS_PLUGIN_SLUG . '-submissions' ]   = [
-			'parent_slug' => ABLOCKS_PLUGIN_SLUG,
-			'title'       => __( 'Submissions', 'ablocks' ),
-			'capability'  => 'manage_options',
-		];
+		if ( self::is_enabled_block( 'form-builder' ) ) {
+			$menu[ ABLOCKS_PLUGIN_SLUG . '-submissions' ]   = [
+				'parent_slug' => ABLOCKS_PLUGIN_SLUG,
+				'title'       => __( 'Submissions', 'ablocks' ),
+				'capability'  => 'manage_options',
+			];
+		}
 		$menu[ ABLOCKS_PLUGIN_SLUG . '-settings' ]   = [
 			'parent_slug' => ABLOCKS_PLUGIN_SLUG,
 			'title'       => __( 'Settings', 'ablocks' ),
@@ -158,6 +169,30 @@ class Helper {
 		return $options;
 	}
 
+	public static function get_author_data( $post_id, $author_id = false ) {
+		$author_id = $author_id ?: get_post_field( 'post_author', $post_id );
+		$user = get_userdata( $author_id );
+
+		if ( ! $user ) {
+			wp_send_json_error( 'Author not found.', 404 );
+		}
+
+		$data = [
+			'author_id' => $author_id,
+			'author_name' => sanitize_text_field( $user->display_name ),
+			'author_posts_count' => count_user_posts( $author_id ),
+			'author_posts_url' => esc_url( get_author_posts_url( $author_id ) ),
+			'author_profile_picture_url' => esc_url( get_avatar_url( $author_id ) ),
+			'author_bio' => sanitize_text_field( get_user_meta( $author_id, 'description', true ) ),
+			'author_email' => sanitize_email( $user->user_email ),
+			'author_website' => esc_url( $user->user_url ),
+			'author_first_name' => sanitize_text_field( get_user_meta( $author_id, 'first_name', true ) ),
+			'author_last_name' => sanitize_text_field( get_user_meta( $author_id, 'last_name', true ) )
+		];
+
+		return $data;
+	}
+
 	public static function get_icon_picker_attribute( $attributePrefix = 'icon', $defaultValue = [] ) {
 		$svgPathKey = $attributePrefix . 'SvgPath';
 		$svgViewBoxKey = $attributePrefix . 'SvgViewBox';
@@ -190,6 +225,75 @@ class Helper {
 		}
 		return $attribute;
 	}
+
+	public static function get_terms_for_post( $taxonomy, $post_id ) {
+		$terms = wp_get_object_terms( $post_id, $taxonomy, [ 'fields' => 'all' ] );
+
+		if ( is_wp_error( $terms ) ) {
+			return [];
+		}
+
+		return array_map( function( $term ) {
+			return [
+				'id'   => $term->term_id,
+				'name' => $term->name,
+				'slug' => $term->slug,
+			];
+		}, $terms );
+	}
+
+	public static function get_taxonomies_data_for_post_type( $post_type ) {
+		$all_taxonomies = get_object_taxonomies( $post_type, 'objects' );
+		return array_values(array_map( function( $taxonomy ) {
+			return [
+				'value' => $taxonomy->name,
+				'label' => $taxonomy->label,
+			];
+		}, $all_taxonomies ));
+	}
+
+	public static function get_post_excerpt( $post_id, $length = false ) {
+		$excerpt = get_the_excerpt( $post_id );
+		if ( $length ) {
+			return wp_trim_words( $excerpt, $length, '...' );
+		}
+		return $excerpt;
+	}
+
+	public static function get_post_terms_as_string( $post_id, $taxonomy, $separator = ', ' ) {
+		$terms = wp_get_post_terms( $post_id, $taxonomy );
+
+		if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+			$term_names = wp_list_pluck( $terms, 'name' );
+			return implode( $separator, $term_names );
+		}
+
+		return '';
+	}
+
+	public static function get_post_time_date( $post_id, $dynamicContentAttribute, $is_time = false ) {
+		$dateTimeType = $dynamicContentAttribute['dateTimeType'];
+		$dateTimeFormat = $dynamicContentAttribute['dateTimeFormat'];
+		$customDateTimeFormat = $dynamicContentAttribute['customDateTimeFormat'];
+
+		$format = $dateTimeFormat;
+		$defaultFormat = $is_time ? 'g:i a' : 'j M, Y';
+		if ( ! $dateTimeFormat ) {
+			$format = $defaultFormat;
+		} elseif ( 'custom' === $dateTimeFormat ) {
+			$format = $customDateTimeFormat || $defaultFormat;
+		}
+
+		$date_time = '';
+		if ( ! $dateTimeType || 'post_published' === $dateTimeType ) {
+			$date_time = get_the_date( $format, $post_id );
+		} elseif ( 'post_modified' === $dateTimeType ) {
+			$date_time = get_the_modified_date( $format, $post_id );
+		}
+
+		return $date_time;
+	}
+
 	public static function is_fse_theme() {
 		return function_exists( 'wp_is_block_theme' ) && wp_is_block_theme();
 	}
@@ -434,6 +538,10 @@ class Helper {
 	}
 	public static function plugin_path() {
 		return apply_filters( 'ablocks/plugin_path', ABLOCKS_ROOT_DIR_PATH );
+	}
+
+	public static function is_valid_site_url( string $url ): bool {
+		return str_starts_with( $url, get_option( 'siteurl' ) );
 	}
 
 }

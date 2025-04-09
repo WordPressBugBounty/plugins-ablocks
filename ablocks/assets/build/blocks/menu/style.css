@@ -64,7 +64,7 @@
   position: absolute !important;
   width: 100%;
   top: 100%;
-  background-color: white;
+  background-color: transparent;
   z-index: 10;
   left: 0;
   list-style: none;

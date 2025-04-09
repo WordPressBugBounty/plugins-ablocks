@@ -24,21 +24,49 @@ class FormBuilder extends AbstractAjaxHandler {
 			'form_builder_login_handler'      => array(
 				'callback' => array( $this, 'form_builder_login_handler' ),
 				'allow_visitor_action' => true,
+				'fields' => array(
+					'username'              => 'string',
+					'password'              => 'string',
+					'rememberme'            => 'string',
+					'current_post_id'       => 'integer',
+					'block_id'              => 'string',
+				),
 			),
 			'form_builder_registration_handler'      => array(
 				'callback' => array( $this, 'form_builder_registration_handler' ),
 				'allow_visitor_action' => true,
+				'fields' => array(
+					'current_post_id'    => 'integer',
+					'block_id'           => 'string',
+					'username'           => 'string',
+					'email'              => 'email',
+					'password'           => 'string',
+					'confirm_password'   => 'string',
+					'current_post_id'       => 'integer',
+				)
 			),
 			'form_builder_forget_password_handler'      => array(
 				'callback' => array( $this, 'form_builder_forget_password_handler' ),
 				'allow_visitor_action' => true,
+				'fields' => array(
+					'email' => 'string',
+				)
 			),
 			'form_builder_submit_handler'      => array(
 				'callback' => array( $this, 'handle_form_submission' ),
 				'allow_visitor_action' => true,
+				'fields' => array(
+					'current_post_id' => 'integer',
+					'block_id' => 'string',
+				)
 			),
 			'form_builder_action_setting_data'      => array(
-				'callback' => array( $this, 'action_setting_data' )
+				'callback' => array( $this, 'action_setting_data' ),
+				'fields' => array(
+					'type' => 'string',
+					'api'  => 'string',
+					'list_id' => 'string',
+				)
 			),
 			'registration_form_setting_data'      => array(
 				'callback' => array( $this, 'registration_form_setting_data' ),
@@ -47,15 +75,7 @@ class FormBuilder extends AbstractAjaxHandler {
 		);
 
 	}
-	public function form_builder_login_handler( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'username'              => 'string',
-			'password'              => 'string',
-			'rememberme'            => 'string',
-			'current_post_id'       => 'integer',
-			'block_id'              => 'string',
-		], $form_data);
-
+	public function form_builder_login_handler( $payload ) {
 		$block_data = Helper::get_block_attributes( $payload['current_post_id'], $payload['block_id'], 'ablocks/form-builder' );
 
 		$redirect_url = '';
@@ -95,7 +115,7 @@ class FormBuilder extends AbstractAjaxHandler {
 		]);
 	}
 
-	public function registration_form_setting_data( $form_data ) {
+	public function registration_form_setting_data( $payload ) {
 		$roles = [
 			'default' => __( 'Default', 'ablocks' )
 		];
@@ -107,17 +127,7 @@ class FormBuilder extends AbstractAjaxHandler {
 		}
 		wp_send_json_success( $roles );
 	}
-	public function form_builder_registration_handler( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'current_post_id'    => 'integer',
-			'block_id'           => 'string',
-			'username'           => 'string',
-			'email'              => 'email',
-			'password'           => 'string',
-			'confirm_password'   => 'string',
-			'current_post_id'       => 'integer',
-		], $form_data);
-
+	public function form_builder_registration_handler( $payload ) {
 		$block_data = Helper::get_block_attributes( $payload['current_post_id'], $payload['block_id'], 'ablocks/form-builder' );
 
 		if ( ! get_option( 'users_can_register' ) ) {
@@ -160,7 +170,7 @@ class FormBuilder extends AbstractAjaxHandler {
 			$user->set_role( $role );
 		}
 
-		$custom_fields = $this->get_custom_fields( $form_data );
+		$custom_fields = $this->get_custom_fields( $_POST );
 
 		if ( ! empty( $block_data ) ) {
 			$sorted_fields = Helper::sorted_input_fields_by_input_type( $block_data['innerBlocks'] );
@@ -213,11 +223,7 @@ class FormBuilder extends AbstractAjaxHandler {
 		return array_diff_key( $form_data, array_flip( $reserved_keys ) );
 	}
 
-	public function form_builder_forget_password_handler( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'email' => 'string',
-		], $form_data);
-
+	public function form_builder_forget_password_handler( $payload ) {
 		if ( empty( $payload['email'] ?? '' ) ) {
 			wp_send_json_error([
 				'message' => __( 'email field is required.', 'ablocks' )
@@ -246,14 +252,9 @@ class FormBuilder extends AbstractAjaxHandler {
 		]);
 	}
 
-	public function handle_form_submission( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'current_post_id' => 'integer',
-			'block_id' => 'string',
-		], $form_data);
-
+	public function handle_form_submission( $payload ) {
 		$fields_to_skip = [ 'current_post_id', 'block_id', 'security', 'action' ];
-		$all_fields = array_diff_key( $form_data, array_flip( $fields_to_skip ) );
+		$all_fields = array_diff_key( $_POST, array_flip( $fields_to_skip ) );
 		$block_data = Helper::get_block_attributes( $payload['current_post_id'], $payload['block_id'], 'ablocks/form-builder' );
 
 		$actions = apply_filters('ablocks/form_builder/actions', [
@@ -278,13 +279,7 @@ class FormBuilder extends AbstractAjaxHandler {
 		wp_send_json_error( [ 'message' => __( 'Action is not defined.', 'ablocks' ) ] );
 	}
 
-	public function action_setting_data( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'type' => 'string',
-			'api'  => 'string',
-			'list_id' => 'string',
-		], $form_data);
-
+	public function action_setting_data( $payload ) {
 		$type         = $payload['type'] ?? '';
 		$settings_key = $type . '_api_key';
 		$api          = $payload['api'] ?? $GLOBALS['ablocks_settings']->{$settings_key} ?? '';

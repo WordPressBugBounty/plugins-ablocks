@@ -2,7 +2,9 @@
 
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Icon;
+use ABlocks\Controls\Border;
 use ABlocks\Components\ButtonGroup;
+use ABlocks\Controls\Dimensions;
 $attributes = [
 	'block_id'          => [
 		'type'          => 'string',
@@ -64,9 +66,21 @@ $attributes = [
 		'type' => 'string',
 		'default' => '#686868'
 	],
+	'navigationIconColorH' => [
+		'type' => 'string',
+		'default' => ''
+	],
 	'navigationIconBgColor' => [
 		'type' => 'string',
 		'default' => '#e4e4e4'
+	],
+	'navigationIconBgColorH' => [
+		'type' => 'string',
+		'default' => ''
+	],
+	'navigationIconTransition' => [
+		'type' => 'number',
+		'default' => '',
 	],
 	'paginationColor' => [
 		'type' => 'string',
@@ -91,6 +105,8 @@ $attributes = array_merge(
 	ButtonGroup::get_attribute( 'verticalAlignment', false, [
 		'value' => 'center',
 	] ),
+	Border::get_attribute( 'navigationIconBorder', true ),
+	Dimensions::get_attribute( 'navigationIconPadding', true ),
 	Range::get_attribute([
 		'attributeName' => 'carouselHeight',
 		'attributeObjectKey' => 'value',

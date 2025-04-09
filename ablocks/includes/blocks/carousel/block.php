@@ -5,6 +5,8 @@ use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Dimensions;
+use ABlocks\Controls\Border;
 
 
 class Block extends BlockBaseAbstract {
@@ -63,14 +65,22 @@ class Block extends BlockBaseAbstract {
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button .ablocks-svg-icon',
 			$this->get_navigation_icon_svg_css( $attributes ),
+			$this->get_navigation_icon_svg_css( $attributes, 'Tablet' ),
+			$this->get_navigation_icon_svg_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-navigation__button .ablocks-svg-icon:hover',
+			$this->get_navigation_icon_svg_hover_css( $attributes ),
+			$this->get_navigation_icon_svg_hover_css( $attributes, 'Tablet' ),
+			$this->get_navigation_icon_svg_hover_css( $attributes, 'Mobile' )
 		);
 		return $css_generator->generate_css();
 	}
 
 	public function get_carousel_css( $attributes, $device = '' ) {
 		$carousel_css = [];
-		if ( ! empty( $attributes['verticalAlignment'][ 'value' . $device ] ) ) {
-			$carousel_css['align-items'] = $attributes['verticalAlignment'][ 'value' . $device ];
+		if ( ! empty( $attributes['verticalAlignment'] ) ) {
+			$carousel_css['align-items'] = $attributes['verticalAlignment'];
 		}
 
 		return array_merge(
@@ -168,7 +178,7 @@ class Block extends BlockBaseAbstract {
 	}
 
 
-	public function get_navigation_icon_svg_css( $attributes ) {
+	public function get_navigation_icon_svg_css( $attributes, $device = '' ) {
 		$navigation_icon_svg_css = [];
 		if ( isset( $attributes['navigationIconColor'] ) ) {
 			$navigation_icon_svg_css['fill'] = $attributes['navigationIconColor'];
@@ -176,7 +186,32 @@ class Block extends BlockBaseAbstract {
 		if ( isset( $attributes['navigationIconBgColor'] ) ) {
 			$navigation_icon_svg_css['background-color'] = $attributes['navigationIconBgColor'];
 		};
-		return $navigation_icon_svg_css;
+		return array_merge(
+			$navigation_icon_svg_css,
+			Dimensions::get_css( $attributes['navigationIconPadding'], 'padding', $device ),
+			Border::get_css( $attributes['navigationIconBorder'], '', $device ),
+		);
+	}
+	public function get_navigation_icon_svg_hover_css( $attributes, $device = '' ) {
+		$navigation_icon_svg_hover_css = [];
+		if ( isset( $attributes['navigationIconColorH'] ) ) {
+			$navigation_icon_svg_hover_css['fill'] = $attributes['navigationIconColorH'];
+		};
+		if ( isset( $attributes['navigationIconBgColorH'] ) ) {
+			$navigation_icon_svg_hover_css['background-color'] = $attributes['navigationIconBgColorH'];
+		};
+		return array_merge(
+			Range::get_css([
+				'attributeValue' => $attributes['navigationIconTransition'],
+				'attribute_object_key' => 'value',
+				'defaultValue' => 10,
+				'unitDefaultValue' => 's',
+				'property' => 'transition-duration',
+				'device' => $device,
+			]),
+			$navigation_icon_svg_hover_css,
+			Border::get_hover_css( $attributes['navigationIconBorder'], '', $device ),
+		);
 	}
 
 	public function get_pagination_color_css( $attributes ) {

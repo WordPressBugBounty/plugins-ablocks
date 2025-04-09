@@ -77,6 +77,7 @@ class Assets {
 		);
 	}
 	public function get_editor_localize_script_data() {
+		global $ablocks_blocks;
 		$args = array(
 			'settings'         => [
 				'default_container_width' => Helper::get_settings( 'default_container_width', 1280 ),
@@ -93,7 +94,8 @@ class Assets {
 				'academy_lms' => Helper::is_active_academy(),
 				'storeengine' => Helper::is_active_storeengine(),
 				'wp_map_block' => Helper::is_active_wp_map_block(),
-			]
+			],
+			'blocks_status' => $ablocks_blocks
 		);
 		return apply_filters(
 			'ablocks/assets/editor_scripts_data',

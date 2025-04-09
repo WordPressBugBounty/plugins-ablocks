@@ -17,19 +17,17 @@ class SearchBlock extends AbstractAjaxHandler {
 		$this->actions = array(
 			'search_block_ajax_action'      => array(
 				'callback' => array( $this, 'search_blocks_ajax_handler' ),
-				'allow_visitor_action' => true
+				'allow_visitor_action' => true,
+				'fields' => array(
+					'current_page_id'        => 'integer',
+					'searchQuery'        => 'string',
+					'source'            => 'string',
+				)
 			),
 		);
 	}
 
-	public function search_blocks_ajax_handler( $form_data ) {
-
-		$payload = Sanitizer::sanitize_payload([
-			'current_page_id'        => 'integer',
-			'searchQuery'        => 'string',
-			'source'            => 'string',
-		], $form_data); // phpcs:ignore WordPress.Security.NonceVerification.Missing
-
+	public function search_blocks_ajax_handler( $payload ) {
 		$searchQuery = $payload['searchQuery'];
 		$source = $payload['source'];
 		$current_page_id = $payload['current_page_id'];

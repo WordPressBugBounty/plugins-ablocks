@@ -177,6 +177,9 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			]),
 		);
+		if ( ! empty( $label_css['margin-bottom'] ) ) {
+			$label_css['margin-bottom'] = $label_css['margin-bottom'] . ' !important';
+		}
 
 		if ( ! empty( $attributes['labelColor'] ) ) {
 			$label_css['color'] = $attributes['labelColor'];
@@ -190,16 +193,29 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_helper_text_css( $attributes, $device = '' ) {
 		$helper_text_css = array_merge(
-			Alignment::get_css( $attributes['labelAlignment'], 'text-align', $device )
+			Typography::get_css( $attributes['helperTextTypography'], '', $device ),
+			Alignment::get_css( $attributes['labelAlignment'], 'text-align', $device ),
+			Range::get_css([
+				'attributeValue' => $attributes['helperTextSpacing'],
+				'attributeObjectKey' => 'value',
+				'isResponsive' => true,
+				'defaultValue' => 10,
+				'unitDefaultValue' => 'px',
+				'property' => 'margin-bottom',
+				'device' => $device,
+			]),
 		);
 
 		if ( ! $attributes['showLabels'] ) {
 			$helper_text_css['display'] = 'none';
 		}
 
-		if ( ! empty( $attributes['labelSpacing'][ 'value' . $device ] ) ) {
-			$helper_text_css['margin-top'] = '-' . $attributes['labelSpacing'][ 'value' . $device ] . 'px';
-			$helper_text_css['margin-bottom'] = $attributes['labelSpacing'][ 'value' . $device ] . 'px';
+		if ( ! empty( $attributes['helperTextSpacing'][ 'value' . $device ] ) ) {
+			$helper_text_css['margin-top'] = $attributes['helperTextSpacing'][ 'value' . $device ] . 'px';
+			$helper_text_css['margin-bottom'] = $attributes['helperTextSpacing'][ 'value' . $device ] . 'px';
+		}
+		if ( ! empty( $attributes['helperTextColor'] ) ) {
+			$helper_text_css['color'] = $attributes['helperTextColor'];
 		}
 
 		return $helper_text_css;

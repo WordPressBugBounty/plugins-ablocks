@@ -19,15 +19,45 @@ class Settings extends AbstractAjaxHandler {
 			),
 			'save_block_visibility'      => array(
 				'callback' => array( $this, 'save_block_visibility' ),
+				'fields' => array(
+					'block_name'        => 'string',
+					'status'            => 'boolean',
+				)
 			),
 			'get_settings'      => array(
 				'callback' => array( $this, 'get_settings' ),
 			),
 			'save_settings'      => array(
 				'callback' => array( $this, 'save_settings' ),
+				'fields' => array(
+					'default_container_width' => 'integer',
+					'container_padding' => 'integer',
+					'container_element_gap' => 'integer',
+					'enabled_assets_file_generation' => 'boolean',
+					'enabled_block_copy_paste_style' => 'boolean',
+					'enabled_only_selected_fonts' => 'boolean',
+					'enabled_coming_soon_page' => 'boolean',
+					'coming_soon_page' => 'integer',
+					'enabled_maintenance_page' => 'boolean',
+					'maintenance_page' => 'integer',
+					'login_page' => 'integer',
+					'registration_page' => 'integer',
+					'forget_password_page' => 'integer',
+
+					'mailchimp_api_key' => 'string',
+					'drip_api_key' => 'string',
+					'getresponse_api_key' => 'string',
+					'convertkit_api_key' => 'string',
+					'mailerlite_api_key' => 'string',
+				)
 			),
 			'fetch_posts'      => array(
 				'callback' => array( $this, 'fetch_posts' ),
+				'fields' => array(
+					'postId'   => 'integer',
+					'postType' => 'string',
+					'keyword'  => 'string',
+				)
 			),
 		);
 	}
@@ -37,16 +67,15 @@ class Settings extends AbstractAjaxHandler {
 		wp_send_json_success( $ablocks_blocks );
 	}
 
-	public function save_block_visibility() {
-		$payload = Sanitizer::sanitize_payload([
-			'block_name'        => 'string',
-			'status'            => 'boolean',
-			'required_plugin'   => 'json',
-		], $_POST); // phpcs:ignore WordPress.Security.NonceVerification.Missing
-
+	public function save_block_visibility( $payload ) {
 		$block_name = $payload['block_name'];
 		$status = $payload['status'];
-		$required_plugin = $payload['required_plugin'];
+
+		$json_payload = Sanitizer::sanitize_payload([
+			'required_plugin' => 'json',
+		], $_POST); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+
+		$required_plugin = $json_payload['required_plugin'];
 
 		if ( empty( $block_name ) ) {
 			wp_send_json_error( __( 'Block Name missing', 'ablocks' ) );
@@ -80,30 +109,11 @@ class Settings extends AbstractAjaxHandler {
 		wp_send_json_success( $settings );
 	}
 
-	public function save_settings() {
+	public function save_settings( $payload ) {
         // phpcs:ignore WordPress.Security.NonceVerification.Missing
-		do_action( 'ablocks/before_save_settings', $_POST, 'base' );
-		$payload = Sanitizer::sanitize_payload([
-			'default_container_width' => 'integer',
-			'container_padding' => 'integer',
-			'container_element_gap' => 'integer',
-			'enabled_assets_file_generation' => 'boolean',
-			'enabled_block_copy_paste_style' => 'boolean',
-			'enabled_only_selected_fonts' => 'boolean',
+		do_action( 'ablocks/before_save_settings', $payload, 'base' );
+		$json_payload = Sanitizer::sanitize_payload([
 			'selected_fonts' => 'json',
-			'enabled_coming_soon_page' => 'boolean',
-			'coming_soon_page' => 'integer',
-			'enabled_maintenance_page' => 'boolean',
-			'maintenance_page' => 'integer',
-			'login_page' => 'integer',
-			'registration_page' => 'integer',
-			'forget_password_page' => 'integer',
-
-			'mailchimp_api_key' => 'string',
-			'drip_api_key' => 'string',
-			'getresponse_api_key' => 'string',
-			'convertkit_api_key' => 'string',
-			'mailerlite_api_key' => 'string',
 		], $_POST); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		$default = BaseSettings::get_default_data();
@@ -114,7 +124,7 @@ class Settings extends AbstractAjaxHandler {
 			'enabled_assets_file_generation' => $payload['enabled_assets_file_generation'] ?? $default['enabled_assets_file_generation'],
 			'enabled_block_copy_paste_style' => $payload['enabled_block_copy_paste_style'] ?? $default['enabled_block_copy_paste_style'],
 			'enabled_only_selected_fonts' => $payload['enabled_only_selected_fonts'] ?? $default['enabled_only_selected_fonts'],
-			'selected_fonts' => $payload['selected_fonts'] ?? $default['selected_fonts'],
+			'selected_fonts' => $json_payload['selected_fonts'] ?? $default['selected_fonts'],
 			'enabled_coming_soon_page' => $payload['enabled_coming_soon_page'] ?? $default['enabled_coming_soon_page'],
 			'coming_soon_page' => $payload['coming_soon_page'] ?? $default['coming_soon_page'],
 			'enabled_maintenance_page' => $payload['enabled_maintenance_page'] ?? $default['enabled_maintenance_page'],
@@ -130,17 +140,11 @@ class Settings extends AbstractAjaxHandler {
 			'mailerlite_api_key' => $payload['mailerlite_api_key'] ?? '',
 		]);
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		do_action( 'ablocks/after_save_settings', $is_update, 'base', $_POST );
+		do_action( 'ablocks/after_save_settings', $is_update, 'base', $payload );
 		wp_send_json_success( $is_update );
 	}
 
-	public function fetch_posts() {
-		$payload = Sanitizer::sanitize_payload( [
-			'postId'   => 'integer',
-			'postType' => 'string',
-			'keyword'  => 'string',
-		], $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
-
+	public function fetch_posts( $payload ) {
 		$post_type = ( isset( $payload['postType'] ) ? $payload['postType'] : 'page' );
 		$postId    = ( isset( $payload['postId'] ) ? $payload['postId'] : 0 );
 		$keyword   = ( isset( $payload['keyword'] ) ? $payload['keyword'] : '' );

@@ -19,34 +19,70 @@ class Entry extends AbstractAjaxHandler {
 			/** Get entries with pagination */
 			'get_entries' => [
 				'callback' => [ $this, 'get_entries' ],
+				'fields'    => array(
+					'is_in_trash'  => 'string', // yes/no; default: no
+					'search'       => 'string', // name of form
+					'form_type'    => 'string', // name of form
+					'order'        => 'string', // asc/desc
+					'order_by'     => 'string', // created_at, id,
+					'date'         => 'string', // date :  format : y-m; eg: 2024-12,  get entries by a month of year;
+					'from_date'    => 'string', // date : y-m-d
+					'to_date'      => 'string', // date : y-m-d
+					'status'       => 'string', // all/read/unread
+					'per_page'     => 'integer', // int: default = 15
+					'current_page' => 'integer', // int
+					'export_csv'   => 'integer', // int
+				)
 			],
 			/** Get single entry */
 			'get_entry' => [
 				'callback' => [ $this, 'get_entry' ],
+				'fields'    => array(
+					'entry_id' => 'integer', // int : entry id
+				)
 			],
 			/** Edit entry */
 			'edit_entry' => [
 				'callback' => [ $this, 'edit_entry' ],
+				'fields'    => array(
+					'entry_id' => 'integer', // int : entry id
+					'data'     => 'array',
+				)
 			],
 			/** Delete entries */
 			'delete_entries' => [
 				'callback' => [ $this, 'delete_entries' ],
+				'fields'    => array(
+					'entry_id_array'     => 'array',
+				)
 			],
 			/** Mark entries as read */
 			'mark_entries_as_read' => [
 				'callback' => [ $this, 'mark_entries_as_read' ],
+				'fields'    => array(
+					'entry_id_array'     => 'array',
+				)
 			],
 			/** Mark entries as unread */
 			'mark_entries_as_unread' => [
 				'callback' => [ $this, 'mark_entries_as_unread' ],
+				'fields'    => array(
+					'entry_id_array'     => 'array',
+				)
 			],
 			/** Send one or more entries to trash */
 			'send_entries_to_trash' => [
 				'callback' => [ $this, 'send_entries_to_trash' ],
+				'fields'    => array(
+					'entry_id' => 'integer', // int : entry id
+				)
 			],
 			/** Send one or more entries to trash */
 			'restore_entries_from_trash' => [
 				'callback' => [ $this, 'restore_entries_from_trash' ],
+				'fields'    => array(
+					'entry_id' => 'integer', // int : entry id
+				)
 			],
 		];
 	}
@@ -88,22 +124,7 @@ class Entry extends AbstractAjaxHandler {
 	 * @param array $form_data The form data submitted by the user.
 	 * @return void
 	 */
-	public function get_entries( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'is_in_trash'  => 'string', // yes/no; default: no
-			'search'       => 'string', // name of form
-			'form_type'    => 'string', // name of form
-			'order'        => 'string', // asc/desc
-			'order_by'     => 'string', // created_at, id,
-			'date'         => 'string', // date :  format : y-m; eg: 2024-12,  get entries by a month of year;
-			'from_date'    => 'string', // date : y-m-d
-			'to_date'      => 'string', // date : y-m-d
-			'status'       => 'string', // all/read/unread
-			'per_page'     => 'integer', // int: default = 15
-			'current_page' => 'integer', // int
-			'export_csv'   => 'integer', // int
-		], $form_data);
-
+	public function get_entries( $payload ) {
 		wp_send_json_success(Query::get_entries(
 			$payload['is_in_trash'] ?? 'no',
 			$payload['search'] ?? null,
@@ -120,11 +141,7 @@ class Entry extends AbstractAjaxHandler {
 		));
 	}
 
-	public function get_entry( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'entry_id' => 'integer', // int : entry id
-		], $form_data);
-
+	public function get_entry( $payload ) {
 		if ( ! isset( $payload['entry_id'] ) ) {
 			wp_send_json_error( [ 'message' => __( 'Error', 'ablocks' ) ] );
 		}
@@ -143,12 +160,7 @@ class Entry extends AbstractAjaxHandler {
 	 * @param array $form_data The form data containing metadata details.
 	 * @return void
 	 */
-	public function edit_entry( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'entry_id' => 'integer', // int : entry id
-			'data'     => 'array', // associative array, depth 1
-		], $form_data);
-
+	public function edit_entry( $payload ) {
 		if ( ! isset( $payload['entry_id'] ) || ! isset( $payload['data'] ) ) {
 			wp_send_json_error( [ 'message' => __( 'Error', 'ablocks' ) ] );
 		}
@@ -166,11 +178,7 @@ class Entry extends AbstractAjaxHandler {
 	 * @param array $form_data The form data containing entry IDs to delete.
 	 * @return void
 	 */
-	public function delete_entries( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'entry_id_array' => 'array', // int[] : entry id  indexed array, depth 1
-		], $form_data);
-
+	public function delete_entries( $payload ) {
 		$deleted_entries = Query::delete_entries( $payload['entry_id_array'] ?? [] );
 		$num_of_entries_deleted = count( $deleted_entries );
 		if ( $num_of_entries_deleted === 0 ) {
@@ -194,10 +202,8 @@ class Entry extends AbstractAjaxHandler {
 	 * @param array $form_data The form data containing entry IDs to mark as updated.
 	 * @return void
 	 */
-	public function mark_entries_as_read( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'entry_id_array' => 'array', // int[] : entry id  indexed array, depth 1
-		], $form_data);
+	public function mark_entries_as_read( $payload ) {
+
 		$updated_entries = Query::update_status_of_entries( $payload['entry_id_array'] ?? [], 'read' );
 		$num_of_entries_updated = count( $updated_entries );
 		if ( $num_of_entries_updated === 0 ) {
@@ -221,10 +227,7 @@ class Entry extends AbstractAjaxHandler {
 	 * @param array $form_data The form data containing entry IDs to mark as updated.
 	 * @return void
 	 */
-	public function mark_entries_as_unread( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'entry_id_array' => 'array', // int[] : entry id  indexed array, depth 1
-		], $form_data);
+	public function mark_entries_as_unread( $payload ) {
 		$updated_entries = Query::update_status_of_entries( $payload['entry_id_array'] ?? [], 'unread' );
 		$num_of_entries_updated = count( $updated_entries );
 		if ( $num_of_entries_updated === 0 ) {
@@ -248,11 +251,7 @@ class Entry extends AbstractAjaxHandler {
 	 * @param array $form_data The form data containing entry IDs to move to trash.
 	 * @return void
 	 */
-	public function send_entries_to_trash( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'entry_id' => 'integer', // int : entry id
-		], $form_data);
-
+	public function send_entries_to_trash( $payload ) {
 		$updated = Query::update_trash_status_of_entries( $payload['entry_id'] ?? 0, 'yes' );
 		if ( empty( $updated ) ) {
 			wp_send_json_error([
@@ -271,11 +270,7 @@ class Entry extends AbstractAjaxHandler {
 	 * @param array $form_data The form data containing entry IDs to restore.
 	 * @return void
 	 */
-	public function restore_entries_from_trash( $form_data ) {
-		$payload = Sanitizer::sanitize_payload([
-			'entry_id' => 'integer', // int
-		], $form_data);
-
+	public function restore_entries_from_trash( $payload ) {
 		$updated = Query::update_trash_status_of_entries( $payload['entry_id'] ?? 0, 'no' );
 
 		if ( empty( $updated ) ) {

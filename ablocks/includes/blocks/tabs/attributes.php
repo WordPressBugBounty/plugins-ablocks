@@ -16,6 +16,18 @@ $attributes = [
 		'type' => 'string',
 		'default'   => '',
 	],
+	'tabIcons' => [
+		'type' => 'array',
+		'default' => []
+	],
+	'tabIconsClasses' => [
+		'type' => 'array',
+		'default' => [],
+	],
+	'clickedTabIndex' => [
+		'type' => 'number',
+		'default' => 0
+	],
 	'tabPositionChange' => [
 		'type' => 'boolean',
 		'default' => false
@@ -63,6 +75,10 @@ $attributes = [
 	'activeDuration' => [
 		'type' => 'number',
 		'default' => 5000
+	],
+	'activeColorOptions' => [
+		'type' => 'string',
+		'default' => 'background'
 	],
 	'tabMenuAlign' => [
 		'type' => 'string',
@@ -114,11 +130,11 @@ $attributes = [
 	],
 	'contentBackgroundColor' => [
 		'type' => 'string',
-		'default' => '#FFFFFF'
+		'default' => '#ffffff00'
 	],
 	'activeBorderColor' => [
 		'type' => 'string',
-		'default'   => 'transparent',
+		'default'   => '#61CE70',
 	],
 	'showTitle' => [
 		'type' => 'boolean',
@@ -189,7 +205,31 @@ $attributes = array_merge(
 		'unitDefaultValue' => 'px',
 	] ),
 	Range::get_attribute( [
+		'attributeName' => 'tabsWidth',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 30,
+		'hasUnit' => true,
+		'unitDefaultValue' => '%',
+	] ),
+	Range::get_attribute( [
+		'attributeName' => 'contentWidth',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 70,
+		'hasUnit' => true,
+		'unitDefaultValue' => '%',
+	] ),
+	Range::get_attribute( [
 		'attributeName' => 'tabsGap',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 10,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+	] ),
+	Range::get_attribute( [
+		'attributeName' => 'contentGap',
 		'attributeObjectKey' => 'value',
 		'isResponsive' => true,
 		'defaultValue' => 10,

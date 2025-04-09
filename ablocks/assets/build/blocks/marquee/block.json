@@ -48,8 +48,12 @@
             "default": 2
         },
         "gap": {
-            "type": "number",
-            "default": 12
+            "type": "object",
+            "default": {
+                "value": 12,
+                "valueTablet": "",
+                "valueMobile": ""
+            }
         },
         "_margin": {
             "type": "object",
