@@ -65,6 +65,7 @@ class Blocks {
 		new \ABlocks\Blocks\Search\Block();
 		new \ABlocks\Blocks\Carousel\Block();
 		new \ABlocks\Blocks\CarouselChild\Block();
+		new \ABlocks\Blocks\Chart\Block();
 		new \ABlocks\Blocks\Toggle\Block();
 		new \ABlocks\Blocks\ToggleChild\Block();
 		new \ABlocks\Blocks\Accordion\Block();
@@ -124,6 +125,7 @@ class Blocks {
 		new \ABlocks\Blocks\FormMultiStep\Block();
 		new \ABlocks\Blocks\FormMultiStepChild\Block();
 		new \ABlocks\Blocks\FormRadio\Block();
+		new \ABlocks\Blocks\TextPath\Block();
 	}
 
 	public function register_block_category( $categories, $post ) {

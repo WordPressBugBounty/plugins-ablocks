@@ -29,6 +29,11 @@ class Installer {
 		if ( ! $this->ablocks_version ) {
 			add_option( 'ablocks_version', ABLOCKS_VERSION );
 			add_option( 'ablocks_fonts', '{}' );
+			// Save Default activated addon
+			$addons_default_settings = [
+				'theme-builder' => true
+			];
+			add_option( ABLOCKS_ADDONS_SETTINGS_NAME, wp_json_encode( $addons_default_settings ) );
 		}
 		if ( ! get_option( 'ablocks_first_install_time' ) ) {
 			add_option( 'ablocks_first_install_time', Helper::get_time(), '', false );

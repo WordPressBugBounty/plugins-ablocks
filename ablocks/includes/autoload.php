@@ -17,6 +17,15 @@ class Autoload {
 	private static $instance;
 
 	/**
+	 * Autoload directories for different namespaces.
+	 *
+	 * @var array
+	 */
+	private $autoload_directories = array(
+		'ABlocks' => ABLOCKS_ROOT_DIR_PATH . 'includes/',
+	);
+
+	/**
 	 * Initiator
 	 *
 	 * @since 1.1.0
@@ -28,29 +37,39 @@ class Autoload {
 		}
 		return self::$instance;
 	}
+
+	/**
+	 * Register autoload directories for namespaces.
+	 *
+	 * @param string $namespace Namespace to autoload.
+	 * @param string $directory Directory path for the namespace.
+	 */
+	public function add_namespace_directory( $namespace, $directory ) {
+		$this->autoload_directories[ $namespace ] = $directory;
+	}
+
 	/**
 	 * Autoload classes.
 	 *
-	 * @param string $class class name.
+	 * @param string $class Class name.
 	 */
 	public function autoload( $class ) {
-		if ( 0 !== strpos( $class, __NAMESPACE__ ) ) {
-			return;
-		}
-		$class_to_load = $class;
-		$filename = strtolower(
-			preg_replace(
-				[ '/^' . __NAMESPACE__ . '\\\/', '/([a-z])([A-Z])/', '/_/', '/\\\/' ],
-				[ '', '$1-$2', '-', DIRECTORY_SEPARATOR ],
-				$class_to_load
-			)
-		);
-
-		$file = ABLOCKS_INCLUDES_DIR_PATH . $filename . '.php';
-
-		// if the file redable, include it.
-		if ( is_readable( $file ) ) {
-			require_once $file;
+		foreach ( $this->autoload_directories as $namespace => $directory ) {
+			if ( 0 === strpos( $class, $namespace ) ) {
+				$class_to_load = $class;
+				$filename = strtolower(
+					preg_replace(
+						[ '/^' . $namespace . '\\\/', '/([a-z])([A-Z])/', '/_/', '/\\\/' ],
+						[ '', '$1-$2', '-', DIRECTORY_SEPARATOR ],
+						$class_to_load
+					)
+				);
+				$file = $directory . $filename . '.php';
+				// If the file is readable, include it.
+				if ( is_readable( $file ) ) {
+					require_once $file;
+				}
+			}
 		}
 	}
 
@@ -63,5 +82,6 @@ class Autoload {
 		spl_autoload_register( [ $this, 'autoload' ] );
 	}
 }
+
 
 Autoload::get_instance();

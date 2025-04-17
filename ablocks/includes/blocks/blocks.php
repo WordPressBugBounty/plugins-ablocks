@@ -19,6 +19,7 @@ return [
 	'search',
 	'container',
 	'toggle',
+	'chart',
 	'toggle-child',
 	'accordion',
 	'single-accordion',
@@ -82,6 +83,7 @@ return [
 	'form-password',
 	'form-select',
 	'form-radio',
+	'text-path',
 	// Academy LMS
 	'academy-certificate',
 	'academy-certificate-id',

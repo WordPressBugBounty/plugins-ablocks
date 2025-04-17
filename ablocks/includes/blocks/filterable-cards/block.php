@@ -85,6 +85,8 @@ class Block extends BlockBaseAbstract {
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards-load-more-wrapper',
 			$this->filterable_Cards_More_Wrapper( $attributes ),
+			$this->filterable_Cards_More_Wrapper( $attributes, 'Tablet' ),
+			$this->filterable_Cards_More_Wrapper( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards-showMore-button',
@@ -279,11 +281,21 @@ class Block extends BlockBaseAbstract {
 		}
 		return $css;
 	}
-	private function filterable_Cards_More_Wrapper( $attributes ) {
+	private function filterable_Cards_More_Wrapper( $attributes, $device = '' ) {
 		$css = [];
 		if ( isset( $attributes['moreButtonAlignment'] ) ) {
 			$css['justify-content'] = $attributes['moreButtonAlignment'];
 		}
+		$css = array_merge($css, Range::get_css([
+			'attributeValue' => $attributes['loadMoreButtonGap'] ?? null,
+			'attribute_object_key' => 'value',
+			'isResponsive' => true,
+			'hasUnit' => false,
+			'unitDefaultValue' => 'px',
+			'defaultValue' => '',
+			'property' => 'margin-top',
+			'device' => $device,
+		]));
 		return $css;
 	}
 	private function filterable_loadMore_button( $attributes, $device = '' ) {

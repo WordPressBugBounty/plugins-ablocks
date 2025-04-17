@@ -20,7 +20,6 @@ class Assets {
 		add_action( 'enqueue_block_assets', [ $self, 'block_editor_assets' ] );
 		add_action( 'enqueue_block_assets', [ $self, 'register_scripts' ] );
 		add_action( 'wp_enqueue_scripts', [ $self, 'front_end_google_fonts' ] );
-		add_action( 'wp_enqueue_scripts', [ $self, 'register_scripts' ] );
 
 		add_action( 'wp_enqueue_scripts', [ $self, 'enqueue_frontend_assets' ], 99 );
 		add_action( 'wp_enqueue_scripts', [ $self, 'enqueue_frontend_localize_script' ] );
@@ -61,7 +60,8 @@ class Assets {
 				'enabled_only_selected_fonts' => (bool) Helper::get_settings( 'enabled_only_selected_fonts', false ),
 				'selected_fonts' => (array) Helper::get_settings( 'selected_fonts', [] ),
 			],
-			'is_gutenberg_editor' => Helper::is_gutenberg_editor(),
+			'is_gutenberg_editor'   => Helper::is_gutenberg_editor(),
+			'is_fse_theme'          => Helper::is_fse_theme(),
 			'third_party_plugin_status' => [
 				'academy_lms' => Helper::is_active_academy(),
 				'storeengine' => Helper::is_active_storeengine(),

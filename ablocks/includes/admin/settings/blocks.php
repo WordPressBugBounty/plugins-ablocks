@@ -63,6 +63,11 @@ class Blocks {
 			'marquee' => true,
 			'marquee-child' => true,
 			'logout' => true,
+			'chart' => true,
+			'text-path' => true,
+			'advance-lists' => true,
+			'stacked-cards' => true,
+			'filterable-card' => true,
 			// Academy LMS Blocks
 			'academy-courses' => true,
 			'academy-course-search' => true,

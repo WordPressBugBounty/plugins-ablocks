@@ -552,6 +552,14 @@
                 "valueMobile": ""
             }
         },
+        "loadMoreButtonGap": {
+            "type": "object",
+            "default": {
+                "value": "",
+                "valueTablet": "",
+                "valueMobile": ""
+            }
+        },
         "itemGap": {
             "type": "object",
             "default": {

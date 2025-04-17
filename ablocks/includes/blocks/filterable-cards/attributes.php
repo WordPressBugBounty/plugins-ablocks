@@ -187,6 +187,14 @@ $attributes = array_merge(
 		'unitDefaultValue' => 'px',
 	]),
 	Range::get_attribute([
+		'attributeName' => 'loadMoreButtonGap',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => '',
+		'hasUnit' => false,
+		'unitDefaultValue' => 'px',
+	]),
+	Range::get_attribute([
 		'attributeName' => 'itemGap',
 		'attributeObjectKey' => 'value',
 		'isResponsive' => true,

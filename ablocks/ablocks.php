@@ -4,7 +4,7 @@
  * Description:       The WordPress plugin for creating beautiful and functional websites using the Gutenberg editor, with a variety of customizable blocks to design website pages.
  * Requires at least: 6.3
  * Requires PHP:      7.4
- * Version:           1.8.0
+ * Version:           1.9.0
  * Author:            Academy LMS
  * Author URI:        https://ablocks.pro/
  * License:           GPL-3.0+
@@ -40,7 +40,7 @@ final class ABlocks {
 	 * Define the plugin constants
 	 */
 	private function define_constants() {
-		define( 'ABLOCKS_VERSION', '1.8.0' );
+		define( 'ABLOCKS_VERSION', '1.9.0' );
 		define( 'ABLOCKS_PLUGIN_SLUG', 'ablocks' );
 		define( 'ABLOCKS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 		define( 'ABLOCKS_ROOT_URL', plugin_dir_url( __FILE__ ) );
@@ -49,9 +49,11 @@ final class ABlocks {
 		define( 'ABLOCKS_ASSETS_PATH', ABLOCKS_ROOT_DIR_PATH . 'assets/' );
 		define( 'ABLOCKS_INCLUDES_DIR_PATH', ABLOCKS_ROOT_DIR_PATH . 'includes/' );
 		define( 'ABLOCKS_BLOCKS_DIR_PATH', ABLOCKS_ROOT_DIR_PATH . 'includes/blocks/' );
+		define( 'ABLOCKS_ADDONS_DIR_PATH', ABLOCKS_ROOT_DIR_PATH . 'addons/' );
 		define( 'ABLOCKS_BLOCKS_VISIBILITY_SETTINGS_NAME', 'ablocks_blocks' );
 		define( 'ABLOCKS_FONTS_SETTINGS_NAME', 'ablocks_fonts' );
 		define( 'ABLOCKS_SETTINGS_NAME', 'ablocks_settings' );
+		define( 'ABLOCKS_ADDONS_SETTINGS_NAME', 'ablocks_addons' );
 		define( 'ABLOCKS_TEMPLATE_LIB_HOST', 'template-kits.com' );
 	}
 
@@ -68,6 +70,7 @@ final class ABlocks {
 		$GLOBALS['ablocks_fonts'] = json_decode( get_option( ABLOCKS_FONTS_SETTINGS_NAME, '{}' ), true );
 		$GLOBALS['ablocks_blocks'] = json_decode( get_option( ABLOCKS_BLOCKS_VISIBILITY_SETTINGS_NAME, '{}' ) );
 		$GLOBALS['ablocks_settings'] = json_decode( get_option( ABLOCKS_SETTINGS_NAME, '{}' ) );
+		$GLOBALS['ablocks_addons'] = json_decode( get_option( ABLOCKS_ADDONS_SETTINGS_NAME, '{}' ) );
 	}
 
 	/**
@@ -84,6 +87,7 @@ final class ABlocks {
 
 	public function init_plugin() {
 		ABlocks\Migration::init();
+		ABlocks\Addons::init();
 		ABlocks\Blocks::init();
 		ABlocks\Assets::init();
 		ABlocks\Ajax::init();
@@ -91,6 +95,7 @@ final class ABlocks {
 			ABlocks\Admin::init();
 		}
 		ABlocks\Frontend::init();
+
 	}
 
 	public function activate() {

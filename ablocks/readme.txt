@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 5.4
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.8.0
+Stable tag: 1.9.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -150,6 +150,14 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 8. Instant Style Copy-Paste
 
 == Changelog ==
+
+= 1.9.0 - 17/04/2025 =
+* Added - New Theme Builder Features 
+* Added - New Text Path Block 
+* Added - New Chart Block
+* Fixed - Filterable Card block responsive issue
+* Fixed - Global Tooltip not worked issue
+* Fixed - Demo Import image not worked issue
 
 = 1.8.0 - 09/04/2025 =
 * Added - New Marquee Block

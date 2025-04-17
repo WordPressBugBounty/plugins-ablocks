@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ablocks';
-  src:  url('fonts/ablocks.eot?if8has');
-  src:  url('fonts/ablocks.eot?if8has#iefix') format('embedded-opentype'),
-    url('fonts/ablocks.ttf?if8has') format('truetype'),
-    url('fonts/ablocks.woff?if8has') format('woff'),
-    url('fonts/ablocks.svg?if8has#ablocks') format('svg');
+  src:  url('fonts/ablocks.eot?ze28lf');
+  src:  url('fonts/ablocks.eot?ze28lf#iefix') format('embedded-opentype'),
+    url('fonts/ablocks.ttf?ze28lf') format('truetype'),
+    url('fonts/ablocks.woff?ze28lf') format('woff'),
+    url('fonts/ablocks.svg?ze28lf#ablocks') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ablocks-icon--theme-builder:before {
+  content: "\e9c5";
+}
+.ablocks-icon--stripe:before {
+  content: "\e9b1";
+}
+.ablocks-icon--loop-builder:before {
+  content: "\e9c4";
+}
+.ablocks-icon--eye:before {
+  content: "\e9c0";
+}
+.ablocks-icon--trash:before {
+  content: "\e9c3";
+}
+.ablocks-icon--vertical-menu:before {
+  content: "\e9be";
+}
+.ablocks-icon--angle-up:before {
+  content: "\e9bc";
+}
 .ablocks-icon--database:before {
   content: "\e9ba";
 }
@@ -74,9 +95,6 @@
 }
 .ablocks-icon--progress-bar:before {
   content: "\e9b0";
-}
-.ablocks-icon--stripe:before {
-  content: "\e9b1";
 }
 .ablocks-icon--dual-button:before {
   content: "\e9bd";
@@ -131,6 +149,9 @@
 }
 .ablocks-icon--subscription:before {
   content: "\e9a5";
+}
+.ablocks-icon--chart:before {
+  content: "\e9c0";
 }
 .ablocks-icon--price-menu:before {
   content: "\e99c";

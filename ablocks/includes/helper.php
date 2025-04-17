@@ -98,6 +98,18 @@ class Helper {
 				'capability'  => 'manage_options',
 			];
 		}
+		if ( self::get_addon_active_status( 'theme-builder' ) ) {
+			$menu[ ABLOCKS_PLUGIN_SLUG . '-theme-builder' ]   = [
+				'parent_slug' => ABLOCKS_PLUGIN_SLUG,
+				'title'       => __( 'Theme Builder', 'ablocks' ),
+				'capability'  => 'manage_options',
+			];
+		}
+		$menu[ ABLOCKS_PLUGIN_SLUG . '-addons' ]   = [
+			'parent_slug' => ABLOCKS_PLUGIN_SLUG,
+			'title'       => __( 'Add-ons', 'ablocks' ),
+			'capability'  => 'manage_options',
+		];
 		$menu[ ABLOCKS_PLUGIN_SLUG . '-settings' ]   = [
 			'parent_slug' => ABLOCKS_PLUGIN_SLUG,
 			'title'       => __( 'Settings', 'ablocks' ),
@@ -538,6 +550,22 @@ class Helper {
 	}
 	public static function plugin_path() {
 		return apply_filters( 'ablocks/plugin_path', ABLOCKS_ROOT_DIR_PATH );
+	}
+
+	public static function get_addon_active_status( $addon_name, $is_pro = false ) {
+		global $ablocks_addons;
+		if ( $is_pro && ! self::is_active_ablocks_pro() ) {
+			return false;
+		}
+		if ( isset( $ablocks_addons->{$addon_name} ) ) {
+			return (bool) $ablocks_addons->{$addon_name};
+		}
+
+		return false;
+	}
+
+	public static function sanitize_checkbox_field( $boolean ) {
+		return filter_var( sanitize_text_field( $boolean ), FILTER_VALIDATE_BOOLEAN );
 	}
 
 	public static function is_valid_site_url( string $url ): bool {

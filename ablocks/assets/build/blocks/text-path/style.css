@@ -1,0 +1,18 @@
+
+.ablocks-text-path {
+    display: flex;
+    box-sizing: border-box;
+}
+
+.ablocks-text-path svg {
+    height: auto;
+    max-width: 100%;
+    overflow: visible;
+    width: var(--width);
+}
+
+.ablocks-text-path text {
+    fill: currentColor;
+    cursor: pointer;
+    text-decoration: none;
+}
