@@ -131,7 +131,7 @@ trait Importer {
 		$installed_plugins = get_plugins();
 		foreach ( $installed_plugins as $plugin_file => $plugin_data ) {
 			if ( strpos( $plugin_file, $plugin_slug . '/' ) === 0 ) {
-				$activation = activate_plugin( $plugin_file );
+				$activation = activate_plugin( $plugin_file, false, false, true );
 				if ( is_wp_error( $activation ) ) {
 					return $activation;
 				}
@@ -167,7 +167,7 @@ trait Importer {
 		}
 
 		if ( ! is_plugin_active( $plugin_name ) ) {
-			$activation = activate_plugin( $plugin_name );
+			$activation = activate_plugin( $plugin_name, false, false, true );
 
 			if ( is_wp_error( $activation ) ) {
 				return $activation;

@@ -331,15 +331,28 @@ class Helper {
 		return false;
 	}
 
-	public static function get_block_attributes( $post_id, $block_id, $block_name ) {
-		$post_content = get_post_field( 'post_content', $post_id );
-		$blocks = parse_blocks( $post_content );
-		return self::get_block_attributes_recursive( $block_id, $block_name, $blocks );
-
+	public static function get_content_by_object_id( string $id_or_fse_slug ) : ?string {
+		if ( is_numeric( $id_or_fse_slug ) ) {
+			return get_post_field( 'post_content', intval( $id_or_fse_slug ) );
+		} elseif (
+			! empty( $template = get_block_template( $id_or_fse_slug, 'wp_template_part' ) ) ||
+			! empty( $template = get_block_template( $id_or_fse_slug ) )
+		) {
+			return $template->content;
+		}
+		return null;
 	}
 
-	public static function get_block_attributes_recursive( $block_id, $block_name, $blocks ) {
+	public static function get_block_attributes( string $post_id, string $block_id, string $block_name ) : array {
+		if ( ! is_null( $post_content = self::get_content_by_object_id( $post_id ) ) ) {
+			if ( is_array( $blocks = parse_blocks( $post_content ) ) ) {
+				return self::get_block_attributes_recursive( $block_id, $block_name, $blocks );
+			}
+		}
+		return [];
+	}
 
+	public static function get_block_attributes_recursive( string $block_id, string $block_name, array $blocks ) : array {
 		foreach ( $blocks as $block ) {
 
 			if (

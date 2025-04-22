@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ablocks';
-  src:  url('fonts/ablocks.eot?ze28lf');
-  src:  url('fonts/ablocks.eot?ze28lf#iefix') format('embedded-opentype'),
-    url('fonts/ablocks.ttf?ze28lf') format('truetype'),
-    url('fonts/ablocks.woff?ze28lf') format('woff'),
-    url('fonts/ablocks.svg?ze28lf#ablocks') format('svg');
+  src:  url('fonts/ablocks.eot?pvmuta');
+  src:  url('fonts/ablocks.eot?pvmuta#iefix') format('embedded-opentype'),
+    url('fonts/ablocks.ttf?pvmuta') format('truetype'),
+    url('fonts/ablocks.woff?pvmuta') format('woff'),
+    url('fonts/ablocks.svg?pvmuta#ablocks') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ablocks-icon--qr-code:before {
+  content: "\e9c6";
+}
 .ablocks-icon--theme-builder:before {
   content: "\e9c5";
 }

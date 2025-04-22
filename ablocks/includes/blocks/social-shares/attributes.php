@@ -115,6 +115,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'iconFillColor' => [
+		'type' => 'string',
+		'default' => '#ffffff',
+	],
 	'shareTextBgColor' => [
 		'type' => 'string',
 		'default' => '',

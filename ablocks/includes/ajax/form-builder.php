@@ -56,7 +56,7 @@ class FormBuilder extends AbstractAjaxHandler {
 				'callback' => array( $this, 'handle_form_submission' ),
 				'allow_visitor_action' => true,
 				'fields' => array(
-					'current_post_id' => 'integer',
+					'current_post_id' => 'string',
 					'block_id' => 'string',
 				)
 			),

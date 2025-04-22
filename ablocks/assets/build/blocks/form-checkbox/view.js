@@ -1,0 +1,1 @@
+(()=>{"use strict";document.addEventListener("DOMContentLoaded",(()=>{document.querySelectorAll(".ablocks-form-builder__field").forEach((e=>{!function(e){const t=e?.querySelector(".ablocks-form-builder__field__content"),c=(t?.querySelector("label"),t?.querySelector("input"));t?.addEventListener("click",(e=>{e.target!==c&&(c.checked=!c.checked)}))}(e)}))}))})();

@@ -1,0 +1,15 @@
+// Insert a new form entry
+$entry_id = insert_form_entry('contact', 'John Doe', 'john@example.com', 'unread');
+
+// Add metadata for the original entry (e.g., subject and message)
+add_form_meta($entry_id, 'subject', 'Inquiry about services');
+add_form_meta($entry_id, 'message', 'I am interested in your services.');
+
+// Insert a reply to the original entry
+$reply_id = insert_form_entry('contact', 'Support Agent', 'support@example.com', 'replied', $entry_id);
+
+// Add metadata for the reply (e.g., reply message)
+add_form_meta($reply_id, 'message', 'Thank you for your inquiry!');
+
+// Retrieve the original entry with all replies
+$entry_with_replies = get_form_entry_with_replies($entry_id);

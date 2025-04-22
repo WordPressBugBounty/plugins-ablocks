@@ -21,6 +21,8 @@ class Migration {
 		if ( ABLOCKS_VERSION !== $ablocks_version ) {
 			Settings::save_settings();
 			$this->migrate_1_6_3( $ablocks_version );
+			$this->migrate_1_8_0( $ablocks_version );
+			$this->migrate_1_9_0( $ablocks_version );
 			update_option( 'ablocks_version', ABLOCKS_VERSION );
 		}
 	}
@@ -34,6 +36,21 @@ class Migration {
 			Database\CreateFormTable::down( $prefix );
 			// Crate New database table
 			Database::create_initial_custom_table();
+		}
+	}
+	public function migrate_1_8_0( $version ) {
+		if ( version_compare( $version, '1.8.0', '<=' ) ) {
+			global $wpdb;
+			$table_name = $wpdb->prefix . ABLOCKS_PLUGIN_SLUG . '_form_entries';
+			$wpdb->query( "ALTER TABLE {$table_name} MODIFY post_id VARCHAR(100) NULL" );
+		}
+	}
+
+	public function migrate_1_9_0( $version ) {
+		if ( version_compare( $version, '1.9.0', '<=' ) ) {
+			$saved_addons = (array) json_decode( get_option( ABLOCKS_ADDONS_SETTINGS_NAME ), true );
+			$saved_addons[ 'theme-builder' ] = true;
+			update_option( ABLOCKS_ADDONS_SETTINGS_NAME, wp_json_encode( $saved_addons ) );
 		}
 	}
 

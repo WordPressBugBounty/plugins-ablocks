@@ -485,7 +485,7 @@ class Query {
 
 	public static function add_new_entry(
 		string $form_type,
-		int $post_id,
+		string $post_id,
 		string $user_email,
 		string $ip,
 		string $user_agent,

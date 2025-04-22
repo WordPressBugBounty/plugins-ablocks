@@ -14,7 +14,7 @@ class CreateFormTable {
             id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
             form_type VARCHAR(50) NOT NULL,
 
-            post_id BIGINT(20) NULL,  -- for post id
+            post_id VARCHAR(100) NULL,  -- for post id
             ip VARCHAR(100) NULL,  -- for user ip
             is_in_trash VARCHAR(20) DEFAULT 'no',  
             user_agent VARCHAR(250) NULL,  -- for user browser agent
