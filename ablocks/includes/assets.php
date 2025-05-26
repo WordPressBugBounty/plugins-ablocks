@@ -185,21 +185,25 @@ class Assets {
 				1
 			);
 
-			wp_enqueue_style( 'ablocks-fonts', $this->web_fonts_url( 'Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap' ), array(), ABLOCKS_VERSION );
-			wp_enqueue_style( 'ablocks-icon', ABLOCKS_ASSETS_URL . 'library/css/ablocks-icon/style.css', array( 'wp-components' ), filemtime( ABLOCKS_ASSETS_PATH . 'library/css/ablocks-icon/style.css' ), 'all' );
-			wp_enqueue_style( 'ablocks-dashboard-style', ABLOCKS_ASSETS_URL . 'build/demo-import.css', array( 'wp-components' ), filemtime( ABLOCKS_ASSETS_PATH . 'build/demo-import.css' ), 'all' );
-
-			$dependencies = include ABLOCKS_ASSETS_PATH . 'build/demo-import.asset.php';
-			wp_enqueue_script(
-				'ablocks-demo-import-scripts',
-				ABLOCKS_ASSETS_URL . 'build/demo-import.js',
-				$dependencies['dependencies'],
-				$dependencies['version'],
-				true
-			);
-			wp_localize_script( 'ablocks-demo-import-scripts', 'ABlocksGlobal', $this->get_dashboard_localize_script_data() );
-			wp_set_script_translations( 'ablocks-demo-import-scripts', 'ablocks', ABLOCKS_ROOT_DIR_PATH . 'languages' );
+			$this->demo_template_importer_scripts();
 		}//end if
+	}
+
+	public function demo_template_importer_scripts(){
+		wp_enqueue_style( 'ablocks-fonts', $this->web_fonts_url( 'Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap' ), array(), ABLOCKS_VERSION );
+		wp_enqueue_style( 'ablocks-icon', ABLOCKS_ASSETS_URL . 'library/css/ablocks-icon/style.css', array( 'wp-components' ), filemtime( ABLOCKS_ASSETS_PATH . 'library/css/ablocks-icon/style.css' ), 'all' );
+		wp_enqueue_style( 'ablocks-dashboard-style', ABLOCKS_ASSETS_URL . 'build/demo-import.css', array( 'wp-components' ), filemtime( ABLOCKS_ASSETS_PATH . 'build/demo-import.css' ), 'all' );
+
+		$dependencies = include ABLOCKS_ASSETS_PATH . 'build/demo-import.asset.php';
+		wp_enqueue_script(
+			'ablocks-demo-import-scripts',
+			ABLOCKS_ASSETS_URL . 'build/demo-import.js',
+			$dependencies['dependencies'],
+			$dependencies['version'],
+			true
+		);
+		wp_localize_script( 'ablocks-demo-import-scripts', 'ABlocksGlobal', $this->get_dashboard_localize_script_data() );
+		wp_set_script_translations( 'ablocks-demo-import-scripts', 'ablocks', ABLOCKS_ROOT_DIR_PATH . 'languages' );
 	}
 
 	public function web_fonts_url( $font ) {

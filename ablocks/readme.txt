@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 5.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.9.1
+Stable tag: 1.9.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -150,6 +150,9 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 8. Instant Style Copy-Paste
 
 == Changelog ==
+
+= 1.9.2 - 26/05/2025 =
+* Fixed - Security issue
 
 = 1.9.1 - 22/04/2025 =
 * Fixed - Form Builder FSE theme compatibility issue

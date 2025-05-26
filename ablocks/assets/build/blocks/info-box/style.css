@@ -1,5 +1,4 @@
 .ablocks-block--info-box{
-	display: flex;
 	padding: 30px;
 	border: 1px solid #DDDDDF;
 }
@@ -10,6 +9,7 @@
 }
 
 .ablocks-block--info-box__content{
+	width: 100%;;
 	display: flex;
 	flex-direction: column;
 }

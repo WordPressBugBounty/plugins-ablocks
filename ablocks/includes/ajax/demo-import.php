@@ -18,55 +18,55 @@ class DemoImport extends AbstractAjaxHandler {
 
 	public function __construct() {
 		$this->actions = array(
-			'get_demo_list'      => array(
+			'get_demo_list'       => array(
 				'callback' => array( $this, 'get_demo_list' ),
-				'fields'    => array(
-					'type' => 'string',
+				'fields'   => array(
+					'type'      => 'string',
 					'cost_type' => 'string',
-					'page' => 'integer',
-					'per_page' => 'integer',
-					'category' => 'string',
-					'dev' => 'string',
-					'q' => 'string',
+					'page'      => 'integer',
+					'per_page'  => 'integer',
+					'category'  => 'string',
+					'dev'       => 'string',
+					'q'         => 'string',
 				)
 			),
-			'get_single_demo'      => array(
+			'get_single_demo'     => array(
 				'callback' => array( $this, 'get_single_demo' ),
-				'fields'    => array(
-					'id' => 'integer',
+				'fields'   => array(
+					'id'          => 'integer',
 					'with_images' => 'string',
 				)
 			),
-			'get_demo_categories'      => array(
+			'get_demo_categories' => array(
 				'callback' => array( $this, 'get_demo_categories' ),
-				'fields'    => array(
+				'fields'   => array(
 					'type' => 'string',
 				)
 			),
-			'get_theme_demos'      => array(
+			'get_theme_demos'     => array(
 				'callback' => array( $this, 'get_theme_demos' ),
 			),
-			'check_dependencies'      => array(
+			'check_dependencies'  => array(
 				'callback' => array( $this, 'check_dependencies' ),
-				'fields'    => array(
+				'fields'   => array(
 					'dependencies' => 'array|string',
 				)
 			),
-			'install_and_active'      => array(
+			'install_and_active'  => array(
 				'callback' => array( $this, 'install_and_active' ),
-				'fields'    => array(
+				'fields'   => array(
 					'dependency' => 'array|string',
 				)
 			),
-			'import_template'      => array(
+			'import_template'     => array(
 				'callback' => array( $this, 'import_template' ),
-				'fields'    => array(
-					'file_url' => 'string',
+				'fields'   => array(
+					'file_url'            => 'string',
 					'customizer_file_url' => 'string',
-					'widget_file_url' => 'string',
-					'codestar_file_url' => 'string',
-					'redux_options' => 'json',
-					'with_images' => 'boolean',
+					'widget_file_url'     => 'string',
+					'codestar_file_url'   => 'string',
+					'redux_options'       => 'json',
+					'with_images'         => 'boolean',
 				)
 			),
 		);
@@ -81,9 +81,9 @@ class DemoImport extends AbstractAjaxHandler {
 	 */
 	public function get_demo_list( array $data ) {
 		$args = [
-			'type' => $data['type'] ?? 'pattern',
+			'type'      => $data['type'] ?? 'pattern',
 			'cost_type' => $data['cost_type'] ?? 'all',
-			'page' => $data['page'] ?? 1,
+			'page'      => $data['page'] ?? 1,
 		];
 
 		if ( isset( $data['category'] ) ) {
@@ -102,8 +102,8 @@ class DemoImport extends AbstractAjaxHandler {
 			$args['per_page'] = $data['per_page'];
 		}
 
-		$hash = md5( wp_json_encode( $args ) );
-		$key = "ablocks_demo_$hash";
+		$hash         = md5( wp_json_encode( $args ) );
+		$key          = "ablocks_demo_$hash";
 		$has_response = get_transient( $key );
 		if ( $has_response ) {
 			wp_send_json_success( $has_response );
@@ -125,14 +125,14 @@ class DemoImport extends AbstractAjaxHandler {
 		if ( ! $data['id'] ) {
 			wp_send_json_error( __( 'id is required.', 'ablocks' ) );
 		}
-		$id = absint( $data['id'] );
+		$id          = absint( $data['id'] );
 		$with_images = isset( $data['with_images'] ) && true === (bool) $data['with_images'];
 
-		$key = 'ablocks_demo_item_' . $id;
+		$key          = 'ablocks_demo_item_' . $id;
 		$has_response = get_transient( $key );
 		if ( $has_response ) {
 			if ( $with_images && ! isset( $has_response['remote_images_parsed'] ) ) {
-				$has_response['content'] = Helper::parse_remote_images( $has_response['content'] );
+				$has_response['content']              = Helper::parse_remote_images( $has_response['content'] );
 				$has_response['remote_images_parsed'] = true;
 				set_transient( $key, $has_response, WEEK_IN_SECONDS );
 			}
@@ -140,15 +140,15 @@ class DemoImport extends AbstractAjaxHandler {
 			wp_send_json_success( $has_response );
 		}
 
-		$url = 'https://' . ABLOCKS_TEMPLATE_LIB_HOST . '/wp-json/ablocks_server/v1/ablocks/' . $id;
+		$url      = 'https://' . ABLOCKS_TEMPLATE_LIB_HOST . '/wp-json/ablocks_server/v1/ablocks/' . $id;
 		$response = wp_safe_remote_get( $url );
 		if ( is_wp_error( $response ) ) {
 			wp_send_json_error( $response->get_error_message() );
 		}
 
 		$response_code = wp_remote_retrieve_response_code( $response );
-		$response = wp_remote_retrieve_body( $response );
-		$response = json_decode( $response, true );
+		$response      = wp_remote_retrieve_body( $response );
+		$response      = json_decode( $response, true );
 		if ( $response_code !== 200 ) {
 			wp_send_json_error( $response );
 		}
@@ -157,7 +157,7 @@ class DemoImport extends AbstractAjaxHandler {
 		if ( $with_images ) {
 			$content = $response['content'] ?? null;
 			if ( $content ) {
-				$response['content'] = Helper::parse_remote_images( wp_unslash( $content ) );
+				$response['content']              = Helper::parse_remote_images( wp_unslash( $content ) );
 				$response['remote_images_parsed'] = true;
 			}
 		}
@@ -174,8 +174,8 @@ class DemoImport extends AbstractAjaxHandler {
 	 * @return void
 	 */
 	public function get_demo_categories( array $data ) {
-		$type = $data['type'] ?? 'pattern';
-		$key = "ablocks_demo_categories_$type";
+		$type         = $data['type'] ?? 'pattern';
+		$key          = "ablocks_demo_categories_$type";
 		$has_response = get_transient( $key );
 		if ( $has_response ) {
 			wp_send_json_success( $has_response );
@@ -194,37 +194,37 @@ class DemoImport extends AbstractAjaxHandler {
 	public function get_theme_demos() {
 		$demo_config = Helper::get_theme_demo_config();
 		if ( ! $demo_config ) {
-			wp_send_json_error([
+			wp_send_json_error( [
 				'message' => 'Current theme demo isn\'t configured.',
-			]);
+			] );
 		}
 
-		$demos = $demo_config['demos'];
+		$demos      = $demo_config['demos'];
 		$categories = [];
 		foreach ( $demos as &$demo ) {
 			$demo_categories = [];
 			foreach ( $demo['categories'] as $category ) {
 				if ( is_array( $category ) ) {
-					$categories[] = $category;
+					$categories[]      = $category;
 					$demo_categories[] = $category;
 				} else {
-					$demo_category = [
+					$demo_category     = [
 						'label' => ucfirst( $category ),
-						'slug' => str_replace( ' ', '-', trim( $category ) ),
+						'slug'  => str_replace( ' ', '-', trim( $category ) ),
 					];
-					$categories[] = $demo_category;
+					$categories[]      = $demo_category;
 					$demo_categories[] = $demo_category;
 				}
 			}
 			$demo['categories'] = $demo_categories;
 		}
 
-		$preloaded_categories = array_map(fn ( $category) => is_array( $category ) ? $category : [
+		$preloaded_categories = array_map( fn( $category ) => is_array( $category ) ? $category : [
 			'label' => ucfirst( $category ),
-			'slug' => str_replace( ' ', '-', trim( $category ) ),
-		], $demo_config['preloaded_demo_category']);
+			'slug'  => str_replace( ' ', '-', trim( $category ) ),
+		], $demo_config['preloaded_demo_category'] );
 
-		$categories_slugs = array_map( fn ( $category) => $category['slug'], $categories );
+		$categories_slugs = array_map( fn( $category ) => $category['slug'], $categories );
 		foreach ( $preloaded_categories as $preloaded_category ) {
 			if ( ! in_array( $preloaded_category['slug'], $categories_slugs, true ) ) {
 				$categories[] = $preloaded_category;
@@ -232,10 +232,10 @@ class DemoImport extends AbstractAjaxHandler {
 		}
 
 		wp_send_json_success( array(
-			'categories' => $categories,
-			'preloaded_demo' => $demo_config['preloaded_demo'],
+			'categories'                => $categories,
+			'preloaded_demo'            => $demo_config['preloaded_demo'],
 			'preloaded_demo_categories' => $preloaded_categories,
-			'demos' => $demos,
+			'demos'                     => $demos,
 		) );
 	}
 
@@ -253,8 +253,8 @@ class DemoImport extends AbstractAjaxHandler {
 
 		$dependencies = Sanitizer::sanitize_array_field( $data['dependencies'] );
 		foreach ( $dependencies as $index => $dependency ) {
-			$type = 'check_' . ( $dependency['type'] ?? 'plugin' );
-			$status = Helper::$type( $dependency['slug'] );
+			$type                             = 'check_' . ( $dependency['type'] ?? 'plugin' );
+			$status                           = Helper::$type( $dependency['slug'] );
 			$dependencies[ $index ]['status'] = $status;
 			if ( isset( $dependency['id'] ) ) {
 				$dependencies[ $index ]['id'] = (int) $dependency['id'];
@@ -276,12 +276,12 @@ class DemoImport extends AbstractAjaxHandler {
 			return;
 		}
 		$dependency = Sanitizer::sanitize_array_field( $data['dependency'] );
-		$method = 'install_and_active_' . ( $dependency['type'] ?? 'plugin' );
-		$activated = Helper::$method( $dependency['slug'] );
+		$method     = 'install_and_active_' . ( $dependency['type'] ?? 'plugin' );
+		$activated  = Helper::$method( $dependency['slug'] );
 		if ( is_wp_error( $activated ) ) {
-			wp_send_json_error(array(
+			wp_send_json_error( array(
 				'message' => $activated->get_error_message(),
-			));
+			) );
 		}
 
 		wp_send_json_success();
@@ -299,16 +299,16 @@ class DemoImport extends AbstractAjaxHandler {
 			return;
 		}
 
-		$file_url = $data['file_url'];
+		$file_url          = $data['file_url'];
 		$content_file_path = Helper::remote_to_tmp_file( $file_url );
 
-		$customizer_file_url = $data['customizer_file_url'] ?? '';
+		$customizer_file_url  = $data['customizer_file_url'] ?? '';
 		$customizer_file_path = Helper::remote_to_tmp_file( $customizer_file_url );
-		$widget_file_url = $data['widget_file_url'] ?? '';
-		$widget_file_path = Helper::remote_to_tmp_file( $widget_file_url );
-		$codestar_file_url = $data['codestar_file_url'] ?? '';
-		$codestar_file_path = Helper::remote_to_tmp_file( $codestar_file_url );
-		$with_images = isset( $data['with_images'] ) && true === $data['with_images'];
+		$widget_file_url      = $data['widget_file_url'] ?? '';
+		$widget_file_path     = Helper::remote_to_tmp_file( $widget_file_url );
+		$codestar_file_url    = $data['codestar_file_url'] ?? '';
+		$codestar_file_path   = Helper::remote_to_tmp_file( $codestar_file_url );
+		$with_images          = isset( $data['with_images'] ) && true === $data['with_images'];
 
 		// Start the event stream.
 		header( 'Content-Type: text/event-stream, charset=UTF-8' );
@@ -335,6 +335,14 @@ class DemoImport extends AbstractAjaxHandler {
 		// Ensure we're not buffered.
 		wp_ob_end_flush_all();
 		flush();
+
+		if ( is_wp_error( $content_file_path ) ) {
+			Helper::emit_sse_message( [
+				'action' => 'complete',
+				'error'  => is_string( $codestar_file_path->get_error_message() ) && ! empty( $codestar_file_path->get_error_message() ) ? $codestar_file_path->get_error_code() : __( 'Invalid content path.', 'ablocks' ),
+			] );
+			exit;
+		}
 
 		do_action( 'ablocks/import/before_template_import_start', $data );
 		$template_import = Helper::import_template( $content_file_path, $with_images );

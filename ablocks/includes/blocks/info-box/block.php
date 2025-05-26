@@ -21,12 +21,6 @@ class Block extends BlockBaseAbstract {
 
 	public function build_css( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
-		$css_generator->add_class_styles(
-			'{{WRAPPER}}',
-			$this->get_wrapper_css( $attributes ),
-			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
-		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container',
@@ -261,10 +255,6 @@ class Block extends BlockBaseAbstract {
 		);
 
 		return $css_generator->generate_css();
-	}
-
-	public function get_wrapper_css( $attributes, $device = '' ) {
-		return isset( $attributes['alignment'] ) ? Alignment::get_css( $attributes['alignment'], 'text-align', $device ) : [];
 	}
 
 	public function get_info_box( $attributes, $device = '' ) {

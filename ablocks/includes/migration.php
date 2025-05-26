@@ -49,7 +49,7 @@ class Migration {
 	public function migrate_1_9_0( $version ) {
 		if ( version_compare( $version, '1.9.0', '<=' ) ) {
 			$saved_addons = (array) json_decode( get_option( ABLOCKS_ADDONS_SETTINGS_NAME ), true );
-			$saved_addons[ 'theme-builder' ] = true;
+			$saved_addons['theme-builder'] = true;
 			update_option( ABLOCKS_ADDONS_SETTINGS_NAME, wp_json_encode( $saved_addons ) );
 		}
 	}

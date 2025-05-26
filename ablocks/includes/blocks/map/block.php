@@ -69,11 +69,12 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public static function escaping_array_data( $array ) {
+		error_log( print_r( $array, true ) );
 		foreach ( $array as $key => &$value ) {
 			if ( is_array( $value ) ) {
 				$value = self::escaping_array_data( $value );
 			} else {
-				$value = esc_attr( $value );
+				$value = esc_attr( wp_kses_post( $value ) );
 			}
 		}
 		return $array;
