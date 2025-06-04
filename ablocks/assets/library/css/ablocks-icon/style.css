@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ablocks';
-  src:  url('fonts/ablocks.eot?1qpyav');
-  src:  url('fonts/ablocks.eot?1qpyav#iefix') format('embedded-opentype'),
-    url('fonts/ablocks.ttf?1qpyav') format('truetype'),
-    url('fonts/ablocks.woff?1qpyav') format('woff'),
-    url('fonts/ablocks.svg?1qpyav#ablocks') format('svg');
+  src:  url('fonts/ablocks.eot?fxn29e');
+  src:  url('fonts/ablocks.eot?fxn29e#iefix') format('embedded-opentype'),
+    url('fonts/ablocks.ttf?fxn29e') format('truetype'),
+    url('fonts/ablocks.woff?fxn29e') format('woff'),
+    url('fonts/ablocks.svg?fxn29e#ablocks') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ablocks-icon--player:before {
+  content: "\e9c8";
+}
 .ablocks-icon--lottie-animation:before {
   content: "\e9c7";
 }
@@ -671,4 +674,7 @@
 }
 .ablocks-icon--right:before {
   content: "\e925";
+}
+.ablocks-icon--lottie-animation:before {
+  content: "\e9c7";
 }

@@ -97,11 +97,9 @@ class Block extends BlockBaseAbstract {
 	}
 
 
-
-
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		$attr_array = [
-			'placeholder'                 => Helper::get_attribute_value( $attributes, 'placeholder' ),
+			'placeholder' => sanitize_text_field( Helper::get_attribute_value( $attributes, 'placeholder' ) ),
 		];
 		$shortcode = '[academy_course_search ' . Helper::attr_shortcode( $attr_array ) . ']';
 		echo do_shortcode( $shortcode );

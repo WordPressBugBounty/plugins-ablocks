@@ -123,9 +123,9 @@ class Block extends BlockBaseAbstract {
 
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		$attr_array = [
-			'course_id'                 => Helper::get_attribute_value( $attributes, 'course_id' ),
+			'course_id' => absint( Helper::get_attribute_value( $attributes, 'course_id' ) ),
 		];
-		$shortcode = '[academy_enroll_form  ' . Helper::attr_shortcode( $attr_array ) . ']';
+		$shortcode = '[academy_enroll_form ' . Helper::attr_shortcode( $attr_array ) . ']';
 		echo do_shortcode( $shortcode );
 	}
 

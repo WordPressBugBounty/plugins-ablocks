@@ -239,23 +239,21 @@ class Block extends BlockBaseAbstract {
 
 
 
-
-
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		$attr_array = [
-			'count'                 => Helper::get_attribute_value( $attributes, 'course_count' ),
-			'column_per_row'        => Helper::get_attribute_value( $attributes, 'course_columns' ),
-			'has_pagination'        => Helper::get_attribute_value( $attributes, 'show_pagination' ),
-			'course_level'          => Helper::get_attribute_value( $attributes, 'difficulty_levels' ),
-			'price_type'            => Helper::get_attribute_value( $attributes, 'price_types' ),
-			'orderby'               => Helper::get_attribute_value( $attributes, 'order_by' ),
-			'order'                 => Helper::get_attribute_value( $attributes, 'course_order' ),
-			'ids'                   => Helper::get_attribute_value( $attributes, 'course_ids' ),
-			'exclude_ids'           => Helper::get_attribute_value( $attributes, 'course_exclude_ids' ),
-			'category'              => Helper::get_attribute_value( $attributes, 'course_categories' ),
-			'cat_not_in'            => Helper::get_attribute_value( $attributes, 'course_exclude_categories' ),
-			'tag'                   => Helper::get_attribute_value( $attributes, 'course_tags' ),
-			'tag_not_in'            => Helper::get_attribute_value( $attributes, 'course_exclude_tags' ),
+			'count'                 => absint( Helper::get_attribute_value( $attributes, 'course_count' ) ),
+			'column_per_row'        => absint( Helper::get_attribute_value( $attributes, 'course_columns' ) ),
+			'has_pagination'        => filter_var( Helper::get_attribute_value( $attributes, 'show_pagination' ), FILTER_VALIDATE_BOOLEAN ),
+			'course_level'          => sanitize_text_field( Helper::get_attribute_value( $attributes, 'difficulty_levels' ) ),
+			'price_type'            => sanitize_text_field( Helper::get_attribute_value( $attributes, 'price_types' ) ),
+			'orderby'               => sanitize_key( Helper::get_attribute_value( $attributes, 'order_by' ) ),
+			'order'                 => sanitize_text_field( Helper::get_attribute_value( $attributes, 'course_order' ) ),
+			'ids'                   => sanitize_text_field( Helper::get_attribute_value( $attributes, 'course_ids' ) ),
+			'exclude_ids'           => sanitize_text_field( Helper::get_attribute_value( $attributes, 'course_exclude_ids' ) ),
+			'category'              => sanitize_text_field( Helper::get_attribute_value( $attributes, 'course_categories' ) ),
+			'cat_not_in'            => sanitize_text_field( Helper::get_attribute_value( $attributes, 'course_exclude_categories' ) ),
+			'tag'                   => sanitize_text_field( Helper::get_attribute_value( $attributes, 'course_tags' ) ),
+			'tag_not_in'            => sanitize_text_field( Helper::get_attribute_value( $attributes, 'course_exclude_tags' ) ),
 		];
 		$shortcode = '[academy_courses ' . Helper::attr_shortcode( $attr_array ) . ']';
 		echo do_shortcode( $shortcode );

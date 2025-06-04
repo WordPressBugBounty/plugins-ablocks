@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 1.9.2\n"
+"Project-Id-Version: aBlocks 1.9.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-26T06:31:56+00:00\n"
+"POT-Creation-Date: 2025-06-04T14:16:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: ablocks\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #. Author of the plugin
 #: ablocks.php
-#: includes/blocks.php:140
+#: includes/blocks.php:141
 msgid "Academy LMS"
 msgstr ""
 
@@ -153,46 +153,46 @@ msgstr ""
 msgid "Theme Builder archives"
 msgstr ""
 
-#: includes/admin.php:49
+#: includes/admin.php:67
 msgid "Docs"
 msgstr ""
 
-#: includes/admin.php:50
+#: includes/admin.php:68
 msgid "View Academy documentation"
 msgstr ""
 
-#: includes/admin.php:54
+#: includes/admin.php:72
 msgid "Video Tutorials"
 msgstr ""
 
-#: includes/admin.php:55
+#: includes/admin.php:73
 msgid "See Video Tutorials"
 msgstr ""
 
-#: includes/admin.php:59
+#: includes/admin.php:77
 msgid "Community Support"
 msgstr ""
 
-#: includes/admin.php:60
+#: includes/admin.php:78
 msgid "Visit community forums"
 msgstr ""
 
-#: includes/admin.php:64
+#: includes/admin.php:82
 msgid "Rate the plugin ★★★★★"
 msgstr ""
 
-#: includes/admin.php:65
+#: includes/admin.php:83
 msgid "Rate the plugin."
 msgstr ""
 
-#: includes/admin.php:81
+#: includes/admin.php:99
 #: includes/helper.php:115
 #: assets/build/dashboard.js:1
 #: assets/build/dashboard.js:13
 msgid "Settings"
 msgstr ""
 
-#: includes/admin.php:86
+#: includes/admin.php:104
 msgid "Get aBlocks Pro"
 msgstr ""
 
@@ -360,7 +360,7 @@ msgctxt "Google font: on or off"
 msgid "on"
 msgstr ""
 
-#: includes/blocks.php:136
+#: includes/blocks.php:137
 msgid "ABlocks"
 msgstr ""
 
@@ -399,20 +399,19 @@ msgstr ""
 msgid "Form is empty."
 msgstr ""
 
-#: includes/blocks/logout/block.php:203
+#: includes/blocks/logout/block.php:201
 msgid "(Log Out)"
 msgstr ""
 
-#: includes/blocks/logout/block.php:204
+#: includes/blocks/logout/block.php:202
 msgid "(Log In)"
 msgstr ""
 
-#. translators: %s is the post type (e.g., 'post', 'page', etc.)
-#: includes/blocks/news-ticker/block.php:412
+#: includes/blocks/news-ticker/block.php:405
 msgid "No %s found in the selection"
 msgstr ""
 
-#: includes/blocks/news-ticker/block.php:418
+#: includes/blocks/news-ticker/block.php:408
 #: assets/build/blocks.js:17
 msgid "No items selected"
 msgstr ""
@@ -3257,10 +3256,6 @@ msgid "Popup Content"
 msgstr ""
 
 #: assets/build/blocks.js:17
-msgid "HTML Supported"
-msgstr ""
-
-#: assets/build/blocks.js:17
 msgid "Save & Close"
 msgstr ""
 
@@ -4821,6 +4816,54 @@ msgstr ""
 
 #: assets/build/blocks.js:17
 msgid "Sandbox Email"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Animation Settings"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Animation Source"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Select Animation"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Custom JSON URL"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "File Name"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Replace"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Upload JSON File"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Animation Speed"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Hover Area"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "On Hover Out"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Reverse in Finish"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Loop Animation"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -7483,6 +7526,16 @@ msgstr ""
 #: assets/build/blocks/logout/block.json
 msgctxt "block description"
 msgid "Quick user logout option."
+msgstr ""
+
+#: assets/build/blocks/lottie-animation/block.json
+msgctxt "block title"
+msgid "Lottie Animation"
+msgstr ""
+
+#: assets/build/blocks/lottie-animation/block.json
+msgctxt "block description"
+msgid " Embed responsive, customizable Animations."
 msgstr ""
 
 #: assets/build/blocks/map/block.json

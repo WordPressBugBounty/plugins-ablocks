@@ -163,13 +163,11 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 
-
-
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		$logout_redirect_option = isset( $attributes['logoutRedirect'] ) ? $attributes['logoutRedirect'] : 'current-url';
 
 		if ( $logout_redirect_option === 'current-url' ) {
-			$logout_redirect_url = ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+			$logout_redirect_url = ( is_ssl() ? 'https://' : 'http://' ) . sanitize_text_field( $_SERVER['HTTP_HOST'] ) . sanitize_text_field( $_SERVER['REQUEST_URI'] );
 		} elseif ( $logout_redirect_option === 'custom-url' ) {
 			$logout_redirect_url = isset( $attributes['logoutCustomUrl'] ) && ! empty( $attributes['logoutCustomUrl'] )
 				? esc_url( $attributes['logoutCustomUrl'] )
@@ -179,7 +177,7 @@ class Block extends BlockBaseAbstract {
 		$login_redirect_option = isset( $attributes['loginRedirect'] ) ? $attributes['loginRedirect'] : 'current-url';
 
 		if ( $login_redirect_option === 'current-url' ) {
-			$login_redirect_url = ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+			$login_redirect_url = ( is_ssl() ? 'https://' : 'http://' ) . sanitize_text_field( $_SERVER['HTTP_HOST'] ) . sanitize_text_field( $_SERVER['REQUEST_URI'] );
 		} elseif ( $login_redirect_option === 'custom-url' ) {
 			$login_redirect_url = isset( $attributes['loginCustomUrl'] ) && ! empty( $attributes['loginCustomUrl'] )
 				? esc_url( $attributes['loginCustomUrl'] )
@@ -187,44 +185,45 @@ class Block extends BlockBaseAbstract {
 		}
 
 		$current_user    = wp_get_current_user();
-		$profile_picture = get_avatar_url( $current_user->ID );
-		$display_name    = $current_user->display_name;
+		$profile_picture = esc_url( get_avatar_url( $current_user->ID ) );
+		$display_name    = sanitize_text_field( $current_user->display_name );
 
 		$button_icon_url = isset( $attributes['buttonIconUrl'] ) && ! empty( $attributes['buttonIconUrl'] )
 			? esc_url( $attributes['buttonIconUrl'] )
 			: '';
 
-		$button_class = isset( $attributes['buttonClass'] ) ? esc_attr( $attributes['buttonClass'] ) : 'ablocks-block-logout__label';
+		$button_class = isset( $attributes['buttonClass'] ) ? sanitize_html_class( $attributes['buttonClass'] ) : 'ablocks-block-logout__label';
 		$is_logged_in = is_user_logged_in();
 		$is_show_avatar = isset( $attributes['isShowAvatar'] ) && $attributes['isShowAvatar'];
 		$is_show_name = isset( $attributes['isShowName'] ) && $attributes['isShowName'];
 
 		$button_text = $is_logged_in
-			? ( isset( $attributes['logOutLabel'] ) ? esc_html( $attributes['logOutLabel'] ) : __( '(Log Out)', 'ablocks' ) )
-			: ( isset( $attributes['logInLabel'] ) ? esc_html( $attributes['logInLabel'] ) : __( '(Log In)', 'ablocks' ) );
+			? ( isset( $attributes['logOutLabel'] ) ? sanitize_text_field( $attributes['logOutLabel'] ) : __( '(Log Out)', 'ablocks' ) )
+			: ( isset( $attributes['logInLabel'] ) ? sanitize_text_field( $attributes['logInLabel'] ) : __( '(Log In)', 'ablocks' ) );
 
 		$action_url = $is_logged_in ? wp_logout_url( $logout_redirect_url ) : wp_login_url( $login_redirect_url );
 
 		ob_start();
 		?>
-			<div class="ablocks-block-logout">
+		<div class="ablocks-block-logout">
 			<?php if ( $is_logged_in && $is_show_avatar ) : ?>
-				<img 
-					src="<?php echo esc_url( $profile_picture ); ?>" 
-					alt="<?php echo esc_attr( $display_name ); ?>" 
-					class="ablocks-block-logout__avatar" 
+				<img
+						src="<?php echo esc_url( $profile_picture ); ?>"
+						alt="<?php echo esc_attr( $display_name ); ?>"
+						class="ablocks-block-logout__avatar"
 				/>
 			<?php endif; ?>
 			<?php if ( $is_logged_in && $is_show_name ) : ?>
 				<span class="ablocks-block-logout__name"><?php echo esc_html( $display_name ); ?></span>
-			<?php endif; ?>	
+			<?php endif; ?>
 			<a href="<?php echo esc_url( $action_url ); ?>" class="<?php echo esc_attr( $button_class ); ?>">
 				(<span><?php echo esc_html( $button_text ); ?></span>)
 			</a>
-			</div>	
+		</div>
 		<?php
 
 		return ob_get_clean();
 	}
+
 
 }

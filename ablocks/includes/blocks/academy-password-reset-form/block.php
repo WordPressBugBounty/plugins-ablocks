@@ -208,15 +208,15 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 
-
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		$attr_array = [
-			'form_title'                 => Helper::get_attribute_value( $attributes, 'form_title' ),
-			'username_label'        => Helper::get_attribute_value( $attributes, 'username_label' ),
-			'reset_button_label'        => Helper::get_attribute_value( $attributes, 'reset_button_label' ),
-			'login_button_label'        => Helper::get_attribute_value( $attributes, 'login_button_label' ),
-			'show_logged_in_message'          => Helper::get_attribute_value( $attributes, 'show_logged_in_message' ),
+			'form_title'            => sanitize_text_field( Helper::get_attribute_value( $attributes, 'form_title' ) ),
+			'username_label'        => sanitize_text_field( Helper::get_attribute_value( $attributes, 'username_label' ) ),
+			'reset_button_label'    => sanitize_text_field( Helper::get_attribute_value( $attributes, 'reset_button_label' ) ),
+			'login_button_label'    => sanitize_text_field( Helper::get_attribute_value( $attributes, 'login_button_label' ) ),
+			'show_logged_in_message' => filter_var( Helper::get_attribute_value( $attributes, 'show_logged_in_message' ), FILTER_VALIDATE_BOOLEAN ),
 		];
+
 		$shortcode = '[academy_password_reset_form ' . Helper::attr_shortcode( $attr_array ) . ']';
 		echo do_shortcode( $shortcode );
 	}

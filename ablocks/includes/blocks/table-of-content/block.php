@@ -170,14 +170,14 @@ class Block extends BlockBaseAbstract {
 		$open_icon_attributes = array(
 			'path'      => esc_attr( $attributes['openIconSvgPath'] ),
 			'viewBox'   => esc_attr( $attributes['openIconSvgViewBox'] ),
-			'className' => esc_attr( $attributes['openIconClass'] ),
+			'className' => sanitize_text_field( $attributes['openIconClass'] ),
 			'width'     => '20',
 			'height'    => '20',
 		);
 		$close_icon_attributes = array(
 			'path'      => esc_attr( $attributes['closeIconSvgPath'] ),
 			'viewBox'   => esc_attr( $attributes['closeIconSvgViewBox'] ),
-			'className' => esc_attr( $attributes['closeIconClass'] ),
+			'className' => sanitize_text_field( $attributes['closeIconClass'] ),
 			'width'     => '20',
 			'height'    => '20',
 		);

@@ -237,27 +237,25 @@ class Block extends BlockBaseAbstract {
 	}
 
 
-
-
-
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		$attr_array = [
-			'form_title'                 => Helper::get_attribute_value( $attributes, 'form_title' ),
-			'username_label'             => Helper::get_attribute_value( $attributes, 'username_label' ),
-			'username_placeholder'       => Helper::get_attribute_value( $attributes, 'username_placeholder' ),
-			'password_label'             => Helper::get_attribute_value( $attributes, 'password_label' ),
-			'password_placeholder'       => Helper::get_attribute_value( $attributes, 'password_placeholder' ),
-			'remember_label'             => Helper::get_attribute_value( $attributes, 'remember_label' ),
-			'login_button_label'         => Helper::get_attribute_value( $attributes, 'login_button_label' ),
-			'reset_password_label'       => Helper::get_attribute_value( $attributes, 'reset_password_label' ),
-			'show_logged_in_message'     => Helper::get_attribute_value( $attributes, 'show_logged_in_message' ),
-			'student_register_url'       => Helper::get_attribute_value( $attributes, 'student_register_url' ),
-			'login_redirect_url'       => Helper::get_attribute_value( $attributes, 'login_redirect_url' ),
-			'logout_redirect_url'       => Helper::get_attribute_value( $attributes, 'logout_redirect_url' ),
+			'form_title'               => sanitize_text_field( Helper::get_attribute_value( $attributes, 'form_title' ) ),
+			'username_label'           => sanitize_text_field( Helper::get_attribute_value( $attributes, 'username_label' ) ),
+			'username_placeholder'     => sanitize_text_field( Helper::get_attribute_value( $attributes, 'username_placeholder' ) ),
+			'password_label'           => sanitize_text_field( Helper::get_attribute_value( $attributes, 'password_label' ) ),
+			'password_placeholder'     => sanitize_text_field( Helper::get_attribute_value( $attributes, 'password_placeholder' ) ),
+			'remember_label'           => sanitize_text_field( Helper::get_attribute_value( $attributes, 'remember_label' ) ),
+			'login_button_label'       => sanitize_text_field( Helper::get_attribute_value( $attributes, 'login_button_label' ) ),
+			'reset_password_label'     => sanitize_text_field( Helper::get_attribute_value( $attributes, 'reset_password_label' ) ),
+			'show_logged_in_message'   => filter_var( Helper::get_attribute_value( $attributes, 'show_logged_in_message' ), FILTER_VALIDATE_BOOLEAN ),
+			'student_register_url'     => esc_url_raw( Helper::get_attribute_value( $attributes, 'student_register_url' ) ),
+			'login_redirect_url'       => esc_url_raw( Helper::get_attribute_value( $attributes, 'login_redirect_url' ) ),
+			'logout_redirect_url'      => esc_url_raw( Helper::get_attribute_value( $attributes, 'logout_redirect_url' ) ),
 		];
 
 		$shortcode = '[academy_login_form ' . Helper::attr_shortcode( $attr_array ) . ']';
 		echo do_shortcode( $shortcode );
 	}
+
 
 }

@@ -68,6 +68,7 @@ return [
 	'stripe-button',
 	'news-ticker',
 	'paypal-button',
+	'lottie-animation',
 	'marquee',
 	'marquee-child',
 	'logout',

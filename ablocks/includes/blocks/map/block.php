@@ -69,12 +69,11 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public static function escaping_array_data( $array ) {
-		error_log( print_r( $array, true ) );
 		foreach ( $array as $key => &$value ) {
 			if ( is_array( $value ) ) {
 				$value = self::escaping_array_data( $value );
 			} else {
-				$value = esc_attr( wp_kses_post( $value ) );
+				$value = esc_attr( sanitize_text_field( $value ) );
 			}
 		}
 		return $array;
@@ -87,24 +86,22 @@ class Block extends BlockBaseAbstract {
 		} else {
 			$custom_icon_url = esc_url( ABLOCKS_ASSETS_URL . 'images/marker-icon.png' );
 		}
+
 		$settings = array(
-			'mapMarkerList'   => $this->escaping_array_data( isset( $attributes['mapMarkerList'] ) ? $attributes['mapMarkerList'] : array() ),
-			'mapZoom'         => isset( $attributes['mapZoom'] ) ? esc_attr( $attributes['mapZoom'] ) : 10,
-			'scrollWheelZoom' => isset( $attributes['scrollWheelZoom'] ) ? esc_attr( $attributes['scrollWheelZoom'] ) : false,
-			'mapType'         => isset( $attributes['mapType'] ) ? esc_attr( $attributes['mapType'] ) : 'GM',
-			'centerIndex'     => isset( $attributes['centerIndex'] ) ? intval( esc_attr( $attributes['centerIndex'] ) ) : 0,
-			'defaultMarkerIcon' => $custom_icon_url,
-			'iconHeight' => isset( $attributes['iconHeight'] ) ? esc_attr( $attributes['iconHeight'] ) : 40,
-			'iconWidth' => isset( $attributes['iconWidth'] ) ? esc_attr( $attributes['iconWidth'] ) : 25,
+			'mapMarkerList'      => $this->escaping_array_data( is_array( $attributes['mapMarkerList'] ?? null ) ? $attributes['mapMarkerList'] : [] ),
+			'mapZoom'            => isset( $attributes['mapZoom'] ) ? intval( $attributes['mapZoom'] ) : 10,
+			'scrollWheelZoom'    => isset( $attributes['scrollWheelZoom'] ) ? filter_var( $attributes['scrollWheelZoom'], FILTER_VALIDATE_BOOLEAN ) : false,
+			'mapType'            => isset( $attributes['mapType'] ) ? sanitize_text_field( $attributes['mapType'] ) : 'GM',
+			'centerIndex'        => isset( $attributes['centerIndex'] ) ? intval( $attributes['centerIndex'] ) : 0,
+			'defaultMarkerIcon'  => $custom_icon_url,
+			'iconHeight'         => isset( $attributes['iconHeight'] ) ? sanitize_text_field( $attributes['iconHeight'] ) : 40,
+			'iconWidth'          => isset( $attributes['iconWidth'] ) ? sanitize_text_field( $attributes['iconWidth'] ) : 25,
 		);
 
 		ob_start();
 		?>
 		<div 
-			data-settings='<?php
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo htmlspecialchars( wp_json_encode( $settings ), ENT_QUOTES, 'UTF-8' );
-			?>' 
+			data-settings='<?php echo esc_attr( wp_json_encode( $settings, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT ) ); ?>' 
 			class="ablocks-map-block"
 		>
 		</div>

@@ -60,6 +60,7 @@ class Blocks {
 			'svg-draw' => true,
 			'info-box' => true,
 			'price-menu' => true,
+			'lottie-animation' => true,
 			'marquee' => true,
 			'marquee-child' => true,
 			'logout' => true,

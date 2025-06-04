@@ -26,12 +26,13 @@ class Block extends BlockBaseAbstract {
 
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		$attr_array = [
-			'src'                 => Helper::get_attribute_value( $attributes, 'src' ),
-			'width'        => Helper::get_attribute_value( $attributes, 'width' ),
-			'height'        => Helper::get_attribute_value( $attributes, 'height' ),
+			'src'    => esc_url_raw( Helper::get_attribute_value( $attributes, 'src' ) ),
+			'width'  => sanitize_text_field( Helper::get_attribute_value( $attributes, 'width' ) ),
+			'height' => sanitize_text_field( Helper::get_attribute_value( $attributes, 'height' ) ),
 		];
-		$shortcode = '[academy_pdf  ' . Helper::attr_shortcode( $attr_array ) . ']';
+		$shortcode = '[academy_pdf ' . Helper::attr_shortcode( $attr_array ) . ']';
 		echo do_shortcode( $shortcode );
 	}
+
 
 }

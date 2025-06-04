@@ -9,6 +9,24 @@ class Admin {
 	public static function init() {
 		$self = new self();
 		$self->dispatch_hooks();
+
+		add_filter( 'upload_mimes', [ $self, 'allow_lottie_json_uploads' ] );
+		add_filter( 'wp_check_filetype_and_ext', function ( $data, $file, $filename ) {
+			$ext = pathinfo( $filename, PATHINFO_EXTENSION );
+
+			if ( 'json' === $ext ) {
+				$data['ext']  = 'json';
+				$data['type'] = 'application/json';
+			}
+
+			return $data;
+		}, 10, 3 );
+	}
+
+	function allow_lottie_json_uploads( $mimes ) {
+		$mimes['json'] = 'application/json';
+		$mimes['lottie'] = 'application/json';
+		return $mimes;
 	}
 
 	public function dispatch_hooks() {

@@ -189,7 +189,7 @@ class Assets {
 		}//end if
 	}
 
-	public function demo_template_importer_scripts(){
+	public function demo_template_importer_scripts() {
 		wp_enqueue_style( 'ablocks-fonts', $this->web_fonts_url( 'Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap' ), array(), ABLOCKS_VERSION );
 		wp_enqueue_style( 'ablocks-icon', ABLOCKS_ASSETS_URL . 'library/css/ablocks-icon/style.css', array( 'wp-components' ), filemtime( ABLOCKS_ASSETS_PATH . 'library/css/ablocks-icon/style.css' ), 'all' );
 		wp_enqueue_style( 'ablocks-dashboard-style', ABLOCKS_ASSETS_URL . 'build/demo-import.css', array( 'wp-components' ), filemtime( ABLOCKS_ASSETS_PATH . 'build/demo-import.css' ), 'all' );
