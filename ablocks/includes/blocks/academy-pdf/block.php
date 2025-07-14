@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\BlockBaseAbstract;
-use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Helper;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Background;
@@ -17,7 +17,7 @@ class Block extends BlockBaseAbstract {
 	protected $block_name = 'academy-pdf';
 
 	public function build_css( $attributes ) {
-		$css_generator = new CssGenerator( $attributes );
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 
 		return $css_generator->generate_css();
 	}

@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\BoxShadow;
@@ -17,7 +18,7 @@ use ABlocks\Controls\Icon;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'stripe-button';
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 
 		// Generate CSS start
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
@@ -96,6 +97,94 @@ class Block extends BlockBaseAbstract {
 		);
 
 		return $css_generator->generate_css();
+	}
+
+	public function build_css_v2( $attributes ) {
+
+		// Generate CSS start
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+
+		// Generate wrapper CSS start
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}',
+			$this->get_wrapper_css( $attributes ),
+			$this->get_wrapper_css( $attributes, 'Tablet' ),
+			$this->get_wrapper_css( $attributes, 'Mobile' )
+		);
+		// Generate wrapper CSS end
+
+		// Generate button CSS start
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-stripe-button',
+			$this->get_button_css( $attributes ),
+			$this->get_button_css( $attributes, 'Tablet' ),
+			$this->get_button_css( $attributes, 'Mobile' )
+		);
+		// Generate button CSS end
+
+		// Generate button hover CSS start
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-stripe-button:hover',
+			$this->get_button_hover_css( $attributes ),
+			$this->get_button_hover_css( $attributes, 'Tablet' ),
+			$this->get_button_hover_css( $attributes, 'Mobile' )
+		);
+
+		// Generate button icon hover CSS
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-stripe-button:hover .ablocks-icon-wrap svg.ablocks-svg-icon',
+			$this->get_icon_hover_css( $attributes ),
+			$this->get_icon_hover_css( $attributes, 'Tablet' ),
+			$this->get_icon_hover_css( $attributes, 'Mobile' )
+		);
+
+		// Generate button text CSS start
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-stripe-button .ablocks-stripe-button__text',
+			$this->get_button_text_css( $attributes )
+		);
+
+		// Generate button icon CSS start
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-icon-wrap',
+			Icon::get_wrapper_css( $attributes ),
+			Icon::get_wrapper_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-icon-wrap img.ablocks-image-icon',
+			Icon::get_element_image_css( $attributes ),
+			Icon::get_element_image_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-icon-wrap img.ablocks-image-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-icon-wrap svg.ablocks-svg-icon',
+			Icon::get_element_css( $attributes ),
+			Icon::get_element_css( $attributes, 'Tablet' ),
+			Icon::get_element_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-icon-wrap svg.ablocks-svg-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+		);
+
+		return $css_generator->generate_css();
+	}
+
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 
 	public function get_wrapper_css( $attributes, $device = '' ) {

@@ -120,8 +120,13 @@ class FileUpload {
 			require_once ABSPATH . '/wp-admin/includes/file.php';
 			WP_Filesystem();
 		}
-		if ( is_dir( $file_name ) ) {
-			return $wp_filesystem->rmdir( $file_name, true );
+		$upload_dir = $this->get_upload_dir();
+		$file_path = $upload_dir . '/' . $file_name;
+
+		if ( $wp_filesystem->is_file( $file_path ) ) {
+			return $wp_filesystem->delete( $file_path );
+		} elseif ( $wp_filesystem->is_dir( $file_path ) ) {
+			return $wp_filesystem->rmdir( $file_path, true );
 		}
 		return false;
 	}

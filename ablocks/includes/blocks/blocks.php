@@ -72,8 +72,12 @@ return [
 	'marquee',
 	'marquee-child',
 	'logout',
+	'player',
 	'advance-lists',
-	'advance-list-item' .
+	'advance-list-item',
+	'loop-builder',
+	'loop-template',
+	'loop-load-more',
 	// Form Builder
 	'form-builder',
 	'form-input',
@@ -97,4 +101,15 @@ return [
 	'academy-password-reset-form',
 	'academy-pdf',
 	'academy-student-registration-form',
+	// StoreEngine Blocks
+	'storeengine-products',
+	'storeengine-cart-list',
+	'storeengine-login-form',
+	'storeengine-coupon-form',
+	'storeengine-product-filter',
+	'storeengine-checkout-form',
+	'storeengine-continue-button',
+	'storeengine-checkout-button',
+	'storeengine-cart-sub-table',
+
 ];

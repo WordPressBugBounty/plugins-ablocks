@@ -4,13 +4,14 @@ namespace ABlocks\Blocks\DualButton;
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Controls\Alignment;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Range;
 
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'dual-button';
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
 
@@ -22,6 +23,25 @@ class Block extends BlockBaseAbstract {
 		);
 
 		return $css_generator->generate_css();
+	}
+	public function build_css_v2( $attributes ) {
+
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}:not(.ablocks-has-block-container), {{WRAPPER}}.ablocks-block--dual-button > .ablocks-block-container',
+			$this->getDualButtonCss( $attributes ),
+			$this->getDualButtonCss( $attributes, 'Tablet' ),
+			$this->getDualButtonCss( $attributes, 'Mobile' )
+		);
+
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 
 	public function getDualButtonCss( $attributes, $device = '' ) {

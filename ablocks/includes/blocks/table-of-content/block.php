@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Helper;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Background;
@@ -19,7 +20,7 @@ class Block extends BlockBaseAbstract {
 	protected $block_name = 'table-of-content';
 
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes );
 
 		$css_generator->add_class_styles(
@@ -56,7 +57,56 @@ class Block extends BlockBaseAbstract {
 
 		return $css_generator->generate_css();
 	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-toc__header-title',
+			$this->get_toc_title_css( $attributes ),
+			$this->get_toc_title_css( $attributes, 'Tablet' ),
+			$this->get_toc_title_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-toc__header',
+			$this->get_toc_header_css( $attributes ),
+			$this->get_toc_header_css( $attributes, 'Tablet' ),
+			$this->get_toc_header_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-toc-body',
+			$this->get_toc_body_css( $attributes ),
+			$this->get_toc_body_css( $attributes, 'Tablet' ),
+			$this->get_toc_body_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-toc__header-toggle-icon svg',
+			$this->get_toc_header_icon_css( $attributes ),
+			$this->get_toc_header_icon_css( $attributes, 'Tablet' ),
+			$this->get_toc_header_icon_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-toc-body .ablocks-toc-list',
+			$this->get_marker_list_style_css( $attributes ),
+			$this->get_marker_list_style_css( $attributes, 'Tablet' ),
+			$this->get_marker_list_style_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-toc-list,
+		    {{WRAPPER}} .ablocks-toc-list li a',
+			$this->get_list_item_css( $attributes ),
+			$this->get_list_item_css( $attributes, 'Tablet' ),
+			$this->get_list_item_css( $attributes, 'Mobile' )
+		);
+
+		return $css_generator->generate_css();
+	}
+
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
+	}
 
 
 	public function get_toc_title_css( $attributes, $device = '' ) {
@@ -138,6 +188,23 @@ class Block extends BlockBaseAbstract {
 	}
 
 
+	public function get_marker_list_style_css( $attributes ) {
+		$css = [];
+		$allowed_list_types = [
+			'decimal',
+			'disc',
+			'circle',
+			'square',
+			'lower-alpha',
+			'lower-roman',
+			'none'
+		];
+		if ( ! empty( $attributes['markerView'] ) && in_array( $attributes['markerView'], $allowed_list_types, true ) ) {
+			$css['list-style-type'] = $attributes['markerView'];
+		}
+		return $css;
+	}
+
 
 
 	public function add_toc_to_post_content( $content ) {
@@ -205,28 +272,29 @@ class Block extends BlockBaseAbstract {
 		// Process headings
 		foreach ( $matches as $match ) {
 			$level = intval( $match[1] );
-			$heading = trim( $match[2] );
+			$heading_html = trim( $match[2] );
+			$heading = esc_html( wp_strip_all_tags( $heading_html ) );
+
 			$base_anchor = strtolower( sanitize_title( $heading ) );
 			$anchor = $base_anchor;
 			$count = 1;
 
-			// Ensure unique anchors
 			while ( in_array( $anchor, $unique_anchors, true ) ) {
 				$anchor = $base_anchor . '-' . $count;
 				$count++;
 			}
 
-			// Add heading if enabled in attributes
 			if ( (
-				( $level === 1 && $attributes['H1'] ) ||
-				( $level === 2 && $attributes['H2'] ) ||
-				( $level === 3 && $attributes['H3'] ) ||
-				( $level === 4 && $attributes['H4'] ) ||
-				( $level === 5 && $attributes['H5'] ) ||
-				( $level === 6 && $attributes['H6'] ) ) ) {
+			( $level === 1 && $attributes['H1'] ) ||
+			( $level === 2 && $attributes['H2'] ) ||
+			( $level === 3 && $attributes['H3'] ) ||
+			( $level === 4 && $attributes['H4'] ) ||
+			( $level === 5 && $attributes['H5'] ) ||
+			( $level === 6 && $attributes['H6'] ) ) ) {
+
 				$headings[] = [
 					'level'   => $level,
-					'heading' => esc_html( $heading ),
+					'heading' => $heading,
 					'anchor'  => esc_attr( $anchor ),
 				];
 				$unique_anchors[] = $anchor;
@@ -247,10 +315,9 @@ class Block extends BlockBaseAbstract {
 		}
 
 		$toc = '';
-		$marker_view = in_array( $attributes['markerView'], [ 'ul', 'ol' ], true ) ? $attributes['markerView'] : 'ul';
+		$marker_view = 'ol';
 		$current_level = 0;
 		$open_lists = [];
-
 		foreach ( $headings as $index => $heading ) {
 			if ( ! isset( $heading['level'], $heading['heading'], $heading['anchor'] ) ) {
 				continue;
@@ -295,13 +362,4 @@ class Block extends BlockBaseAbstract {
 
 		return $toc;
 	}
-
-
-
-
-
-
-
-
-
 }

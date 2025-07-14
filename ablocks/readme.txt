@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 5.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.9.3
+Stable tag: 2.0.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -77,6 +77,10 @@ https://youtu.be/MRq5xE9A-RM
 - **Logout Block**: Add a simple, customizable logout button to allow users to securely log out from your site.
 - **Marquee Block**: Create eye-catching, customizable scrolling text or content for announcements, highlights, or dynamic visual effects.
 - **Stacked Cards Blocks [PRO]**: Add customizable, impactful Stacked Cards.
+- **Price Menu**: Display your products or services in an elegant price list layout with customizable items, prices, and descriptions.
+- **Chart**: Visualize data with responsive and interactive charts, including bar, line, pie, and more for clear statistics representation.
+- **Image Scroll**: Create smooth horizontal or vertical scrolling galleries to showcase images in an engaging, dynamic way.
+- **Text Path**: Easily curve or align text along custom paths, shapes, or lines for creative typography and eye-catching designs.
 
 - **Demo Importer**: Quickly set up and replicate demo designs with a single click for a seamless start.
 
@@ -150,6 +154,28 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 8. Instant Style Copy-Paste
 
 == Changelog ==
+
+= 2.0.0 - 14/07/2025 =
+* Added - New Player Block
+* Added - Heading Block typing effects
+* Added - Container Grid Support
+* Added - Container Shape Divider
+* Added - Heading block link support
+* Added - New Loop Builder Block
+* Added - StoreEngine 9+ Integration Block
+* Updated - 60+ Blocks Dom optimized 
+* Updated - Search Block Improvement
+* Updated - Modal Block
+* Fixed - responsive css generating issue
+* Fixed - Container inner block inline issue
+* Fixed - Icon Block Merging issue
+* Fixed - Table of Content List issue
+* Fixed - Spacer Block resize issue
+* Fixed - Countdown Block alignment issue
+* Fixed - Map Block Icon Issue
+* Fixed - Info Box block theme compatibility issue
+* Fixed - Social Share Block Improvement
+
 
 = 1.9.3 - 26/05/2025 =
 * Fixed - Security issue
@@ -457,5 +483,5 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 * Initial beta release
 
 == Upgrade Notice ==
-= 1.7.0 =
+= 2.0.0 =
 This is a major update with breaking changes. Please back up your site before proceeding with the update.

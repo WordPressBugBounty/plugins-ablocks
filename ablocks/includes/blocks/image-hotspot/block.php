@@ -10,14 +10,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Controls\BoxShadow;
+use ABlocks\Classes\CssGeneratorV2;
 
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'image-hotspot';
 
-	public function build_css( $attributes ) {
-
-		$css_generator = new CssGenerator( $attributes );
+	public function build_css_v1( $attributes ) {
+		$css_generator = new CssGenerator( $attributes, $this->block_name );
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-hotspot__pin:after',
@@ -73,7 +73,69 @@ class Block extends BlockBaseAbstract {
 
 		return $css_generator->generate_css();
 	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-hotspot__pin:after',
+			[
+				'animation' => $attributes['animationType'],
+			]
+		);
+
+		// Loop through lists and apply styles for each pin
+		if ( ! empty( $attributes['lists'] ) ) {
+			foreach ( $attributes['lists'] as $list ) {
+				$css_generator->add_class_styles(
+					"{{WRAPPER}} .ablocks-image-hotspot-list-{$list['id']}",
+					$this->get_pin_css( $attributes, $list )
+				);
+
+				$css_generator->add_class_styles(
+					"{{WRAPPER}} .ablocks-image-hotspot-list-{$list['id']}:after",
+					$this->get_pin_effect_css( $attributes, $list )
+				);
+
+				$css_generator->add_class_styles(
+					"{{WRAPPER}} .ablocks-image-hotspot-list-{$list['id']}:hover",
+					$this->get_pin_hover_css( $attributes, $list )
+				);
+
+				$css_generator->add_class_styles(
+					"{{WRAPPER}} .ablocks-image-hotspot-list-{$list['id']}:hover:after",
+					$this->get_pin_hover_effect_css( $attributes, $list )
+				);
+			}//end foreach
+		}//end if
+
+		// Tooltip content animation
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-hotspot__tooltip-content',
+			$this->get_tooltip_content_css( $attributes )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-hotspot__tooltip--active',
+			$this->get_active_content_css( $attributes ),
+			$this->get_active_content_css( $attributes, 'Tablet' ),
+			$this->get_active_content_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-hotspot__tooltip--active:hover',
+			$this->get_active_content_hover_css( $attributes ),
+			$this->get_active_content_hover_css( $attributes, 'Tablet' ),
+			$this->get_active_content_hover_css( $attributes, 'Mobile' )
+		);
+
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
+	}
 	public function get_pin_css( $attributes, $list ) {
 		return [
 			'background-color' => ! empty( $list['pinColorEffect'] ) ? $list['pinColorEffect'] : $attributes['pinColorEffect'],

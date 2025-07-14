@@ -31,6 +31,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": 2
+        },
         "form_title": {
             "type": "string",
             "default": "RESET YOUR PASSWORD"

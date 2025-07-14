@@ -11,6 +11,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'blockVersion' => [
+		'type' => 'number',
+		'default' => '',
+	],
 	'marqueeSlideLength' => [
 		'type' => 'number',
 		'default' => 0,

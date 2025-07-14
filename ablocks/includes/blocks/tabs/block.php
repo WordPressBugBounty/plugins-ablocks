@@ -4,6 +4,7 @@ namespace ABlocks\Blocks\Tabs;
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Border;
@@ -15,7 +16,7 @@ class Block extends BlockBaseAbstract {
 
 	protected $block_name = 'tabs';
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
 
 		$css_generator->add_class_styles(
@@ -235,6 +236,234 @@ class Block extends BlockBaseAbstract {
 		);
 
 		return $css_generator->generate_css();
+	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs',
+			$this->get_tabs_css( $attributes ),
+			$this->get_tabs_css( $attributes, 'Tablet' ),
+			$this->get_tabs_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab-panel',
+			$this->get_tabs_panel_css( $attributes ),
+			$this->get_tabs_panel_css( $attributes, 'Tablet' ),
+			$this->get_tabs_panel_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab',
+			$this->get_tabs_menu_content_css( $attributes ),
+			$this->get_tabs_menu_content_css( $attributes, 'Tablet' ),
+			$this->get_tabs_menu_content_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-block-tabs__tab--active',
+			$this->get_tabs_menu_content_active_css( $attributes ),
+			$this->get_tabs_menu_content_active_css( $attributes, 'Tablet' ),
+			$this->get_tabs_menu_content_active_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-block-tabs__tab:hover',
+			$this->get_tabs_menu_content_hover_css( $attributes ),
+			$this->get_tabs_menu_content_hover_css( $attributes, 'Tablet' ),
+			$this->get_tabs_menu_content_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab-menu-title',
+			$this->get_tabs_title_css( $attributes ),
+			$this->get_tabs_title_css( $attributes, 'Tablet' ),
+			$this->get_tabs_title_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab--active .ablocks-block-tabs__tab-menu-title',
+			$this->get_tabs_active_title_css( $attributes ),
+			$this->get_tabs_active_title_css( $attributes, 'Tablet' ),
+			$this->get_tabs_active_title_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab-menu-subtitle',
+			$this->get_tabs_subtitle_css( $attributes ),
+			$this->get_tabs_subtitle_css( $attributes, 'Tablet' ),
+			$this->get_tabs_subtitle_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-block-tabs__tab--active .ablocks-block-tabs__tab-menu-subtitle',
+			$this->get_tabs_active_subtitle_text_css( $attributes ),
+			$this->get_tabs_active_subtitle_text_css( $attributes, 'Tablet' ),
+			$this->get_tabs_active_subtitle_text_css( $attributes, 'Mobile' )
+		);
+		if ( isset( $attributes['showActiveSubTitle'] ) && $attributes['showActiveSubTitle'] === false ) {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-block-tabs__icon',
+				$this->get_icon_position_css( $attributes ),
+				$this->get_icon_position_css( $attributes, 'Tablet' ),
+				$this->get_icon_position_css( $attributes, 'Mobile' )
+			);
+		} else {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-block-tabs__tab--active .ablocks-block-tabs__icon',
+				$this->get_icon_position_css( $attributes ),
+				$this->get_icon_position_css( $attributes, 'Tablet' ),
+				$this->get_icon_position_css( $attributes, 'Mobile' )
+			);
+		}
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab--active .ablocks-block-tabs__progressbar',
+			$this->progress_bar_style_css( $attributes ),
+			$this->progress_bar_style_css( $attributes, 'Tablet' ),
+			$this->progress_bar_style_css( $attributes, 'Mobile' )
+		);
+		$tabs_element_icon_wrapper_styles = Icon::get_wrapper_css( $attributes );
+
+			$spacing_value = [];
+
+		switch ( $attributes['iconPosition'] ) {
+			case 'left':
+				$spacing_value = Range::get_css([
+					'attributeValue' => $attributes['spacing'] ?? null,
+					'attributeObjectKey' => 'value',
+					'defaultValue' => 0,
+					'isResponsive' => true,
+					'hasUnit' => true,
+					'property' => 'margin-right',
+					'unitDefaultValue' => 'px',
+				]);
+				break;
+			case 'right':
+				$spacing_value = Range::get_css([
+					'attributeValue' => $attributes['spacing'] ?? null,
+					'attributeObjectKey' => 'value',
+					'defaultValue' => 0,
+					'isResponsive' => true,
+					'hasUnit' => true,
+					'property' => 'margin-left',
+					'unitDefaultValue' => 'px',
+				]);
+				break;
+			case 'bottom':
+				$spacing_value = Range::get_css([
+					'attributeValue' => $attributes['spacing'] ?? null,
+					'attributeObjectKey' => 'value',
+					'defaultValue' => 0,
+					'isResponsive' => true,
+					'hasUnit' => true,
+					'property' => 'margin-top',
+					'unitDefaultValue' => 'px',
+				]);
+				break;
+			case 'top':
+				$spacing_value = Range::get_css([
+					'attributeValue' => $attributes['spacing'] ?? null,
+					'attributeObjectKey' => 'value',
+					'defaultValue' => 0,
+					'isResponsive' => true,
+					'hasUnit' => true,
+					'property' => 'margin-bottom',
+					'unitDefaultValue' => 'px',
+				]);
+				break;
+		}//end switch
+
+		// Merge $spacing_value into icon wrapper styles
+		$tabs_element_icon_wrapper_styles = array_merge(
+			Icon::get_wrapper_css( $attributes ),
+			$spacing_value
+		);
+
+		// Generate tablet and mobile styles for the icon wrapper
+		$tablet_styles = array_merge(
+			Icon::get_wrapper_css( $attributes, 'Tablet' ),
+			$spacing_value
+		);
+		$mobile_styles = array_merge(
+			Icon::get_wrapper_css( $attributes, 'Mobile' ),
+			$spacing_value
+		);
+
+		// Add icon wrapper styles to the CSS generator
+		if ( ! empty( $tabs_element_icon_wrapper_styles ) || ! empty( $tablet_styles ) || ! empty( $mobile_styles ) ) {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap',
+				$tabs_element_icon_wrapper_styles,
+				$tablet_styles,
+				$mobile_styles
+			);
+		}
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap img.ablocks-image-icon',
+			Icon::get_element_image_css( $attributes ),
+			Icon::get_element_image_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap img.ablocks-image-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap svg.ablocks-svg-icon',
+			Icon::get_element_css( $attributes ),
+			Icon::get_element_css( $attributes, 'Tablet' ),
+			Icon::get_element_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap svg.ablocks-svg-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-block-tabs__body',
+			$this->get_tabs_content_css( $attributes ),
+			$this->get_tabs_content_css( $attributes, 'Tablet' ),
+			$this->get_tabs_content_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__body:hover',
+			$this->get_tabs_content_hover_css( $attributes ),
+			$this->get_tabs_content_hover_css( $attributes, 'Tablet' ),
+			$this->get_tabs_content_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab-menu-content',
+			$this->get_content_css( $attributes ),
+			$this->get_content_css( $attributes, 'Tablet' ),
+			$this->get_content_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab-panel',
+			$this->get_tabs_width_css( $attributes ),
+			$this->get_tabs_width_css( $attributes, 'Tablet' ),
+			$this->get_tabs_width_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__body',
+			$this->get_content_width_css( $attributes ),
+			$this->get_content_width_css( $attributes, 'Tablet' ),
+			$this->get_content_width_css( $attributes, 'Mobile' )
+		);
+
+		return $css_generator->generate_css();
+	}
+
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 
 

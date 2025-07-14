@@ -14,6 +14,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	),
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => 2,
+	),
 	'course_id' => array(
 		'type' => 'number',
 		'default' => 0,

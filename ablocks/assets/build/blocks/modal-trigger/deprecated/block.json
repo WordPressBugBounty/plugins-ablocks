@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ablocks/modal-trigger",
+  "version": "0.1.0",
+  "title": "Modal Trigger",
+  "category": "ablocks",
+  "description": "Modal block trigger element",
+  "example": [],
+  "parent": [
+    "ablocks/modal"
+  ],
+  "supports": {
+    "html": false,
+    "anchor": false
+  },
+  "textdomain": "ablocks",
+  "editorStyle": [
+    "ablocks-animate-style",
+    "ablocks-common-style"
+  ],
+  "editorScript": [
+    "ablocks-common-script"
+  ],
+  "attributes": {
+    "block_id": {
+      "type": "string",
+      "default": ""
+    },
+    "hideTrigger": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

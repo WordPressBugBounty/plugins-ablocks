@@ -12,6 +12,10 @@ $attributes = [
 		'type'         => 'string',
 		'default'      => '',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'scale'            => [
 		'type'         => 'number',
 		'default'      => 5,
@@ -40,16 +44,15 @@ $attributes = [
 		'type' => 'string',
 		'default' => 'right',
 	],
+	'rating'            => [
+		'type'         => 'string',
+		'default'      => 4,
+	],
 
 ];
 
 $attributes = array_merge(
 	$attributes,
-	Range::get_attribute( [
-		'attributeName' => 'rating',
-		'isResponsive' => false,
-		'defaultValue' => 4,
-	]),
 	Range::get_attribute( [
 		'attributeName' => 'size',
 		'attributeObjectKey' => 'value',

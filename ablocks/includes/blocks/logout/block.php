@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\BlockBaseAbstract;
-use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Border;
@@ -19,9 +19,7 @@ class Block extends BlockBaseAbstract {
 	protected $block_name = 'logout';
 
 	public function build_css( $attributes ) {
-
-		// Generate CSS start
-		$css_generator = new CssGenerator( $attributes, $this->block_name );
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-logout__label',
@@ -36,7 +34,7 @@ class Block extends BlockBaseAbstract {
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-logout__name',
-			$this->get_name_css( $attributes ),
+			$this->get_name_css( $attributes )
 		);
 
 		$css_generator->add_class_styles(
@@ -54,7 +52,6 @@ class Block extends BlockBaseAbstract {
 
 		return $css_generator->generate_css();
 	}
-
 
 	public function get_log_out_label_color( $attributes, $device = '' ) {
 		$log_out_label_color_css = [];

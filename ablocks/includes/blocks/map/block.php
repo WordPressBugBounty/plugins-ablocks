@@ -3,6 +3,7 @@ namespace ABlocks\Blocks\Map;
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\CssFilter;
 use ABlocks\Controls\Range;
 
@@ -11,7 +12,7 @@ class Block extends BlockBaseAbstract {
 	protected $style_depends = [ 'ablocks-leaflet-style', 'ablocks-leaflet-full-screen-style' ];
 	protected $script_depends = [ 'ablocks-leaflet-script', 'ablocks-leaflet-full-screen-script' ];
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
 
 		$css_generator->add_class_styles(
@@ -22,6 +23,24 @@ class Block extends BlockBaseAbstract {
 		);
 
 		return $css_generator->generate_css();
+	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-map-block',
+			$this->get_map_size_css( $attributes ),
+			$this->get_map_size_css( $attributes, 'Tablet' ),
+			$this->get_map_size_css( $attributes, 'Mobile' )
+		);
+
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 
 	private function get_map_size_css( $attributes, $device = '' ) {

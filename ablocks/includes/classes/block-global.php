@@ -104,29 +104,30 @@ class BlockGlobal {
 		return apply_filters( 'ablocks/get_block_common_container_hover_css', $css, $attribute, $device );
 	}
 	public static function get_wrapper_device_responsive_css( $attribute, $device = '' ) {
-		if ( ! isset( $attribute['_hide_on_desktop'] ) && ! isset( $attribute['_hide_on_tablet'] ) && ! isset( $attribute['_hide_on_mobile'] ) ) {
+		if (
+			! isset( $attribute['_hide_on_desktop'] ) &&
+			! isset( $attribute['_hide_on_tablet'] ) &&
+			! isset( $attribute['_hide_on_mobile'] )
+		) {
 			return [];
 		}
 
-		if ( ! $device && Helper::has_value( $attribute['_hide_on_desktop'] ) ) {
-			return [
-				'display' => 'none'
-			];
+		// Desktop (default view)
+		if ( '' === $device && Helper::has_value( $attribute['_hide_on_desktop'] ) ) {
+			return [ 'display' => 'none' ];
 		}
 
+		// Tablet
 		if ( 'Tablet' === $device && Helper::has_value( $attribute['_hide_on_tablet'] ) ) {
-			return [
-				'display' => 'none'
-			];
-		}
-		if ( 'Mobile' === $device && Helper::has_value( $attribute['_hide_on_mobile'] ) ) {
-			return [
-				'display' => 'none'
-			];
+			return [ 'display' => 'none' ];
 		}
 
-		return [
-			'display' => 'inherit'
-		];
+		// Mobile
+		if ( 'Mobile' === $device && Helper::has_value( $attribute['_hide_on_mobile'] ) ) {
+			return [ 'display' => 'none' ];
+		}
+
+		return [];
 	}
+
 }

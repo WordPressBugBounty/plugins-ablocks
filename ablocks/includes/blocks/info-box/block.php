@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\TextShadow;
@@ -19,7 +20,7 @@ use ABlocks\Controls\Range;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'info-box';
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
 
 		$css_generator->add_class_styles(
@@ -255,6 +256,249 @@ class Block extends BlockBaseAbstract {
 		);
 
 		return $css_generator->generate_css();
+	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}:not(.ablocks-has-block-container), {{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container',
+			$this->get_info_box( $attributes ),
+			$this->get_info_box( $attributes, 'Tablet' ),
+			$this->get_info_box( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content',
+			$this->get_info_box_content( $attributes ),
+			$this->get_info_box_content( $attributes, 'Tablet' ),
+			$this->get_info_box_content( $attributes, 'Mobile' )
+		);
+
+		// badge starts
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-badge-link',
+			$this->get_badge_css( $attributes ),
+			$this->get_badge_css( $attributes, 'Tablet' ),
+			$this->get_badge_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-badge-link:hover',
+			$this->get_badge_hover_css( $attributes ),
+			$this->get_badge_hover_css( $attributes, 'Tablet' ),
+			$this->get_badge_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-badge-link > .ablocks-info-box-badge-link-text',
+			$this->get_badge_text_css( $attributes )
+		);
+
+		// Icon Style
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap, {{WRAPPER}} > a .ablocks-icon-wrap',
+			Icon::get_wrapper_css( $attributes ),
+			Icon::get_wrapper_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap > img.ablocks-image-icon',
+			Icon::get_element_image_css( $attributes ),
+			Icon::get_element_image_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap > img.ablocks-image-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap > svg.ablocks-svg-icon',
+			Icon::get_element_css( $attributes ),
+			Icon::get_element_css( $attributes, 'Tablet' ),
+			Icon::get_element_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap > svg.ablocks-svg-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap svg.ablocks-svg-icon , {{WRAPPER}}.ablocks-block--info-box:hover a .ablocks-icon-wrap svg.ablocks-svg-icon',
+			$this->get_icon_css_hover( $attributes ),
+		);
+
+		// Heading starts
+		$desktop_heading_text_styles = $this->get_heading_text_css( $attributes );
+		if ( ! empty( $attributes['headingTextColor'] ) ) {
+			$desktop_heading_text_styles['color'] = $attributes['headingTextColor'];
+		}
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-heading',
+			$desktop_heading_text_styles,
+			$this->get_heading_text_css( $attributes, 'Tablet' ),
+			$this->get_heading_text_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-heading',
+			$this->get_heading_text_css_hover( $attributes ),
+			$this->get_heading_text_css_hover( $attributes, 'Tablet' ),
+			$this->get_heading_text_css_hover( $attributes, 'Mobile' )
+		);
+
+		// Sub Heading starts
+		$desktop_sub_heading_text_styles = $this->get_sub_heading_text_css( $attributes );
+		if ( ! empty( $attributes['subHeadingTextColor'] ) ) {
+			$desktop_sub_heading_text_styles['color'] = $attributes['subHeadingTextColor'];
+		}
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-sub-heading',
+			$desktop_sub_heading_text_styles,
+			$this->get_sub_heading_text_css( $attributes, 'Tablet' ),
+			$this->get_sub_heading_text_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-sub-heading',
+			$this->get_sub_heading_text_css_hover( $attributes ),
+			$this->get_sub_heading_text_css_hover( $attributes, 'Tablet' ),
+			$this->get_sub_heading_text_css_hover( $attributes, 'Mobile' )
+		);
+
+		// Description starts
+		$desktop_des_text_style = $this->get_des_text_css( $attributes );
+		if ( ! empty( $attributes['desTextColor'] ) ) {
+			$desktop_des_text_style['color'] = $attributes['desTextColor'];
+		}
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-text',
+			$desktop_des_text_style,
+			$this->get_des_text_css( $attributes, 'Tablet' ),
+			$this->get_des_text_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-text',
+			$this->get_des_text_css_hover( $attributes ),
+			$this->get_des_text_css_hover( $attributes, 'Tablet' ),
+			$this->get_des_text_css_hover( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-text-drop-caps::first-letter',
+			$this->get_des_drop_text_css( $attributes ),
+			$this->get_des_drop_text_css( $attributes, 'Tablet' ),
+			$this->get_des_drop_text_css( $attributes, 'Mobile' ),
+		);
+
+		// rating icon css
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-star-ratings',
+			$this->get_container_css( $attributes ),
+			$this->get_container_css( $attributes, 'Tablet' ),
+			$this->get_container_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-star-ratings',
+			$this->get_rating_css( $attributes ),
+			$this->get_rating_css( $attributes, 'Tablet' ),
+			$this->get_rating_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__fill > .ablocks-icon-wrap, {{WRAPPER}} .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__unfill > .ablocks-icon-wrap',
+			Icon::get_wrapper_css( $attributes, '', 'starIcon' ),
+			Icon::get_wrapper_css( $attributes, 'Tablet', 'starIcon' ),
+			Icon::get_wrapper_css( $attributes, 'Mobile', 'starIcon' )
+		);
+		// rating icon spacing css
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-star-ratings-icons',
+			$this->get_rating_icon_spacing_css( $attributes ),
+			$this->get_rating_icon_spacing_css( $attributes, 'Tablet' ),
+			$this->get_rating_icon_spacing_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__fill > .ablocks-icon-wrap > svg',
+			$this->get_fill_rating_css( $attributes ),
+			$this->get_fill_rating_css( $attributes, 'Tablet' ),
+			$this->get_fill_rating_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__unfill > .ablocks-icon-wrap > svg',
+			$this->get_unfill_rating_css( $attributes ),
+			$this->get_unfill_rating_css( $attributes, 'Tablet' ),
+			$this->get_unfill_rating_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-star-ratings > .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__fill > .ablocks-icon-wrap > svg',
+			$this->get_fill_rating_css_hover( $attributes ),
+			$this->get_fill_rating_css_hover( $attributes, 'Tablet' ),
+			$this->get_fill_rating_css_hover( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-star-ratings > .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__unfill > .ablocks-icon-wrap > svg',
+			$this->get_unfill_rating_css_hover( $attributes ),
+			$this->get_unfill_rating_css_hover( $attributes, 'Tablet' ),
+			$this->get_unfill_rating_css_hover( $attributes, 'Mobile' ),
+		);
+		// rating number css
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-star-rating-number',
+			$this->get_rating_number_css( $attributes ),
+			$this->get_rating_number_css( $attributes, 'Tablet' ),
+			$this->get_rating_number_css( $attributes, 'Mobile' ),
+		);
+
+		// Generate button CSS start
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-btn-link',
+			$this->get_button_css( $attributes ),
+			$this->get_button_css( $attributes, 'Tablet' ),
+			$this->get_button_css( $attributes, 'Mobile' )
+		);
+		// Generate button CSS end
+		// Generate button hover CSS start
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-btn-link:hover',
+			$this->get_button_hover_css( $attributes ),
+			$this->get_button_hover_css( $attributes, 'Tablet' ),
+			$this->get_button_hover_css( $attributes, 'Mobile' )
+		);
+		// Generate button icon hover CSS
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-btn-link:hover > .ablocks-icon-wrap > svg.ablocks-svg-icon',
+			$this->get_button_icon_hover_css( $attributes ),
+			$this->get_button_icon_hover_css( $attributes, 'Tablet' ),
+			$this->get_button_icon_hover_css( $attributes, 'Mobile' )
+		);
+		// Generate button text CSS start
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-btn-link > .ablocks-info-box-btn-link-text',
+			$this->get_button_text_css( $attributes )
+		);
+		// Generate button icon CSS start
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-btn-link > .ablocks-icon-wrap',
+			Icon::get_wrapper_css( $attributes, '', 'btnIcon' ),
+			Icon::get_wrapper_css( $attributes, 'Tablet', 'btnIcon' ),
+			Icon::get_wrapper_css( $attributes, 'Mobile', 'btnIcon' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-btn-link > .ablocks-icon-wrap > svg.ablocks-svg-icon',
+			Icon::get_element_css( $attributes, '', 'btnIcon' ),
+			Icon::get_element_css( $attributes, 'Tablet', 'btnIcon' ),
+			Icon::get_element_css( $attributes, 'Mobile', 'btnIcon' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-btn-link > .ablocks-icon-wrap > svg.ablocks-svg-icon:hover',
+			Icon::get_element_image_hover_css( $attributes, '', 'btnIcon' ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet', 'btnIcon' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile', 'btnIcon' ),
+		);
+
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 
 	public function get_info_box( $attributes, $device = '' ) {

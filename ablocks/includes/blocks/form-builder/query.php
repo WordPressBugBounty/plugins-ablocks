@@ -204,7 +204,7 @@ class Query {
 		if ( ( $block_data['innerBlocks'][0]['blockName'] ?? '' ) === 'ablocks/form-multi-step' ) {
 
 			foreach ( $block_data['innerBlocks'][0]['innerBlocks'] ?? [] as $block ) {
-				foreach ( $block['innerBlocks'] as ['attributes' => $attr] ) {
+				foreach ( $block['innerBlocks'] as [ 'blockName' => $block_name, 'attributes' => $attr ] ) {
 					$name       = $attr['name'] ?? false;
 					$input_type = $attr['inputType'] ?? false;
 					$label      = $attr['label'] ?? $attr['placeholder'] ?? false;
@@ -220,9 +220,15 @@ class Query {
 						if ( is_array( $radio_arr ) ) {
 							$fields[ $name ]['radioArr'] = $radio_arr;
 						}
+					} elseif ( $block_name === 'ablocks/form-hidden' ) {
+						$name = strtolower( sanitize_text_field( $attr['hiddenname'] ?? '' ) );
+						$fields[ $name ] = [
+							'inputType' => 'textarea', // sanitize value
+							'label'     => ucfirst( preg_replace( '/[_-]/m', ' ', $name ) ), // sanitize value
+						];
 					}
-				}
-			}
+				}//end foreach
+			}//end foreach
 		} elseif (
 			isset( $block_data['innerBlocks'] )
 		) {
@@ -243,8 +249,14 @@ class Query {
 					if ( is_array( $radio_arr ) ) {
 						$fields[ $name ]['radioArr'] = $radio_arr;
 					}
+				} elseif ( $input_element_data['blockName'] === 'ablocks/form-hidden' ) {
+					$name = strtolower( sanitize_text_field( $input_element_data['attributes']['hiddenname'] ?? '' ) );
+					$fields[ $name ] = [
+						'inputType' => 'textarea', // sanitize value
+						'label'     => ucfirst( preg_replace( '/[_-]/m', ' ', $name ) ), // sanitize value
+					];
 				}
-			}
+			}//end foreach
 		}//end if
 		return $fields;
 	}
@@ -485,7 +497,7 @@ class Query {
 
 	public static function add_new_entry(
 		string $form_type,
-		string $post_id,
+		int $post_id,
 		string $user_email,
 		string $ip,
 		string $user_agent,

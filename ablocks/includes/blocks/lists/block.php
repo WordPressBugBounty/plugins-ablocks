@@ -8,14 +8,14 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Width;
 use ABlocks\Controls\Border;
+use ABlocks\Classes\CssGeneratorV2;
 
 class Block extends BlockBaseAbstract {
 
 	protected $block_name = 'lists';
 
-	public function build_css( $attributes ) {
-		// Generate CSS
-		$css_generator = new CssGenerator( $attributes );
+	public function build_css_v1( $attributes ) {
+		$css_generator = new CssGenerator( $attributes, $this->block_name );
 		// Wrapper CSS
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}',
@@ -76,7 +76,74 @@ class Block extends BlockBaseAbstract {
 
 		return $css_generator->generate_css();
 	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+		// Wrapper CSS
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}',
+			$this->get_wrapper_css( $attributes, '' ),
+			$this->get_wrapper_css( $attributes, 'Tablet' ),
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+		);
+		// List CSS
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-list',
+			$this->get_list_css( $attributes, '' ),
+			$this->get_list_css( $attributes, 'Tablet' ),
+			$this->get_list_css( $attributes, 'Mobile' ),
+		);
+		// List Wrapper CSS
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-list__item-content',
+			$this->get_list_wrapper_css( $attributes, '' ),
+			$this->get_list_wrapper_css( $attributes, 'Tablet' ),
+			$this->get_list_wrapper_css( $attributes, 'Mobile' ),
+		);
 
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-list_item-content-divider',
+			$this->get_Divider_Wrapper_css( $attributes, '' ),
+			$this->get_Divider_Wrapper_css( $attributes, 'Tablet' ),
+			$this->get_Divider_Wrapper_css( $attributes, 'Mobile' ),
+		);
+		// Marker CSS
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-list__item-content .ablocks-list__item-marker',
+			$this->get_marker_css( $attributes, '' ),
+			$this->get_marker_css( $attributes, 'Tablet' ),
+			$this->get_marker_css( $attributes, 'Mobile' ),
+		);
+		// Icon CSS
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-list__item-content .ablocks-svg-icon',
+			$this->get_icon_css( $attributes, '' ),
+			$this->get_icon_css( $attributes, 'Tablet' ),
+			$this->get_icon_css( $attributes, 'Mobile' ),
+		);
+		// Icon hover css
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-list__item-content .ablocks-svg-icon:hover',
+			$this->get_icon_hover_css( $attributes, '' ),
+			$this->get_icon_hover_css( $attributes, 'Tablet' ),
+			$this->get_icon_hover_css( $attributes, 'Mobile' ),
+		);
+
+		// List text CSS
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-list__item-content .ablocks-list__item-text',
+			$this->get_list_text_css( $attributes ),
+			$this->get_list_text_css( $attributes, 'Tablet' ),
+			$this->get_list_text_css( $attributes, 'Mobile' ),
+		);
+
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
+	}
 	public function get_wrapper_css( $attributes, $device = '' ) {
 		$typography = isset( $attributes['typography'] ) ? $attributes['typography'] : '';
 		$alignment = isset( $attributes['alignment'] ) ? $attributes['alignment'] : '';

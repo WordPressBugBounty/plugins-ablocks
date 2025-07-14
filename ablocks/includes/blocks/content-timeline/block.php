@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Border;
@@ -17,7 +18,7 @@ class Block extends BlockBaseAbstract {
 
 	protected $block_name = 'content-timeline';
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes );
 
 		// Generate and add CSS styles for different parts of the block
@@ -127,6 +128,123 @@ class Block extends BlockBaseAbstract {
 		);
 
 		return $css_generator->generate_css();
+	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+
+		// Generate and add CSS styles for different parts of the block
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline--outer-wrap .ablocks-icon-maker svg',
+			$this->get_content_timeline_icon_css( $attributes ),
+			$this->get_content_timeline_icon_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_icon_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline--outer-wrap .ablocks__in-view-icon .ablocks-icon-wrap',
+			$this->get_content_timeline_icon_background_css( $attributes ),
+			$this->get_content_timeline_icon_background_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_icon_background_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline .ablocks-block-content-timeline__line',
+			$this->get_content_timeline_connector_css( $attributes ),
+			$this->get_content_timeline_connector_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_connector_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline--outer-wrap .ablocks-block-content-timeline-child--field',
+			$this->get_content_timeline_item_gap_css( $attributes ),
+			$this->get_content_timeline_item_gap_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_item_gap_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline--outer-wrap .ablocks-block-content-timeline-child--field .ablocks-block-content-timeline-child__content-part',
+			$this->get_content_timeline_content_css( $attributes ),
+			$this->get_content_timeline_content_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_content_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline-child__content-part .ablocks-block-content-timeline-child__arrow::after',
+			$this->get_content_timeline_content_background_css( $attributes ),
+			$this->get_content_timeline_content_background_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_content_background_css( $attributes, 'Mobile' )
+		);
+		// Conditional CSS generation based on arrowAlignment
+		$arrowAlignment = $attributes['arrowAlignment'] ?? 'top';
+
+		if ( $arrowAlignment === 'top' ) {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-top .ablocks-block-content-timeline-child__arrow',
+				$this->get_content_timeline_arrow_css( $attributes ),
+				$this->get_content_timeline_arrow_css( $attributes, 'Tablet' ),
+				$this->get_content_timeline_arrow_css( $attributes, 'Mobile' )
+			);
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-top .ablocks-block-content-timeline-child__date',
+				$this->get_content_timeline_date_alignment_css( $attributes ),
+				$this->get_content_timeline_date_alignment_css( $attributes, 'Tablet' ),
+				$this->get_content_timeline_date_alignment_css( $attributes, 'Mobile' )
+			);
+		} elseif ( $arrowAlignment === 'bottom' ) {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-bottom .ablocks-block-content-timeline-child__arrow',
+				$this->get_content_timeline_arrow_css( $attributes ),
+				$this->get_content_timeline_arrow_css( $attributes, 'Tablet' ),
+				$this->get_content_timeline_arrow_css( $attributes, 'Mobile' )
+			);
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-bottom .ablocks-block-content-timeline-child__date',
+				$this->get_content_timeline_date_alignment_css( $attributes ),
+				$this->get_content_timeline_date_alignment_css( $attributes, 'Tablet' ),
+				$this->get_content_timeline_date_alignment_css( $attributes, 'Mobile' )
+			);
+		}//end if
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline-child__date,.ablocks-block-content-timeline-child__inner-content-date',
+			$this->get_content_timeline_date_css( $attributes ),
+			$this->get_content_timeline_date_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_date_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline-child__inner-content-date',
+			$this->get_content_timeline_date_mobile_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline-child__inner-content-date:hover',
+			$this->get_content_timeline_date_hover_mobile_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline-child__date-inner',
+			$this->get_content_timeline_show_date_center_css( $attributes, '' ),
+			$this->get_content_timeline_show_date_center_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_show_date_center_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline-child__date',
+			$this->get_content_timeline_show_date_left_right_css( $attributes, '' ),
+			$this->get_content_timeline_show_date_left_right_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_show_date_left_right_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline--left .ablocks-block-content-timeline__line,.ablocks-block-content-timeline--right .ablocks-block-content-timeline__line',
+			$this->get_content_timeline_show_date_left_right_line_css( $attributes, '' ),
+			$this->get_content_timeline_show_date_left_right_line_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_show_date_left_right_line_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline-child__inner-content-date',
+			$this->get_content_timeline_show_date_mobile_css( $attributes, '' ),
+			$this->get_content_timeline_show_date_mobile_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_show_date_mobile_css( $attributes, 'Mobile' )
+		);
+
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 	public function get_content_timeline_show_date_mobile_css( $attributes, $device = '' ) {
 		$css = [];

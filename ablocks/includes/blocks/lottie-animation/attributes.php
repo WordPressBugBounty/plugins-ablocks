@@ -11,6 +11,10 @@ $attributes = [
 	'block_id' => [
 		'type' => 'string',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => 2,
+	),
 	'asset_url' => [
 		'type' => 'string',
 		'default' => 'https://assets10.lottiefiles.com/packages/lf20_5tl1xxnz.json',

@@ -17,6 +17,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'blockVersion' => [
+		'type' => 'number',
+		'default' => 2,
+	],
 	'logoutRedirect' => [
 		'type' => 'string',
 		'default' => 'current-url'

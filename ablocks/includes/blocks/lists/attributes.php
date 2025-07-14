@@ -15,6 +15,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'markerType' => [
 		'type' => 'string',
 		'default' => 'icon',

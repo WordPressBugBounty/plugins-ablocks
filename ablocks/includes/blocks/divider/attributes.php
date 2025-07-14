@@ -14,6 +14,10 @@ $attributes                = [
 		'type'             => 'string',
 		'default'          => '',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'dividerPatternUrl'    => [
 		'type'             => 'string',
 		'default'          => 'solid',

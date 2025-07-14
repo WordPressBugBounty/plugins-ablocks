@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class CreateFormTable {
 	public static function up( $prefix, $charset_collate ) {
+		global $wpdb;
 		$table_entries = $prefix . ABLOCKS_PLUGIN_SLUG . '_form_entries';
 		$table_meta = $prefix . ABLOCKS_PLUGIN_SLUG . '_form_meta';
 
@@ -40,8 +41,14 @@ class CreateFormTable {
             FOREIGN KEY (entry_id) REFERENCES $table_entries(id) ON DELETE CASCADE ON UPDATE CASCADE
         ) $charset_collate;";
 
-		dbDelta( $sql_entries );
-		dbDelta( $sql_meta );
+		if ( $wpdb->get_var( "SHOW TABLES LIKE '{$table_entries}'" ) !== $table_entries ) {
+			dbDelta( $sql_entries );
+		}
+
+		if ( $wpdb->get_var( "SHOW TABLES LIKE '{$table_meta}'" ) !== $table_meta ) {
+			dbDelta( $sql_meta );
+		}
+
 	}
 	public static function down( $prefix ) {
 		global $wpdb;

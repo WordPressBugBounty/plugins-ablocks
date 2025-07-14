@@ -14,6 +14,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	),
+	'blockVersion' => [
+		'type' => 'number',
+		'default' => 2,
+	],
 	'course_count' => array(
 		'type' => 'number',
 		'default' => 3,
@@ -93,19 +97,19 @@ $attributes = [
 	),
 	'rating_color' => array(
 		'type' => 'string',
-		'default' => '#f4c150',
+		'default' => '#5a3d00',
 	),
 	'rating_hover_color' => array(
 		'type' => 'string',
-		'default' => '#f4c150',
+		'default' => '#5a3d00',
 	),
 	'price_color' => array(
 		'type' => 'string',
-		'default' => '#1dbe84',
+		'default' => '#1a1a1a',
 	),
 	'price_hover_color' => array(
 		'type' => 'string',
-		'default' => '#1dbe84',
+		'default' => '#1a1a1a',
 	),
 	'wish_icon_color' => array(
 		'type' => 'string',

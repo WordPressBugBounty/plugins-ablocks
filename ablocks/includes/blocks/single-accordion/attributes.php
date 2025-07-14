@@ -66,7 +66,7 @@ $attributes = [
 		'default'   => '',
 	],
 	'parentAttributes' => [
-		'type' => 'array',
+		'type' => 'object',
 		'default'   => [
 			'iconPosition' => 'right',
 			'headingTag' => 'p',

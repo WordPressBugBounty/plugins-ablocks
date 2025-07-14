@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Helper;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Background;
@@ -17,7 +18,7 @@ class Block extends BlockBaseAbstract {
 	protected $block_name = 'academy-courses';
 
 	public function build_css( $attributes ) {
-		$css_generator = new CssGenerator( $attributes, $this->block_name );
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 
 		$course_category_desktop_css = $this->get_course_card_category_css( $attributes );
 		if ( ! empty( $attributes['category_color'] ) ) {

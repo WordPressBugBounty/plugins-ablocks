@@ -14,8 +14,8 @@ class Frontend {
 	public function dispatch_hooks() {
 		Frontend\Template::init();
 		Frontend\Link::init();
-		if ( ! is_admin() ) {
-			add_filter( 'render_block', [ Frontend\DynamicContent\Interpreter::class, 'init' ] );
+		if ( ! is_admin() || defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+			add_filter( 'render_block', [ Frontend\DynamicContent\Interpreter::class, 'init' ], 10, 3 );
 		}
 	}
 

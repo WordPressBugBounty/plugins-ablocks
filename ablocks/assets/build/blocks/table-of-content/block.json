@@ -21,9 +21,18 @@
         "ablocks-common-script",
         "file:./view.js"
     ],
+    "usesContext": [
+        "postId",
+        "postType",
+        "queryId"
+    ],
     "attributes": {
         "block_id": {
             "type": "string",
+            "default": ""
+        },
+        "blockVersion": {
+            "type": "number",
             "default": ""
         },
         "tocTableTitle": {
@@ -64,7 +73,7 @@
         },
         "markerView": {
             "type": "string",
-            "default": "ul"
+            "default": "disc"
         },
         "titleColor": {
             "type": "string",

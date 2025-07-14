@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 1.9.3\n"
+"Project-Id-Version: aBlocks 2.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-04T14:16:19+00:00\n"
+"POT-Creation-Date: 2025-07-14T14:07:55+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: ablocks\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #. Author of the plugin
 #: ablocks.php
-#: includes/blocks.php:141
+#: includes/blocks.php:158
 msgid "Academy LMS"
 msgstr ""
 
@@ -128,7 +128,7 @@ msgstr ""
 
 #: addons/theme-builder/database.php:21
 #: addons/theme-builder/database.php:22
-#: includes/helper.php:104
+#: includes/helper.php:101
 #: assets/build/dashboard.js:25
 msgid "Theme Builder"
 msgstr ""
@@ -153,46 +153,46 @@ msgstr ""
 msgid "Theme Builder archives"
 msgstr ""
 
-#: includes/admin.php:67
+#: includes/admin.php:68
 msgid "Docs"
 msgstr ""
 
-#: includes/admin.php:68
-msgid "View Academy documentation"
-msgstr ""
-
-#: includes/admin.php:72
-msgid "Video Tutorials"
+#: includes/admin.php:69
+msgid "View aBlocks documentation"
 msgstr ""
 
 #: includes/admin.php:73
+msgid "Video Tutorials"
+msgstr ""
+
+#: includes/admin.php:74
 msgid "See Video Tutorials"
 msgstr ""
 
-#: includes/admin.php:77
+#: includes/admin.php:78
 msgid "Community Support"
 msgstr ""
 
-#: includes/admin.php:78
+#: includes/admin.php:79
 msgid "Visit community forums"
 msgstr ""
 
-#: includes/admin.php:82
+#: includes/admin.php:83
 msgid "Rate the plugin ★★★★★"
 msgstr ""
 
-#: includes/admin.php:83
+#: includes/admin.php:84
 msgid "Rate the plugin."
 msgstr ""
 
-#: includes/admin.php:99
-#: includes/helper.php:115
+#: includes/admin.php:100
+#: includes/helper.php:112
 #: assets/build/dashboard.js:1
 #: assets/build/dashboard.js:13
 msgid "Settings"
 msgstr ""
 
-#: includes/admin.php:104
+#: includes/admin.php:105
 msgid "Get aBlocks Pro"
 msgstr ""
 
@@ -200,21 +200,25 @@ msgstr ""
 msgid "Patterns"
 msgstr ""
 
-#: includes/ajax/dashboard.php:55
+#: includes/ajax/dashboard.php:58
+#: includes/ajax/dashboard.php:81
 msgid "You do not have sufficient permissions to install plugins."
 msgstr ""
 
-#: includes/ajax/dashboard.php:63
-#: includes/ajax/dashboard.php:73
+#: includes/ajax/dashboard.php:66
+#: includes/ajax/dashboard.php:76
+#: includes/ajax/dashboard.php:89
+#: includes/ajax/dashboard.php:99
 msgid "Plugin installed and activated successfully!"
 msgstr ""
 
-#: includes/ajax/dashboard.php:65
+#: includes/ajax/dashboard.php:68
+#: includes/ajax/dashboard.php:91
 msgid "Sorry, failed to download."
 msgstr ""
 
-#: includes/ajax/dashboard.php:78
-#: includes/ajax/dashboard.php:116
+#: includes/ajax/dashboard.php:104
+#: includes/ajax/dashboard.php:142
 msgid "Argument should not be empty."
 msgstr ""
 
@@ -226,12 +230,16 @@ msgstr ""
 msgid "Invalid content path."
 msgstr ""
 
-#: includes/ajax/dynamic-content.php:113
-#: includes/ajax/dynamic-content.php:131
+#: includes/ajax/dynamic-content.php:142
+#: includes/ajax/dynamic-content.php:179
 msgid "Sorry, Post type is required!"
 msgstr ""
 
-#: includes/ajax/dynamic-content.php:150
+#: includes/ajax/dynamic-content.php:152
+msgid "Sorry, Taxonomy is required"
+msgstr ""
+
+#: includes/ajax/dynamic-content.php:198
 msgid "Sorry, Post ID and Meta Key is required!"
 msgstr ""
 
@@ -289,7 +297,6 @@ msgstr ""
 #: includes/ajax/form-builder.php:120
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
-#: assets/build/blocks/accordion/view.js:1
 #: assets/build/dashboard.js:4
 msgid "Default"
 msgstr ""
@@ -355,13 +362,18 @@ msgstr ""
 msgid "Error. [2]"
 msgstr ""
 
-#: includes/assets.php:211
+#: includes/assets.php:267
 msgctxt "Google font: on or off"
 msgid "on"
 msgstr ""
 
-#: includes/blocks.php:137
+#: includes/blocks.php:154
 msgid "ABlocks"
+msgstr ""
+
+#: includes/blocks.php:162
+#: assets/build/dashboard.js:1
+msgid "StoreEngine"
 msgstr ""
 
 #: includes/blocks/form-builder/actions/save-form-data.php:41
@@ -395,32 +407,32 @@ msgstr ""
 msgid "Failed to send email"
 msgstr ""
 
-#: includes/blocks/form-builder/validate-form-data.php:69
+#: includes/blocks/form-builder/validate-form-data.php:65
 msgid "Form is empty."
 msgstr ""
 
-#: includes/blocks/logout/block.php:201
+#: includes/blocks/logout/block.php:198
 msgid "(Log Out)"
 msgstr ""
 
-#: includes/blocks/logout/block.php:202
+#: includes/blocks/logout/block.php:199
 msgid "(Log In)"
 msgstr ""
 
-#: includes/blocks/news-ticker/block.php:405
+#: includes/blocks/news-ticker/block.php:403
 msgid "No %s found in the selection"
 msgstr ""
 
-#: includes/blocks/news-ticker/block.php:408
+#: includes/blocks/news-ticker/block.php:406
 #: assets/build/blocks.js:17
 msgid "No items selected"
 msgstr ""
 
-#: includes/blocks/search/block.php:348
+#: includes/blocks/search/block.php:418
 msgid "Write anything..."
 msgstr ""
 
-#: includes/blocks/search/block.php:351
+#: includes/blocks/search/block.php:423
 #: assets/build/blocks.js:1
 #: assets/build/dashboard.js:1
 msgid "Search"
@@ -430,32 +442,32 @@ msgstr ""
 msgid "Shipping Charge: "
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:38
+#: includes/blocks/tabs/attributes.php:42
 #: assets/build/blocks.js:1
 msgid "Tab 1"
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:39
+#: includes/blocks/tabs/attributes.php:43
 #: assets/build/blocks.js:1
 msgid "Tab 2"
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:40
+#: includes/blocks/tabs/attributes.php:44
 #: assets/build/blocks.js:1
 msgid "Tab 3"
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:46
+#: includes/blocks/tabs/attributes.php:50
 #: assets/build/blocks.js:1
 msgid "Subtitle 1 Content: This tab provides general information about our company"
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:47
+#: includes/blocks/tabs/attributes.php:51
 #: assets/build/blocks.js:1
 msgid "Subtitle 2 Content: This tab provides general information about our company"
 msgstr ""
 
-#: includes/blocks/tabs/attributes.php:48
+#: includes/blocks/tabs/attributes.php:52
 #: assets/build/blocks.js:1
 msgid "Subtitle 3 Content: This tab provides general information about our company"
 msgstr ""
@@ -502,33 +514,33 @@ msgstr ""
 msgid "Verification successful."
 msgstr ""
 
-#: includes/helper.php:91
+#: includes/helper.php:88
 msgid "Dashboard"
 msgstr ""
 
-#: includes/helper.php:97
+#: includes/helper.php:94
 msgid "Submissions"
 msgstr ""
 
-#: includes/helper.php:110
+#: includes/helper.php:107
 msgid "Add-ons"
 msgstr ""
 
-#: includes/helper.php:121
+#: includes/helper.php:118
 #: assets/build/dashboard.js:1
 msgid "Get Pro"
 msgstr ""
 
-#: includes/helper.php:131
+#: includes/helper.php:128
 msgid "Loading..."
 msgstr ""
 
 #. translators: %s template
-#: includes/helper.php:504
+#: includes/helper.php:501
 msgid "%s does not exist."
 msgstr ""
 
-#: includes/helper.php:522
+#: includes/helper.php:519
 msgid "action_args should not be overwritten when calling ablocks/get_template."
 msgstr ""
 
@@ -821,27 +833,23 @@ msgid "To manage your subscribers or contacts, log in to your WordPress admin da
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
-#: assets/build/blocks/form-builder/view.js:1
-#: assets/build/blocks/stripe-button/view.js:1
+#: assets/build/blocks.js:17
+#: assets/build/blocks/loop-builder/view.js:1
 #: assets/build/dashboard.js:1
 #: assets/build/demo-import.js:1
 msgid "Normal Text"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Full Width (100%)"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Inline (auto)"
 msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
-#: assets/build/blocks/accordion/view.js:1
 msgid "Custom"
 msgstr ""
 
@@ -874,7 +882,6 @@ msgid "Custom Width"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Normal"
 msgstr ""
 
@@ -1083,6 +1090,7 @@ msgstr ""
 #: assets/build/blocks.js:7
 #: assets/build/blocks.js:16
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Width"
 msgstr ""
 
@@ -1144,6 +1152,7 @@ msgid "Start"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Specify a start time (in seconds)"
 msgstr ""
 
@@ -1153,6 +1162,7 @@ msgid "End"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Specify a end time (in seconds)"
 msgstr ""
 
@@ -1203,7 +1213,6 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
-#: assets/build/blocks/accordion/view.js:1
 msgid "None"
 msgstr ""
 
@@ -1235,17 +1244,20 @@ msgid "External link"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 #: assets/build/dashboard.js:1
 msgid "Video"
 msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Background color"
 msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Background"
 msgstr ""
 
@@ -1392,11 +1404,13 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Horizontal"
 msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Vertical"
 msgstr ""
 
@@ -1452,16 +1466,19 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Layout"
 msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Margin"
 msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Padding"
 msgstr ""
 
@@ -1519,11 +1536,13 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Border"
 msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Box shadow"
 msgstr ""
 
@@ -1540,13 +1559,85 @@ msgid "Custom CSS"
 msgstr ""
 
 #: assets/build/blocks.js:1
+msgid "Need Help"
+msgstr ""
+
+#: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
 msgid "General"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "Content"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
+msgid "Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "%s"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "Flex Start"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "Center"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "Flex End"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "Space Between"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "Space Around"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "Space Evenly"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "start"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "Stretch"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Explore container Blocks Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Access the container block setting to customize container for easy navigation."
+msgstr ""
+
+#: assets/build/blocks.js:1
 #: assets/build/dashboard.js:1
 msgid "Container"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Container layout"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -1602,42 +1693,15 @@ msgid "Justify"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks.js:17
-msgid "Flex Start"
-msgstr ""
-
-#: assets/build/blocks.js:1
-#: assets/build/blocks.js:17
-msgid "Center"
-msgstr ""
-
-#: assets/build/blocks.js:1
-#: assets/build/blocks.js:17
-msgid "Flex End"
-msgstr ""
-
-#: assets/build/blocks.js:1
-#: assets/build/blocks.js:17
-msgid "Space Between"
-msgstr ""
-
-#: assets/build/blocks.js:1
-#: assets/build/blocks.js:17
-msgid "Space Around"
-msgstr ""
-
-#: assets/build/blocks.js:1
-#: assets/build/blocks.js:17
-msgid "Space Evenly"
-msgstr ""
-
-#: assets/build/blocks.js:1
 msgid "Align Items"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks.js:17
-msgid "Stretch"
+msgid "Grid Columns"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Grid Rows"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -1661,142 +1725,132 @@ msgid "Wrap Reverse"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
+msgid "Container Shape"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
+msgid "Height"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Bring to Front"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Flip"
+msgstr ""
+
+#: assets/build/blocks.js:1
 msgid "100 (Thin)"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "200 (Extra Light)"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "300 (Light)"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "400 (Normal)"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "500 (Medium)"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "600 (Semi Bold)"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "700 (Bold)"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "800 (Extra Bold)"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "900 (Black)"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Uppercase"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Lowercase"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Capitalize"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Italic"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Oblique"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Underline"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Overline"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Line Through"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "All icons"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Animations"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Award & reward"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Bookmark & logo"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Favorite"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Business"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Cloth Accessories"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Date & Time"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Device"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "E-commerce"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks/accordion/view.js:1
 msgid "Educations"
 msgstr ""
 
@@ -1817,11 +1871,11 @@ msgid "aBlocks Paste Styles (cmd+shift+v)"
 msgstr ""
 
 #: assets/build/blocks.js:1
-msgid "Choose Container Layout"
+msgid "Choose Container layout"
 msgstr ""
 
 #: assets/build/blocks.js:1
-msgid "Select a container layout to start with."
+msgid "Choose Grid layout"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -1891,13 +1945,6 @@ msgid "Weight"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks.js:7
-#: assets/build/blocks.js:16
-#: assets/build/blocks.js:17
-msgid "Style"
-msgstr ""
-
-#: assets/build/blocks.js:1
 msgid "Decoration"
 msgstr ""
 
@@ -1914,8 +1961,19 @@ msgid "Word spacing"
 msgstr ""
 
 #: assets/build/blocks.js:1
-#: assets/build/blocks.js:17
-msgid "Content"
+msgid "Link Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Open in new window"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add nofollow"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Custom Attributes"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -1926,6 +1984,31 @@ msgstr ""
 #: assets/build/blocks.js:26
 #: assets/build/dashboard.js:25
 msgid "Title"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Animation Type"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+msgid "Animation"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Starting Text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Animated Text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Ending Text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Duration(ms)"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -1941,6 +2024,15 @@ msgstr ""
 #: assets/build/blocks.js:23
 #: assets/build/blocks.js:26
 msgid "Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Regular Text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:26
+msgid "Stroke Color"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -2013,22 +2105,6 @@ msgid "Border radius"
 msgstr ""
 
 #: assets/build/blocks.js:1
-msgid "Link Options"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Open in new window"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Add nofollow"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Custom Attributes"
-msgstr ""
-
-#: assets/build/blocks.js:1
 #: assets/build/blocks.js:7
 #: assets/build/blocks.js:17
 #: assets/build/dashboard.js:1
@@ -2043,6 +2119,7 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Text"
 msgstr ""
 
@@ -2091,6 +2168,7 @@ msgid "Horizontal alignment"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:26
 msgid "Text color"
 msgstr ""
 
@@ -2131,12 +2209,6 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 msgid "Aspect ratio"
-msgstr ""
-
-#: assets/build/blocks.js:1
-#: assets/build/blocks.js:16
-#: assets/build/blocks.js:17
-msgid "Height"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -2275,11 +2347,13 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Text Color"
 msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Background Color"
 msgstr ""
 
@@ -2355,6 +2429,10 @@ msgstr ""
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
 msgid "Show Rating number"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Show Total Rating number"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -2578,6 +2656,7 @@ msgid "Minimal"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Button Alignment"
 msgstr ""
 
@@ -2590,17 +2669,7 @@ msgid "Any"
 msgstr ""
 
 #: assets/build/blocks.js:1
-msgid "Post"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Product"
-msgstr ""
-
-#: assets/build/blocks.js:1
-#: assets/build/blocks.js:26
-#: assets/build/dashboard.js:16
-msgid "Page"
+msgid "Allow collapse"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -2643,10 +2712,6 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 msgid "Item width"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "width"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -2700,10 +2765,6 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 msgid "Right Icon"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "%s"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -3216,6 +3277,14 @@ msgid "Use hover trigger instead of click"
 msgstr ""
 
 #: assets/build/blocks.js:17
+msgid "Show on mouse out of window"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Trigger Once"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "Enable Auto Trigger Timer (s)"
 msgstr ""
 
@@ -3433,6 +3502,7 @@ msgid "Header Setting"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Background Hover"
 msgstr ""
 
@@ -3542,6 +3612,7 @@ msgid "Row setting"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Background Hover Color"
 msgstr ""
 
@@ -3693,6 +3764,7 @@ msgid "Coupon Button"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Button Text"
 msgstr ""
 
@@ -3718,6 +3790,7 @@ msgid "Item Gap"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 #: assets/build/dashboard.js:25
 msgid "Date"
 msgstr ""
@@ -3955,6 +4028,7 @@ msgid "Color Effect"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Hover Color"
 msgstr ""
 
@@ -4023,10 +4097,6 @@ msgid "Items Height"
 msgstr ""
 
 #: assets/build/blocks.js:17
-msgid "Animation"
-msgstr ""
-
-#: assets/build/blocks.js:17
 msgid "Filter Style"
 msgstr ""
 
@@ -4047,10 +4117,6 @@ msgid "Filterable Controls"
 msgstr ""
 
 #: assets/build/blocks.js:17
-msgid "The first item is all labels."
-msgstr ""
-
-#: assets/build/blocks.js:17
 msgid "Filter Name"
 msgstr ""
 
@@ -4064,10 +4130,6 @@ msgstr ""
 
 #: assets/build/blocks.js:17
 msgid "Control Name"
-msgstr ""
-
-#: assets/build/blocks.js:17
-msgid "start"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -5469,63 +5531,118 @@ msgid "Password Hide"
 msgstr ""
 
 #: assets/build/blocks.js:17
+msgid "Replace Audio"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Choose Audio…"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Poster Image"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Playbutton Size"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Playbutton Color"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Progressbar Size"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Progressbar Background"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Progressbar Color"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "ProgressBar Background"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "ProgressBar Color"
+msgstr ""
+
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "2"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "3"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "4"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "6"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "12"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Beginner"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Intermediate"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Expert"
 msgstr ""
 
 #: assets/build/blocks.js:17
 #: assets/build/blocks.js:23
+#: assets/build/blocks.js:26
 msgid "Free"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Paid"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Product Title"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Modified Date"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Descending"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Ascending"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Layout Options"
 msgstr ""
 
@@ -5546,30 +5663,37 @@ msgid "Price Type"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Order By"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Order"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Hover color"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Form Settings"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Form Title Style"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Input Field Style"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Button Style"
 msgstr ""
 
@@ -5615,6 +5739,86 @@ msgstr ""
 
 #: assets/build/blocks.js:17
 msgid "Form Header & Footer"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Post Types"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Posts Per Page"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Normal Loop"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Filterable Loop"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Choose a template or start from blank"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Access Loop Builder Settings"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "This is a child block. Click below to manage the full loop builder."
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Grid"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Templete Styles"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Taxonomies"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Select Taxonomy"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Select a taxonomy…"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Select Terms"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Select terms…"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Reverse"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Row Alignment"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Button Gap"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Filter"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Active Style Filter"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "No Filter Selected"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -5788,11 +5992,116 @@ msgid "Template"
 msgstr ""
 
 #: assets/build/blocks.js:26
+#: assets/build/dashboard.js:16
+msgid "Page"
+msgstr ""
+
+#: assets/build/blocks.js:26
 msgid "Import Templates"
 msgstr ""
 
 #: assets/build/blocks.js:26
 msgid "Import Template"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Products Columns"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Product Per Page"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Button Typography"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Text Hover Color"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Hover background"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Table Background"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Table Child Control"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Flex Direction"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Input Box Style"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Button Setting"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Text Hover"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Select Width"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Select Style"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Title Style"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Label Style"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Input Style"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Button Background Hover"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Button Text Hover"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Color Hover"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Table Layout"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Table Width"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Table First Row Style"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "color Hover"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Table Second Row Style"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Row Typography"
 msgstr ""
 
 #: assets/build/blocks.js:26
@@ -5818,10 +6127,6 @@ msgstr ""
 
 #: assets/build/blocks.js:26
 msgid "Staring Points"
-msgstr ""
-
-#: assets/build/blocks.js:26
-msgid "Stroke Color"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -5959,6 +6264,10 @@ msgid "Filterable Cards"
 msgstr ""
 
 #: assets/build/dashboard.js:1
+msgid "Loop Builder"
+msgstr ""
+
+#: assets/build/dashboard.js:1
 msgid "Form Builder"
 msgstr ""
 
@@ -5987,23 +6296,7 @@ msgid "Marquee Block"
 msgstr ""
 
 #: assets/build/dashboard.js:1
-msgid "Loop Builder"
-msgstr ""
-
-#: assets/build/dashboard.js:1
-msgid "Facebook Like"
-msgstr ""
-
-#: assets/build/dashboard.js:1
-msgid "Facebook Embed"
-msgstr ""
-
-#: assets/build/dashboard.js:1
-msgid "Playlist"
-msgstr ""
-
-#: assets/build/dashboard.js:1
-msgid "Breadcrumb"
+msgid "player"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -6043,18 +6336,52 @@ msgid "Certificate Builder"
 msgstr ""
 
 #: assets/build/dashboard.js:1
+msgid "StoreEngine Products"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "StoreEngine Cart List"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "StoreEngine Login Form"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "StoreEngine Coupon Form"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "StoreEngine Product Filter"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "StoreEngine Checkout From"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "StoreEngine Continue Button"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "StoreEngine Checkout Button"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "StoreEngine Cart Sub Table"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Academy Lms"
+msgstr ""
+
+#: assets/build/dashboard.js:1
 #: assets/build/dashboard.js:4
 msgid "Plugin Required"
 msgstr ""
 
 #: assets/build/dashboard.js:1
-#: assets/build/dashboard.js:4
-msgid "Install Academy LMS to unlock this Block!"
-msgstr ""
-
-#: assets/build/dashboard.js:1
-#: assets/build/dashboard.js:4
-msgid "Install Academy LMS"
+msgid "%s Install to unlock this Block!"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -6090,6 +6417,38 @@ msgid "Sorry, you can't disable required block."
 msgstr ""
 
 #: assets/build/dashboard.js:4
+msgid "StoreEngine Integration Blocks"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Install StoreEngine to unlock this Block!"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Install StoreEngine"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "StoreEngine Integration Blocks not found!"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Academy LMS Integration Blocks"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Install Academy LMS to unlock this Block!"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Install Academy LMS"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Academy LMS Integration Blocks not found!"
+msgstr ""
+
+#: assets/build/dashboard.js:4
 #: assets/build/dashboard.js:25
 msgid "Inactive"
 msgstr ""
@@ -6104,14 +6463,6 @@ msgstr ""
 
 #: assets/build/dashboard.js:4
 msgid "Core Blocks not found!"
-msgstr ""
-
-#: assets/build/dashboard.js:4
-msgid "Academy LMS Integration Blocks"
-msgstr ""
-
-#: assets/build/dashboard.js:4
-msgid "Academy LMS Integration Blocks not found!"
 msgstr ""
 
 #: assets/build/dashboard.js:4
@@ -6709,33 +7060,65 @@ msgstr ""
 #: assets/build/blocks/academy-pdf/block.json
 #: assets/build/blocks/academy-student-registration-form/block.json
 #: assets/build/blocks/accordion/block.json
+#: assets/build/blocks/accordion/deprecated/block.json
 #: assets/build/blocks/advance-lists/block.json
 #: assets/build/blocks/button/block.json
+#: assets/build/blocks/button/deprecated/block.json
 #: assets/build/blocks/chart/block.json
+#: assets/build/blocks/chart/deprecated/block.json
 #: assets/build/blocks/container/block.json
 #: assets/build/blocks/container/deprecated/block.json
 #: assets/build/blocks/countdown/block.json
+#: assets/build/blocks/countdown/deprecated/block.json
 #: assets/build/blocks/counter/block.json
+#: assets/build/blocks/counter/deprecated/block.json
 #: assets/build/blocks/coupon/block.json
+#: assets/build/blocks/coupon/deprecated/block.json
 #: assets/build/blocks/divider/block.json
+#: assets/build/blocks/divider/deprecated/block.json
 #: assets/build/blocks/heading/block.json
+#: assets/build/blocks/heading/deprecated/block.json
 #: assets/build/blocks/icon/block.json
+#: assets/build/blocks/icon/deprecated/block.json
 #: assets/build/blocks/image-scroll/block.json
+#: assets/build/blocks/image-scroll/deprecated/block.json
 #: assets/build/blocks/image/block.json
+#: assets/build/blocks/image/deprecated/block.json
 #: assets/build/blocks/info-box/block.json
+#: assets/build/blocks/info-box/deprecated/block.json
 #: assets/build/blocks/lists/block.json
+#: assets/build/blocks/lists/deprecated/block.json
 #: assets/build/blocks/paragraph/block.json
+#: assets/build/blocks/paragraph/deprecated/block.json
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/paypal-button/deprecated/block.json
+#: assets/build/blocks/player/block.json
 #: assets/build/blocks/search/block.json
 #: assets/build/blocks/spacer/block.json
+#: assets/build/blocks/spacer/deprecated/block.json
 #: assets/build/blocks/star-ratings/block.json
+#: assets/build/blocks/star-ratings/deprecated/block.json
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-login-form/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+#: assets/build/blocks/storeengine-products/block.json
 #: assets/build/blocks/stripe-button/block.json
+#: assets/build/blocks/stripe-button/deprecated/block.json
 #: assets/build/blocks/svg-draw/block.json
+#: assets/build/blocks/svg-draw/deprecated/block.json
 #: assets/build/blocks/tabs/block.json
 #: assets/build/blocks/tabs/deprecated/block.json
 #: assets/build/blocks/text-path/block.json
+#: assets/build/blocks/text-path/deprecated/block.json
 #: assets/build/blocks/toggle/block.json
+#: assets/build/blocks/toggle/deprecated/block.json
 #: assets/build/blocks/video/block.json
+#: assets/build/blocks/video/deprecated/block.json
 msgctxt "block keyword"
 msgid "ablocks"
 msgstr ""
@@ -6748,6 +7131,7 @@ msgstr ""
 #: assets/build/blocks/academy-password-reset-form/block.json
 #: assets/build/blocks/academy-pdf/block.json
 #: assets/build/blocks/academy-student-registration-form/block.json
+#: assets/build/blocks/storeengine-login-form/block.json
 msgctxt "block keyword"
 msgid "academy"
 msgstr ""
@@ -6760,12 +7144,14 @@ msgstr ""
 #: assets/build/blocks/academy-password-reset-form/block.json
 #: assets/build/blocks/academy-pdf/block.json
 #: assets/build/blocks/academy-student-registration-form/block.json
+#: assets/build/blocks/storeengine-login-form/block.json
 msgctxt "block keyword"
 msgid "academy lms"
 msgstr ""
 
 #: assets/build/blocks/academy-course-search/block.json
 #: assets/build/blocks/info-box/block.json
+#: assets/build/blocks/info-box/deprecated/block.json
 #: assets/build/blocks/search/block.json
 msgctxt "block keyword"
 msgid "search"
@@ -6845,12 +7231,14 @@ msgstr ""
 
 #: assets/build/blocks/academy-login-form/block.json
 #: assets/build/blocks/academy-password-reset-form/block.json
+#: assets/build/blocks/storeengine-login-form/block.json
 msgctxt "block keyword"
 msgid "login"
 msgstr ""
 
 #: assets/build/blocks/academy-login-form/block.json
 #: assets/build/blocks/academy-password-reset-form/block.json
+#: assets/build/blocks/storeengine-login-form/block.json
 msgctxt "block keyword"
 msgid "login form"
 msgstr ""
@@ -6896,31 +7284,37 @@ msgid "student"
 msgstr ""
 
 #: assets/build/blocks/accordion/block.json
+#: assets/build/blocks/accordion/deprecated/block.json
 msgctxt "block title"
 msgid "Accordion"
 msgstr ""
 
 #: assets/build/blocks/accordion/block.json
+#: assets/build/blocks/accordion/deprecated/block.json
 msgctxt "block description"
 msgid "Organize content into collapsible sections."
 msgstr ""
 
 #: assets/build/blocks/accordion/block.json
+#: assets/build/blocks/accordion/deprecated/block.json
 msgctxt "block keyword"
 msgid "accordion"
 msgstr ""
 
 #: assets/build/blocks/accordion/block.json
+#: assets/build/blocks/accordion/deprecated/block.json
 msgctxt "block keyword"
 msgid "faq"
 msgstr ""
 
 #: assets/build/blocks/accordion/block.json
+#: assets/build/blocks/accordion/deprecated/block.json
 msgctxt "block keyword"
 msgid "collapsible"
 msgstr ""
 
 #: assets/build/blocks/accordion/block.json
+#: assets/build/blocks/accordion/deprecated/block.json
 msgctxt "block keyword"
 msgid "expandable"
 msgstr ""
@@ -6952,62 +7346,80 @@ msgstr ""
 
 #: assets/build/blocks/advance-lists/block.json
 #: assets/build/blocks/lists/block.json
+#: assets/build/blocks/lists/deprecated/block.json
 msgctxt "block keyword"
 msgid "lists"
 msgstr ""
 
 #: assets/build/blocks/advance-lists/block.json
 #: assets/build/blocks/lists/block.json
+#: assets/build/blocks/lists/deprecated/block.json
 msgctxt "block keyword"
 msgid "list"
 msgstr ""
 
 #: assets/build/blocks/advance-lists/block.json
 #: assets/build/blocks/lists/block.json
+#: assets/build/blocks/lists/deprecated/block.json
 msgctxt "block keyword"
 msgid "icon list"
 msgstr ""
 
 #: assets/build/blocks/advance-lists/block.json
 #: assets/build/blocks/lists/block.json
+#: assets/build/blocks/lists/deprecated/block.json
 msgctxt "block keyword"
 msgid "point"
 msgstr ""
 
 #: assets/build/blocks/button/block.json
+#: assets/build/blocks/button/deprecated/block.json
 msgctxt "block title"
 msgid "Button"
 msgstr ""
 
 #: assets/build/blocks/button/block.json
+#: assets/build/blocks/button/deprecated/block.json
 msgctxt "block description"
 msgid "Design stylish call-to-action buttons."
 msgstr ""
 
 #: assets/build/blocks/button/block.json
+#: assets/build/blocks/button/deprecated/block.json
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/paypal-button/deprecated/block.json
 #: assets/build/blocks/stripe-button/block.json
+#: assets/build/blocks/stripe-button/deprecated/block.json
 msgctxt "block keyword"
 msgid "button"
 msgstr ""
 
 #: assets/build/blocks/button/block.json
+#: assets/build/blocks/button/deprecated/block.json
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/paypal-button/deprecated/block.json
 #: assets/build/blocks/stripe-button/block.json
+#: assets/build/blocks/stripe-button/deprecated/block.json
 msgctxt "block keyword"
 msgid "anchor"
 msgstr ""
 
 #: assets/build/blocks/button/block.json
+#: assets/build/blocks/button/deprecated/block.json
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/paypal-button/deprecated/block.json
 #: assets/build/blocks/stripe-button/block.json
+#: assets/build/blocks/stripe-button/deprecated/block.json
 msgctxt "block keyword"
 msgid "link"
 msgstr ""
 
 #: assets/build/blocks/button/block.json
+#: assets/build/blocks/button/deprecated/block.json
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/paypal-button/deprecated/block.json
 #: assets/build/blocks/stripe-button/block.json
+#: assets/build/blocks/stripe-button/deprecated/block.json
 msgctxt "block keyword"
 msgid "cta"
 msgstr ""
@@ -7019,42 +7431,51 @@ msgstr ""
 
 #: assets/build/blocks/carousel-child/block.json
 #: assets/build/blocks/carousel/block.json
+#: assets/build/blocks/carousel/deprecated/block.json
 msgctxt "block description"
 msgid "Make attractive image presentation with carousel"
 msgstr ""
 
 #: assets/build/blocks/carousel/block.json
+#: assets/build/blocks/carousel/deprecated/block.json
 msgctxt "block title"
 msgid "Carousel"
 msgstr ""
 
 #: assets/build/blocks/chart/block.json
+#: assets/build/blocks/chart/deprecated/block.json
 msgctxt "block title"
 msgid "Chart"
 msgstr ""
 
 #: assets/build/blocks/chart/block.json
+#: assets/build/blocks/chart/deprecated/block.json
 msgctxt "block description"
 msgid "Add customizable, impactful charts."
 msgstr ""
 
 #: assets/build/blocks/chart/block.json
+#: assets/build/blocks/chart/deprecated/block.json
 msgctxt "block keyword"
 msgid "chart"
 msgstr ""
 
 #: assets/build/blocks/chart/block.json
+#: assets/build/blocks/chart/deprecated/block.json
 msgctxt "block keyword"
 msgid "bar"
 msgstr ""
 
 #: assets/build/blocks/chart/block.json
+#: assets/build/blocks/chart/deprecated/block.json
 msgctxt "block keyword"
 msgid "pie"
 msgstr ""
 
 #: assets/build/blocks/chart/block.json
+#: assets/build/blocks/chart/deprecated/block.json
 #: assets/build/blocks/divider/block.json
+#: assets/build/blocks/divider/deprecated/block.json
 msgctxt "block keyword"
 msgid "line"
 msgstr ""
@@ -7102,161 +7523,193 @@ msgid "content box"
 msgstr ""
 
 #: assets/build/blocks/content-timeline-child/block.json
+#: assets/build/blocks/content-timeline-child/deprecated/block.json
 msgctxt "block title"
 msgid "Content Timeline Child"
 msgstr ""
 
 #: assets/build/blocks/content-timeline-child/block.json
+#: assets/build/blocks/content-timeline-child/deprecated/block.json
 msgctxt "block description"
 msgid "Design stylish call-to-action content-timeline-child."
 msgstr ""
 
 #: assets/build/blocks/content-timeline/block.json
+#: assets/build/blocks/content-timeline/deprecated/block.json
 msgctxt "block title"
 msgid "Content Timeline"
 msgstr ""
 
 #: assets/build/blocks/content-timeline/block.json
+#: assets/build/blocks/content-timeline/deprecated/block.json
 msgctxt "block description"
 msgid "Design stylish call-to-action Content Timeline."
 msgstr ""
 
 #: assets/build/blocks/countdown/block.json
+#: assets/build/blocks/countdown/deprecated/block.json
 msgctxt "block title"
 msgid "Countdown"
 msgstr ""
 
 #: assets/build/blocks/countdown/block.json
+#: assets/build/blocks/countdown/deprecated/block.json
 msgctxt "block description"
 msgid "Add countdown timers for events."
 msgstr ""
 
 #: assets/build/blocks/countdown/block.json
+#: assets/build/blocks/countdown/deprecated/block.json
 msgctxt "block keyword"
 msgid "countdown"
 msgstr ""
 
 #: assets/build/blocks/countdown/block.json
+#: assets/build/blocks/countdown/deprecated/block.json
 msgctxt "block keyword"
 msgid "count"
 msgstr ""
 
 #: assets/build/blocks/countdown/block.json
+#: assets/build/blocks/countdown/deprecated/block.json
 msgctxt "block keyword"
 msgid "notice"
 msgstr ""
 
 #: assets/build/blocks/counter/block.json
+#: assets/build/blocks/counter/deprecated/block.json
 msgctxt "block title"
 msgid "Counter"
 msgstr ""
 
 #: assets/build/blocks/counter/block.json
+#: assets/build/blocks/counter/deprecated/block.json
 msgctxt "block description"
 msgid "Display animated counters for stats."
 msgstr ""
 
 #: assets/build/blocks/counter/block.json
+#: assets/build/blocks/counter/deprecated/block.json
 msgctxt "block keyword"
 msgid "counter"
 msgstr ""
 
 #: assets/build/blocks/counter/block.json
+#: assets/build/blocks/counter/deprecated/block.json
 msgctxt "block keyword"
 msgid "fun fact"
 msgstr ""
 
 #: assets/build/blocks/counter/block.json
+#: assets/build/blocks/counter/deprecated/block.json
 msgctxt "block keyword"
 msgid "number counter"
 msgstr ""
 
 #: assets/build/blocks/counter/block.json
+#: assets/build/blocks/counter/deprecated/block.json
 msgctxt "block keyword"
 msgid "circle counter"
 msgstr ""
 
 #: assets/build/blocks/counter/block.json
+#: assets/build/blocks/counter/deprecated/block.json
 msgctxt "block keyword"
 msgid "bar counter"
 msgstr ""
 
 #: assets/build/blocks/counter/block.json
+#: assets/build/blocks/counter/deprecated/block.json
 msgctxt "block keyword"
 msgid "line counter"
 msgstr ""
 
 #: assets/build/blocks/coupon/block.json
+#: assets/build/blocks/coupon/deprecated/block.json
 msgctxt "block title"
 msgid "Coupon"
 msgstr ""
 
 #: assets/build/blocks/coupon/block.json
+#: assets/build/blocks/coupon/deprecated/block.json
 msgctxt "block description"
 msgid "Add clickable coupons that copy codes instantly."
 msgstr ""
 
 #: assets/build/blocks/coupon/block.json
+#: assets/build/blocks/coupon/deprecated/block.json
 msgctxt "block keyword"
 msgid "coupon"
 msgstr ""
 
 #: assets/build/blocks/coupon/block.json
+#: assets/build/blocks/coupon/deprecated/block.json
 msgctxt "block keyword"
 msgid "coupon-code"
 msgstr ""
 
 #: assets/build/blocks/coupon/block.json
+#: assets/build/blocks/coupon/deprecated/block.json
 msgctxt "block keyword"
 msgid "discount"
 msgstr ""
 
 #: assets/build/blocks/coupon/block.json
+#: assets/build/blocks/coupon/deprecated/block.json
 msgctxt "block keyword"
 msgid "offer"
 msgstr ""
 
 #: assets/build/blocks/coupon/block.json
+#: assets/build/blocks/coupon/deprecated/block.json
 msgctxt "block keyword"
 msgid "promo"
 msgstr ""
 
 #: assets/build/blocks/coupon/block.json
+#: assets/build/blocks/coupon/deprecated/block.json
 msgctxt "block keyword"
 msgid "promotion"
 msgstr ""
 
 #: assets/build/blocks/divider/block.json
+#: assets/build/blocks/divider/deprecated/block.json
 msgctxt "block title"
 msgid "Divider"
 msgstr ""
 
 #: assets/build/blocks/divider/block.json
+#: assets/build/blocks/divider/deprecated/block.json
 msgctxt "block description"
 msgid "Add stylish content section dividers."
 msgstr ""
 
 #: assets/build/blocks/divider/block.json
+#: assets/build/blocks/divider/deprecated/block.json
 msgctxt "block keyword"
 msgid "divider"
 msgstr ""
 
 #: assets/build/blocks/divider/block.json
+#: assets/build/blocks/divider/deprecated/block.json
 msgctxt "block keyword"
 msgid "section divider"
 msgstr ""
 
 #: assets/build/blocks/divider/block.json
+#: assets/build/blocks/divider/deprecated/block.json
 msgctxt "block keyword"
 msgid "separator"
 msgstr ""
 
 #: assets/build/blocks/dual-button/block.json
+#: assets/build/blocks/dual-button/deprecated/block.json
 msgctxt "block title"
 msgid "Dual Button"
 msgstr ""
 
 #: assets/build/blocks/dual-button/block.json
+#: assets/build/blocks/dual-button/deprecated/block.json
 msgctxt "block description"
 msgid "Craft beautiful, fully customizable Dual Button."
 msgstr ""
@@ -7272,11 +7725,13 @@ msgid "Filterable card-based layout Child."
 msgstr ""
 
 #: assets/build/blocks/filterable-cards/block.json
+#: assets/build/blocks/filterable-cards/deprecated/block.json
 msgctxt "block title"
 msgid "Filterable Cards"
 msgstr ""
 
 #: assets/build/blocks/filterable-cards/block.json
+#: assets/build/blocks/filterable-cards/deprecated/block.json
 msgctxt "block description"
 msgid "Filterable card-based layout."
 msgstr ""
@@ -7302,11 +7757,13 @@ msgid "Engaging content flip effect."
 msgstr ""
 
 #: assets/build/blocks/form-builder/block.json
+#: assets/build/blocks/form-builder/deprecated/block.json
 msgctxt "block title"
 msgid "Form Builder"
 msgstr ""
 
 #: assets/build/blocks/form-builder/block.json
+#: assets/build/blocks/form-builder/deprecated/block.json
 #: assets/build/blocks/form-multi-step-child/block.json
 #: assets/build/blocks/form-multi-step/block.json
 msgctxt "block description"
@@ -7325,6 +7782,7 @@ msgstr ""
 #: assets/build/blocks/form-select/block.json
 #: assets/build/blocks/form-textarea/block.json
 #: assets/build/blocks/spacer/block.json
+#: assets/build/blocks/spacer/deprecated/block.json
 msgctxt "block description"
 msgid "Easily add adjustable layout spacing."
 msgstr ""
@@ -7365,72 +7823,91 @@ msgid "Textarea"
 msgstr ""
 
 #: assets/build/blocks/heading/block.json
+#: assets/build/blocks/heading/deprecated/block.json
 msgctxt "block title"
 msgid "Heading"
 msgstr ""
 
 #: assets/build/blocks/heading/block.json
+#: assets/build/blocks/heading/deprecated/block.json
 #: assets/build/blocks/info-box/block.json
+#: assets/build/blocks/info-box/deprecated/block.json
 msgctxt "block description"
 msgid "Add customizable, impactful headings."
 msgstr ""
 
 #: assets/build/blocks/heading/block.json
+#: assets/build/blocks/heading/deprecated/block.json
 msgctxt "block keyword"
 msgid "heading"
 msgstr ""
 
 #: assets/build/blocks/heading/block.json
+#: assets/build/blocks/heading/deprecated/block.json
 msgctxt "block keyword"
 msgid "headline"
 msgstr ""
 
 #: assets/build/blocks/heading/block.json
+#: assets/build/blocks/heading/deprecated/block.json
 #: assets/build/blocks/info-box/block.json
+#: assets/build/blocks/info-box/deprecated/block.json
 msgctxt "block keyword"
 msgid "title"
 msgstr ""
 
 #: assets/build/blocks/heading/block.json
+#: assets/build/blocks/heading/deprecated/block.json
 #: assets/build/blocks/info-box/block.json
+#: assets/build/blocks/info-box/deprecated/block.json
 msgctxt "block keyword"
 msgid "sub title"
 msgstr ""
 
 #: assets/build/blocks/icon/block.json
+#: assets/build/blocks/icon/deprecated/block.json
 msgctxt "block title"
 msgid "Icon"
 msgstr ""
 
 #: assets/build/blocks/icon/block.json
+#: assets/build/blocks/icon/deprecated/block.json
 msgctxt "block description"
 msgid "Enhance content with a diverse library of icons."
 msgstr ""
 
 #: assets/build/blocks/icon/block.json
+#: assets/build/blocks/icon/deprecated/block.json
 #: assets/build/blocks/svg-draw/block.json
+#: assets/build/blocks/svg-draw/deprecated/block.json
 msgctxt "block keyword"
 msgid "icon"
 msgstr ""
 
 #: assets/build/blocks/icon/block.json
+#: assets/build/blocks/icon/deprecated/block.json
 msgctxt "block keyword"
 msgid "symbol"
 msgstr ""
 
 #: assets/build/blocks/icon/block.json
+#: assets/build/blocks/icon/deprecated/block.json
 #: assets/build/blocks/image-scroll/block.json
+#: assets/build/blocks/image-scroll/deprecated/block.json
 #: assets/build/blocks/image/block.json
+#: assets/build/blocks/image/deprecated/block.json
 msgctxt "block keyword"
 msgid "image"
 msgstr ""
 
 #: assets/build/blocks/image-comparison/block.json
+#: assets/build/blocks/image-comparison/deprecated/block.json
 msgctxt "block title"
 msgid "Image Comparison"
 msgstr ""
 
 #: assets/build/blocks/image-comparison/block.json
+#: assets/build/blocks/image-comparison/deprecated/block.json
 msgctxt "block description"
 msgid "Compare two images easily."
 msgstr ""
@@ -7446,74 +7923,91 @@ msgid "Add customizable, impactful image hotspot-child."
 msgstr ""
 
 #: assets/build/blocks/image-hotspot/block.json
+#: assets/build/blocks/image-hotspot/deprecated/block.json
 msgctxt "block title"
 msgid "Image Hotspot"
 msgstr ""
 
 #: assets/build/blocks/image-hotspot/block.json
+#: assets/build/blocks/image-hotspot/deprecated/block.json
 msgctxt "block description"
 msgid "Add customizable, impactful image hotspot."
 msgstr ""
 
 #: assets/build/blocks/image-scroll/block.json
+#: assets/build/blocks/image-scroll/deprecated/block.json
 msgctxt "block title"
 msgid "Image Scroll"
 msgstr ""
 
 #: assets/build/blocks/image-scroll/block.json
+#: assets/build/blocks/image-scroll/deprecated/block.json
 #: assets/build/blocks/image/block.json
+#: assets/build/blocks/image/deprecated/block.json
 msgctxt "block description"
 msgid "Insert and style customizable images."
 msgstr ""
 
 #: assets/build/blocks/image-scroll/block.json
+#: assets/build/blocks/image-scroll/deprecated/block.json
 #: assets/build/blocks/image/block.json
+#: assets/build/blocks/image/deprecated/block.json
 msgctxt "block keyword"
 msgid "media"
 msgstr ""
 
 #: assets/build/blocks/image-scroll/block.json
+#: assets/build/blocks/image-scroll/deprecated/block.json
 #: assets/build/blocks/image/block.json
+#: assets/build/blocks/image/deprecated/block.json
 msgctxt "block keyword"
 msgid "photo"
 msgstr ""
 
 #: assets/build/blocks/image-scroll/block.json
+#: assets/build/blocks/image-scroll/deprecated/block.json
 msgctxt "block keyword"
 msgid "image-scroll"
 msgstr ""
 
 #: assets/build/blocks/image/block.json
+#: assets/build/blocks/image/deprecated/block.json
 msgctxt "block title"
 msgid "Image"
 msgstr ""
 
 #: assets/build/blocks/info-box/block.json
+#: assets/build/blocks/info-box/deprecated/block.json
 msgctxt "block title"
 msgid "Info Box"
 msgstr ""
 
 #: assets/build/blocks/info-box/block.json
+#: assets/build/blocks/info-box/deprecated/block.json
 msgctxt "block keyword"
 msgid "information"
 msgstr ""
 
 #: assets/build/blocks/info-box/block.json
+#: assets/build/blocks/info-box/deprecated/block.json
 msgctxt "block keyword"
 msgid "info"
 msgstr ""
 
 #: assets/build/blocks/info-box/block.json
+#: assets/build/blocks/info-box/deprecated/block.json
 msgctxt "block keyword"
 msgid "details"
 msgstr ""
 
 #: assets/build/blocks/lists/block.json
+#: assets/build/blocks/lists/deprecated/block.json
 msgctxt "block title"
 msgid "List"
 msgstr ""
 
 #: assets/build/blocks/lists/block.json
+#: assets/build/blocks/lists/deprecated/block.json
 msgctxt "block description"
 msgid "Design customizable, organized lists."
 msgstr ""
@@ -7526,6 +8020,46 @@ msgstr ""
 #: assets/build/blocks/logout/block.json
 msgctxt "block description"
 msgid "Quick user logout option."
+msgstr ""
+
+#: assets/build/blocks/loop-builder/block.json
+msgctxt "block title"
+msgid "Loop Builder"
+msgstr ""
+
+#: assets/build/blocks/loop-builder/block.json
+msgctxt "block description"
+msgid "Use Advanced Query Loop Builder"
+msgstr ""
+
+#: assets/build/blocks/loop-filter/block.json
+msgctxt "block title"
+msgid "Loop Filter"
+msgstr ""
+
+#: assets/build/blocks/loop-filter/block.json
+msgctxt "block description"
+msgid "Use Advanced Query Loop Filter"
+msgstr ""
+
+#: assets/build/blocks/loop-load-more/block.json
+msgctxt "block title"
+msgid "Loop Load More"
+msgstr ""
+
+#: assets/build/blocks/loop-load-more/block.json
+msgctxt "block description"
+msgid "Use Advanced Query Loop Load More"
+msgstr ""
+
+#: assets/build/blocks/loop-template/block.json
+msgctxt "block title"
+msgid "Loop Template"
+msgstr ""
+
+#: assets/build/blocks/loop-template/block.json
+msgctxt "block description"
+msgid "Use Advanced Query Loop template"
 msgstr ""
 
 #: assets/build/blocks/lottie-animation/block.json
@@ -7559,11 +8093,13 @@ msgid "Auto scrolling item Child."
 msgstr ""
 
 #: assets/build/blocks/marquee/block.json
+#: assets/build/blocks/marquee/deprecated/block.json
 msgctxt "block title"
 msgid "Marquee"
 msgstr ""
 
 #: assets/build/blocks/marquee/block.json
+#: assets/build/blocks/marquee/deprecated/block.json
 msgctxt "block description"
 msgid "Auto scrolling item display."
 msgstr ""
@@ -7591,41 +8127,49 @@ msgid "Menu Item"
 msgstr ""
 
 #: assets/build/blocks/menu/block.json
+#: assets/build/blocks/menu/deprecated/block.json
 msgctxt "block title"
 msgid "Menu"
 msgstr ""
 
 #: assets/build/blocks/menu/block.json
+#: assets/build/blocks/menu/deprecated/block.json
 msgctxt "block description"
 msgid "Show Navigation"
 msgstr ""
 
 #: assets/build/blocks/modal-panel/block.json
+#: assets/build/blocks/modal-panel/deprecated/block.json
 msgctxt "block title"
 msgid "Modal Panel"
 msgstr ""
 
 #: assets/build/blocks/modal-panel/block.json
+#: assets/build/blocks/modal-panel/deprecated/block.json
 msgctxt "block description"
 msgid "Modal block panel element"
 msgstr ""
 
 #: assets/build/blocks/modal-trigger/block.json
+#: assets/build/blocks/modal-trigger/deprecated/block.json
 msgctxt "block title"
 msgid "Modal Trigger"
 msgstr ""
 
 #: assets/build/blocks/modal-trigger/block.json
+#: assets/build/blocks/modal-trigger/deprecated/block.json
 msgctxt "block description"
 msgid "Modal block trigger element"
 msgstr ""
 
 #: assets/build/blocks/modal/block.json
+#: assets/build/blocks/modal/deprecated/block.json
 msgctxt "block title"
 msgid "Modal"
 msgstr ""
 
 #: assets/build/blocks/modal/block.json
+#: assets/build/blocks/modal/deprecated/block.json
 msgctxt "block description"
 msgid "Create customizable modal popups."
 msgstr ""
@@ -7641,93 +8185,158 @@ msgid "Add your news ticker"
 msgstr ""
 
 #: assets/build/blocks/notice/block.json
+#: assets/build/blocks/notice/deprecated/block.json
 msgctxt "block title"
 msgid "Notification"
 msgstr ""
 
 #: assets/build/blocks/notice/block.json
+#: assets/build/blocks/notice/deprecated/block.json
 msgctxt "block description"
 msgid " A customizable notification block for displaying important messages ."
 msgstr ""
 
 #: assets/build/blocks/paragraph/block.json
+#: assets/build/blocks/paragraph/deprecated/block.json
 msgctxt "block title"
 msgid "Paragraph"
 msgstr ""
 
 #: assets/build/blocks/paragraph/block.json
+#: assets/build/blocks/paragraph/deprecated/block.json
 msgctxt "block description"
 msgid "Craft beautiful, fully customizable paragraphs."
 msgstr ""
 
 #: assets/build/blocks/paragraph/block.json
+#: assets/build/blocks/paragraph/deprecated/block.json
 msgctxt "block keyword"
 msgid "paragraph"
 msgstr ""
 
 #: assets/build/blocks/paragraph/block.json
+#: assets/build/blocks/paragraph/deprecated/block.json
 msgctxt "block keyword"
 msgid "text"
 msgstr ""
 
 #: assets/build/blocks/paragraph/block.json
+#: assets/build/blocks/paragraph/deprecated/block.json
 msgctxt "block keyword"
 msgid "content"
 msgstr ""
 
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/paypal-button/deprecated/block.json
 msgctxt "block title"
 msgid "PayPal Button"
 msgstr ""
 
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/paypal-button/deprecated/block.json
 msgctxt "block description"
 msgid "Add PayPal payment functionality to your site."
 msgstr ""
 
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/paypal-button/deprecated/block.json
 msgctxt "block keyword"
 msgid "paypal"
 msgstr ""
 
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/paypal-button/deprecated/block.json
 #: assets/build/blocks/stripe-button/block.json
+#: assets/build/blocks/stripe-button/deprecated/block.json
 msgctxt "block keyword"
 msgid "payment"
 msgstr ""
 
 #: assets/build/blocks/paypal-button/block.json
+#: assets/build/blocks/paypal-button/deprecated/block.json
 #: assets/build/blocks/stripe-button/block.json
+#: assets/build/blocks/stripe-button/deprecated/block.json
 msgctxt "block keyword"
 msgid "pay"
 msgstr ""
 
+#: assets/build/blocks/player/block.json
+msgctxt "block title"
+msgid "Player"
+msgstr ""
+
+#: assets/build/blocks/player/block.json
+#: assets/build/blocks/video/block.json
+#: assets/build/blocks/video/deprecated/block.json
+msgctxt "block description"
+msgid " Embed responsive, customizable video."
+msgstr ""
+
+#: assets/build/blocks/player/block.json
+#: assets/build/blocks/video/block.json
+#: assets/build/blocks/video/deprecated/block.json
+msgctxt "block keyword"
+msgid "video"
+msgstr ""
+
+#: assets/build/blocks/player/block.json
+#: assets/build/blocks/video/block.json
+#: assets/build/blocks/video/deprecated/block.json
+msgctxt "block keyword"
+msgid "youtube"
+msgstr ""
+
+#: assets/build/blocks/player/block.json
+#: assets/build/blocks/video/block.json
+#: assets/build/blocks/video/deprecated/block.json
+msgctxt "block keyword"
+msgid "vimeo"
+msgstr ""
+
+#: assets/build/blocks/player/block.json
+msgctxt "block keyword"
+msgid "audio"
+msgstr ""
+
+#: assets/build/blocks/player/block.json
+#: assets/build/blocks/video/block.json
+#: assets/build/blocks/video/deprecated/block.json
+msgctxt "block keyword"
+msgid "embedded"
+msgstr ""
+
 #: assets/build/blocks/price-menu-item/block.json
+#: assets/build/blocks/price-menu-item/deprecated/block.json
 msgctxt "block title"
 msgid "Price Menu Item"
 msgstr ""
 
 #: assets/build/blocks/price-menu-item/block.json
+#: assets/build/blocks/price-menu-item/deprecated/block.json
 msgctxt "block description"
 msgid "Craft beautiful, fully customizable price-menu-item."
 msgstr ""
 
 #: assets/build/blocks/price-menu/block.json
+#: assets/build/blocks/price-menu/deprecated/block.json
 msgctxt "block title"
 msgid "Price Menu"
 msgstr ""
 
 #: assets/build/blocks/price-menu/block.json
+#: assets/build/blocks/price-menu/deprecated/block.json
 msgctxt "block description"
 msgid "Craft beautiful, fully customizable price-menu."
 msgstr ""
 
 #: assets/build/blocks/progress-tracker/block.json
+#: assets/build/blocks/progress-tracker/deprecated/block.json
 msgctxt "block title"
 msgid "Progress Tracker"
 msgstr ""
 
 #: assets/build/blocks/progress-tracker/block.json
+#: assets/build/blocks/progress-tracker/deprecated/block.json
 msgctxt "block description"
 msgid "Add customizable, impactful Progress"
 msgstr ""
@@ -7758,121 +8367,361 @@ msgid "Show Accordion Item"
 msgstr ""
 
 #: assets/build/blocks/social-shares/block.json
+#: assets/build/blocks/social-shares/deprecated/block.json
 msgctxt "block title"
 msgid "Social Shares"
 msgstr ""
 
 #: assets/build/blocks/social-shares/block.json
+#: assets/build/blocks/social-shares/deprecated/block.json
 msgctxt "block description"
 msgid "Add customizable social media share buttons"
 msgstr ""
 
 #: assets/build/blocks/spacer/block.json
+#: assets/build/blocks/spacer/deprecated/block.json
 msgctxt "block title"
 msgid "Spacer"
 msgstr ""
 
 #: assets/build/blocks/spacer/block.json
+#: assets/build/blocks/spacer/deprecated/block.json
 msgctxt "block keyword"
 msgid "spacer"
 msgstr ""
 
 #: assets/build/blocks/spacer/block.json
+#: assets/build/blocks/spacer/deprecated/block.json
 msgctxt "block keyword"
 msgid "empty"
 msgstr ""
 
 #: assets/build/blocks/spacer/block.json
+#: assets/build/blocks/spacer/deprecated/block.json
 msgctxt "block keyword"
 msgid "empty space"
 msgstr ""
 
 #: assets/build/blocks/spacer/block.json
+#: assets/build/blocks/spacer/deprecated/block.json
 msgctxt "block keyword"
 msgid "gap"
 msgstr ""
 
 #: assets/build/blocks/spacer/block.json
+#: assets/build/blocks/spacer/deprecated/block.json
 msgctxt "block keyword"
 msgid "margin"
 msgstr ""
 
 #: assets/build/blocks/spacer/block.json
+#: assets/build/blocks/spacer/deprecated/block.json
 msgctxt "block keyword"
 msgid "padding"
 msgstr ""
 
 #: assets/build/blocks/star-ratings/block.json
+#: assets/build/blocks/star-ratings/deprecated/block.json
 msgctxt "block title"
 msgid "Star Ratings"
 msgstr ""
 
 #: assets/build/blocks/star-ratings/block.json
+#: assets/build/blocks/star-ratings/deprecated/block.json
 msgctxt "block description"
 msgid "Display reviews with star ratings."
 msgstr ""
 
 #: assets/build/blocks/star-ratings/block.json
+#: assets/build/blocks/star-ratings/deprecated/block.json
 msgctxt "block keyword"
 msgid "star-ratings"
 msgstr ""
 
 #: assets/build/blocks/star-ratings/block.json
+#: assets/build/blocks/star-ratings/deprecated/block.json
 msgctxt "block keyword"
 msgid "star-rating"
 msgstr ""
 
 #: assets/build/blocks/star-ratings/block.json
+#: assets/build/blocks/star-ratings/deprecated/block.json
 msgctxt "block keyword"
 msgid "reviews"
 msgstr ""
 
 #: assets/build/blocks/star-ratings/block.json
+#: assets/build/blocks/star-ratings/deprecated/block.json
 msgctxt "block keyword"
 msgid "review"
 msgstr ""
 
 #: assets/build/blocks/star-ratings/block.json
+#: assets/build/blocks/star-ratings/deprecated/block.json
 msgctxt "block keyword"
 msgid "feedback"
 msgstr ""
 
+#: assets/build/blocks/storeengine-cart-list/block.json
+msgctxt "block title"
+msgid "StoreEngine Cart List"
+msgstr ""
+
+#: assets/build/blocks/storeengine-cart-list/block.json
+msgctxt "block description"
+msgid "Displays the list of products currently added to the shopping cart, including quantity, price, and remove buttons."
+msgstr ""
+
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+msgctxt "block keyword"
+msgid "cart"
+msgstr ""
+
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+msgctxt "block keyword"
+msgid "cart list"
+msgstr ""
+
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+msgctxt "block keyword"
+msgid "shopping cart"
+msgstr ""
+
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+#: assets/build/blocks/storeengine-products/block.json
+msgctxt "block keyword"
+msgid "storeengine"
+msgstr ""
+
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+msgctxt "block keyword"
+msgid "checkout"
+msgstr ""
+
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+msgctxt "block keyword"
+msgid "cart items"
+msgstr ""
+
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+msgctxt "block keyword"
+msgid "woocommerce"
+msgstr ""
+
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+msgctxt "block keyword"
+msgid "ecommerce"
+msgstr ""
+
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+msgctxt "block keyword"
+msgid "store"
+msgstr ""
+
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+msgctxt "block keyword"
+msgid "shop"
+msgstr ""
+
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+msgctxt "block title"
+msgid "StoreEngine Cart Sub Table"
+msgstr ""
+
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+msgctxt "block description"
+msgid "Shows the cart summary table, including subtotal, shipping cost, tax, and total price. Useful to display in cart or checkout pages."
+msgstr ""
+
+#: assets/build/blocks/storeengine-checkout-button/block.json
+msgctxt "block title"
+msgid "StoreEngine Checkout Button"
+msgstr ""
+
+#: assets/build/blocks/storeengine-checkout-button/block.json
+msgctxt "block description"
+msgid "Displays the final button for confirming and placing the order after all required checkout fields are completed."
+msgstr ""
+
+#: assets/build/blocks/storeengine-checkout-form/block.json
+msgctxt "block title"
+msgid "StoreEngine Checkout Form"
+msgstr ""
+
+#: assets/build/blocks/storeengine-checkout-form/block.json
+msgctxt "block description"
+msgid "Renders the full checkout form, including billing, shipping, and payment sections."
+msgstr ""
+
+#: assets/build/blocks/storeengine-continue-button/block.json
+msgctxt "block title"
+msgid "StoreEngine Continue Button"
+msgstr ""
+
+#: assets/build/blocks/storeengine-continue-button/block.json
+msgctxt "block description"
+msgid "A customizable button that takes users to the next step in the shopping or checkout process (e.g., from cart to checkout)."
+msgstr ""
+
+#: assets/build/blocks/storeengine-coupon-form/block.json
+msgctxt "block title"
+msgid "StoreEngine Coupon From"
+msgstr ""
+
+#: assets/build/blocks/storeengine-coupon-form/block.json
+msgctxt "block description"
+msgid "Allows users to apply discount codes during the checkout process. Supports error and success message handling."
+msgstr ""
+
+#: assets/build/blocks/storeengine-login-form/block.json
+msgctxt "block title"
+msgid "StoreEngine Login Form"
+msgstr ""
+
+#: assets/build/blocks/storeengine-login-form/block.json
+msgctxt "block description"
+msgid "Shows a user login form for customers to log into their accounts before checking out or viewing orders."
+msgstr ""
+
+#: assets/build/blocks/storeengine-product-filter/block.json
+msgctxt "block title"
+msgid "StoreEngine Products Filter"
+msgstr ""
+
+#: assets/build/blocks/storeengine-product-filter/block.json
+msgctxt "block description"
+msgid "Adds filter options (by category, price, tag, etc.) to your product archive or shop page for improved user experience."
+msgstr ""
+
+#: assets/build/blocks/storeengine-products/block.json
+msgctxt "block title"
+msgid "StoreEngine Products"
+msgstr ""
+
+#: assets/build/blocks/storeengine-products/block.json
+msgctxt "block description"
+msgid "Display a dynamic list of products with customizable layout and sorting options."
+msgstr ""
+
+#: assets/build/blocks/storeengine-products/block.json
+msgctxt "block keyword"
+msgid "storeengine products"
+msgstr ""
+
+#: assets/build/blocks/storeengine-products/block.json
+msgctxt "block keyword"
+msgid "products"
+msgstr ""
+
+#: assets/build/blocks/storeengine-products/block.json
+msgctxt "block keyword"
+msgid "products grid"
+msgstr ""
+
 #: assets/build/blocks/stripe-button/block.json
+#: assets/build/blocks/stripe-button/deprecated/block.json
 msgctxt "block title"
 msgid "Stripe Button"
 msgstr ""
 
 #: assets/build/blocks/stripe-button/block.json
+#: assets/build/blocks/stripe-button/deprecated/block.json
 msgctxt "block description"
 msgid "Stripe payment integration."
 msgstr ""
 
 #: assets/build/blocks/stripe-button/block.json
+#: assets/build/blocks/stripe-button/deprecated/block.json
 msgctxt "block keyword"
 msgid "stripe"
 msgstr ""
 
 #: assets/build/blocks/svg-draw/block.json
+#: assets/build/blocks/svg-draw/deprecated/block.json
 msgctxt "block title"
 msgid "SVG Draw"
 msgstr ""
 
 #: assets/build/blocks/svg-draw/block.json
+#: assets/build/blocks/svg-draw/deprecated/block.json
 msgctxt "block description"
 msgid "Add customizable, impactful SVG Draw."
 msgstr ""
 
 #: assets/build/blocks/svg-draw/block.json
+#: assets/build/blocks/svg-draw/deprecated/block.json
 msgctxt "block keyword"
 msgid "svg-draw"
 msgstr ""
 
 #: assets/build/blocks/svg-draw/block.json
+#: assets/build/blocks/svg-draw/deprecated/block.json
 msgctxt "block keyword"
 msgid "svg"
 msgstr ""
 
 #: assets/build/blocks/svg-draw/block.json
+#: assets/build/blocks/svg-draw/deprecated/block.json
 msgctxt "block keyword"
 msgid "animate"
 msgstr ""
@@ -7897,6 +8746,7 @@ msgstr ""
 #: assets/build/blocks/table-header/block.json
 #: assets/build/blocks/table-row/block.json
 #: assets/build/blocks/table/block.json
+#: assets/build/blocks/table/deprecated/block.json
 msgctxt "block description"
 msgid "Create a fully customizable, responsive table. Supports multiple rows and columns"
 msgstr ""
@@ -7927,6 +8777,7 @@ msgid "table-row"
 msgstr ""
 
 #: assets/build/blocks/table/block.json
+#: assets/build/blocks/table/deprecated/block.json
 msgctxt "block title"
 msgid "Table"
 msgstr ""
@@ -7972,126 +8823,121 @@ msgid "multi tab"
 msgstr ""
 
 #: assets/build/blocks/text-path/block.json
+#: assets/build/blocks/text-path/deprecated/block.json
 msgctxt "block title"
 msgid "Text-Path"
 msgstr ""
 
 #: assets/build/blocks/text-path/block.json
+#: assets/build/blocks/text-path/deprecated/block.json
 msgctxt "block description"
 msgid "Create interactive text paths for visually engaging effects."
 msgstr ""
 
 #: assets/build/blocks/text-path/block.json
+#: assets/build/blocks/text-path/deprecated/block.json
 msgctxt "block keyword"
 msgid "text-path"
 msgstr ""
 
 #: assets/build/blocks/text-path/block.json
+#: assets/build/blocks/text-path/deprecated/block.json
 msgctxt "block keyword"
 msgid "path text"
 msgstr ""
 
 #: assets/build/blocks/text-path/block.json
+#: assets/build/blocks/text-path/deprecated/block.json
 msgctxt "block keyword"
 msgid "svg text"
 msgstr ""
 
 #: assets/build/blocks/text-path/block.json
+#: assets/build/blocks/text-path/deprecated/block.json
 msgctxt "block keyword"
 msgid "curved text"
 msgstr ""
 
 #: assets/build/blocks/text-path/block.json
+#: assets/build/blocks/text-path/deprecated/block.json
 msgctxt "block keyword"
 msgid "text on path"
 msgstr ""
 
 #: assets/build/blocks/text-path/block.json
+#: assets/build/blocks/text-path/deprecated/block.json
 msgctxt "block keyword"
 msgid "interactive text"
 msgstr ""
 
 #: assets/build/blocks/text-path/block.json
+#: assets/build/blocks/text-path/deprecated/block.json
 msgctxt "block keyword"
 msgid "svg typography"
 msgstr ""
 
 #: assets/build/blocks/text-path/block.json
+#: assets/build/blocks/text-path/deprecated/block.json
 msgctxt "block keyword"
 msgid "creative text"
 msgstr ""
 
 #: assets/build/blocks/text-path/block.json
+#: assets/build/blocks/text-path/deprecated/block.json
 msgctxt "block keyword"
 msgid "vector text"
 msgstr ""
 
 #: assets/build/blocks/toggle-child/block.json
+#: assets/build/blocks/toggle-child/deprecated/block.json
 msgctxt "block title"
 msgid "Toggle child"
 msgstr ""
 
 #: assets/build/blocks/toggle-child/block.json
+#: assets/build/blocks/toggle-child/deprecated/block.json
 msgctxt "block description"
 msgid "Easily add conditional content"
 msgstr ""
 
 #: assets/build/blocks/toggle/block.json
+#: assets/build/blocks/toggle/deprecated/block.json
 msgctxt "block title"
 msgid "Toggle"
 msgstr ""
 
 #: assets/build/blocks/toggle/block.json
+#: assets/build/blocks/toggle/deprecated/block.json
 msgctxt "block description"
 msgid "Create interactive toggle sections."
 msgstr ""
 
 #: assets/build/blocks/toggle/block.json
+#: assets/build/blocks/toggle/deprecated/block.json
 msgctxt "block keyword"
 msgid "toggle"
 msgstr ""
 
 #: assets/build/blocks/toggle/block.json
+#: assets/build/blocks/toggle/deprecated/block.json
 msgctxt "block keyword"
 msgid "switch"
 msgstr ""
 
 #: assets/build/blocks/toggle/block.json
+#: assets/build/blocks/toggle/deprecated/block.json
 msgctxt "block keyword"
 msgid "switcher"
 msgstr ""
 
 #: assets/build/blocks/toggle/block.json
+#: assets/build/blocks/toggle/deprecated/block.json
 msgctxt "block keyword"
 msgid "Pricing Plan"
 msgstr ""
 
 #: assets/build/blocks/video/block.json
+#: assets/build/blocks/video/deprecated/block.json
 msgctxt "block title"
 msgid "Video"
-msgstr ""
-
-#: assets/build/blocks/video/block.json
-msgctxt "block description"
-msgid " Embed responsive, customizable video."
-msgstr ""
-
-#: assets/build/blocks/video/block.json
-msgctxt "block keyword"
-msgid "video"
-msgstr ""
-
-#: assets/build/blocks/video/block.json
-msgctxt "block keyword"
-msgid "youtube"
-msgstr ""
-
-#: assets/build/blocks/video/block.json
-msgctxt "block keyword"
-msgid "vimeo"
-msgstr ""
-
-#: assets/build/blocks/video/block.json
-msgctxt "block keyword"
-msgid "embedded"
 msgstr ""

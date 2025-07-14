@@ -32,6 +32,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "videoSource": {
             "type": "string",
             "default": "youtube"

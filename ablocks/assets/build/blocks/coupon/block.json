@@ -500,6 +500,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "couponStyle": {
             "type": "string",
             "default": "default"

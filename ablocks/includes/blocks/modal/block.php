@@ -13,14 +13,15 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Background;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Border;
+use ABlocks\Classes\CssGeneratorV2;
 
 
 class Block extends BlockBaseAbstract {
 
 	protected $block_name = 'modal';
 
-	public function build_css( $attributes ) {
-		$css_generator = new CssGenerator( $attributes );
+	public function build_css_v1( $attributes ) {
+		$css_generator = new CssGenerator( $attributes, $this->block_name );
 		if ( ! empty( $attributes['popupPosition'] ) && 'popup' === $attributes['popupPosition'] && ! empty( $attributes['popupTopOffset'] ) ) {
 			$css_generator->add_class_styles(
 				'{{WRAPPER}}.ablocks-block-modal-position--popup .ablocks-block-modal---panel-wrap .ablocks-modal-popup-content-wrap',
@@ -61,6 +62,55 @@ class Block extends BlockBaseAbstract {
 			}
 		}
 		return $css_generator->generate_css();
+	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+		if ( ! empty( $attributes['popupPosition'] ) && 'popup' === $attributes['popupPosition'] && ! empty( $attributes['popupTopOffset'] ) ) {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}}.ablocks-block-modal-position--popup .ablocks-block-modal---panel-wrap .ablocks-modal-popup-content-wrap',
+				[ 'margin-top' => $attributes['popupTopOffset'] . 'px' ]
+			);
+		}
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap',
+			$this->get_panel_main_wrapper_css( $attributes ),
+			$this->get_panel_main_wrapper_css( $attributes, 'Tablet' ),
+			$this->get_panel_main_wrapper_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap .ablocks-modal-popup-content-wrap',
+			$this->get_panel_content_wrap_css( $attributes ),
+			$this->get_panel_content_wrap_css( $attributes, 'Tablet' ),
+			$this->get_panel_content_wrap_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap .ablocks-modal-popup-content-wrap:hover',
+			$this->get_panel_content_wrap_hover_css( $attributes ),
+			$this->get_panel_content_wrap_hover_css( $attributes, 'Tablet' ),
+			$this->get_panel_content_wrap_hover_css( $attributes, 'Mobile' )
+		);
+		if ( empty( $attributes['disableCloseButton'] ) ) {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap .ablocks-modal-popup-close',
+				$this->get_panel_close_button_css( $attributes ),
+				$this->get_panel_close_button_css( $attributes, 'Tablet' ),
+				$this->get_panel_close_button_css( $attributes, 'Mobile' )
+			);
+
+			if ( ! empty( $attributes['closeBtnColor'] ) ) {
+				$css_generator->add_class_styles(
+					'{{WRAPPER}} .ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap .ablocks-modal-popup-close svg',
+					[ 'fill' => $attributes['closeBtnColor'] ]
+				);
+			}
+		}
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 
 	public function get_panel_main_wrapper_css( $attributes, $device = '' ) {

@@ -22,6 +22,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'blockElements' => [
 		'type' => 'array',
 		'default' => [
@@ -159,7 +163,7 @@ $attributes = [
 	),
 	'subHeadingTag' => array(
 		'type' => 'string',
-		'default' => 'h4',
+		'default' => 'h3',
 	),
 	'subHeadingTextColor' => array(
 		'type' => 'string',
@@ -188,21 +192,21 @@ $attributes = [
 		'type'          => 'string',
 		'default'       => '#0f2aff',
 	],
-	'desGraphSize' => [
-		'type' => 'string',
-		'default' => 'sm',
-	],
 	'desSize'     => [
 		'type'          => 'string',
 		'default'       => 'sm',
 	],
+	'desGraphSize' => [
+		'type' => 'string',
+		'default' => 'sm',
+	],
 	'desTextColor'         => [
 		'type'          => 'string',
-		'default'       => '#74777C',
+		'default'       => '#595959',
 	],
 	'desTextColorHover'         => [
 		'type'          => 'string',
-		'default'       => 'gray',
+		'default'       => '',
 	],
 	'desTransition' => [
 		'type' => 'number',

@@ -12,6 +12,7 @@ use ABlocks\Controls\Range;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'flip-box';
 
+	// No Dom optimization needed
 	public function build_css( $attributes ) {
 
 		// Generate CSS start

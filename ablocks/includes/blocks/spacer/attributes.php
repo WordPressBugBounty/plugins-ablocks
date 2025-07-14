@@ -10,7 +10,11 @@ $attributes = [
 	'block_id' => [
 		'type' => 'string',
 		'default' => ''
-	]
+	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 ];
 $attributes = array_merge(
 	$attributes,

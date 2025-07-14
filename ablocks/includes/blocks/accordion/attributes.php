@@ -18,6 +18,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	),
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'allowMultiple' => [
 		'type' => 'boolean',
 		'default' => false,

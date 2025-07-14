@@ -15,6 +15,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'blockVersion' => [
+		'type' => 'number',
+		'default' => '',
+	],
 	'isShowIcon' => [
 		'type' => 'boolean',
 		'default' => true,

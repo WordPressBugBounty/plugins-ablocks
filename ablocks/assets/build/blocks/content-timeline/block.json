@@ -26,6 +26,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "iconColor": {
             "type": "string",
             "default": "#000000"

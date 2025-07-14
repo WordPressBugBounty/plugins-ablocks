@@ -12,6 +12,10 @@ $attributes = [
 		'type'      => 'string',
 		'default'   => '',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'className' => [
 		'type' => 'string',
 		'default'   => '',
@@ -122,11 +126,11 @@ $attributes = [
 	],
 	'subTitleTextColor' => [
 		'type' => 'string',
-		'default' => '#74777C'
+		'default' => '#3A3A3A '
 	],
 	'subTitleTextActiveColor' => [
 		'type' => 'string',
-		'default' => '#74777C'
+		'default' => '#3A3A3A'
 	],
 	'contentBackgroundColor' => [
 		'type' => 'string',

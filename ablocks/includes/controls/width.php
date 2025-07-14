@@ -86,7 +86,7 @@ class Width extends ControlBaseAbstract {
 								: '',
 						],
 						$device
-					) . '!important';
+					);
 			}//end if
 		}//end if
 		return $css;

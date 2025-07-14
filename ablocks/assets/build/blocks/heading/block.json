@@ -2,7 +2,7 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "ablocks/heading",
-    "version": "0.1.0",
+    "version": "2",
     "title": "Heading",
     "category": "ablocks",
     "description": "Add customizable, impactful headings.",
@@ -25,12 +25,26 @@
         "file:./style.css"
     ],
     "editorScript": [
-        "ablocks-common-script"
+        "ablocks-common-script",
+        "file:./view.js"
+    ],
+    "usesContext": [
+        "postId",
+        "postType",
+        "queryId"
     ],
     "attributes": {
         "block_id": {
             "type": "string",
             "default": ""
+        },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
+        "isAnimated": {
+            "type": "boolean",
+            "default": false
         },
         "heading": {
             "type": "string",
@@ -42,6 +56,46 @@
             "default": "h2"
         },
         "textColor": {
+            "type": "string",
+            "default": ""
+        },
+        "animationType": {
+            "type": "string",
+            "default": "highlighted"
+        },
+        "animationStyle": {
+            "type": "string",
+            "default": "highlighter-circle"
+        },
+        "startingText": {
+            "type": "string",
+            "default": ""
+        },
+        "animatedText": {
+            "type": "string",
+            "default": "Animated"
+        },
+        "endingText": {
+            "type": "string",
+            "default": ""
+        },
+        "highlightColor": {
+            "type": "string",
+            "default": "#ff000e"
+        },
+        "highlightDuration": {
+            "type": "number",
+            "default": 2000
+        },
+        "isInfiniteLoop": {
+            "type": "boolean",
+            "default": true
+        },
+        "highlightDelay": {
+            "type": "number",
+            "default": 1000
+        },
+        "animatedTextColor": {
             "type": "string",
             "default": ""
         },
@@ -119,6 +173,17 @@
                 "strokeWidthUnitTablet": "px",
                 "strokeWidthUnitMobile": "px",
                 "stroke": ""
+            }
+        },
+        "highlightStrokeWidth": {
+            "type": "object",
+            "default": {
+                "value": 10,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
             }
         },
         "_margin": {

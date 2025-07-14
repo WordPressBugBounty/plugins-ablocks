@@ -8,6 +8,10 @@ $attributes = [
 	'block_id' => [
 		'type' => 'string',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'tableCreated' => [
 		'type' => 'boolean',
 		'default' => false,

@@ -36,6 +36,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "text": {
             "type": "string",
             "default": "Buy now"

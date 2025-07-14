@@ -20,6 +20,8 @@ abstract class BlockBaseAbstract {
 
 	protected $parent_block_name = '';
 
+	protected $is_skip_inner_block = false;
+
 	protected $block_name = '';
 
 	protected $style_depends = [];
@@ -43,10 +45,19 @@ abstract class BlockBaseAbstract {
 
 	public function register_block() {
 		$block_path = $this->assets_path . 'build/blocks/' . $this->block_name . '/block.json';
-		// Register the block with the merged attributes and render callback
-		register_block_type( $block_path, array(
+		$args = [
 			'render_callback' => array( $this, 'render_callback' ),
-		) );
+		];
+		if ( isset( $metadata['usesContext'] ) ) {
+			$args['usesContext'] = $metadata['usesContext'];
+		}
+		if ( isset( $metadata['providesContext'] ) ) {
+			$args['providesContext'] = $metadata['providesContext'];
+		}
+		if ( $this->is_skip_inner_block ) {
+			$args['skip_inner_blocks'] = $this->is_skip_inner_block;
+		}
+		register_block_type( $block_path, $args );
 	}
 
 	public function get_attributes() {
@@ -69,9 +80,10 @@ abstract class BlockBaseAbstract {
 		return 'class="' . esc_attr( implode( ' ', $classes ) ) . '"';
 	}
 	private function get_block_data_settings_attributes( $settings ) {
-		if ( ! is_array( $settings ) ) {
+		if ( ! is_array( $settings ) || empty( $settings['animationType'] ) || $settings['animationType'] !== 'none' ) {
 			return '';
 		}
+
 		// Sanitize each setting in the array
 		$sanitized_settings = array_map( 'esc_attr', $settings );
 		// Encode sanitized settings to JSON and escape it for safe output
@@ -81,6 +93,8 @@ abstract class BlockBaseAbstract {
 		$block_id = ( isset( $attributes['block_id'] ) ? $attributes['block_id'] : '' );
 		$animation = ( isset( $attributes['_animation'] ) ? $attributes['_animation'] : [] );
 		$block_class_args = array( 'ablocks-block', 'ablocks-block-' . $block_id, 'ablocks-block--' . $this->block_name );
+		$has_transform = (bool) ( isset( $attributes['_transform']['isApplied'] ) ? $attributes['_transform']['isApplied'] : false );
+
 		if (
 			count( $animation ) &&
 			( $animation['animationType'] && $animation['animationType'] !== 'none' ) ||
@@ -89,15 +103,29 @@ abstract class BlockBaseAbstract {
 		) {
 			array_push( $block_class_args, 'ablocks-invisible' );
 		}
+
+		if ( $has_transform ) {
+			array_push( $block_class_args, 'ablocks-has-block-container' );
+		}
+
 		ob_start();
 		?>
 		<div <?php echo $this->get_block_class( $block_class_args ) . $this->get_block_data_settings_attributes( $animation ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+			<?php
+			if ( $has_transform ) :
+				?>
 			<div class="ablocks-block-container">
 				<?php
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo $this->render_block_content( $attributes, $content, $block_instance );
+				?>
+			</div> 
+				<?php
+				else :
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					echo $this->render_block_content( $attributes, $content, $block_instance );
+				endif;
 				?>
-			</div>
 		</div>
 		<?php
 		return ob_get_clean();
@@ -113,7 +141,7 @@ abstract class BlockBaseAbstract {
 		do_action( 'ablocks/before_render_' . explode( '/', $block_name )[1] . '_block_content', $block_name );
 
 		// Dynamic block
-		if ( ! $content ) {
+		if ( ! $content || $this->is_skip_inner_block ) {
 			$content = $this->get_dynamic_block_wrap( $attributes, $content, $block_instance );
 		}
 
@@ -124,8 +152,10 @@ abstract class BlockBaseAbstract {
 		}
 
 		// Pure Static block
-		if ( apply_filters( 'ablocks/is_allow_block_inline_assets', ! is_admin() && ! Helper::is_enabled_assets_generation() ) ) {
+		if ( apply_filters( 'ablocks/is_allow_block_inline_assets', ( ! is_admin() || defined( 'DOING_AJAX' ) && DOING_AJAX ) && ! Helper::is_enabled_assets_generation() ) ) {
+
 			$build_css = '<style>' . $this->build_css( $attributes ) . '</style>';
+
 			return $build_css . $content;
 		}
 
@@ -140,17 +170,20 @@ abstract class BlockBaseAbstract {
 			}
 		}
 
-		// block static css
-		if ( file_exists( $this->assets_path . 'build/blocks/' . $block_name . '/style.css' ) ) {
-			wp_enqueue_style( 'ablocks-' . $block_name . '-block-static-style', $this->assets_url . 'build/blocks/' . $block_name . '/style.css', array(), filemtime( $this->assets_path . 'build/blocks/' . $block_name . '/style.css' ), 'all' );
-		}
-
 		// Library
 		if ( count( $this->get_script_depends() ) ) {
 			foreach ( $this->get_script_depends() as $script_handler ) {
 				wp_enqueue_script( $script_handler );
 			}
 		}
+
+		// block static css
+		if ( file_exists( $this->assets_path . 'build/blocks/' . $block_name . '/style.css' ) ) {
+			wp_enqueue_style( 'ablocks-' . $block_name . '-block-static-style', $this->assets_url . 'build/blocks/' . $block_name . '/style.css', array(), filemtime( $this->assets_path . 'build/blocks/' . $block_name . '/style.css' ), 'all' );
+		}
+
+		$script_loading_strategy = \ABlocks\Helper::get_script_loading_strategy();
+		$args = [ 'strategy' => $script_loading_strategy ];
 
 		if ( file_exists( $this->assets_path . 'build/blocks/' . $block_name . '/view.js' ) ) {
 			$dependencies = include $this->assets_path . 'build/blocks/' . $block_name . '/view.asset.php';
@@ -159,7 +192,7 @@ abstract class BlockBaseAbstract {
 				$this->assets_url . 'build/blocks/' . $block_name . '/view.js',
 				$dependencies['dependencies'],
 				$dependencies['version'],
-				true
+				$args
 			);
 			$Assets = new Assets();
 			wp_localize_script(
@@ -168,6 +201,7 @@ abstract class BlockBaseAbstract {
 				$Assets->get_localize_script_data()
 			);
 		}
+
 	}
 
 	public function enqueue_block_static_assets() {
@@ -202,7 +236,7 @@ abstract class BlockBaseAbstract {
 		return '';
 	}
 	public function get_style_depends() {
-		return apply_filters( 'ablocks/block_style_depends', array_merge( $this->style_depends, array( 'ablocks-frontend-google-fonts', 'ablocks-animate-style', 'ablocks-common-style' ) ) );
+		return apply_filters( 'ablocks/block_style_depends', array_merge( $this->style_depends, array( 'ablocks-frontend-google-fonts', 'ablocks-common-style' ) ) );
 	}
 	public function get_script_depends() {
 		return apply_filters( 'ablocks/block_script_depends', array_merge( $this->script_depends, array( 'ablocks-common-script' ) ) );

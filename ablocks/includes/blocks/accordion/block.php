@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Helper;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\TextShadow;
@@ -20,7 +21,7 @@ use ABlocks\Controls\Range;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'accordion';
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes );
 
 		$css_generator->add_class_styles(
@@ -96,6 +97,89 @@ class Block extends BlockBaseAbstract {
 			$this->get_content_hover_css( $attributes, 'Mobile' )
 		);
 		return $css_generator->generate_css();
+	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--single-accordion',
+			$this->get_item_css( $attributes ),
+			$this->get_item_css( $attributes, 'Tablet' ),
+			$this->get_item_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--single-accordion:hover',
+			$this->get_item_hover_css( $attributes ),
+			$this->get_item_hover_css( $attributes, 'Tablet' ),
+			$this->get_item_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--single-accordion__heading .ablocks-block-accordion-title',
+			$this->get_title_css( $attributes ),
+			$this->get_title_css( $attributes, 'Tablet' ),
+			$this->get_title_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--single-accordion__heading:hover .ablocks-block-accordion-title',
+			$this->get_title_hover_css( $attributes ),
+			$this->get_title_hover_css( $attributes, 'Tablet' ),
+			$this->get_title_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--single-accordion-is-selected .ablocks-block-accordion-title',
+			$this->get_title_active_css( $attributes ),
+			$this->get_title_active_css( $attributes, 'Tablet' ),
+			$this->get_title_active_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--single-accordion__heading',
+			$this->get_panel_css( $attributes ),
+			$this->get_panel_css( $attributes, 'Tablet' ),
+			$this->get_panel_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--single-accordion__heading:hover',
+			$this->get_panel_hover_css( $attributes ),
+			$this->get_panel_hover_css( $attributes, 'Tablet' ),
+			$this->get_panel_hover_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--single-accordion-is-selected .ablocks-block--single-accordion__heading',
+			$this->get_panel_active_css( $attributes ),
+			$this->get_panel_active_css( $attributes, 'Tablet' ),
+			$this->get_panel_active_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--single-accordion__heading svg.ablocks-svg-icon',
+			$this->get_icon_css( $attributes )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-block--single-accordion__heading:hover svg.ablocks-svg-icon',
+			$this->get_icon_hover_css( $attributes )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--single-accordion-is-selected svg.ablocks-svg-icon',
+			$this->get_icon_active_css( $attributes )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--single-accordion__body-content',
+			$this->get_content_css( $attributes ),
+			$this->get_content_css( $attributes, 'Tablet' ),
+			$this->get_content_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--single-accordion__body-content:hover',
+			$this->get_content_hover_css( $attributes ),
+			$this->get_content_hover_css( $attributes, 'Tablet' ),
+			$this->get_content_hover_css( $attributes, 'Mobile' )
+		);
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 	public function get_item_css( $attributes, $device = '' ) {
 		$css = [];

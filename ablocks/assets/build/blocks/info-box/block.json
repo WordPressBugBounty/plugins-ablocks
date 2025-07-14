@@ -29,9 +29,18 @@
     "editorScript": [
         "ablocks-common-script"
     ],
+    "usesContext": [
+        "postId",
+        "postType",
+        "queryId"
+    ],
     "attributes": {
         "block_id": {
             "type": "string",
+            "default": ""
+        },
+        "blockVersion": {
+            "type": "number",
             "default": ""
         },
         "blockElements": {
@@ -167,7 +176,7 @@
         },
         "subHeadingTag": {
             "type": "string",
-            "default": "h4"
+            "default": "h3"
         },
         "subHeadingTextColor": {
             "type": "string",
@@ -189,21 +198,21 @@
             "type": "string",
             "default": "#0f2aff"
         },
-        "desGraphSize": {
+        "desSize": {
             "type": "string",
             "default": "sm"
         },
-        "desSize": {
+        "desGraphSize": {
             "type": "string",
             "default": "sm"
         },
         "desTextColor": {
             "type": "string",
-            "default": "#74777C"
+            "default": "#595959"
         },
         "desTextColorHover": {
             "type": "string",
-            "default": "gray"
+            "default": ""
         },
         "desTransition": {
             "type": "number",

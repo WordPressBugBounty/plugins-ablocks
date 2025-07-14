@@ -28,6 +28,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "mapMarkerList": {
             "type": "array",
             "default": [

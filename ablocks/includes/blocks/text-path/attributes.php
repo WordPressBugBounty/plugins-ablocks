@@ -25,6 +25,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'text' => [
 		'type' => 'string',
 		'default' => 'Add Your Curvy Text Here',

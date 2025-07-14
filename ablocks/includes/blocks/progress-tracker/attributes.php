@@ -15,6 +15,10 @@ $attributes = [
 	'block_id' => [
 		'type' => 'string',
 	],
+	'blockVersion' => [
+		'type' => 'number',
+		'default' => '',
+	],
 	'progressValue' => [
 		'type' => 'number',
 		'default' => 100,

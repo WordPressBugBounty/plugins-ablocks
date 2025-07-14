@@ -10,6 +10,10 @@ $attributes = [
 		'type'          => 'string',
 		'default'       => ''
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'paragraph'         => [
 		'type'          => 'string',
 		'source'        => 'html',

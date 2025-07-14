@@ -270,6 +270,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "dividerPatternUrl": {
             "type": "string",
             "default": "solid"

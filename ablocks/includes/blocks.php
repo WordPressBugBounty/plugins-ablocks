@@ -20,6 +20,7 @@ class Blocks {
 		add_filter( 'block_categories_all', [ $self, 'register_block_category' ], 10, 2 );
 		// Assets Generator
 		add_action( 'save_post', [ $self, 'generate_block_assets' ], 10, 3 );
+		add_action( 'switch_theme', [ $self, 'clear_generated_block_assets' ] );
 
 		$self->register_block_sanitizer();
 		$self->form_builder_default_data();
@@ -48,6 +49,17 @@ class Blocks {
 				}
 			}
 		}//end if
+		if ( Helper::is_plugin_active( 'storeengine/storeengine.php' ) ) {
+			new \ABlocks\Blocks\StoreengineProducts\Block();
+			new \ABlocks\Blocks\StoreengineCouponForm\Block();
+			new \ABlocks\Blocks\StoreengineCartList\Block();
+			new \ABlocks\Blocks\StoreengineLoginForm\Block();
+			new \ABlocks\Blocks\StoreengineProductFilter\Block();
+			new \ABlocks\Blocks\StoreengineCheckoutForm\Block();
+			new \ABlocks\Blocks\StoreengineContinueButton\Block();
+			new \ABlocks\Blocks\StoreengineCheckoutButton\Block();
+			new \ABlocks\Blocks\StoreengineCartSubTable\Block();
+		}//end if
 		new \ABlocks\Blocks\Container\Block();
 		new \ABlocks\Blocks\Heading\Block();
 		new \ABlocks\Blocks\Paragraph\Block();
@@ -62,6 +74,10 @@ class Blocks {
 		new \ABlocks\Blocks\Divider\Block();
 		new \ABlocks\Blocks\Spacer\Block();
 		new \ABlocks\Blocks\Video\Block();
+		new \ABlocks\Blocks\LoopBuilder\Block();
+		new \ABlocks\Blocks\LoopTemplate\Block();
+		new \ABlocks\Blocks\LoopFilter\Block();
+		new \ABlocks\Blocks\LoopLoadMore\Block();
 		new \ABlocks\Blocks\Search\Block();
 		new \ABlocks\Blocks\Carousel\Block();
 		new \ABlocks\Blocks\CarouselChild\Block();
@@ -127,6 +143,7 @@ class Blocks {
 		new \ABlocks\Blocks\FormMultiStepChild\Block();
 		new \ABlocks\Blocks\FormRadio\Block();
 		new \ABlocks\Blocks\TextPath\Block();
+		new \ABlocks\Blocks\Player\Block();
 	}
 
 	public function register_block_category( $categories, $post ) {
@@ -139,6 +156,10 @@ class Blocks {
 				[
 					'slug' => 'academy',
 					'title' => __( 'Academy LMS', 'ablocks' ),
+				],
+				[
+					'slug' => 'storeengine',
+					'title' => __( 'StoreEngine', 'ablocks' ),
 				],
 			],
 			$categories
@@ -170,12 +191,14 @@ class Blocks {
 			return;
 		}
 
-		// Don't save FSE theme assets
-		if ( ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) ) {
+		$uploader = new \ABlocks\Classes\FileUpload();
+		if ( file_exists( $uploader->get_file_path( $post_id . '.min.css' ) ) ) {
+			$uploader->delete_file( $post_id . '.min.css' );
+			$uploader->delete_file( $post_id . '.min.js' );
 			return;
 		}
 
-		AssetsGenerator::write_frontend_css_in_uploads_folder( $post_id );
+		$this->clear_generated_block_assets();
 	}
 
 	public function form_builder_default_data(): void {
@@ -186,5 +209,10 @@ class Blocks {
 	}
 	public function register_block_sanitizer(): void {
 		BlockSanitizer::init();
+	}
+
+	public function clear_generated_block_assets() {
+		$uploader = new \ABlocks\Classes\FileUpload();
+		$uploader->delete_files();
 	}
 }

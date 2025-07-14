@@ -20,6 +20,13 @@ class DynamicContent extends AbstractAjaxHandler {
 					'post_type'      => 'string',
 				],
 			),
+			'get_taxonomy_term_data'      => array(
+				'callback' => array( $this, 'get_taxonomy_term_data' ),
+				'capability' => 'edit_posts',
+				'fields'     => [
+					'taxonomy'      => 'string',
+				],
+			),
 			'get_terms_for_post'      => array(
 				'callback' => array( $this, 'get_terms_for_post' ),
 				'capability' => 'edit_posts',
@@ -103,6 +110,28 @@ class DynamicContent extends AbstractAjaxHandler {
 					'postID'      => 'integer',
 				],
 			),
+			'get_academy_course_data'      => array(
+				'callback' => array( $this, 'get_academy_course_data' ),
+				'capability' => 'edit_posts',
+				'fields'     => [
+					'post_id'      => 'integer',
+					'meta_key'      => 'string',
+				],
+			),
+			'loop_builder'      => array(
+				'callback' => array( $this, 'render_loop_builder' ),
+				'allow_visitor_action' => true,
+				'fields'     => [
+					'loop_builder_block_id'      => 'string',
+					'loop_template_block_id'      => 'string',
+					'taxonomy'          => 'string',
+					'post_id'           => 'integer',
+					'term_id'           => 'integer',
+					'page'              => 'integer',
+					'is_archive'        => 'boolean',
+					'archive_post_type'      => 'string',
+				],
+			),
 		);
 	}
 
@@ -116,6 +145,25 @@ class DynamicContent extends AbstractAjaxHandler {
 		$all_taxonomies = Helper::get_taxonomies_data_for_post_type( $post_type );
 
 		wp_send_json_success( $all_taxonomies );
+	}
+
+	public function get_taxonomy_term_data( $payload ) {
+		if ( empty( $payload['taxonomy'] ) ) {
+			wp_send_json_error( __( 'Sorry, Taxonomy is required', 'ablocks' ) );
+		}
+		$terms = get_terms([
+			'taxonomy' => $payload['taxonomy'],
+			'hide_empty' => false, // Set to true if you only want terms attached to posts
+		]);
+
+		$results = array_map(function( $term ) {
+			return [
+				'label' => $term->name,
+				'value' => $term->term_id,
+			];
+		}, $terms);
+
+		wp_send_json_success( $results );
 	}
 
 	public function get_terms_for_post( $payload ) {
@@ -150,11 +198,10 @@ class DynamicContent extends AbstractAjaxHandler {
 			wp_send_json_error( __( 'Sorry, Post ID and Meta Key is required!', 'ablocks' ) );
 		}
 
-		$post_id = $payload['post_id'];
+		$post_id = (int) $payload['post_id'];
 		$meta_key = $payload['meta_key'];
 
 		$result = get_post_meta( $post_id, $meta_key, true );
-
 		wp_send_json_success( $result );
 	}
 
@@ -367,4 +414,235 @@ class DynamicContent extends AbstractAjaxHandler {
 
 		wp_send_json_success( $result );
 	}
+
+	public function get_academy_course_data( $payload ) {
+
+		$post_id = $payload['post_id'] ?? 0;
+		$meta_key = $payload['meta_key'] ?? '';
+
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
+		}
+
+		if ( ! Helper::is_active_academy() ) {
+			wp_send_json_error( '' );
+		}
+
+		$Analytics = new \Academy\Classes\Analytics();
+		$results = '';
+		if ( 'numberOfTopics' === $meta_key ) {
+			$curriculums = \Academy\Helper::get_course_curriculums_number_of_counts( $post_id );
+
+			$results = isset( $curriculums['total_topics'] ) ? $curriculums['total_topics'] : 0;
+		} elseif ( 'numberOfReviews' === $meta_key ) {
+			$results = $Analytics->get_total_number_of_reviews_by_course_id( $post_id );
+		} elseif ( 'numberOfEnrolled' === $meta_key ) {
+			$results = $Analytics->get_total_number_of_enrolled_by_course_id( $post_id );
+		}
+
+		wp_send_json_success( $results );
+	}
+
+	public function render_loop_builder( $payload ) {
+		$post_id = $payload['post_id'];
+		$loop_builder_block_id = $payload['loop_builder_block_id'];
+		$loop_template_block_id = $payload['loop_template_block_id'];
+		$taxonomy = $payload['taxonomy'];
+		$term_id = (int) $payload['term_id'];
+		$page = (int) ( isset( $payload['page'] ) ? $payload['page'] : 1 );
+		$is_archive = (bool) ( isset( $payload['is_archive'] ) ? $payload['is_archive'] : false );
+		$archive_post_type = $payload['archive_post_type'];
+
+		if ( $is_archive ) {
+			$template_slug = 'archive-' . $archive_post_type;
+
+			$theme_slug = wp_get_theme()->get_stylesheet();
+			$template_posts = get_posts([
+				'post_type'      => 'wp_template',
+				'post_status'    => 'publish',
+				'numberposts'    => 1,
+				'name'           => $template_slug, // post_name (slug)
+				'tax_query'      => [
+					[
+						'taxonomy' => 'wp_theme',
+						'field'    => 'slug',
+						'terms'    => $theme_slug,
+					],
+				],
+			]);
+
+			$post_content = current( $template_posts )->post_content;
+			$blocks = parse_blocks( $post_content );
+			$block_data = Helper::get_block_attributes_recursive( $loop_builder_block_id, 'ablocks/loop-builder', $blocks );
+		} else {
+			$block_data = Helper::get_block_attributes( $payload['post_id'], $payload['loop_builder_block_id'], 'ablocks/loop-builder' );
+				// Get and parse post content
+			$post = get_post( $post_id );
+			$post_content = $post->post_content;
+			$blocks = parse_blocks( $post_content );
+		}//end if
+
+		$query_vars = isset( $block_data['parentAttributes']['query'] ) ? $this->convert_to_wp_query_args( $block_data['parentAttributes']['query'] ) : [
+			'post_type' => 'post',
+			'posts_per_page' => -1
+		];
+		$query_vars['posts_per_page'] = $query_vars['posts_per_page'] * $page;
+		if ( ! empty( $taxonomy ) && $term_id ) {
+			$query_vars['tax_query'] = [
+				[
+					'taxonomy' => $taxonomy,
+					'field'    => 'term_id',
+					'terms'    => [ $term_id ],
+					'operator' => 'IN',
+				],
+			];
+		}
+
+		$blocks = $this->get_loop_builder_blocks_by_block_id( $blocks, $loop_builder_block_id );
+
+		// Update the block attributes
+		$updated_blocks = $this->update_loop_builder_query( $blocks, $loop_template_block_id, $query_vars, $term_id );
+
+		// Serialize blocks back to content
+		$html = '';
+		foreach ( $updated_blocks as $block ) {
+			$html .= serialize_block( $block );
+		}
+
+		$rendered = do_blocks( $html );
+
+		wp_send_json_success([
+			'html' => $rendered,
+			'term_id' => $term_id,
+			'post_id' => $post_id,
+		]);
+	}
+
+	public function get_loop_builder_blocks_by_block_id( $blocks, $target_block_id ) {
+		foreach ( $blocks as $block ) {
+			if ( ! empty( $block['attrs']['block_id'] ) && $block['attrs']['block_id'] === $target_block_id ) {
+				return [ $block ];
+			}
+			if ( ! empty( $block['innerBlocks'] ) ) {
+				$found = $this->get_loop_builder_blocks_by_block_id( $block['innerBlocks'], $target_block_id );
+				if ( ! empty( $found ) ) {
+					return [ $found ];
+				}
+			}
+		}
+		return [];
+	}
+
+	public function update_loop_builder_query( $blocks, $loop_template_block_id, $query_vars, $term_id ) {
+		foreach ( $blocks as &$block ) {
+			// perfectly not worked if multiple loop used
+			// !empty($block['attrs']['block_id']) && $block['attrs']['block_id'] === $loop_template_block_id
+
+			if ( ! empty( $block['blockName'] ) && $block['blockName'] === 'ablocks/loop-template' ) {
+				if ( ! isset( $block['attrs']['query'] ) ) {
+					$block['attrs']['query'] = [];
+				}
+				// Merge new query vars
+				$block['attrs']['query'] = array_merge( $block['attrs']['query'], $query_vars );
+			}
+
+			if ( 'ablocks/loop-filter' === $block['blockName'] ) {
+				$block['attrs']['active_term_id'] = $term_id;
+			}
+
+			// Recurse into inner blocks
+			if ( ! empty( $block['innerBlocks'] ) ) {
+				$block['innerBlocks'] = $this->update_loop_builder_query( $block['innerBlocks'], $loop_template_block_id, $query_vars, $term_id );
+			}
+		}//end foreach
+		return $blocks;
+	}
+
+	public function convert_to_wp_query_args( array $input ): array {
+		$args = [];
+
+		// Basic pagination
+		$args['posts_per_page'] = isset( $input['perPage'] ) ? (int) $input['perPage'] : get_option( 'posts_per_page' );
+		$args['paged'] = isset( $input['pages'] ) && $input['pages'] > 0 ? (int) $input['pages'] : 1;
+
+		// Post type
+		if ( ! empty( $input['postType'] ) ) {
+			$args['post_type'] = $input['postType'];
+		}
+
+		// Order and orderby
+		if ( ! empty( $input['order'] ) ) {
+			$args['order'] = $input['order'];
+		}
+
+		if ( ! empty( $input['orderBy'] ) ) {
+			$args['orderby'] = $input['orderBy'];
+		}
+
+		// Author
+		if ( ! empty( $input['author'] ) ) {
+			$args['author'] = $input['author'];
+		}
+
+		// Search
+		if ( ! empty( $input['search'] ) ) {
+			$args['s'] = $input['search'];
+		}
+
+		// Exclude posts
+		if ( ! empty( $input['exclude'] ) && is_array( $input['exclude'] ) ) {
+			$args['post__not_in'] = array_map( 'intval', $input['exclude'] );
+		}
+
+		// Sticky posts
+		if ( ! empty( $input['sticky'] ) ) {
+			if ( $input['sticky'] === 'include' ) {
+				$args['ignore_sticky_posts'] = 0;
+			} elseif ( $input['sticky'] === 'exclude' ) {
+				$args['ignore_sticky_posts'] = 1;
+			}
+		}
+
+		// Post parent (for hierarchical post types like pages)
+		if ( ! empty( $input['parents'] ) && is_array( $input['parents'] ) ) {
+			$args['post_parent__in'] = array_map( 'intval', $input['parents'] );
+		}
+
+		// Offset
+		if ( isset( $input['offset'] ) ) {
+			$args['offset'] = (int) $input['offset'];
+		}
+
+		// Format (post format taxonomy)
+		if ( ! empty( $input['format'] ) ) {
+			$args['tax_query'][] = [
+				'taxonomy' => 'post_format',
+				'field'    => 'slug',
+				'terms'    => [ 'post-format-' . sanitize_title( $input['format'] ) ],
+			];
+		}
+
+		// Category
+		if ( ! empty( $input['category'] ) ) {
+			$args['category_name'] = $input['category'];
+		}
+
+		// Tag
+		if ( ! empty( $input['tag'] ) ) {
+			$args['tag'] = $input['tag'];
+		}
+
+		// Generic taxonomy query
+		if ( ! empty( $input['taxonomy'] ) && ! empty( $input['value'] ) ) {
+			$args['tax_query'][] = [
+				'taxonomy' => $input['taxonomy'],
+				'field'    => 'slug',
+				'terms'    => is_array( $input['value'] ) ? $input['value'] : [ $input['value'] ],
+			];
+		}
+
+		return $args;
+	}
+
+
 }

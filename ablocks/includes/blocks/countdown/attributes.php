@@ -16,6 +16,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'blockVersion' => [
+		'type' => 'number',
+		'default' => '',
+	],
 	'targetTime' => [
 		'type' => 'string',
 		'default' => '',
@@ -185,7 +189,7 @@ $attributes = array_merge(
 	ButtonGroup::get_attribute( 'orient', true, [
 		'value' => 'row',
 	] ),
-	ButtonGroup::get_attribute( 'justifyDep', true, [
+	ButtonGroup::get_attribute( 'justificationAlign', true, [
 		'value' => 'center',
 	] ),
 	ButtonGroup::get_attribute( 'alignment', true, [

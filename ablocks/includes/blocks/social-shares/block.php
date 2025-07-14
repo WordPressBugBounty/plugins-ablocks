@@ -12,12 +12,12 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Range;
+use ABlocks\Classes\CssGeneratorV2;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'social-shares';
 
-	public function build_css( $attributes ) {
-		// Initialize CSS Generator
-		$css_generator = new CssGenerator( $attributes );
+	public function build_css_v1( $attributes ) {
+		$css_generator = new CssGenerator( $attributes, $this->block_name );
 			$css_generator->add_class_styles(
 				'{{WRAPPER}}.ablocks-block--social-shares .ablocks-block-container',
 				$this->get_share_css( $attributes, '' ),
@@ -84,7 +84,83 @@ class Block extends BlockBaseAbstract {
 			);
 		return $css_generator->generate_css();
 	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+			$css_generator->add_class_styles(
+				'{{WRAPPER}}.ablocks-block--social-shares:not(.ablocks-has-container),
+                   {{WRAPPER}}.ablocks-block--social-shares .ablocks-block-container',
+				$this->get_share_css( $attributes, '' ),
+				$this->get_share_css( $attributes, 'Tablet' ),
+				$this->get_share_css( $attributes, 'Mobile' )
+			);
+			// Social Button Styles
+			$css_generator->add_class_styles(
+				'{{WRAPPER}}  .ablocks-social-share',
+				$this->get_social_share_bar_css( $attributes ),
+				$this->get_social_share_bar_css( $attributes, 'Table' ),
+				$this->get_social_share_bar_css( $attributes, 'Mobile' )
+			);
+				// share Hover Styles
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-social-share:hover',
+				$this->get_share_border_hover_css( $attributes, '' ),
+				$this->get_share_border_hover_css( $attributes, 'Tablet' ),
+				$this->get_share_border_hover_css( $attributes, 'Mobile' )
+			);
 
+			// share Icon Size
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-social-share > .ablocks-svg-icon',
+				$this->get_share_icon_css( $attributes ),
+				$this->get_share_icon_css( $attributes, 'Table' ),
+				$this->get_share_icon_css( $attributes, 'Mobile' ),
+			);
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-social-share > .ablocks-svg-icon:hover',
+				$this->get_share_icon_hover_css(
+					$attributes
+				),
+			);
+			// item style
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-social-share-item',
+				$this->get_item_border_css( $attributes ),
+				$this->get_item_border_css( $attributes, 'Tablet' ),
+				$this->get_item_border_css( $attributes, 'Mobile' )
+			);
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} :not(.ablocks-has-container) .ablocks-social-share-item:hover ,
+                 {{WRAPPER}} .ablocks-block-container .ablocks-social-share-item:hover',
+				$this->get_Item_border_hover_css( $attributes ),
+				$this->get_Item_border_hover_css( $attributes, 'Tablet' ),
+				$this->get_Item_border_hover_css( $attributes, 'Mobile' )
+			);
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-social-share-item--icon',
+				$this->get_share_item_css( $attributes ),
+				$this->get_share_item_css( $attributes, 'Tablet' ),
+				$this->get_share_item_css( $attributes, 'Mobile' ),
+			);
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-social-share-item--icon>.ablocks-svg-icon',
+				$this->shareItemIconSVG( $attributes ),
+				$this->shareItemIconSVG( $attributes, 'Tablet' ),
+				$this->shareItemIconSVG( $attributes, 'Mobile' ),
+			);
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-social-share-item--text',
+				$this->get_share_item_text_css( $attributes, '' ),
+				$this->get_share_item_text_css( $attributes, 'Tablet' ),
+				$this->get_share_item_text_css( $attributes, 'Mobile' )
+			);
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
+	}
 	public function get_share_css( $attributes, $device = '' ) {
 		$css = [];
 		$stack = $attributes[ 'stack' . $device ] ?? $attributes['stack'] ?? '';

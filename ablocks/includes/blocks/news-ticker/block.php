@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\TextStroke;
@@ -15,11 +16,8 @@ use ABlocks\Controls\Range;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'news-ticker';
 
-
-
 	public function build_css( $attributes ) {
-		// Generate CSS start
-		$css_generator = new CssGenerator( $attributes, $this->block_name );
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-news-ticker__label',
@@ -418,12 +416,18 @@ class Block extends BlockBaseAbstract {
 							<path d="..." fill="<?php echo esc_attr( $navigator_color ); ?>" />
 						</svg>
 					</button>
-					<button class="ablocks-block-news-ticker--icons__pause">
+					<button
+						aria-label="Pause Button"
+						title="Pause Button"
+						 class="ablocks-block-news-ticker--icons__pause">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="50" fill="currentColor">
 							<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
 						</svg>
 					</button>
-					<button class="ablocks-block-news-ticker--icons__next">
+					<button
+						aria-label="Next Button"
+						title="Next Button"
+						class="ablocks-block-news-ticker--icons__next">
 						<svg width="24" height="50" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="..." fill="<?php echo esc_attr( $navigator_color ); ?>" />
 						</svg>

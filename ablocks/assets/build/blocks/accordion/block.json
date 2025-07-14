@@ -33,6 +33,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "allowMultiple": {
             "type": "boolean",
             "default": false

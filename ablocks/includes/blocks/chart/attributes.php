@@ -12,6 +12,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	),
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'chartType' => [
 		'type' => 'string',
 		'default'  => 'bar',

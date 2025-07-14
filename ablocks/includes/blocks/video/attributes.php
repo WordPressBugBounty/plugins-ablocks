@@ -7,6 +7,10 @@ $attributes = [
 		'type'        => 'string',
 		'default'     => '',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'videoSource'     => [
 		'type'        => 'string',
 		'default'     => 'youtube',

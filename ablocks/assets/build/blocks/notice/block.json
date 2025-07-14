@@ -26,6 +26,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "heading": {
             "type": "string",
             "source": "html",
@@ -34,7 +38,7 @@
         },
         "headingTag": {
             "type": "string",
-            "default": "h5"
+            "default": "h1"
         },
         "textColor": {
             "type": "string",

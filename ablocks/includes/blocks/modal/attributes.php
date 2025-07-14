@@ -17,6 +17,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	),
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'popupOnTop' => array(
 		'type' => 'boolean',
 		'default' => false,
@@ -30,6 +34,14 @@ $attributes = [
 		'default' => false,
 	),
 	'enableAutoTriggerTimer' => array(
+		'type' => 'boolean',
+		'default' => false,
+	),
+	'showAutoOnce' => array(
+		'type' => 'boolean',
+		'default' => false,
+	),
+	'showOnMouseOutOfWindow' => array(
 		'type' => 'boolean',
 		'default' => false,
 	),

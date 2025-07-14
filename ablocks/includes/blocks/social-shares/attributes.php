@@ -19,6 +19,10 @@ $attributes = [
 		'type'               => 'string',
 		'default'            => '',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'buttonType'               => [
 		'type'               => 'string',
 		'default'            => 'Facebook',

@@ -18,6 +18,10 @@ $attributes = [
 		'type' => 'string',
 		'default'  => '',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'device' => [
 		'type' => 'string',
 		'default'  => '',
@@ -68,7 +72,7 @@ $attributes = [
 	],
 	'descriptionColor' => [
 		'type' => 'string',
-		'default' => '#74777C',
+		'default' => '#595959',
 	],
 	// divider related attributes
 	'placeDivider' => [

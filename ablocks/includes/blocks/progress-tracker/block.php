@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\TextStroke;
@@ -18,10 +19,61 @@ use ABlocks\Controls\Range;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'progress-tracker';
 
-	public function build_css( $attributes ) {
-			// Generate CSS start
-			$css_generator = new CssGenerator( $attributes );
 
+	public function build_css_v1( $attributes ) {
+		$css_generator = new CssGenerator( $attributes, $this->block_name );
+
+		// Generate wrapper CSS start
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-progress-circle',
+			$this->get_wrapper_css( $attributes ),
+			$this->get_wrapper_css( $attributes, 'Tablet' ),
+			$this->get_wrapper_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-progress__text',
+			$this->get_content_css( $attributes ),
+			$this->get_content_css( $attributes, 'Tablet' ),
+			$this->get_content_css( $attributes, 'Mobile' )
+		);
+		// Progress Bar Background CSS
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-progress-bar-track',
+			$this->get_progress_bar_track_css( $attributes ),
+			$this->get_progress_bar_track_css( $attributes, 'Tablet' ),
+			$this->get_progress_bar_track_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-progress-bar-track:hover',
+			$this->get_progress_bar_hover_css( $attributes ),
+			$this->get_progress_bar_hover_css( $attributes, 'Tablet' ),
+			$this->get_progress_bar_hover_css( $attributes, 'Mobile' )
+		);
+
+		// Progress Bar Progress CSS
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-progress-bar',
+			$this->get_progress_bar_css( $attributes )
+		);
+
+		// circle css
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-progress-circle__svg-bar',
+			$this->get_progress_circle_css( $attributes ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-progress-circle__svg-track',
+			$this->get_progress_circle_bg_css( $attributes ),
+		);
+
+		return $css_generator->generate_css();
+	}
+
+
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 			// Generate wrapper CSS start
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-block-progress-circle',
@@ -69,6 +121,14 @@ class Block extends BlockBaseAbstract {
 
 		return $css_generator->generate_css();
 	}
+
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
+	}
+
 
 	public function get_wrapper_css( $attributes, $device = '' ) {
 		$alignment_key = 'value' . $device;

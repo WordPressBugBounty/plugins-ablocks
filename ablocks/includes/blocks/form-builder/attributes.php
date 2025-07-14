@@ -17,6 +17,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => ''
 	),
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'variationSelected' => [
 		'type' => 'boolean',
 		'default' => true,

@@ -25,6 +25,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "device": {
             "type": "string",
             "default": ""
@@ -78,7 +82,7 @@
         },
         "descriptionColor": {
             "type": "string",
-            "default": "#74777C"
+            "default": "#595959"
         },
         "placeDivider": {
             "type": "string",

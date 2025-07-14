@@ -30,6 +30,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": 2
+        },
         "placeholder": {
             "type": "string",
             "default": "Search Course"

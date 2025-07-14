@@ -8,13 +8,104 @@ use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\BoxShadow;
+use ABlocks\Classes\CssGeneratorV2;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'menu';
 
-	public function build_css( $attributes ) {
-		// Generate CSS
-		$css_generator = new CssGenerator( $attributes );
+	public function build_css_v1( $attributes ) {
+		$css_generator = new CssGenerator( $attributes, $this->block_name );
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-menu',
+			$this->get_menu_css( $attributes, '' ),
+			$this->get_menu_css( $attributes, 'Tablet' ),
+			$this->get_menu_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-menu',
+			$this->get_menu_css( $attributes, '' ),
+			$this->get_menu_css( $attributes, 'Tablet' ),
+			$this->get_menu_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-main-menu > .ablocks-menu-item',
+			$this->get_menu_item_css( $attributes ),
+			$this->get_menu_item_css( $attributes, 'Tablet' ),
+			$this->get_menu_item_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-main-menu > .ablocks-menu-item:hover',
+			$this->get_menu_item_hover_css( $attributes, '' ),
+			$this->get_menu_item_hover_css( $attributes, 'Tablet' ),
+			$this->get_menu_item_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--menu-child-sub',
+			$this->get_sub_menu_css( $attributes, '' ),
+			$this->get_sub_menu_css( $attributes, 'Tablet' ),
+			$this->get_sub_menu_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--menu-child-sub:hover',
+			$this->get_sub_menu_hover_css( $attributes, '' ),
+			$this->get_sub_menu_hover_css( $attributes, 'Tablet' ),
+			$this->get_sub_menu_hover_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--menu-child-sub .ablocks-block--menu-item',
+			$this->get_subMenu_responsive_css( $attributes, '' ),
+			$this->get_subMenu_responsive_css( $attributes, 'Tablet' ),
+			$this->get_subMenu_responsive_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--menu-child-sub .ablocks-block--menu-item:hover',
+			$this->get_subMenu_responsive_hover_css( $attributes, '' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--menu-child-sub .ablocks-block--menu-item .ablocks-menu-item__link',
+			$this->get_subMenu_responsive_text_css( $attributes, '' ),
+			$this->get_subMenu_responsive_text_css( $attributes, 'Tablet' ),
+			$this->get_subMenu_responsive_text_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-menu-child-mega',
+			$this->getMegaMenuCSS( $attributes ),
+			$this->getMegaMenuCSS( $attributes, 'Tablet' ),
+			$this->getMegaMenuCSS( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-main-menu > .ablocks-menu-item > .ablocks-menu-item__link',
+			$this->get_menu_item_link_css( $attributes, '' ),
+			$this->get_menu_item_link_css( $attributes, 'Tablet' ),
+			$this->get_menu_item_link_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-main-menu > .ablocks-menu-item:hover > .ablocks-menu-item__link ',
+			$this->get_menu_item_link_hover_css( $attributes, '' ),
+		);
+		$css_generator->add_class_styles( '{{WRAPPER}} .ablocks-main-menu  > .ablocks-menu-item > .ablocks-menu-item__dropdown-icon svg',
+			$this->get_menu_item_dropdown_icon_css( $attributes ),
+			$this->get_menu_item_dropdown_icon_css( $attributes, 'Tablet' ),
+			$this->get_menu_item_dropdown_icon_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles( '{{WRAPPER}} .ablocks-main-menu  > .ablocks-menu-item:hover > .ablocks-menu-item__dropdown-icon svg', $this->get_menu_item_dropdown_icon_hover_css( $attributes ) );
+		$css_generator->add_class_styles( '{{WRAPPER}} .ablocks-menu__trigger-wrapper', $this->get_hamburger_menu_wrapper_css( $attributes ) );
+		$css_generator->add_class_styles( '{{WRAPPER}} .ablocks-menu__trigger-wrapper .ablocks-menu__trigger ',
+			$this->get_hamburger_menu_css( $attributes ),
+			$this->get_hamburger_menu_css( $attributes, 'Tablet' ),
+			$this->get_hamburger_menu_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles( '{{WRAPPER}} .ablocks-menu__trigger-wrapper .ablocks-menu__trigger:hover ',
+			$this->get_hamburgerHoverCSS( $attributes ),
+			$this->get_hamburgerHoverCSS( $attributes, 'Tablet' ),
+			$this->get_hamburgerHoverCSS( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles( '{{WRAPPER}} .ablocks-menu__trigger-wrapper .ablocks-menu__trigger .ablocks-menu__trigger-item ', $this->get_hamburger_menu_item_css( $attributes ) );
+
+		return $css_generator->generate_css();
+	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 		// Wrapper CSS
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-menu',
@@ -118,7 +209,12 @@ class Block extends BlockBaseAbstract {
 			$css
 		);
 	}
-
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
+	}
 
 
 

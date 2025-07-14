@@ -20,6 +20,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'text' => [
 		'type' => 'string',
 		'default' => 'Click here',

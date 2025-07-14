@@ -22,6 +22,7 @@
         "anchor": true
     },
     "textdomain": "ablocks",
+    "viewScript": "file:./view.js",
     "editorStyle": [
         "ablocks-animate-style",
         "ablocks-common-style",
@@ -34,6 +35,10 @@
     "attributes": {
         "block_id": {
             "type": "string",
+            "default": ""
+        },
+        "blockVersion": {
+            "type": "number",
             "default": ""
         },
         "postId": {

@@ -27,8 +27,8 @@ class Template {
 
 		// load email verification handler
 		add_action( 'template_redirect', [ $this, 'email_verification_handler' ] );
-
 	}
+
 
 	public function add_fse_theme_body_class( $classes ) {
 		if ( Helper::is_fse_theme() ) {

@@ -19,23 +19,18 @@ use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Responsive;
 use ABlocks\Controls\Color;
 use ABlocks\Controls\TextShadow;
+use ABlocks\Classes\CssGeneratorV2;
 
 
 class Block extends BlockBaseAbstract {
 
 	protected $block_name = 'text-path';
 
-	public function build_css( $attributes ) {
-		$css_generator = new CssGenerator( $attributes );
+	public function build_css_v1( $attributes ) {
+		$css_generator = new CssGenerator( $attributes, $this->block_name );
 		$css_generator->add_class_styles(
-			'{{WRAPPER}}',
-			$this->get_wrapper_css( $attributes ),
-			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
-		);
-
-		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-text-path',
+			'{{WRAPPER}}.ablocks-block--text-path:not(.ablocks-block-container),
+			{{WRAPPER}}.ablocks-block--text-path .ablocks-block-container',
 			$this->get_text_path_container_css( $attributes ),
 			$this->get_text_path_container_css( $attributes, 'Tablet' ),
 			$this->get_text_path_container_css( $attributes, 'Mobile' )
@@ -64,9 +59,45 @@ class Block extends BlockBaseAbstract {
 
 		return $css_generator->generate_css();
 	}
-	// wrapper css grnerate
-	public function get_wrapper_css( $attributes, $device = '' ) {
-		return [ 'width' => '100%' ];
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--text-path:not(.ablocks-block-container),
+			{{WRAPPER}}.ablocks-block--text-path .ablocks-block-container',
+			$this->get_text_path_container_css( $attributes ),
+			$this->get_text_path_container_css( $attributes, 'Tablet' ),
+			$this->get_text_path_container_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-text-path-text',
+			$this->get_text_css( $attributes ),
+			$this->get_text_css( $attributes, 'Tablet' ),
+			$this->get_text_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-text-path-text:hover',
+			$this->get_text_hover_css( $attributes ),
+			$this->get_text_hover_css( $attributes, 'Tablet' ),
+			$this->get_text_hover_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-path-text-path',
+			$this->get_text_path_css( $attributes ),
+			$this->get_text_path_css( $attributes, 'Tablet' ),
+			$this->get_text_path_css( $attributes, 'Mobile' )
+		);
+
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 	// text path css generate
 	public function get_text_css( $attributes, $device = '' ) {

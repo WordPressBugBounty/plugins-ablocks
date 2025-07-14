@@ -10,6 +10,10 @@ $attributes = [
 		'type'          => 'string',
 		'default'       => ''
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'effect' => [
 		'type' => 'string',
 		'default' => 'slide'

@@ -26,6 +26,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "beforeImage": {
             "type": "string",
             "default": ""

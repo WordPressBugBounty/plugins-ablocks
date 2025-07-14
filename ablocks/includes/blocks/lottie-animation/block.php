@@ -6,8 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\BlockBaseAbstract;
-use ABlocks\Classes\CssGenerator;
-
+use ABlocks\Classes\CssGeneratorV2;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'lottie-animation';
@@ -15,7 +14,7 @@ class Block extends BlockBaseAbstract {
 	public function build_css( $attributes ) {
 
 		// Generate CSS start
-		$css_generator = new CssGenerator( $attributes, $this->block_name );
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 
 		return $css_generator->generate_css();
 	}

@@ -13,6 +13,9 @@ class CssGenerator {
 	private $class_styles = [];
 
 	public function __construct( $attributes = [] ) {
+		if ( ! isset( $attributes['block_id'] ) ) {
+			return;
+		}
 		$this->parent_class = '.ablocks-block-' . $attributes['block_id'];
 		if ( isset( $attributes['_custom_css'] ) ) {
 			$this->custom_css = $attributes['_custom_css'];
@@ -65,9 +68,17 @@ class CssGenerator {
 		$css_output = '';
 
 		foreach ( $this->class_styles as $class_style ) {
-			$desktop_css = AssetsGenerator::minify_css( $this->generate_css_for_media_query( 'desktop', $class_style['desktop_styles'] ) );
-			$tablet_css = AssetsGenerator::minify_css( $this->generate_css_for_media_query( 'tablet', $class_style['tablet_styles'] ) );
-			$mobile_css = AssetsGenerator::minify_css( $this->generate_css_for_media_query( 'mobile', $class_style['mobile_styles'] ) );
+			$desktop_styles = $class_style['desktop_styles'];
+			$tablet_styles  = $this->filter_responsive_styles( $desktop_styles, $class_style['tablet_styles'] );
+			$mobile_styles  = $this->filter_responsive_styles( $desktop_styles, $class_style['mobile_styles'] );
+
+			$desktop_raw = $this->generate_css_for_media_query( 'desktop', $desktop_styles );
+			$tablet_raw  = $this->generate_css_for_media_query( 'tablet', $tablet_styles );
+			$mobile_raw  = $this->generate_css_for_media_query( 'mobile', $mobile_styles );
+
+			$desktop_css = AssetsGenerator::minify_css( $desktop_raw );
+			$tablet_css  = AssetsGenerator::minify_css( $tablet_raw );
+			$mobile_css  = AssetsGenerator::minify_css( $mobile_raw );
 
 			$parent_selector = $this->get_parent_selector( $class_style['class_name'] );
 			$css_blocks = [];
@@ -78,12 +89,21 @@ class CssGenerator {
 				}
 			};
 
+			// Always add desktop CSS
 			$addToCssBlocks( '', '', $desktop_css );
-			$addToCssBlocks( 'tablet', $this->get_breakpoint( 'tablet' ), $tablet_css );
-			$addToCssBlocks( 'mobile', $this->get_breakpoint( 'mobile' ), $mobile_css );
+
+			// Only add tablet CSS if it differs from desktop
+			if ( $tablet_raw !== $desktop_raw ) {
+				$addToCssBlocks( 'tablet', $this->get_breakpoint( 'tablet' ), $tablet_css );
+			}
+
+			// Only add mobile CSS if it differs from desktop AND tablet
+			if ( $mobile_raw !== $desktop_raw && $mobile_raw !== $tablet_raw ) {
+				$addToCssBlocks( 'mobile', $this->get_breakpoint( 'mobile' ), $mobile_css );
+			}
 
 			$css_output .= implode( "\n\n", $css_blocks ) . "\n\n";
-		}
+		}//end foreach
 
 		$css_output .= $this->get_custom_css();
 
@@ -120,6 +140,21 @@ class CssGenerator {
 
 	public function get_parent_selector( $class_name ) {
 		return $this->parent_class ? str_replace( '{{WRAPPER}}', $this->parent_class, $class_name ) : $class_name;
+	}
+	private function filter_responsive_styles( $base_styles, $responsive_styles ) {
+		if ( empty( $responsive_styles ) ) {
+			return [];
+		}
+
+		$difference = [];
+
+		foreach ( $responsive_styles as $prop => $value ) {
+			if ( ! isset( $base_styles[ $prop ] ) || $base_styles[ $prop ] !== $value ) {
+				$difference[ $prop ] = $value;
+			}
+		}
+
+		return $difference;
 	}
 }
 

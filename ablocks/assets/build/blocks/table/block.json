@@ -15,11 +15,15 @@
     "editorStyle": [
         "ablocks-animate-style",
         "ablocks-common-style",
-        "file:./style.css"
+        "file:./styles.css"
     ],
     "attributes": {
         "block_id": {
             "type": "string"
+        },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
         },
         "tableCreated": {
             "type": "boolean",

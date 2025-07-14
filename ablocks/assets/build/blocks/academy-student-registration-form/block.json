@@ -31,6 +31,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": 2
+        },
         "input_label_color": {
             "type": "string",
             "default": "#000"

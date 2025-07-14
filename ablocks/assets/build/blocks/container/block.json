@@ -33,6 +33,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "className": {
             "type": "string",
             "default": ""
@@ -92,6 +96,42 @@
         "wrapMobile": {
             "type": "string",
             "default": ""
+        },
+        "layout": {
+            "type": "string",
+            "default": ""
+        },
+        "shapeTop": {
+            "type": "string",
+            "default": ""
+        },
+        "shapeBottom": {
+            "type": "string",
+            "default": ""
+        },
+        "shapeTopColor": {
+            "type": "string",
+            "default": "#61CE70"
+        },
+        "shapeBottomColor": {
+            "type": "string",
+            "default": "#61CE70"
+        },
+        "bottomShapeBringToFront": {
+            "type": "boolean",
+            "default": false
+        },
+        "topShapeBringToFront": {
+            "type": "boolean",
+            "default": false
+        },
+        "topShapeFlip": {
+            "type": "boolean",
+            "default": false
+        },
+        "bottomShapeFlip": {
+            "type": "boolean",
+            "default": false
         },
         "gap": {
             "type": "object",
@@ -172,6 +212,22 @@
                 "valueUnitMobile": ""
             }
         },
+        "gridColumn": {
+            "type": "object",
+            "default": {
+                "value": 0,
+                "valueTablet": 2,
+                "valueMobile": 1
+            }
+        },
+        "gridRow": {
+            "type": "object",
+            "default": {
+                "value": "",
+                "valueTablet": "",
+                "valueMobile": ""
+            }
+        },
         "containerContentWidth": {
             "type": "object",
             "default": {
@@ -179,6 +235,50 @@
                 "valueTablet": "",
                 "valueMobile": "",
                 "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "shapeBottomHeight": {
+            "type": "object",
+            "default": {
+                "value": "100",
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "shapeBottomWidth": {
+            "type": "object",
+            "default": {
+                "value": "100",
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "%",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "shapeTopHeight": {
+            "type": "object",
+            "default": {
+                "value": "100",
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "shapeTopWidth": {
+            "type": "object",
+            "default": {
+                "value": "100",
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "%",
                 "valueUnitTablet": "",
                 "valueUnitMobile": ""
             }

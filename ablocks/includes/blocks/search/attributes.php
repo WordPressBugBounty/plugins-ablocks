@@ -19,6 +19,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => ''
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'currentPostID' => [
 		'type' => 'integer',
 		'default' => '',
@@ -39,6 +43,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => 'classic',
 	],
+	'allowCollapse'        => [
+		'type'         => 'boolean',
+		'default'      => false,
+	],
 	'position' => [
 		'type' => 'string',
 		'default' => 'default'
@@ -48,6 +56,10 @@ $attributes = [
 		'default' => 'Search',
 	],
 	'buttonTextColor' => [
+		'type' => 'string',
+		'default' => '',
+	],
+	'buttonTextColorH' => [
 		'type' => 'string',
 		'default' => '',
 	],
@@ -76,10 +88,13 @@ $attributes = [
 $attributes = array_merge(
 	$attributes,
 	Alignment::get_attribute( 'buttonAlignment', false, [ 'value' => 'left' ] ),
-	Typography::get_attribute( 'buttonTypography', true ),
 	Typography::get_attribute( 'searchResTypography', true ),
+	Typography::get_attribute( 'buttonTypography', true ),
 	TextShadow::get_attribute( 'buttonTextShadow' ),
 	TextStroke::get_attribute( 'buttonTextStroke', true ),
+	Typography::get_attribute( 'buttonTypographyH', true ),
+	TextShadow::get_attribute( 'buttonTextShadowH' ),
+	TextStroke::get_attribute( 'buttonTextStrokeH', true ),
 	Alignment::get_attribute( 'alignment', true, [ 'value' => 'left' ] ),
 	Typography::get_attribute( 'inputTypography', true ),
 	TextShadow::get_attribute( 'inputTextShadow' ),
@@ -126,22 +141,6 @@ $attributes = array_merge(
 		'defaultValue' => '',
 		'hasUnit' => true,
 		'unitDefaultValue' => '%',
-	] ),
-	Range::get_attribute( [
-		'attributeName' => 'thumbnailWidth',
-		'attributeObjectKey' => 'value',
-		'isResponsive' => true,
-		'defaultValue' => '',
-		'hasUnit' => true,
-		'unitDefaultValue' => '%',
-	] ),
-	Range::get_attribute( [
-		'attributeName' => 'thumbnailHeight',
-		'attributeObjectKey' => 'value',
-		'isResponsive' => true,
-		'defaultValue' => '',
-		'hasUnit' => true,
-		'unitDefaultValue' => 'px',
 	] ),
 	Range::get_attribute( [
 		'attributeName' => 'itemWidth',

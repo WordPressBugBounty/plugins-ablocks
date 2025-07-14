@@ -16,6 +16,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'heading' => [
 		'type' => 'string',
 		'source' => 'html',
@@ -24,7 +28,7 @@ $attributes = [
 	],
 	'headingTag' => [
 		'type' => 'string',
-		'default' => 'h5',
+		'default' => 'h1',
 	],
 	'textColor' => [
 		'type' => 'string',

@@ -31,11 +31,15 @@ class Blocks {
 			'image-scroll' => true,
 			'lists' => true,
 			'paragraph' => true,
+			'player' => true,
 			'spacer' => true,
 			'star-ratings' => true,
 			'video' => true,
 			'tabs' => true,
 			'toggle' => true,
+			'loop-builder' => true,
+			'loop-template' => true,
+			'loop-load-more' => true,
 			'news-ticker' => true,
 			'image-hotspot' => true,
 			'form-builder' => true,
@@ -79,6 +83,16 @@ class Blocks {
 			'academy-pdf' => true,
 			'academy-student-registration-form' => true,
 			'academy-certificate' => true,
+			// StoreEngine Blocks
+			'storeengine-products' => true,
+			'storeengine-cart-list' => true,
+			'storeengine-login-form' => true,
+			'storeengine-coupon-form' => true,
+			'storeengine-product-filter' => true,
+			'storeengine-checkout-form' => true,
+			'storeengine-continue-button' => true,
+			'storeengine-checkout-button' => true,
+			'storeengine-cart-sub-table' => true,
 		]);
 	}
 

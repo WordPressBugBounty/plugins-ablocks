@@ -14,6 +14,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	),
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => 2,
+	),
 	'form_title' => array(
 		'type' => 'string',
 		'default' => 'RESET YOUR PASSWORD',

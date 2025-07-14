@@ -26,9 +26,18 @@
     "editorScript": [
         "ablocks-common-script"
     ],
+    "usesContext": [
+        "postId",
+        "postType",
+        "queryId"
+    ],
     "attributes": {
         "block_id": {
             "type": "string",
+            "default": ""
+        },
+        "blockVersion": {
+            "type": "number",
             "default": ""
         },
         "imgId": {

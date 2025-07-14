@@ -13,6 +13,10 @@ $attributes = [
 	'block_id' => [
 		'type' => 'string',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'filterList' => [
 		'type'    => 'array',
 		'default' => [

@@ -17,6 +17,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => ''
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'couponStyle' => [
 		'type' => 'string',
 		'default' => 'default'

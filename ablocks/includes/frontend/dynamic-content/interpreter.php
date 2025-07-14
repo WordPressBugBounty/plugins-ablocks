@@ -19,8 +19,10 @@ class Interpreter {
 		'image' => Interpreters\Image::class,
 	];
 	protected string $content;
-	public function __construct( string $content ) {
+	protected array $context;
+	public function __construct( string $content, $context = [] ) {
 		$this->content = $content;
+		$this->context = $context;
 		$this->parse();// exit;
 	}
 	public function parse() : void {
@@ -30,8 +32,12 @@ class Interpreter {
 			$this->content
 		);
 	}
-	public function apply_changes( array $matches ) : string {
-		return is_null( $ins = ( new ArgumentParser( ...$this->filter( $matches ), ...[ $this->interpreters ] ) )->interpret() ) ? '' : $ins->content();
+	public function apply_changes( array $matches ): string {
+		$filtered = $this->filter( $matches ); // returns an array
+		$args = array_merge( $filtered, [ $this->interpreters, $this->context ] );
+		$parser = new ArgumentParser( ...$args );
+		$ins = $parser->interpret();
+		return is_null( $ins ) ? '' : $ins->content();
 	}
 
 	public function filter( array $matches ) : array {
@@ -47,8 +53,8 @@ class Interpreter {
 		];
 	}
 
-	public static function init( string $content ) : string {
-		$ins = new self( $content );
+	public static function init( string $content, $block, $instance ) : string {
+		$ins = new self( $content, $instance->context );
 		return $ins->content;
 	}
 }

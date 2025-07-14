@@ -19,7 +19,7 @@ class Base {
 			'default_container_width' => 1140,
 			'container_padding' => 10,
 			'container_element_gap' => 20,
-			'enabled_assets_file_generation' => true,
+			'enabled_assets_file_generation' => false,
 			'enabled_block_copy_paste_style' => true,
 			'enabled_only_selected_fonts' => false,
 			'selected_fonts' => [],

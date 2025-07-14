@@ -31,6 +31,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "currentPostID": {
             "type": "integer",
             "default": ""
@@ -51,6 +55,10 @@
             "type": "string",
             "default": "classic"
         },
+        "allowCollapse": {
+            "type": "boolean",
+            "default": false
+        },
         "position": {
             "type": "string",
             "default": "default"
@@ -60,6 +68,10 @@
             "default": "Search"
         },
         "buttonTextColor": {
+            "type": "string",
+            "default": ""
+        },
+        "buttonTextColorH": {
             "type": "string",
             "default": ""
         },
@@ -89,7 +101,7 @@
                 "value": "left"
             }
         },
-        "buttonTypography": {
+        "searchResTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
@@ -123,7 +135,7 @@
                 "wordSpacingUnitMobile": "px"
             }
         },
-        "searchResTypography": {
+        "buttonTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
@@ -167,6 +179,61 @@
             }
         },
         "buttonTextStroke": {
+            "type": "object",
+            "default": {
+                "strokeWidth": "",
+                "strokeWidthTablet": "",
+                "strokeWidthMobile": "",
+                "strokeWidthUnit": "px",
+                "strokeWidthUnitTablet": "px",
+                "strokeWidthUnitMobile": "px",
+                "stroke": ""
+            }
+        },
+        "buttonTypographyH": {
+            "type": "object",
+            "default": {
+                "fontFamily": "",
+                "weight": "400",
+                "transform": "",
+                "style": "",
+                "decoration": "",
+                "fontSize": "",
+                "fontSizeUnit": "px",
+                "lineHeight": "",
+                "lineHeightUnit": "px",
+                "letterSpacing": "",
+                "letterSpacingUnit": "px",
+                "wordSpacing": "",
+                "wordSpacingUnit": "px",
+                "fontSizeTablet": "",
+                "fontSizeMobile": "",
+                "fontSizeUnitTablet": "px",
+                "fontSizeUnitMobile": "px",
+                "lineHeightTablet": "",
+                "lineHeightMobile": "",
+                "lineHeightUnitTablet": "px",
+                "lineHeightUnitMobile": "px",
+                "letterSpacingTablet": "",
+                "letterSpacingMobile": "",
+                "letterSpacingUnitTablet": "px",
+                "letterSpacingUnitMobile": "px",
+                "wordSpacingTablet": "",
+                "wordSpacingMobile": "",
+                "wordSpacingUnitTablet": "px",
+                "wordSpacingUnitMobile": "px"
+            }
+        },
+        "buttonTextShadowH": {
+            "type": "object",
+            "default": {
+                "color": "",
+                "blur": "",
+                "horizontal": "",
+                "vertical": ""
+            }
+        },
+        "buttonTextStrokeH": {
             "type": "object",
             "default": {
                 "strokeWidth": "",
@@ -545,28 +612,6 @@
                 "valueTablet": "",
                 "valueMobile": "",
                 "valueUnit": "%",
-                "valueUnitTablet": "",
-                "valueUnitMobile": ""
-            }
-        },
-        "thumbnailWidth": {
-            "type": "object",
-            "default": {
-                "value": "",
-                "valueTablet": "",
-                "valueMobile": "",
-                "valueUnit": "%",
-                "valueUnitTablet": "",
-                "valueUnitMobile": ""
-            }
-        },
-        "thumbnailHeight": {
-            "type": "object",
-            "default": {
-                "value": "",
-                "valueTablet": "",
-                "valueMobile": "",
-                "valueUnit": "px",
                 "valueUnitTablet": "",
                 "valueUnitMobile": ""
             }

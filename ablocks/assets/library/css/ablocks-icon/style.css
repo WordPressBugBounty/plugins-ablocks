@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ablocks';
-  src:  url('fonts/ablocks.eot?fxn29e');
-  src:  url('fonts/ablocks.eot?fxn29e#iefix') format('embedded-opentype'),
-    url('fonts/ablocks.ttf?fxn29e') format('truetype'),
-    url('fonts/ablocks.woff?fxn29e') format('woff'),
-    url('fonts/ablocks.svg?fxn29e#ablocks') format('svg');
+  src:  url('fonts/ablocks.eot?l89la9');
+  src:  url('fonts/ablocks.eot?l89la9#iefix') format('embedded-opentype'),
+    url('fonts/ablocks.ttf?l89la9') format('truetype'),
+    url('fonts/ablocks.woff?l89la9') format('woff'),
+    url('fonts/ablocks.svg?l89la9#ablocks') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ablocks-icon--chart:before {
+  content: "\e9ca";
+}
+.ablocks-icon--new-tab:before {
+  content: "\e9c9";
+}
 .ablocks-icon--player:before {
   content: "\e9c8";
 }
@@ -158,9 +164,6 @@
 }
 .ablocks-icon--subscription:before {
   content: "\e9a5";
-}
-.ablocks-icon--chart:before {
-  content: "\e9c0";
 }
 .ablocks-icon--price-menu:before {
   content: "\e99c";
@@ -674,7 +677,4 @@
 }
 .ablocks-icon--right:before {
   content: "\e925";
-}
-.ablocks-icon--lottie-animation:before {
-  content: "\e9c7";
 }

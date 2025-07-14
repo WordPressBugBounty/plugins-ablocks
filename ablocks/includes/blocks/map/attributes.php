@@ -9,6 +9,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'mapMarkerList' => [
 		'type' => 'array',
 		'default' => [

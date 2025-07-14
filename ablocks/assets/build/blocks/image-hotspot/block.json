@@ -14,8 +14,7 @@
     "textdomain": "ablocks",
     "editorStyle": [
         "ablocks-animate-style",
-        "ablocks-common-style",
-        "file:./style.css"
+        "ablocks-common-style"
     ],
     "editorScript": [
         "ablocks-common-script",
@@ -24,6 +23,10 @@
     "attributes": {
         "block_id": {
             "type": "string",
+            "default": ""
+        },
+        "blockVersion": {
+            "type": "number",
             "default": ""
         },
         "backgroundImage": {

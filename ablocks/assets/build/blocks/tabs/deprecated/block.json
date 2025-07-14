@@ -36,6 +36,18 @@
       "type": "string",
       "default": ""
     },
+    "tabIcons": {
+      "type": "array",
+      "default": []
+    },
+    "tabIconsClasses": {
+      "type": "array",
+      "default": []
+    },
+    "clickedTabIndex": {
+      "type": "number",
+      "default": 0
+    },
     "tabPositionChange": {
       "type": "boolean",
       "default": false
@@ -70,11 +82,11 @@
     },
     "tabsMenuPositionTablet": {
       "type": "string",
-      "default": "left"
+      "default": ""
     },
     "tabsMenuPositionMobile": {
       "type": "string",
-      "default": "left"
+      "default": ""
     },
     "initialOpen": {
       "type": "number",
@@ -83,6 +95,10 @@
     "activeDuration": {
       "type": "number",
       "default": 5000
+    },
+    "activeColorOptions": {
+      "type": "string",
+      "default": "background"
     },
     "tabMenuAlign": {
       "type": "string",
@@ -134,11 +150,11 @@
     },
     "contentBackgroundColor": {
       "type": "string",
-      "default": "#FFFFFF"
+      "default": "#ffffff00"
     },
     "activeBorderColor": {
       "type": "string",
-      "default": "transparent"
+      "default": "#61CE70"
     },
     "showTitle": {
       "type": "boolean",
@@ -159,10 +175,6 @@
     "showIcon": {
       "type": "boolean",
       "default": false
-    },
-    "iconPosition": {
-      "type": "string",
-      "default": "left"
     },
     "progressBarColor": {
       "type": "string",
@@ -214,7 +226,40 @@
         "valueUnitMobile": ""
       }
     },
+    "tabsWidth": {
+      "type": "object",
+      "default": {
+        "value": 30,
+        "valueTablet": "",
+        "valueMobile": "",
+        "valueUnit": "%",
+        "valueUnitTablet": "",
+        "valueUnitMobile": ""
+      }
+    },
+    "contentWidth": {
+      "type": "object",
+      "default": {
+        "value": 70,
+        "valueTablet": "",
+        "valueMobile": "",
+        "valueUnit": "%",
+        "valueUnitTablet": "",
+        "valueUnitMobile": ""
+      }
+    },
     "tabsGap": {
+      "type": "object",
+      "default": {
+        "value": 10,
+        "valueTablet": "",
+        "valueMobile": "",
+        "valueUnit": "px",
+        "valueUnitTablet": "",
+        "valueUnitMobile": ""
+      }
+    },
+    "contentGap": {
       "type": "object",
       "default": {
         "value": 10,
@@ -303,9 +348,74 @@
       "type": "number",
       "default": 0
     },
+    "iconSizing": {
+      "type": "object",
+      "default": {
+        "value": 55,
+        "valueTablet": "",
+        "valueMobile": "",
+        "valueUnit": "px",
+        "valueUnitTablet": "",
+        "valueUnitMobile": ""
+      }
+    },
+    "iconRotated": {
+      "type": "object",
+      "default": {
+        "value": 0,
+        "valueTablet": "",
+        "valueMobile": "",
+        "valueUnit": "deg",
+        "valueUnitTablet": "",
+        "valueUnitMobile": ""
+      }
+    },
+    "iconRotateHover": {
+      "type": "object",
+      "default": {
+        "value": 0,
+        "valueTablet": "",
+        "valueMobile": "",
+        "valueUnit": "deg",
+        "valueUnitTablet": "",
+        "valueUnitMobile": ""
+      }
+    },
+    "icontransitionDuration": {
+      "type": "number",
+      "default": 0
+    },
     "iconImageWidth": {
       "type": "number",
       "default": 0
+    },
+    "iconPosition": {
+      "type": "string",
+      "default": "left"
+    },
+    "tabsMenuPositioning": {
+      "type": "object",
+      "default": {
+        "value": "left",
+        "valueTablet": "",
+        "valueMobile": ""
+      }
+    },
+    "tabMenuAlignment": {
+      "type": "object",
+      "default": {
+        "value": "",
+        "valueTablet": "",
+        "valueMobile": ""
+      }
+    },
+    "menuContentAlignment": {
+      "type": "object",
+      "default": {
+        "value": "center",
+        "valueTablet": "",
+        "valueMobile": ""
+      }
     },
     "contentMargin": {
       "type": "object",
@@ -1163,6 +1273,10 @@
     "_hide_on_mobile": {
       "type": "boolean",
       "default": false
+    },
+    "_custom_css": {
+      "type": "string",
+      "default": ""
     }
   }
 }

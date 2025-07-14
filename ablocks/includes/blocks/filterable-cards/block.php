@@ -13,14 +13,13 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\BoxShadow;
+use ABlocks\Classes\CssGeneratorV2;
 
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'filterable-cards';
 
-	public function build_css( $attributes ) {
-
-		// Generate CSS start
+	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
 
 		$css_generator->add_class_styles(
@@ -101,6 +100,94 @@ class Block extends BlockBaseAbstract {
 			$this->filterable_loadMore_button_hover( $attributes, 'Mobile' )
 		);
 		return $css_generator->generate_css();
+	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .filterable-cards_filter , {{WRAPPER}} .filterable-cards-filter-wrap',
+			$this->get_filter_wrap_CSS( $attributes ),
+			$this->get_filter_wrap_CSS( $attributes, 'Tablet' ),
+			$this->get_filter_wrap_CSS( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .filterable-cards_filter .filterable-filter-button',
+			$this->get_filter_CSS( $attributes ),
+			$this->get_filter_CSS( $attributes, 'Tablet' ),
+			$this->get_filter_CSS( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .filterable-cards_filter .filterable-filter-button:hover',
+			$this->get_filter_hover_CSS( $attributes ),
+			$this->get_filter_hover_CSS( $attributes, 'Tablet' ),
+			$this->get_filter_hover_CSS( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .filterable-cards-filter-wrap .filterable-cards_filter .filterable-search-toggle-btn , {{WRAPPER}} .filterable-cards-filter-wrap .filterable-searchInput',
+			$this->get_search_menu_CSS( $attributes ),
+			$this->get_search_menu_CSS( $attributes, 'Tablet' ),
+			$this->get_search_menu_CSS( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .filterable-cards_filter .filterable-search-toggle-btn:hover , {{WRAPPER}} .filterable-cards-filter-wrap .filterable-searchInput:hover',
+			$this->get_search_menu_hover_CSS( $attributes ),
+			$this->get_search_menu_hover_CSS( $attributes, 'Tablet' ),
+			$this->get_search_menu_hover_CSS( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .filterable-cards-filter-wrap .filterable-searchInput::placeholder ',
+			$this->get_search_input_placeholder_CSS( $attributes ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .filterable-cards_filter .filterable-filter-button.filterable-filter-button-active',
+			$this->get_Filter_active_class_CSS( $attributes ),
+			$this->get_Filter_active_class_CSS( $attributes, 'Tablet' ),
+			$this->get_Filter_active_class_CSS( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .filterable-cards_filter .filterable-filter-button.filterable-filter-button-active:hover',
+			$this->get_Filter_active_class_hover_CSS( $attributes ),
+			$this->get_Filter_active_class_hover_CSS( $attributes, 'Tablet' ),
+			$this->get_Filter_active_class_hover_CSS( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .filterable-cards-wrap',
+			$this->filterable_cards_WrapCSS( $attributes ),
+			$this->filterable_cards_WrapCSS( $attributes, 'Tablet' ),
+			$this->filterable_cards_WrapCSS( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .filterable-cards-wrap > .ablocks-block--filterable-cards-item',
+			$this->filterable_cards_items( $attributes ),
+			$this->filterable_cards_items( $attributes, 'Tablet' ),
+			$this->filterable_cards_items( $attributes, 'Mobile' ),
+		);
+		// button style
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .filterable-cards-load-more-wrapper',
+			$this->filterable_Cards_More_Wrapper( $attributes ),
+			$this->filterable_Cards_More_Wrapper( $attributes, 'Tablet' ),
+			$this->filterable_Cards_More_Wrapper( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .filterable-cards-showMore-button',
+			$this->filterable_loadMore_button( $attributes ),
+			$this->filterable_loadMore_button( $attributes, 'Tablet' ),
+			$this->filterable_loadMore_button( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .filterable-cards-showMore-button:hover',
+			$this->filterable_loadMore_button_hover( $attributes ),
+			$this->filterable_loadMore_button_hover( $attributes, 'Tablet' ),
+			$this->filterable_loadMore_button_hover( $attributes, 'Mobile' )
+		);
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 	private function get_filter_wrap_CSS( $attributes, $device = '' ) {
 		$css = [];

@@ -15,7 +15,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
-
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'alignment' => [
 		'type' => 'string',
 		'default' => 'left'

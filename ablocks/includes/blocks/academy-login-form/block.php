@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\BlockBaseAbstract;
-use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Helper;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Background;
@@ -32,7 +32,7 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function build_css( $attributes ) {
-		$css_generator = new CssGenerator( $attributes );
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 
 		$login_form_button_desktop_css = $this->get_login_form_button_css( $attributes );
 		if ( ! empty( $attributes['login_btn_color'] ) ) {

@@ -32,6 +32,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "svgDrawColor": {
             "type": "string",
             "default": "gray"
@@ -170,6 +174,19 @@
         "iconImageWidth": {
             "type": "number",
             "default": 0
+        },
+        "link": {
+            "type": "object",
+            "default": {
+                "linkDestination": "",
+                "href": "",
+                "lightbox": "",
+                "linkTarget": "",
+                "rel": "",
+                "noFollow": "",
+                "keyValue": "",
+                "linkClass": ""
+            }
         },
         "alignment": {
             "type": "object",

@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Range;
@@ -17,7 +18,7 @@ use ABlocks\Controls\Border;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'toggle';
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes );
 
 		$css_generator->add_class_styles(
@@ -78,6 +79,74 @@ class Block extends BlockBaseAbstract {
 		}
 
 		return $css_generator->generate_css();
+	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes );
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-toggle__topbar',
+			$this->get_toggle_bar_css( $attributes ),
+			$this->get_toggle_bar_css( $attributes, 'Tablet' ),
+			$this->get_toggle_bar_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-toggle__topbar:hover',
+			$this->get_toggle_bar_hover_css( $attributes ),
+			$this->get_toggle_bar_hover_css( $attributes, 'Tablet' ),
+			$this->get_toggle_bar_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-toggle__topbar-wrapper',
+			$this->get_toggle_bar_wrapper_css( $attributes ),
+			$this->get_toggle_bar_wrapper_css( $attributes, 'Tablet' ),
+			$this->get_toggle_bar_wrapper_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-toggle__label',
+			$this->get_toggle_label_css( $attributes ),
+			$this->get_toggle_label_css( $attributes, 'Tablet' ),
+			$this->get_toggle_label_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-toggle__label--active',
+			$this->get_toggle_label_active_css( $attributes )
+		);
+
+		if ( ! empty( $attributes['toggleNormalBgColor'] ) ) {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-toggle__slider',
+				[ 'background-color' => $attributes['toggleNormalBgColor'] ]
+			);
+		}
+
+		if ( ! empty( $attributes['toggleNormalColor'] ) ) {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-toggle__slider:before',
+				[ 'background-color' => $attributes['toggleNormalColor'] ]
+			);
+		}
+
+		if ( ! empty( $attributes['toggleActiveBgColor'] ) ) {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} input.ablocks-toggle__checkbox:checked + .ablocks-toggle__slider',
+				[ 'background-color' => $attributes['toggleActiveBgColor'] ]
+			);
+		}
+
+		if ( ! empty( $attributes['toggleActiveColor'] ) ) {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} input.ablocks-toggle__checkbox:checked + .ablocks-toggle__slider:before',
+				[ 'background-color' => $attributes['toggleActiveColor'] ]
+			);
+		}
+
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 
 	public function get_toggle_bar_css( $attributes, $device = '' ) {

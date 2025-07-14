@@ -33,6 +33,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "scale": {
             "type": "number",
             "default": 5
@@ -62,7 +66,7 @@
             "default": "right"
         },
         "rating": {
-            "type": "number",
+            "type": "string",
             "default": 4
         },
         "size": {

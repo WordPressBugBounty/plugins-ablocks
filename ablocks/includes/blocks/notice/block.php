@@ -13,11 +13,12 @@ use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Icon;
+use ABlocks\Classes\CssGeneratorV2;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'notice';
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-notice-header',
@@ -67,7 +68,64 @@ class Block extends BlockBaseAbstract {
 
 		return $css_generator->generate_css();
 	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-notice-header',
+			$this->get_notice_header_css( $attributes ),
+			$this->get_notice_header_css( $attributes, 'Tablet' ),
+			$this->get_notice_header_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-notice-header .ablocks-notice-title',
+			$this->get_notice_header_title_css( $attributes ),
+			$this->get_notice_header_title_css( $attributes, 'Tablet' ),
+			$this->get_notice_header_title_css( $attributes, 'Mobile' )
+		);
+
+		// Icon CSS
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-notice-header .ablocks-icon-wrap',
+			Icon::get_wrapper_css( $attributes ),
+			Icon::get_wrapper_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-notice-header .ablocks-icon-wrap img.ablocks-image-icon',
+			Icon::get_element_image_css( $attributes ),
+			Icon::get_element_image_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-notice-header .ablocks-icon-wrap img.ablocks-image-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-notice-header .ablocks-icon-wrap svg.ablocks-svg-icon',
+			Icon::get_element_css( $attributes ),
+			Icon::get_element_css( $attributes, 'Tablet' ),
+			Icon::get_element_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-notice-header .ablocks-icon-wrap svg.ablocks-svg-icon:hover',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+		);
+
+		return $css_generator->generate_css();
+	}
+
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
+	}
 	public function get_notice_header_css( $attributes, $device = '' ) {
 		$css = [];
 		if ( ! empty( $attributes['backgroundColor'] ) ) {

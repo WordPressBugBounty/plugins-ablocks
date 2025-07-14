@@ -12,6 +12,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	),
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'backgroundImage' => array(
 		'type' => 'string',
 		'default' => '',

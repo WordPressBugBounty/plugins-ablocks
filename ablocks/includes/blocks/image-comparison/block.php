@@ -3,6 +3,7 @@ namespace ABlocks\Blocks\ImageComparison;
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
@@ -10,7 +11,7 @@ use ABlocks\Controls\Range;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'image-comparison';
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes );
 
 		$css_generator->add_class_styles(
@@ -109,6 +110,113 @@ class Block extends BlockBaseAbstract {
 		return $css_generator->generate_css();
 	}
 
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes );
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__images-container .ablocks-image-comparison__before-image',
+			$this->get_before_image_width_css( $attributes )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__images-container-vertical .ablocks-image-comparison__before-image',
+			$this->get_before_image_height_css( $attributes )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-image-comparison__images-container .ablocks-image-comparison__slider-line',
+			$this->get_slider_line_horizontal_css( $attributes ),
+			$this->get_slider_line_horizontal_css( $attributes, 'Tablet' ),
+			$this->get_slider_line_horizontal_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-image-comparison__images-container-vertical .ablocks-image-comparison__slider-line',
+			$this->get_slider_line_vertical_css( $attributes ),
+			$this->get_slider_line_vertical_css( $attributes, 'Tablet' ),
+			$this->get_slider_line_vertical_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__images-container .ablocks-image-comparison__slider-icon',
+			$this->get_horizontal_slider_icon_css( $attributes ),
+			$this->get_horizontal_slider_icon_css( $attributes, 'Tablet' ),
+			$this->get_horizontal_slider_icon_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__images-container-vertical .ablocks-image-comparison__slider-icon',
+			$this->get_vertical_slider_icon_css( $attributes ),
+			$this->get_vertical_slider_icon_css( $attributes, 'Tablet' ),
+			$this->get_vertical_slider_icon_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__beforeImage-label',
+			$this->get_image_overlay_css( $attributes ),
+			$this->get_image_overlay_css( $attributes, 'Tablet' ),
+			$this->get_image_overlay_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__beforeImage-label:hover',
+			$this->get_image_overlay_hover_css( $attributes ),
+			$this->get_image_overlay_hover_css( $attributes, 'Tablet' ),
+			$this->get_image_overlay_hover_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__afterImage-label',
+			$this->get_image_overlay_css( $attributes ),
+			$this->get_image_overlay_css( $attributes, 'Tablet' ),
+			$this->get_image_overlay_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__afterImage-label:hover',
+			$this->get_image_overlay_hover_css( $attributes ),
+			$this->get_image_overlay_hover_css( $attributes, 'Tablet' ),
+			$this->get_image_overlay_hover_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__overlay',
+			$this->get_overlay_css( $attributes ),
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__overlay--hover',
+			$this->get_overlay_css( $attributes ),
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__beforeImage-label--horizontal',
+			$this->get_before_image_overlay_horizontal_css( $attributes )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__beforeImage-label--vertical',
+			$this->get_before_image_overlay_vertical_css( $attributes )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__afterImage-label--horizontal',
+			$this->get_after_image_overlay_horizontal_css( $attributes )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-comparison__afterImage-label--vertical',
+			$this->get_after_image_overlay_vertical_css( $attributes )
+		);
+
+		return $css_generator->generate_css();
+	}
+
+
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
+	}
+
 	public function get_before_image_width_css( $attributes ) {
 		$slider_position = isset( $attributes['sliderPosition'] ) ? $attributes['sliderPosition'] : 50;
 		return [ 'width' => $slider_position . '%' ];
@@ -171,6 +279,7 @@ class Block extends BlockBaseAbstract {
 			: ( is_array( $slider_icon_border_size ) ? $slider_icon_border_size['value'] : $slider_icon_border_size );
 		$css = [];
 		$css['left'] = $slider_position . '%';
+		$css['top'] = '50%';
 		$css['border-weight'] = 'solid';
 		$css['border-color'] = $handle_color;
 		$css['color'] = $handle_color;
@@ -212,7 +321,8 @@ class Block extends BlockBaseAbstract {
 		$handle_color = isset( $attributes['handleColor'] ) ? $attributes['handleColor'] : '';
 
 		$css = [];
-		$css['left'] = $slider_position . '%';
+		$css['left'] = '50%';
+		$css['top'] = $slider_position . '%';
 		$css['border-weight'] = 'solid';
 		$css['border-color'] = $handle_color;
 		$css['color'] = $handle_color;

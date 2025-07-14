@@ -32,6 +32,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "className": {
             "type": "string",
             "default": ""
@@ -142,11 +146,11 @@
         },
         "subTitleTextColor": {
             "type": "string",
-            "default": "#74777C"
+            "default": "#3A3A3A "
         },
         "subTitleTextActiveColor": {
             "type": "string",
-            "default": "#74777C"
+            "default": "#3A3A3A"
         },
         "contentBackgroundColor": {
             "type": "string",

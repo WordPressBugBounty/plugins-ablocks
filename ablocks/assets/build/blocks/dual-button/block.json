@@ -24,6 +24,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "justifyItems": {
             "type": "string",
             "default": "start"

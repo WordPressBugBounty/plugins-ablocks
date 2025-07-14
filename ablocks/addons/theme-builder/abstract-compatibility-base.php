@@ -13,32 +13,41 @@ abstract class AbstractCompatibilityBase {
 	protected $header_hook = 'ablocks/templates/theme_builder/header';
 	protected $footer_hook = 'ablocks/templates/theme_builder/footer';
 	protected $before_footer_hook = 'ablocks/templates/theme_builder/footer';
+	protected $enabled_header;
+	protected $enabled_before_footer;
+	protected $enabled_footer;
 
 	public function __construct( $theme ) {
 		$this->theme = $theme;
 	}
 
 	public function init() {
+		$this->enabled_header = $this->enabled_header();
 		// Header
-		if ( $this->enabled_header() ) {
+		if ( $this->enabled_header ) {
 			add_action( 'get_header', [ $this, 'header_template' ] );
 			add_action( $this->header_hook, [ $this, 'render_header' ] );
 		}
 
 		// Footer
-		$enabled_footer = $this->enabled_footer();
-		$enabled_before_footer = $this->enabled_before_footer();
-		if ( $enabled_footer || $enabled_before_footer ) {
+		$this->enabled_footer = $this->enabled_footer();
+		$this->enabled_before_footer = $this->enabled_before_footer();
+		if ( $this->enabled_footer || $this->enabled_before_footer ) {
 			add_action( 'get_footer', [ $this, 'footer_template' ] );
 		}
 		// Before Footer
-		if ( $enabled_before_footer ) {
+		if ( $this->enabled_before_footer ) {
 			add_action( $this->before_footer_hook, [ $this, 'render_before_footer' ], 5 );
 		}
-		if ( $enabled_footer ) {
+		if ( $this->enabled_footer ) {
 			add_action( $this->footer_hook, [ $this, 'render_footer' ] );
 		}
 
+		do_action('ablocks_theme_builder_after_dispatch', [
+			'header' => $this->enabled_header,
+			'before_footer' => $this->enabled_before_footer,
+			'footer' => $this->enabled_footer,
+		]);
 	}
 
 	public function enabled_header() {

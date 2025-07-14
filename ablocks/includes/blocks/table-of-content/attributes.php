@@ -19,6 +19,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	),
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'tocTableTitle' => array(
 		'type' => 'string',
 		'default' => 'Table Of Contents',
@@ -57,7 +61,7 @@ $attributes = [
 	),
 	'markerView' => array(
 		'type' => 'string',
-		'default' => 'ul',
+		'default' => 'disc',
 	),
 	'titleColor' => array(
 		'type' => 'string',

@@ -9,7 +9,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
-
+use ABlocks\Classes\CssGeneratorV2;
 class Block extends BlockBaseAbstract {
 
 	protected $block_name = 'form-builder';
@@ -31,7 +31,7 @@ class Block extends BlockBaseAbstract {
 		return $content;
 	}
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
 
 		$css_generator->add_class_styles(
@@ -138,7 +138,119 @@ class Block extends BlockBaseAbstract {
 		);
 		return $css_generator->generate_css();
 	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-form-builder__field',
+			$this->get_field_css( $attributes ),
+			$this->get_field_css( $attributes, 'Tablet' ),
+			$this->get_field_css( $attributes, 'Mobile' ),
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-form-builder__label',
+			$this->get_label_css( $attributes ),
+			$this->get_label_css( $attributes, 'Tablet' ),
+			$this->get_label_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-form-builder__helper-text',
+			$this->get_helper_text_css( $attributes ),
+			$this->get_helper_text_css( $attributes, 'Tablet' ),
+			$this->get_helper_text_css( $attributes, 'Mobile' ),
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-form-builder__input',
+			$this->get_input_css( $attributes ),
+			$this->get_input_css( $attributes, 'Tablet' ),
+			$this->get_input_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-form-builder__input:hover',
+			$this->get_input_hover_css( $attributes ),
+			$this->get_input_hover_css( $attributes, 'Tablet' ),
+			$this->get_input_hover_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-form-builder__input:focus',
+			$this->get_input_focus_css( $attributes ),
+			$this->get_input_focus_css( $attributes, 'Tablet' ),
+			$this->get_input_focus_css( $attributes, 'Mobile' ),
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-form-builder__input::placeholder',
+			$this->get_input_placeholder_css( $attributes ),
+			$this->get_input_placeholder_css( $attributes, 'Tablet' ),
+			$this->get_input_placeholder_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-form-builder__input-icon,{{WRAPPER}} .ablocks-form-builder__input-toggle-password',
+			$this->get_input_position_css( $attributes ),
+			$this->get_input_position_css( $attributes, 'Tablet' ),
+			$this->get_input_position_css( $attributes, 'Mobile' ),
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-form-builder__submit-button',
+			$this->get_alignment_button_css( $attributes ),
+			$this->get_alignment_button_css( $attributes, 'Tablet' ),
+			$this->get_alignment_button_css( $attributes, 'Mobile' ),
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-form-builder__submit-button',
+			$this->get_submit_button_css( $attributes ),
+			$this->get_submit_button_css( $attributes, 'Tablet' ),
+			$this->get_submit_button_css( $attributes, 'Mobile' ),
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-form-builder__submit-button:hover',
+			$this->get_submit_button_hover_css( $attributes ),
+			$this->get_submit_button_hover_css( $attributes, 'Tablet' ),
+			$this->get_submit_button_hover_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--form-builder__navigator',
+			$this->get_navigator_css( $attributes ),
+			$this->get_navigator_css( $attributes, 'Tablet' ),
+			$this->get_navigator_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--form-builder__navigator-redirect-page',
+			$this->get_navigator_spacing_css( $attributes ),
+			$this->get_navigator_spacing_css( $attributes, 'Tablet' ),
+			$this->get_navigator_spacing_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--form-builder__success',
+			$this->get_succsss_styles_css( $attributes ),
+			$this->get_succsss_styles_css( $attributes, 'Tablet' ),
+			$this->get_succsss_styles_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--form-builder__error',
+			$this->get_error_styles_css( $attributes ),
+			$this->get_error_styles_css( $attributes, 'Tablet' ),
+			$this->get_error_styles_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--form-builder__feedback-message',
+			$this->get_success_error_common_styles_css( $attributes ),
+			$this->get_success_error_common_styles_css( $attributes, 'Tablet' ),
+			$this->get_success_error_common_styles_css( $attributes, 'Mobile' ),
+		);
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
+	}
 	public function get_field_css( $attributes, $device = '' ) {
 		$field_css = array_merge(
 			Range::get_css([

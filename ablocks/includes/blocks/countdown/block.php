@@ -3,6 +3,7 @@ namespace ABlocks\Blocks\Countdown;
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Border;
@@ -12,7 +13,7 @@ use ABlocks\Controls\Range;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'countdown';
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes );
 
 		$css_generator->add_class_styles(
@@ -65,6 +66,66 @@ class Block extends BlockBaseAbstract {
 
 		return $css_generator->generate_css();
 	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}',
+			$this->get_wrapper_css( $attributes ),
+			$this->get_wrapper_css( $attributes, 'Tablet' ),
+			$this->get_wrapper_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--countdown:not(.ablocks-has-container),
+			{{WRAPPER}}.ablocks-block--countdown .ablocks-block-container',
+			$this->get_countdown_items_css( $attributes, '' ),
+			$this->get_countdown_items_css( $attributes, 'Tablet' ),
+			$this->get_countdown_items_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-countdown__item',
+			$this->get_countdown_item_css( $attributes ),
+			$this->get_countdown_item_css( $attributes, 'Tablet' ),
+			$this->get_countdown_item_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-countdown__item:hover',
+			$this->get_countdown_item_hover_css( $attributes ),
+			$this->get_countdown_item_hover_css( $attributes, 'Tablet' ),
+			$this->get_countdown_item_hover_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-countdown__item .ablocks-countdown-label',
+			$this->get_label_css( $attributes ),
+			$this->get_label_css( $attributes, 'Tablet' ),
+			$this->get_label_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-countdown__item .ablocks-countdown-value',
+			$this->get_number_css( $attributes ),
+			$this->get_number_css( $attributes, 'Tablet' ),
+			$this->get_number_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-countdown__separator',
+			$this->get_separator_css( $attributes ),
+			$this->get_separator_css( $attributes, 'Tablet' ),
+			$this->get_separator_css( $attributes, 'Mobile' )
+		);
+
+		return $css_generator->generate_css();
+	}
+
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
+	}
 
 	public function get_wrapper_css( $attributes, $device = '' ) {
 		$alignment = ! empty( $attributes['alignment'] ) ? $attributes['alignment'] : '';
@@ -77,8 +138,8 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $attributes['orient'][ 'value' . $device ] ) ) {
 			$css['flex-direction'] = $attributes['orient'][ 'value' . $device ];
 		}
-		if ( ! empty( $attributes['justifyDep'][ 'value' . $device ] ) ) {
-			$css['justify-content'] = $attributes['justifyDep'][ 'value' . $device ];
+		if ( ! empty( $attributes['justificationAlign'][ 'value' . $device ] ) ) {
+			$css['justify-content'] = $attributes['justificationAlign'][ 'value' . $device ];
 		}
 		if ( ! empty( $attributes['alignment'][ 'value' . $device ] ) ) {
 			$css['align-items'] = $attributes['alignment'][ 'value' . $device ];
@@ -95,6 +156,7 @@ class Block extends BlockBaseAbstract {
 			$css['row-gap'] = $attributes['boxRowGap'][ 'value' . $device ]
 				. ( ! empty( $attributes['boxRowGap'][ 'valueUnit' . $device ] ) ? $attributes['boxRowGap'][ 'valueUnit' . $device ] : 'px' );
 		}
+
 		return array_merge(
 			Range::get_css([
 				'attributeValue' => $attributes['boxSize'],
@@ -134,44 +196,57 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 
 		$box_background_color = ! empty( $attributes['boxBackgroundColor'] ) ? $attributes['boxBackgroundColor'] : '';
+		$label_position       = ! empty( $attributes['labelPosition'] ) ? $attributes['labelPosition'] : '';
+		$orient               = ! empty( $attributes['orient'] ) ? $attributes['orient'] : [];
 
-		$label_position = ! empty( $attributes['labelPosition'] ) ? $attributes['labelPosition'] : '';
+		$device_key = $device ? 'value' . ucfirst( $device ) : 'value';
+		$direction  = isset( $orient[ $device_key ] ) ? $orient[ $device_key ] : ( $orient['value'] ?? '' );
+
+		if ( in_array( $direction, [ 'column', 'column-reverse' ], true ) ) {
+			$width_css = Range::get_css( [
+				'attributeValue'      => $attributes['boxSize'],
+				'attribute_object_key' => 'value',
+				'isResponsive'        => true,
+				'defaultValue'        => 130,
+				'hasUnit'             => true,
+				'unitDefaultValue'    => 'px',
+				'property'            => 'width',
+				'device'              => $device,
+			] );
+		} else {
+			$width_css = [ 'width' => '130px' ];
+		}
+
 		if ( $label_position ) {
 			$css['flex-direction'] = $label_position;
 		}
 		if ( $box_background_color ) {
 			$css['background'] = $box_background_color;
 		}
+
 		$border_css = [];
 		if ( isset( $attributes['boxBorder'] ) ) {
 			$border_css = Border::get_css( $attributes['boxBorder'], '', $device );
 		}
+
 		return array_merge(
-			Range::get_css([
-				'attributeValue' => $attributes['boxSize'],
+			$width_css,
+			Range::get_css( [
+				'attributeValue'      => $attributes['numberAndLabelGap'],
 				'attribute_object_key' => 'value',
-				'isResponsive' => true,
-				'defaultValue' => 130,
-				'hasUnit' => true,
-				'unitDefaultValue' => 'px',
-				'property' => 'width',
-				'device' => $device,
-			]),
-			Range::get_css([
-				'attributeValue' => $attributes['numberAndLabelGap'],
-				'attribute_object_key' => 'value',
-				'isResponsive' => true,
-				'defaultValue' => 5,
-				'hasUnit' => true,
-				'unitDefaultValue' => 'px',
-				'property' => 'gap',
-				'device' => $device,
-			]),
+				'isResponsive'        => true,
+				'defaultValue'        => 5,
+				'hasUnit'             => true,
+				'unitDefaultValue'    => 'px',
+				'property'            => 'gap',
+				'device'              => $device,
+			] ),
 			$border_css,
 			$css,
 			BoxShadow::get_css( ! empty( $attributes['boxShadow'] ) ? $attributes['boxShadow'] : '', $device )
 		);
 	}
+
 
 
 

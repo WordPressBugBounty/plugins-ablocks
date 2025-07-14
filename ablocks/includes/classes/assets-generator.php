@@ -5,20 +5,15 @@ use ABlocks\Classes\FileUpload;
 use ABlocks\Classes\RegisterScripts;
 
 class AssetsGenerator {
-	public static function write_frontend_css_in_uploads_folder( $post_id ) {
-		$post = get_post( $post_id );
-		$post_type = get_post_type( $post_id );
-		$parse_blocks_content = '';
-
-		if ( empty( $post->post_content ) || $post_type === 'wp_template_part' || $post_type === 'wp_template' ) {
-			$parse_blocks_content = parse_blocks( $post->post_content );
-		} else {
-			$parse_blocks_content = parse_blocks( $post->post_content );
+	public static function write_frontend_css_in_uploads_folder( $file_name, $parse_blocks_content ) {
+		if ( empty( $file_name ) ) {
+			return;
 		}
 
 		$style_depends = [];
 		$scripts_depends = [];
 		$aBlocks = [];
+
 		self::recursive_block_parser( $parse_blocks_content, $aBlocks, $style_depends, $scripts_depends );
 
 		$register_styles = RegisterScripts::get_register_styles();
@@ -61,8 +56,8 @@ class AssetsGenerator {
 		$FileUpload = new FileUpload();
 		$destination_folder = $FileUpload->get_upload_dir();
 		self::copy_build_image_folder_to_uploads( $destination_folder );
-		$FileUpload->create_file( $post_id . '.min.css', $library_css . $static_css . $dynamic_css );
-		$FileUpload->create_file( $post_id . '.min.js', $library_js . $static_js );
+		$FileUpload->create_file( $file_name . '.min.css', $library_css . $static_css . $dynamic_css );
+		$FileUpload->create_file( $file_name . '.min.js', $library_js . $static_js );
 
 		return $aBlocks;
 	}
@@ -100,7 +95,11 @@ class AssetsGenerator {
 									'static_js' => $instance->get_static_js(),
 								];
 							}
-
+							// 'ablocks-animate-style',
+							// if animation is used then added ablocks-animate-style dependency
+							if ( isset( $attributes['_animation']['animationType'] ) && ! empty( $attributes['_animation']['animationType'] ) && $attributes['_animation']['animationType'] !== 'none' ) {
+								$style_depends = array_unique( array_merge( $style_depends, [ 'ablocks-animate-style' ] ) );
+							}
 							// Capture library scripts
 							$style_depends = array_unique( array_merge( $style_depends, $instance->get_style_depends() ) );
 							$scripts_depends = array_unique( array_merge( $scripts_depends, $instance->get_script_depends() ) );
@@ -213,5 +212,4 @@ class AssetsGenerator {
 		// Close the directory handle
 		closedir( $dir );
 	}
-
 }

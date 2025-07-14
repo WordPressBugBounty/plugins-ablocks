@@ -1,13 +1,1 @@
-
-.ablocks-image-hotspot__tooltip--active {
-  padding: 20px;
-  padding-top: 40px;
-}
-
-.ablocks-block--image-hotspot .block-list-appender.wp-block{
-  display: none;
-}
-
-.ablocks-block--image-hotspot-child .block-list-appender.wp-block{
-  display: block;
-}
+.ablocks-image-hotspot__tooltip--active{padding:40px 20px 20px}.ablocks-block--image-hotspot .block-list-appender.wp-block{display:none}.ablocks-block--image-hotspot-child .block-list-appender.wp-block{display:block}

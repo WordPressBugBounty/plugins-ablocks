@@ -37,6 +37,13 @@ class RegisterScripts {
 				'ver'   => false,
 				'media' => 'all'
 			],
+			'ablocks-plyr-style' => [
+				'path'  => ABLOCKS_ASSETS_PATH . 'library/plyr/plyr.css',
+				'url'   => ABLOCKS_ASSETS_URL . 'library/plyr/plyr.css',
+				'deps'  => array(),
+				'ver'   => false,
+				'media' => 'all'
+			],
 			'ablocks-common-style' => [
 				'path'  => ABLOCKS_ASSETS_PATH . 'build/blocks-common.css',
 				'url'   => ABLOCKS_ASSETS_URL . 'build/blocks-common.css',
@@ -47,41 +54,51 @@ class RegisterScripts {
 		]);
 	}
 	public static function get_register_scripts() {
+		$script_loading_strategy = \ABlocks\Helper::get_script_loading_strategy();
+		$args = [ 'strategy' => $script_loading_strategy ];
 		return apply_filters('ablocks/register_scripts', [
 			'ablocks-leaflet-script' => [
 				'path'          => ABLOCKS_ASSETS_PATH . 'library/leaflet/leaflet.js',
 				'url'           => ABLOCKS_ASSETS_URL . 'library/leaflet/leaflet.js',
 				'deps'          => array(),
 				'ver'           => false,
-				'args'          => false,
+				'args'          => $args
 			],
 			'ablocks-leaflet-full-screen-script' => [
 				'path'          => ABLOCKS_ASSETS_PATH . 'library/leaflet/Leaflet.fullscreen.js',
 				'url'           => ABLOCKS_ASSETS_URL . 'library/leaflet/Leaflet.fullscreen.js',
 				'deps'          => array(),
 				'ver'           => false,
-				'args'          => false,
+				'args'          => $args
 			],
 			'ablocks-swiper-script' => [
 				'path'          => ABLOCKS_ASSETS_PATH . 'library/swiper/swiper-bundle.min.js',
 				'url'           => ABLOCKS_ASSETS_URL . 'library/swiper/swiper-bundle.min.js',
 				'deps'          => array(),
 				'ver'           => false,
-				'args'          => false,
+				'args'          => $args
 			],
 			'ablocks-chart.js-script' => [
 				'path'          => ABLOCKS_ASSETS_PATH . 'library/chart/chart.js',
 				'url'           => ABLOCKS_ASSETS_URL . 'library/chart/chart.js',
 				'deps'          => array(),
 				'ver'           => false,
-				'args'          => false,
+				'args'          => $args
+			],
+			'ablocks-plyr-script' => [
+				'path'  => ABLOCKS_ASSETS_PATH . 'library/plyr/plyr.js',
+				'url'   => ABLOCKS_ASSETS_URL . 'library/plyr/plyr.js',
+				'deps'          => array(),
+				'ver'           => false,
+				'args'          => true,
+				'dependencies'  => ABLOCKS_ASSETS_PATH . 'build/blocks-common.asset.php'
 			],
 			'ablocks-common-script' => [
 				'path'          => ABLOCKS_ASSETS_PATH . 'build/blocks-common.js',
 				'url'           => ABLOCKS_ASSETS_URL . 'build/blocks-common.js',
 				'deps'          => array(),
 				'ver'           => false,
-				'args'          => true,
+				'args'          => $args,
 				'dependencies'  => ABLOCKS_ASSETS_PATH . 'build/blocks-common.asset.php'
 			],
 		]);

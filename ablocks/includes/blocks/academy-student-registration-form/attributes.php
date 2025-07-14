@@ -14,6 +14,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	),
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => 2,
+	),
 	'input_label_color' => array(
 		'type' => 'string',
 		'default' => '#000',

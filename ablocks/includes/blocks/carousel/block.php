@@ -3,6 +3,7 @@ namespace ABlocks\Blocks\Carousel;
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Dimensions;
@@ -14,7 +15,7 @@ class Block extends BlockBaseAbstract {
 	protected $style_depends = [ 'ablocks-swiper-style' ];
 	protected $script_depends = [ 'ablocks-swiper-script' ];
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 
 		$css_generator = new CssGenerator( $attributes );
 
@@ -75,6 +76,75 @@ class Block extends BlockBaseAbstract {
 			$this->get_navigation_icon_svg_hover_css( $attributes, 'Mobile' )
 		);
 		return $css_generator->generate_css();
+	}
+
+	public function build_css_v2( $attributes ) {
+
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-swiper .swiper-wrapper',
+			$this->get_carousel_css( $attributes ),
+			$this->get_carousel_css( $attributes, 'Tablet' ),
+			$this->get_carousel_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-navigation__button',
+			$this->get_navigation_button_css( $attributes ),
+			$this->get_navigation_button_css( $attributes, 'Tablet' ),
+			$this->get_navigation_button_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-navigation__button--next',
+			$this->get_navigation_next_button_css( $attributes ),
+			$this->get_navigation_next_button_css( $attributes, 'Tablet' ),
+			$this->get_navigation_next_button_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-navigation__button--prev',
+			$this->get_navigation_prev_button_css( $attributes ),
+			$this->get_navigation_prev_button_css( $attributes, 'Tablet' ),
+			$this->get_navigation_prev_button_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-navigation__button .ablocks-icon-wrap',
+			$this->get_navigation_icon_css( $attributes ),
+			$this->get_navigation_icon_css( $attributes, 'Tablet' ),
+			$this->get_navigation_icon_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .swiper-pagination-bullet',
+			$this->get_pagination_color_css( $attributes ),
+			$this->get_pagination_color_css( $attributes, 'Tablet' ),
+			$this->get_pagination_color_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .swiper-pagination-bullet.swiper-pagination-bullet-active',
+			$this->get_pagination_active_color_css( $attributes ),
+			$this->get_pagination_active_color_css( $attributes, 'Tablet' ),
+			$this->get_pagination_active_color_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-navigation__button .ablocks-svg-icon',
+			$this->get_navigation_icon_svg_css( $attributes ),
+			$this->get_navigation_icon_svg_css( $attributes, 'Tablet' ),
+			$this->get_navigation_icon_svg_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-navigation__button .ablocks-svg-icon:hover',
+			$this->get_navigation_icon_svg_hover_css( $attributes ),
+			$this->get_navigation_icon_svg_hover_css( $attributes, 'Tablet' ),
+			$this->get_navigation_icon_svg_hover_css( $attributes, 'Mobile' )
+		);
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 
 	public function get_carousel_css( $attributes, $device = '' ) {

@@ -14,19 +14,19 @@ class PostType extends Abstracts\Interpreter {
 	protected string $default;
 	protected string $m_key = '';
 
-	public function __construct( string $name, array $setting, bool $is_richtext = false ) {
+	public function __construct( string $name, array $setting, bool $is_richtext = false, $context = [] ) {
 		parent::__construct( $name, $setting, $is_richtext );
 		if ( ! $this->is_richtext || $this->name === 'post-type' ) {
-			$this->ID        = intval( $this->setting[1] ?? 0 );
-			$this->post_type = strval( $this->setting[0] ?? '' );
+			$this->ID        = isset( $context['postId'] ) ? $context['postId'] : intval( $this->setting[1] ?? 0 );
+			$this->post_type = isset( $context['postType'] ) ? $context['postType'] : strval( $this->setting[0] ?? '' );
 			$this->field     = strval( $this->setting[2] ?? '' );
 			$this->pre     = $this->is_richtext ? '' : strval( $this->setting[3] ?? '' );
 			$this->post    = $this->is_richtext ? '' : strval( $this->setting[4] ?? '' );
 			$this->default = $this->is_richtext ? strval( $this->setting[3] ?? '' ) : strval( $this->setting[5] ?? '' );
 			$this->m_key   = $this->is_richtext ? ( $this->setting[4] ?? '' ) : '';
 		} else {
-			$this->ID        = get_the_ID();
-			$this->post_type = get_post_type();
+			$this->ID        = isset( $context['postId'] ) ? $context['postId'] : get_the_ID();
+			$this->post_type = isset( $context['postType'] ) ? $context['postType'] : get_post_type();
 			$this->field     = strval( $this->setting[0] ?? '' );
 			$this->pre     = '';
 			$this->post    = '';
@@ -74,7 +74,7 @@ class PostType extends Abstracts\Interpreter {
 
 			case 'post-excerpt':
 				$this->default = $this->is_richtext ? ( $this->name === 'post-type' ? ( $this->setting[3] ?? 10 ) : ( $this->setting[1] ?? 10 ) ) : $this->default;
-				$this->content = $this->get_excerpt( sanitize_text_field( strval( get_the_content() ) ), $this->is_richtext ? ( $this->name === 'post-type' ? intval( $this->setting[4] ?? 10 ) : intval( $this->setting[2] ?? 10 ) ) : intval( $this->setting[6] ?? 40 ) );
+				$this->content = $this->get_excerpt( strval( get_the_excerpt( $this->ID ) ), $this->is_richtext ? ( $this->name === 'post-type' ? intval( $this->setting[4] ?? 10 ) : intval( $this->setting[2] ?? 10 ) ) : intval( $this->setting[6] ?? 40 ) );
 				break;
 
 			case 'post-id':
@@ -210,9 +210,16 @@ class PostType extends Abstracts\Interpreter {
 		return '';
 	}
 	protected function get_excerpt( string $str, int $n ) : string {
-		$words = explode( ' ', $str );
-		$first_n_words = array_slice( $words, 0, $n );
-		$result = implode( ' ', $first_n_words );
-		return $result;
+		if ( $n < 1 ) {
+			$n = -1;
+		}
+		$str = wp_strip_all_tags( $str ); // Remove HTML tags
+		$str = trim( $str ); // Trim whitespace
+		$words = preg_split( '/\s+/', $str ); // Split by any whitespace
+		if ( count( $words ) <= $n ) {
+			return implode( ' ', $words );
+		}
+		$excerpt = array_slice( $words, 0, $n );
+		return implode( ' ', $excerpt ) . '';
 	}
 }

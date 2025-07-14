@@ -28,6 +28,10 @@
             "type": "string",
             "default": ""
         },
+        "blockVersion": {
+            "type": "number",
+            "default": ""
+        },
         "effect": {
             "type": "string",
             "default": "slide"

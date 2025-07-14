@@ -3,7 +3,7 @@ namespace ABlocks\Blocks\Search;
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
-use ABlocks\Controls\Icon;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\TextShadow;
@@ -11,13 +11,92 @@ use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
-use WP_Query;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'search';
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-form',
+			$this->get_SearchBar_css( $attributes ),
+			$this->get_SearchBar_css( $attributes, 'Tablet' ),
+			$this->get_SearchBar_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-input',
+			$this->get_Input_css( $attributes ),
+			$this->get_Input_css( $attributes, 'Tablet' ),
+			$this->get_Input_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-input::placeholder',
+			$this->get_Input_css( $attributes ),
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-button > span',
+			$this->get_Button_css( $attributes ),
+			$this->get_Button_css( $attributes, 'Tablet' ),
+			$this->get_Button_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-button:hover > span',
+			$this->get_Button_hover_css( $attributes ),
+			$this->get_Button_hover_css( $attributes, 'Tablet' ),
+			$this->get_Button_hover_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-button > span > svg',
+			$this->get_Icon_css( $attributes ),
+			$this->get_Icon_css( $attributes, 'Tablet' ),
+			$this->get_Icon_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-result',
+			$this->get_search_result_list( $attributes ),
+			$this->get_search_result_list( $attributes, 'Tablet' ),
+			$this->get_search_result_list( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-result:hover',
+			$this->get_search_result_list_hover( $attributes ),
+			$this->get_search_result_list_hover( $attributes, 'Tablet' ),
+			$this->get_search_result_list_hover( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-result__list',
+			$this->get_search_result_item( $attributes ),
+			$this->get_search_result_item( $attributes, 'Tablet' ),
+			$this->get_search_result_item( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-result__list:hover',
+			$this->get_search_result_item_hover( $attributes ),
+			$this->get_search_result_item_hover( $attributes, 'Tablet' ),
+			$this->get_search_result_item_hover( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} a.ablocks-block--search-result__list-title',
+			$this->get_search_result_title_css( $attributes ),
+			$this->get_search_result_title_css( $attributes, 'Tablet' ),
+			$this->get_search_result_title_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-search-block__spin',
+			$this->get_loading_spinner_css( $attributes ),
+			$this->get_loading_spinner_css( $attributes, 'Tablet' ),
+			$this->get_loading_spinner_css( $attributes, 'Mobile' )
+		);
+
+		return $css_generator->generate_css();
+	}
+	public function build_css_v2( $attributes ) {
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-form',
@@ -76,12 +155,6 @@ class Block extends BlockBaseAbstract {
 			$this->get_search_result_item_hover( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-block--search-result__list-thumbnail',
-			$this->get_search_result_img_css( $attributes ),
-			$this->get_search_result_img_css( $attributes, 'Tablet' ),
-			$this->get_search_result_img_css( $attributes, 'Mobile' )
-		);
-		$css_generator->add_class_styles(
 			'{{WRAPPER}} a.ablocks-block--search-result__list-title',
 			$this->get_search_result_title_css( $attributes ),
 			$this->get_search_result_title_css( $attributes, 'Tablet' ),
@@ -95,6 +168,13 @@ class Block extends BlockBaseAbstract {
 		);
 
 		return $css_generator->generate_css();
+	}
+
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 	public function get_SearchBar_css( $attributes, $device = '' ) {
 
@@ -280,31 +360,6 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 
-	public function get_search_result_img_css( $attributes, $device = '' ) {
-		return array_merge(
-			Range::get_css([
-				'attributeValue' => $attributes['thumbnailWidth'],
-				'attribute_object_key' => 'value',
-				'isResponsive' => true,
-				'hasUnit' => true,
-				'defaultValue' => '',
-				'unitDefaultValue' => '%',
-				'property' => 'width',
-				'device' => $device,
-			]),
-			Range::get_css([
-				'attributeValue' => $attributes['thumbnailHeight'],
-				'attribute_object_key' => 'value',
-				'isResponsive' => true,
-				'hasUnit' => true,
-				'defaultValue' => '',
-				'unitDefaultValue' => 'px',
-				'property' => 'height',
-				'device' => $device,
-			]),
-		);
-	}
-
 	public function get_Button_css( $attributes, $device = '' ) {
 		$css = [];
 		$button_color = isset( $attributes['buttonTextColor'] ) ? $attributes['buttonTextColor'] : '';
@@ -318,6 +373,21 @@ class Block extends BlockBaseAbstract {
 			isset( $attributes['buttonTypography'] ) ? Typography::get_css( $attributes['buttonTypography'], '', $device ) : [],
 			isset( $attributes['buttonTextStroke'] ) ? TextStroke::get_css( $attributes['buttonTextStroke'], '', $device ) : [],
 			isset( $attributes['buttonTextShadow'] ) ? TextStroke::get_css( $attributes['buttonTextShadow'], '', $device ) : [],
+		);
+	}
+	public function get_Button_hover_css( $attributes, $device = '' ) {
+		$css = [];
+		$button_color = isset( $attributes['buttonTextColorH'] ) ? $attributes['buttonTextColorH'] : '';
+
+		if ( isset( $attributes['buttonTextColorH'] ) && ! empty( $attributes['buttonTextColorH'] ) ) {
+			$css['color'] = $button_color;
+		}
+
+		return array_merge(
+			$css,
+			isset( $attributes['buttonTypographyH'] ) ? Typography::get_css( $attributes['buttonTypographyH'], '', $device ) : [],
+			isset( $attributes['buttonTextStrokeH'] ) ? TextStroke::get_css( $attributes['buttonTextStrokeH'], '', $device ) : [],
+			isset( $attributes['buttonTextShadowH'] ) ? TextStroke::get_css( $attributes['buttonTextShadowH'], '', $device ) : [],
 		);
 	}
 
@@ -348,6 +418,8 @@ class Block extends BlockBaseAbstract {
 		$placeholder = isset( $attributes['placeholder'] ) ? sanitize_text_field( $attributes['placeholder'] ) : esc_html__( 'Write anything...', 'ablocks' );
 		$variant = isset( $attributes['variant'] ) ? sanitize_key( $attributes['variant'] ) : 'classic';
 		$isIcon = isset( $attributes['isIcon'] ) ? sanitize_key( $attributes['isIcon'] ) : 'icon';
+		$buttonAlignment = isset( $attributes['buttonAlignment'] ) ? sanitize_text_field( $attributes['buttonAlignment'] ) : 'left';
+		$allowCollapse = isset( $attributes['allowCollapse'] ) ? sanitize_key( $attributes['allowCollapse'] ) : false;
 		$buttonText = isset( $attributes['buttonText'] ) ? sanitize_text_field( $attributes['buttonText'] ) : esc_html__( 'Search', 'ablocks' );
 		$buttonAlignment = isset( $attributes['buttonAlignment']['value'] ) ? sanitize_key( $attributes['buttonAlignment']['value'] ) : 'left';
 
@@ -356,7 +428,7 @@ class Block extends BlockBaseAbstract {
 		<div class="ablocks-block--search-bar <?php echo esc_attr( $variant ); ?>">
 			<form method="post" class="ablocks-block--search-form <?php echo esc_attr( ( $isIcon === 'both' || $isIcon === 'text' ) ? $isIcon : '' ); ?>">
 				<?php if ( 'left' === $buttonAlignment && 'classic' !== $variant ) : ?>
-					<button type="button" class="ablocks-block--search-button <?php echo esc_attr( ( $isIcon === 'both' || $isIcon === 'text' ) ? $isIcon : '' ); ?>">
+					<button type="button" class="ablocks-block--search-button <?php echo esc_attr( ( $isIcon === 'both' || $isIcon === 'text' ) ? $isIcon : '' ); ?>  searchbar-submit-left">
 						<span class="button-content">
 							<?php
 								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -371,9 +443,9 @@ class Block extends BlockBaseAbstract {
 						</span>
 					</button>
 				<?php endif; ?>
-				<input class="ablocks-block--search-input <?php echo esc_attr( ( $isIcon === 'both' || $isIcon === 'text' ) ? $isIcon : '' ); ?>" type="text" placeholder="<?php echo esc_attr( $placeholder ); ?>" value=""/>
+				<input class="ablocks-block--search-input <?php echo esc_attr( $allowCollapse ? 'ablocks-block--search-input-collapse' : '' ); ?> <?php echo esc_attr( ( $isIcon === 'both' || $isIcon === 'text' ) ? $isIcon : '' ); ?> searchbar-input-<?php echo esc_attr( $buttonAlignment ); ?>" type="text" placeholder="<?php echo esc_attr( $placeholder ); ?>" value=""/>
 				<?php if ( 'right' === $buttonAlignment || 'classic' === $variant ) : ?>
-					<button type="button" class="ablocks-block--search-button <?php echo esc_attr( ( $isIcon === 'both' || $isIcon === 'text' ) ? $isIcon : '' ); ?>">
+					<button type="button" class="ablocks-block--search-button <?php echo esc_attr( ( $isIcon === 'both' || $isIcon === 'text' ) ? $isIcon : '' ); ?> searchbar-submit-right">
 						<span class="button-content">
 							<?php
 								// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped

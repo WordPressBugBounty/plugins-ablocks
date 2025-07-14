@@ -1,0 +1,1 @@
+@keyframes spin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}.ablocks-loop-loading-spinner{animation:spin 1s linear infinite;border:2px solid rgba(0,0,0,.1);border-radius:50%;border-top-color:#3498db;display:inline-block;height:16px;width:16px}

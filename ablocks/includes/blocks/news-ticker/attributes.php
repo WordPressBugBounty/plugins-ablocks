@@ -14,6 +14,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'blockVersion' => [
+		'type' => 'number',
+		'default' => 2,
+	],
 	'stickyLabel' => [
 		'type' => 'string',
 		'default' => 'Breaking News',

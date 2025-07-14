@@ -3,7 +3,6 @@
 namespace ABlocks\Blocks\FormBuilder;
 
 use ABlocks\Blocks\FormBuilder\Actions\Interfaces\FormSubmissionAction;
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -48,11 +47,8 @@ final class ValidateFormData {
 	public function __construct( ?array $block_data, ?array $input_data ) {
 		$this->block_data = $block_data;
 		$this->input_data = $input_data;
-
 		$this->is_form_data_empty = count( $input_data ) === 0;
-
 		$this->filter_data_by_whitelisted_key();
-
 		$this->form_info = [
 			'info' => [
 				'type'    => sanitize_text_field( $block_data['parentAttributes']['formType'] ?? null ),
@@ -78,7 +74,8 @@ final class ValidateFormData {
 		if ( ( $this->block_data['innerBlocks'][0]['blockName'] ?? '' ) === 'ablocks/form-multi-step' ) {
 
 			foreach ( $this->block_data['innerBlocks'][0]['innerBlocks'] ?? [] as $block ) {
-				foreach ( $block['innerBlocks'] as ['attributes' => $attr] ) {
+				foreach ( $block['innerBlocks'] as [ 'blockName' => $block_name, 'attributes' => $attr ] ) {
+					$this->filtered_data = apply_filters( 'ablocks/form_builder/form_data', $this->filtered_data, $block_name, $attr, $this->block_data['parentAttributes'] );
 					$name  = $attr['name'] ?? false;
 					// check current input name exists in $all_fields
 					if ( $name && array_key_exists( $name, $this->input_data ) ) {
@@ -94,6 +91,7 @@ final class ValidateFormData {
 		) {
 			$this->filtered_data = [];
 			foreach ( $this->block_data['innerBlocks'] as $input_element_data ) {
+				$this->filtered_data = apply_filters( 'ablocks/form_builder/form_data', $this->filtered_data, $input_element_data['blockName'] ?? '', $input_element_data['attributes'] ?? [], $this->block_data['parentAttributes'] );
 				$name  = $input_element_data['attributes']['name'] ?? false;
 				[ 'placeholder' ] ?? false;
 				// check current input name exists in $all_fields

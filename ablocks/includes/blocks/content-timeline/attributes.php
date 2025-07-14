@@ -16,6 +16,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => '',
+	),
 	'iconColor' => [
 		'type' => 'string',
 		'default' => '#000000'

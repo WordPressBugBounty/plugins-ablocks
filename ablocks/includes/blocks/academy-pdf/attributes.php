@@ -14,6 +14,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	),
+	'blockVersion' => array(
+		'type' => 'number',
+		'default' => 2,
+	),
 	'src' => array(
 		'type' => 'string',
 		'default' => 'http://example.com/example.pdf',

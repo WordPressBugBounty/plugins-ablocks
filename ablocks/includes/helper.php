@@ -63,10 +63,7 @@ class Helper {
 	}
 
 	public static function is_enabled_assets_generation() {
-		$flag = false;
-		if ( (bool) self::get_settings( 'enabled_assets_file_generation' ) ) {
-			$flag = function_exists( 'wp_is_block_theme' ) ? ! wp_is_block_theme() : true;
-		}
+		$flag = (bool) self::get_settings( 'enabled_assets_file_generation' );
 		return apply_filters( 'ablocks/is_enabled_assets_generation', $flag );
 	}
 
@@ -583,6 +580,46 @@ class Helper {
 
 	public static function is_valid_site_url( string $url ): bool {
 		return str_starts_with( $url, get_option( 'siteurl' ) );
+	}
+
+	public static function get_script_loading_strategy() {
+		return 'defer';
+	}
+
+	public static function is_static_front_page( $post_id ) {
+		$show_on_front = get_option( 'show_on_front' );
+		$page_on_front = (int) get_option( 'page_on_front' );
+		return ( $show_on_front === 'page' && $page_on_front === (int) $post_id );
+	}
+
+	public static function get_public_post_type_options() {
+		$args = [
+			'public'   => true,
+			'_builtin' => true,
+		];
+		$post_types = get_post_types( $args, 'objects' );
+		unset( $post_types['attachment'] ); // Remove 'attachment' if present
+
+		// Get custom post types
+		$args['_builtin'] = false;
+		$custom_post_types = get_post_types( $args, 'objects' );
+
+		// Allow filters to modify the combined post types
+		$all_post_types = apply_filters(
+			'ablocks_theme_builder/location_rule_post_types',
+			array_merge( $post_types, $custom_post_types )
+		);
+
+		// Format result
+		$result = [];
+		foreach ( $all_post_types as $post_type => $post_type_obj ) {
+			$result[] = [
+				'label' => $post_type_obj->label,
+				'value' => $post_type,
+			];
+		}
+
+		return $result;
 	}
 
 }

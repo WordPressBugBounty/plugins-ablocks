@@ -14,7 +14,6 @@ abstract class Interpreter {
 		$this->name    = $name;
 		$this->setting = $setting;
 		$this->is_richtext = $is_richtext;
-		// print_r(func_get_args());
 	}
 	abstract public function content() : string;
 }

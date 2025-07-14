@@ -3,6 +3,7 @@ namespace ABlocks\Blocks\Image;
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
@@ -14,7 +15,7 @@ use ABlocks\Controls\Range;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'image';
 
-	public function build_css( $attributes ) {
+	public function build_css_v1( $attributes ) {
 
 		// Generate CSS
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
@@ -65,6 +66,64 @@ class Block extends BlockBaseAbstract {
 		);
 
 		return $css_generator->generate_css();
+	}
+	public function build_css_v2( $attributes ) {
+
+		// Generate CSS
+		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+		// Image Wrapper CSS
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}',
+			$this->get_wrapper_css( $attributes ),
+			$this->get_wrapper_css( $attributes, 'Tablet' ),
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+		);
+
+		// Image container css
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}',
+			$this->get_image_container_css( $attributes ),
+			$this->get_image_container_css( $attributes, 'Tablet' ),
+			$this->get_image_container_css( $attributes, 'Mobile' ),
+		);
+		// Image css
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-figure img',
+			$this->get_image_css( $attributes ),
+			$this->get_image_css( $attributes, 'Tablet' ),
+			$this->get_image_css( $attributes, 'Mobile' ),
+		);
+
+		// Image hover css
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-figure img:hover',
+			$this->get_image_hover_css( $attributes ),
+			$this->get_image_hover_css( $attributes, 'Tablet' ),
+			$this->get_image_hover_css( $attributes, 'Mobile' ),
+		);
+		// Image caption css
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-figure .ablocks-image-caption',
+			$this->get_image_caption_css( $attributes ),
+			$this->get_image_caption_css( $attributes, 'Tablet' ),
+			$this->get_image_caption_css( $attributes, 'Mobile' ),
+		);
+
+		// Image caption hover css
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-image-figure .ablocks-image-caption:hover',
+			$this->get_image_caption_hover_css( $attributes ),
+			$this->get_image_caption_hover_css( $attributes, 'Tablet' ),
+			$this->get_image_caption_hover_css( $attributes, 'Mobile' )
+		);
+
+		return $css_generator->generate_css();
+	}
+	public function build_css( $attributes ) {
+		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
+			return $this->build_css_v2( $attributes );
+		}
+		return $this->build_css_v1( $attributes );
 	}
 
 	public function get_wrapper_css( $attributes, $device = '' ) {
