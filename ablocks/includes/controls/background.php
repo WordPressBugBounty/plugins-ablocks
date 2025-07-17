@@ -231,7 +231,7 @@ class Background extends ControlBaseAbstract {
 					$css[ $property . '-size' ] = $value[ 'imgDisplaySize' . $device ];
 				}
 			}
-		} elseif ( 'video' === $value['backgroundType'] && '' !== $value['fallbackImageUrl'] ) {
+		} elseif ( 'video' === $value['backgroundType'] && '' !== $value['fallbackImageUrl'] && ( $value['videoSource'] == 'none' || ( $value['videoSource'] == 'selfHosted' && empty( $value['videoUrl'] ) ) || ( $value['videoSource'] == 'youtube' && empty( $value['youtubeURL'] ) ) || ( $value['videoSource'] == 'vimeo' && empty( $value['vimeoURL'] ) ) ) ) {
 			$css[ $property . '-image' ] = 'url("' . $value['fallbackImageUrl'] . '")';
 			$css[ $property . '-size' ] = 'cover';
 		} elseif ( 'color' === $value['backgroundType'] && $value['backgroundColor'] ) {
@@ -295,7 +295,7 @@ class Background extends ControlBaseAbstract {
 			}
 			// background-attachments css
 			if ( '' !== isset( $value[ 'imgAttachmentH' . $device ] ) ) {
-				$css[ $property . '-attachment' ] = isset( $value[ 'imgAttachmentH' . $device ] );
+				$css[ $property . '-attachment' ] = $value[ 'imgAttachmentH' . $device ];
 			}
 			// background-repeat css
 			if ( '' !== $value[ 'imgRepeatH' . $device ] ) {
@@ -309,9 +309,8 @@ class Background extends ControlBaseAbstract {
 					$css[ $property . '-size' ] = $value[ 'imgDisplaySizeH' . $device ];
 				}
 			}
-		} elseif ( 'video' === $value['backgroundTypeH'] && '' !== $value['fallbackImageUrlH'] ) {
-			$css[ $property . '-image' ] = 'url("' . $value['fallbackImageUrlH'] . '")';
-			$css[ $property . '-size' ] = 'cover';
+		} elseif ( 'video' === $value['backgroundTypeH'] ) {
+
 		} elseif ( 'color' === $value['backgroundTypeH'] && $value['backgroundColorH'] ) {
 			$css[ $property ] = $value['backgroundColorH'];
 		}//end if

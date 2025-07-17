@@ -7,6 +7,7 @@ use ABlocks\Controls\Range;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Link;
+use ABlocks\Components\ButtonGroup;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -516,7 +517,7 @@ $attributes = array_merge(
 	Alignment::get_attribute( 'inputAlignment', true, [ 'value' => 'left' ] ),
 	Alignment::get_attribute( 'buttonTextAlignment', true, [ 'value' => 'center' ] ),
 	Alignment::get_attribute( 'navigatorAlignment', true, [ 'value' => 'left' ] ),
-	Alignment::get_attribute( 'buttonAlignment', true, [ 'value' => 'flex-end' ] ),
+	Alignment::get_attribute( 'buttonAlignment', true, [ 'value' => '' ] ),
 	Alignment::get_attribute( 'successErrorAlignment', true, [ 'value' => 'center' ] ),
 	Range::get_attribute( [
 		'attributeName' => 'rowsSpacing',
@@ -570,6 +571,9 @@ $attributes = array_merge(
 	Dimensions::get_attribute( 'navigatorPadding', true ),
 	Dimensions::get_attribute( 'successErrorPadding', true ),
 	Dimensions::get_attribute( 'buttonPadding', true ),
+	ButtonGroup::get_attribute( 'dir', true, [
+		'value' => 'column',
+	] ),
 );
 
 return array_merge( $attributes, \ABlocks\Classes\BlockGlobal::get_attributes() );

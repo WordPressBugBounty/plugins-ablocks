@@ -35,6 +35,13 @@ class Block extends BlockBaseAbstract {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
 
 		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-form-builder',
+			$this->get_row_column_displayCss( $attributes ),
+			$this->get_row_column_displayCss( $attributes, 'Tablet' ),
+			$this->get_row_column_displayCss( $attributes, 'Mobile' ),
+		);
+
+		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-form-builder__field',
 			$this->get_field_css( $attributes ),
 			$this->get_field_css( $attributes, 'Tablet' ),
@@ -140,6 +147,13 @@ class Block extends BlockBaseAbstract {
 	}
 	public function build_css_v2( $attributes ) {
 		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
+
+				$css_generator->add_class_styles(
+					'{{WRAPPER}} .ablocks-form-builder',
+					$this->get_row_column_displayCss( $attributes ),
+					$this->get_row_column_displayCss( $attributes, 'Tablet' ),
+					$this->get_row_column_displayCss( $attributes, 'Mobile' ),
+				);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-form-builder__field',
@@ -525,5 +539,23 @@ class Block extends BlockBaseAbstract {
 			$css,
 		);
 	}
+
+	public function get_row_column_displayCss( $attributes, $device = '' ) {
+		$css = [];
+
+		if ( isset( $attributes['dir'][ 'value' . $device ] ) ) {
+			$dir_value = $attributes['dir'][ 'value' . $device ];
+			$css['flex-direction'] = $dir_value;
+
+			if ( in_array( $dir_value, [ 'row', 'row-reverse' ], true ) ) {
+				$css['align-items'] = 'center';
+			} elseif ( in_array( $dir_value, [ 'column', 'column-reverse' ], true ) ) {
+				$css['flex-wrap'] = 'wrap';
+			}
+		}
+
+		return $css;
+	}
+
 
 }

@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 5.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -154,6 +154,11 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 8. Instant Style Copy-Paste
 
 == Changelog ==
+
+= 2.0.1 - 16/07/2025 =
+* Added - Video Background Support
+* Fixed - Form Builder column issue
+* Fixed - Dynamic Content meta fatal error
 
 = 2.0.0 - 14/07/2025 =
 * Added - New Player Block
@@ -483,5 +488,5 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 * Initial beta release
 
 == Upgrade Notice ==
-= 2.0.0 =
+= 1.7.0 =
 This is a major update with breaking changes. Please back up your site before proceeding with the update.

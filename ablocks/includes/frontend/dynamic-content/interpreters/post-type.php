@@ -40,7 +40,8 @@ class PostType extends Abstracts\Interpreter {
 			case 'post-custom-field':
 				$key = $this->is_richtext ? ( empty( $this->m_key ) ? ( $this->setting[2] ?? '' ) : $this->m_key ) : ( $this->setting[6] ?? '' );
 				$this->default = $this->is_richtext ? ( $this->setting[1] ?? '' ) : $this->default;
-				$this->content = empty( $key ) ? '' : get_post_meta( $this->ID, $key, true );
+				$meta_data = empty( $key ) ? '' : get_post_meta( $this->ID, $key, true );
+				$this->content = is_string( $meta_data ) || is_numeric( $meta_data ) ? $meta_data : '';
 				break;
 
 			case 'post-date':

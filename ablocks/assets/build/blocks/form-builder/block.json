@@ -534,7 +534,7 @@
         "buttonAlignment": {
             "type": "object",
             "default": {
-                "value": "flex-end",
+                "value": "",
                 "valueTablet": "",
                 "valueMobile": ""
             }
@@ -1110,6 +1110,14 @@
                 "bottomMobile": "",
                 "leftMobile": "",
                 "unitMobile": ""
+            }
+        },
+        "dir": {
+            "type": "object",
+            "default": {
+                "value": "column",
+                "valueTablet": "",
+                "valueMobile": ""
             }
         },
         "_margin": {
