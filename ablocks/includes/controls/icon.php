@@ -5,9 +5,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use ABlocks\Classes\ControlBaseAbstract;
+
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
+use ABlocks\Helper;
 
 class Icon {
 	public static function get_attribute_default_value( $is_responsive = false ) {
@@ -190,11 +191,13 @@ class Icon {
 
 		if ( ! empty( $attributes[ $attributePrefix . 'Sizing' ] ) && empty( $attributes[ $attributePrefix . 'ImageUrl' ] ) ) {
 			$sizeValue = isset( $attributes[ $attributePrefix . 'Sizing' ][ 'value' . $device ] ) ? $attributes[ $attributePrefix . 'Sizing' ][ 'value' . $device ] : $attributes[ $attributePrefix . 'Sizing' ]['value'];
-			$sizeUnit = isset( $attributes[ $attributePrefix . 'Sizing' ][ 'valueUnit' . $device ] ) ? $attributes[ $attributePrefix . 'Sizing' ][ 'valueUnit' . $device ] : ( isset( $attributes[ $attributePrefix . 'Sizing' ]['valueUnit'] ) ? $attributes[ $attributePrefix . 'Sizing' ]['valueUnit'] : '' );
 
-			if ( empty( $sizeUnit ) ) {
-				$sizeUnit = 'px';
-			}
+			$sizeUnit = self::get_unit( [
+				'attributeValue'      => $attributes[ $attributePrefix . 'Sizing' ],
+				'attributeObjectKey'  => 'value',
+				'unitDefaultValue'    => 'px',
+				'device'              => $device,
+			] );
 
 			$iconViewCSS['font-size'] = $sizeValue . $sizeUnit;
 		}
@@ -293,5 +296,33 @@ class Icon {
 		return array_merge(
 			$iconViewCSS
 		);
+	}
+
+	// copy from control-base-abstract-two.php
+	public static function get_unit( $args ) {
+		$defaultUnit = $args['unitDefaultValue'];
+		$value = $args['attributeValue'];
+		$device = $args['device'];
+		$keyPrefix = $args['attributeObjectKey'] . 'Unit';
+
+		// Retrieve units with fallback to default
+		$unitDesktop = Helper::get_array_value( $value, $keyPrefix, $defaultUnit ); // Desktop
+		$unitTablet = Helper::get_array_value( $value, $keyPrefix . 'Tablet', $unitDesktop ); // Tablet inherits from Desktop
+		$unitMobile = Helper::get_array_value( $value, $keyPrefix . 'Mobile', $unitTablet ); // Mobile inherits from Tablet
+
+		// Return the appropriate unit based on the device
+		if ( '' === $device ) {
+			return $unitDesktop; // Desktop
+		}
+
+		if ( 'Tablet' === $device ) {
+			return $unitTablet; // Tablet
+		}
+
+		if ( 'Mobile' === $device ) {
+			return $unitMobile; // Mobile
+		}
+
+		return $defaultUnit; // Default fallback
 	}
 }

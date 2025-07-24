@@ -56,17 +56,50 @@ class Block extends BlockBaseAbstract {
 
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		global $post;
-		$current_post_id = isset( $post->ID ) ? $post->ID : 0;
-		$active_term_id = isset( $attributes['active_term_id'] ) && ! empty( $attributes['active_term_id'] ) ? $attributes['active_term_id'] : '*';
 
-		$taxonomy_term_items = isset( $attributes['taxonomy_term_items'] ) ? $attributes['taxonomy_term_items'] : [];
-		if ( is_array( $taxonomy_term_items ) && count( $taxonomy_term_items ) ) {
+		$current_post_id = isset( $post->ID ) ? $post->ID : 0;
+		$active_term_id = ! empty( $attributes['active_term_id'] ) ? $attributes['active_term_id'] : '*';
+		if ( ! empty( $attributes['taxonomy'] ) && $attributes['taxonomy'] !== 'inherit' ) {
+			$taxonomy = $attributes['taxonomy'];
+		} else {
+			// Try to get the current queried taxonomy
+			$queried_object = get_queried_object();
+			if ( ! empty( $queried_object ) && ! empty( $queried_object->taxonomy ) ) {
+				$taxonomy = $queried_object->taxonomy;
+			} else {
+				$taxonomy = 'category'; // fallback
+			}
+		}
+		// Determine archive state and post type (null if not archive)
+		$is_archive = is_archive() ? 'true' : 'false';
+		$archive_post_type = is_post_type_archive() ? get_query_var( 'post_type' ) : get_post_type();
+		if ( is_array( $archive_post_type ) ) {
+			$archive_post_type = reset( $archive_post_type );
+		}
+		$archive_post_type = esc_attr( $archive_post_type );
+
+		$taxonomy_term_items = isset( $attributes['taxonomy_term_items'] ) && is_array( $attributes['taxonomy_term_items'] ) ? $attributes['taxonomy_term_items'] : [];
+
+		if ( count( $taxonomy_term_items ) ) {
 			foreach ( $taxonomy_term_items as $term_item ) {
-				$taxonomy = ( isset( $attributes['taxonomy'] ) && ! empty( $attributes['taxonomy'] ) ? $attributes['taxonomy'] : 'category' );
-				echo '<span class="ablocks-loop-term-filter' . ( $active_term_id === $term_item['value'] ? ' ablocks-loop-term-filter--active' : '' ) . '" data-post-id="' . esc_attr( $current_post_id ) . '" data-term-id="' . esc_attr( $term_item['value'] ) . '" data-taxonomy="' . esc_attr( $taxonomy ) . '" type="button">' . esc_html( $term_item['label'] ) . '</span>';
+				$term_value = isset( $term_item['value'] ) ? $term_item['value'] : '';
+				$term_label = isset( $term_item['label'] ) ? $term_item['label'] : '';
+
+				$is_active = (string) $active_term_id === (string) $term_value ? ' ablocks-loop-term-filter--active' : '';
+
+				echo '<span class="ablocks-loop-term-filter' . $is_active . '" '
+					. 'data-post-id="' . esc_attr( $current_post_id ) . '" '
+					. 'data-term-id="' . esc_attr( $term_value ) . '" '
+					. 'data-taxonomy="' . esc_attr( $taxonomy ) . '" '
+					. 'data-is-archive="' . $is_archive . '" '
+					. 'data-archive-post-type="' . $archive_post_type . '" '
+					. 'type="button">'
+					. esc_html( $term_label )
+					. '</span>';
 			}
 		}
 	}
+
 
 	public function filter_button_alignment( $attributes, $device = '' ) {
 		$css = [];
@@ -84,10 +117,10 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			])
 		);
+		$css['display'] = 'flex';
 		$css['width'] = '100%';
 		$css['flex-wrap'] = 'wrap';
 		if ( ! empty( $attributes['buttonAlignment'] ) ) {
-			$css['display'] = 'flex';
 			$css['flex-direction'] = $attributes['buttonAlignment'];
 		}
 

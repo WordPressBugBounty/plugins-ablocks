@@ -4,6 +4,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Background;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
+use ABlocks\Controls\Range;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -21,6 +22,10 @@ $attributes = [
 	'course_id' => array(
 		'type' => 'number',
 		'default' => 0,
+	),
+	'layout' => array(
+		'type' => 'string',
+		'default' => 'legacy',
 	),
 	'start_btn_color' => array(
 		'type' => 'string',
@@ -54,16 +59,61 @@ $attributes = [
 		'type' => 'string',
 		'default' => '#6F5DD6',
 	),
+	'massage_title_bg' => array(
+		'type' => 'string',
+		'default' => '',
+	),
+	'massage_title_color' => array(
+		'type' => 'string',
+		'default' => '',
+	),
+	'massage_title_hover_bg' => array(
+		'type' => 'string',
+		'default' => '',
+	),
+	'massage_title_hover_color' => array(
+		'type' => 'string',
+		'default' => '',
+	),
+	'list_color' => array(
+		'type' => 'string',
+		'default' => '',
+	),
+	'list_hover_color' => array(
+		'type' => 'string',
+		'default' => '',
+	),
+	'price_hover_color' => array(
+		'type' => 'string',
+		'default' => '',
+	),
+	'price_color' => array(
+		'type' => 'string',
+		'default' => '',
+	),
 ];
 
 $attributes = array_merge(
 	$attributes,
 	Typography::get_attribute( 'start_btn_typography', true ),
+	Typography::get_attribute( 'price_typography', true ),
+	Typography::get_attribute( 'list_typography', true ),
+	Typography::get_attribute( 'massage_title_typography', true ),
 	Dimensions::get_attribute( 'start_btn_padding', true ),
 	Dimensions::get_attribute( 'enroll_btn_padding', true ),
 	Typography::get_attribute( 'enroll_btn_typography', true ),
 	Border::get_attribute( 'start_btn_border', true ),
 	Border::get_attribute( 'enroll_btn_border', true ),
+	Range::get_attribute([
+		'attributeName' => 'modalWidth',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 150,
+		'defaultValueTablet' => 100,
+		'defaultValueMobile' => 80,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+	]),
 );
 
 return array_merge( $attributes, \ABlocks\Classes\BlockGlobal::get_attributes() );

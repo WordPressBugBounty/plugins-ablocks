@@ -5,9 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use ABlocks\Classes\ControlBaseAbstractTwo;
+use ABlocks\Helper;
 
-class Range extends ControlBaseAbstractTwo {
+class Range {
 
 	public static function get_attribute_default_value( $args ) {
 
@@ -72,9 +72,7 @@ class Range extends ControlBaseAbstractTwo {
 	}
 
 	public static function get_css( $args ) {
-		if ( ! isset( $args['property'] ) ||
-			empty( $args['property'] )
-		) {
+		if ( ! isset( $args['property'] ) || empty( $args['property'] ) ) {
 			return [];
 		}
 
@@ -125,4 +123,30 @@ class Range extends ControlBaseAbstractTwo {
 		return $css;
 	}
 
+	public static function get_unit( $args ) {
+		$defaultUnit = $args['unitDefaultValue'];
+		$value = $args['attributeValue'];
+		$device = $args['device'];
+		$keyPrefix = $args['attributeObjectKey'] . 'Unit';
+
+		// Retrieve units with fallback to default
+		$unitDesktop = Helper::get_array_value( $value, $keyPrefix, $defaultUnit ); // Desktop
+		$unitTablet = Helper::get_array_value( $value, $keyPrefix . 'Tablet', $unitDesktop ); // Tablet inherits from Desktop
+		$unitMobile = Helper::get_array_value( $value, $keyPrefix . 'Mobile', $unitTablet ); // Mobile inherits from Tablet
+
+		// Return the appropriate unit based on the device
+		if ( '' === $device ) {
+			return $unitDesktop; // Desktop
+		}
+
+		if ( 'Tablet' === $device ) {
+			return $unitTablet; // Tablet
+		}
+
+		if ( 'Mobile' === $device ) {
+			return $unitMobile; // Mobile
+		}
+
+		return $defaultUnit; // Default fallback
+	}
 }

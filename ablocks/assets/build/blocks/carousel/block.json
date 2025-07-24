@@ -259,8 +259,8 @@
             "type": "object",
             "default": {
                 "value": 35,
-                "valueTablet": 35,
-                "valueMobile": 35,
+                "valueTablet": "",
+                "valueMobile": "",
                 "valueUnit": "px",
                 "valueUnitTablet": "",
                 "valueUnitMobile": ""

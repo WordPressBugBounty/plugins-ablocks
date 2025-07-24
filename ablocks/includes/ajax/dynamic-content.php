@@ -127,9 +127,10 @@ class DynamicContent extends AbstractAjaxHandler {
 					'taxonomy'          => 'string',
 					'post_id'           => 'integer',
 					'term_id'           => 'integer',
+					'term_slug'         => 'string',
 					'page'              => 'integer',
 					'is_archive'        => 'boolean',
-					'archive_post_type'      => 'string',
+					'archive_post_type' => 'string',
 				],
 			),
 		);
@@ -451,10 +452,20 @@ class DynamicContent extends AbstractAjaxHandler {
 		$term_id = (int) $payload['term_id'];
 		$page = (int) ( isset( $payload['page'] ) ? $payload['page'] : 1 );
 		$is_archive = (bool) ( isset( $payload['is_archive'] ) ? $payload['is_archive'] : false );
-		$archive_post_type = $payload['archive_post_type'];
 
 		if ( $is_archive ) {
-			$template_slug = 'archive-' . $archive_post_type;
+			if ( ! empty( $payload['archive_post_type'] ) ) {
+				// Post type archive template
+				$template_slug = 'archive-' . $payload['archive_post_type'];
+			} elseif ( ! empty( $payload['taxonomy'] ) ) {
+				if ( ! empty( $payload['term_slug'] ) ) {
+					// Taxonomy term archive template
+					$template_slug = 'archive-' . $payload['taxonomy'] . '-' . $payload['term_slug'];
+				} else {
+					// Taxonomy archive template without term
+					$template_slug = 'archive-' . $payload['taxonomy'];
+				}
+			}
 
 			$theme_slug = wp_get_theme()->get_stylesheet();
 			$template_posts = get_posts([
@@ -484,8 +495,11 @@ class DynamicContent extends AbstractAjaxHandler {
 
 		$query_vars = isset( $block_data['parentAttributes']['query'] ) ? $this->convert_to_wp_query_args( $block_data['parentAttributes']['query'] ) : [
 			'post_type' => 'post',
-			'posts_per_page' => -1
+			'posts_per_page' => get_option( 'posts_per_page' )
 		];
+		if ( $is_archive && ! empty( $payload['archive_post_type'] ) ) {
+			$query_vars['post_type'] = $payload['archive_post_type'];
+		}
 		$query_vars['posts_per_page'] = $query_vars['posts_per_page'] * $page;
 		if ( ! empty( $taxonomy ) && $term_id ) {
 			$query_vars['tax_query'] = [
@@ -526,7 +540,7 @@ class DynamicContent extends AbstractAjaxHandler {
 			if ( ! empty( $block['innerBlocks'] ) ) {
 				$found = $this->get_loop_builder_blocks_by_block_id( $block['innerBlocks'], $target_block_id );
 				if ( ! empty( $found ) ) {
-					return [ $found ];
+					return $found;
 				}
 			}
 		}

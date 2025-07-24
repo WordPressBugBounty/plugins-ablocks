@@ -9,6 +9,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Width;
 use ABlocks\Controls\Border;
 use ABlocks\Classes\CssGeneratorV2;
+use ABlocks\Controls\Range;
 
 class Block extends BlockBaseAbstract {
 
@@ -286,14 +287,6 @@ class Block extends BlockBaseAbstract {
 				}
 			}
 
-			$defaultUnit = 'px';
-
-			$unit = ! empty( $attributes['iconSize'][ 'valueUnit' . $device ] ) ? $attributes['iconSize'][ 'valueUnit' . $device ] : $defaultUnit;
-
-			if ( ! empty( $attributes['iconSize'][ 'value' . $device ] ) ) {
-				$css['font-size'] = $attributes['iconSize'][ 'value' . $device ] . $unit;
-			}
-
 			if ( ! empty( $attributes[ 'iconColor' . $device ] ) && isset( $attributes[ 'iconColor' . $device ] ) ) {
 				$css['color'] = $attributes['iconColor'];
 				$css['fill'] = $attributes['iconColor'];
@@ -308,6 +301,16 @@ class Block extends BlockBaseAbstract {
 
 		return array_merge(
 			$css,
+			Range::get_css([
+				'attributeValue' => $attributes['iconSize'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'defaultValue' => 20,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'font-size',
+				'device' => $device,
+			]),
 			isset( $attributes['border'] ) ? Border::get_css( $attributes['border'], '', $device ) : [],
 			Dimensions::get_css( $padding, 'padding', $device )
 		);

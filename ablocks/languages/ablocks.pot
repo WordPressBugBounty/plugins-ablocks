@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 2.0.1\n"
+"Project-Id-Version: aBlocks 2.0.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-16T11:00:18+00:00\n"
+"POT-Creation-Date: 2025-07-24T09:25:29+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: ablocks\n"
@@ -200,25 +200,25 @@ msgstr ""
 msgid "Patterns"
 msgstr ""
 
-#: includes/ajax/dashboard.php:58
-#: includes/ajax/dashboard.php:81
+#: includes/ajax/dashboard.php:59
+#: includes/ajax/dashboard.php:82
 msgid "You do not have sufficient permissions to install plugins."
 msgstr ""
 
-#: includes/ajax/dashboard.php:66
-#: includes/ajax/dashboard.php:76
-#: includes/ajax/dashboard.php:89
-#: includes/ajax/dashboard.php:99
+#: includes/ajax/dashboard.php:67
+#: includes/ajax/dashboard.php:77
+#: includes/ajax/dashboard.php:90
+#: includes/ajax/dashboard.php:100
 msgid "Plugin installed and activated successfully!"
 msgstr ""
 
-#: includes/ajax/dashboard.php:68
-#: includes/ajax/dashboard.php:91
+#: includes/ajax/dashboard.php:69
+#: includes/ajax/dashboard.php:92
 msgid "Sorry, failed to download."
 msgstr ""
 
-#: includes/ajax/dashboard.php:104
-#: includes/ajax/dashboard.php:142
+#: includes/ajax/dashboard.php:105
+#: includes/ajax/dashboard.php:143
 msgid "Argument should not be empty."
 msgstr ""
 
@@ -230,16 +230,16 @@ msgstr ""
 msgid "Invalid content path."
 msgstr ""
 
-#: includes/ajax/dynamic-content.php:142
-#: includes/ajax/dynamic-content.php:179
+#: includes/ajax/dynamic-content.php:143
+#: includes/ajax/dynamic-content.php:180
 msgid "Sorry, Post type is required!"
 msgstr ""
 
-#: includes/ajax/dynamic-content.php:152
+#: includes/ajax/dynamic-content.php:153
 msgid "Sorry, Taxonomy is required"
 msgstr ""
 
-#: includes/ajax/dynamic-content.php:198
+#: includes/ajax/dynamic-content.php:199
 msgid "Sorry, Post ID and Meta Key is required!"
 msgstr ""
 
@@ -362,7 +362,7 @@ msgstr ""
 msgid "Error. [2]"
 msgstr ""
 
-#: includes/assets.php:267
+#: includes/assets.php:266
 msgctxt "Google font: on or off"
 msgid "on"
 msgstr ""
@@ -411,11 +411,11 @@ msgstr ""
 msgid "Form is empty."
 msgstr ""
 
-#: includes/blocks/logout/block.php:198
+#: includes/blocks/logout/block.php:181
 msgid "(Log Out)"
 msgstr ""
 
-#: includes/blocks/logout/block.php:199
+#: includes/blocks/logout/block.php:182
 msgid "(Log In)"
 msgstr ""
 
@@ -536,11 +536,11 @@ msgid "Loading..."
 msgstr ""
 
 #. translators: %s template
-#: includes/helper.php:501
+#: includes/helper.php:506
 msgid "%s does not exist."
 msgstr ""
 
-#: includes/helper.php:519
+#: includes/helper.php:524
 msgid "action_args should not be overwritten when calling ablocks/get_template."
 msgstr ""
 
@@ -2999,7 +2999,19 @@ msgid "Access the tabs settings to organize and customize content easily."
 msgstr ""
 
 #: assets/build/blocks.js:1
+msgid "New"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Legacy"
+msgstr ""
+
+#: assets/build/blocks.js:1
 msgid "Enroll Form Option"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Select Layout"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -3007,11 +3019,27 @@ msgid "Select Course"
 msgstr ""
 
 #: assets/build/blocks.js:1
-msgid "Start Button Style"
+msgid "Enroll Button Style"
 msgstr ""
 
 #: assets/build/blocks.js:1
-msgid "Enroll Button Style"
+msgid "Prerequisites Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Modal Width"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Prerequisites List Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Price Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Start Button Style"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -5743,6 +5771,10 @@ msgstr ""
 
 #: assets/build/blocks.js:17
 msgid "Form Header & Footer"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Inherit"
 msgstr ""
 
 #: assets/build/blocks.js:17

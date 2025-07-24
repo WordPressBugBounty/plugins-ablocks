@@ -15,6 +15,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\Icon;
+use ABlocks\Controls\Range;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'stripe-button';
 
@@ -146,7 +147,7 @@ class Block extends BlockBaseAbstract {
 
 		// Generate button icon CSS start
 		$css_generator->add_class_styles(
-			'{{WRAPPER}}  .ablocks-icon-wrap',
+			'{{WRAPPER}} .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
@@ -215,17 +216,19 @@ class Block extends BlockBaseAbstract {
 			$css['width'] = '100%';
 		}
 
-		$defaultUnit = 'px';
-
-			$unit = ! empty( $attributes['iconSpace'][ 'valueUnit' . $device ] ) ? $attributes['iconSpace'][ 'valueUnit' . $device ] : $defaultUnit;
-
-		if ( ! empty( $attributes['iconSpace'][ 'value' . $device ] ) ) {
-			$css['column-gap'] = $attributes['iconSpace'][ 'value' . $device ] . $unit;
-		}
-
 		return array_merge(
 			$css,
 			[ 'color' => $attributes['textColor'] ?? '#000000' ],
+			Range::get_css([
+				'attributeValue' => $attributes['iconSpace'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'defaultValue' => 10,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'column-gap',
+				'device' => $device,
+			]),
 			Border::get_css( $attributes['border'], '', $device ),
 			BoxShadow::get_css( $attributes['boxShadow'], '', $device ),
 			Typography::get_css( $attributes['typography'], '', $device ),

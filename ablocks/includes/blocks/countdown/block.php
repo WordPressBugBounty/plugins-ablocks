@@ -147,15 +147,6 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $attributes['wrapping'][ 'value' . $device ] ) ) {
 			$css['flex-wrap'] = $attributes['wrapping'][ 'value' . $device ];
 		}
-		if ( ! empty( $attributes['boxColumnGap'][ 'value' . $device ] ) ) {
-			$css['column-gap'] = $attributes['boxColumnGap'][ 'value' . $device ]
-			. ( ! empty( $attributes['boxColumnGap'][ 'valueUnit' . $device ] ) ? $attributes['boxColumnGap'][ 'valueUnit' . $device ] : 'px' );
-		}
-
-		if ( ! empty( $attributes['boxRowGap'][ 'value' . $device ] ) ) {
-			$css['row-gap'] = $attributes['boxRowGap'][ 'value' . $device ]
-				. ( ! empty( $attributes['boxRowGap'][ 'valueUnit' . $device ] ) ? $attributes['boxRowGap'][ 'valueUnit' . $device ] : 'px' );
-		}
 
 		return array_merge(
 			Range::get_css([

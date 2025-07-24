@@ -45,38 +45,73 @@ class Block extends BlockBaseAbstract {
 	}
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		global $post;
+
 		$current_post_id    = isset( $post->ID ) ? intval( $post->ID ) : 0;
 		$load_more_text     = isset( $attributes['loadMoreButtonText'] ) ? esc_html( $attributes['loadMoreButtonText'] ) : '';
 		$no_more_items_text = isset( $attributes['noMoreItemsText'] ) ? esc_attr( $attributes['noMoreItemsText'] ) : '';
-		$data_per_page      = isset( $attributes['dataPerPageShow'] ) ? esc_attr( $attributes['dataPerPageShow'] ) : '';
-		$card_numbers       = isset( $attributes['cardNumbers'] ) ? esc_attr( $attributes['cardNumbers'] ) : '';
+
+		if ( ! empty( $attributes['taxonomy'] ) && $attributes['taxonomy'] !== 'inherit' ) {
+			$taxonomy = $attributes['taxonomy'];
+		} else {
+			// Try to get the current queried taxonomy
+			$queried_object = get_queried_object();
+			if ( ! empty( $queried_object ) && ! empty( $queried_object->taxonomy ) ) {
+				$taxonomy = $queried_object->taxonomy;
+			} else {
+				$taxonomy = 'category'; // fallback
+			}
+		}
+		$taxonomy = esc_attr( $taxonomy );
+
+		// Determine archive info
+		$is_archive = is_archive() ? 'true' : 'false';
+		$archive_post_type = is_post_type_archive() ? get_query_var( 'post_type' ) : get_post_type();
+		if ( is_array( $archive_post_type ) ) {
+			$archive_post_type = reset( $archive_post_type );
+		}
+		$archive_post_type = esc_attr( $archive_post_type );
+
+		$term_id = null;
+		if ( is_tax() || is_category() || is_tag() ) {
+			$term = get_queried_object();
+
+			if ( $term instanceof \WP_Term ) {
+				$term_id = $term->term_id;
+			}
+		}
 
 		echo '<span 
-            class="ablocks-loop-load-more__text" 
-            data-post-id="' . $current_post_id . '" 
-            data-no-item-text="' . $no_more_items_text . '" 
-            data-per-page="' . $data_per_page . '" 
-            data-cards-numbers="' . $card_numbers . '" 
-            data-more-button-text="' . $load_more_text . '"
-          >' . $load_more_text . '</span>';
+			class="ablocks-loop-load-more__text" 
+			data-post-id="' . esc_attr( $current_post_id ) . '" 
+			data-term-id="' . esc_attr( $term_id ) . '" 
+			data-no-item-text="' . $no_more_items_text . '" 
+			data-more-button-text="' . $load_more_text . '" 
+			data-taxonomy="' . $taxonomy . '" 
+			data-is-archive="' . $is_archive . '" 
+			data-archive-post-type="' . $archive_post_type . '"
+		>' . $load_more_text . '</span>';
 	}
+
 
 	private function loop_load_More_Wrapper( $attributes, $device = '' ) {
 		$css = [];
 		if ( isset( $attributes['moreButtonAlignment'] ) ) {
 			$css['justify-content'] = $attributes['moreButtonAlignment'];
 		}
-		$css = array_merge($css, Range::get_css([
-			'attributeValue' => $attributes['loadMoreButtonGap'] ?? null,
-			'attribute_object_key' => 'value',
-			'isResponsive' => true,
-			'hasUnit' => false,
-			'unitDefaultValue' => 'px',
-			'defaultValue' => '',
-			'property' => 'margin-top',
-			'device' => $device,
-		]));
-		return $css;
+
+		return array_merge(
+			$css,
+			Range::get_css([
+				'attributeValue' => $attributes['loadMoreButtonGap'] ?? null,
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'hasUnit' => false,
+				'unitDefaultValue' => 'px',
+				'defaultValue' => '',
+				'property' => 'margin-top',
+				'device' => $device,
+			])
+		);
 	}
 	private function loop_load_More_button( $attributes, $device = '' ) {
 		$css = [];

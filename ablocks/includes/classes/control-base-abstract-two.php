@@ -5,6 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use ABlocks\Helper;
+
 abstract class ControlBaseAbstractTwo {
 	abstract public static function get_attribute_default_value( $args );
 	abstract public static function get_attribute( $args );
@@ -17,9 +19,9 @@ abstract class ControlBaseAbstractTwo {
 		$keyPrefix = $args['attributeObjectKey'] . 'Unit';
 
 		// Retrieve units with fallback to default
-		$unitDesktop = $value[ $keyPrefix ] ?? $defaultUnit; // Desktop
-		$unitTablet = $value[ $keyPrefix . 'Tablet' ] ?? $unitDesktop; // Tablet inherits from Desktop
-		$unitMobile = $value[ $keyPrefix . 'Mobile' ] ?? $unitTablet; // Mobile inherits from Tablet
+		$unitDesktop = Helper::get_array_value( $value, $keyPrefix, $defaultUnit ); // Desktop
+		$unitTablet = Helper::get_array_value( $value, $keyPrefix . 'Tablet', $unitDesktop ); // Tablet inherits from Desktop
+		$unitMobile = Helper::get_array_value( $value, $keyPrefix . 'Mobile', $unitTablet ); // Mobile inherits from Tablet
 
 		// Return the appropriate unit based on the device
 		if ( '' === $device ) {

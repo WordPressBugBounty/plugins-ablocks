@@ -75,6 +75,7 @@ return [
 	'player',
 	'advance-lists',
 	'advance-list-item',
+	// loop builder
 	'loop-builder',
 	'loop-template',
 	'loop-load-more',

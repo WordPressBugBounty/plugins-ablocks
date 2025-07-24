@@ -132,6 +132,11 @@ class Helper {
 	public static function has_value( $value ) {
 		return isset( $value ) && ! empty( $value );
 	}
+
+	public static function get_array_value( $array, $key, $default ) {
+		return ( isset( $array[ $key ] ) && ! empty( $array[ $key ] ) ) ? $array[ $key ] : $default;
+	}
+
 	public static function is_gutenberg_editor() {
 		global $pagenow;
 		if ( $pagenow === 'post.php' || $pagenow === 'post-new.php' ) {
@@ -620,6 +625,64 @@ class Helper {
 		}
 
 		return $result;
+	}
+
+	public static function clear_third_party_plugin_cache() {
+
+		// Breeze
+		try {
+			if ( class_exists( 'Breeze_Purge' ) ) {
+				\Breeze_Purge::breeze_cache_flush();
+			}
+		} catch ( \Throwable $e ) {
+			error_log( 'Breeze Cache Clear Failed: ' . $e->getMessage() );
+		}
+
+		// W3 Total Cache
+		try {
+			if ( function_exists( 'w3tc_flush_all' ) ) {
+				\w3tc_flush_all();
+			}
+		} catch ( \Throwable $e ) {
+			error_log( 'W3 Total Cache Clear Failed: ' . $e->getMessage() );
+		}
+
+		// WP Super Cache
+		try {
+			if ( function_exists( 'wp_cache_clear_cache' ) ) {
+				\wp_cache_clear_cache();
+			}
+		} catch ( \Throwable $e ) {
+			error_log( 'WP Super Cache Clear Failed: ' . $e->getMessage() );
+		}
+
+		// LiteSpeed Cache
+		try {
+			if ( class_exists( 'LiteSpeed_Cache_API' ) ) {
+				\LiteSpeed_Cache_API::purge_all();
+			}
+		} catch ( \Throwable $e ) {
+			error_log( 'LiteSpeed Cache Clear Failed: ' . $e->getMessage() );
+		}
+
+		// WP Fastest Cache
+		try {
+			if ( class_exists( 'WpFastestCache' ) ) {
+				$wpfc = new \WpFastestCache();
+				$wpfc->deleteCache();
+			}
+		} catch ( \Throwable $e ) {
+			error_log( 'WP Fastest Cache Clear Failed: ' . $e->getMessage() );
+		}
+
+		// Autoptimize
+		try {
+			if ( function_exists( 'autoptimize_clearall' ) ) {
+				\autoptimize_clearall();
+			}
+		} catch ( \Throwable $e ) {
+			error_log( 'Autoptimize Clear Failed: ' . $e->getMessage() );
+		}
 	}
 
 }

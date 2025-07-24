@@ -128,8 +128,6 @@ $attributes = array_merge(
 		'hasUnit' => true,
 		'unitDefaultValue' => 'px',
 		'defaultValue' => 35,
-		'defaultValueMobile' => 35,
-		'defaultValueTablet' => 35,
 	]),
 	Range::get_attribute([
 		'attributeName' => 'slidesPerView',

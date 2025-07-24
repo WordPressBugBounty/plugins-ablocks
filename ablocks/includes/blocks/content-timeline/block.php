@@ -398,6 +398,7 @@ class Block extends BlockBaseAbstract {
 				'hasUnit' => true,
 				'unitDefaultValue' => 'px',
 				'property' => 'margin-top',
+				'device' => $device,
 			]),
 			$css,
 		);

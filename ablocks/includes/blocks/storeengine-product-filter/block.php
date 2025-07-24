@@ -18,8 +18,6 @@ class Block extends BlockBaseAbstract {
 	public function build_css( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
 
-		// error_log(print_r($attributes));
-
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-products__filter .storeengine__header-ordering select',
 			$this->get_product_filter_select_css( $attributes ),

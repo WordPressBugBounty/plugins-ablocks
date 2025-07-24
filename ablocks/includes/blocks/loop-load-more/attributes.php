@@ -16,6 +16,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'taxonomy' => [
+		'type' => 'string',
+		'default' => 'category'
+	],
 	'moreButtonAlignment' => [
 		'type' => 'string',
 		'default' => 'center'
@@ -55,7 +59,6 @@ $attributes = [
 	]
 ];
 $attributes = array_merge(
-	$attributes,
 	Range::get_attribute([
 		'attributeName' => 'loadMoreButtonGap',
 		'attributeObjectKey' => 'value',
@@ -71,6 +74,7 @@ $attributes = array_merge(
 	Alignment::get_attribute( 'position', true, [ 'value' => 'left' ] ),
 	Alignment::get_attribute( 'alignment', true, [ 'value' => 'left' ] ),
 	BoxShadow::get_attribute( 'moreButtonboxShadow', true ),
+	$attributes
 );
 
 

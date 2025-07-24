@@ -78,6 +78,10 @@ class Block extends BlockBaseAbstract {
 
 		// Use global query if needed.
 		$use_global_query = ( isset( $block->context['query']['inherit'] ) && $block->context['query']['inherit'] );
+		// Disable use of global query if this is an AJAX request.
+		if ( wp_doing_ajax() ) {
+			$use_global_query = false;
+		}
 
 		if ( $use_global_query ) {
 			global $wp_query;

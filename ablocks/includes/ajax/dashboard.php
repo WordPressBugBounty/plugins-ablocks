@@ -38,6 +38,7 @@ class Dashboard extends AbstractAjaxHandler {
 	public function regenerate_assets() {
 		$FileUpload = new FileUpload();
 		$has_delete = $FileUpload->delete_files();
+		Helper::clear_third_party_plugin_cache();
 		wp_send_json_success( $has_delete );
 	}
 

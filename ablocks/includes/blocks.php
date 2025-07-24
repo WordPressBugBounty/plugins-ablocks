@@ -214,5 +214,6 @@ class Blocks {
 	public function clear_generated_block_assets() {
 		$uploader = new \ABlocks\Classes\FileUpload();
 		$uploader->delete_files();
+		Helper::clear_third_party_plugin_cache();
 	}
 }

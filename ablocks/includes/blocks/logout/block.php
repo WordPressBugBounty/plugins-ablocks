@@ -93,22 +93,6 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_avatar_css( $attributes, $device = '' ) {
-		$avatar_css = [];
-
-		if ( ! empty( $attributes['avatarWidth'][ 'value' . $device ] ) ) {
-			$width_value = $attributes['avatarWidth'][ 'value' . $device ];
-			$width_unit = $attributes['avatarWidth'][ 'valueUnit' . $device ] ?? 'px';
-			$avatar_css['width'] = $width_value . $width_unit;
-		}
-
-		if ( ! empty( $attributes['avatarHeight'][ 'value' . $device ] ) ) {
-			$height_value = $attributes['avatarHeight'][ 'value' . $device ];
-			$height_unit = ! empty( $attributes['avatarHeight'][ 'valueUnit' . $device ] )
-				? $attributes['avatarHeight'][ 'valueUnit' . $device ]
-				: 'px';
-
-			$avatar_css['height'] = $height_value . $height_unit;
-		}
 
 		return array_merge(
 			Range::get_css([
@@ -132,7 +116,6 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			]),
 			isset( $attributes['avatarBorder'] ) ? Border::get_css( $attributes['avatarBorder'], '', $device ) : [],
-			$avatar_css,
 		);
 	}
 

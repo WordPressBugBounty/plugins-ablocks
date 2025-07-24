@@ -28,7 +28,6 @@ class Assets {
 		add_action( 'wp_enqueue_scripts', [ $self, 'front_end_google_fonts' ] );
 
 		add_action( 'wp_enqueue_scripts', [ $self, 'enqueue_frontend_assets' ], 99 );
-		add_action( 'wp_enqueue_scripts', [ $self, 'enqueue_frontend_localize_script' ] );
 		// Global CSS
 		add_action( 'wp_enqueue_block_assets', [ $self, 'global_css_variable' ], 999 );
 		add_action( 'wp_enqueue_scripts', [ $self, 'global_css_variable' ], 999 );
@@ -409,12 +408,6 @@ class Assets {
 		}";
 		wp_add_inline_style( 'ablocks-editor-global-styles', $css );
 	}
-
-	public function enqueue_frontend_localize_script() {
-		wp_localize_script( 'ablocks-common-script', 'ABlocksGlobal', $this->get_localize_script_data() );
-		wp_set_script_translations( 'ablocks-common-script', 'ablocks', ABLOCKS_ROOT_DIR_PATH . 'languages' );
-	}
-
 
 	public function is_assets_generated() {
 		$file_name = $this->current_page_slug;

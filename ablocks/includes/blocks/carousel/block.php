@@ -228,11 +228,6 @@ class Block extends BlockBaseAbstract {
 	public function get_navigation_icon_css( $attributes, $device = '' ) {
 		$navigation_icon_css = [];
 
-		if ( isset( $attributes['navigationIconSize'][ 'value' . $device ] ) ) {
-			$unit = isset( $attributes['navigationIconSize'][ 'valueUnit' . $device ] ) ? $attributes['navigationIconSize'][ 'valueUnit' . $device ] : 'px';
-			$navigation_icon_css['font-size'] = $attributes['navigationIconSize'][ 'value' . $device ] . $unit;
-		}
-
 		return array_merge(
 			Range::get_css([
 				'attributeValue' => $attributes['navigationIconSize'],
@@ -242,6 +237,7 @@ class Block extends BlockBaseAbstract {
 				'hasUnit' => true,
 				'unitDefaultValue' => 'px',
 				'property' => 'font-size',
+				'device' => $device,
 			]),
 			$navigation_icon_css,
 		);

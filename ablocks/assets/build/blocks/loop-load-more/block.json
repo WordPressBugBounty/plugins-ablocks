@@ -20,8 +20,7 @@
     "textdomain": "ablocks",
     "editorStyle": [
         "ablocks-animate-style",
-        "ablocks-common-style",
-        "file:./style.css"
+        "ablocks-common-style"
     ],
     "editorScript": [
         "ablocks-common-script"
@@ -36,47 +35,6 @@
         "postType"
     ],
     "attributes": {
-        "block_id": {
-            "type": "string",
-            "default": ""
-        },
-        "moreButtonAlignment": {
-            "type": "string",
-            "default": "center"
-        },
-        "loadMoreButtonText": {
-            "type": "string",
-            "default": "Load More"
-        },
-        "loadMoreButtonTextColor": {
-            "type": "string",
-            "default": "#fff",
-            "copyStyle": true
-        },
-        "loadMoreButtonTextColorH": {
-            "type": "string",
-            "default": "#fff ",
-            "copyStyle": true
-        },
-        "loadMoreButtonBackground": {
-            "type": "string",
-            "default": "#13191B",
-            "copyStyle": true
-        },
-        "loadMoreButtonBackgroundH": {
-            "type": "string",
-            "default": "#13191B",
-            "copyStyle": true
-        },
-        "loadMoreButtonTransition": {
-            "type": "number",
-            "default": "",
-            "copyStyle": true
-        },
-        "noMoreItemsText": {
-            "type": "string",
-            "default": "No More Items !"
-        },
         "loadMoreButtonGap": {
             "type": "object",
             "default": {
@@ -276,6 +234,51 @@
                 "colorH": "",
                 "transitionDuration": "0"
             }
+        },
+        "block_id": {
+            "type": "string",
+            "default": ""
+        },
+        "taxonomy": {
+            "type": "string",
+            "default": "category"
+        },
+        "moreButtonAlignment": {
+            "type": "string",
+            "default": "center"
+        },
+        "loadMoreButtonText": {
+            "type": "string",
+            "default": "Load More"
+        },
+        "loadMoreButtonTextColor": {
+            "type": "string",
+            "default": "#fff",
+            "copyStyle": true
+        },
+        "loadMoreButtonTextColorH": {
+            "type": "string",
+            "default": "#fff ",
+            "copyStyle": true
+        },
+        "loadMoreButtonBackground": {
+            "type": "string",
+            "default": "#13191B",
+            "copyStyle": true
+        },
+        "loadMoreButtonBackgroundH": {
+            "type": "string",
+            "default": "#13191B",
+            "copyStyle": true
+        },
+        "loadMoreButtonTransition": {
+            "type": "number",
+            "default": "",
+            "copyStyle": true
+        },
+        "noMoreItemsText": {
+            "type": "string",
+            "default": "No More Items !"
         },
         "_margin": {
             "type": "object",
