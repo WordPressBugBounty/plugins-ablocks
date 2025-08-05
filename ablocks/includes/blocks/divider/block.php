@@ -271,9 +271,6 @@ class Block extends BlockBaseAbstract {
 			'property' => 'margin-right',
 			'device' => $device,
 		]);
-		return [
-			...$marginLeft,
-			...$marginRight
-		];
+		return array_merge( $marginLeft, $marginRight );
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+use ABlocks\Controls\Range;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -26,10 +27,7 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
-	'inputWidth' => [
-		'type' => 'number',
-		'default' => 100
-	],
+
 	'name' => [
 		'type' => 'string',
 		'default' => '',
@@ -55,6 +53,14 @@ $attributes = [
 
 $attributes = array_merge(
 	$attributes,
+	Range::get_attribute( [
+		'attributeName' => 'inputWidth',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 100,
+		'hasUnit' => true,
+		'unitDefaultValue' => '%',
+	] ),
 );
 
 return array_merge( $attributes, \ABlocks\Classes\BlockGlobal::get_attributes() );

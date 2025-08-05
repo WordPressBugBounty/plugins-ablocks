@@ -213,33 +213,63 @@ class Block extends BlockBaseAbstract {
 
 	public function get_divider_wrapper_css( $attributes, $device = '' ) {
 		$css = [];
+		$width_css = [];
+		$weight_css = [];
 
 		if ( isset( $attributes['divider'] ) && ! empty( $attributes['divider'] ) ) {
-			$weight_value = isset( $attributes['weight'][ 'value' . $device ] ) ? $attributes['weight'][ 'value' . $device ] : 1;
-			$weight_unit = isset( $attributes['weight'][ 'valueUnit' . $device ] ) ? $attributes['weight'][ 'valueUnit' . $device ] : 'px';
-
 			$border_color = isset( $attributes['borderColor'] ) ? $attributes['borderColor'] : 'black';
 			$divider_pattern_url = isset( $attributes['dividerPatternUrl'] ) ? $attributes['dividerPatternUrl'] : '';
 			$stack = isset( $attributes['stack'] ) ? $attributes['stack'] : '';
 
 			if ( ! empty( $divider_pattern_url ) ) {
 				if ( $stack === 'vertical' ) {
-					$css['border-bottom'] = "{$weight_value}{$weight_unit} {$divider_pattern_url} {$border_color}";
+					$css['border-bottom-color'] = $border_color;
+					$css['border-bottom-style'] = $divider_pattern_url;
+					$weight_css = Range::get_css([
+						'attributeValue' => $attributes['weight'],
+						'attribute_object_key' => 'value',
+						'isResponsive' => true,
+						'defaultValue' => 5,
+						'hasUnit' => true,
+						'unitDefaultValue' => 'px',
+						'property' => 'border-bottom-width',
+						'device' => $device,
+					]);
 				} elseif ( $stack === 'horizontal' ) {
-					$css['border-right'] = "{$weight_value}{$weight_unit} {$divider_pattern_url} {$border_color}";
-				}
-			}
+					$css['border-right-color'] = $border_color;
+					$css['border-right-style'] = $divider_pattern_url;
+					$weight_css = Range::get_css([
+						'attributeValue' => $attributes['weight'],
+						'attribute_object_key' => 'value',
+						'isResponsive' => true,
+						'defaultValue' => 5,
+						'hasUnit' => true,
+						'unitDefaultValue' => 'px',
+						'property' => 'border-right-width',
+						'device' => $device,
+					]);
+				}//end if
+			}//end if
 
-			if ( $stack === 'horizontal' ) {
-				$width_value = isset( $attributes['width'][ 'value' . $device ] ) ? $attributes['width'][ 'value' . $device ] : '0';
-			} else {
-				$width_value = isset( $attributes['width'][ 'value' . $device ] ) ? $attributes['width'][ 'value' . $device ] : '100';
-				$width_unit = isset( $attributes['width'][ 'valueUnit' . $device ] ) ? $attributes['width'][ 'valueUnit' . $device ] : '%';
-				$css['width'] = "{$width_value}{$width_unit}";
+			if ( $stack === 'vertical' && ! empty( $attributes['width'][ 'value' . $device ] ) ) {
+				$width_css = Range::get_css([
+					'attributeValue' => $attributes['width'],
+					'attribute_object_key' => 'value',
+					'isResponsive' => true,
+					'defaultValue' => 100,
+					'hasUnit' => true,
+					'unitDefaultValue' => 'px',
+					'property' => 'width',
+					'device' => $device,
+				]);
 			}
 		}//end if
 
-		return $css;
+		return array_merge(
+			$css,
+			$weight_css,
+			$width_css
+		);
 	}
 
 
@@ -292,10 +322,8 @@ class Block extends BlockBaseAbstract {
 				$css['fill'] = $attributes['iconColor'];
 			}
 
-			if ( isset( $attributes['iconBackground'] ) && $attributes['iconBackground'] ) {
-				if ( ! empty( $attributes['iconBackgroundColor'] ) ) {
-					$css['background'] = $attributes['iconBackgroundColor'];
-				}
+			if ( ! empty( $attributes['iconBackgroundColor'] ) ) {
+				$css['background'] = $attributes['iconBackgroundColor'];
 			}
 		}//end if
 

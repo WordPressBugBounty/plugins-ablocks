@@ -549,7 +549,7 @@ $attributes = array_merge(
 		'attributeName' => 'inputIconPosition',
 		'attributeObjectKey' => 'value',
 		'isResponsive' => false,
-		'defaultValue' => 60,
+		'defaultValue' => 75,
 	] ),
 	Range::get_attribute( [
 		'attributeName' => 'navigatorSpacing',

@@ -45,16 +45,31 @@ class Block extends BlockBaseAbstract {
 	}
 	private function loop_template_wrapper( $attributes, $device = '' ) {
 		$css = [];
+		// Temporary approch instead of attribute migration. Might remove it in future
+		if ( ! empty( $attributes['gridColumns'] ) && (int) $attributes['gridColumns'] !== 2 ) {
+			$attributes['templateGridColumns'][ 'value' . $device ] = $attributes['gridColumns'];
+			$attributes['gridColumns'] = '';
+		}
+		// Temporary approch instead of attribute migration. Might remove it in future
+
 		if ( ! empty( $attributes['gridStyle'] ) && $attributes['gridStyle'] === 'grid' ) {
 			$css['display'] = 'grid';
-			if ( $device === 'Tablet' ) {
-				$css['grid-template-columns'] = 'repeat(2, 1fr)';
-			} elseif ( $device === 'Mobile' ) {
-				$css['grid-template-columns'] = 'repeat(1, 1fr)';
-			} elseif ( ! empty( $attributes['gridColumns'] ) ) {
-				$css['grid-template-columns'] = 'repeat(' . $attributes['gridColumns'] . ', 1fr)';
-			}
-		}
+			$columnCSS = Range::get_css([
+				'attributeValue' => $attributes['templateGridColumns'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'hasUnit' => false,
+				'defaultValue' => 2,
+				'defaultValueTablet' => 2,
+				'defaultValueMobile' => 1,
+				'unitDefaultValue' => '',
+				'property' => 'grid-template-columns',
+				'device' => $device,
+			]);
+			if ( ! empty( $columnCSS ) ) {
+				$css['grid-template-columns'] = 'repeat(' . $columnCSS['grid-template-columns'] . ', 1fr)';
+			};
+		};
 
 		return array_merge(
 			$css,

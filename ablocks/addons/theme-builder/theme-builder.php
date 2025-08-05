@@ -36,6 +36,9 @@ final class ThemeBuilder implements AddonInterface {
 		Assets::init();
 		( new Ajax\Posts() )->dispatch_actions();
 		Shortcode::init();
+		if ( ! is_admin() ) {
+			Frontend::init();
+		}
 	}
 
 	public static function init() {

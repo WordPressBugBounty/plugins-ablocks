@@ -73,41 +73,34 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $attributes['textColor'] ) ) {
 			$desktop_heading_text_styles['color'] = $attributes['textColor'];
 		}
-
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-heading-text',
 			$desktop_heading_text_styles,
 			$this->get_heading_text_css( $attributes, 'Tablet' ),
 			$this->get_heading_text_css( $attributes, 'Mobile' )
 		);
+		if ( ! empty( $attributes['isAnimated'] ) ) {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-animated-text path',
+				$this->get_svg_path_css( $attributes ),
+				$this->get_svg_path_css( $attributes, 'Tablet' ),
+				$this->get_svg_path_css( $attributes, 'Mobile' )
+			);
 
-		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-heading-text',
-			$desktop_heading_text_styles,
-			$this->get_heading_text_css( $attributes, 'Tablet' ),
-			$this->get_heading_text_css( $attributes, 'Mobile' )
-		);
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-animated-text',
+				$this->get_heading_general_css( $attributes ),
+				$this->get_heading_general_css( $attributes, 'Tablet' ),
+				$this->get_heading_general_css( $attributes, 'Mobile' )
+			);
 
-		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-animated-text path',
-			$this->get_svg_path_css( $attributes ),
-			$this->get_svg_path_css( $attributes, 'Tablet' ),
-			$this->get_svg_path_css( $attributes, 'Mobile' )
-		);
-
-		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-animated-text',
-			$this->get_heading_general_css( $attributes ),
-			$this->get_heading_general_css( $attributes, 'Tablet' ),
-			$this->get_heading_general_css( $attributes, 'Mobile' )
-		);
-
-		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-animated-text-wrapper',
-			$this->get_heading_animated_css( $attributes ),
-			$this->get_heading_animated_css( $attributes, 'Tablet' ),
-			$this->get_heading_animated_css( $attributes, 'Mobile' )
-		);
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-animated-text-wrapper',
+				$this->get_heading_animated_css( $attributes ),
+				$this->get_heading_animated_css( $attributes, 'Tablet' ),
+				$this->get_heading_animated_css( $attributes, 'Mobile' )
+			);
+		}//end if
 
 		return $css_generator->generate_css();
 	}

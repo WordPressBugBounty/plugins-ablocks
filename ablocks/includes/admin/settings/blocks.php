@@ -72,6 +72,7 @@ class Blocks {
 			'text-path' => true,
 			'advance-lists' => true,
 			'stacked-cards' => true,
+			'group-image-effect' => true,
 			'filterable-card' => true,
 			// Academy LMS Blocks
 			'academy-courses' => true,
@@ -93,6 +94,10 @@ class Blocks {
 			'storeengine-continue-button' => true,
 			'storeengine-checkout-button' => true,
 			'storeengine-cart-sub-table' => true,
+			'storeengine-order-info' => true,
+			'storeengine-billing-info' => true,
+			'storeengine-shipping-info' => true,
+			'storeengine-order-details' => true,
 		]);
 	}
 

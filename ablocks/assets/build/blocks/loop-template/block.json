@@ -52,6 +52,14 @@
             "type": "string",
             "default": ""
         },
+        "templateGridColumns": {
+            "type": "object",
+            "default": {
+                "value": 2,
+                "valueTablet": 2,
+                "valueMobile": 1
+            }
+        },
         "itemGap": {
             "type": "object",
             "default": {

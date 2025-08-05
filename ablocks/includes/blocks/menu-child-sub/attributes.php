@@ -6,6 +6,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\BoxShadow;
+use ABlocks\Components\ButtonGroup;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -133,6 +134,9 @@ $attributes = [
 
 $attributes = array_merge(
 	$attributes,
+	ButtonGroup::get_attribute( 'menuItemJustification', true, [
+		'value' => 'space-between',
+	] ),
 	BoxShadow::get_attribute( 'boxShadow', true ),
 	Dimensions::get_attribute( 'padding', false ),
 	Dimensions::get_attribute( 'menuItemPadding', false ),

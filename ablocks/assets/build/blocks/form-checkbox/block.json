@@ -16,9 +16,7 @@
         "anchor": true
     },
     "textdomain": "ablocks",
-    "editorStyle": [
-        "file:./style.css"
-    ],
+    "editorStyle": [],
     "editorScript": [
         "ablocks-common-script"
     ],
@@ -30,10 +28,6 @@
         "label": {
             "type": "string",
             "default": ""
-        },
-        "inputWidth": {
-            "type": "number",
-            "default": 100
         },
         "errorMsg": {
             "type": "string",
@@ -62,6 +56,17 @@
         "placeholder": {
             "type": "string",
             "default": "Enter your message"
+        },
+        "inputWidth": {
+            "type": "object",
+            "default": {
+                "value": 100,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "%",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
         },
         "_margin": {
             "type": "object",

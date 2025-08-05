@@ -1,6 +1,8 @@
 <?php
 namespace ABlocks\Blocks\FormInput;
 
+use ABlocks\Controls\Range;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -81,16 +83,24 @@ class Block extends BlockBaseAbstract {
 
 	public function get_input_block_main_wrapper( $attributes, $device = '' ) {
 		$css = [];
-		$css['display'] = 'inline-block';
 		$css['box-sizing'] = 'border-box';
-		$css['padding'] = '0px 2px';
 
-		if ( isset( $attributes['inputWidth'] ) && is_numeric( $attributes['inputWidth'] ) ) {
-			$css['width'] = ( $attributes['inputWidth'] - 1 ) . '%';
-		} else {
-			// Handle case where inputWidth is not set or not a number
-			$css['width'] = '100%'; // or some default value
+		$valueKey = $device === 'Tablet' ? 'valueTablet' : ( $device === 'Mobile' ? 'valueMobile' : 'value' );
+		$unitKey = $device === 'Tablet' ? 'valueUnitTablet' : ( $device === 'Mobile' ? 'valueUnitMobile' : 'valueUnit' );
+
+		$widthValue = isset( $attributes['inputWidth'][ $valueKey ] ) && $attributes['inputWidth'][ $valueKey ] !== ''
+		? $attributes['inputWidth'][ $valueKey ]
+		: ( isset( $attributes['inputWidth']['value'] ) ? $attributes['inputWidth']['value'] : 100 );
+
+		$widthUnit = isset( $attributes['inputWidth'][ $unitKey ] ) && $attributes['inputWidth'][ $unitKey ] !== ''
+		? $attributes['inputWidth'][ $unitKey ]
+		: '%';
+
+		if ( is_numeric( $widthValue ) ) {
+			$widthValue = max( 0, floatval( $widthValue ) - 1 );
 		}
+
+		$css['width'] = $widthValue . $widthUnit;
 
 		return $css;
 	}

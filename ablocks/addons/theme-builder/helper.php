@@ -471,4 +471,18 @@ class Helper {
 
 		return $show_popup;
 	}
+
+	public static function get_info_popup_builder_content() {
+		global $wpdb;
+		return $wpdb->get_results("
+			SELECT p.ID, p.post_content
+			FROM {$wpdb->prefix}posts AS p
+			INNER JOIN {$wpdb->prefix}postmeta AS pm
+				ON p.ID = pm.post_id
+			WHERE p.post_type = 'ablocks_tb'
+			AND p.post_status = 'publish'
+			AND pm.meta_key = 'ablocks_tb_template_type'
+			AND pm.meta_value = 'info-popup-builder'
+		");
+	}
 }

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 2.0.2\n"
+"Project-Id-Version: aBlocks 2.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-24T09:25:29+00:00\n"
+"POT-Creation-Date: 2025-08-05T11:40:09+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: ablocks\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #. Author of the plugin
 #: ablocks.php
-#: includes/blocks.php:158
+#: includes/blocks.php:162
 msgid "Academy LMS"
 msgstr ""
 
@@ -362,16 +362,16 @@ msgstr ""
 msgid "Error. [2]"
 msgstr ""
 
-#: includes/assets.php:266
+#: includes/assets.php:273
 msgctxt "Google font: on or off"
 msgid "on"
 msgstr ""
 
-#: includes/blocks.php:154
+#: includes/blocks.php:158
 msgid "ABlocks"
 msgstr ""
 
-#: includes/blocks.php:162
+#: includes/blocks.php:166
 #: assets/build/dashboard.js:1
 msgid "StoreEngine"
 msgstr ""
@@ -1576,6 +1576,7 @@ msgstr ""
 #: assets/build/blocks.js:7
 #: assets/build/blocks.js:16
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Style"
 msgstr ""
 
@@ -1731,6 +1732,7 @@ msgstr ""
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:16
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Height"
 msgstr ""
 
@@ -5407,6 +5409,10 @@ msgid "Username"
 msgstr ""
 
 #: assets/build/blocks.js:17
+msgid "URL"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "first_name"
 msgstr ""
 
@@ -5431,6 +5437,10 @@ msgid "Field type"
 msgstr ""
 
 #: assets/build/blocks.js:17
+msgid "Input Width"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "Email Type"
 msgstr ""
 
@@ -5448,6 +5458,21 @@ msgstr ""
 
 #: assets/build/blocks.js:17
 msgid "Icon Space"
+msgstr ""
+
+#: assets/build/blocks.js:17
+#: assets/build/blocks/form-input/view.js:1
+msgid "This field is required"
+msgstr ""
+
+#: assets/build/blocks.js:17
+#: assets/build/blocks/form-input/view.js:1
+msgid "Please enter a valid URL"
+msgstr ""
+
+#: assets/build/blocks.js:17
+#: assets/build/blocks/form-input/view.js:1
+msgid "Please enter a valid Email"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -5483,6 +5508,10 @@ msgid "Text Area"
 msgstr ""
 
 #: assets/build/blocks.js:17
+msgid "Text Area Width"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "Custom Name"
 msgstr ""
 
@@ -5495,11 +5524,24 @@ msgid "Checkbox"
 msgstr ""
 
 #: assets/build/blocks.js:17
+msgid "Checkbox Width"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "Label Name"
 msgstr ""
 
 #: assets/build/blocks.js:17
 msgid "Default Checked"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Select"
+msgstr ""
+
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
+msgid "Select Width"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -5523,6 +5565,10 @@ msgid "Multi Select Block Settings"
 msgstr ""
 
 #: assets/build/blocks.js:17
+msgid "Multi Select Width"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "Option Type"
 msgstr ""
 
@@ -5540,6 +5586,10 @@ msgstr ""
 
 #: assets/build/blocks.js:17
 msgid "Password"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Password Width"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -5810,7 +5860,7 @@ msgid "Grid"
 msgstr ""
 
 #: assets/build/blocks.js:17
-msgid "Templete Styles"
+msgid "Template Styles"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -6085,10 +6135,6 @@ msgid "Text Hover"
 msgstr ""
 
 #: assets/build/blocks.js:26
-msgid "Select Width"
-msgstr ""
-
-#: assets/build/blocks.js:26
 msgid "Select Style"
 msgstr ""
 
@@ -6138,6 +6184,22 @@ msgstr ""
 
 #: assets/build/blocks.js:26
 msgid "Row Typography"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Order Info"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Billing Info Style"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Shipping Info Style"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Layout Style"
 msgstr ""
 
 #: assets/build/blocks.js:26
@@ -6324,6 +6386,10 @@ msgid "Stripe Button"
 msgstr ""
 
 #: assets/build/dashboard.js:1
+msgid "Group Image Effect"
+msgstr ""
+
+#: assets/build/dashboard.js:1
 msgid "Stacked Cards"
 msgstr ""
 
@@ -6396,7 +6462,11 @@ msgid "StoreEngine Checkout From"
 msgstr ""
 
 #: assets/build/dashboard.js:1
-msgid "StoreEngine Continue Button"
+msgid "Storeengine Continue Button"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "StoreEngine Order Derails"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -6405,6 +6475,18 @@ msgstr ""
 
 #: assets/build/dashboard.js:1
 msgid "StoreEngine Cart Sub Table"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "StoreEngine Order Info"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "StoreEngine Billing Info"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "StoreEngine Shipping Info"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -6980,11 +7062,11 @@ msgid "Publish"
 msgstr ""
 
 #: assets/build/dashboard.js:25
-msgid "Short Code"
+msgid "Display Rules"
 msgstr ""
 
 #: assets/build/dashboard.js:25
-msgid "Display Rules"
+msgid "Enter Website"
 msgstr ""
 
 #: assets/build/dashboard.js:25
@@ -7134,6 +7216,7 @@ msgstr ""
 #: assets/build/blocks/spacer/deprecated/block.json
 #: assets/build/blocks/star-ratings/block.json
 #: assets/build/blocks/star-ratings/deprecated/block.json
+#: assets/build/blocks/storeengine-billing-info/block.json
 #: assets/build/blocks/storeengine-cart-list/block.json
 #: assets/build/blocks/storeengine-cart-sub-table/block.json
 #: assets/build/blocks/storeengine-checkout-button/block.json
@@ -7141,8 +7224,11 @@ msgstr ""
 #: assets/build/blocks/storeengine-continue-button/block.json
 #: assets/build/blocks/storeengine-coupon-form/block.json
 #: assets/build/blocks/storeengine-login-form/block.json
+#: assets/build/blocks/storeengine-order-details/block.json
+#: assets/build/blocks/storeengine-order-info/block.json
 #: assets/build/blocks/storeengine-product-filter/block.json
 #: assets/build/blocks/storeengine-products/block.json
+#: assets/build/blocks/storeengine-shipping-info/block.json
 #: assets/build/blocks/stripe-button/block.json
 #: assets/build/blocks/stripe-button/deprecated/block.json
 #: assets/build/blocks/svg-draw/block.json
@@ -8498,6 +8584,161 @@ msgctxt "block keyword"
 msgid "feedback"
 msgstr ""
 
+#: assets/build/blocks/storeengine-billing-info/block.json
+msgctxt "block title"
+msgid "StoreEngine Billing Info"
+msgstr ""
+
+#: assets/build/blocks/storeengine-billing-info/block.json
+msgctxt "block description"
+msgid "Show the billing address associated with the customer’s order."
+msgstr ""
+
+#: assets/build/blocks/storeengine-billing-info/block.json
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-order-details/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+#: assets/build/blocks/storeengine-shipping-info/block.json
+msgctxt "block keyword"
+msgid "cart"
+msgstr ""
+
+#: assets/build/blocks/storeengine-billing-info/block.json
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-order-details/block.json
+#: assets/build/blocks/storeengine-order-info/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+#: assets/build/blocks/storeengine-shipping-info/block.json
+msgctxt "block keyword"
+msgid "cart list"
+msgstr ""
+
+#: assets/build/blocks/storeengine-billing-info/block.json
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-order-details/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+#: assets/build/blocks/storeengine-shipping-info/block.json
+msgctxt "block keyword"
+msgid "shopping cart"
+msgstr ""
+
+#: assets/build/blocks/storeengine-billing-info/block.json
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-order-details/block.json
+#: assets/build/blocks/storeengine-order-info/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+#: assets/build/blocks/storeengine-products/block.json
+#: assets/build/blocks/storeengine-shipping-info/block.json
+msgctxt "block keyword"
+msgid "storeengine"
+msgstr ""
+
+#: assets/build/blocks/storeengine-billing-info/block.json
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-order-details/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+#: assets/build/blocks/storeengine-shipping-info/block.json
+msgctxt "block keyword"
+msgid "checkout"
+msgstr ""
+
+#: assets/build/blocks/storeengine-billing-info/block.json
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-order-details/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+#: assets/build/blocks/storeengine-shipping-info/block.json
+msgctxt "block keyword"
+msgid "cart items"
+msgstr ""
+
+#: assets/build/blocks/storeengine-billing-info/block.json
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-order-details/block.json
+#: assets/build/blocks/storeengine-shipping-info/block.json
+msgctxt "block keyword"
+msgid "woocommerce"
+msgstr ""
+
+#: assets/build/blocks/storeengine-billing-info/block.json
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-order-details/block.json
+#: assets/build/blocks/storeengine-order-info/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+#: assets/build/blocks/storeengine-shipping-info/block.json
+msgctxt "block keyword"
+msgid "ecommerce"
+msgstr ""
+
+#: assets/build/blocks/storeengine-billing-info/block.json
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-order-details/block.json
+#: assets/build/blocks/storeengine-order-info/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+#: assets/build/blocks/storeengine-shipping-info/block.json
+msgctxt "block keyword"
+msgid "store"
+msgstr ""
+
+#: assets/build/blocks/storeengine-billing-info/block.json
+#: assets/build/blocks/storeengine-cart-list/block.json
+#: assets/build/blocks/storeengine-cart-sub-table/block.json
+#: assets/build/blocks/storeengine-checkout-button/block.json
+#: assets/build/blocks/storeengine-checkout-form/block.json
+#: assets/build/blocks/storeengine-continue-button/block.json
+#: assets/build/blocks/storeengine-coupon-form/block.json
+#: assets/build/blocks/storeengine-order-details/block.json
+#: assets/build/blocks/storeengine-order-info/block.json
+#: assets/build/blocks/storeengine-product-filter/block.json
+#: assets/build/blocks/storeengine-shipping-info/block.json
+msgctxt "block keyword"
+msgid "shop"
+msgstr ""
+
 #: assets/build/blocks/storeengine-cart-list/block.json
 msgctxt "block title"
 msgid "StoreEngine Cart List"
@@ -8506,117 +8747,6 @@ msgstr ""
 #: assets/build/blocks/storeengine-cart-list/block.json
 msgctxt "block description"
 msgid "Displays the list of products currently added to the shopping cart, including quantity, price, and remove buttons."
-msgstr ""
-
-#: assets/build/blocks/storeengine-cart-list/block.json
-#: assets/build/blocks/storeengine-cart-sub-table/block.json
-#: assets/build/blocks/storeengine-checkout-button/block.json
-#: assets/build/blocks/storeengine-checkout-form/block.json
-#: assets/build/blocks/storeengine-continue-button/block.json
-#: assets/build/blocks/storeengine-coupon-form/block.json
-#: assets/build/blocks/storeengine-product-filter/block.json
-msgctxt "block keyword"
-msgid "cart"
-msgstr ""
-
-#: assets/build/blocks/storeengine-cart-list/block.json
-#: assets/build/blocks/storeengine-cart-sub-table/block.json
-#: assets/build/blocks/storeengine-checkout-button/block.json
-#: assets/build/blocks/storeengine-checkout-form/block.json
-#: assets/build/blocks/storeengine-continue-button/block.json
-#: assets/build/blocks/storeengine-coupon-form/block.json
-#: assets/build/blocks/storeengine-product-filter/block.json
-msgctxt "block keyword"
-msgid "cart list"
-msgstr ""
-
-#: assets/build/blocks/storeengine-cart-list/block.json
-#: assets/build/blocks/storeengine-cart-sub-table/block.json
-#: assets/build/blocks/storeengine-checkout-button/block.json
-#: assets/build/blocks/storeengine-checkout-form/block.json
-#: assets/build/blocks/storeengine-continue-button/block.json
-#: assets/build/blocks/storeengine-coupon-form/block.json
-#: assets/build/blocks/storeengine-product-filter/block.json
-msgctxt "block keyword"
-msgid "shopping cart"
-msgstr ""
-
-#: assets/build/blocks/storeengine-cart-list/block.json
-#: assets/build/blocks/storeengine-cart-sub-table/block.json
-#: assets/build/blocks/storeengine-checkout-button/block.json
-#: assets/build/blocks/storeengine-checkout-form/block.json
-#: assets/build/blocks/storeengine-continue-button/block.json
-#: assets/build/blocks/storeengine-coupon-form/block.json
-#: assets/build/blocks/storeengine-product-filter/block.json
-#: assets/build/blocks/storeengine-products/block.json
-msgctxt "block keyword"
-msgid "storeengine"
-msgstr ""
-
-#: assets/build/blocks/storeengine-cart-list/block.json
-#: assets/build/blocks/storeengine-cart-sub-table/block.json
-#: assets/build/blocks/storeengine-checkout-button/block.json
-#: assets/build/blocks/storeengine-checkout-form/block.json
-#: assets/build/blocks/storeengine-continue-button/block.json
-#: assets/build/blocks/storeengine-coupon-form/block.json
-#: assets/build/blocks/storeengine-product-filter/block.json
-msgctxt "block keyword"
-msgid "checkout"
-msgstr ""
-
-#: assets/build/blocks/storeengine-cart-list/block.json
-#: assets/build/blocks/storeengine-cart-sub-table/block.json
-#: assets/build/blocks/storeengine-checkout-button/block.json
-#: assets/build/blocks/storeengine-checkout-form/block.json
-#: assets/build/blocks/storeengine-continue-button/block.json
-#: assets/build/blocks/storeengine-coupon-form/block.json
-#: assets/build/blocks/storeengine-product-filter/block.json
-msgctxt "block keyword"
-msgid "cart items"
-msgstr ""
-
-#: assets/build/blocks/storeengine-cart-list/block.json
-#: assets/build/blocks/storeengine-cart-sub-table/block.json
-#: assets/build/blocks/storeengine-checkout-button/block.json
-#: assets/build/blocks/storeengine-checkout-form/block.json
-#: assets/build/blocks/storeengine-continue-button/block.json
-#: assets/build/blocks/storeengine-coupon-form/block.json
-#: assets/build/blocks/storeengine-product-filter/block.json
-msgctxt "block keyword"
-msgid "woocommerce"
-msgstr ""
-
-#: assets/build/blocks/storeengine-cart-list/block.json
-#: assets/build/blocks/storeengine-cart-sub-table/block.json
-#: assets/build/blocks/storeengine-checkout-button/block.json
-#: assets/build/blocks/storeengine-checkout-form/block.json
-#: assets/build/blocks/storeengine-continue-button/block.json
-#: assets/build/blocks/storeengine-coupon-form/block.json
-#: assets/build/blocks/storeengine-product-filter/block.json
-msgctxt "block keyword"
-msgid "ecommerce"
-msgstr ""
-
-#: assets/build/blocks/storeengine-cart-list/block.json
-#: assets/build/blocks/storeengine-cart-sub-table/block.json
-#: assets/build/blocks/storeengine-checkout-button/block.json
-#: assets/build/blocks/storeengine-checkout-form/block.json
-#: assets/build/blocks/storeengine-continue-button/block.json
-#: assets/build/blocks/storeengine-coupon-form/block.json
-#: assets/build/blocks/storeengine-product-filter/block.json
-msgctxt "block keyword"
-msgid "store"
-msgstr ""
-
-#: assets/build/blocks/storeengine-cart-list/block.json
-#: assets/build/blocks/storeengine-cart-sub-table/block.json
-#: assets/build/blocks/storeengine-checkout-button/block.json
-#: assets/build/blocks/storeengine-checkout-form/block.json
-#: assets/build/blocks/storeengine-continue-button/block.json
-#: assets/build/blocks/storeengine-coupon-form/block.json
-#: assets/build/blocks/storeengine-product-filter/block.json
-msgctxt "block keyword"
-msgid "shop"
 msgstr ""
 
 #: assets/build/blocks/storeengine-cart-sub-table/block.json
@@ -8679,6 +8809,32 @@ msgctxt "block description"
 msgid "Shows a user login form for customers to log into their accounts before checking out or viewing orders."
 msgstr ""
 
+#: assets/build/blocks/storeengine-order-details/block.json
+msgctxt "block title"
+msgid "StoreEngine Order Details"
+msgstr ""
+
+#: assets/build/blocks/storeengine-order-details/block.json
+#: assets/build/blocks/storeengine-order-info/block.json
+msgctxt "block description"
+msgid "Provide essential order information like order ID, status, and date."
+msgstr ""
+
+#: assets/build/blocks/storeengine-order-info/block.json
+msgctxt "block title"
+msgid "StoreEngine Order Info"
+msgstr ""
+
+#: assets/build/blocks/storeengine-order-info/block.json
+msgctxt "block keyword"
+msgid "order"
+msgstr ""
+
+#: assets/build/blocks/storeengine-order-info/block.json
+msgctxt "block keyword"
+msgid "order info"
+msgstr ""
+
 #: assets/build/blocks/storeengine-product-filter/block.json
 msgctxt "block title"
 msgid "StoreEngine Products Filter"
@@ -8712,6 +8868,16 @@ msgstr ""
 #: assets/build/blocks/storeengine-products/block.json
 msgctxt "block keyword"
 msgid "products grid"
+msgstr ""
+
+#: assets/build/blocks/storeengine-shipping-info/block.json
+msgctxt "block title"
+msgid "StoreEngine Shipping Info"
+msgstr ""
+
+#: assets/build/blocks/storeengine-shipping-info/block.json
+msgctxt "block description"
+msgid "Show the shipping address provided during the checkout process."
 msgstr ""
 
 #: assets/build/blocks/stripe-button/block.json

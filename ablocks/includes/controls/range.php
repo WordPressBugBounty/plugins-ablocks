@@ -90,11 +90,12 @@ class Range {
 		]);
 
 		$value = $args['attributeValue'];
-		$css = [];
+		$css   = [];
 
+		// ✅ Basic non-responsive + non-unit handling
 		if ( ! $args['isResponsive'] && ! $args['hasUnit'] ) {
 			if ( $args['property'] === 'value' ) {
-				$css['value'] = $value;
+				$css['value']     = $value;
 				$css['valueUnit'] = $args['unitDefaultValue'];
 			} else {
 				$css[ $args['property'] ] = $value . $args['unitDefaultValue'];
@@ -102,9 +103,57 @@ class Range {
 			return $css;
 		}
 
-		// Check and generate CSS for the specified device
-		$deviceValueKey = $args['attributeObjectKey'] . $args['device'];
-		if ( ! empty( $value[ $deviceValueKey ] ) ) {
+		// ✅ Get values per device
+		$desktop_key = $args['attributeObjectKey'];
+		$tablet_key  = $args['attributeObjectKey'] . 'Tablet';
+		$mobile_key  = $args['attributeObjectKey'] . 'Mobile';
+
+		$desktop_val = ! empty( $value[ $desktop_key ] ) ? $value[ $desktop_key ] : '';
+		$tablet_val  = ! empty( $value[ $tablet_key ] ) ? $value[ $tablet_key ] : '';
+		$mobile_val  = ! empty( $value[ $mobile_key ] ) ? $value[ $mobile_key ] : '';
+
+		$device_value = '';
+
+		switch ( $args['device'] ) {
+			case 'Mobile':
+				if ( $mobile_val !== '' ) {
+					$device_value = $mobile_val;
+				} elseif ( $args['defaultValueMobile'] !== '' ) {
+					$device_value = $args['defaultValueMobile'];
+				} elseif ( $tablet_val !== '' ) {
+					$device_value = $tablet_val;
+				} elseif ( $args['defaultValueTablet'] !== '' ) {
+					$device_value = $args['defaultValueTablet'];
+				} elseif ( $desktop_val !== '' ) {
+					$device_value = $desktop_val;
+				} else {
+					$device_value = $args['defaultValue'];
+				}
+				break;
+
+			case 'Tablet':
+				if ( $tablet_val !== '' ) {
+					$device_value = $tablet_val;
+				} elseif ( $args['defaultValueTablet'] !== '' ) {
+					$device_value = $args['defaultValueTablet'];
+				} elseif ( $desktop_val !== '' ) {
+					$device_value = $desktop_val;
+				} else {
+					$device_value = $args['defaultValue'];
+				}
+				break;
+
+			default: // Desktop
+				if ( $desktop_val !== '' ) {
+					$device_value = $desktop_val;
+				} else {
+					$device_value = $args['defaultValue'];
+				}
+				break;
+		}//end switch
+
+		// ✅ If value exists, apply unit and return
+		if ( $device_value !== '' ) {
 			$unit = self::get_unit( [
 				'attributeValue'      => $value,
 				'attributeObjectKey'  => $args['attributeObjectKey'],
@@ -113,15 +162,16 @@ class Range {
 			] );
 
 			if ( $args['property'] === 'value' ) {
-				$css['value'] = $value[ $deviceValueKey ];
+				$css['value']     = $device_value;
 				$css['valueUnit'] = $unit;
 			} else {
-				$css[ $args['property'] ] = $value[ $deviceValueKey ] . $unit;
+				$css[ $args['property'] ] = $device_value . $unit;
 			}
 		}
 
 		return $css;
 	}
+
 
 	public static function get_unit( $args ) {
 		$defaultUnit = $args['unitDefaultValue'];

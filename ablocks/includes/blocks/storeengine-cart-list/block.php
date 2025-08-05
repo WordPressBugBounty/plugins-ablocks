@@ -1,4 +1,5 @@
 <?php
+
 namespace ABlocks\Blocks\StoreengineCartList;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -95,6 +96,7 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $attributes['tableBackground'] ) ) {
 			$css['background'] = $attributes['tableBackground'];
 		}
+
 		return $css;
 	}
 	public function get_cart_list_table_hover_css( $attributes, $device = '' ) {
@@ -102,15 +104,16 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $attributes['tableBackgroundH'] ) ) {
 			$css['background'] = $attributes['tableBackgroundH'];
 		}
+
 		return array_merge(
-			Range::get_css([
-				'attributeValue' => isset( $attributes['tableTransition'] ) ? $attributes['tableTransition'] : '',
+			Range::get_css( [
+				'attributeValue'       => isset( $attributes['tableTransition'] ) ? $attributes['tableTransition'] : '',
 				'attribute_object_key' => 'value',
-				'defaultValue' => 0,
-				'unitDefaultValue' => 's',
-				'property' => 'transition-duration',
-				'device' => $device,
-			]),
+				'defaultValue'         => 0,
+				'unitDefaultValue'     => 's',
+				'property'             => 'transition-duration',
+				'device'               => $device,
+			] ),
 			$css,
 		);
 	}
@@ -120,6 +123,7 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $attributes['tableHeaderBackground'] ) ) {
 			$css['background'] = $attributes['tableHeaderBackground'];
 		}
+
 		return $css;
 	}
 
@@ -128,15 +132,16 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $attributes['tableHeaderBackgroundH'] ) ) {
 			$css['background'] = $attributes['tableHeaderBackgroundH'];
 		}
+
 		return array_merge(
-			Range::get_css([
-				'attributeValue' => isset( $attributes['tableTransition'] ) ? $attributes['tableTransition'] : '',
+			Range::get_css( [
+				'attributeValue'       => isset( $attributes['tableTransition'] ) ? $attributes['tableTransition'] : '',
 				'attribute_object_key' => 'value',
-				'defaultValue' => 0,
-				'unitDefaultValue' => 's',
-				'property' => 'transition-duration',
-				'device' => $device,
-			]),
+				'defaultValue'         => 0,
+				'unitDefaultValue'     => 's',
+				'property'             => 'transition-duration',
+				'device'               => $device,
+			] ),
 			$css,
 		);
 	}
@@ -148,9 +153,9 @@ class Block extends BlockBaseAbstract {
 
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
 
-			return array_merge(
-				Typography::get_css( $typography_value, $device ),
-			);
+		return array_merge(
+			Typography::get_css( $typography_value, $device ),
+		);
 	}
 
 	public function get_cart_list_product_title( $attributes, $device = '' ) {
@@ -172,6 +177,7 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $attributes['productTitleColorH'] ) ) {
 			$css['color'] = $attributes['productTitleColorH'];
 		}
+
 		return $css;
 	}
 

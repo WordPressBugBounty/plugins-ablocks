@@ -257,6 +257,11 @@ class Block extends BlockBaseAbstract {
 			'course_id' => absint( Helper::get_attribute_value( $attributes, 'course_id' ) ),
 			'layout'  => (string) ( Helper::get_attribute_value( $attributes, 'layout' ) )
 		];
+
+		if ( isset( $block_instance->context['postId'] ) && ! empty( $block_instance->context['postId'] ) && empty( $attr_array['course_id'] ) ) {
+			$attr_array['course_id'] = $block_instance->context['postId'];
+		}
+
 		$shortcode = '[academy_enroll_form ' . Helper::attr_shortcode( $attr_array ) . ']';
 		echo do_shortcode( $shortcode );
 	}

@@ -29,6 +29,16 @@ $attributes = [
 ];
 $attributes = array_merge(
 	$attributes,
+	Range::get_attribute( [
+		'attributeName' => 'templateGridColumns',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 2,
+		'defaultValueTablet' => 2,
+		'defaultValueMobile' => 1,
+		'hasUnit' => false,
+		'unitDefaultValue' => '',
+	] ),
 	Range::get_attribute([
 		'attributeName' => 'itemGap',
 		'attributeObjectKey' => 'value',

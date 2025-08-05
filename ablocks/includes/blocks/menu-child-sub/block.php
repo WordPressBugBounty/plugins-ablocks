@@ -97,8 +97,8 @@ class Block extends BlockBaseAbstract {
 		}
 
 		// Justify content
-		if ( isset( $attributes[ 'menuItemJustify' . $device ] ) && ! empty( $attributes[ 'menuItemJustify' . $device ] ) ) {
-			$css['justify-content'] = $attributes[ 'menuItemJustify' . $device ];
+		if ( isset( $attributes['menuItemJustification'][ 'value' . $device ] ) && ! empty( $attributes['menuItemJustification'][ 'value' . $device ] ) ) {
+			$css['justify-content'] = $attributes['menuItemJustification'][ 'value' . $device ];
 		}
 
 		// Align items

@@ -318,8 +318,8 @@
             "type": "object",
             "default": {
                 "value": 100,
-                "valueTablet": 30,
-                "valueMobile": 20,
+                "valueTablet": "",
+                "valueMobile": "",
                 "valueUnit": "px",
                 "valueUnitTablet": "",
                 "valueUnitMobile": ""
@@ -329,8 +329,8 @@
             "type": "object",
             "default": {
                 "value": 5,
-                "valueTablet": 2,
-                "valueMobile": 1,
+                "valueTablet": "",
+                "valueMobile": "",
                 "valueUnit": "px",
                 "valueUnitTablet": "",
                 "valueUnitMobile": ""

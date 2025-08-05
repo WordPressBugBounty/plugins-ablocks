@@ -104,6 +104,7 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 
 		$css['display'] = 'flex';
+		$css['width'] = '100%';
 
 		if ( ! empty( $attributes['tableAlignment'][ 'value' . $device ] ) ) {
 			$alignment_css['justify-content'] = $attributes['tableAlignment'][ 'value' . $device ];

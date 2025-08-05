@@ -118,13 +118,23 @@ class BlockGlobal {
 		}
 
 		// Tablet
-		if ( 'Tablet' === $device && Helper::has_value( $attribute['_hide_on_tablet'] ) ) {
-			return [ 'display' => 'none' ];
+		if ( 'Tablet' === $device ) {
+			if ( Helper::has_value( $attribute['_hide_on_tablet'] ) ) {
+				return [ 'display' => 'none' ];
+			}
+			if ( Helper::has_value( $attribute['_hide_on_desktop'] ) ) {
+				return [ 'display' => 'block' ];
+			}
 		}
 
 		// Mobile
-		if ( 'Mobile' === $device && Helper::has_value( $attribute['_hide_on_mobile'] ) ) {
-			return [ 'display' => 'none' ];
+		if ( 'Mobile' === $device ) {
+			if ( Helper::has_value( $attribute['_hide_on_mobile'] ) ) {
+				return [ 'display' => 'none' ];
+			}
+			if ( Helper::has_value( $attribute['_hide_on_tablet'] ) ) {
+				return [ 'display' => 'block' ];
+			}
 		}
 
 		return [];

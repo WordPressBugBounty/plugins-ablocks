@@ -84,6 +84,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => 'background'
 	],
+	'enableHoverSwitch'=> [
+		'type' => 'boolean',
+		'default' => false,
+	],
 	'tabMenuAlign' => [
 		'type' => 'string',
 		'default'   => '',
@@ -112,6 +116,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '#F9F9F9'
 	],
+	'contentBackgroundColor' => [
+		'type' => 'string',
+		'default' => ''
+	],
 	'tabActiveBackgroundColor' => [
 		'type' => 'string',
 		'default' => '#61CE70'
@@ -131,10 +139,6 @@ $attributes = [
 	'subTitleTextActiveColor' => [
 		'type' => 'string',
 		'default' => '#3A3A3A'
-	],
-	'contentBackgroundColor' => [
-		'type' => 'string',
-		'default' => '#ffffff00'
 	],
 	'activeBorderColor' => [
 		'type' => 'string',
@@ -241,7 +245,7 @@ $attributes = array_merge(
 		'unitDefaultValue' => 'px',
 	] ),
 	Icon::get_attribute( 'icon' ),
-	ButtonGroup::get_attribute( 'iconPosition', false, [
+	ButtonGroup::get_attribute( 'iconPosition', true, [
 		'value' => 'left',
 	] ),
 	ButtonGroup::get_attribute( 'tabsMenuPositioning', true, [

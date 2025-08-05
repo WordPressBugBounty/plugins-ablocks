@@ -16,9 +16,7 @@
         "anchor": true
     },
     "textdomain": "ablocks",
-    "style": [
-        "file:./style.css"
-    ],
+    "style": [],
     "viewScript": "file:./view.js",
     "attributes": {
         "block_id": {
@@ -129,6 +127,14 @@
             "type": "string",
             "default": "space-between",
             "copyStyle": true
+        },
+        "menuItemJustification": {
+            "type": "object",
+            "default": {
+                "value": "space-between",
+                "valueTablet": "",
+                "valueMobile": ""
+            }
         },
         "boxShadow": {
             "type": "object",

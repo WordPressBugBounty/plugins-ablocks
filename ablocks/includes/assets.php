@@ -52,22 +52,29 @@ class Assets {
 			$this->current_page_slug = '404';
 		} elseif ( is_search() ) {
 			$this->current_page_slug = 'search';
+		} elseif ( is_home() ) {
+			$posts_page_id = get_option( 'page_for_posts' );
+			$this->current_page_slug = $posts_page_id ? (string) $posts_page_id : 'blog';
 		} elseif ( is_post_type_archive() ) {
 			$this->current_page_slug = 'archive-' . get_post_type();
 		} elseif ( is_category() ) {
-			$this->current_page_slug = 'category-' . get_queried_object()->slug;
+			$term = get_queried_object();
+			$this->current_page_slug = 'category-' . $term->term_id; // or use slug
 		} elseif ( is_tag() ) {
-			$this->current_page_slug = 'tag-' . get_queried_object()->slug;
+			$term = get_queried_object();
+			$this->current_page_slug = 'tag-' . $term->term_id;
 		} elseif ( is_tax() ) {
 			$term = get_queried_object();
-			$this->current_page_slug = 'tax-' . $term->taxonomy . '-' . $term->slug;
+			$this->current_page_slug = 'tax-' . $term->taxonomy . '-' . $term->term_id;
 		} elseif ( is_author() ) {
-			$this->current_page_slug = 'author-' . get_the_author_meta( 'user_nicename' );
+			$this->current_page_slug = 'author-' . get_the_author_meta( 'ID' );
 		} elseif ( is_date() ) {
 			$this->current_page_slug = 'date-archive';
+		} elseif ( is_singular() ) {
+			$this->current_page_slug = (string) get_the_ID(); // just the post/page/custom ID
 		} else {
-			$this->current_page_slug = get_the_ID();
-		}
+			$this->current_page_slug = (string) get_the_ID(); // fallback to ID
+		}//end if
 	}
 
 	public function get_current_archive_post_type() {

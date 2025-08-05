@@ -15,9 +15,7 @@
         "anchor": true
     },
     "textdomain": "ablocks",
-    "editorStyle": [
-        "file:./style.css"
-    ],
+    "editorStyle": [],
     "editorScript": [
         "ablocks-common-script",
         "file:./view.js"
@@ -43,10 +41,6 @@
             "type": "string",
             "default": ""
         },
-        "inputWidth": {
-            "type": "number",
-            "default": 100
-        },
         "name": {
             "type": "string",
             "default": ""
@@ -67,6 +61,17 @@
                     "value": "Javascript"
                 }
             ]
+        },
+        "inputWidth": {
+            "type": "object",
+            "default": {
+                "value": 100,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "%",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
         },
         "_margin": {
             "type": "object",

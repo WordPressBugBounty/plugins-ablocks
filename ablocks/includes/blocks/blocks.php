@@ -79,6 +79,7 @@ return [
 	'loop-builder',
 	'loop-template',
 	'loop-load-more',
+	'loop-filter',
 	// Form Builder
 	'form-builder',
 	'form-input',
@@ -112,5 +113,9 @@ return [
 	'storeengine-continue-button',
 	'storeengine-checkout-button',
 	'storeengine-cart-sub-table',
+	'storeengine-order-info',
+	'storeengine-billing-info',
+	'storeengine-shipping-info',
+	'storeengine-order-details',
 
 ];

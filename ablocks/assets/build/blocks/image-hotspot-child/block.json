@@ -15,9 +15,7 @@
         "anchor": true
     },
     "textdomain": "ablocks",
-    "style": [
-        "file:./style.css"
-    ],
+    "style": [],
     "viewScript": "file:./view.js",
     "attributes": {
         "block_id": {

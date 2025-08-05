@@ -34,7 +34,7 @@ class PostType extends Abstracts\Interpreter {
 		}
 	}
 	public function content() : string {
-		$id = (int) get_post_thumbnail_id( $this->ID );
+		$thumbnail_id = (int) get_post_thumbnail_id( $this->ID );
 
 		switch ( $this->field ) {
 			case 'post-custom-field':
@@ -150,7 +150,7 @@ class PostType extends Abstracts\Interpreter {
 				break;
 
 			case 'featured-image-alt':
-				$this->content = $id ? get_post_meta( $id, '_wp_attachment_image_alt', true ) : '';
+				$this->content = $thumbnail_id ? get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true ) : '';
 				break;
 
 			case 'featured-image-caption':
@@ -162,13 +162,34 @@ class PostType extends Abstracts\Interpreter {
 				break;
 
 			case 'featured-image-file-url':
-				$this->content = $id ? wp_get_attachment_url( $id ) : '';
+				$this->content = $thumbnail_id ? wp_get_attachment_url( $thumbnail_id ) : '';
 				break;
 
 			case 'featured-image-attachment-url':
-				$this->content = $id ? get_permalink( $id ) : '';
+				$this->content = $thumbnail_id ? get_permalink( $thumbnail_id ) : '';
 				break;
 		}//end switch
+
+		// Academy LMS
+		if ( Helper::is_active_academy() ) {
+			switch ( $this->field ) {
+				case 'numberOfTopics':
+					$curriculums = \Academy\Helper::get_course_curriculums_number_of_counts( $this->ID );
+					$this->content = (int) isset( $curriculums['total_topics'] ) ? $curriculums['total_topics'] : 0;
+					break;
+				case 'numberOfReviews':
+					$Analytics = new \Academy\Classes\Analytics();
+					$this->content = (int) $Analytics->get_total_number_of_reviews_by_course_id( $this->ID );
+					break;
+				case 'numberOfEnrolled':
+						$Analytics = new \Academy\Classes\Analytics();
+						$this->content = (int) $Analytics->get_total_number_of_enrolled_by_course_id( $this->ID );
+					break;
+				case 'totalDuration':
+						$this->content = (int) \Academy\Helper::get_course_duration( $this->ID );
+					break;
+			}
+		}
 
 		return $this->pre . ( $this->content === '' ? $this->default : $this->content ) . $this->post;
 	}

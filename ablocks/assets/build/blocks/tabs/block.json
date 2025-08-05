@@ -104,6 +104,10 @@
             "type": "string",
             "default": "background"
         },
+        "enableHoverSwitch": {
+            "type": "boolean",
+            "default": false
+        },
         "tabMenuAlign": {
             "type": "string",
             "default": ""
@@ -132,6 +136,10 @@
             "type": "string",
             "default": "#F9F9F9"
         },
+        "contentBackgroundColor": {
+            "type": "string",
+            "default": ""
+        },
         "tabActiveBackgroundColor": {
             "type": "string",
             "default": "#61CE70"
@@ -151,10 +159,6 @@
         "subTitleTextActiveColor": {
             "type": "string",
             "default": "#3A3A3A"
-        },
-        "contentBackgroundColor": {
-            "type": "string",
-            "default": "#ffffff00"
         },
         "activeBorderColor": {
             "type": "string",
@@ -394,8 +398,12 @@
             "default": 0
         },
         "iconPosition": {
-            "type": "string",
-            "default": "left"
+            "type": "object",
+            "default": {
+                "value": "left",
+                "valueTablet": "",
+                "valueMobile": ""
+            }
         },
         "tabsMenuPositioning": {
             "type": "object",

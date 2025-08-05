@@ -14,10 +14,7 @@ $attributes = [
 		'type' => 'string',
 		'default' => ''
 	),
-	'inputWidth' => [
-		'type' => 'number',
-		'default' => 100
-	],
+
 	'label' => [
 		'type' => 'string',
 		'default' => ''
@@ -112,6 +109,14 @@ $attributes = array_merge(
 		'attributeName' => 'inputIconSpace',
 		'isResponsive' => false,
 		'defaultValue' => 38,
+	] ),
+	Range::get_attribute( [
+		'attributeName' => 'inputWidth',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 100,
+		'hasUnit' => true,
+		'unitDefaultValue' => '%',
 	] ),
 );
 

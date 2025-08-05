@@ -430,17 +430,17 @@ class DynamicContent extends AbstractAjaxHandler {
 		}
 
 		$Analytics = new \Academy\Classes\Analytics();
-		$results = '';
+		$results = 0;
 		if ( 'numberOfTopics' === $meta_key ) {
 			$curriculums = \Academy\Helper::get_course_curriculums_number_of_counts( $post_id );
-
-			$results = isset( $curriculums['total_topics'] ) ? $curriculums['total_topics'] : 0;
+			$results = (int) isset( $curriculums['total_topics'] ) ? $curriculums['total_topics'] : 0;
 		} elseif ( 'numberOfReviews' === $meta_key ) {
-			$results = $Analytics->get_total_number_of_reviews_by_course_id( $post_id );
+			$results = (int) $Analytics->get_total_number_of_reviews_by_course_id( $post_id );
 		} elseif ( 'numberOfEnrolled' === $meta_key ) {
-			$results = $Analytics->get_total_number_of_enrolled_by_course_id( $post_id );
+			$results = (int) $Analytics->get_total_number_of_enrolled_by_course_id( $post_id );
+		} elseif ( 'totalDuration' === $meta_key ) {
+			$results = (int) \Academy\Helper::get_course_duration( $post_id );
 		}
-
 		wp_send_json_success( $results );
 	}
 

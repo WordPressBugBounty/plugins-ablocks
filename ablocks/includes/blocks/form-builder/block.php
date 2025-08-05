@@ -435,7 +435,7 @@ class Block extends BlockBaseAbstract {
 			Range::get_css([
 				'attributeValue' => $attributes['inputIconPosition'],
 				'isResponsive' => false,
-				'defaultValue' => 60,
+				'defaultValue' => 75,
 				'unitDefaultValue' => '%',
 				'property' => 'top',
 				'device' => $device,

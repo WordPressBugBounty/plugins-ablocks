@@ -584,7 +584,7 @@
         },
         "inputIconPosition": {
             "type": "number",
-            "default": 60
+            "default": 75
         },
         "navigatorSpacing": {
             "type": "number",

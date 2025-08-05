@@ -29,8 +29,10 @@ class Shortcode {
 			return '';
 		}
 		add_filter( 'ablocks/is_allow_block_inline_assets', '__return_true' );
+		add_filter( 'ablocks/is_enabled_assets_generation', '__return_false' );
 		$content = $this->get_rendered_block_content_by_id( $id );
 		remove_filter( 'ablocks/is_allow_block_inline_assets', '__return_true' );
+		remove_filter( 'ablocks/is_enabled_assets_generation', '__return_false' );
 		return $content;
 	}
 }

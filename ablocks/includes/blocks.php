@@ -59,6 +59,10 @@ class Blocks {
 			new \ABlocks\Blocks\StoreengineContinueButton\Block();
 			new \ABlocks\Blocks\StoreengineCheckoutButton\Block();
 			new \ABlocks\Blocks\StoreengineCartSubTable\Block();
+			new \ABlocks\Blocks\StoreengineOrderInfo\Block();
+			new \ABlocks\Blocks\StoreengineBillingInfo\Block();
+			new \ABlocks\Blocks\StoreengineShippingInfo\Block();
+			new \ABlocks\Blocks\StoreengineOrderDetails\Block();
 		}//end if
 		new \ABlocks\Blocks\Container\Block();
 		new \ABlocks\Blocks\Heading\Block();
