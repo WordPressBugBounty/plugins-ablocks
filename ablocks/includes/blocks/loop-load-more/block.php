@@ -13,6 +13,7 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\BoxShadow;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $parent_block_name = 'loop-builder';
@@ -114,17 +115,9 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	private function loop_load_More_button( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['loadMoreButtonBackground'] ) ) {
-			$css['background'] = $attributes['loadMoreButtonBackground'];
-		}
-		if ( ! empty( $attributes['loadMoreButtonTextColor'] ) ) {
-			$css['color'] = $attributes['loadMoreButtonTextColor'];
-		}
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['loadMoreButtonTextColor'] ) ? $attributes['loadMoreButtonTextColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['loadMoreButtonBackground'] ) ? $attributes['loadMoreButtonBackground'] : '' ) ],
 			Border::get_css( $attributes['moreButtonBorder'], '', $device ),
 			BoxShadow::get_css( $attributes['moreButtonboxShadow'], '', $device ),
 			Typography::get_css( $attributes['moreButtonTypography'], $device ),
@@ -133,18 +126,12 @@ class Block extends BlockBaseAbstract {
 	}
 	private function loop_load_More_button_hover( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['loadMoreButtonTextColorH'] ) ) {
-			$css['color'] = $attributes['loadMoreButtonTextColorH'];
-		}
-
-		if ( ! empty( $attributes['loadMoreButtonBackgroundH'] ) ) {
-			$css['background'] = $attributes['loadMoreButtonBackgroundH'];
-		}
-
 		if ( ! empty( $attributes['loadMoreButtonTransition'] ) ) {
 			$css['transition-duration'] = $attributes['loadMoreButtonTransition'] . 's';
 		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['loadMoreButtonTextColorH'] ) ? $attributes['loadMoreButtonTextColorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['loadMoreButtonBackgroundH'] ) ? $attributes['loadMoreButtonBackgroundH'] : '' ) ],
 			$css,
 			Border::get_hover_css( $attributes['moreButtonBorder'], '', $device ),
 			BoxShadow::get_hover_css( $attributes['moreButtonboxShadow'], '', $device )

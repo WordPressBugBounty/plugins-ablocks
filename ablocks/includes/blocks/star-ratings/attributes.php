@@ -45,7 +45,7 @@ $attributes = [
 		'default' => 'right',
 	],
 	'rating'            => [
-		'type'         => 'string',
+		'type'         => 'number',
 		'default'      => 4,
 	],
 

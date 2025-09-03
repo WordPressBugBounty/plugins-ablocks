@@ -332,19 +332,19 @@ class Query {
 						$field['meta_value'] = strtolower( $field['meta_value'] ) === 'on' ? true : false;
 					}
 
-					$entry['meta'][] = array_merge(
+					$entry['meta'][] = apply_filters( 'ablocks/form_builder/meta_output', array_merge(
 						$fields[ $field['meta_key'] ],
 						$field
-					);
+					) );
 
 				} else {
-					$entry['meta'][] = array_merge(
+					$entry['meta'][] = apply_filters( 'ablocks/form_builder/meta_output', array_merge(
 						$field,
 						[
 							'inputType' => 'text',
 							'label'     => ucfirst( preg_replace( '/[_-]/m', ' ', $field['meta_key'] ) ),
 						]
-					);
+					) );
 				}//end if
 			}//end foreach
 
@@ -365,7 +365,7 @@ class Query {
 					$fields[ $key ]['meta_value'] = null;
 				}
 
-				$entry['meta'][] = $fields[ $key ];
+				$entry['meta'][] = apply_filters( 'ablocks/form_builder/meta_output', $fields[ $key ] );
 			}//end foreach
 
 			return $entry;
@@ -497,7 +497,7 @@ class Query {
 
 	public static function add_new_entry(
 		string $form_type,
-		int $post_id,
+		string $post_id,
 		string $user_email,
 		string $ip,
 		string $user_agent,

@@ -15,6 +15,7 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'table-of-content';
@@ -110,32 +111,26 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_toc_title_css( $attributes, $device = '' ) {
-		$css = array();
 		$toc_title_typography_css = ! empty( $attributes['titleTypography'] ) ? Typography::get_css( $attributes['titleTypography'], '', $device ) : array();
-		if ( isset( $attributes['titleColor'] ) ) {
-			$css['color'] = $attributes['titleColor'];
-		}
-		return array_merge( $toc_title_typography_css, $css );
+		return array_merge( $toc_title_typography_css,
+		[ 'color' => Color::get_css( isset( $attributes['titleColor'] ) ? $attributes['titleColor'] : '' ) ], );
 	}
 	public function get_toc_header_css( $attributes, $device = '' ) {
-		$css = array();
 		$headerorder = ! empty( $attributes['headerBorder'] ) ? Border::get_css( $attributes['headerBorder'], '', $device ) : array();
 		$header_padding_css = ! empty( $attributes['header_padding'] ) ? Dimensions::get_css( $attributes['header_padding'], 'padding', $device ) : array();
-		if ( isset( $attributes['headerBG'] ) ) {
-			$css['background'] = $attributes['headerBG'];
-		}
-		return array_merge( $css, $headerorder, $header_padding_css );
+		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['headerBG'] ) ? $attributes['headerBG'] : '' ) ],
+		$headerorder, $header_padding_css );
 	}
 	public function get_toc_body_css( $attributes, $device = '' ) {
-		$css = array();
 		$listing_padding_css = ! empty( $attributes['list_padding'] ) ? Dimensions::get_css( $attributes['list_padding'], 'padding', $device ) : array();
-		if ( isset( $attributes['bodyBG'] ) ) {
-			$css['background'] = $attributes['bodyBG'];
-		}
-		return array_merge( $listing_padding_css, $css );
+		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['bodyBG'] ) ? $attributes['bodyBG'] : '' ) ],
+		$listing_padding_css, );
 	}
 	public function get_toc_header_icon_css( $attributes, $device = '' ) {
 		$css = array_merge(
+			[ 'fill' => Color::get_css( isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['iconSize'],
 				'isResponsive' => false,
@@ -157,21 +152,13 @@ class Block extends BlockBaseAbstract {
 			$css['width'] = $attributes['iconSize'] . 'px';
 			$css['height'] = $attributes['iconSize'] . 'px';
 		}
-		if ( isset( $attributes['iconColor'] ) ) {
-			$css['fill'] = $attributes['iconColor'];
-		}
 		return $css;
 	}
 
 	public function get_list_item_css( $attributes, $device = '' ) {
-		$css = array();
-
 		$contentTypography = ! empty( $attributes['contentTypography'] ) ? Typography::get_css( $attributes['contentTypography'], '', $device ) : array();
-
-		if ( ! empty( $attributes['itemColor'] ) ) {
-			$css['color'] = $attributes['itemColor'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['itemColor'] ) ? $attributes['itemColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['listItemGap'],
 				'attribute_object_key' => 'value',
@@ -183,7 +170,6 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			]),
 			$contentTypography,
-			$css,
 		);
 	}
 

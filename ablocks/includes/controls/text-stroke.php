@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\ControlBaseAbstract;
+use ABlocks\Controls\Color;
 
 class TextStroke extends ControlBaseAbstract {
 	public static function get_attribute_default_value( $is_responsive = false ) {
@@ -46,7 +47,7 @@ class TextStroke extends ControlBaseAbstract {
 
 		if ( '' !== $value[ 'strokeWidth' . $device ] ) {
 			$css['-webkit-text-stroke-width'] = $value[ 'strokeWidth' . $device ] . $value[ 'strokeWidthUnit' . $device ];
-			$css['-webkit-text-stroke-color'] = '' !== $value['stroke'] ? $value['stroke'] : '#000';
+			$css['-webkit-text-stroke-color'] = Color::get_css( '' !== $value['stroke'] ? $value['stroke'] : '#000' );
 		}
 
 		return $css;

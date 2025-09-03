@@ -10,7 +10,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Icon;
 use ABlocks\Controls\Range;
 use ABlocks\Classes\CssGeneratorV2;
-
+use ABlocks\Controls\Color;
 class Block extends BlockBaseAbstract {
 
 	protected $block_name = 'divider';
@@ -169,12 +169,9 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_divider_element_text_css( $attributes, $device = '' ) {
-		$divider_text_styles = [];
-		if ( isset( $attributes['elementTextColor'] ) ) {
-			$divider_text_styles['color'] = $attributes['elementTextColor'];
-		}
+
 		return array_merge(
-			$divider_text_styles,
+			[ 'color' => Color::get_css( isset( $attributes['elementTextColor'] ) ? $attributes['elementTextColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['elementTextSpacing'],
 				'attributeObjectKey' => 'value',

@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\ControlBaseAbstract;
+use ABlocks\Controls\Color;
 
 class BoxShadow extends ControlBaseAbstract {
 	public static function get_attribute_default_value( $is_responsive = false ) {
@@ -43,7 +44,7 @@ class BoxShadow extends ControlBaseAbstract {
 			self::get_attribute_default_value( true )
 		);
 		$css = [];
-		$color = $value['color'] ? $value['color'] : '#000000';
+		$color = Color::get_css( $value['color'] ? $value['color'] : '#000000' );
 		if ( $value['shadowType'] !== 'default' && $value['shadowType'] === 'inner_shadow' ) {
 			if ( ! empty( $value['preset'] ) ) {
 				$css['box-shadow'] = 'inset ' . $value['horizontal'] . 'px ' . $value['vertical'] . 'px ' . $value['blur'] . 'px ' . $value['spread'] . 'px ' . $color;
@@ -71,7 +72,7 @@ class BoxShadow extends ControlBaseAbstract {
 		);
 
 		$css = [];
-		$colorH = $value['colorH'] ? $value['colorH'] : '#000000';
+		$colorH = Color::get_css( $value['colorH'] ? $value['colorH'] : '#000000' );
 		if ( $value['shadowTypeH'] !== 'default' && $value['shadowTypeH'] === 'inner_shadow' ) {
 			if ( ! empty( $value['presetH'] ) ) {
 				$css['box-shadow'] = 'inset ' . $value['horizontalH'] . 'px ' . $value['verticalH'] . 'px ' . $value['blurH'] . 'px ' . $value['spreadH'] . 'px ' . $colorH;

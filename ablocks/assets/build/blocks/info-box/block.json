@@ -142,6 +142,10 @@
             "type": "string",
             "default": ""
         },
+        "iconBackgroundColorH": {
+            "type": "string",
+            "default": ""
+        },
         "iconTransition": {
             "type": "number",
             "default": ""
@@ -250,6 +254,10 @@
             "type": "boolean",
             "default": true
         },
+        "showCount": {
+            "type": "boolean",
+            "default": true
+        },
         "ratingNumberColor": {
             "type": "string",
             "default": "#000000"
@@ -298,6 +306,10 @@
             "type": "boolean",
             "default": true
         },
+        "stack": {
+            "type": "string",
+            "default": ""
+        },
         "alignment": {
             "type": "object",
             "default": {
@@ -306,9 +318,13 @@
                 "valueMobile": ""
             }
         },
-        "stack": {
-            "type": "string",
-            "default": ""
+        "iconPlacement": {
+            "type": "object",
+            "default": {
+                "value": "",
+                "valueTablet": "",
+                "valueMobile": ""
+            }
         },
         "badgeBorder": {
             "type": "object",
@@ -614,6 +630,32 @@
             "type": "number",
             "default": 0
         },
+        "iconMargin": {
+            "type": "object",
+            "default": {
+                "isLinked": true,
+                "isLinkedTablet": true,
+                "isLinkedMobile": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px",
+                "commonTablet": "",
+                "topTablet": "",
+                "rightTablet": "",
+                "bottomTablet": "",
+                "leftTablet": "",
+                "unitTablet": "",
+                "commonMobile": "",
+                "topMobile": "",
+                "rightMobile": "",
+                "bottomMobile": "",
+                "leftMobile": "",
+                "unitMobile": ""
+            }
+        },
         "iconLink": {
             "type": "object",
             "default": {
@@ -690,6 +732,32 @@
                 "stroke": ""
             }
         },
+        "headingMargin": {
+            "type": "object",
+            "default": {
+                "isLinked": true,
+                "isLinkedTablet": true,
+                "isLinkedMobile": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px",
+                "commonTablet": "",
+                "topTablet": "",
+                "rightTablet": "",
+                "bottomTablet": "",
+                "leftTablet": "",
+                "unitTablet": "",
+                "commonMobile": "",
+                "topMobile": "",
+                "rightMobile": "",
+                "bottomMobile": "",
+                "leftMobile": "",
+                "unitMobile": ""
+            }
+        },
         "subHeadingTypography": {
             "type": "object",
             "default": {
@@ -745,6 +813,32 @@
                 "stroke": ""
             }
         },
+        "subHeadingMargin": {
+            "type": "object",
+            "default": {
+                "isLinked": true,
+                "isLinkedTablet": true,
+                "isLinkedMobile": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px",
+                "commonTablet": "",
+                "topTablet": "",
+                "rightTablet": "",
+                "bottomTablet": "",
+                "leftTablet": "",
+                "unitTablet": "",
+                "commonMobile": "",
+                "topMobile": "",
+                "rightMobile": "",
+                "bottomMobile": "",
+                "leftMobile": "",
+                "unitMobile": ""
+            }
+        },
         "desTypography": {
             "type": "object",
             "default": {
@@ -798,6 +892,32 @@
                 "strokeWidthUnitTablet": "px",
                 "strokeWidthUnitMobile": "px",
                 "stroke": ""
+            }
+        },
+        "desMargin": {
+            "type": "object",
+            "default": {
+                "isLinked": true,
+                "isLinkedTablet": true,
+                "isLinkedMobile": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px",
+                "commonTablet": "",
+                "topTablet": "",
+                "rightTablet": "",
+                "bottomTablet": "",
+                "leftTablet": "",
+                "unitTablet": "",
+                "commonMobile": "",
+                "topMobile": "",
+                "rightMobile": "",
+                "bottomMobile": "",
+                "leftMobile": "",
+                "unitMobile": ""
             }
         },
         "btnIconSvgPath": {
@@ -1058,6 +1178,32 @@
                 "unitMobile": ""
             }
         },
+        "btnMargin": {
+            "type": "object",
+            "default": {
+                "isLinked": true,
+                "isLinkedTablet": true,
+                "isLinkedMobile": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px",
+                "commonTablet": "",
+                "topTablet": "",
+                "rightTablet": "",
+                "bottomTablet": "",
+                "leftTablet": "",
+                "unitTablet": "",
+                "commonMobile": "",
+                "topMobile": "",
+                "rightMobile": "",
+                "bottomMobile": "",
+                "leftMobile": "",
+                "unitMobile": ""
+            }
+        },
         "btnTypography": {
             "type": "object",
             "default": {
@@ -1141,6 +1287,32 @@
                 "wordSpacingMobile": "",
                 "wordSpacingUnitTablet": "px",
                 "wordSpacingUnitMobile": "px"
+            }
+        },
+        "ratingMargin": {
+            "type": "object",
+            "default": {
+                "isLinked": true,
+                "isLinkedTablet": true,
+                "isLinkedMobile": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px",
+                "commonTablet": "",
+                "topTablet": "",
+                "rightTablet": "",
+                "bottomTablet": "",
+                "leftTablet": "",
+                "unitTablet": "",
+                "commonMobile": "",
+                "topMobile": "",
+                "rightMobile": "",
+                "bottomMobile": "",
+                "leftMobile": "",
+                "unitMobile": ""
             }
         },
         "starIconSvgPath": {

@@ -7,6 +7,7 @@ use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'image-comparison';
@@ -229,11 +230,10 @@ class Block extends BlockBaseAbstract {
 
 	public function get_slider_line_horizontal_css( $attributes, $device = '' ) {
 		$slider_position = isset( $attributes['sliderPosition'] ) ? $attributes['sliderPosition'] : 50;
-		$handle_color = isset( $attributes['handleColor'] ) ? $attributes['handleColor'] : '';
 		$css = [];
 		$css['left'] = $slider_position . '%';
-		$css['background'] = $handle_color;
 		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['handleColor'] ) ? $attributes['handleColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['sliderBarSize'],
 				'attribute_object_key' => 'value',
@@ -250,12 +250,10 @@ class Block extends BlockBaseAbstract {
 
 	public function get_slider_line_vertical_css( $attributes, $device = '' ) {
 		$slider_top = isset( $attributes['sliderPosition'] ) ? $attributes['sliderPosition'] : 50;
-		$slider_background = isset( $attributes['handleColor'] ) ? $attributes['handleColor'] : '';
-
 		$css = [];
 		$css['top'] = $slider_top . '%';
-		$css['background'] = $slider_background;
 		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['handleColor'] ) ? $attributes['handleColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['sliderBarSize'],
 				'attribute_object_key' => 'value',
@@ -272,8 +270,6 @@ class Block extends BlockBaseAbstract {
 	public function get_horizontal_slider_icon_css( $attributes, $device = '' ) {
 		$slider_position = isset( $attributes['sliderPosition'] ) ? $attributes['sliderPosition'] : 50;
 		$slider_icon_border_size = isset( $attributes['sliderIconBorderSize'][ 'value' . $device ] ) ? $attributes['sliderIconBorderSize'][ 'value' . $device ] : [ 'value' => 2 ];
-		$handle_color = isset( $attributes['handleColor'] ) ? $attributes['handleColor'] : '';
-
 		$border_size = is_array( $slider_icon_border_size ) && isset( $slider_icon_border_size[ 'value' . $device ] )
 			? $slider_icon_border_size[ 'value' . $device ]
 			: ( is_array( $slider_icon_border_size ) ? $slider_icon_border_size['value'] : $slider_icon_border_size );
@@ -281,10 +277,9 @@ class Block extends BlockBaseAbstract {
 		$css['left'] = $slider_position . '%';
 		$css['top'] = '50%';
 		$css['border-weight'] = 'solid';
-		$css['border-color'] = $handle_color;
-		$css['color'] = $handle_color;
-
 		return array_merge(
+			[ 'border-color' => Color::get_css( isset( $attributes['handleColor'] ) ? $attributes['handleColor'] : '' ) ],
+			[ 'color' => Color::get_css( isset( $attributes['handleColor'] ) ? $attributes['handleColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['sliderIconSize'],
 				'attribute_object_key' => 'value',
@@ -318,15 +313,13 @@ class Block extends BlockBaseAbstract {
 
 	public function get_vertical_slider_icon_css( $attributes, $device = '' ) {
 		$slider_position = isset( $attributes['sliderPosition'] ) ? $attributes['sliderPosition'] : 50;
-		$handle_color = isset( $attributes['handleColor'] ) ? $attributes['handleColor'] : '';
-
 		$css = [];
 		$css['left'] = '50%';
 		$css['top'] = $slider_position . '%';
 		$css['border-weight'] = 'solid';
-		$css['border-color'] = $handle_color;
-		$css['color'] = $handle_color;
 			return array_merge(
+				[ 'border-color' => Color::get_css( isset( $attributes['handleColor'] ) ? $attributes['handleColor'] : '' ) ],
+				[ 'color' => Color::get_css( isset( $attributes['handleColor'] ) ? $attributes['handleColor'] : '' ) ],
 				Range::get_css([
 					'attributeValue' => $attributes['sliderIconSize'],
 					'attribute_object_key' => 'value',
@@ -359,16 +352,10 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_overlay_css( $attributes, $device = '' ) {
-		$overlay_color = isset( $attributes['labelOverlayColor'] ) ? $attributes['labelOverlayColor'] : '';
-
-		return [
-			'background' => $overlay_color
-		];
+		return [ 'background' => Color::get_css( isset( $attributes['labelOverlayColor'] ) ? $attributes['labelOverlayColor'] : '' ) ];
 	}
 
 	public function get_image_overlay_css( $attributes, $device = '' ) {
-		$label_bg_color = isset( $attributes['labelBgColor'] ) ? $attributes['labelBgColor'] : '';
-		$label_text_color = isset( $attributes['labelTextColor'] ) ? $attributes['labelTextColor'] : '';
 		$label_border = isset( $attributes['labelBorder'] ) ? $attributes['labelBorder'] : [];
 		$slider_orientation = isset( $attributes['sliderOrientation'] ) ? $attributes['sliderOrientation'] : '';
 		$label_position = isset( $attributes['labelPosition'] ) ? $attributes['labelPosition'] : '';
@@ -385,10 +372,10 @@ class Block extends BlockBaseAbstract {
 
 		return array_merge(
 			Border::get_css( $label_border, '', $device ),
+			[ 'color' => Color::get_css( isset( $attributes['labelTextColor'] ) ? $attributes['labelTextColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['labelBgColor'] ) ? $attributes['labelBgColor'] : '' ) ],
 			[
-				'background'  => $label_bg_color,
-				'color'       => $label_text_color,
-				'transform'   => $transform,  // Add transform to the CSS array
+				'transform'   => $transform,
 				'max-width'   => '30%'
 			]
 		);
@@ -396,16 +383,10 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_image_overlay_hover_css( $attributes, $device = '' ) {
-		$label_hover_bg_color = isset( $attributes['labelHoverBgColor'] ) ? $attributes['labelHoverBgColor'] : '';
-		$label_hover_text_color = isset( $attributes['labelHoverTextColor'] ) ? $attributes['labelHoverTextColor'] : '';
-		$label_border_hover = isset( $attributes['labelBorderHover'] ) ? $attributes['labelBorderHover'] : [];
-
 		return array_merge(
 			Border::get_hover_css( $attributes['labelBorder'], '', $device ),
-			[
-				'background' => $label_hover_bg_color,
-				'color' => $label_hover_text_color,
-			]
+			[ 'color' => Color::get_css( isset( $attributes['labelHoverTextColor'] ) ? $attributes['labelHoverTextColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['labelHoverBgColor'] ) ? $attributes['labelHoverBgColor'] : '' ) ],
 		);
 	}
 

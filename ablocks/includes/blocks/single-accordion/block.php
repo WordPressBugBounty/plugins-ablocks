@@ -13,6 +13,8 @@ use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
+
 
 class Block extends BlockBaseAbstract {
 	protected $parent_block_name = 'accordion';
@@ -111,15 +113,11 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_title_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['headerTextColor'] ) ) {
-			$css['color'] = $attributes['headerTextColor'];
-		}
 		$typography_css = Typography::get_css( $attributes['headerTypography'], '', $device );
 		$textShadowCss = TextShadow::get_css( $attributes['headerTextShadow'], '', $device );
 		$textStrokeCss = TextStroke::get_css( $attributes['headerTextStroke'], '', $device );
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['headerTextColor'] ) ? $attributes['headerTextColor'] : '' ) ],
 			$typography_css,
 			$textShadowCss,
 			$textStrokeCss
@@ -127,59 +125,30 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_title_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['headerTextColorH'] ) ) {
-			$css['color'] = $attributes['headerTextColorH'];
-		}
-		return array_merge(
-			$css,
-		);
+		return [ 'color' => Color::get_css( isset( $attributes['headerTextColorH'] ) ? $attributes['headerTextColorH'] : '' ) ];
 	}
 	public function get_title_active_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['headerTextActiveColor'] ) ) {
-			$css['color'] = $attributes['headerTextActiveColor'];
-		}
-		return array_merge(
-			$css,
-		);
+		return [ 'color' => Color::get_css( isset( $attributes['headerTextActiveColor'] ) ? $attributes['headerTextActiveColor'] : '' ) ];
 	}
 	public function get_panel_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['headerBackgroundColor'] ) ) {
-			$css['background'] = $attributes['headerBackgroundColor'];
-		}
 		return array_merge(
-			$css,
+			[ 'background' => Color::get_css( isset( $attributes['headerBackgroundColor'] ) ? $attributes['headerBackgroundColor'] : '' ) ],
 			Border::get_css( $attributes['headerBorder'], '', $device ),
 			Dimensions::get_css( $attributes['headerPadding'], 'padding', $device )
 		);
 	}
 	public function get_panel_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['headerBackgroundColorH'] ) ) {
-			$css['background'] = $attributes['headerBackgroundColorH'];
-		}
 		return array_merge(
-			$css,
+			[ 'background' => Color::get_css( isset( $attributes['headerBackgroundColorH'] ) ? $attributes['headerBackgroundColorH'] : '' ) ],
 			Border::get_hover_css( $attributes['headerBorder'], '', $device )
 		);
 	}
 	public function get_panel_active_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['headerBackgroundActiveColor'] ) ) {
-			$css['background'] = $attributes['headerBackgroundActiveColor'];
-		}
-		return array_merge(
-			$css,
-		);
+		return [ 'background' => Color::get_css( isset( $attributes['headerBackgroundActiveColor'] ) ? $attributes['headerBackgroundActiveColor'] : '' ) ];
 	}
 	public function get_icon_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['iconColor'] ) ) {
-			$css['fill'] = $attributes['iconColor'] . ' !important';
-		}
-		return array_merge( $css,
+		return array_merge(
+			[ 'fill' => Color::get_css( isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : '' ) . ' !important' ],
 			Range::get_css( [
 				'attributeValue' => $attributes['iconSize'],
 				'attribute_object_key' => 'value',
@@ -191,29 +160,16 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_icon_hover_css( $attributes ) {
-		$css = [];
-		if ( ! empty( $attributes['iconColorH'] ) ) {
-			$css['fill'] = $attributes['iconColorH'] . ' !important';
-		}
-		return array_merge( $css );
+		return [ 'fill' => Color::get_css( isset( $attributes['iconColorH'] ) ? $attributes['iconColorH'] : '' ) . ' !important' ];
+
 	}
 	public function get_content_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['bodyBackground'] ) ) {
-			$css['background'] = $attributes['bodyBackground'];
-		}
 		return array_merge(
-			$css,
+			[ 'background' => Color::get_css( isset( $attributes['bodyBackground'] ) ? $attributes['bodyBackground'] : '' ) ],
 			Dimensions::get_css( $attributes['bodyPadding'], 'padding', $device )
 		);
 	}
 	public function get_content_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['bodyBackgroundH'] ) ) {
-			$css['background'] = $attributes['bodyBackgroundH'];
-		}
-		return array_merge(
-			$css,
-		);
+		return [ 'background' => Color::get_css( isset( $attributes['bodyBackgroundH'] ) ? $attributes['bodyBackgroundH'] : '' ) ];
 	}
 }

@@ -32,6 +32,10 @@ $attributes = [
 		'type' => 'number',
 		'default' => 0
 	],
+	'tabMenusBackgroundColor' => [
+		'type' => 'string',
+		'default' => ''
+	],
 	'tabPositionChange' => [
 		'type' => 'boolean',
 		'default' => false
@@ -84,7 +88,7 @@ $attributes = [
 		'type' => 'string',
 		'default' => 'background'
 	],
-	'enableHoverSwitch'=> [
+	'enableHoverSwitch' => [
 		'type' => 'boolean',
 		'default' => false,
 	],
@@ -251,12 +255,21 @@ $attributes = array_merge(
 	ButtonGroup::get_attribute( 'tabsMenuPositioning', true, [
 		'value' => 'left',
 	] ),
+	ButtonGroup::get_attribute( 'tabsMenuDirection', true, [
+		'value' => 'row',
+	] ),
+	ButtonGroup::get_attribute( 'tabsWidthType', true, [
+		'value' => 'auto',
+	] ),
 	ButtonGroup::get_attribute( 'tabMenuAlignment', true, [
 		'value' => '',
 	] ),
 	ButtonGroup::get_attribute( 'menuContentAlignment', true, [
 		'value' => 'center',
 	] ),
+	Dimensions::get_attribute( 'tabMenusMargin', true ),
+	Dimensions::get_attribute( 'tabMenusPadding', true ),
+	Border::get_attribute( 'tabMenusBorder', true ),
 	Dimensions::get_attribute( 'contentMargin', true ),
 	Dimensions::get_attribute( 'iconPositionMargin', true ),
 	Typography::get_attribute( 'titleTypography', true ),
@@ -269,4 +282,3 @@ $attributes = array_merge(
 );
 
 return array_merge( $attributes, \ABlocks\Classes\BlockGlobal::get_attributes() );
-

@@ -62,7 +62,7 @@ $attributes = [
 	],
 	'numberColor' => [
 		'type' => 'string',
-		'default' => 'black',
+		'default' => '#08fd00ff',
 	],
 	'headingColor' => [
 		'type' => 'string',

@@ -14,6 +14,7 @@ use ABlocks\Controls\Background;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'storeengine-cart-list';
@@ -92,20 +93,12 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_cart_list_table_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['tableBackground'] ) ) {
-			$css['background'] = $attributes['tableBackground'];
-		}
+		return [ 'background' => Color::get_css( isset( $attributes['tableBackground'] ) ? $attributes['tableBackground'] : '' ) ];
 
-		return $css;
 	}
 	public function get_cart_list_table_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['tableBackgroundH'] ) ) {
-			$css['background'] = $attributes['tableBackgroundH'];
-		}
-
 		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['tableBackgroundH'] ) ? $attributes['tableBackgroundH'] : '' ) ],
 			Range::get_css( [
 				'attributeValue'       => isset( $attributes['tableTransition'] ) ? $attributes['tableTransition'] : '',
 				'attribute_object_key' => 'value',
@@ -114,25 +107,14 @@ class Block extends BlockBaseAbstract {
 				'property'             => 'transition-duration',
 				'device'               => $device,
 			] ),
-			$css,
 		);
 	}
 
 	public function get_cart_list_table_header_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['tableHeaderBackground'] ) ) {
-			$css['background'] = $attributes['tableHeaderBackground'];
-		}
-
-		return $css;
+		return [ 'background' => Color::get_css( isset( $attributes['tableHeaderBackground'] ) ? $attributes['tableHeaderBackground'] : '' ) ];
 	}
 
 	public function get_cart_list_table_header_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['tableHeaderBackgroundH'] ) ) {
-			$css['background'] = $attributes['tableHeaderBackgroundH'];
-		}
-
 		return array_merge(
 			Range::get_css( [
 				'attributeValue'       => isset( $attributes['tableTransition'] ) ? $attributes['tableTransition'] : '',
@@ -142,7 +124,7 @@ class Block extends BlockBaseAbstract {
 				'property'             => 'transition-duration',
 				'device'               => $device,
 			] ),
-			$css,
+			[ 'background' => Color::get_css( isset( $attributes['tableHeaderBackgroundH'] ) ? $attributes['tableHeaderBackgroundH'] : '' ) ]
 		);
 	}
 
@@ -159,53 +141,38 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_cart_list_product_title( $attributes, $device = '' ) {
-		$css['color'] = $attributes['productTitleColor'] ?? '';
 		$typography = isset( $attributes['productTilteTypography'] ) && is_array( $attributes['productTilteTypography'] )
 			? $attributes['productTilteTypography']
 			: array();
 
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
-
 			return array_merge(
 				Typography::get_css( $typography_value, $device ),
-				$css,
+				[ 'color' => Color::get_css( isset( $attributes['productTitleColor'] ) ? $attributes['productTitleColor'] : '' ) ]
 			);
 
 	}
 	public function get_cart_list_product_title_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['productTitleColorH'] ) ) {
-			$css['color'] = $attributes['productTitleColorH'];
-		}
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['productTitleColorH'] ) ? $attributes['productTitleColorH'] : '' ) ];
 	}
 
 	public function get_cart_list_subtitle_css( $attributes, $device = '' ) {
-		$css['color'] = $attributes['productSubTiteColor'] ?? '';
 		$typography = isset( $attributes['productsubTitleTypography'] ) && is_array( $attributes['productsubTitleTypography'] )
 			? $attributes['productsubTitleTypography']
 			: [];
 
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
-
 			return array_merge(
 				Typography::get_css( $typography_value, $device ),
-				$css,
+				[ 'color' => Color::get_css( isset( $attributes['productSubTiteColor'] ) ? $attributes['productSubTiteColor'] : '' ) ]
 			);
 
 	}
 
 	public function get_cart_list_subtitle_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color'] = $attributes['productSubTiteColorH'] ?? '';
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['productSubTiteColorH'] ) ? $attributes['productSubTiteColorH'] : '' ) ];
 	}
 	public function get_cart_list_product_price_css( $attributes, $device = '' ) {
-		// $css = [];
-		$css['color'] = $attributes['productPriceColor'] ?? '';
-
 		$typography = isset( $attributes['productPriceTypography'] ) && is_array( $attributes['productPriceTypography'] )
 			? $attributes['productPriceTypography']
 			: [];
@@ -214,13 +181,12 @@ class Block extends BlockBaseAbstract {
 
 		return array_merge(
 			Typography::get_css( $typography_value, $device ),
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['productPriceColor'] ) ? $attributes['productPriceColor'] : '' ) ]
 		);
 
 	}
 	public function get_cart_list_product_price_hover_css( $attributes, $device = '' ) {
-		$css['color'] = $attributes['productPriceColorH'] ?? '';
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['productPriceColorH'] ) ? $attributes['productPriceColorH'] : '' ) ];
 	}
 
 	public function render_block_content( $attributes, $content, $block_instance ) {

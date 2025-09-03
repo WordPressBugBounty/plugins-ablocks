@@ -12,6 +12,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Background;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
+use ABlocks\Controls\Color;
 
 
 class Block extends BlockBaseAbstract {
@@ -33,14 +34,9 @@ class Block extends BlockBaseAbstract {
 
 	public function build_css( $attributes ) {
 		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
-
-		$login_form_button_desktop_css = $this->get_login_form_button_css( $attributes );
-		if ( ! empty( $attributes['login_btn_color'] ) ) {
-			$login_form_button_desktop_css['color'] = $attributes['login_btn_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-login-form-wrapper .academy-login-form .academy-form-group button',
-			$login_form_button_desktop_css,
+			$this->get_login_form_button_css( $attributes ),
 			$this->get_login_form_button_css( $attributes, 'Tablet' ),
 			$this->get_login_form_button_css( $attributes, 'Mobile' )
 		);
@@ -51,15 +47,10 @@ class Block extends BlockBaseAbstract {
 			$this->get_login_btn_hover_css( $attributes, 'Tablet' ),
 			$this->get_login_btn_hover_css( $attributes, 'Mobile' )
 		);
-
-		$login_form_footer_desktop_css = $this->get_login_form_footer_css( $attributes );
-		if ( ! empty( $attributes['form_footer_title_color'] ) ) {
-			$login_form_footer_desktop_css['color'] = $attributes['form_footer_title_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-login-form-wrapper .academy-login-form-info,
 			{{WRAPPER}} .academy-login-form-wrapper .academy-login-form-info a ',
-			$login_form_footer_desktop_css,
+			$this->get_login_form_footer_css( $attributes ),
 			$this->get_login_form_footer_css( $attributes, 'Tablet' ),
 			$this->get_login_form_footer_css( $attributes, 'Mobile' )
 		);
@@ -70,28 +61,18 @@ class Block extends BlockBaseAbstract {
 		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-login-form-wrapper .academy-login-form-heading',
-			$form_title_desktop_css,
+			$this->get_form_title_css( $attributes ),
 			$this->get_form_title_css( $attributes, 'Tablet' ),
 			$this->get_form_title_css( $attributes, 'Mobile' )
 		);
-
-		$form_title_desktop_hover_css = [];
-		if ( ! empty( $attributes['title_hover_color'] ) ) {
-			$form_title_desktop_hover_css['color'] = $attributes['title_hover_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-login-form-wrapper .academy-login-form-heading:hover',
-			$form_title_desktop_hover_css,
+			$this->form_title_desktop_hover_css( $attributes )
 		);
-
-		$input_field_label_desktop_css = $this->get_input_field_label_css( $attributes );
-		if ( ! empty( $attributes['input_field_label_color'] ) ) {
-			$input_field_label_desktop_css['color'] = $attributes['input_field_label_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-login-form-wrapper .academy-login-form label,
 			{{WRAPPER}} .academy-login-form-wrapper .academy-login-form a',
-			$input_field_label_desktop_css,
+			$this->get_input_field_label_css( $attributes ),
 			$this->get_input_field_label_css( $attributes, 'Tablet' ),
 			$this->get_input_field_label_css( $attributes, 'Mobile' )
 		);
@@ -137,25 +118,31 @@ class Block extends BlockBaseAbstract {
 
 	public function get_login_form_button_css( $attributes, $device = '' ) {
 		$login_form_button_typography_css = ! empty( $attributes['login_btn_typography'] ) ? Typography::get_css( $attributes['login_btn_typography'], '', $device ) : array();
-		$login_form_button_bg_css = array();
-
-		if ( ! empty( $attributes['login_btn_bg_color'] ) ) {
-			$login_form_button_bg_css['background'] = $attributes['login_btn_bg_color'];
-		}
 		return array_merge(
 			$login_form_button_typography_css,
-			$login_form_button_bg_css,
+			[ 'color' => Color::get_css( isset( $attributes['login_btn_color'] ) ? $attributes['login_btn_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['login_btn_bg_color'] ) ? $attributes['login_btn_bg_color'] : '' ) ]
 		);
 	}
 
 	public function get_login_form_footer_css( $attributes, $device = '' ) {
 		$login_form_footer_typography_css = ! empty( $attributes['form_footer_title_typography'] ) ? Typography::get_css( $attributes['form_footer_title_typography'], '', $device ) : array();
-		return $login_form_footer_typography_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['form_footer_title_color'] ) ? $attributes['form_footer_title_color'] : '' ) ],
+			$login_form_footer_typography_css
+		);
 	}
 
 	public function get_form_title_css( $attributes, $device = '' ) {
 		$form_title_typography_css = ! empty( $attributes['title_typography'] ) ? Typography::get_css( $attributes['title_typography'], '', $device ) : array();
-		return $form_title_typography_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['title_color'] ) ? $attributes['title_color'] : '' ) ],
+			$form_title_typography_css
+		);
+	}
+	public function form_title_desktop_hover_css( $attributes ) {
+		return [ 'color' => Color::get_css( isset( $attributes['title_hover_color'] ) ? $attributes['title_hover_color'] : '' ) ];
+
 	}
 
 	public function get_course_card_title_css( $attributes, $device = '' ) {
@@ -165,56 +152,34 @@ class Block extends BlockBaseAbstract {
 
 	public function get_input_field_label_css( $attributes, $device = '' ) {
 		$input_field_label_typography_css = ! empty( $attributes['input_field_label_typography'] ) ? Typography::get_css( $attributes['input_field_label_typography'], '', $device ) : array();
-		return $input_field_label_typography_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['input_field_label_color'] ) ? $attributes['input_field_label_color'] : '' ) ],
+			$input_field_label_typography_css
+		);
 	}
 
 	public function get_input_field_label_hover_css( $attributes, $device = '' ) {
-		$input_field_label_hover_css = array();
-
-		if ( ! empty( $attributes['input_field_label_hover_color'] ) ) {
-			$input_field_label_hover_css['color'] = $attributes['input_field_label_hover_color'];
-		}
-		return $input_field_label_hover_css;
+		return [ 'color' => Color::get_css( isset( $attributes['input_field_label_hover_color'] ) ? $attributes['input_field_label_hover_color'] : '' ) ];
 	}
 
 	public function get_input_field_css( $attributes, $device = '' ) {
-		$input_field_css = array();
 		$input_border_css = ! empty( $attributes['input_field_border'] ) ? Border::get_css( $attributes['input_field_border'], '', $device ) : array();
 		$input_field_padding = ! empty( $attributes['input_field_padding'] ) ? Dimensions::get_css( $attributes['input_field_padding'], 'padding', $device ) : array();
-		if ( ! empty( $attributes['input_field_bg_color'] ) ) {
-			$input_field_css['background'] = $attributes['input_field_bg_color'];
-		}
-		if ( ! empty( $attributes['inputFieldColor'] ) ) {
-			$input_field_css['color'] = $attributes['inputFieldColor'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['inputFieldColor'] ) ? $attributes['inputFieldColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['input_field_bg_color'] ) ? $attributes['input_field_bg_color'] : '' ) ],
 			$input_border_css,
-			$input_field_css,
 			$input_field_padding
 		);
 	}
 	public function get_input_field_placeholder_css( $attributes, $device = '' ) {
-		$input_field_css = array();
-		if ( ! empty( $attributes['inputFieldColor'] ) ) {
-			$input_field_css['color'] = $attributes['inputFieldColor'];
-		}
-		return $input_field_css;
+		return [ 'color' => Color::get_css( isset( $attributes['inputFieldColor'] ) ? $attributes['inputFieldColor'] : '' ) ];
 	}
 
 	public function get_login_btn_hover_css( $attributes, $device = '' ) {
-		$login_btn_background_css = array();
-		$login_btn_hover_color = array();
-
-		if ( ! empty( $attributes['login_btn_hover_color'] ) ) {
-			$login_btn_hover_color['color'] = $attributes['login_btn_hover_color'];
-		}
-		if ( ! empty( $attributes['login_btn_bg_hover_color'] ) ) {
-			$login_btn_background_css['background'] = $attributes['login_btn_bg_hover_color'];
-		}
-
 		return array_merge(
-			$login_btn_background_css,
-			$login_btn_hover_color,
+			[ 'color' => Color::get_css( isset( $attributes['login_btn_hover_color'] ) ? $attributes['login_btn_hover_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['login_btn_bg_hover_color'] ) ? $attributes['login_btn_bg_hover_color'] : '' ) ]
 		);
 	}
 

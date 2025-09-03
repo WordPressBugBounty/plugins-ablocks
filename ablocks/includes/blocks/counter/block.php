@@ -9,6 +9,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Icon;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'counter';
@@ -245,10 +246,6 @@ class Block extends BlockBaseAbstract {
 
 	public function get_number_text_css( $attributes, $device = '' ) {
 		$css = [];
-		$number_color = ! empty( $attributes['numberColor'] ) ? $attributes['numberColor'] : '';
-		if ( $number_color ) {
-			$css['color'] = $attributes['numberColor'];
-		}
 		if ( isset( $attributes['mediaPosition'] ) && $attributes['mediaPosition'] === 'leftOfNumber' || isset( $attributes['mediaPosition'] ) && $attributes['mediaPosition'] === 'rightOfNumber' || isset( $attributes['layout'] ) && $attributes['layout'] === 'bar' ) {
 			$css['display'] = 'inline-flex';
 			$css['align-items'] = 'center';
@@ -257,6 +254,7 @@ class Block extends BlockBaseAbstract {
 			$css['display'] = 'block';
 		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['numberColor'] ) ? $attributes['numberColor'] : '' ) ],
 			isset( $attributes['numberTypography'] ) ? Typography::get_css( $attributes['numberTypography'], '', $device ) : [],
 			isset( $attributes['numberMargin'] ) ? Dimensions::get_css( $attributes['numberMargin'], 'margin', '', $device ) : [],
 			$css
@@ -264,34 +262,20 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_heading_text_css( $attributes, $device = '' ) {
-		$css = [];
-		$heading_color = ! empty( $attributes['headingColor'] ) ? $attributes['headingColor'] : '';
-		if ( $heading_color ) {
-			$css['color'] = $attributes['headingColor'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['headingColor'] ) ? $attributes['headingColor'] : '' ) ],
 			isset( $attributes['headingTypography'] ) ? Typography::get_css( $attributes['headingTypography'], '', $device ) : [],
 			isset( $attributes['headingMargin'] ) ? Dimensions::get_css( $attributes['headingMargin'], 'margin', $device ) : [],
-			$css
 		);
 	}
 
 
 	public function get_counter_bar_bg_css( $attributes ) {
-		$counter_bar_bg_css = [];
-
-		if ( ! empty( $attributes['barBackgroundColor'] ) ) {
-			$counter_bar_bg_css['background'] = $attributes['barBackgroundColor'];
-		}
-
-		return $counter_bar_bg_css;
+		return [ 'background' => Color::get_css( isset( $attributes['barBackgroundColor'] ) ? $attributes['barBackgroundColor'] : '' ) ];
 	}
 
 	public function get_counter_bar_progress_css( $attributes, $device = '' ) {
 		$counter_bar_progress_css = [];
-		if ( ! empty( $attributes['barProgressColor'] ) ) {
-			$counter_bar_progress_css['background'] = $attributes['barProgressColor'];
-		}
 		if ( ! empty( $attributes['barHeadingPosition'] ) ) {
 			if ( $attributes['barHeadingPosition'] === 'inner' ) {
 				$counter_bar_progress_css['justify-content'] = 'space-between';
@@ -304,6 +288,7 @@ class Block extends BlockBaseAbstract {
 		}
 
 		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['barProgressColor'] ) ? $attributes['barProgressColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['barSize'],
 				'attribute_object_key' => 'value',
@@ -331,16 +316,12 @@ class Block extends BlockBaseAbstract {
 
 	public function get_counter_circle_bg_css( $attributes ) {
 		$counter_circle_bg_css = [];
-
-		if ( ! empty( $attributes['circleBackgroundColor'] ) ) {
-			$counter_circle_bg_css['stroke'] = $attributes['circleBackgroundColor'];
-		}
-
 		if ( ! empty( $attributes['circleStrokeSize'] ) ) {
 			$counter_circle_bg_css['stroke-width'] = $attributes['circleStrokeSize'];
 		}
 
 		return array_merge(
+			[ 'stroke' => Color::get_css( isset( $attributes['circleBackgroundColor'] ) ? $attributes['circleBackgroundColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['circleStrokeSize'],
 				'attribute_object_key' => 'value',
@@ -352,20 +333,14 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_counter_circle_progress_css( $attributes ) {
-		$counter_circle_progress_css = [];
-
-		if ( ! empty( $attributes['circleProgressColor'] ) ) {
-			$counter_circle_progress_css['stroke'] = $attributes['circleProgressColor'];
-		}
-
 		return array_merge(
+			[ 'stroke' => Color::get_css( isset( $attributes['circleProgressColor'] ) ? $attributes['circleProgressColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['circleStrokeSize'],
 				'attribute_object_key' => 'value',
 				'defaultValue' => 20,
 				'property' => 'stroke-width',
 			]),
-			$counter_circle_progress_css,
 		);
 	}
 

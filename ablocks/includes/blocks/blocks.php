@@ -74,6 +74,8 @@ return [
 	'logout',
 	'player',
 	'advance-lists',
+	'taxonomy-listing',
+	'qr-code',
 	'advance-list-item',
 	// loop builder
 	'loop-builder',
@@ -113,6 +115,7 @@ return [
 	'storeengine-continue-button',
 	'storeengine-checkout-button',
 	'storeengine-cart-sub-table',
+	'storeengine-cart-button',
 	'storeengine-order-info',
 	'storeengine-billing-info',
 	'storeengine-shipping-info',

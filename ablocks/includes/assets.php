@@ -25,13 +25,13 @@ class Assets {
 		add_action( 'admin_enqueue_scripts', [ $self, 'demo_importer_scripts' ], 10 );
 		add_action( 'enqueue_block_assets', [ $self, 'block_editor_assets' ] );
 		add_action( 'enqueue_block_assets', [ $self, 'register_scripts' ] );
-		add_action( 'wp_enqueue_scripts', [ $self, 'front_end_google_fonts' ] );
+		add_action( 'wp_enqueue_scripts', [ $self, 'front_end_google_fonts' ], 999 );
 
 		add_action( 'wp_enqueue_scripts', [ $self, 'enqueue_frontend_assets' ], 99 );
 		// Global CSS
-		add_action( 'wp_enqueue_block_assets', [ $self, 'global_css_variable' ], 999 );
-		add_action( 'wp_enqueue_scripts', [ $self, 'global_css_variable' ], 999 );
-		add_action( 'enqueue_block_editor_assets', [ $self, 'global_css_variable' ], 999 );
+		add_action( 'wp_enqueue_block_assets', [ $self, 'global_css_variable' ] );
+		add_action( 'wp_enqueue_scripts', [ $self, 'global_css_variable' ] );
+		add_action( 'enqueue_block_editor_assets', [ $self, 'global_css_variable' ] );
 		// Detect page
 		add_action( 'wp', array( $self, 'detect_page' ) );
 

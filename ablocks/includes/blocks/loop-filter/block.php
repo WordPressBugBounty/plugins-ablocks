@@ -12,6 +12,7 @@ use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Typography;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $parent_block_name = 'loop-builder';
@@ -141,20 +142,13 @@ class Block extends BlockBaseAbstract {
 		$normal_button_border = ! empty( $attributes['filterBtnBorder'] ) ? Border::get_css( $attributes['filterBtnBorder'], '', $device ) : array();
 
 		$css = array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['filterBtnTextColor'] ) ? $attributes['filterBtnTextColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['filterBtnBgColor'] ) ? $attributes['filterBtnBgColor'] : '' ) ],
 			$normal_button_border,
 			Typography::get_css( isset( $attributes['typography'] ) ? $attributes['typography'] : array(), $device ),
 			Dimensions::get_css( isset( $attributes['filterButtonPadding'] ) ? $attributes['filterButtonPadding'] : [], 'padding', $device ),
 			Dimensions::get_css( isset( $attributes['filterButtonMargin'] ) ? $attributes['filterButtonMargin'] : [], 'margin', $device ),
 		);
-
-		if ( ! empty( $attributes['filterBtnTextColor'] ) ) {
-			$css['color'] = $attributes['filterBtnTextColor'];
-		}
-
-		if ( ! empty( $attributes['filterBtnBgColor'] ) ) {
-			$css['background-color'] = $attributes['filterBtnBgColor'];
-		}
-
 		return $css;
 
 	}
@@ -170,18 +164,11 @@ class Block extends BlockBaseAbstract {
 		: array();
 
 		$css = array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['activeBtnTextColor'] ) ? $attributes['activeBtnTextColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['activeBtnBgColor'] ) ? $attributes['activeBtnBgColor'] : '' ) ],
 			$button_border_css,
 			Typography::get_css( isset( $attributes['typography'] ) ? $attributes['typography'] : array(), $device ),
 		);
-
-		if ( ! empty( $attributes['activeBtnTextColor'] ) ) {
-			$css['color'] = $attributes['activeBtnTextColor'];
-		}
-
-		if ( ! empty( $attributes['activeBtnBgColor'] ) ) {
-			$css['background-color'] = $attributes['activeBtnBgColor'];
-		}
-
 		return $css;
 	}
 

@@ -13,6 +13,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Border;
+use ABlocks\Controls\Color;
 
 
 class Block extends BlockBaseAbstract {
@@ -115,28 +116,28 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $attributes['toggleNormalBgColor'] ) ) {
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-toggle__slider',
-				[ 'background-color' => $attributes['toggleNormalBgColor'] ]
+				[ 'background-color' => Color::get_css( isset( $attributes['toggleNormalBgColor'] ) ? $attributes['toggleNormalBgColor'] : '' ) ]
 			);
 		}
 
 		if ( ! empty( $attributes['toggleNormalColor'] ) ) {
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-toggle__slider:before',
-				[ 'background-color' => $attributes['toggleNormalColor'] ]
+				[ 'background-color' => Color::get_css( isset( $attributes['toggleNormalColor'] ) ? $attributes['toggleNormalColor'] : '' ) ]
 			);
 		}
 
 		if ( ! empty( $attributes['toggleActiveBgColor'] ) ) {
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} input.ablocks-toggle__checkbox:checked + .ablocks-toggle__slider',
-				[ 'background-color' => $attributes['toggleActiveBgColor'] ]
+				[ 'background-color' => Color::get_css( isset( $attributes['toggleActiveBgColor'] ) ? $attributes['toggleActiveBgColor'] : '' ) ]
 			);
 		}
 
 		if ( ! empty( $attributes['toggleActiveColor'] ) ) {
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} input.ablocks-toggle__checkbox:checked + .ablocks-toggle__slider:before',
-				[ 'background-color' => $attributes['toggleActiveColor'] ]
+				[ 'background-color' => Color::get_css( isset( $attributes['toggleActiveColor'] ) ? $attributes['toggleActiveColor'] : '' ) ]
 			);
 		}
 
@@ -150,12 +151,9 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_toggle_bar_css( $attributes, $device = '' ) {
-		$toggleBarCSS = [];
-		if ( ! empty( $attributes['toggleBarBgColor'] ) ) {
-			$toggleBarCSS['background-color'] = $attributes['toggleBarBgColor'];
-		}
+
 		return array_merge(
-			$toggleBarCSS,
+			[ 'background-color' => Color::get_css( isset( $attributes['toggleBarBgColor'] ) ? $attributes['toggleBarBgColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['space'],
 				'attribute_object_key' => 'value',
@@ -194,19 +192,13 @@ class Block extends BlockBaseAbstract {
 
 	public function get_toggle_label_css( $attributes, $device = '' ) {
 		$labelCSS = isset( $attributes['labelTypography'] ) ? Typography::get_css( $attributes['labelTypography'], '', $device ) : [];
-		if ( ! empty( $attributes['labelNormalColor'] ) ) {
-			$labelCSS['color'] = $attributes['labelNormalColor'];
-		}
-		return $labelCSS;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['labelNormalColor'] ) ? $attributes['labelNormalColor'] : '' ) ],
+			$labelCSS
+		);
 	}
 
 	public function get_toggle_label_active_css( $attributes ) {
-		$labelActiveCSS = [];
-
-		if ( ! empty( $attributes['labelActiveColor'] ) ) {
-			$labelActiveCSS['color'] = $attributes['labelActiveColor'];
-		}
-
-		return $labelActiveCSS;
+		return [ 'color' => Color::get_css( isset( $attributes['labelActiveColor'] ) ? $attributes['labelActiveColor'] : '' ) ];
 	}
 }

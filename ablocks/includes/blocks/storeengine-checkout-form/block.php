@@ -12,6 +12,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'storeengine-checkout-form';
@@ -89,9 +90,6 @@ class Block extends BlockBaseAbstract {
 		return $css_generator->generate_css();
 	}
 	public function get_Cheackout_form_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color'] = $attributes['titleColor'];
-
 		$typography = isset( $attributes['titleTypography'] ) && is_array( $attributes['titleTypography'] )
 			? $attributes['titleTypography']
 			: [];
@@ -99,24 +97,17 @@ class Block extends BlockBaseAbstract {
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['titleColor'] ) ? $attributes['titleColor'] : '' ) ],
 			Typography::get_css( $typography_value, $device ),
 		);
 
 	}
 
 	public function get_Cheackout_form_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color'] = $attributes['titleColorH'];
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['titleColorH'] ) ? $attributes['titleColorH'] : '' ) ];
 	}
 
 	public function get_Cheackout_form_label_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['labelColor'];
-
 		$typography = isset( $attributes['labelTypography'] ) && is_array( $attributes['labelTypography'] )
 			? $attributes['labelTypography']
 			: [];
@@ -124,16 +115,12 @@ class Block extends BlockBaseAbstract {
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['labelColor'] ) ? $attributes['labelColor'] : '' ) ],
 			Typography::get_css( $typography_value, $device ),
 		);
 	}
 	public function get_Cheackout_form_label_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['labelColorH'];
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['labelColorH'] ) ? $attributes['labelColorH'] : '' ) ];
 	}
 	public function get_Cheackout_form_input_css( $attributes, $device = '' ) {
 
@@ -154,11 +141,7 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_cheackout_form_select_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color']  = $attributes['selectTextcolor'];
-		$css['background'] = $attributes['selectBackground'];
 		$typographyValue = ! empty( $attributes['selectTypography'] ) ? Typography::get_css( $attributes['selectTypography'], '', $device ) : array();
-
 		if ( ! empty( $attributes['selectPadding'] ) ) {
 			$cssPadding = Dimensions::get_css( $attributes['selectPadding'], '', $device );
 		}
@@ -168,6 +151,8 @@ class Block extends BlockBaseAbstract {
 		}
 
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['selectTextcolor'] ) ? $attributes['selectTextcolor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['selectBackground'] ) ? $attributes['selectBackground'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['selectWidth'],
 				'attribute_object_key' => 'value',
@@ -178,7 +163,6 @@ class Block extends BlockBaseAbstract {
 				'unitDefaultValue' => 'px',
 				'device' => $device,
 			]),
-			$css,
 			$cssBorder,
 			$cssPadding,
 			$typographyValue,
@@ -188,38 +172,30 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_cheackout_form_button_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['buttonColor'];
-		$css['background'] = $attributes['buttonBackground'];
 		$typographyValue = ! empty( $attributes['buttonTypography'] ) ? Typography::get_css( $attributes['buttonTypography'], '', $device ) : array();
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['buttonColor'] ) ? $attributes['buttonColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['buttonBackground'] ) ? $attributes['buttonBackground'] : '' ) ],
 			$typographyValue,
 		);
 	}
 
 	public function get_cheackout_form_button_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['buttonColorH'];
-		$css['background'] = $attributes['buttonBackgroundH'];
-
-		return $css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['buttonColorH'] ) ? $attributes['buttonColorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['buttonBackgroundH'] ) ? $attributes['buttonBackgroundH'] : '' ) ],
+		);
 	}
 
 	public function get_cheackout_form_select_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color']  = $attributes['selectTextcolorH'];
-		$css['background'] = $attributes['selectBackgroundH'];
-
 		if ( ! empty( $attributes['selectBorder'] ) ) {
 				$cssBorder = Border::get_hover_css( $attributes['selectBorder'] ?? [], '', $device );
 
 		}
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['selectTextcolorH'] ) ? $attributes['selectTextcolorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['selectBackgroundH'] ) ? $attributes['selectBackgroundH'] : '' ) ],
 			$cssBorder,
 		);
 	}

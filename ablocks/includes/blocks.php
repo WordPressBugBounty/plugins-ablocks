@@ -59,6 +59,7 @@ class Blocks {
 			new \ABlocks\Blocks\StoreengineContinueButton\Block();
 			new \ABlocks\Blocks\StoreengineCheckoutButton\Block();
 			new \ABlocks\Blocks\StoreengineCartSubTable\Block();
+			new \ABlocks\Blocks\StoreengineCartButton\Block();
 			new \ABlocks\Blocks\StoreengineOrderInfo\Block();
 			new \ABlocks\Blocks\StoreengineBillingInfo\Block();
 			new \ABlocks\Blocks\StoreengineShippingInfo\Block();
@@ -136,6 +137,7 @@ class Blocks {
 		new \ABlocks\Blocks\FilterableCardsItem\Block();
 		new \ABlocks\Blocks\AdvanceLists\Block();
 		new \ABlocks\Blocks\AdvanceListItem\Block();
+		new \ABlocks\Blocks\QrCode\Block();
 		// Form Builder
 		new \ABlocks\Blocks\FormBuilder\Block();
 		new \ABlocks\Blocks\FormInput\Block();
@@ -147,6 +149,7 @@ class Blocks {
 		new \ABlocks\Blocks\FormMultiStepChild\Block();
 		new \ABlocks\Blocks\FormRadio\Block();
 		new \ABlocks\Blocks\TextPath\Block();
+		new \ABlocks\Blocks\taxonomyListing\Block();
 		new \ABlocks\Blocks\Player\Block();
 	}
 

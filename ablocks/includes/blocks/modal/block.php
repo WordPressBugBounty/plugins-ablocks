@@ -14,6 +14,7 @@ use ABlocks\Controls\Background;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Border;
 use ABlocks\Classes\CssGeneratorV2;
+use ABlocks\Controls\Color;
 
 
 class Block extends BlockBaseAbstract {
@@ -117,12 +118,7 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $device ) ) {
 			return [];
 		}
-		$css = [];
-		$backdrop_color = ! empty( $attributes['backdropColor'] ) ? $attributes['backdropColor'] : '';
-		if ( $backdrop_color ) {
-			$css['background-color'] = $backdrop_color;
-		}
-		return $css;
+		return [ 'background-color' => Color::get_css( isset( $attributes['backdropColor'] ) ? $attributes['backdropColor'] : '' ) ];
 	}
 
 	public function get_panel_content_wrap_css( $attributes, $device = '' ) {
@@ -200,19 +196,20 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 		if ( empty( $device ) ) {
 			if ( ! empty( $attributes['closeBtnBackgroundColor'] ) ) {
-				$css['background-color'] = $attributes['closeBtnBackgroundColor'];
+				$css['background-color'] = Color::get_css(
+				isset( $attributes['closeBtnBackgroundColor'] ) ? $attributes['closeBtnBackgroundColor'] : '');
 			}
-			if ( ! empty( $attributes['closeBtnTop'] ) || 0 === $attributes['closeBtnTop'] ) {
-				$css['top'] = $attributes['closeBtnTop'] . 'px';
-			}
-			if ( ! empty( $attributes['closeBtnSide'] ) || 0 === $attributes['closeBtnSide'] ) {
-				if ( 'left' === $attributes['closePosition'] ) {
-					$css['left'] = $attributes['closeBtnSide'] . 'px';
-					$css['right'] = 'unset';
-				} else {
-					$css['right'] = $attributes['closeBtnSide'] . 'px';
-					$css['left'] = 'unset';
-				}
+		}
+		if ( ! empty( $attributes['closeBtnTop'] ) || 0 === $attributes['closeBtnTop'] ) {
+			$css['top'] = $attributes['closeBtnTop'] . 'px';
+		}
+		if ( ! empty( $attributes['closeBtnSide'] ) || 0 === $attributes['closeBtnSide'] ) {
+			if ( 'left' === $attributes['closePosition'] ) {
+				$css['left'] = $attributes['closeBtnSide'] . 'px';
+				$css['right'] = 'unset';
+			} else {
+				$css['right'] = $attributes['closeBtnSide'] . 'px';
+				$css['left'] = 'unset';
 			}
 		}
 		return $css;

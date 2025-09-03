@@ -13,6 +13,7 @@ use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Range;
 use ABlocks\Classes\CssGeneratorV2;
+use ABlocks\Controls\Color;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'social-shares';
 
@@ -203,12 +204,8 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_social_share_bar_css( $attributes, $device = '' ) {
-		$css = [
-			'background' => $attributes['buttonBackground'],
-		];
-
 		return array_merge(
-			$css,
+			[ 'background' => Color::get_css( isset( $attributes['buttonBackground'] ) ? $attributes['buttonBackground'] : '' ) ],
 			Border::get_css( $attributes['border'], $device ),
 			Range::get_css([
 				'attributeValue' => $attributes['shareSize'],
@@ -234,21 +231,14 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_share_border_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['buttonHover'] ) ) {
-			$css['background'] = $attributes['buttonHover'];
-		}
 		return array_merge(
-			$css,
+			[ 'background' => Color::get_css( isset( $attributes['buttonHover'] ) ? $attributes['buttonHover'] : '' ) ],
 			( isset( $attributes['border'] ) ? Border::get_hover_css( $attributes['border'], '', $device ) : [] )
 		);
 	}
 	public function get_share_icon_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['shareButtonIconColor'] ) ) {
-			$css['fill'] = $attributes['shareButtonIconColor'] . ' !important';
-		}
-		return array_merge( $css,
+		return array_merge(
+			[ 'fill' => Color::get_css( isset( $attributes['shareButtonIconColor'] ) ? $attributes['shareButtonIconColor'] : '' ) . '!important' ],
 			Range::get_css( [
 				'attributeValue' => $attributes['shareIconSize'],
 				'attribute_object_key' => 'value',
@@ -272,12 +262,7 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_share_icon_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['shareButtonIconColorH'] ) ) {
-			$css['fill'] = $attributes['shareButtonIconColorH'] . ' !important';
-		}
-		return $css;
+		return [ 'fill' => Color::get_css( isset( $attributes['shareButtonIconColorH'] ) ? $attributes['shareButtonIconColorH'] : '' ) . '!important' ];
 	}
 	public function shareItemIconSVG( $attributes, $device = '' ) {
 		return Range::get_css( [

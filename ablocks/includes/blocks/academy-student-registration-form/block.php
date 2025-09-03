@@ -12,6 +12,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Background;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
+use ABlocks\Controls\Color;
 
 
 class Block extends BlockBaseAbstract {
@@ -35,14 +36,9 @@ class Block extends BlockBaseAbstract {
 
 	public function build_css( $attributes ) {
 		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
-
-		$input_field_label_desktop_css = $this->get_form_input_label_css( $attributes );
-		if ( ! empty( $attributes['input_label_color'] ) ) {
-			$input_field_label_desktop_css['color'] = $attributes['input_label_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-reg-form--student .academy-form-group label',
-			$input_field_label_desktop_css,
+			$this->get_form_input_label_css( $attributes ),
 			$this->get_form_input_label_css( $attributes, 'Tablet' ),
 			$this->get_form_input_label_css( $attributes, 'Mobile' )
 		);
@@ -106,67 +102,43 @@ class Block extends BlockBaseAbstract {
 
 	public function get_form_input_label_css( $attributes, $device = '' ) {
 		$input_label_typography_css = ! empty( $attributes['input_label_typhography'] ) ? Typography::get_css( $attributes['input_label_typhography'], '', $device ) : array();
-		return $input_label_typography_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['input_label_color'] ) ? $attributes['input_label_color'] : '' ) ],
+			$input_label_typography_css
+		);
 	}
 
 	public function get_form_input_label_hover_css( $attributes, $device = '' ) {
-		$css = array();
-		if ( ! empty( $attributes['input_label_hover_color'] ) ) {
-			$css['color'] = $attributes['input_label_hover_color'];
-		}
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['input_label_hover_color'] ) ? $attributes['input_label_hover_color'] : '' ) ];
 	}
 
 	public function get_form_input_field_css( $attributes, $device = '' ) {
-		$css = array();
 		$input_field_border_css = ! empty( $attributes['form_field_border'] ) ? Border::get_css( $attributes['form_field_border'], '', $device ) : array();
-		if ( ! empty( $attributes['input_field_color'] ) ) {
-			$css['color'] = $attributes['input_field_color'];
-		}
-		if ( ! empty( $attributes['input_field_bg_color'] ) ) {
-			$css['background'] = $attributes['input_field_bg_color'];
-		}
-
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['input_field_color'] ) ? $attributes['input_field_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['input_field_bg_color'] ) ? $attributes['input_field_bg_color'] : '' ) ],
 			$input_field_border_css,
-			$css,
 		);
 	}
 
 	public function get_form_input_field_hover_css( $attributes, $device = '' ) {
-		$css = array();
 		$input_field_border_hover_css = ! empty( $attributes['form_field_border'] ) ? Border::get_hover_css( $attributes['form_field_border'], '', $device ) : array();
-
-		return array_merge(
-			$input_field_border_hover_css,
-			$css,
-		);
+		return $input_field_border_hover_css;
 	}
 	public function get_form_input_field_placeholder_css( $attributes, $device = '' ) {
-		$css = array();
-		if ( ! empty( $attributes['input_field_placeholder_color'] ) ) {
-			$css['color'] = $attributes['input_field_placeholder_color'];
-		}
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['input_field_placeholder_color'] ) ? $attributes['input_field_placeholder_color'] : '' ) ];
 	}
 
 	public function get_form_button_css( $attributes, $device = '' ) {
-		$css = array();
-		if ( ! empty( $attributes['form_button_background'] ) ) {
-			$css['background'] = $attributes['form_button_background'];
-		}
-		if ( ! empty( $attributes['form_button_color'] ) ) {
-			$css['color'] = $attributes['form_button_color'];
-		}
 		$form_button_typography_css = ! empty( $attributes['form_button_typhography'] ) ? Typography::get_css( $attributes['form_button_typhography'], '', $device ) : array();
 		$form_button_padding = ! empty( $attributes['form_button_padding'] ) ? Dimensions::get_css( $attributes['form_button_padding'], 'padding', $device ) : array();
 		$form_button_border_css = ! empty( $attributes['form_button_border'] ) ? Border::get_css( $attributes['form_button_border'], '', $device ) : array();
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['form_button_color'] ) ? $attributes['form_button_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['form_button_background'] ) ? $attributes['form_button_background'] : '' ) ],
 			$form_button_typography_css,
 			$form_button_padding,
 			$form_button_border_css,
-			$css
 		);
 	}
 
@@ -192,18 +164,10 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_form_button_hover_css( $attributes, $device = '' ) {
-		$css = array();
-		if ( ! empty( $attributes['form_button_hover_background'] ) ) {
-			$css['background'] = $attributes['form_button_hover_background'];
-		}
-		if ( ! empty( $attributes['form_button_hover_color'] ) ) {
-			$css['color'] = $attributes['form_button_hover_color'];
-		}
-
 		$form_button_border = ! empty( $attributes['form_button_border'] ) ? Border::get_hover_css( $attributes['form_button_border'], '', $device ) : array();
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['form_button_hover_color'] ) ? $attributes['form_button_hover_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['form_button_hover_background'] ) ? $attributes['form_button_hover_background'] : '' ) ],
 			$form_button_border
 		);
 	}

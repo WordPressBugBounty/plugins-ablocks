@@ -15,6 +15,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Classes\CssGeneratorV2;
+use ABlocks\Controls\Color;
 
 
 
@@ -154,30 +155,18 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_button_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( isset( $attributes['textColorH'] ) ) {
-			$css['color'] = $attributes['textColorH'];
-		}
-		if ( isset( $attributes['backgroundH'] ) ) {
-			$css['background'] = $attributes['backgroundH'];
-		}
-
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['textColorH'] ) ? $attributes['textColorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['backgroundH'] ) ? $attributes['backgroundH'] : '' ) ],
 			isset( $attributes['padding'] ) ? Dimensions::get_css( $attributes['padding'], 'padding', $device ) : [],
-			$css
 		);
 	}
 
 
 	public function get_coupon_text_css( $attributes, $device = '' ) {
-		$css = [
-			'color' => $attributes['couponCodeColor'],
-			'background' => $attributes['couponCodeBgColor'],
-		];
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['couponCodeColor'] ) ? $attributes['couponCodeColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['couponCodeBgColor'] ) ? $attributes['couponCodeBgColor'] : '' ) ],
 			isset( $attributes['couponBorder'] ) ? Border::get_css( $attributes['couponBorder'], '', $device ) : [],
 			isset( $attributes['couponPadding'] ) ? Dimensions::get_css( $attributes['couponPadding'], 'padding', $device ) : [],
 			Typography::get_css( $attributes['couponTypography'], '', $device ),
@@ -186,13 +175,9 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_btn_text_css( $attributes, $device = '' ) {
-		$css = [
-			'color' => $attributes['couponBtnTextColor'],
-			'background' => $attributes['couponBtnBgColor'],
-		];
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['couponBtnTextColor'] ) ? $attributes['couponBtnTextColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['couponBtnBgColor'] ) ? $attributes['couponBtnBgColor'] : '' ) ],
 			Border::get_css( $attributes['buttonBorder'], '', $device ),
 			Dimensions::get_css( $attributes['buttonPadding'], 'padding', $device ),
 			Typography::get_css( $attributes['buttonTypography'], '', $device ),

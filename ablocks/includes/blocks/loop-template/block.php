@@ -11,6 +11,7 @@ use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $parent_block_name = 'loop-builder';
@@ -176,13 +177,9 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function template_card_style_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['bgColor'] ) ) {
-			$css['background'] = $attributes['bgColor'];
-		}
 		$templte_padding_css = ! empty( $attributes['padding'] ) ? Dimensions::get_css( $attributes['padding'], 'padding', $device ) : array();
 		return array_merge(
-			$css,
+			[ 'background' => Color::get_css( isset( $attributes['bgColor'] ) ? $attributes['bgColor'] : '' ) ],
 			$templte_padding_css,
 			! empty( $attributes['border'] ) ? Border::get_css( $attributes['border'], '', $device ) : [],
 		);

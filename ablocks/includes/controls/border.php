@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\ControlBaseAbstract;
+use ABlocks\Controls\Color;
 
 class Border extends ControlBaseAbstract {
 	public static function get_attribute_default_value( $is_responsive = false ) {
@@ -212,7 +213,7 @@ class Border extends ControlBaseAbstract {
 			$css['border-style'] = $value['borderStyle'];
 		}
 		if ( '' !== $value['borderColor'] ) {
-			$css['border-color'] = $value['borderColor'];
+			$css['border-color'] = Color::get_css( $value['borderColor'] );
 		}
 
 		// Separate handling of radius units
@@ -282,7 +283,7 @@ class Border extends ControlBaseAbstract {
 
 			// Handle hover border color
 			if ( ! empty( $value['borderColorH'] ) ) {
-				$css['border-color'] = $value['borderColorH'];
+				$css['border-color'] = Color::get_css( $value['borderColorH'] );
 			}
 		}
 

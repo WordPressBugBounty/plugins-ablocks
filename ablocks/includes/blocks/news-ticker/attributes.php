@@ -140,7 +140,7 @@ $attributes = [
 	],
 	'navigatorColor' => [
 		'type' => 'string',
-		'default' => 'black'
+		'default' => '#000000'
 	],
 	'showTickerNavigator' => [
 		'type' => 'boolean',

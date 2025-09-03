@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $parent_block_name = 'table';
@@ -31,17 +32,14 @@ class Block extends BlockBaseAbstract {
 
 	public function get_row_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['rowColor'] ) ) {
-			$css['background'] = $attributes['rowColor'] . ' !important';
-		}
-
+			$css['background'] = Color::get_css(
+			isset( $attributes['rowColor'] ) ? $attributes['rowColor'] : '') . ' !important';
 		return $css;
 	}
 	public function get_row_hover_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['rowColorH'] ) ) {
-			$css['background'] = $attributes['rowColorH'] . ' !important';
-		}
+			$css['background'] = Color::get_css(
+			isset( $attributes['rowColorH'] ) ? $attributes['rowColorH'] : '') . ' !important';
 
 		return $css;
 	}

@@ -69,7 +69,7 @@
         },
         "menuItemTextColorH": {
             "type": "string",
-            "default": "#000000"
+            "default": ""
         },
         "menuItemBackground": {
             "type": "string",

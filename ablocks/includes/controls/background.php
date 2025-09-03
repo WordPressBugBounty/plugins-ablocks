@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\ControlBaseAbstract;
+use ABlocks\Controls\Color;
 
 class Background extends ControlBaseAbstract {
 	public static function get_attribute_default_value( $is_responsive = false ) {
@@ -235,7 +236,7 @@ class Background extends ControlBaseAbstract {
 			$css[ $property . '-image' ] = 'url("' . $value['fallbackImageUrl'] . '")';
 			$css[ $property . '-size' ] = 'cover';
 		} elseif ( 'color' === $value['backgroundType'] && $value['backgroundColor'] ) {
-			$css[ $property ] = $value['backgroundColor'];
+			$css[ $property ] = Color::get_css( $value['backgroundColor'] );
 		}//end if
 
 		if ( '' !== $value['transitionDuration'] ) {
@@ -312,7 +313,7 @@ class Background extends ControlBaseAbstract {
 		} elseif ( 'video' === $value['backgroundTypeH'] ) {
 
 		} elseif ( 'color' === $value['backgroundTypeH'] && $value['backgroundColorH'] ) {
-			$css[ $property ] = $value['backgroundColorH'];
+			$css[ $property ] = Color::get_css( $value['backgroundColorH'] );
 		}//end if
 
 		return $css;

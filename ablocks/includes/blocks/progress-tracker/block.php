@@ -15,6 +15,7 @@ use ABlocks\Controls\Typography;
 use Google\Service\Slides\Shadow;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'progress-tracker';
@@ -154,26 +155,19 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_content_css( $attributes, $device = '' ) {
-		$content_css = [];
-		if ( ! empty( $attributes['contentColor'] ) ) {
-			$content_css['color'] = $attributes['contentColor'];
-		}
 		$typography = isset( $attributes['contentTypography'] ) ? $attributes['contentTypography'] : '';
 		$text_stroke = isset( $attributes['contentTextStroke'] ) ? $attributes['contentTextStroke'] : '';
 		$text_shadow = isset( $attributes['contentTextShadow'] ) ? $attributes['contentTextShadow'] : '';
 		return array_merge(
-			$content_css,
+			[ 'color' => Color::get_css( isset( $attributes['contentColor'] ) ? $attributes['contentColor'] : '' ) ],
 			Typography::get_css( $typography, '', $device ),
 			TextStroke::get_css( $text_stroke, '', $device ),
 			TextShadow::get_css( $text_shadow, '', $device )
 		);
 	}
 	public function get_progress_bar_track_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['barBackgroundColor'] ) ) {
-			$css['background'] = $attributes['barBackgroundColor'];
-		}
 		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['barBackgroundColor'] ) ? $attributes['barBackgroundColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['barHeightSize'],
 				'attribute_object_key' => 'value',
@@ -185,7 +179,6 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			]),
 			isset( $attributes['barBorder'] ) ? Border::get_css( $attributes['barBorder'], '', $device ) : [],
-			$css,
 		);
 	}
 	public function get_progress_bar_hover_css( $attributes, $device = '' ) {
@@ -196,31 +189,24 @@ class Block extends BlockBaseAbstract {
 
 	public function get_progress_bar_css( $attributes ) {
 		$css = [];
-		if ( ! empty( $attributes['barProgressColor'] ) ) {
-			$css['background'] = $attributes['barProgressColor'];
-		}
 		if ( ! empty( $attributes['direction'] ) && $attributes['direction'] === 'left' ) {
 			$css['justify-content'] = 'right';
 		} elseif ( ! empty( $attributes['direction'] ) && $attributes['direction'] === 'right' ) {
 			$css['justify-content'] = 'left';
 		}
-		return $css;
+		return array_merge(
+			$css,
+			[ 'background' => Color::get_css( isset( $attributes['barProgressColor'] ) ? $attributes['barProgressColor'] : '' ) ]
+		);
 	}
 
 	public function get_progress_circle_css( $attributes ) {
-		$css = [];
-		if ( $attributes['circleProgressColor'] ) {
-			$css['stroke'] = $attributes['circleProgressColor'];
-		}
-		return $css;
+		return [ 'stroke' => Color::get_css( isset( $attributes['circleProgressColor'] ) ? $attributes['circleProgressColor'] : '' ) ];
 	}
 
 	public function get_progress_circle_bg_css( $attributes ) {
-		$css = [];
-		if ( $attributes['circleBackgroundColor'] ) {
-			$css['stroke'] = $attributes['circleBackgroundColor'];
-		}
 		return array_merge(
+			[ 'stroke' => Color::get_css( isset( $attributes['circleBackgroundColor'] ) ? $attributes['circleBackgroundColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['circleStrokeSize'],
 				'attribute_object_key' => 'value',
@@ -228,7 +214,6 @@ class Block extends BlockBaseAbstract {
 				'unitDefaultValue' => 'px',
 				'property' => 'stroke-width'
 			]),
-			$css,
 		);
 	}
 }

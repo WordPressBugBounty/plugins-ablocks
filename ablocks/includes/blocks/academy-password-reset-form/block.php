@@ -12,6 +12,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Background;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'academy-password-reset-form';
@@ -95,116 +96,77 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function getResetFormCss( $attributes, $device = '' ) {
-		$css = array();
 		$form_border_css = ! empty( $attributes['form_border'] ) ? Border::get_css( $attributes['form_border'], '', $device ) : array();
 		$form_padding_css = ! empty( $attributes['form_padding'] ) ? Dimensions::get_css( $attributes['form_padding'], 'padding', $device ) : array();
-		if ( ! empty( $attributes['form_background_color'] ) ) {
-			$css['background'] = $attributes['form_background_color'];
-		}
 		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['form_background_color'] ) ? $attributes['form_background_color'] : '' ) ],
 			$form_border_css,
 			$form_padding_css,
-			$css
 		);
 	}
 	public function getResetFormHoverCss( $attributes, $device = '' ) {
-		$css = array();
 		$form_border_hover_css = ! empty( $attributes['form_border'] ) ? Border::get_hover_css( $attributes['form_border'], '', $device ) : array();
-		if ( ! empty( $attributes['form_background_hover_color'] ) ) {
-			$css['background'] = $attributes['form_background_hover_color'];
-		}
 		return array_merge(
-			$form_border_hover_css,
-			$css
+			[ 'background' => Color::get_css( isset( $attributes['form_background_hover_color'] ) ? $attributes['form_background_hover_color'] : '' ) ],
+			$form_border_hover_css
 		);
 	}
 	public function getResetFormLabelCss( $attributes, $device = '' ) {
-		$css = array();
 		$reset_form_label_typography_css = ! empty( $attributes['label_typography'] ) ? Typography::get_css( $attributes['label_typography'], '', $device ) : array();
-		if ( ! empty( $attributes['label_color'] ) ) {
-			$css['color'] = $attributes['label_color'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['label_color'] ) ? $attributes['label_color'] : '' ) ],
 			$reset_form_label_typography_css,
-			$css
 		);
 	}
 	public function getResetFormInputCss( $attributes, $device = '' ) {
-		$css = array();
 		$form_input_border_css = ! empty( $attributes['input_border'] ) ? Border::get_css( $attributes['input_border'], '', $device ) : array();
 		$form_input_padding_css = ! empty( $attributes['input_padding'] ) ? Dimensions::get_css( $attributes['input_padding'], 'padding', $device ) : array();
 		$form_input_typography_css = ! empty( $attributes['input_field_typography'] ) ? Typography::get_css( $attributes['input_field_typography'], '', $device ) : array();
-		if ( ! empty( $attributes['input_field_color'] ) ) {
-			$css['color'] = $attributes['input_field_color'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['input_field_color'] ) ? $attributes['input_field_color'] : '' ) ],
 			$form_input_border_css,
 			$form_input_padding_css,
 			$form_input_typography_css,
-			$css
 		);
 	}
 	public function getResetFormInputHoverCss( $attributes, $device = '' ) {
-		$css = array();
+
 		$form_input_border_hover_css = ! empty( $attributes['input_border'] ) ? Border::get_hover_css( $attributes['input_border'], '', $device ) : array();
-		return array_merge(
-			$form_input_border_hover_css,
-			$css
-		);
+		return $form_input_border_hover_css;
 	}
 
 	public function getResetFormButtonCss( $attributes, $device = '' ) {
-		$css = array();
 		$button_border = ! empty( $attributes['button_border'] ) ? Border::get_css( $attributes['button_border'], '', $device ) : array();
 		$button_padding = ! empty( $attributes['button_padding'] ) ? Dimensions::get_css( $attributes['button_padding'], 'padding', $device ) : array();
 		$button_typography = ! empty( $attributes['button_typography'] ) ? Typography::get_css( $attributes['button_typography'], '', $device ) : array();
-		if ( ! empty( $attributes['button_color'] ) ) {
-			$css['color'] = $attributes['button_color'];
-		}
-		if ( ! empty( $attributes['button_background_color'] ) ) {
-			$css['background'] = $attributes['button_background_color'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['button_color'] ) ? $attributes['button_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['button_background_color'] ) ? $attributes['button_background_color'] : '' ) ],
 			$button_border,
 			$button_padding,
 			$button_typography,
-			$css
 		);
 	}
 	public function getResetFormButtonHoverCss( $attributes, $device = '' ) {
-		$css = array();
 		$button_hover_border = ! empty( $attributes['button_border'] ) ? Border::get_hover_css( $attributes['button_border'], '', $device ) : array();
-		if ( ! empty( $attributes['button_hover_color'] ) ) {
-			$css['color'] = $attributes['button_hover_color'];
-		}
-		if ( ! empty( $attributes['button_background_hover_color'] ) ) {
-			$css['background'] = $attributes['button_background_hover_color'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['button_hover_color'] ) ? $attributes['button_hover_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['button_background_hover_color'] ) ? $attributes['button_background_hover_color'] : '' ) ],
 			$button_hover_border,
-			$css
 		);
 	}
 	public function getResetFormHeaderCss( $attributes, $device = '' ) {
-		$css = array();
 		$form_title_typography = ! empty( $attributes['form_title_typography'] ) ? Typography::get_css( $attributes['form_title_typography'], '', $device ) : array();
-		if ( ! empty( $attributes['form_title_color'] ) ) {
-			$css['color'] = $attributes['form_title_color'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['form_title_color'] ) ? $attributes['form_title_color'] : '' ) ],
 			$form_title_typography,
-			$css
 		);
 	}
 	public function getResetFormFooterCss( $attributes, $device = '' ) {
-		$css = array();
 		$form_footer_title_typography = ! empty( $attributes['form_footer_title_typography'] ) ? Typography::get_css( $attributes['form_footer_title_typography'], '', $device ) : array();
-		if ( ! empty( $attributes['form_footer_title_color'] ) ) {
-			$css['color'] = $attributes['form_footer_title_color'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['form_footer_title_color'] ) ? $attributes['form_footer_title_color'] : '' ) ],
 			$form_footer_title_typography,
-			$css
 		);
 	}
 

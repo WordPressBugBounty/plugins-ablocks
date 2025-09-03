@@ -2,6 +2,7 @@
 namespace ABlocks\Blocks\ImageHotspot;
 
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -138,7 +139,7 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_pin_css( $attributes, $list ) {
 		return [
-			'background-color' => ! empty( $list['pinColorEffect'] ) ? $list['pinColorEffect'] : $attributes['pinColorEffect'],
+			'background-color' => Color::get_css( ! empty( $list['pinColorEffect'] ) ? $list['pinColorEffect'] : $attributes['pinColorEffect'] ),
 			'width' => ! empty( $list['pinSize'] ) ? $list['pinSize'] . 'px' : $attributes['pinSize'] . 'px',
 			'height' => ! empty( $list['pinSize'] ) ? $list['pinSize'] . 'px' : $attributes['pinSize'] . 'px',
 			'transform' => 'translate(-50%, -50%)',
@@ -147,7 +148,7 @@ class Block extends BlockBaseAbstract {
 
 	public function get_pin_effect_css( $attributes, $list ) {
 		return [
-			'background-color' => ! empty( $list['pinColor'] ) ? $list['pinColor'] : $attributes['pinColor'],
+			'background-color' => Color::get_css( ! empty( $list['pinColor'] ) ? $list['pinColor'] : $attributes['pinColor'] ),
 			'width' => ! empty( $list['pinSize'] ) ? $list['pinSize'] . 'px' : $attributes['pinSize'] . 'px',
 			'height' => ! empty( $list['pinSize'] ) ? $list['pinSize'] . 'px' : $attributes['pinSize'] . 'px',
 		];
@@ -155,7 +156,7 @@ class Block extends BlockBaseAbstract {
 
 	public function get_pin_hover_css( $attributes, $list ) {
 		return [
-			'background-color' => ! empty( $list['pinHoverColor'] ) ? $list['pinHoverColor'] : $attributes['pinHoverColor'],
+			'background-color' => Color::get_css( ! empty( $list['pinHoverColor'] ) ? $list['pinHoverColor'] : $attributes['pinHoverColor'] ),
 			'transform' => 'translate(-50%, -50%)',
 			'--ablocks-hotspot-effect-max-scale' => ! empty( $list['pinHoverSize'] ) ? $list['pinHoverSize'] : $attributes['pinHoverSize'],
 		];
@@ -163,7 +164,7 @@ class Block extends BlockBaseAbstract {
 
 	public function get_pin_hover_effect_css( $attributes, $list ) {
 		return [
-			'background-color' => ! empty( $list['pinHoverColor'] ) ? $list['pinHoverColor'] : $attributes['pinHoverColor'],
+			'background-color' => Color::get_css( ! empty( $list['pinHoverColor'] ) ? $list['pinHoverColor'] : $attributes['pinHoverColor'] ),
 			'--ablocks-hotspot-effect-max-scale' => ! empty( $list['pinHoverSize'] ) ? $list['pinHoverSize'] : $attributes['pinHoverSize'],
 		];
 	}
@@ -335,12 +336,6 @@ class Block extends BlockBaseAbstract {
 
 	public function get_active_content_css( $attributes, $device = '' ) {
 		$css = array();
-
-		// Set background color
-		if ( ! empty( $attributes['backgroundColor'] ) ) {
-			$css['background-color'] = $attributes['backgroundColor'];
-		}
-
 		if ( isset( $width[ 'value' . $device ] ) && ! empty( $width[ 'value' . $device ] ) ) {
 
 			if ( ! empty( $width[ 'valueUnit' . $device ] ) ) {
@@ -350,7 +345,9 @@ class Block extends BlockBaseAbstract {
 			}
 		}
 
-		$css = array_merge( $css,
+		$css = array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['backgroundColor'] ) ? $attributes['backgroundColor'] : '' ) ],
+			$css,
 			Range::get_css([
 				'attributeValue' => $attributes['childWidth'],
 				'attribute_object_key' => 'value',

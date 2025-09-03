@@ -11,6 +11,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\CssFilter;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'image';
@@ -252,10 +253,11 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 
 		if ( isset( $attributes['captionColor'] ) && ! empty( $attributes['captionColor'] ) ) {
-			$css['color'] = $attributes['captionColor'];
+			$css['color'] = Color::get_css( isset( $attributes['captionColor'] ) ? $attributes['captionColor'] : '' );
+
 		}
 		if ( isset( $attributes['captionBackground'] ) && ! empty( $attributes['captionBackground'] ) ) {
-			$css['background'] = $attributes['captionBackground'];
+			$css['background'] = Color::get_css( isset( $attributes['captionBackground'] ) ? $attributes['captionBackground'] : '' );
 		}
 		if ( isset( $attributes['captionPosition'] ) && ! empty( $attributes['captionPosition'] && 'overlap' === $attributes['captionPosition'] ) ) {
 			$css['width'] = '100%';

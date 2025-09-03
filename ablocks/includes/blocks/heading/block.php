@@ -12,6 +12,7 @@ use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\TextStroke;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'heading';
@@ -25,16 +26,17 @@ class Block extends BlockBaseAbstract {
 			$this->get_wrapper_css( $attributes, 'Mobile' )
 		);
 
-		$desktop_heading_text_styles = $this->get_heading_text_css( $attributes );
-		if ( ! empty( $attributes['textColor'] ) ) {
-			$desktop_heading_text_styles['color'] = $attributes['textColor'];
-		}
-
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-heading-text',
-			$desktop_heading_text_styles,
+			$this->get_heading_text_css( $attributes ),
 			$this->get_heading_text_css( $attributes, 'Tablet' ),
 			$this->get_heading_text_css( $attributes, 'Mobile' )
+		);
+
+		$desktop_heading_a_styles = $this->get_heading_a_css( $attributes );
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--heading a',
+			$desktop_heading_a_styles,
 		);
 
 		$css_generator->add_class_styles(
@@ -69,15 +71,16 @@ class Block extends BlockBaseAbstract {
 			$this->get_wrapper_css( $attributes, 'Mobile' )
 		);
 
-		$desktop_heading_text_styles = $this->get_heading_text_css( $attributes );
-		if ( ! empty( $attributes['textColor'] ) ) {
-			$desktop_heading_text_styles['color'] = $attributes['textColor'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-heading-text',
-			$desktop_heading_text_styles,
+			$this->get_heading_text_css( $attributes ),
 			$this->get_heading_text_css( $attributes, 'Tablet' ),
 			$this->get_heading_text_css( $attributes, 'Mobile' )
+		);
+		$desktop_heading_a_styles = $this->get_heading_a_css( $attributes );
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--heading a',
+			$desktop_heading_a_styles,
 		);
 		if ( ! empty( $attributes['isAnimated'] ) ) {
 			$css_generator->add_class_styles(
@@ -119,8 +122,19 @@ class Block extends BlockBaseAbstract {
 		$typography_css = ! empty( $attributes['typography'] ) ? Typography::get_css( $attributes['typography'], '', $device ) : array();
 		$textShadowCss = ! empty( $attributes['textShadow'] ) ? TextShadow::get_css( $attributes['textShadow'], '', $device ) : array();
 		$textStrokeCss = ! empty( $attributes['textStroke'] ) ? TextStroke::get_css( $attributes['textStroke'], '', $device ) : array();
-		return array_merge( $typography_css, $textShadowCss, $textStrokeCss );
+
+		return array_merge( [
+			'color' => Color::get_css( isset( $attributes['textColor'] ) ? $attributes['textColor'] : '' ),
+		], $typography_css, $textShadowCss, $textStrokeCss );
 	}
+
+	public function get_heading_a_css( $attributes ) {
+		$decoration = isset( $attributes ['typography']['decoration'] ) ? $attributes['typography'] ['decoration'] : '';
+		if ( ! empty( $decoration ) ) {
+			return array( 'text-decoration' => $decoration ); }
+		return array();
+	}
+
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		if ( ! isset( $block_instance->context['postId'] ) ) {
 			return '';
@@ -148,15 +162,21 @@ class Block extends BlockBaseAbstract {
 		$unit = $highlightStrokeWidth[ 'valueUnit' . $device ] ?? $highlightStrokeWidth['valueUnit'] ?? 'px';
 		$value = $highlightStrokeWidth[ 'value' . $device ] ?? $highlightStrokeWidth['value'] ?? 10;
 		$stroke_width = $value . $unit;
-
-		$highlightColor = isset( $attributes['highlightColor'] ) ? $attributes['highlightColor'] : '#000';
 		$highlightDuration = isset( $attributes['highlightDuration'] ) ? $attributes['highlightDuration'] : 0;
 		$highlightDelay = isset( $attributes['highlightDelay'] ) ? $attributes['highlightDelay'] : 0;
 
-		return array(
-			'stroke' => $highlightColor,
-			'stroke-width' => $stroke_width,
-			'animation' => 'draw-auto ' . ( $highlightDuration + $highlightDelay ) . 'ms forwards ' . $count,
+		return array_merge(
+			[
+				'stroke' => Color::get_css(
+					isset( $attributes['highlightColor'] )
+					? $attributes['highlightColor']
+					: '#000'
+				)
+			],
+			[
+				'stroke-width' => $stroke_width,
+				'animation'    => 'draw-auto ' . ( $highlightDuration + $highlightDelay ) . 'ms forwards ' . $count
+			]
 		);
 	}
 
@@ -165,11 +185,8 @@ class Block extends BlockBaseAbstract {
 	public function get_heading_general_css( $attributes, $device = '' ) {
 		$typography_value = isset( $attributes['typography'] ) ? $attributes['typography'] : [];
 		$stock_unit_value = isset( $attributes['textStroke'] ) ? $attributes['textStroke'] : [];
-
 		return array_merge(
-			array(
-				'color' => isset( $attributes['textColor'] ) ? $attributes['textColor'] : '',
-			),
+			[ 'color' => Color::get_css( isset( $attributes['textColor'] ) ? $attributes['textColor'] : '' ) ],
 			Typography::get_css( $typography_value, '', $device ),
 			TextStroke::get_css( $stock_unit_value, '', $device ),
 			TextShadow::get_css( isset( $attributes['textShadow'] ) ? $attributes['textShadow'] : [], '', $device )
@@ -180,9 +197,7 @@ class Block extends BlockBaseAbstract {
 		$typography_value = isset( $attributes['animatedTypography'] ) ? $attributes['animatedTypography'] : [];
 		$stroke_unit_value = isset( $attributes['animatedTextStroke'] ) ? $attributes['animatedTextStroke'] : [];
 		return array_merge(
-			array(
-				'color' => isset( $attributes['animatedTextColor'] ) ? $attributes['animatedTextColor'] : '',
-			),
+			[ 'color' => Color::get_css( isset( $attributes['animatedTextColor'] ) ? $attributes['animatedTextColor'] : '' ) ],
 			Typography::get_css( $typography_value, '', $device ),
 			TextStroke::get_css( $stroke_unit_value, '', $device ),
 			TextShadow::get_css( isset( $attributes['animatedTextShadow'] ) ? $attributes['animatedTextShadow'] : [], '', $device )

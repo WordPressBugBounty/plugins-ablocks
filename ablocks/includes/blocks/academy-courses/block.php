@@ -13,6 +13,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Background;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'academy-courses';
@@ -20,116 +21,68 @@ class Block extends BlockBaseAbstract {
 	public function build_css( $attributes ) {
 		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 
-		$course_category_desktop_css = $this->get_course_card_category_css( $attributes );
-		if ( ! empty( $attributes['category_color'] ) ) {
-			$course_category_desktop_css['color'] = $attributes['category_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__meta--categroy a',
-			$course_category_desktop_css,
+			$this->get_course_card_category_css( $attributes ),
 			$this->get_course_card_category_css( $attributes, 'Tablet' ),
 			$this->get_course_card_category_css( $attributes, 'Mobile' )
 		);
 
-		$course_category_desktop_hover_css = [];
-		if ( ! empty( $attributes['category_hover_color'] ) ) {
-			$course_category_desktop_hover_css['color'] = $attributes['category_hover_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__meta--categroy:hover a',
-			$course_category_desktop_hover_css,
+			$this->course_category_desktop_hover_css( $attributes )
 		);
-
-		$course_title_desktop_css = $this->get_course_card_title_css( $attributes );
-		if ( ! empty( $attributes['title_color'] ) ) {
-			$course_title_desktop_css['color'] = $attributes['title_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__title, 
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__title a',
-			$course_title_desktop_css,
+			$this->get_course_card_title_css( $attributes ),
 			$this->get_course_card_title_css( $attributes, 'Tablet' ),
 			$this->get_course_card_title_css( $attributes, 'Mobile' )
 		);
-
-		$course_title_desktop_hover_css = [];
-		if ( ! empty( $attributes['title_hover_color'] ) ) {
-			$course_title_desktop_hover_css['color'] = $attributes['title_hover_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__title:hover, 
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__title:hover a',
-			$course_title_desktop_hover_css,
+			$this->get_course_title__hover_css( $attributes )
 		);
-
-		$course_author_desktop_css = $this->get_course_card_title_css( $attributes );
-		if ( ! empty( $attributes['author_color'] ) ) {
-			$course_author_desktop_css['color'] = $attributes['author_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__author,
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__author .author,
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__author .author a',
-			$course_author_desktop_css,
+			$this->get_course_card_author_css( $attributes ),
 			$this->get_course_card_author_css( $attributes, 'Tablet' ),
 			$this->get_course_card_author_css( $attributes, 'Mobile' )
 		);
-
-		$course_author_desktop_hover_css = [];
-		if ( ! empty( $attributes['author_hover_color'] ) ) {
-			$course_author_desktop_hover_css['color'] = $attributes['author_hover_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__author:hover,
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__author:hover .author,
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__author:hover .author a',
-			$course_author_desktop_hover_css,
+			$this->course_author_desktop_hover_css( $attributes )
 		);
-
-		$course_rating_desktop_css = $this->get_course_card_rating_css( $attributes );
-		if ( ! empty( $attributes['rating_color'] ) ) {
-			$course_rating_desktop_css['color'] = $attributes['rating_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__rating,
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__rating .academy-group-star, 
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__rating .academy-group-star .academy-icon::before, 
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__rating .academy-course__rating-count',
-			$course_rating_desktop_css,
+			$this->get_course_card_rating_css( $attributes ),
 			$this->get_course_card_rating_css( $attributes, 'Tablet' ),
 			$this->get_course_card_rating_css( $attributes, 'Mobile' )
 		);
-
-		$course_rating_desktop_hover_css = [];
-		if ( ! empty( $attributes['rating_hover_color'] ) ) {
-			$course_rating_desktop_hover_css['color'] = $attributes['rating_hover_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__rating:hover,
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__rating:hover .academy-group-star, 
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__rating:hover .academy-group-star .academy-icon::before, 
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__rating:hover .academy-course__rating-count',
-			$course_rating_desktop_hover_css,
+			$this->course_rating_desktop_hover_css( $attributes )
 		);
-
-		$course_price_css = $this->get_course_card_price_css( $attributes );
-		if ( ! empty( $attributes['price_color'] ) ) {
-			$course_price_css['color'] = $attributes['price_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__price',
-			$course_price_css,
+			$this->get_course_card_price_css( $attributes ),
 			$this->get_course_card_price_css( $attributes, 'Tablet' ),
 			$this->get_course_card_price_css( $attributes, 'Mobile' )
 		);
-
-		$course_price_hover_css = [];
-		if ( ! empty( $attributes['price_hover_color'] ) ) {
-			$course_price_hover_css['color'] = $attributes['price_hover_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__price:hover',
-			$course_price_hover_css,
+			$this->course_price_hover_css( $attributes )
 		);
 
 		$css_generator->add_class_styles(
@@ -171,43 +124,76 @@ class Block extends BlockBaseAbstract {
 
 	public function get_course_card_category_css( $attributes, $device = '' ) {
 		$course_category_typography_css = ! empty( $attributes['cat_typography'] ) ? Typography::get_css( $attributes['cat_typography'], '', $device ) : array();
-		return $course_category_typography_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['category_color'] ) ? $attributes['category_color'] : '' ) ],
+			$course_category_typography_css
+		);
+	}
+	public function course_category_desktop_hover_css( $attributes ) {
+
+		return [ 'color' => Color::get_css( isset( $attributes['category_hover_color'] ) ? $attributes['category_hover_color'] : '' ) ];
+	}
+	public function course_author_desktop_hover_css( $attributes ) {
+
+		return [ 'color' => Color::get_css( isset( $attributes['author_hover_color'] ) ? $attributes['author_hover_color'] : '' ) ];
+	}
+	public function course_rating_desktop_hover_css( $attributes ) {
+
+		return [ 'color' => Color::get_css( isset( $attributes['rating_hover_color'] ) ? $attributes['rating_hover_color'] : '' ) ];
+	}
+	public function course_price_hover_css( $attributes ) {
+		return [ 'color' => Color::get_css( isset( $attributes['price_hover_color'] ) ? $attributes['price_hover_color'] : '' ) ];
+	}
+	public function get_course_title__hover_css( $attributes ) {
+		return [ 'color' => Color::get_css( isset( $attributes['title_hover_color'] ) ? $attributes['title_hover_color'] : '' ) ];
 	}
 
 	public function get_course_card_title_css( $attributes, $device = '' ) {
 		$course_title_typography_css = ! empty( $attributes['title_typography'] ) ? Typography::get_css( $attributes['title_typography'], '', $device ) : array();
-		return $course_title_typography_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['title_color'] ) ? $attributes['title_color'] : '' ) ],
+			$course_title_typography_css
+		);
 	}
 
 	public function get_course_card_author_css( $attributes, $device = '' ) {
 		$course_author_typography_css = ! empty( $attributes['author_typography'] ) ? Typography::get_css( $attributes['author_typography'], '', $device ) : array();
-		return $course_author_typography_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['author_color'] ) ? $attributes['author_color'] : '' ) ],
+			$course_author_typography_css
+		);
 	}
 
 	public function get_course_card_rating_css( $attributes, $device = '' ) {
 		$course_rating_typography_css = ! empty( $attributes['rating_typography'] ) ? Typography::get_css( $attributes['rating_typography'], '', $device ) : array();
-		return $course_rating_typography_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['rating_color'] ) ? $attributes['rating_color'] : '' ) ],
+			$course_rating_typography_css
+		);
 	}
 
 	public function get_course_card_price_css( $attributes, $device = '' ) {
 		$course_price_typography_css = ! empty( $attributes['price_typography'] ) ? Typography::get_css( $attributes['price_typography'], '', $device ) : array();
-		return $course_price_typography_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['price_color'] ) ? $attributes['price_color'] : '' ) ],
+			$course_price_typography_css
+		);
 	}
 
 	public function get_wish_icon_css( $attributes, $device = '' ) {
 		$wish_icon_background_css = ! empty( $attributes['wish_icon_background'] ) ? Background::get_css( $attributes['wish_icon_background'], 'background', $device ) : array();
-		if ( ! empty( $attributes['wish_icon_color'] ) ) {
-			$wish_icon_background_css['color'] = $attributes['wish_icon_color'];
-		}
-		return $wish_icon_background_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['wish_icon_color'] ) ? $attributes['wish_icon_color'] : '' ) ],
+			$wish_icon_background_css
+		);
 	}
 
 	public function get_wish_icon_hover_css( $attributes, $device = '' ) {
 		$wish_icon_background_css = ! empty( $attributes['wish_icon_background'] ) ? Background::get_hover_css( $attributes['wish_icon_background'], 'background', $device ) : array();
-		if ( ! empty( $attributes['wish_icon_hover_color'] ) ) {
-			$wish_icon_background_css['color'] = $attributes['wish_icon_hover_color'];
-		}
-		return $wish_icon_background_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['wish_icon_hover_color'] ) ? $attributes['wish_icon_hover_color'] : '' ) ],
+			$wish_icon_background_css
+		);
 	}
 
 	public function get_course_card_css( $attributes, $device = '' ) {

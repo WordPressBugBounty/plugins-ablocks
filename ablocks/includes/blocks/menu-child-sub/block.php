@@ -8,7 +8,7 @@ use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Range;
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
-
+use ABlocks\Controls\Color;
 class Block extends BlockBaseAbstract {
 	protected $parent_block_name = 'menu';
 	protected $block_name = 'menu-child-sub';
@@ -55,13 +55,8 @@ class Block extends BlockBaseAbstract {
 	}
 
 	private function get_wrapper_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['background'] ) ) {
-			$css['background'] = $attributes['background'];
-		}
-
 		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['background'] ) ? $attributes['background'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['width'],
 				'attribute_object_key' => 'value',
@@ -74,7 +69,6 @@ class Block extends BlockBaseAbstract {
 			BoxShadow::get_css( ! empty( $attributes['boxShadow'] ) ? $attributes['boxShadow'] : '', $device ),
 			Dimensions::get_css( $attributes['padding'], 'padding', $device ),
 			Border::get_css( $attributes['border'], '', $device ),
-			$css
 		);
 	}
 	private function get_wrapper_hover_css( $attributes, $device = '' ) {
@@ -86,6 +80,8 @@ class Block extends BlockBaseAbstract {
 	}
 	private function get_menu_item_css( $attributes, $device = '' ) {
 		$css = array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['menuItemTextColor'] ) ? $attributes['menuItemTextColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['menuItemBackground'] ) ? $attributes['menuItemBackground'] : '' ) ],
 			Border::get_css( isset( $attributes['menuItemBorder'] ) ? $attributes['menuItemBorder'] : [], '', $device ),
 			Typography::get_css( isset( $attributes['menuItemTypography'] ) ? $attributes['menuItemTypography'] : [], '', $device ),
 			Dimensions::get_css( isset( $attributes['menuItemPadding'] ) ? $attributes['menuItemPadding'] : [], 'padding', $device ),
@@ -105,59 +101,29 @@ class Block extends BlockBaseAbstract {
 		if ( isset( $attributes[ 'menuItemAlign' . $device ] ) && ! empty( $attributes[ 'menuItemAlign' . $device ] ) ) {
 			$css['align-items'] = $attributes[ 'menuItemAlign' . $device ];
 		}
-		// Text color
-		if ( ! empty( $attributes['menuItemTextColor'] ) ) {
-			$css['color'] = $attributes['menuItemTextColor'];
-		}
-		if ( ! empty( $attributes['menuItemBackground'] ) ) {
-			$css['background'] = $attributes['menuItemBackground'];
-		}
 		if ( ! empty( $attributes['menuItemTransition'] ) ) {
 			$css['transition-duration'] = $attributes['menuItemTransition'] . 's';
 		}
 		return $css;
 	}
 	private function get_menu_item_link_css( $attributes ) {
-		$css = [];
-		if ( ! empty( $attributes['menuItemTextColor'] ) ) {
-			$css['color'] = $attributes['menuItemTextColor'] . '!important';
-		}
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['menuItemTextColor'] ) ? $attributes['menuItemTextColor'] : '' ) . '!important' ];
 	}
 	private function get_menu_item_hover_css( $attributes, $device = '' ) {
-		$css = array_merge(
+		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['menuItemBackgroundH'] ) ? $attributes['menuItemBackgroundH'] : '' ) ],
 			Border::get_hover_css( isset( $attributes['menuItemBorder'] ) ? $attributes['menuItemBorder'] : [], '', $device )
 		);
-
-		// Text color on hover
-		if ( ! empty( $attributes['menuItemTextColorH'] ) ) {
-			$css['color'] = $attributes['menuItemTextColorH'];
-		}
-		if ( ! empty( $attributes['menuItemBackgroundH'] ) ) {
-			$css['background'] = $attributes['menuItemBackgroundH'];
-		}
-		return $css;
 	}
 	private function get_menu_item_link_hover_css( $attributes ) {
-		$css = [];
-		if ( ! empty( $attributes['menuItemTextColorH'] ) ) {
-			$css['color'] = $attributes['menuItemTextColorH'];
-		}
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['menuItemTextColorH'] ) ? $attributes['menuItemTextColorH'] : '' ) . '!important' ];
 	}
 	private function get_menu_item_dropdown_icon_css( $attributes ) {
-		$css = [];
-		if ( ! empty( $attributes['menuItemTextColor'] ) ) {
-			$css['fill'] = $attributes['menuItemTextColor'];
-		}
-		return $css;
+
+		return [ 'fill' => Color::get_css( isset( $attributes['menuItemTextColor'] ) ? $attributes['menuItemTextColor'] : '' ) ];
 	}
 	private function get_menu_item_dropdown_icon_hover_css( $attributes ) {
-		$css = [];
-		if ( ! empty( $attributes['menuItemTextColorH'] ) ) {
-			$css['fill'] = $attributes['menuItemTextColorH'];
-		}
-		return $css;
+		return [ 'fill' => Color::get_css( isset( $attributes['menuItemTextColorH'] ) ? $attributes['menuItemTextColorH'] : '' ) ];
 	}
 	private function get_hamburger_menu_css( $attributes ) {
 			$css = [];

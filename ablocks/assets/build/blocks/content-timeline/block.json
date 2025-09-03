@@ -51,12 +51,19 @@
             "default": true
         },
         "showDateTablet": {
-            "type": "boolean",
-            "default": true
+            "type": "boolean"
         },
         "showDateMobile": {
             "type": "boolean",
             "default": true
+        },
+        "showAnimation": {
+            "type": "boolean",
+            "default": false
+        },
+        "connectorAnimationColor": {
+            "type": "string",
+            "default": "00ad6b"
         },
         "dateColor": {
             "type": "string",
@@ -90,8 +97,37 @@
             "default": 3
         },
         "iconSize": {
-            "type": "number",
-            "default": 18
+            "type": "object",
+            "default": {
+                "value": 18,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "lineLeft": {
+            "type": "object",
+            "default": {
+                "value": 0,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "lineRight": {
+            "type": "object",
+            "default": {
+                "value": 0,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
         },
         "contentTimeLineIconSvgPath": {
             "type": "string",

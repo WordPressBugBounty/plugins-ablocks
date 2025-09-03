@@ -15,6 +15,7 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
 use ABlocks\Classes\CssGeneratorV2;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'storeengine-order-details';
@@ -177,132 +178,71 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_order_details_product_title_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['productTitleColor'] ) ) {
-			$css['color'] = $attributes['productTitleColor'];
-		}
-
 		$title_typography_css = ! empty( $attributes['ProductTitleTypography'] ) ? Typography::get_css( $attributes['ProductTitleTypography'], '', $device ) : array();
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['productTitleColor'] ) ? $attributes['productTitleColor'] : '' ) ],
 			$title_typography_css,
 		);
 	}
 
 	public function get_order_details_product_title_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['productTitleColorH'] ) ) {
-			$css['color'] = $attributes['productTitleColorH'];
-		}
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['productTitleColorH'] ) ? $attributes['productTitleColorH'] : '' ) ];
 	}
 
 	public function get_order_details_price_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['discountPriceColor'] ) ) {
-			$css['color'] = $attributes['discountPriceColor'];
-		}
-
 		$typography_value = isset( $attributes['discountPriceTypography'] ) ? Typography::get_css( $attributes['ProductTitleTypography'], '', $device ) : array();
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['discountPriceColor'] ) ? $attributes['discountPriceColor'] : '' ) ],
 			$typography_value,
 		);
 	}
 
 	public function get_order_details_price_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['discountPriceColorH'] ) ) {
-			$css['color'] = $attributes['discountPriceColorH'];
-		}
-
-		return array_merge(
-			$css
-		);
+		return [ 'color' => Color::get_css( isset( $attributes['discountPriceColorH'] ) ? $attributes['discountPriceColorH'] : '' ) ];
 
 	}
 
 	public function get_order_details_regular_price_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes[''] ) ) {
-			$css['color'] = $attributes['regularPriceColor'];
-		}
-
 		$typography_value = isset( $attributes['regularPriceTypography'] ) ? Typography::get_css( $attributes['regularPriceTypography'], '', $device ) : array();
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['regularPriceColor'] ) ? $attributes['regularPriceColor'] : '' ) ],
 			$typography_value,
 		);
 	}
 
 	public function get_order_details_price_regular_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['regularPriceColorH'] ) ) {
-			$css['color'] = $attributes['regularPriceColorH'];
-		}
-
-		return array_merge(
-			$css
-		);
+		return [ 'color' => Color::get_css( isset( $attributes['regularPriceColorH'] ) ? $attributes['regularPriceColorH'] : '' ) ];
 
 	}
 
 	public function get_order_details_quality_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['qualityColor'] ) ) {
-			$css['color'] = $attributes['qualityColor'];
-		}
-
 		$typography_value = isset( $attributes['qualityTypography'] ) ? Typography::get_css( $attributes['qualityTypography'], '', $device ) : array();
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['qualityColor'] ) ? $attributes['qualityColor'] : '' ) ],
 			$typography_value,
 		);
 	}
 
 	public function get_order_details_quality_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['qualityColorH'] ) ) {
-			$css['color'] = $attributes['qualityColorH'];
-		}
-
-		return array_merge(
-			$css
-		);
+		return [ 'color' => Color::get_css( isset( $attributes['qualityColorH'] ) ? $attributes['qualityColorH'] : '' ) ];
 
 	}
 
 	public function get_table_text_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['tableTextColor'] ?? '#000';
 		$typography_value = isset( $attributes['tableTextTypography'] ) ?
 			Typography::get_css( $attributes['tableTextTypography'], '', $device )
 			: array();
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['tableTextColor'] ) ? $attributes['tableTextColor'] : '' ) ],
 			$typography_value
 		);
 	}
 	public function get_table_text_hover_css( $attributes, $device = '' ) {
-		$css = [];
 
-		$css['color'] = $attributes['tableTextColorH'] ?? '#000';
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['tableTextColorH'] ) ? $attributes['tableTextColorH'] : '#000' ) ];
 	}
 
 

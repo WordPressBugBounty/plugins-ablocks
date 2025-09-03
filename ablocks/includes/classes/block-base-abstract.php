@@ -95,11 +95,11 @@ abstract class BlockBaseAbstract {
 		$block_class_args = array( 'ablocks-block', 'ablocks-block-' . $block_id, 'ablocks-block--' . $this->block_name );
 		$has_transform = (bool) ( isset( $attributes['_transform']['isApplied'] ) ? $attributes['_transform']['isApplied'] : false );
 
-		if (
-			count( $animation ) &&
-			( $animation['animationType'] && $animation['animationType'] !== 'none' ) ||
-			( $animation['animationTypeTablet'] && $animation['animationTypeTablet'] !== 'none' ) ||
-			( $animation['animationTypeMobile'] && $animation['animationTypeMobile'] !== 'none' )
+		if ( count( $animation ) && (
+				( ! empty( $animation['animationType'] ) && $animation['animationType'] !== 'none' ) ||
+				( ! empty( $animation['animationTypeTablet'] ) && $animation['animationTypeTablet'] !== 'none' ) ||
+				( ! empty( $animation['animationTypeMobile'] ) && $animation['animationTypeMobile'] !== 'none' )
+			)
 		) {
 			array_push( $block_class_args, 'ablocks-invisible' );
 		}

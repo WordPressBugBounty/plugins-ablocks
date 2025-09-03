@@ -14,6 +14,7 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Alignment;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'storeengine-products';
@@ -34,53 +35,24 @@ class Block extends BlockBaseAbstract {
 			$this->get_products_card_hover_css( $attributes, 'Tablet' ),
 			$this->get_products_card_hover_css( $attributes, 'Mobile' )
 		);
-
-		$products_title_desktop_css = $this->get_products_card_title_css( $attributes );
-		if ( ! empty( $attributes['title_color'] ) ) {
-			$products_title_desktop_css['color'] = $attributes['title_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-products--grid .storeengine-row .storeengine-product .storeengine-product__body .storeengine-product__title, 
             {{WRAPPER}} .storeengine-products--grid .storeengine-row .storeengine-product .storeengine-product__body .storeengine-product__title a',
-			$products_title_desktop_css,
+			$this->get_products_card_title_css( $attributes ),
 			$this->get_products_card_title_css( $attributes, 'Tablet' ),
 			$this->get_products_card_title_css( $attributes, 'Mobile' )
 		);
-
-		$get_products_card_title_hover_css = [];
-		if ( ! empty( $attributes['title_hover_color'] ) ) {
-			$get_products_card_title_hover_css['color'] = $attributes['title_hover_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-products--grid .storeengine-row .storeengine-product .storeengine-product__body .storeengine-product__title:hover, 
             {{WRAPPER}} .storeengine-products--grid .storeengine-row .storeengine-product .storeengine-product__body .storeengine-product__title:hover a',
-			$get_products_card_title_hover_css,
+			$this->get_products_card_title_hover_css( $attributes ),
 		);
-		$products_price_css = $this->get_products_price_css( $attributes );
-		if ( ! empty( $attributes['price_color'] ) ) {
-			$products_price_css['color'] = $attributes['price_color'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-product ins .storeengine-price',
-			$products_price_css,
+			$this->get_products_price_css( $attributes ),
 			$this->get_products_price_css( $attributes, 'Tablet' ),
 			$this->get_products_price_css( $attributes, 'Mobile' )
 		);
-
-		// $products_price_hover_css = [];
-		// if ( ! empty( $attributes['price_hover_color'] ) ) {
-		// $products_price_hover_css['color'] = $attributes['price_hover_color'];
-		// }
-		// $css_generator->add_class_styles(
-		// '{{WRAPPER}} .storeengine-product span.price:hover',
-		// $products_price_hover_css,
-		// );
-		$cart_button_desktop_css = [];
-		$cart_button_desktop_css = $this->get_products_cart_button_css( $attributes );
-		if ( ! empty( $attributes['cart_button_text_color'] ) ) {
-			$cart_button_desktop_css['color'] = $attributes['cart_button_text_color'];
-		}
-
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-add-to-cart-buttons .storeengine-btn',
 			$this->get_products_cart_button_css( $attributes ),
@@ -94,17 +66,13 @@ class Block extends BlockBaseAbstract {
 			$this->get_products_cart_button_hover_css( $attributes, 'Tablet' ),
 			$this->get_products_cart_button_hover_css( $attributes, 'Mobile' )
 		);
-		// $css_generator->add_class_styles(
-		// '{{WRAPPER}} .storeengine-product .storeengine-ajax-add-to-cart-form .storeengine-add-to-cart-buttons',
-		// $this->get_button_leyout_css( $attributes ),
-		// $this->get_button_leyout_css( $attributes, 'Tablet' ),
-		// $this->get_button_leyout_css( $attributes, 'Mobile' )
-		// );
-
 		return $css_generator->generate_css();
 
 	}
+	public function get_products_card_title_hover_css( $attributes, $device = '' ) {
 
+		return [ 'color' => Color::get_css( isset( $attributes['title_hover_color'] ) ? $attributes['title_hover_color'] : '' ) ];
+	}
 	public function get_products_card_css( $attributes, $device = '' ) {
 		$products_background_css = ! empty( $attributes['card_background'] ) ? Background::get_css( $attributes['card_background'], 'background', $device ) : array();
 		$products_border_css = ! empty( $attributes['card_border'] ) ? Border::get_css( $attributes['card_border'], '', $device ) : array();
@@ -135,30 +103,32 @@ class Block extends BlockBaseAbstract {
 
 	public function get_products_price_css( $attributes, $device = '' ) {
 		$products_price_typography_css = ! empty( $attributes['price_typography'] ) ? Typography::get_css( $attributes['price_typography'], '', $device ) : array();
-		return $products_price_typography_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['price_color'] ) ? $attributes['price_color'] : '' ) ],
+			$products_price_typography_css
+		);
 	}
 	public function get_products_card_title_css( $attributes, $device = '' ) {
 		$course_title_typography_css = ! empty( $attributes['title_typography'] ) ? Typography::get_css( $attributes['title_typography'], '', $device ) : array();
-		return $course_title_typography_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['title_color'] ) ? $attributes['title_color'] : '' ) ],
+			$course_title_typography_css
+		);
 	}
 
 	public function get_products_cart_button_css( $attributes, $device = '' ) {
-		$css = [];
 		$typography_value = ! empty( $attributes['cart_button_typography'] ) ? Typography::get_css( $attributes['cart_button_typography'], '', $device ) : array();
-
-		$css['color'] = ! empty( $attributes['cart_button_text_color'] ) ? $attributes['cart_button_text_color'] : '';
-		$css['background'] = ! empty( $attributes['cart_button_color'] ) ? $attributes['cart_button_color'] : '';
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['cart_button_text_color'] ) ? $attributes['cart_button_text_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['cart_button_color'] ) ? $attributes['cart_button_color'] : '' ) ],
 			$typography_value,
 			Range::get_css([
 				'attributeValue' => $attributes['buttonWidth'],
 				'attribute_object_key' => 'value',
 				'isResponsive' => true,
-				'hasUnit' => false,
-				'defaultValue' => 0,
-				'unitDefaultValue' => 'px',
+				'hasUnit' => true,
+				'defaultValue' => 100,
+				'unitDefaultValue' => '%',
 				'property' => 'width',
 				'device' => $device,
 			])
@@ -166,49 +136,11 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_products_cart_button_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = ! empty( $attributes['cart_button_text_hover_color'] ) ? $attributes['cart_button_text_hover_color'] : '';
-		$css['background'] = ! empty( $attributes['cart_button_hover_color'] ) ? $attributes['cart_button_hover_color'] : '';
-
-		return $css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['cart_button_text_hover_color'] ) ? $attributes['cart_button_text_hover_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['cart_button_hover_color'] ) ? $attributes['cart_button_hover_color'] : '' ) ],
+		);
 	}
-	// public function get_button_leyout_css( $attributes, $device = '' ) {
-	// $css = [];
-	// $button_alignment = [];
-
-	// $css['display'] = 'flex';
-
-	// $buttons_direction = Range::get_css([
-	// 'attributeValue' => $attributes['buttonDriection'],
-	// 'attribute_object_key' => 'value',
-	// 'isResponsive' => true,
-	// 'hasUnit' => false,
-	// 'defaultValue' => 'column',
-	// 'unitDefaultValue' => '',
-	// 'property' => 'flex-direction',
-	// 'device' => $device,
-	// ]);
-	// $buttons_gap = Range::get_css([
-	// 'attributeValue' => $attributes['buttonGap'],
-	// 'attribute_object_key' => 'value',
-	// 'isResponsive' => true,
-	// 'hasUnit' => false,
-	// 'defaultValue' => 8,
-	// 'unitDefaultValue' => 'px',
-	// 'property' => 'gap',
-	// 'device' => $device,
-	// ]);
-	// if ( ! empty( $attributes['buttonAlignment'][ 'value' . $device ] ) ) {
-	// $button_alignment['align-items'] = $attributes['buttonAlignment'][ 'value' . $device ];
-	// }
-	// return array_merge(
-	// $css,
-	// $buttons_direction,
-	// $buttons_gap,
-	// $button_alignment,
-	// );
-	// }
 
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		$attr_array = [

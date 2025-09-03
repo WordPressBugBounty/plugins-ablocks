@@ -159,11 +159,19 @@ $attributes = array_merge(
 	]),
 	Range::get_attribute( [
 		'attributeName' => 'iconFontSize',
-		'defaultValue' => 35,
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 36,
+		'defaultValueTablet' => 24,
+		'defaultValueMobile' => 16,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
 	] ),
 	Range::get_attribute( [
 		'attributeName' => 'scrollHeight',
-		'defaultValue' => 300,
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 200,
 	] ),
 );
 

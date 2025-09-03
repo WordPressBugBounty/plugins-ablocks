@@ -13,6 +13,8 @@ use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Border;
+use ABlocks\Controls\Color;
+
 
 class Block extends BlockBaseAbstract {
 
@@ -134,13 +136,13 @@ class Block extends BlockBaseAbstract {
 
 		// Generate and add CSS styles for different parts of the block
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-block-content-timeline--outer-wrap .ablocks-icon-maker svg',
+			'{{WRAPPER}} .ablocks-icon-maker svg',
 			$this->get_content_timeline_icon_css( $attributes ),
 			$this->get_content_timeline_icon_css( $attributes, 'Tablet' ),
 			$this->get_content_timeline_icon_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-block-content-timeline--outer-wrap .ablocks__in-view-icon .ablocks-icon-wrap',
+			'{{WRAPPER}} .ablocks-block-content-timeline--outer-wrap .ablocks__in-view-icon',
 			$this->get_content_timeline_icon_background_css( $attributes ),
 			$this->get_content_timeline_icon_background_css( $attributes, 'Tablet' ),
 			$this->get_content_timeline_icon_background_css( $attributes, 'Mobile' )
@@ -300,17 +302,17 @@ class Block extends BlockBaseAbstract {
 		if ( $device === 'Mobile' ) {
 			// Specific case for mobile content position left/right without date
 			if ( $attribute['contentPosition'] === 'left' ) {
-				$css['left'] = 'calc(61px / 2) !important'; // fallback for left without date
+				$css['left'] = 'calc(35px / 2) !important'; // fallback for left without date
 			} elseif ( $attribute['contentPosition'] === 'right' ) {
-				$css['right'] = 'calc(61px / 2) !important'; // fallback for right without date
+				$css['right'] = 'calc(35px / 2) !important'; // fallback for right without date
 			}
 		} elseif ( $device ) {
 			// Non-mobile styles (if needed)
 			if ( $attribute['contentPosition'] === 'left' ) {
-				$css['left'] = $showDate ? 'calc(33% / 2) !important' : 'calc(61px / 2) !important';
+				$css['left'] = $showDate ? 'calc(30% / 2) !important' : 'calc(61px / 2) !important';
 				$css['right'] = 'auto !important';
 			} elseif ( $attribute['contentPosition'] === 'right' ) {
-				$css['right'] = $showDate ? 'calc(33% / 2) !important' : 'calc(61px / 2) !important';
+				$css['right'] = $showDate ? 'calc(30% / 2) !important' : 'calc(61px / 2) !important';
 				$css['left'] = 'auto !important';
 			}
 		} else {
@@ -327,34 +329,35 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_content_timeline_icon_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['iconColor'] ) ) {
-			$css['fill'] = $attributes['iconColor'];
-		}
 		return array_merge(
+			[ 'fill' => Color::get_css( isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['iconSize'],
 				'attribute_object_key' => 'value',
-				'unitDefaultValue' => 'px',
+				'isResponsive' => true,
+				'hasUnit' => true,
 				'defaultValue' => 18,
+				'unitDefaultValue' => 'px',
 				'property' => 'width',
+				'device' => $device,
 			]),
 			Range::get_css([
 				'attributeValue' => $attributes['iconSize'],
 				'attribute_object_key' => 'value',
-				'unitDefaultValue' => 'px',
+				'isResponsive' => true,
+				'hasUnit' => true,
 				'defaultValue' => 18,
+				'unitDefaultValue' => 'px',
 				'property' => 'height',
+				'device' => $device,
 			]),
 			$css,
 		);
 	}
 
 	public function get_content_timeline_icon_background_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['iconBackgroundColor'] ) ) {
-			$css['background-color'] = $attributes['iconBackgroundColor'];
-		}
 		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['iconBackgroundColor'] ) ? $attributes['iconBackgroundColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['iconBackgroundSize'],
 				'attribute_object_key' => 'value',
@@ -367,23 +370,38 @@ class Block extends BlockBaseAbstract {
 				'defaultValue' => 48,
 				'property' => 'height',
 			]),
-			$css,
 		);
 	}
 
 	public function get_content_timeline_connector_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['thicknessColor'] ) ) {
-			$css['background-color'] = $attributes['thicknessColor'];
-		}
 		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['thicknessColor'] ) ? $attributes['thicknessColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['thickness'],
 				'attribute_object_key' => 'value',
 				'defaultValue' => 3,
 				'property' => 'width',
 			]),
-			$css,
+			Range::get_css([
+				'attributeValue' => $attributes['lineLeft'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'defaultValue' => 0,
+				'unitDefaultValue' => 'px',
+				'property' => 'margin-left',
+				'device' => $device,
+			]),
+			Range::get_css([
+				'attributeValue' => $attributes['lineRight'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'defaultValue' => 0,
+				'unitDefaultValue' => 'px',
+				'property' => 'margin-right',
+				'device' => $device,
+			]),
 		);
 	}
 
@@ -407,10 +425,8 @@ class Block extends BlockBaseAbstract {
 	public function get_content_timeline_content_css( $attributes, $device = '' ) {
 		$css = [];
 		$css['padding'] = '15px';
-		if ( ! empty( $attributes['contentBackgroundColor'] ) ) {
-			$css['background-color'] = $attributes['contentBackgroundColor'];
-		}
 		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['contentBackgroundColor'] ) ? $attributes['contentBackgroundColor'] : '' ) ],
 			$css,
 			Dimensions::get_css( $attributes['contentPadding'] ?? [], 'padding', $device )
 		);
@@ -419,8 +435,10 @@ class Block extends BlockBaseAbstract {
 	public function get_content_timeline_content_background_css( $attributes, $device = '' ) {
 		$css = [];
 		if ( ! empty( $attributes['contentBackgroundColor'] ) ) {
-			$css['border-left-color'] = $attributes['contentBackgroundColor'];
-			$css['border-right-color'] = $attributes['contentBackgroundColor'];
+			$css['border-left-color'] = Color::get_css(
+			isset( $attributes['contentBackgroundColor'] ) ? $attributes['contentBackgroundColor'] : '');
+			$css['border-right-color'] = Color::get_css(
+			isset( $attributes['contentBackgroundColor'] ) ? $attributes['contentBackgroundColor'] : '');
 		}
 		return $css;
 	}
@@ -455,12 +473,9 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_content_timeline_date_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['dateColor'] ) ) {
-			$css['color'] = $attributes['dateColor'];
-		}
+
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['dateColor'] ) ? $attributes['dateColor'] : '' ) ],
 			Typography::get_css( $attributes['dateTypography'] ?? [], '', $device )
 		);
 	}
@@ -469,10 +484,8 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $attributes['dateAlign'] ) ) {
 			$css['text-align'] = $attributes['dateAlign'];
 		}
-		if ( ! empty( $attributes['dateBackground'] ) ) {
-			$css['background'] = $attributes['dateBackground'];
-		}
 		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['dateBackground'] ) ? $attributes['dateBackground'] : '' ) ],
 			$css,
 			Dimensions::get_css( $attributes['datePadding'] ?? [], 'padding', $device ),
 			Border::get_css( $attributes['dateBorder'] ?? [], '', $device )

@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\ControlBaseAbstract;
+use ABlocks\Controls\Color;
 
 class BackgroundOverlay extends ControlBaseAbstract {
 
@@ -300,7 +301,7 @@ class BackgroundOverlay extends ControlBaseAbstract {
 				$css['left'] = '0';
 				$css['width'] = '100%';
 				$css['height'] = '100%';
-				$css[ $property ] = $value[ $background_color_key ];
+				$css[ $property ] = Color::get_css( esc_attr( $value[ $background_color_key ] ) );
 
 				// Handle opacity
 
@@ -494,7 +495,7 @@ class BackgroundOverlay extends ControlBaseAbstract {
 				$css['left'] = '0';
 				$css['width'] = '100%';
 				$css['height'] = '100%';
-				$css[ $property ] = esc_attr( $value[ $background_color_h_key ] );
+				$css[ $property ] = Color::get_css( esc_attr( $value[ $background_color_h_key ] ) );
 
 				if ( $device === 'Tablet' && isset( $value['opacityHTablet'] ) ) {
 					$css['opacity'] = $value['opacityHTablet'];

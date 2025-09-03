@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 5.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -154,6 +154,30 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 8. Instant Style Copy-Paste
 
 == Changelog ==
+
+= 2.2.0 - 01/09/2025 =
+* Added - Form Builder Upload Block compatibility
+* Added - New QR Code Block
+* Added - New StoreEngine add to cart button Block
+* Added - Next highlights option for rich text editor
+* Added - Info box responsive control support
+* Added - Theme Global color support for all block
+* Updated - Carousel Block Improvements
+* Updated - Content timeline Block Improvements
+* Updated - Tabs Block Menu UI update
+* Fixed - StoreEngine Integration block issue
+* Fixed - Image Scroll block height issue
+* Fixed - Video Block issue
+* Fixed - Integration block search issues
+* Fixed - Background Overlay issue
+* Fixed - Accordion block animation issue
+* Fixed - Heading block anchor color issue
+* Fixed - Group Button Block Responsive issue
+* Fixed - Container alignment issue
+* Fixed - Icon Block issue
+* Fixed - Text/Textarea Field number conflict issue
+* Fixed - Form submission dashboard update
+
 
 = 2.1.0 - 05/08/2025 =
 * Added - New 4 StoreEngine supported Blocks

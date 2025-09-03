@@ -14,6 +14,7 @@ use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Icon;
 use ABlocks\Classes\CssGeneratorV2;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'notice';
@@ -127,27 +128,19 @@ class Block extends BlockBaseAbstract {
 		return $this->build_css_v1( $attributes );
 	}
 	public function get_notice_header_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['backgroundColor'] ) ) {
-			$css['background'] = $attributes['backgroundColor'];
-		}
 		return array_merge(
-			Dimensions::get_css( $attributes['noticeHeaderPadding'], 'padding', $device ),
-			$css
+			[ 'background' => Color::get_css( isset( $attributes['backgroundColor'] ) ? $attributes['backgroundColor'] : '' ) ],
+			Dimensions::get_css( $attributes['noticeHeaderPadding'], 'padding', $device )
 		);
 	}
 
 	public function get_notice_header_title_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['textColor'] ) ) {
-			$css['color'] = $attributes['textColor'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['textColor'] ) ? $attributes['textColor'] : '' ) ],
 			Alignment::get_css( $attributes['alignment'], 'justify-content', $device ),
 			Typography::get_css( $attributes['typography'], '', $device ),
 			TextShadow::get_css( $attributes['textShadow'], '', $device ),
 			TextStroke::get_css( $attributes['textStroke'], '', $device ),
-			$css,
 		);
 	}
 

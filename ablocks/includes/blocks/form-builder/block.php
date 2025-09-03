@@ -10,6 +10,7 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
 use ABlocks\Classes\CssGeneratorV2;
+use ABlocks\Controls\Color;
 class Block extends BlockBaseAbstract {
 
 	protected $block_name = 'form-builder';
@@ -291,6 +292,7 @@ class Block extends BlockBaseAbstract {
 
 	public function get_label_css( $attributes, $device = '' ) {
 		$label_css = array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['labelColor'] ) ? $attributes['labelColor'] : '' ) ],
 			Typography::get_css( $attributes['labelTypography'], '', $device ),
 			Alignment::get_css( $attributes['labelAlignment'], 'text-align', $device ),
 			Range::get_css([
@@ -306,11 +308,6 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $label_css['margin-bottom'] ) ) {
 			$label_css['margin-bottom'] = $label_css['margin-bottom'] . ' !important';
 		}
-
-		if ( ! empty( $attributes['labelColor'] ) ) {
-			$label_css['color'] = $attributes['labelColor'];
-		}
-
 		if ( ! $attributes['showLabels'] ) {
 			$label_css['display'] = 'none';
 		}
@@ -319,6 +316,7 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_helper_text_css( $attributes, $device = '' ) {
 		$helper_text_css = array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['helperTextColor'] ) ? $attributes['helperTextColor'] : '' ) ],
 			Typography::get_css( $attributes['helperTextTypography'], '', $device ),
 			Alignment::get_css( $attributes['labelAlignment'], 'text-align', $device ),
 			Range::get_css([
@@ -340,43 +338,29 @@ class Block extends BlockBaseAbstract {
 			$helper_text_css['margin-top'] = $attributes['helperTextSpacing'][ 'value' . $device ] . 'px';
 			$helper_text_css['margin-bottom'] = $attributes['helperTextSpacing'][ 'value' . $device ] . 'px';
 		}
-		if ( ! empty( $attributes['helperTextColor'] ) ) {
-			$helper_text_css['color'] = $attributes['helperTextColor'];
-		}
 
 		return $helper_text_css;
 	}
 
 	public function get_input_css( $attributes, $device = '' ) {
-		// Initialize the $css array before using it
 		$css = array();
-
-		// Check if the inputBorder's borderStyle is 'default' and apply default border styles
 		if ( isset( $attributes['inputBorder']['borderStyle'] ) && $attributes['inputBorder']['borderStyle'] === 'default' ) {
 			$css['border'] = '1px solid #A7AAAD';
 			$css['border-radius'] = '5px';
 		}
-
-		// Merge the base CSS with typography, border, and padding CSS
 		$input_css = array_merge(
-			$css, // Include the default border styles if set
+			[ 'background' => Color::get_css( isset( $attributes['inputBgColor'] ) ? $attributes['inputBgColor'] : '' ) ],
+			$css,
 			Alignment::get_css( $attributes['inputAlignment'], 'text-align', $device ),
 			Typography::get_css( $attributes['inputTypography'], '', $device ),
 			Border::get_css( $attributes['inputBorder'], '', $device ),
 			Dimensions::get_css( $attributes['inputPadding'], 'padding', $device )
 		);
 
-		// Add input text color if it's set in the attributes
 		if ( ! empty( $attributes['inputColor'] ) ) {
-			$input_css['color'] = $attributes['inputColor'] . '!important';
+			$input_css['color'] = Color::get_css(
+			isset( $attributes['inputColor'] ) ? $attributes['inputColor'] : '') . '!important';
 		}
-
-		// Add background color if it's set in the attributes
-		if ( ! empty( $attributes['inputBgColor'] ) ) {
-			$input_css['background-color'] = $attributes['inputBgColor'];
-		}
-
-		// Ensure box-sizing is set to 'border-box'
 		$input_css['box-sizing'] = 'border-box';
 
 		return $input_css;
@@ -384,13 +368,10 @@ class Block extends BlockBaseAbstract {
 
 	public function get_input_hover_css( $attributes, $device = '' ) {
 		$css = array();
-
-		// Check if the inputBorder's borderStyle is 'default' and apply default border styles
 		if ( isset( $attributes['inputBorder']['borderStyle'] ) && $attributes['inputBorder']['borderStyle'] === 'default' ) {
 			$css['border'] = '1px solid #A7AAAD';
 			$css['border-radius'] = '5px';
 		}
-		// Get the border hover CSS based on inputBorder attribute
 		$input_focus_css = array_merge(
 			$css,
 			Border::get_hover_css( $attributes['inputBorder'], '', $device )
@@ -400,13 +381,10 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_input_focus_css( $attributes, $device = '' ) {
 		$css = array();
-
-		// Check if the inputBorder's borderStyle is 'default' and apply default border styles
 		if ( isset( $attributes['inputBorder']['borderStyle'] ) && $attributes['inputBorder']['borderStyle'] === 'default' ) {
 			$css['border'] = '1px solid #A7AAAD';
 			$css['border-radius'] = '5px';
 		}
-		// Get the border hover CSS based on inputBorder attribute
 		$input_focus_css = array_merge(
 			$css,
 			Border::get_hover_css( $attributes['inputBorder'], '', $device )
@@ -415,22 +393,18 @@ class Block extends BlockBaseAbstract {
 		return $input_focus_css;
 	}
 	public function get_input_placeholder_css( $attributes, $device = '' ) {
-		// Initialize placeholder CSS array
 		$placeholder_css = array_merge(
-			// Apply typography for the placeholder (font size, font family, etc.)
 			Typography::get_css( $attributes['inputTypography'], '', $device ),
-			// Apply alignment if specified
 			Alignment::get_css( $attributes['inputAlignment'], 'text-align', $device )
 		);
-		// Check if placeholder color is defined, and apply it
 		if ( ! empty( $attributes['inputPlaceholderColor'] ) ) {
-			$placeholder_css['color'] = $attributes['inputPlaceholderColor'] . '!important'; // Add !important to override conflicting styles
+			$placeholder_css['color'] = Color::get_css(
+			isset( $attributes['inputPlaceholderColor'] ) ? $attributes['inputPlaceholderColor'] : '') . '!important';
 		}
 		return $placeholder_css;
 
 	}
 	public function get_input_position_css( $attributes, $device = '' ) {
-		// Access the inputIconPosition attribute from the attributes array
 		$css = array_merge(
 			Range::get_css([
 				'attributeValue' => $attributes['inputIconPosition'],
@@ -455,44 +429,28 @@ class Block extends BlockBaseAbstract {
 
 	public function get_submit_button_css( $attributes, $device = '' ) {
 		$button_css = array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['buttonColor'] ) ? $attributes['buttonColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['buttonBgColor'] ) ? $attributes['buttonBgColor'] : '' ) ],
 			Border::get_css( $attributes['buttonBorder'], '', $device ),
 			Typography::get_css( $attributes['buttonTypography'], '', $device ),
 			Dimensions::get_css( $attributes['buttonPadding'], 'padding', $device ),
 		);
-		if ( ! empty( $attributes['buttonColor'] ) ) {
-			$button_css['color'] = $attributes['buttonColor'];
-		}
-
-		if ( ! empty( $attributes['buttonBgColor'] ) ) {
-			$button_css['background-color'] = $attributes['buttonBgColor'];
-		}
-
 		return $button_css;
 	}
 
 	public function get_submit_button_hover_css( $attributes, $device = '' ) {
-		$button_hover_css = Border::get_hover_css( $attributes['buttonBorder'], '', $device );
-
-		if ( ! empty( $attributes['buttonHColor'] ) ) {
-			$button_hover_css['color'] = $attributes['buttonHColor'];
-		}
-
-		if ( ! empty( $attributes['buttonBgHColor'] ) ) {
-			$button_hover_css['background-color'] = $attributes['buttonBgHColor'];
-		}
-
-		return $button_hover_css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['buttonHColor'] ) ? $attributes['buttonHColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['buttonBgHColor'] ) ? $attributes['buttonBgHColor'] : '' ) ],
+			Border::get_hover_css( $attributes['buttonBorder'], '', $device )
+		);
 	}
 	public function get_navigator_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['navigatorColor'] ) ) {
-			$css['color'] = $attributes['navigatorColor'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['navigatorColor'] ) ? $attributes['navigatorColor'] : '' ) ],
 			Typography::get_css( $attributes['navigatorTypography'], '', $device ),
 			Dimensions::get_css( $attributes['navigatorPadding'], 'padding', $device ),
 			Alignment::get_css( $attributes['navigatorAlignment'], 'text-align', $device ),
-			$css
 		);
 	}
 	public function get_navigator_spacing_css( $attributes, $device = '' ) {
@@ -511,32 +469,22 @@ class Block extends BlockBaseAbstract {
 
 	}
 	public function get_succsss_styles_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['successBackground'] ) ) {
-			$css['background'] = $attributes['successBackground'];
-		}
-		if ( ! empty( $attributes['successColor'] ) ) {
-			$css['color'] = $attributes['successColor'];
-		}
-		return $css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['successColor'] ) ? $attributes['successColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['successBackground'] ) ? $attributes['successBackground'] : '' ) ]
+		);
 	}
 	public function get_error_styles_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['errorBackground'] ) ) {
-			$css['background'] = $attributes['errorBackground'];
-		}
-		if ( ! empty( $attributes['errorColor'] ) ) {
-			$css['color'] = $attributes['errorColor'];
-		}
-		return $css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['errorColor'] ) ? $attributes['errorColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['errorBackground'] ) ? $attributes['errorBackground'] : '' ) ],
+		);
 	}
 	public function get_success_error_common_styles_css( $attributes, $device = '' ) {
-		$css = [];
 		return array_merge(
 			Typography::get_css( $attributes['successErrorTypography'], '', $device ),
 			Alignment::get_css( $attributes['successErrorAlignment'], 'text-align', $device ),
 			Dimensions::get_css( $attributes['successErrorPadding'], 'padding', $device ),
-			$css,
 		);
 	}
 

@@ -20,8 +20,6 @@ $attributes = [
 		'type' => 'string',
 		'default' => 'white'
 	],
-
-	// flex direction start
 	'direction' => [
 		'type' => 'string',
 		'default' => 'column',
@@ -34,8 +32,6 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
-	// flex direction end
-	// flex 'justify content' start
 	'justify' => [
 		'type' => 'string',
 		'default' => '',
@@ -48,8 +44,6 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
-	// flex 'justify content' end
-	// flex 'align items" start
 	'align' => [
 		'type' => 'string',
 		'default' => '',
@@ -62,15 +56,13 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
-	// flex 'align items" end
-
 	'menuItemTextColor' => [
 		'type' => 'string',
 		'default' => ''
 	],
 	'menuItemTextColorH' => [
 		'type' => 'string',
-		'default' => '#000000',
+		'default' => '',
 	],
 	'menuItemBackground' => [
 		'type' => 'string',

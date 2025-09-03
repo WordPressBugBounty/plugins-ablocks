@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\ControlBaseAbstract;
+use ABlocks\Helper;
 
 class Width extends ControlBaseAbstract {
 
@@ -57,38 +58,47 @@ class Width extends ControlBaseAbstract {
 			$attribute_value,
 			self::get_attribute_default_value( (bool) $device )
 		);
+
 		$css = [];
-		if ( ! empty( $attribute_value[ 'widthType' . $device ] ) ) {
-			if ( $attribute_value[ 'widthType' . $device ] === 'full' ) {
+
+		// Width type (uses responsive fallback)
+		$width_type = Helper::get_responsive_value(
+			$attribute_value,
+			'widthType',
+			$device,
+			self::get_attribute_default_value()
+		);
+
+		if ( ! empty( $width_type ) ) {
+			if ( $width_type === 'full' ) {
 				$css[ $property ] = '100%';
-			} elseif ( $attribute_value[ 'widthType' . $device ] === 'auto' ) {
+			} elseif ( $width_type === 'auto' ) {
 				$css[ $property ] = 'auto';
-				$css['display'] = 'inline-block';
-			} elseif ( $attribute_value[ 'widthType' . $device ] === 'custom' ) {
-				$css[ $property ] =
-					$attribute_value[ 'customWidth' . $device ] .
-					self::get_unit(
-						[
-							'unit' => ! empty(
-								$attribute_value['customWidthUnit']
-							)
-								? $attribute_value['customWidthUnit']
-								: '',
-							'unitTablet' => ! empty(
-								$attribute_value['customWidthUnitTablet']
-							)
-								? $attribute_value['customWidthUnitTablet']
-								: '',
-							'unitMobile' => ! empty(
-								$attribute_value['customWidthUnitTablet']
-							)
-								? $attribute_value['customWidthUnitTablet']
-								: '',
-						],
-						$device
-					);
+				$css['display']  = 'inline-block';
+			} elseif ( $width_type === 'custom' ) {
+				// Get custom width with responsive fallback
+				$custom_width = Helper::get_responsive_value(
+					$attribute_value,
+					'customWidth',
+					$device,
+					self::get_attribute_default_value()
+				);
+
+				// Get responsive unit (delegates to your get_unit function)
+				$unit = self::get_unit(
+					[
+						'unit'       => Helper::get_responsive_value( $attribute_value, 'customWidthUnit', 'Desktop' ),
+						'unitTablet' => Helper::get_responsive_value( $attribute_value, 'customWidthUnit', 'Tablet' ),
+						'unitMobile' => Helper::get_responsive_value( $attribute_value, 'customWidthUnit', 'Mobile' ),
+					],
+					$device
+				);
+
+				$css[ $property ] = $custom_width . $unit;
 			}//end if
 		}//end if
+
 		return $css;
 	}
+
 }

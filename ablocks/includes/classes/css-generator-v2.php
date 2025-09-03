@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use ABlocks\Classes\AssetsGenerator;
 
 class CssGeneratorV2 {
+	private $font_category;
 	private $custom_css = '';
 	private $parent_class;
 	private $class_styles = [];
@@ -17,6 +18,8 @@ class CssGeneratorV2 {
 		if ( isset( $attributes['_custom_css'] ) ) {
 			$this->custom_css = $attributes['_custom_css'];
 		}
+		$this->font_category = include ABLOCKS_BLOCKS_DIR_PATH . 'fonts.php';
+
 		// Alert - don't touch here
 		if ( isset( $attributes['_margin'] ) ) { // check has advanced tab or not
 			$this->add_class_styles(
@@ -65,9 +68,9 @@ class CssGeneratorV2 {
 		$css_output = '';
 
 		foreach ( $this->class_styles as $class_style ) {
-			$desktop_styles = $class_style['desktop_styles'];
+			$desktop_styles = $this->remove_empty_css( $class_style['desktop_styles'] );
 			$tablet_styles  = $this->filter_responsive_styles( $desktop_styles, $class_style['tablet_styles'] );
-			$mobile_styles  = $this->filter_responsive_styles( $desktop_styles, $class_style['mobile_styles'] );
+			$mobile_styles  = $this->filter_responsive_styles( array_merge( $desktop_styles, $tablet_styles ), $class_style['mobile_styles'] );
 
 			$desktop_raw = $this->generate_css_for_media_query( 'desktop', $desktop_styles );
 			$tablet_raw  = $this->generate_css_for_media_query( 'tablet', $tablet_styles );
@@ -97,7 +100,7 @@ class CssGeneratorV2 {
 			}
 
 			// Only add mobile CSS if it differs from desktop AND tablet
-			if ( $mobile_raw !== $desktop_raw && $mobile_raw !== $tablet_raw ) {
+			if ( $mobile_raw !== $tablet_raw ) {
 				$addToCssBlocks( 'mobile', $this->get_breakpoint( 'mobile' ), $mobile_css );
 			}
 
@@ -141,20 +144,84 @@ class CssGeneratorV2 {
 	public function get_parent_selector( $class_name ) {
 		return $this->parent_class ? str_replace( '{{WRAPPER}}', $this->parent_class, $class_name ) : $class_name;
 	}
+	private function remove_empty_css( $base_styles ) {
+		if ( empty( $base_styles ) || ! is_array( $base_styles ) || ( is_array( $base_styles ) && ! count( $base_styles ) ) ) {
+			return [];
+		}
+
+		$styles = [];
+
+		foreach ( $base_styles as $prop => $value ) {
+			if ( 'font-family' === $prop && isset( $this->font_category[ $value ] ) ) {
+				$value = $this->get_font_family_css( $value, $this->font_category[ $value ] );
+			}
+			// Trim value to avoid whitespace-only entries
+			$trimmed = trim( $value );
+			// // Remove if empty, or if it matches only a unit (like 'px', '%', 'em') without any number
+			if ( $trimmed === '' || preg_match( '/^(px|em|rem|vh|vw|vmin|vmax|cm|mm|in|pt|pc|%)$/i', $trimmed ) ) {
+				continue;
+			}
+
+			$styles[ $prop ] = $trimmed;
+		}
+
+		return $styles;
+	}
 	private function filter_responsive_styles( $base_styles, $responsive_styles ) {
-		if ( empty( $responsive_styles ) ) {
+		if ( empty( $responsive_styles ) || ! is_array( $responsive_styles ) ) {
 			return [];
 		}
 
 		$difference = [];
 
 		foreach ( $responsive_styles as $prop => $value ) {
-			if ( ! isset( $base_styles[ $prop ] ) || $base_styles[ $prop ] !== $value ) {
-				$difference[ $prop ] = $value;
+			$trimmed = trim( $value );
+
+			// // Remove if empty, or if it matches only a unit (like 'px', '%', 'em') without any number
+			if ( $trimmed === '' || preg_match( '/^(px|em|rem|vh|vw|vmin|vmax|cm|mm|in|pt|pc|%)$/i', $trimmed ) ) {
+				continue;
+			}
+
+			// Only include if the value is different from base styles
+			if ( ! isset( $base_styles[ $prop ] ) || $base_styles[ $prop ] !== $trimmed ) {
+				$difference[ $prop ] = $trimmed;
 			}
 		}
 
 		return $difference;
 	}
+
+
+	public function get_font_family_css( string $font_name, string $category ): string {
+		// Quote font name if it contains spaces
+		if ( strpos( $font_name, ' ' ) !== false ) {
+			$font_name = '"' . $font_name . '"';
+		}
+
+		// Map category to fallback
+		switch ( $category ) {
+			case 'serif':
+				$fallback = 'serif';
+				break;
+			case 'sans-serif':
+				$fallback = 'sans-serif';
+				break;
+			case 'monospace':
+				$fallback = 'monospace';
+				break;
+			case 'display':
+				$fallback = 'sans-serif';
+				break;
+			case 'handwriting':
+				$fallback = 'cursive';
+				break;
+			default:
+				$fallback = 'sans-serif';
+		}
+
+		return $font_name . ', ' . $fallback;
+	}
+
+
 }
 

@@ -14,6 +14,7 @@ use ABlocks\Controls\Range;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Classes\CssGeneratorV2;
+use ABlocks\Controls\Color;
 
 
 class Block extends BlockBaseAbstract {
@@ -216,33 +217,21 @@ class Block extends BlockBaseAbstract {
 			? Border::get_css( $attributes['filterButtonBorder'], '', $device )
 			: array();
 		$css = array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['filterButtonColor'] ) ? $attributes['filterButtonColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['filterButtonBackground'] ) ? $attributes['filterButtonBackground'] : '' ) ],
 			$filter_border_css,
 			Typography::get_css( isset( $attributes['filterButtonTypography'] ) ? $attributes['filterButtonTypography'] : [], $device ),
 			Dimensions::get_css( isset( $attributes['filterButtonPadding'] ) ? $attributes['filterButtonPadding'] : [], 'padding', $device ),
 			Dimensions::get_css( isset( $attributes['filterButtonMargin'] ) ? $attributes['filterButtonMargin'] : [], 'margin', $device ),
 		);
-
-		if ( ! empty( $attributes['filterButtonColor'] ) ) {
-			$css['color'] = $attributes['filterButtonColor'];
-		}
-
-		if ( ! empty( $attributes['filterButtonBackground'] ) ) {
-			$css['background'] = $attributes['filterButtonBackground'];
-		}
-
 		return $css;
 	}
 	private function get_filter_hover_CSS( $attributes, $device = '' ) {
 		$css = array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['filterButtonColorH'] ) ? $attributes['filterButtonColorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['filterButtonBackgroundH'] ) ? $attributes['filterButtonBackgroundH'] : '' ) ],
 			Border::get_hover_css( isset( $attributes['filterButtonBorder'] ) ? $attributes['filterButtonBorder'] : [], $device )
 		);
-
-		if ( ! empty( $attributes['filterButtonColorH'] ) ) {
-			$css['color'] = $attributes['filterButtonColorH'];
-		}
-		if ( ! empty( $attributes['filterButtonBackgroundH'] ) ) {
-			$css['background'] = $attributes['filterButtonBackgroundH'];
-		}
 		if ( ! empty( $attributes['filterButtonTransition'] ) ) {
 			$css['transition'] = $attributes['filterButtonTransition'];
 		}
@@ -254,31 +243,21 @@ class Block extends BlockBaseAbstract {
 			? Border::get_css( $attributes['searchMenuBorder'], '', $device )
 			: array();
 		$css = array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['searchMenuColor'] ) ? $attributes['searchMenuColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['searchMenuBackground'] ) ? $attributes['searchMenuBackground'] : '' ) ],
 			$searchMenu_menu_border_css,
 			Dimensions::get_css( isset( $attributes['searchMenuPadding'] ) ? $attributes['searchMenuPadding'] : [], 'padding', $device ),
 			Dimensions::get_css( isset( $attributes['searchMenuMargin'] ) ? $attributes['searchMenuMargin'] : [], 'margin', $device )
 		);
-
-		if ( ! empty( $attributes['searchMenuColor'] ) ) {
-			$css['color'] = $attributes['searchMenuColor'];
-		}
-		if ( ! empty( $attributes['searchMenuBackground'] ) ) {
-			$css['background'] = $attributes['searchMenuBackground'];
-		}
-
 		return $css;
 	}
 
 	private function get_search_menu_hover_CSS( $attributes, $device = '' ) {
 		$css = array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['searchMenuColorH'] ) ? $attributes['searchMenuColorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['searchMenuBackgroundH'] ) ? $attributes['searchMenuBackgroundH'] : '' ) ],
 			Border::get_hover_css( isset( $attributes['searchMenuBorder'] ) ? $attributes['searchMenuBorder'] : [], $device )
 		);
-		if ( ! empty( $attributes['searchMenuColorH'] ) ) {
-			$css['color'] = $attributes['searchMenuColorH'];
-		}
-		if ( ! empty( $attributes['searchMenuBackgroundH'] ) ) {
-			$css['background'] = $attributes['searchMenuBackgroundH'];
-		}
 		if ( ! empty( $attributes['searchMenuTransition'] ) ) {
 			$css['transition'] = $attributes['searchMenuTransition'];
 		}
@@ -286,23 +265,14 @@ class Block extends BlockBaseAbstract {
 		return $css;
 	}
 	private function get_search_input_placeholder_CSS( $attributes ) {
-		$css = [];
-		if ( ! empty( $attributes['searchMenuColor'] ) ) {
-			$css['color'] = $attributes['searchMenuColor'];
-		}
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['searchMenuColor'] ) ? $attributes['searchMenuColor'] : '' ) ];
 	}
 	private function get_filter_active_class_CSS( $attributes, $device = '' ) {
 		$css = array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['activeClassColor'] ) ? $attributes['activeClassColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['activeClassBackground'] ) ? $attributes['activeClassBackground'] : '' ) ],
 			Border::get_css( isset( $attributes['activeClassBorder'] ) ? $attributes['activeClassBorder'] : [], $device )
 		);
-		if ( ! empty( $attributes['activeClassColor'] ) ) {
-			$css['color'] = $attributes['activeClassColor'];
-		}
-		if ( ! empty( $attributes['activeClassBackground'] ) ) {
-			$css['background'] = $attributes['activeClassBackground'];
-		}
-
 		return $css;
 	}
 	private function get_Filter_active_class_hover_CSS( $attributes, $device = '' ) {
@@ -386,17 +356,9 @@ class Block extends BlockBaseAbstract {
 		return $css;
 	}
 	private function filterable_loadMore_button( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['loadMoreButtonBackground'] ) ) {
-			$css['background'] = $attributes['loadMoreButtonBackground'];
-		}
-		if ( ! empty( $attributes['loadMoreButtonTextColor'] ) ) {
-			$css['color'] = $attributes['loadMoreButtonTextColor'];
-		}
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['loadMoreButtonTextColor'] ) ? $attributes['loadMoreButtonTextColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['loadMoreButtonBackground'] ) ? $attributes['loadMoreButtonBackground'] : '' ) ],
 			Border::get_css( $attributes['moreButtonBorder'], '', $device ),
 			BoxShadow::get_css( $attributes['moreButtonboxShadow'], '', $device ),
 			Typography::get_css( $attributes['moreButtonTypography'], $device ),
@@ -405,18 +367,12 @@ class Block extends BlockBaseAbstract {
 	}
 	private function filterable_loadMore_button_hover( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['loadMoreButtonTextColorH'] ) ) {
-			$css['color'] = $attributes['loadMoreButtonTextColorH'];
-		}
-
-		if ( ! empty( $attributes['loadMoreButtonBackgroundH'] ) ) {
-			$css['background'] = $attributes['loadMoreButtonBackgroundH'];
-		}
-
 		if ( ! empty( $attributes['loadMoreButtonTransition'] ) ) {
 			$css['transition-duration'] = $attributes['loadMoreButtonTransition'] . 's';
 		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['loadMoreButtonTextColorH'] ) ? $attributes['loadMoreButtonTextColorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['loadMoreButtonBackgroundH'] ) ? $attributes['loadMoreButtonBackgroundH'] : '' ) ],
 			$css,
 			Border::get_hover_css( $attributes['moreButtonBorder'], '', $device ),
 			BoxShadow::get_hover_css( $attributes['moreButtonboxShadow'], '', $device )

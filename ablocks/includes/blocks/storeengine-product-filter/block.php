@@ -11,6 +11,7 @@ use ABlocks\Helper;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'storeengine-product-filter';
@@ -34,9 +35,6 @@ class Block extends BlockBaseAbstract {
 		return $css_generator->generate_css();
 	}
 	public function get_product_filter_select_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color']  = $attributes['selectTextcolor'];
-		$css['background'] = $attributes['selectBackground'];
 		$cssWidth['width'] = $attributes['selectWidth'] . 'px';
 
 		$typographyValue = ! empty( $attributes['selectTypography'] ) ? Typography::get_css( $attributes['selectTypography'], '', $device ) : array();
@@ -50,7 +48,8 @@ class Block extends BlockBaseAbstract {
 		}
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['selectTextcolor'] ) ? $attributes['selectTextcolor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['selectBackground'] ) ? $attributes['selectBackground'] : '' ) ],
 			$cssBorder,
 			$cssPadding,
 			$typographyValue,
@@ -59,16 +58,13 @@ class Block extends BlockBaseAbstract {
 
 	}
 	public function get_product_filter_select_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color']  = $attributes['selectTextcolorH'];
-		$css['background'] = $attributes['selectBackgroundH'];
-
 		if ( ! empty( $attributes['selectBorder'] ) ) {
 			$cssBorder = Border::get_hover_css( $attributes['selectBorder'] ?? [], '', $device );
 
 		}
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['selectTextcolorH'] ) ? $attributes['selectTextcolorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['selectBackgroundH'] ) ? $attributes['selectBackgroundH'] : '' ) ],
 			$cssBorder,
 		);
 

@@ -6,6 +6,7 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Alignment;
+use ABlocks\Controls\Range;
 
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -37,10 +38,6 @@ $attributes = [
 		'type'    => 'string',
 		'default' => '',
 	],
-	'buttonWidth' => [
-		'type'    => 'number',
-		'default' => 100,
-	],
 ];
 
 $attributes = array_merge(
@@ -50,6 +47,14 @@ $attributes = array_merge(
 	Border::get_attribute( 'buttonBorder', true ),
 	Alignment::get_attribute( 'buttonAlignment', true, [ 'value' => 'left' ] ),
 	BoxShadow::get_attribute( 'boxShadow', true ),
+	Range::get_attribute([
+		'attributeName' => 'buttonWidth',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 100,
+		'hasUnit' => false,
+		'unitDefaultValue' => '%',
+	]),
 );
 
 return array_merge( $attributes, \ABlocks\Classes\BlockGlobal::get_attributes() );

@@ -11,6 +11,7 @@ use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Width;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 
@@ -35,13 +36,9 @@ class Block extends BlockBaseAbstract {
 		);
 
 		// text
-		$desktop_paragraph_text_style = $this->get_paragraph_text_css( $attributes );
-		if ( ! empty( $attributes['textColor'] ) ) {
-			$desktop_paragraph_text_style['color'] = $attributes['textColor'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-container .ablocks-advance-list-item-text',
-			$desktop_paragraph_text_style,
+			$this->get_paragraph_text_css( $attributes ),
 			$this->get_paragraph_text_css( $attributes, 'Tablet' ),
 			$this->get_paragraph_text_css( $attributes, 'Mobile' ),
 		);
@@ -96,27 +93,23 @@ class Block extends BlockBaseAbstract {
 
 	public function get_paragraph_text_css( $attributes, $device = '' ) {
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['textColor'] ) ? $attributes['textColor'] : '' ) ],
 			isset( $attributes['listTypography'] ) ? Typography::get_css( $attributes['listTypography'], '', $device ) : [],
 			isset( $attributes['listTextStroke'] ) ? TextStroke::get_css( $attributes['listTextStroke'], '', $device ) : [],
 			isset( $attributes['listTextShadow'] ) ? TextShadow::get_css( $attributes['listTextShadow'] ) : [],
 		);
 	}
 	public function get_paragraph_drop_text_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['dropCapsTextColor'] ) ) {
-			$css['color'] = $attributes['dropCapsTextColor'];
-		}
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['dropCapsTextColor'] ) ? $attributes['dropCapsTextColor'] : '' ) ];
 	}
 
 	public function get_divider_css( $attributes, $device = '' ) {
 		$css = [];
 		$divider_width = isset( $attributes['width'][ 'value' . $device ] ) ? $attributes['width'][ 'value' . $device ] : 60;
-		$divider_color = isset( $attributes['color'] ) ? $attributes['color'] : '#000000';
 		$default_Unit = '%';
 
 		if ( ! empty( $attributes['color'] ) ) {
-			$css['--ablocks-divider-pattern-color'] = $divider_color;
+			$css['--ablocks-divider-pattern-color'] = Color::get_css( isset( $attributes['color'] ) ? $attributes['color'] : '#000000' );
 		}
 
 		$moreRangeCSS = [];

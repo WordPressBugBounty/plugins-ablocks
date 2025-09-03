@@ -327,12 +327,23 @@
             "default": 0.5
         },
         "iconFontSize": {
-            "type": "number",
-            "default": 35
+            "type": "object",
+            "default": {
+                "value": 36,
+                "valueTablet": 24,
+                "valueMobile": 16,
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
         },
         "scrollHeight": {
-            "type": "number",
-            "default": 300
+            "type": "object",
+            "default": {
+                "value": 200,
+                "valueTablet": "",
+                "valueMobile": ""
+            }
         },
         "_margin": {
             "type": "object",

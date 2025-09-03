@@ -9,6 +9,7 @@ use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Controls\Border;
 use ABlocks\Classes\CssGeneratorV2;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'table';
@@ -170,86 +171,64 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_row_odd_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['rowOddColor'] ) ) {
-			$css['background'] = $attributes['rowOddColor'];
-		}
-		return $css;
+		return [ 'background' => Color::get_css( isset( $attributes['rowOddColor'] ) ? $attributes['rowOddColor'] : '' ) ];
 	}
 
 	public function get_row_odd_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['rowOddColorH'] ) ) {
-			$css['background'] = $attributes['rowOddColorH'];
-		}
-		return $css;
+		return [ 'background' => Color::get_css( isset( $attributes['rowOddColorH'] ) ? $attributes['rowOddColorH'] : '' ) ];
 	}
 
 	public function get_row_even_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['rowEvenColor'] ) ) {
-			$css['background'] = $attributes['rowEvenColor'];
-		}
-		return $css;
+		return [ 'background' => Color::get_css( isset( $attributes['rowEvenColor'] ) ? $attributes['rowEvenColor'] : '' ) ];
 	}
 
 	public function get_row_even_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['rowEvenColorH'] ) ) {
-			$css['background'] = $attributes['rowEvenColorH'];
-		}
-		return $css;
+		return [ 'background' => Color::get_css( isset( $attributes['rowEvenColorH'] ) ? $attributes['rowEvenColorH'] : '' ) ];
 	}
 
 	public function get_header_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['headerColor'] ) ) {
-			$css['background'] = $attributes['headerColor'] . ' !important';
-		}
-
+		$css['background'] = Color::get_css(
+		isset( $attributes['headerColor'] ) ? $attributes['headerColor'] : '') . ' !important';
 		return $css;
 	}
 
 	public function get_header_hover_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['headerColorH'] ) ) {
-			$css['background'] = $attributes['headerColorH'] . ' !important';
-		}
+		$css['background'] = Color::get_css(
+		isset( $attributes['headerColorH'] ) ? $attributes['headerColorH'] : '') . ' !important';
 
 		return $css;
 	}
 
 	public function get_body_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['bodyBg'] ) ) {
-			$css['background'] = $attributes['bodyBg'] . ' !important';
-		}
+		$css['background'] = Color::get_css(
+		isset( $attributes['bodyBg'] ) ? $attributes['bodyBg'] : '') . ' !important';
 		return $css;
 	}
 
 	public function get_body_hover_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['bodyBgH'] ) ) {
-			$css['background'] = $attributes['bodyBgH'] . ' !important';
-		}
+		$css['background'] = Color::get_css(
+		isset( $attributes['bodyBgH'] ) ? $attributes['bodyBgH'] : '') . ' !important';
 
 		return $css;
 	}
 
 	public function get_footer_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['footerColor'] ) ) {
-			$css['background'] = $attributes['footerColor'] . ' !important';
-		}
+		$css['background'] = Color::get_css(
+		isset( $attributes['footerColor'] ) ? $attributes['footerColor'] : '') . ' !important';
 
 		return $css;
 	}
 
 	public function get_footer_hover_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['footerColorH'] ) ) {
-			$css['background'] = $attributes['footerColorH'] . ' !important';
-		}
+
+		$css['background'] = Color::get_css(
+		isset( $attributes['footerColorH'] ) ? $attributes['footerColorH'] : '') . ' !important';
 
 		return $css;
 	}

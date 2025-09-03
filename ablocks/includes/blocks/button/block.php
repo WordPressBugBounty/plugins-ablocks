@@ -16,6 +16,7 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\Icon;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'button';
@@ -197,7 +198,8 @@ class Block extends BlockBaseAbstract {
 			$css['padding'] = '0';
 			$css['cursor'] = 'pointer';
 		} elseif ( ! empty( $attributes['background'] ) ) {
-			$css['background'] = $attributes['background'];
+			$css['background'] = Color::get_css(
+			isset( $attributes['background'] ) ? $attributes['background'] : '');
 		} elseif ( ! empty( $attributes['buttonType'] ) ) {
 			$css['background'] = $attributes['buttonType'];
 		}
@@ -222,7 +224,7 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			]),
 			$css,
-			[ 'color' => $attributes['textColor'] ?? '#000000' ],
+			[ 'color' => Color::get_css( isset( $attributes['textColor'] ) ? $attributes['textColor'] : '' ) ],
 			Border::get_css( $attributes['border'], '', $device ),
 			BoxShadow::get_css( $attributes['boxShadow'], '', $device ),
 			Typography::get_css( $attributes['typography'], '', $device ),
@@ -232,14 +234,6 @@ class Block extends BlockBaseAbstract {
 
 	public function get_button_hover_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['textColorH'] ) ) {
-			$css['color'] = $attributes['textColorH'];
-		}
-
-		if ( ! empty( $attributes['backgroundH'] ) ) {
-			$css['background'] = $attributes['backgroundH'];
-		}
-
 		return array_merge(
 			Range::get_css([
 				'attributeValue' => $attributes['transition'],
@@ -250,6 +244,8 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			]),
 			$css,
+			[ 'color' => Color::get_css( isset( $attributes['textColorH'] ) ? $attributes['textColorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['backgroundH'] ) ? $attributes['backgroundH'] : '' ) ],
 			Border::get_hover_css( $attributes['border'], '', $device ),
 			BoxShadow::get_hover_css( $attributes['boxShadow'], '', $device )
 		);
@@ -260,13 +256,7 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_icon_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['textColorH'] ) ) {
-			$css['fill'] = $attributes['textColorH'];
-		}
-
-		return $css;
+		return [ 'fill' => Color::get_css( isset( $attributes['textColorH'] ) ? $attributes['textColorH'] : '' ) ];
 	}
 
 

@@ -10,6 +10,7 @@ use ABlocks\Controls\Width;
 use ABlocks\Controls\Border;
 use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 
@@ -217,7 +218,8 @@ class Block extends BlockBaseAbstract {
 		$weight_css = [];
 
 		if ( isset( $attributes['divider'] ) && ! empty( $attributes['divider'] ) ) {
-			$border_color = isset( $attributes['borderColor'] ) ? $attributes['borderColor'] : 'black';
+			$border_color = Color::get_css(
+			isset( $attributes['borderColor'] ) ? $attributes['borderColor'] : 'black');
 			$divider_pattern_url = isset( $attributes['dividerPatternUrl'] ) ? $attributes['dividerPatternUrl'] : '';
 			$stack = isset( $attributes['stack'] ) ? $attributes['stack'] : '';
 
@@ -278,7 +280,8 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 		$marker_size = isset( $attributes['markerSize'][ 'value' . $device ] ) ? $attributes['markerSize'][ 'value' . $device ] : '';
 		if ( isset( $attributes['markerColor'] ) && ! empty( $attributes['markerColor'] ) ) {
-			$css['background'] = $attributes['markerColor'];
+			$css['background'] = Color::get_css(
+			isset( $attributes['markerColor'] ) ? $attributes['markerColor'] : '');
 		}
 
 		if ( $marker_size && ! empty( $marker_size ) ) {
@@ -301,7 +304,8 @@ class Block extends BlockBaseAbstract {
 			if ( $attributes['iconType'] === 'stacked' ) {
 				$css['background'] = ! empty( $attributes['iconBackgroundColor'] ) ? $attributes['iconBackgroundColor'] : '#ddd';
 				$css['padding'] = '.2em';
-				$css['color'] = ! empty( $attributes['iconColor'] ) ? $attributes['iconColor'] : '#000000';
+				$css['color'] = Color::get_css(
+				isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : '#000000');
 
 				if ( $attributes['iconShape'] === 'circle' ) {
 					$css['border-radius'] = '50px';
@@ -309,7 +313,8 @@ class Block extends BlockBaseAbstract {
 			} elseif ( $attributes['iconType'] === 'framed' ) {
 				$css['background'] = ! empty( $attributes['iconBackgroundColor'] ) ? $attributes['iconBackgroundColor'] : 'transparent';
 				$css['padding'] = '.2em';
-				$css['color'] = ! empty( $attributes['iconColor'] ) ? $attributes['iconColor'] : '#69727d';
+				$css['color'] = Color::get_css(
+				isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : '#69727d');
 				$css['border'] = '2px solid ' . ( ! empty( $attributes['iconColor'] ) ? $attributes['iconColor'] : '#69727d' );
 
 				if ( $attributes['iconShape'] === 'circle' ) {
@@ -318,12 +323,17 @@ class Block extends BlockBaseAbstract {
 			}
 
 			if ( ! empty( $attributes[ 'iconColor' . $device ] ) && isset( $attributes[ 'iconColor' . $device ] ) ) {
-				$css['color'] = $attributes['iconColor'];
-				$css['fill'] = $attributes['iconColor'];
+				$css['color'] = Color::get_css(
+				isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : '');
+				$css['fill'] = Color::get_css(
+				isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : '');
+
 			}
 
 			if ( ! empty( $attributes['iconBackgroundColor'] ) ) {
-				$css['background'] = $attributes['iconBackgroundColor'];
+				$css['background'] = Color::get_css(
+				isset( $attributes['iconBackgroundColor'] ) ? $attributes['iconBackgroundColor'] : '');
+
 			}
 		}//end if
 
@@ -354,10 +364,6 @@ class Block extends BlockBaseAbstract {
 
 	public function get_list_text_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( isset( $attributes['textColor'] ) ) {
-			$css['color'] = $attributes['textColor'];
-		}
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['textColor'] ) ? $attributes['textColor'] : '' ) ];
 	}
 }

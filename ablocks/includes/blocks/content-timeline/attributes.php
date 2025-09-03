@@ -42,15 +42,27 @@ $attributes = [
 	],
 	'showDateTablet' => [
 		'type' => 'boolean',
-		'default' => true,
+
 	],
 	'showDateMobile' => [
 		'type' => 'boolean',
 		'default' => true,
 	],
+	'showAnimation' => [
+		'type' => 'boolean',
+		'default' => false,
+	],
+	'connectorAnimationColor' => [
+		'type' => 'string',
+		'default' => '#00ad6b',
+	],
 	'dateColor' => [
 		'type' => 'string',
 		'default' => '#333333'
+	],
+	'connectorAnimationColor' => [
+		'type' => 'string',
+		'default' => '00ad6b'
 	],
 	'dateFormat' => [
 		'type' => 'string',
@@ -59,6 +71,10 @@ $attributes = [
 	'dateBackground' => [
 		'type' => 'string',
 		'default' => '#eee',
+	],
+	'showAnimation' => [
+		'type' => 'boolean',
+		'default' => false,
 	]
 ];
 $attributes = array_merge(
@@ -83,8 +99,27 @@ $attributes = array_merge(
 	] ),
 	Range::get_attribute([
 		'attributeName' => 'iconSize',
-		'isResponsive' => false,
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
 		'defaultValue' => 18,
+	] ),
+	Range::get_attribute([
+		'attributeName' => 'lineLeft',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+		'defaultValue' => 0,
+	] ),
+	Range::get_attribute([
+		'attributeName' => 'lineRight',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+		'defaultValue' => 0,
 	] ),
 	Icon::get_attribute(
 		'contentTimeLineIcon', [

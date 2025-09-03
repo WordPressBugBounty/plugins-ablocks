@@ -10,7 +10,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\CssFilter;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Range;
-
+use ABlocks\Controls\Color;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'image-scroll';
 
@@ -85,6 +85,8 @@ class Block extends BlockBaseAbstract {
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap',
 			$this->get_icon_wrapper_css( $attributes ),
+			$this->get_icon_wrapper_css( $attributes, 'Tablet' ),
+			$this->get_icon_wrapper_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--image-scroll:hover .ablocks-icon-wrap',
@@ -99,9 +101,8 @@ class Block extends BlockBaseAbstract {
 			$css,
 			Range::get_css([
 				'attributeValue' => $attributes['scrollHeight'],
-				'isResponsive' => false,
-				'hasUnit' => false,
-				'defaultValue' => 300,
+				'isResponsive' => true,
+				'defaultValue' => 200,
 				'property' => 'height',
 				'device' => $device,
 			]),
@@ -138,11 +139,8 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_image_overlay_css( $attributes ) {
 		$css = [];
-
-		// Handle overlay color if provided
-		if ( ! empty( $attributes['overlayColor'] ) ) {
-			$css['background-color'] = $attributes['overlayColor'];
-		}
+		$css['background-color'] = Color::get_css(
+		isset( $attributes['overlayColor'] ) ? $attributes['overlayColor'] : '');
 
 		// Set common positioning and display properties
 		$css['position'] = 'absolute';
@@ -341,14 +339,14 @@ class Block extends BlockBaseAbstract {
 			'z-index' => '5',
 			'opacity' => '1',
 		];
-		if ( ! empty( $attributes['iconColor'] ) ) {
-			$css['color'] = $attributes['iconColor'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : 'black' ) ],
 			$css,
 			Range::get_css([
 				'attributeValue' => $attributes['iconFontSize'],
-				'defaultValue' => 0,
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'defaultValue' => 36,
 				'property' => 'font-size',
 			])
 		);

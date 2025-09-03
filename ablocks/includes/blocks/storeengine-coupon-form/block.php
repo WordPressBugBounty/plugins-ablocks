@@ -14,6 +14,7 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\BoxShadow;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'storeengine-coupon-form';
@@ -97,14 +98,6 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_coupon_form_button_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( $attributes['buttonColor'] !== '' ) {
-			$css['color'] = $attributes['buttonColor'];
-		}
-		if ( $attributes['buttonBackground'] !== '' ) {
-			$css['background'] = $attributes['buttonBackground'];
-		}
 		$typography = isset( $attributes['buttonTypography'] ) && is_array( $attributes['buttonTypography'] )
 			? $attributes['buttonTypography']
 			: [];
@@ -116,7 +109,8 @@ class Block extends BlockBaseAbstract {
 		}
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['buttonColor'] ) ? $attributes['buttonColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['buttonBackground'] ) ? $attributes['buttonBackground'] : '' ) ],
 			Typography::get_css( $typography_value, $device ),
 			Border::get_css( $attributes['buttonBorder'], '', $device ),
 			$cssPadding,
@@ -134,18 +128,11 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_coupon_form_button_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( $attributes['buttonColorH'] !== '' ) {
-			$css['color'] = $attributes['buttonColorH'];
-		}
-		if ( $attributes['buttonBackgroundH'] !== '' ) {
-			$css['background'] = $attributes['buttonBackgroundH'];
-		}
 			return array_merge(
 				Border::get_hover_css( $attributes['buttonBorder'] ?? [], '', $device ),
 				BoxShadow::get_hover_css( $attributes['boxShadow'], '', $device ),
-				$css,
+				[ 'color' => Color::get_css( isset( $attributes['buttonColorH'] ) ? $attributes['buttonColorH'] : '' ) ],
+				[ 'background' => Color::get_css( isset( $attributes['buttonBackgroundH'] ) ? $attributes['buttonBackgroundH'] : '' ) ]
 			);
 	}
 

@@ -39,6 +39,7 @@ class Dashboard extends AbstractAjaxHandler {
 		$FileUpload = new FileUpload();
 		$has_delete = $FileUpload->delete_files();
 		Helper::clear_third_party_plugin_cache();
+		update_option( ABLOCKS_FONTS_SETTINGS_NAME, '{}' );
 		wp_send_json_success( $has_delete );
 	}
 

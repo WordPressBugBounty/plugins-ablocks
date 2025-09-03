@@ -732,7 +732,7 @@
         "buttonWidth": {
             "type": "object",
             "default": {
-                "value": 0,
+                "value": 100,
                 "valueTablet": "",
                 "valueMobile": ""
             }

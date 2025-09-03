@@ -54,6 +54,10 @@ $attributes = [
 		'type' => 'number',
 		'default' => 800
 	],
+	'paginationType' => [
+		'type' => 'string',
+		'default' => 'default'
+	],
 	'pagination' => [
 		'type' => 'boolean',
 		'default' => true
@@ -90,7 +94,15 @@ $attributes = [
 		'type' => 'string',
 		'default' => 'black',
 	],
+	'paginationHoverColor' => [
+		'type' => 'string',
+		'default' => 'black',
+	],
 	'paginationActiveColor' => [
+		'type' => 'string',
+		'default' => 'black',
+	],
+	'paginationActiveHoverColor' => [
 		'type' => 'string',
 		'default' => 'black',
 	],
@@ -102,14 +114,20 @@ $attributes = [
 		'type' => 'boolean',
 		'default' => true
 	],
+	'verticalAlignment' => [
+		'type' => 'string',
+		'default' => 'center'
+	],
 ];
 
 $attributes = array_merge(
 	$attributes,
-	ButtonGroup::get_attribute( 'verticalAlignment', false, [
+	ButtonGroup::get_attribute( 'verticalAlign', true, [
 		'value' => 'center',
 	] ),
 	Border::get_attribute( 'navigationIconBorder', true ),
+	Border::get_attribute( 'paginationBorder', true ),
+	Border::get_attribute( 'activePaginationBorder', true ),
 	Dimensions::get_attribute( 'navigationIconPadding', true ),
 	Range::get_attribute([
 		'attributeName' => 'carouselHeight',
@@ -120,6 +138,56 @@ $attributes = array_merge(
 		'defaultValue' => 300,
 		'defaultValueMobile' => 300,
 		'defaultValueTablet' => 300,
+	]),
+	Range::get_attribute([
+		'attributeName' => 'paginationPositionX',
+		'isResponsive' => false,
+		'defaultValue' => 47,
+		'attributeObjectKey' => 'value',
+		'hasUnit' => true,
+		'unitDefaultValue' => '%',
+		'copyStyle' => true
+	]),
+	Range::get_attribute([
+		'attributeName' => 'paginationPositionY',
+		'isResponsive' => false,
+		'defaultValue' => 100,
+		'hasUnit' => true,
+		'isResponsive' => true,
+		'unitDefaultValue' => '%',
+		'copyStyle' => true
+	]),
+	Range::get_attribute([
+		'attributeName' => 'paginationSize',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+		'defaultValue' => 8,
+	]),
+	Range::get_attribute([
+		'attributeName' => 'paginationHoverSize',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+		'defaultValue' => 8,
+	]),
+	Range::get_attribute([
+		'attributeName' => 'paginationActiveSize',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+		'defaultValue' => 8,
+	]),
+	Range::get_attribute([
+		'attributeName' => 'paginationActiveHoverSize',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+		'defaultValue' => 8,
 	]),
 	Range::get_attribute([
 		'attributeName' => 'navigationIconSize',
@@ -147,7 +215,7 @@ $attributes = array_merge(
 	]),
 	Range::get_attribute([
 		'attributeName' => 'navigationIconPositionY',
-		'isResponsive' => false,
+		'isResponsive' => true,
 		'defaultValue' => 50,
 		'attributeObjectKey' => 'value',
 		'hasUnit' => true,
@@ -156,7 +224,7 @@ $attributes = array_merge(
 	]),
 	Range::get_attribute([
 		'attributeName' => 'navigationIconPositionNextX',
-		'isResponsive' => false,
+		'isResponsive' => true,
 		'defaultValue' => -3,
 		'hasUnit' => true,
 		'isResponsive' => true,
@@ -164,7 +232,7 @@ $attributes = array_merge(
 	]),
 	Range::get_attribute([
 		'attributeName' => 'navigationIconPositionPrevX',
-		'isResponsive' => false,
+		'isResponsive' => true,
 		'defaultValue' => -3,
 		'hasUnit' => true,
 		'unitDefaultValue' => '%',

@@ -383,16 +383,32 @@ class DemoImport extends AbstractAjaxHandler {
 	 * @return void
 	 */
 	private function handle_list_response( string $url, string $key ): void {
-		$response = wp_safe_remote_get( $url );
+		global $wp_version;
+		$response = wp_safe_remote_get( $url, array(
+			'headers' => array(
+				'Accept' => 'application/json',
+				'user-agent' => sprintf(
+					'aBlocks/%1$s (%2$s; WordPress/%3$s) %4$s',
+					ABLOCKS_VERSION,
+					get_option( 'blogname' ),
+					$wp_version,
+					home_url()
+				),
+			),
+		) );
 		if ( is_wp_error( $response ) ) {
-			wp_send_json_error( $response->get_error_message() );
+			wp_send_json_error( [
+				'message' => $response->get_error_message()
+			] );
 		}
 
 		$response_code = wp_remote_retrieve_response_code( $response );
 		$response      = wp_remote_retrieve_body( $response );
 		$response      = json_decode( $response, true );
-		if ( $response_code !== 200 ) {
-			wp_send_json_error( $response );
+		if ( $response_code !== 200 || isset( $response['message'] ) ) {
+			wp_send_json_error( [
+				'message' => $response['message']
+			] );
 		}
 
 		set_transient( $key, $response, WEEK_IN_SECONDS );

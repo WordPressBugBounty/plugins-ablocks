@@ -9,6 +9,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'countdown';
@@ -185,8 +186,7 @@ class Block extends BlockBaseAbstract {
 
 	public function get_countdown_item_css( $attributes, $device = '' ) {
 		$css = [];
-
-		$box_background_color = ! empty( $attributes['boxBackgroundColor'] ) ? $attributes['boxBackgroundColor'] : '';
+		$width_css = [];
 		$label_position       = ! empty( $attributes['labelPosition'] ) ? $attributes['labelPosition'] : '';
 		$orient               = ! empty( $attributes['orient'] ) ? $attributes['orient'] : [];
 
@@ -211,9 +211,6 @@ class Block extends BlockBaseAbstract {
 		if ( $label_position ) {
 			$css['flex-direction'] = $label_position;
 		}
-		if ( $box_background_color ) {
-			$css['background'] = $box_background_color;
-		}
 
 		$border_css = [];
 		if ( isset( $attributes['boxBorder'] ) ) {
@@ -221,6 +218,7 @@ class Block extends BlockBaseAbstract {
 		}
 
 		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['boxBackgroundColor'] ) ? $attributes['boxBackgroundColor'] : '' ) ],
 			$width_css,
 			Range::get_css( [
 				'attributeValue'      => $attributes['numberAndLabelGap'],
@@ -250,13 +248,6 @@ class Block extends BlockBaseAbstract {
 
 	public function get_label_css( $attributes, $device = '' ) {
 		$css = [];
-		$label_color = ! empty( $attributes['labelColor'] ) ? $attributes['labelColor'] : '';
-		if ( $label_color ) {
-			$css['color'] = $label_color;
-		}
-		if ( $attributes['labelBgColor'] ) {
-			$css['background'] = $attributes['labelBgColor'];
-		}
 		if ( $attributes['labelPosition'] === 'column' || $attributes['labelPosition'] === 'column-reverse' ) {
 			$css['width'] = '100%';
 			$css['flex'] = '1 1 30%';
@@ -265,6 +256,8 @@ class Block extends BlockBaseAbstract {
 			$css['align-items'] = 'center';
 		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['labelColor'] ) ? $attributes['labelColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['labelBgColor'] ) ? $attributes['labelBgColor'] : '' ) ],
 			! empty( $attributes['labelTypography'] ) ? Typography::get_css( $attributes['labelTypography'], '', $device ) : array(),
 			$css
 		);
@@ -272,13 +265,6 @@ class Block extends BlockBaseAbstract {
 
 	public function get_number_css( $attributes, $device = '' ) {
 		$css = [];
-		$number_color = ! empty( $attributes['numberColor'] ) ? $attributes['numberColor'] : '';
-		if ( $number_color ) {
-			$css['color'] = $number_color;
-		}
-		if ( $attributes['numberBgColor'] ) {
-			$css['background'] = $attributes['numberBgColor'];
-		}
 		if ( $attributes['labelPosition'] === 'column' || $attributes['labelPosition'] === 'column-reverse' ) {
 			$css['width'] = '100%';
 			$css['flex'] = '1 1 70%';
@@ -287,20 +273,17 @@ class Block extends BlockBaseAbstract {
 			$css['align-items'] = 'center';
 		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['numberColor'] ) ? $attributes['numberColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['numberBgColor'] ) ? $attributes['numberBgColor'] : '' ) ],
 			! empty( $attributes['numberTypography'] ) ? Typography::get_css( $attributes['numberTypography'], '', $device ) : array(),
 			$css
 		);
 	}
 
 	public function get_separator_css( $attributes, $device = '' ) {
-		$css = [];
-		$separator_color = ! empty( $attributes['separatorColor'] ) ? $attributes['separatorColor'] : '';
-		if ( $separator_color ) {
-			$css['color'] = $separator_color;
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['separatorColor'] ) ? $attributes['separatorColor'] : '' ) ],
 			! empty( $attributes['separatorTypography'] ) ? Typography::get_css( $attributes['separatorTypography'], '', $device ) : array(),
-			$css
 		);
 	}
 }

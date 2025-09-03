@@ -16,6 +16,7 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\Icon;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 
 class Block extends BlockBaseAbstract {
@@ -205,7 +206,7 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 
 		if ( ! empty( $attributes['background'] ) ) {
-			$css['background'] = $attributes['background'];
+			$css['background'] = Color::get_css( isset( $attributes['background'] ) ? $attributes['background'] : '' );
 		} else {
 			$css['background'] = $attributes['buttonType'];
 		}
@@ -230,7 +231,7 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			]),
 			$css,
-			[ 'color' => $attributes['textColor'] ?? '#000000' ],
+			[ 'color' => Color::get_css( isset( $attributes['textColor'] ) ? $attributes['textColor'] : '' ) ],
 			Border::get_css( $attributes['border'], '', $device ),
 			BoxShadow::get_css( $attributes['boxShadow'], '', $device ),
 			Typography::get_css( $attributes['typography'], '', $device ),
@@ -240,15 +241,9 @@ class Block extends BlockBaseAbstract {
 
 	public function get_button_hover_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['textColorH'] ) ) {
-			$css['color'] = $attributes['textColorH'];
-		}
-
-		if ( ! empty( $attributes['backgroundH'] ) ) {
-			$css['background'] = $attributes['backgroundH'];
-		}
-
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['textColorH'] ) ? $attributes['textColorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['backgroundH'] ) ? $attributes['backgroundH'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['transition'],
 				'attribute_object_key' => 'value',

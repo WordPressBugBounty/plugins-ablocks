@@ -134,11 +134,8 @@ class Block extends BlockBaseAbstract {
 
 	// text hover css generate
 	public function get_text_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['textColorH'] ) ) {
-			$css['fill'] = $attributes['textColorH'];
-		}
 		return array_merge(
+			[ 'fill' => Color::get_css( isset( $attributes['textColorH'] ) ? $attributes['textColorH'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => isset( $attributes['transition'] ) ? $attributes['transition'] : '',
 				'attribute_object_key' => 'value',
@@ -147,7 +144,6 @@ class Block extends BlockBaseAbstract {
 				'property' => 'transition-duration',
 				'device' => $device,
 			]),
-			$css,
 		);
 	}
 	// path css genarate

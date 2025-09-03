@@ -127,6 +127,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'iconBackgroundColorH' => [
+		'type' => 'string',
+		'default' => '',
+	],
 	'iconTransition' => [
 		'type' => 'number',
 		'default' => '',
@@ -245,6 +249,10 @@ $attributes = [
 		'type'         => 'boolean',
 		'default'      => true,
 	],
+	'showCount'        => [
+		'type'         => 'boolean',
+		'default'      => true,
+	],
 	'ratingNumberColor' => [
 		'type' => 'string',
 		'default' => '#000000',
@@ -294,12 +302,16 @@ $attributes = [
 		'type' => 'boolean',
 		'default' => true
 	],
+	'stack' => [
+		'type' => 'string',
+		'default' => '',
+	],
 ];
 
 $attributes = array_merge(
 	$attributes,
 	Alignment::get_attribute( 'alignment', true ),
-	ButtonGroup::get_attribute( 'stack', false, [
+	ButtonGroup::get_attribute( 'iconPlacement', true, [
 		'value' => '',
 	] ),
 	// badge starts
@@ -318,6 +330,7 @@ $attributes = array_merge(
 		'color' => '#000000',
 		'hasNoSelectorOrSource' => true
 	] ),
+	Dimensions::get_attribute( 'iconMargin', true ),
 	Link::get_attribute( 'iconLink' ),
 	Alignment::get_attribute( 'iconAlignment', true ),
 	// heading starts
@@ -328,6 +341,7 @@ $attributes = array_merge(
 	]),
 	TextShadow::get_attribute( 'headingTextShadow' ),
 	TextStroke::get_attribute( 'headingTextStroke', true ),
+	Dimensions::get_attribute( 'headingMargin', true ),
 	// sub heading starts
 	Typography::get_attribute( 'subHeadingTypography', true, [
 		'fontFamily' => 'Roboto',
@@ -336,6 +350,7 @@ $attributes = array_merge(
 	]),
 	TextShadow::get_attribute( 'subHeadingTextShadow' ),
 	TextStroke::get_attribute( 'subHeadingTextStroke', true ),
+	Dimensions::get_attribute( 'subHeadingMargin', true ),
 	// paragraph starts
 	Typography::get_attribute( 'desTypography', true, [
 		'fontFamily' => 'Roboto',
@@ -344,6 +359,7 @@ $attributes = array_merge(
 	]),
 	TextShadow::get_attribute( 'desTextShadow' ),
 	TextStroke::get_attribute( 'desTextStroke', true ),
+	Dimensions::get_attribute( 'desMargin', true ),
 	// button starts
 	Icon::get_attribute('btnIcon', [
 		'size' => 20,
@@ -356,11 +372,13 @@ $attributes = array_merge(
 	Link::get_attribute( 'btnLink' ),
 	Border::get_attribute( 'btnBorder', true ),
 	Dimensions::get_attribute( 'btnPadding', true ),
+	Dimensions::get_attribute( 'btnMargin', true ),
 	Typography::get_attribute( 'btnTypography', true ),
 	TextShadow::get_attribute( 'btnTextShadow' ),
 	Alignment::get_attribute( 'btnAlignment', true, [ 'value' => 'center' ] ),
 	// star rating starts
 	Typography::get_attribute( 'ratingNumberTypography', true ),
+	Dimensions::get_attribute( 'ratingMargin', true ),
 	Icon::get_attribute( 'starIcon', [
 		'path' => 'M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z',
 		'viewBox' => '0 0 576 512',

@@ -13,7 +13,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\Background;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
-
+use ABlocks\Controls\Color;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'academy-course-search';
 
@@ -51,20 +51,14 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_search_form_css( $attributes, $device = '' ) {
-		$css = array();
-		if ( ! empty( $attributes['search_background_color'] ) ) {
-			$css['background'] = $attributes['search_background_color'];
-		}
-		if ( ! empty( $attributes['search_box_color'] ) ) {
-			$css['color'] = $attributes['search_box_color'];
-		}
 		$search_typography_css = ! empty( $attributes['search_typography'] ) ? Typography::get_css( $attributes['search_typography'], '', $device ) : array();
 		$search_border_css = ! empty( $attributes['search_border'] ) ? Border::get_css( $attributes['search_border'], '', $device ) : array();
 
 		return array_merge(
 			$search_typography_css,
 			$search_border_css,
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['search_box_color'] ) ? $attributes['search_box_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['search_background_color'] ) ? $attributes['search_background_color'] : '' ) ],
 		);
 	}
 	public function get_search_form_hover_css( $attributes, $device = '' ) {
@@ -78,22 +72,10 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_search_box_icon_css( $attributes, $device = '' ) {
-		$css = array();
-
-		if ( ! empty( $attributes['search_icon_color'] ) ) {
-			$css['color'] = $attributes['search_icon_color'];
-		}
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['search_icon_color'] ) ? $attributes['search_icon_color'] : '' ) ];
 	}
 	public function get_search_box_placeholder_css( $attributes, $device = '' ) {
-		$css = array();
-
-		if ( ! empty( $attributes['search_placeholder_color'] ) ) {
-			$css['color'] = $attributes['search_placeholder_color'];
-		}
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['search_placeholder_color'] ) ? $attributes['search_placeholder_color'] : '' ) ];
 	}
 
 

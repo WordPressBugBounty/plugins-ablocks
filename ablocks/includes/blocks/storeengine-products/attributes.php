@@ -136,9 +136,9 @@ $attributes = array_merge(
 		'attributeName' => 'buttonWidth',
 		'attributeObjectKey' => 'value',
 		'isResponsive' => true,
-		'defaultValue' => 0,
+		'defaultValue' => 100,
 		'hasUnit' => false,
-		'unitDefaultValue' => 'px',
+		'unitDefaultValue' => '%',
 	]),
 	Range::get_attribute([
 		'attributeName' => 'buttonDriection',

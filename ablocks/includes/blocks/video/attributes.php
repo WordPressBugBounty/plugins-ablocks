@@ -16,12 +16,12 @@ $attributes = [
 		'default'     => 'youtube',
 	],
 	'videoStartTime'  => [
-		'type'        => 'string',
-		'default'     => '',
+		'type'        => 'number',
+		'default'     => 0,
 	],
 	'videoEndTime'    => [
-		'type'        => 'string',
-		'default'     => '',
+		'type'        => 'number',
+		'default'     => 0,
 	],
 	'videoUrl'         => [
 		'type'        => 'string',

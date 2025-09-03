@@ -15,6 +15,7 @@ use ABlocks\Controls\Background;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'storeengine-billing-info';
@@ -63,42 +64,35 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_billing_heading_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color'] = $attributes['heading_color'] ?? '';
 		$typography_css = isset( $attributes['heading_typograhy'] )
 		? Typography::get_css( $attributes['heading_typograhy'], '', $device )
 		: [];
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['heading_color'] ) ? $attributes['heading_color'] : '' ) ],
 			$typography_css
 		);
 	}
 
 	public function get_billing_heading_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color'] = $attributes['heading_hover_color'] ?? '';
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['heading_hover_color'] ) ? $attributes['heading_hover_color'] : '' ) ];
+
 	}
 
 
 	public function get_billing_address_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color'] = $attributes['address_color'] ?? '';
 		$typography_css = isset( $attributes['address_typograhy'] )
 		? Typography::get_css( $attributes['address_typograhy'], '', $device )
 		: [];
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['address_color'] ) ? $attributes['address_color'] : '' ) ],
 			$typography_css
 		);
 	}
 
 	public function get_billing_address_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color'] = $attributes['address_hover_color'] ?? '';
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['address_hover_color'] ) ? $attributes['address_hover_color'] : '' ) ];
 	}
 
 	public function render_block_content( $attributes, $content, $block_instance ) {

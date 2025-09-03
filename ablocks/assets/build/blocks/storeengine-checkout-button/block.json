@@ -57,10 +57,6 @@
             "type": "string",
             "default": ""
         },
-        "buttonWidth": {
-            "type": "number",
-            "default": 100
-        },
         "padding": {
             "type": "object",
             "default": {
@@ -243,6 +239,14 @@
                 "spreadH": "",
                 "colorH": "",
                 "transitionDuration": "0"
+            }
+        },
+        "buttonWidth": {
+            "type": "object",
+            "default": {
+                "value": 100,
+                "valueTablet": "",
+                "valueMobile": ""
             }
         },
         "_margin": {

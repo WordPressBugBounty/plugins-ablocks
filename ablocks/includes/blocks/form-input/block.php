@@ -1,6 +1,7 @@
 <?php
 namespace ABlocks\Blocks\FormInput;
 
+use ABlocks\Controls\Color;
 use ABlocks\Controls\Range;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -57,23 +58,16 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_icon_wrapper_css( $attributes, $device = '' ) {
 		$css = [];
-
-		// Check for 'inputIconSize' in the attributes and set font-size
 		if ( isset( $attributes['inputIconSize'] ) ) {
 			$css['font-size'] = $attributes['inputIconSize'] . 'px';
 		}
-
-		// Check for 'iconColor' in the attributes and set fill color
-		if ( isset( $attributes['iconColor'] ) ) {
-			$css['fill'] = $attributes['iconColor'];
-		}
-
-		return $css;
+		return array_merge(
+			[ 'fill' => Color::get_css( isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : '' ) ],
+			$css
+		);
 	}
 	public function get_icon_space_css( $attributes, $device = '' ) {
 		$css = [];
-
-		// Check for 'inputIconSpace' in the attributes and set padding-left
 		if ( isset( $attributes['inputIconSpace'] ) ) {
 			$css['padding-left'] = $attributes['inputIconSpace'] . 'px';
 		}

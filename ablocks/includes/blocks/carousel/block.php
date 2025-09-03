@@ -8,6 +8,8 @@ use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Border;
+use ABlocks\Controls\Color;
+
 
 
 class Block extends BlockBaseAbstract {
@@ -49,11 +51,24 @@ class Block extends BlockBaseAbstract {
 			$this->get_navigation_icon_css( $attributes, 'Tablet' ),
 			$this->get_navigation_icon_css( $attributes, 'Mobile' ),
 		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-pagination',
+			$this->get_pagination_parent_css( $attributes ),
+			$this->get_pagination_parent_css( $attributes, 'Tablet' ),
+			$this->get_pagination_parent_css( $attributes, 'Mobile' )
+		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .swiper-pagination-bullet',
 			$this->get_pagination_color_css( $attributes ),
 			$this->get_pagination_color_css( $attributes, 'Tablet' ),
 			$this->get_pagination_color_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .swiper-pagination-bullet:hover',
+			$this->get_pagination_color_hover_css( $attributes ),
+			$this->get_pagination_color_hover_css( $attributes, 'Tablet' ),
+			$this->get_pagination_color_hover_css( $attributes, 'Mobile' )
 		);
 
 		$css_generator->add_class_styles(
@@ -61,6 +76,12 @@ class Block extends BlockBaseAbstract {
 			$this->get_pagination_active_color_css( $attributes ),
 			$this->get_pagination_active_color_css( $attributes, 'Tablet' ),
 			$this->get_pagination_active_color_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .swiper-pagination-bullet.swiper-pagination-bullet-active:hover',
+			$this->get_pagination_active_color_hover_css( $attributes ),
+			$this->get_pagination_active_color_hover_css( $attributes, 'Tablet' ),
+			$this->get_pagination_active_color_hover_css( $attributes, 'Mobile' )
 		);
 
 		$css_generator->add_class_styles(
@@ -112,11 +133,24 @@ class Block extends BlockBaseAbstract {
 			$this->get_navigation_icon_css( $attributes, 'Tablet' ),
 			$this->get_navigation_icon_css( $attributes, 'Mobile' ),
 		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-pagination',
+			$this->get_pagination_parent_css( $attributes ),
+			$this->get_pagination_parent_css( $attributes, 'Tablet' ),
+			$this->get_pagination_parent_css( $attributes, 'Mobile' )
+		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .swiper-pagination-bullet',
 			$this->get_pagination_color_css( $attributes ),
 			$this->get_pagination_color_css( $attributes, 'Tablet' ),
 			$this->get_pagination_color_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .swiper-pagination-bullet:hover',
+			$this->get_pagination_color_hover_css( $attributes ),
+			$this->get_pagination_color_hover_css( $attributes, 'Tablet' ),
+			$this->get_pagination_color_hover_css( $attributes, 'Mobile' )
 		);
 
 		$css_generator->add_class_styles(
@@ -124,6 +158,12 @@ class Block extends BlockBaseAbstract {
 			$this->get_pagination_active_color_css( $attributes ),
 			$this->get_pagination_active_color_css( $attributes, 'Tablet' ),
 			$this->get_pagination_active_color_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .swiper-pagination-bullet.swiper-pagination-bullet-active:hover',
+			$this->get_pagination_active_color_hover_css( $attributes ),
+			$this->get_pagination_active_color_hover_css( $attributes, 'Tablet' ),
+			$this->get_pagination_active_color_hover_css( $attributes, 'Mobile' )
 		);
 
 		$css_generator->add_class_styles(
@@ -149,8 +189,25 @@ class Block extends BlockBaseAbstract {
 
 	public function get_carousel_css( $attributes, $device = '' ) {
 		$carousel_css = [];
-		if ( ! empty( $attributes['verticalAlignment'] ) ) {
-			$carousel_css['align-items'] = $attributes['verticalAlignment'];
+		// Temporary approch instead of attribute migration. Might remove it in future
+		$verticalAlign = isset( $attributes['verticalAlign'][ 'value' . $device ] ) ? $attributes['verticalAlign'][ 'value' . $device ] : '';
+		if (
+			! isset( $attributes['verticalAlign'] )
+			|| (
+				$attributes['verticalAlignment'] !== '' && $attributes['verticalAlignment'] !== 'center'
+			)
+		) {
+			$attributes['verticalAlign'][ 'value' . $device ] = $attributes['verticalAlignment'];
+			$attributes['verticalAlignment'] = '';
+		}else if (
+			$attributes['verticalAlignment'] !== '' && $attributes['verticalAlignment'] === 'center'
+		){
+			$attributes['verticalAlignment'] = '';
+		}
+		// Temporary approch instead of attribute migration. Might remove it in future
+		
+		if ( ! empty( $attributes['verticalAlign'][ 'value' . $device ] ) ) {
+			$carousel_css['align-items'] = $attributes['verticalAlign'][ 'value' . $device ];
 		}
 
 		return array_merge(
@@ -177,7 +234,7 @@ class Block extends BlockBaseAbstract {
 				'attributeValue' => $attributes['navigationIconPositionY'],
 				'attribute_object_key' => 'value',
 				'defaultValue' => 50,
-				'isResponsive' => false,
+				'isResponsive' => true,
 				'hasUnit' => true,
 				'unitDefaultValue' => '%',
 				'property' => 'top',
@@ -197,7 +254,7 @@ class Block extends BlockBaseAbstract {
 				'attribute_object_key' => 'value',
 				'defaultValue' => -3,
 				'hasUnit' => true,
-				'isResponsive' => false,
+				'isResponsive' => true,
 				'unitDefaultValue' => '%',
 				'property' => 'left',
 				'device' => $device,
@@ -214,7 +271,7 @@ class Block extends BlockBaseAbstract {
 				'attributeValue' => $attributes['navigationIconPositionNextX'],
 				'attribute_object_key' => 'value',
 				'defaultValue' => -3,
-				'isResponsive' => false,
+				'isResponsive' => true,
 				'hasUnit' => true,
 				'unitDefaultValue' => '%',
 				'property' => 'right',
@@ -247,10 +304,10 @@ class Block extends BlockBaseAbstract {
 	public function get_navigation_icon_svg_css( $attributes, $device = '' ) {
 		$navigation_icon_svg_css = [];
 		if ( isset( $attributes['navigationIconColor'] ) ) {
-			$navigation_icon_svg_css['fill'] = $attributes['navigationIconColor'];
+			$navigation_icon_svg_css['fill'] = Color::get_css( isset( $attributes['navigationIconColor'] ) ? $attributes['navigationIconColor'] : '' );
 		};
 		if ( isset( $attributes['navigationIconBgColor'] ) ) {
-			$navigation_icon_svg_css['background-color'] = $attributes['navigationIconBgColor'];
+			$navigation_icon_svg_css['background-color'] = Color::get_css( isset( $attributes['navigationIconBgColor'] ) ? $attributes['navigationIconBgColor'] : '' );
 		};
 		return array_merge(
 			$navigation_icon_svg_css,
@@ -261,10 +318,10 @@ class Block extends BlockBaseAbstract {
 	public function get_navigation_icon_svg_hover_css( $attributes, $device = '' ) {
 		$navigation_icon_svg_hover_css = [];
 		if ( isset( $attributes['navigationIconColorH'] ) ) {
-			$navigation_icon_svg_hover_css['fill'] = $attributes['navigationIconColorH'];
+			$navigation_icon_svg_hover_css['fill'] = Color::get_css( isset( $attributes['navigationIconColorH'] ) ? $attributes['navigationIconColorH'] : '' );
 		};
 		if ( isset( $attributes['navigationIconBgColorH'] ) ) {
-			$navigation_icon_svg_hover_css['background-color'] = $attributes['navigationIconBgColorH'];
+			$navigation_icon_svg_hover_css['background-color'] = Color::get_css( isset( $attributes['navigationIconBgColorH'] ) ? $attributes['navigationIconBgColorH'] : '' );
 		};
 		return array_merge(
 			Range::get_css([
@@ -280,20 +337,151 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 
-	public function get_pagination_color_css( $attributes ) {
+	public function get_pagination_parent_css( $attributes, $device = '' ) {
+		return array_merge(
+			Range::get_css([
+				'attributeValue' => $attributes['paginationPositionX'],
+				'attribute_object_key' => 'value',
+				'defaultValue' => 47,
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'unitDefaultValue' => '%',
+				'property' => 'left',
+				'device' => $device,
+			]),
+			Range::get_css([
+				'attributeValue' => $attributes['paginationPositionY'],
+				'attribute_object_key' => 'value',
+				'defaultValue' => 100,
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'unitDefaultValue' => '%',
+				'property' => 'top',
+				'device' => $device,
+			]),
+		);
+	}
+	public function get_pagination_color_css( $attributes, $device = '' ) {
 		$pagination_color_css = [];
 		if ( isset( $attributes['paginationColor'] ) ) {
-			$pagination_color_css['background-color'] = $attributes['paginationColor'];
+			$pagination_color_css['background-color'] = Color::get_css( isset( $attributes['paginationColor'] ) ? $attributes['paginationColor'] : '' );
 		};
-		return $pagination_color_css;
+		return array_merge(
+			$pagination_color_css,
+			Range::get_css([
+				'attributeValue' => $attributes['paginationSize'],
+				'attribute_object_key' => 'value',
+				'defaultValue' => 8,
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'width',
+				'device' => $device,
+			]),
+			Range::get_css([
+				'attributeValue' => $attributes['paginationSize'],
+				'attribute_object_key' => 'value',
+				'defaultValue' => 8,
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'height',
+				'device' => $device,
+			]),
+			Border::get_css( $attributes['paginationBorder'], '', $device ),
+		);
+	}
+	public function get_pagination_color_hover_css( $attributes, $device = '' ) {
+		$pagination_color_css = [];
+		if ( isset( $attributes['paginationHoverColor'] ) ) {
+			$pagination_color_css['background-color'] = $attributes['paginationHoverColor'];
+		};
+		return array_merge(
+			$pagination_color_css,
+			Range::get_css([
+				'attributeValue' => $attributes['paginationHoverSize'],
+				'attribute_object_key' => 'value',
+				'defaultValue' => 8,
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'width',
+				'device' => $device,
+			]),
+			Range::get_css([
+				'attributeValue' => $attributes['paginationHoverSize'],
+				'attribute_object_key' => 'value',
+				'defaultValue' => 8,
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'height',
+				'device' => $device,
+			]),
+			Border::get_hover_css( $attributes['paginationBorder'], '', $device ),
+		);
 	}
 
-	public function get_pagination_active_color_css( $attributes ) {
+	public function get_pagination_active_color_css( $attributes, $device = '' ) {
 		$pagination_active_color_css = [];
 		if ( isset( $attributes['paginationActiveColor'] ) ) {
-			$pagination_active_color_css['background-color'] = $attributes['paginationActiveColor'];
+			$pagination_active_color_css['background-color'] = Color::get_css( isset( $attributes['paginationActiveColor'] ) ? $attributes['paginationActiveColor'] : '' );
+
 		};
-		return $pagination_active_color_css;
+		return array_merge(
+			$pagination_active_color_css,
+			Range::get_css([
+				'attributeValue' => $attributes['paginationActiveSize'],
+				'attribute_object_key' => 'value',
+				'defaultValue' => 8,
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'width',
+				'device' => $device,
+			]),
+			Range::get_css([
+				'attributeValue' => $attributes['paginationActiveSize'],
+				'attribute_object_key' => 'value',
+				'defaultValue' => 8,
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'height',
+				'device' => $device,
+			]),
+			Border::get_css( $attributes['activePaginationBorder'], '', $device ),
+		);
+	}
+	public function get_pagination_active_color_hover_css( $attributes, $device = '' ) {
+		$pagination_active_color_css = [];
+		if ( isset( $attributes['paginationActiveHoverColor'] ) ) {
+			$pagination_active_color_css['background-color'] = $attributes['paginationActiveHoverColor'];
+		};
+		return array_merge(
+			$pagination_active_color_css,
+			Range::get_css([
+				'attributeValue' => $attributes['paginationActiveHoverSize'],
+				'attribute_object_key' => 'value',
+				'defaultValue' => 8,
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'width',
+				'device' => $device,
+			]),
+			Range::get_css([
+				'attributeValue' => $attributes['paginationActiveHoverSize'],
+				'attribute_object_key' => 'value',
+				'defaultValue' => 8,
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'height',
+				'device' => $device,
+			]),
+			Border::get_hover_css( $attributes['activePaginationBorder'], '', $device ),
+		);
 	}
 
 

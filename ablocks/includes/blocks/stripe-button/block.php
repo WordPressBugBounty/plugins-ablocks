@@ -16,6 +16,7 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\Icon;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'stripe-button';
 
@@ -203,7 +204,7 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 
 		if ( ! empty( $attributes['background'] ) ) {
-			$css['background'] = $attributes['background'];
+			$css['background'] = Color::get_css( isset( $attributes['background'] ) ? $attributes['background'] : '' );
 		} else {
 			$css['background'] = $attributes['buttonType'];
 		}
@@ -218,7 +219,7 @@ class Block extends BlockBaseAbstract {
 
 		return array_merge(
 			$css,
-			[ 'color' => $attributes['textColor'] ?? '#000000' ],
+			[ 'color' => Color::get_css( isset( $attributes['textColor'] ) ? $attributes['textColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['iconSpace'],
 				'attribute_object_key' => 'value',
@@ -238,19 +239,13 @@ class Block extends BlockBaseAbstract {
 
 	public function get_button_hover_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['textColorH'] ) ) {
-			$css['color'] = $attributes['textColorH'];
-		}
-
-		if ( ! empty( $attributes['backgroundH'] ) ) {
-			$css['background'] = $attributes['backgroundH'];
-		}
-
 		if ( ! empty( $attributes['transition'] ) ) {
 			$css['transition-duration'] = $attributes['transition'] . 's';
 		}
 		return array_merge(
 			$css,
+			[ 'color' => Color::get_css( isset( $attributes['textColorH'] ) ? $attributes['textColorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['backgroundH'] ) ? $attributes['backgroundH'] : '' ) ],
 			Border::get_hover_css( $attributes['border'], '', $device ),
 			BoxShadow::get_hover_css( $attributes['boxShadow'], '', $device )
 		);
@@ -261,13 +256,7 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_icon_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['textColorH'] ) ) {
-			$css['fill'] = $attributes['textColorH'];
-		}
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['textColorH'] ) ? $attributes['textColorH'] : '' ) ];
 	}
 
 

@@ -11,6 +11,8 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Icon;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
+
 
 class Block extends BlockBaseAbstract {
 
@@ -30,6 +32,13 @@ class Block extends BlockBaseAbstract {
 			$this->get_tabs_panel_css( $attributes ),
 			$this->get_tabs_panel_css( $attributes, 'Tablet' ),
 			$this->get_tabs_panel_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab-panel:hover',
+			$this->get_tabs_panel_hover_css( $attributes ),
+			$this->get_tabs_panel_hover_css( $attributes, 'Tablet' ),
+			$this->get_tabs_panel_hover_css( $attributes, 'Mobile' )
 		);
 
 		$css_generator->add_class_styles(
@@ -254,6 +263,13 @@ class Block extends BlockBaseAbstract {
 		);
 
 		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab-panel:hover',
+			$this->get_tabs_panel_hover_css( $attributes ),
+			$this->get_tabs_panel_hover_css( $attributes, 'Tablet' ),
+			$this->get_tabs_panel_hover_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab',
 			$this->get_tabs_menu_content_css( $attributes ),
 			$this->get_tabs_menu_content_css( $attributes, 'Tablet' ),
@@ -406,15 +422,15 @@ class Block extends BlockBaseAbstract {
 		$tabs_css = [];
 		$menuPosition = $attributes['tabsMenuPositioning'][ 'value' . $device ] ?? '';
 
-			if ( $menuPosition === 'top' ) {
-				$tabs_css['flex-direction'] = 'column';
-			} elseif ( $menuPosition === 'bottom' ) {
-				$tabs_css['flex-direction'] = 'column-reverse';
-			} elseif ( $menuPosition === 'left' ) {
-				$tabs_css['flex-direction'] = 'row';
-			} elseif ( $menuPosition === 'right' ) {
-				$tabs_css['flex-direction'] = 'row-reverse';
-			}
+		if ( $menuPosition === 'top' ) {
+			$tabs_css['flex-direction'] = 'column';
+		} elseif ( $menuPosition === 'bottom' ) {
+			$tabs_css['flex-direction'] = 'column-reverse';
+		} elseif ( $menuPosition === 'left' ) {
+			$tabs_css['flex-direction'] = 'row';
+		} elseif ( $menuPosition === 'right' ) {
+			$tabs_css['flex-direction'] = 'row-reverse';
+		}
 		return $tabs_css;
 	}
 
@@ -425,46 +441,69 @@ class Block extends BlockBaseAbstract {
 			$tabs_panel_css['justify-content'] = $attributes['tabMenuAlignment'][ 'value' . $device ];
 		}
 
-		$tabsMenuPosition = $attributes['tabsMenuPositioning'][ 'value' . $device ] ?? '';
+		$tabsMenuPositioning = $this->get_responsive_attribute_value($attributes['tabsMenuPositioning'], $device);
+		$tabsMenuDirection = $this->get_responsive_attribute_value($attributes['tabsMenuDirection'], $device);
 
-		if ( $tabsMenuPosition === 'top' || $tabsMenuPosition === 'bottom' ) {
-
-			$tabs_panel_css['flex-direction'] = ( $device === 'Tablet' || $device === 'Mobile' ) ? 'column' : 'row';
-			$tabs_panel_css['max-width'] = '100%';
-			$tabs_panel_css['flex-wrap'] = 'wrap';
-		} elseif ( empty( $tabsMenuPosition ) || $tabsMenuPosition === 'left' || $tabsMenuPosition === 'right' ) {
-
+		if ( $tabsMenuPositioning === 'left' || $tabsMenuPositioning === 'right' ) {
 			$tabs_panel_css['flex-direction'] = 'column';
-			$tabs_panel_css['max-width'] = ( $device === 'Mobile' ) ? '100%' : '30%';
-			$tabs_panel_css['flex-grow'] = 1;
+		} else if ( $tabsMenuPositioning === 'top' || $tabsMenuPositioning === 'bottom' ) {
+			$tabs_panel_css['flex-direction'] = $tabsMenuDirection;
+			$tabs_panel_css['flex-wrap'] = 'wrap';
 		}
-		return $tabs_panel_css;
+
+		return array_merge(
+			$tabs_panel_css,
+			[ 'background' => Color::get_css( isset( $attributes['tabMenusBackgroundColor'] ) ? $attributes['tabMenusBackgroundColor'] : '' ) ],
+			Dimensions::get_css( $attributes['tabMenusMargin'] ?? [], 'margin', $device ),
+			Dimensions::get_css( $attributes['tabMenusPadding'] ?? [], 'padding', $device ),
+			Border::get_css( $attributes['tabMenusBorder'] ?? [], '', $device ),
+			Range::get_css([
+				'attributeValue' => $attributes['tabsGap'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'defaultValue' => 10,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'gap',
+				'device' => $device,
+			]),
+		);
 	}
+
+	public function get_tabs_panel_hover_css( $attributes, $device = '' ) {
+
+		return array_merge(
+			Border::get_hover_css( $attributes['tabMenusBorder'] ?? [], '', $device ),
+		);
+	}
+
 	public function get_tabs_menu_content_css( $attributes, $device = '' ) {
 		$css = [];
 		$css['display'] = 'flex';
+		
+		$iconPosition = $this->get_responsive_attribute_value($attributes['iconPosition'], $device);
 
 		// Handling icon position
-		if ( isset( $attributes['iconPosition'][ 'value' . $device ] ) && $attributes['iconPosition'][ 'value' . $device ] === 'top' ) {
+		if ( $iconPosition === 'top' ) {
 			$css['flex-direction'] = 'column';
 			if ( isset( $attributes['menuContentAlignment'][ 'value' . $device ] ) ) {
 				$css['align-items'] = $attributes['menuContentAlignment'][ 'value' . $device ];
 			}
 		}
-		if ( isset( $attributes['iconPosition'][ 'value' . $device ] ) && $attributes['iconPosition'][ 'value' . $device ] === 'bottom' ) {
+		if ( $iconPosition === 'bottom' ) {
 			$css['flex-direction'] = 'column-reverse';
 			if ( isset( $attributes['menuContentAlignment'][ 'value' . $device ] ) ) {
 				$css['align-items'] = $attributes['menuContentAlignment'][ 'value' . $device ];
 			}
 		}
-		if ( isset( $attributes['iconPosition'][ 'value' . $device ] ) && $attributes['iconPosition'][ 'value' . $device ] === 'left' ) {
+		if ( $iconPosition === 'left' ) {
 			$css['flex-direction'] = 'row';
 			$css['align-items'] = 'center';
 			if ( isset( $attributes['menuContentAlignment'][ 'value' . $device ] ) ) {
 				$css['justify-content'] = $attributes['menuContentAlignment'][ 'value' . $device ];
 			}
 		}
-		if ( isset( $attributes['iconPosition'][ 'value' . $device ] ) && $attributes['iconPosition'][ 'value' . $device ] === 'right' ) {
+		if ( $iconPosition === 'right' ) {
 			$css['flex-direction'] = 'row-reverse';
 			$css['align-items'] = 'center';
 			if ( isset( $attributes['menuContentAlignment'][ 'value' . $device ] ) ) {
@@ -472,93 +511,10 @@ class Block extends BlockBaseAbstract {
 			}
 		}
 
-		// Tab background color
-		if ( isset( $attributes['tabBackgroundColor'] ) ) {
-			$css['background-color'] = $attributes['tabBackgroundColor'];
-		}
-
-		// Handling tabs gap
-		$tabs_gap_value = [];
-		$tabs_menu_position = $attributes['tabsMenuPositioning'][ 'value' . $device ] ?? '';
-
-		if ( ( $tabs_menu_position === 'left' || $tabs_menu_position === 'right' ) ) {
-			$tabs_gap_value = array_merge(
-				Range::get_css([
-					'attributeValue' => $attributes['tabsGap'],
-					'attribute_object_key' => 'value',
-					'isResponsive' => true,
-					'defaultValue' => 10,
-					'hasUnit' => true,
-					'unitDefaultValue' => 'px',
-					'property' => 'margin-top',
-					'device' => $device,
-				]),
-				Range::get_css([
-					'attributeValue' => $attributes['tabsGap'],
-					'attribute_object_key' => 'value',
-					'isResponsive' => true,
-					'defaultValue' => 10,
-					'hasUnit' => true,
-					'unitDefaultValue' => 'px',
-					'property' => 'margin-bottom',
-					'device' => $device,
-				]),
-			);
-		}//end if
-		if ( ( $tabs_menu_position === 'top' || $tabs_menu_position === 'bottom' ) ) {
-			if ( $device === 'Tablet' || $device === 'Mobile' ) {
-				$tabs_gap_value = array_merge(
-					Range::get_css([
-						'attributeValue' => $attributes['tabsGap'],
-						'attribute_object_key' => 'value',
-						'isResponsive' => true,
-						'defaultValue' => 10,
-						'hasUnit' => true,
-						'unitDefaultValue' => 'px',
-						'property' => 'margin-top',
-						'device' => $device,
-					]),
-					Range::get_css([
-						'attributeValue' => $attributes['tabsGap'],
-						'attribute_object_key' => 'value',
-						'isResponsive' => true,
-						'defaultValue' => 10,
-						'hasUnit' => true,
-						'unitDefaultValue' => 'px',
-						'property' => 'margin-bottom',
-						'device' => $device,
-					]),
-				);
-			} else {
-				$tabs_gap_value = array_merge(
-					Range::get_css([
-						'attributeValue' => $attributes['tabsGap'],
-						'attribute_object_key' => 'value',
-						'isResponsive' => true,
-						'defaultValue' => 10,
-						'hasUnit' => true,
-						'unitDefaultValue' => 'px',
-						'property' => 'margin-left',
-						'device' => $device,
-					]),
-					Range::get_css([
-						'attributeValue' => $attributes['tabsGap'],
-						'attribute_object_key' => 'value',
-						'isResponsive' => true,
-						'defaultValue' => 10,
-						'hasUnit' => true,
-						'unitDefaultValue' => 'px',
-						'property' => 'margin-right',
-						'device' => $device,
-					]),
-				);
-			}//end if
-		}//end if
-
 		// Merging with margin, padding, and border styles
 		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['tabBackgroundColor'] ) ? $attributes['tabBackgroundColor'] : '' ) ],
 			$css,
-			$tabs_gap_value,
 			Dimensions::get_css( $attributes['menuContentPadding'] ?? [], 'padding', $device ),
 			Border::get_css( $attributes['menuContentBorder'] ?? [], '', $device ),
 			BoxShadow::get_css( $attributes['boxShadow'], '', $device ),
@@ -589,12 +545,12 @@ class Block extends BlockBaseAbstract {
 		: '2px';
 		if ( isset( $attributes['activeColorOptions'] ) && $attributes['activeColorOptions'] === 'background' ) {
 			if ( isset( $attributes['tabActiveBackgroundColor'] ) ) {
-				$tabs_menu_content_active_css['background-color'] = $attributes['tabActiveBackgroundColor'] . ' !important';
+				$tabs_menu_content_active_css['background-color'] = Color::get_css( isset( $attributes['tabActiveBackgroundColor'] ) ? $attributes['tabActiveBackgroundColor'] : '' ) . ' !important';
 			}
 		} elseif ( isset( $attributes['activeColorOptions'] ) && $attributes['activeColorOptions'] === 'border' ) {
 			$tabs_menu_content_active_css['border-width'] = $border_width;
 			if ( isset( $attributes['activeBorderColor'] ) ) {
-				$tabs_menu_content_active_css['border-color'] = $attributes['activeBorderColor'] . ' !important';
+				$tabs_menu_content_active_css['border-color'] = Color::get_css( isset( $attributes['activeBorderColor'] ) ? $attributes['activeBorderColor'] : '' ) . ' !important';
 			}
 		}
 
@@ -610,21 +566,14 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_tabs_title_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( isset( $attributes['titleTextColor'] ) ) {
-			$css['color'] = $attributes['titleTextColor'];
-		}
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['titleTextColor'] ) ? $attributes['titleTextColor'] : '' ) ],
 		Typography::get_css( $attributes['titleTypography'] ?? [], '', $device ));
 	}
 
 	public function get_tabs_active_title_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( isset( $attributes['titleTextActiveColor'] ) ) {
-			$css['color'] = $attributes['titleTextActiveColor'];
-		}
-		return $css;
+
+		return [ 'color' => Color::get_css( isset( $attributes['titleTextActiveColor'] ) ? $attributes['titleTextActiveColor'] : '' ) ];
 	}
 
 	public function get_tabs_subtitle_css( $attributes, $device = '' ) {
@@ -632,24 +581,27 @@ class Block extends BlockBaseAbstract {
 		if ( isset( $attributes['showActiveSubTitle'] ) && $attributes['showActiveSubTitle'] === true ) {
 			$tabsSubtitleCSS['display'] = 'none';
 		}
-		// Get subtitle text color
-		if ( isset( $attributes['subTitleTextColor'] ) ) {
-			$tabsSubtitleCSS['color'] = $attributes['subTitleTextColor'];
-		}
-
 		// Get typography styles
 		$typographyStyles = Typography::get_css( $attributes['subTitleTypography'] ?? [], '', $device );
 		$tabsSubtitleCSS = array_merge( $tabsSubtitleCSS, $typographyStyles );
 
 		// Determine width based on menu position
-		$position = $attributes['tabsMenuPositioning'][ 'value' . $device ] ?? '';
-		if ( $position === 'top' || $position === 'bottom' ) {
-			$tabsSubtitleCSS['width'] = '160px';
-		} else {
+		$tabsWidthType = $this->get_responsive_attribute_value($attributes['tabsWidthType'], $device);
+		$tabsMenuDirection = $this->get_responsive_attribute_value($attributes['tabsMenuDirection'], $device);
+		$position = $this->get_responsive_attribute_value($attributes['tabsMenuPositioning'], $device);
+		if($device === 'Mobile'){
 			$tabsSubtitleCSS['width'] = '100%';
+		}else if ( ($position === 'top' || $position === 'bottom') && $tabsMenuDirection === 'column' ) {
+			$tabsSubtitleCSS['width'] = '100%';
+		} else {
+			$tabsSubtitleCSS['width'] = '160px';
 		}
 
-		return $tabsSubtitleCSS;
+
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['subTitleTextColor'] ) ? $attributes['subTitleTextColor'] : '' ) ],
+			$tabsSubtitleCSS
+		);
 	}
 
 
@@ -659,7 +611,7 @@ class Block extends BlockBaseAbstract {
 			$css['display'] = 'block';
 		}
 		if ( isset( $attributes['subTitleTextActiveColor'] ) ) {
-			$css['color'] = $attributes['subTitleTextActiveColor'] . '!important';
+			$css['color'] = Color::get_css( isset( $attributes['subTitleTextActiveColor'] ) ? $attributes['subTitleTextActiveColor'] : '' ) . '!important';
 		}
 		return $css;
 	}
@@ -669,11 +621,7 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function progress_bar_style_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( isset( $attributes['progressBarColor'] ) ) {
-			$css['background-color'] = $attributes['progressBarColor'];
-		}
-		return $css;
+		return [ 'background' => Color::get_css( isset( $attributes['progressBarColor'] ) ? $attributes['progressBarColor'] : '' ) ];
 	}
 
 	public function get_tabs_icon_css( $attributes, $device = '' ) {
@@ -713,12 +661,6 @@ class Block extends BlockBaseAbstract {
 			$css['width'] = $size . 'px !important';
 			$css['height'] = $size . 'px !important';
 		}
-
-		// Apply icon color if available
-		if ( isset( $attributes['iconColor'] ) ) {
-			$css['fill'] = $attributes['iconColor'];
-		}
-
 		// Apply spacing based on position
 		if ( $spacing ) {
 			switch ( $iconPosition ) {
@@ -737,7 +679,10 @@ class Block extends BlockBaseAbstract {
 			}
 		}
 		// Merge the icon view CSS with the main CSS
-		return array_merge( $css, $iconViewCSS );
+		return array_merge(
+			[ 'fill' => Color::get_css( isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : '' ) ],
+			$css,
+		$iconViewCSS );
 	}
 
 	public function get_tabs_active_icon_css( $attributes ) {
@@ -745,14 +690,12 @@ class Block extends BlockBaseAbstract {
 
 		// Check for active icon color
 		if ( isset( $attributes['iconActiveColor'] ) ) {
-			$css['fill'] = $attributes['iconActiveColor'];
+			$css['fill'] = Color::get_css( isset( $attributes['iconActiveColor'] ) ? $attributes['iconActiveColor'] : '' );
 		}
 
 		// Check for icon type and active background color
 		if ( isset( $attributes['iconType'] ) && $attributes['iconType'] !== 'default' && $attributes['iconType'] !== 'framed' ) {
-			if ( isset( $attributes['iconActiveBackground'] ) ) {
-				$css['background-color'] = $attributes['iconActiveBackground'];
-			}
+				$css['background-color'] = Color::get_css( isset( $attributes['iconActiveBackground'] ) ? $attributes['iconActiveBackground'] : '' );
 		}
 
 		return $css;
@@ -760,26 +703,14 @@ class Block extends BlockBaseAbstract {
 
 	public function get_tabs_content_css( $attributes, $device = '' ) {
 		$tabs_content_css = [];
-
-		// Content background color
-		if ( isset( $attributes['contentBackgroundColor'] ) ) {
-			$css['background-color'] = $attributes['contentBackgroundColor'];
-		}
-
-
 		// Merge margin, padding, and border CSS
 		$tabs_content_css = array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['contentBackgroundColor'] ) ? $attributes['contentBackgroundColor'] : '' ) ],
 			$tabs_content_css,
 			Dimensions::get_css( $attributes['contentMargin'] ?? [], 'margin', $device ),
 			Dimensions::get_css( $attributes['contentPadding'] ?? [], 'padding', $device ),
 			Border::get_css( $attributes['contentBorder'] ?? [], '', $device )
 		);
-
-		// Apply background color if set
-		if ( isset( $attributes['contentBackgroundColor'] ) ) {
-			$tabs_content_css['background-color'] = $attributes['contentBackgroundColor'];
-		}
-
 		// Apply max-width based on device and tabsMenuPosition
 		if ( $device === 'Mobile' ) {
 			$tabs_content_css['max-width'] = '100%';
@@ -805,6 +736,9 @@ class Block extends BlockBaseAbstract {
 
 	public function get_content_css( $attributes, $device = '' ) {
 		$css = [];
+		if ( isset( $attributes['menuContentAlignment'][ 'value' . $device ] ) ) {
+			$css['text-align'] = $attributes['menuContentAlignment'][ 'value' . $device ];
+		}
 		return array_merge(
 			Range::get_css([
 				'attributeValue' => $attributes['contentGap'],
@@ -822,14 +756,16 @@ class Block extends BlockBaseAbstract {
 	public function get_tabs_width_css( $attributes, $device = '' ) {
 		$css = [];
 
+		$tabsWidthType = $this->get_responsive_attribute_value($attributes['tabsWidthType'], $device);
+		$tabsMenuPositioning = $this->get_responsive_attribute_value($attributes['tabsMenuPositioning'], $device);
+
 		if (
-		isset( $attributes['tabsMenuPositioning'][ 'value' . $device ] ) &&
-		(
-			$attributes['tabsMenuPositioning'][ 'value' . $device ] === 'top' ||
-			$attributes['tabsMenuPositioning'][ 'value' . $device ] === 'bottom'
-		)
+			$tabsMenuPositioning === 'top' ||
+			$tabsMenuPositioning === 'bottom'
 		) {
-			$css['max-width'] = '100% !important';
+			$css['margin-inline'] = 'auto';
+			$css['width'] = $tabsWidthType;
+			return $css;
 		}
 
 		return array_merge(
@@ -840,10 +776,9 @@ class Block extends BlockBaseAbstract {
 				'defaultValue' => 30,
 				'hasUnit' => false,
 				'unitDefaultValue' => '%',
-				'property' => 'max-width',
+				'property' => 'width',
 				'device' => $device,
 			]),
-			$css,
 		);
 	}
 
@@ -873,56 +808,75 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_icon_spacing_css( $attributes, $device = '' ) {
-	$spacing_css = [];
+		$spacing_css = [];
 
-	if ( isset( $attributes['iconPosition']['value' . $device] ) ) {
-		$position = $attributes['iconPosition']['value' . $device];
+		if ( isset( $attributes['iconPosition'][ 'value' . $device ] ) ) {
+			$position = $attributes['iconPosition'][ 'value' . $device ];
 
-		if ( $position === 'left' ) {
-			$spacing_css = Range::get_css([
-				'attributeValue'     => $attributes['spacing'] ?? null,
-				'attributeObjectKey' => 'value',
-				'defaultValue'       => 0,
-				'isResponsive'       => true,
-				'hasUnit'            => true,
-				'property'           => 'margin-right',
-				'unitDefaultValue'   => 'px',
-			]);
-		} else if ( $position === 'right' ) {
-			$spacing_css = Range::get_css([
-				'attributeValue'     => $attributes['spacing'] ?? null,
-				'attributeObjectKey' => 'value',
-				'defaultValue'       => 0,
-				'isResponsive'       => true,
-				'hasUnit'            => true,
-				'property'           => 'margin-left',
-				'unitDefaultValue'   => 'px',
-			]);
-		} else if ( $position === 'bottom' ) {
-			$spacing_css = Range::get_css([
-				'attributeValue'     => $attributes['spacing'] ?? null,
-				'attributeObjectKey' => 'value',
-				'defaultValue'       => 0,
-				'isResponsive'       => true,
-				'hasUnit'            => true,
-				'property'           => 'margin-top',
-				'unitDefaultValue'   => 'px',
-			]);
-		} else if ( $position === 'top' ) {
-			$spacing_css = Range::get_css([
-				'attributeValue'     => $attributes['spacing'] ?? null,
-				'attributeObjectKey' => 'value',
-				'defaultValue'       => 0,
-				'isResponsive'       => true,
-				'hasUnit'            => true,
-				'property'           => 'margin-bottom',
-				'unitDefaultValue'   => 'px',
-			]);
-		}
+			if ( $position === 'left' ) {
+				$spacing_css = Range::get_css([
+					'attributeValue'     => $attributes['spacing'] ?? null,
+					'attributeObjectKey' => 'value',
+					'defaultValue'       => 0,
+					'isResponsive'       => true,
+					'hasUnit'            => true,
+					'property'           => 'margin-right',
+					'unitDefaultValue'   => 'px',
+				]);
+			} elseif ( $position === 'right' ) {
+				$spacing_css = Range::get_css([
+					'attributeValue'     => $attributes['spacing'] ?? null,
+					'attributeObjectKey' => 'value',
+					'defaultValue'       => 0,
+					'isResponsive'       => true,
+					'hasUnit'            => true,
+					'property'           => 'margin-left',
+					'unitDefaultValue'   => 'px',
+				]);
+			} elseif ( $position === 'bottom' ) {
+				$spacing_css = Range::get_css([
+					'attributeValue'     => $attributes['spacing'] ?? null,
+					'attributeObjectKey' => 'value',
+					'defaultValue'       => 0,
+					'isResponsive'       => true,
+					'hasUnit'            => true,
+					'property'           => 'margin-top',
+					'unitDefaultValue'   => 'px',
+				]);
+			} elseif ( $position === 'top' ) {
+				$spacing_css = Range::get_css([
+					'attributeValue'     => $attributes['spacing'] ?? null,
+					'attributeObjectKey' => 'value',
+					'defaultValue'       => 0,
+					'isResponsive'       => true,
+					'hasUnit'            => true,
+					'property'           => 'margin-bottom',
+					'unitDefaultValue'   => 'px',
+				]);
+			}//end if
+		}//end if
+
+		return $spacing_css;
 	}
 
-	return $spacing_css;
-}
+	//don't delete this function, it's used in the render method to get responsive attribute values
+	public function get_responsive_attribute_value($attribute, $device) {
+
+		if ($device === 'Mobile') {
+			return !empty($attribute['valueMobile']) ? $attribute['valueMobile']
+				: (!empty($attribute['valueTablet']) ? $attribute['valueTablet']
+				: ($attribute['value'] ?? ''));
+		}
+
+		if ($device === 'Tablet') {
+			return !empty($attribute['valueTablet']) ? $attribute['valueTablet']
+				: ($attribute['value'] ?? '');
+		}
+
+		// Default (Desktop or others)
+		return $attribute['value'] ?? '';
+	}
+
 
 
 }

@@ -495,6 +495,7 @@ class DynamicContent extends AbstractAjaxHandler {
 
 		$query_vars = isset( $block_data['parentAttributes']['query'] ) ? $this->convert_to_wp_query_args( $block_data['parentAttributes']['query'] ) : [
 			'post_type' => 'post',
+			'post_status'    => 'publish',
 			'posts_per_page' => get_option( 'posts_per_page' )
 		];
 		if ( $is_archive && ! empty( $payload['archive_post_type'] ) ) {
@@ -573,7 +574,9 @@ class DynamicContent extends AbstractAjaxHandler {
 	}
 
 	public function convert_to_wp_query_args( array $input ): array {
-		$args = [];
+		$args = [
+			'post_status'    => 'publish',
+		];
 
 		// Basic pagination
 		$args['posts_per_page'] = isset( $input['perPage'] ) ? (int) $input['perPage'] : get_option( 'posts_per_page' );

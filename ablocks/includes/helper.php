@@ -137,6 +137,43 @@ class Helper {
 		return ( isset( $array[ $key ] ) && ! empty( $array[ $key ] ) ) ? $array[ $key ] : $default;
 	}
 
+	public static function get_responsive_value( $attribute, $attribute_object_key, $device, $attribute_default_value = [] ) {
+		// Closure to "clean" a value (similar to your JS clean() helper)
+		$clean = function( $value ) {
+			return self::has_value( $value ) ? $value : null;
+		};
+
+		// Desktop value (fallback to default, or false if nothing found)
+		$desktop_value =
+			$clean( $attribute[ $attribute_object_key ] ?? null ) ??
+			$clean( $attribute_default_value[ $attribute_object_key ] ?? null ) ??
+			false;
+
+		// Tablet value (fallback to desktop if nothing found)
+		$tablet_key = $attribute_object_key . 'Tablet';
+		$tablet_value =
+			$clean( $attribute[ $tablet_key ] ?? null ) ??
+			$clean( $attribute_default_value[ $tablet_key ] ?? null ) ??
+			$desktop_value;
+
+		// Mobile value (fallback to tablet if nothing found)
+		$mobile_key = $attribute_object_key . 'Mobile';
+		$mobile_value =
+			$clean( $attribute[ $mobile_key ] ?? null ) ??
+			$clean( $attribute_default_value[ $mobile_key ] ?? null ) ??
+			$tablet_value;
+
+		// Return based on device
+		switch ( $device ) {
+			case 'Mobile':
+				return $mobile_value;
+			case 'Tablet':
+				return $tablet_value;
+			default:
+				return $desktop_value;
+		}
+	}
+
 	public static function is_gutenberg_editor() {
 		global $pagenow;
 		if ( $pagenow === 'post.php' || $pagenow === 'post-new.php' ) {
@@ -377,6 +414,18 @@ class Helper {
 					$block_name,
 					$block['innerBlocks']
 				);
+				if ( ! empty( $data ) ) {
+					return $data;
+				}
+			}
+
+			if (
+				isset( $block['blockName'] ) &&
+				$block['blockName'] === 'core/template-part' &&
+				! empty( $block['attrs']['slug'] )
+			) {
+				$part_slug = $block['attrs']['theme'] . '//' . $block['attrs']['slug'];
+				$data = self::get_block_attributes( $part_slug, $block_id, $block_name );
 				if ( ! empty( $data ) ) {
 					return $data;
 				}

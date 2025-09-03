@@ -10,6 +10,7 @@ use ABlocks\Classes\CssGenerator;
 use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Icon;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'svg-draw';
@@ -135,13 +136,12 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_svg_css( $attributes = [], $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['svgDrawColor'] ) ) {
-			$css['stroke'] = $attributes['svgDrawColor'];
-		}
 		if ( ! empty( $attributes['duration'] ) ) {
 			$css['animation-duration'] = $attributes['duration'] . 's !important';
 		}
-		return $css;
+		return array_merge(
+			[ 'stroke' => Color::get_css( isset( $attributes['svgDrawColor'] ) ? $attributes['svgDrawColor'] : '' ) ],
+			$css
+		);
 	}
 }

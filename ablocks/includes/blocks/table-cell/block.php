@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Controls\Alignment;
+use ABlocks\Controls\Color;
 
 
 class Block extends BlockBaseAbstract {
@@ -31,22 +32,13 @@ class Block extends BlockBaseAbstract {
 		return $css_generator->generate_css();
 	}
 	public function get_cell_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['cellColor'] ) ) {
-			$css['background'] = $attributes['cellColor'];
-		}
 		return array_merge(
 			Alignment::get_css( $attributes['textAlignment'], 'justify-content', $device ),
-			$css
+			[ 'background' => Color::get_css( isset( $attributes['cellColor'] ) ? $attributes['cellColor'] : '' ) ]
 		);
 	}
 
 	public function get_cell_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['cellColorH'] ) ) {
-			$css['background'] = $attributes['cellColorH'];
-		}
-
-		return $css;
+		return [ 'background' => Color::get_css( isset( $attributes['cellColorH'] ) ? $attributes['cellColorH'] : '' ) ];
 	}
 }

@@ -14,6 +14,7 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\BoxShadow;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 
@@ -117,26 +118,13 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_cart_sub_row_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['background'] = $attributes['tableBackground'];
-
-		return array_merge(
-			$css,
-		);
+		return [ 'background' => Color::get_css( isset( $attributes['tableBackground'] ) ? $attributes['tableBackground'] : '' ) ];
 	}
 	public function get_cart_sub_row_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['background'] = $attributes['tableBackgroundH'] ?? '';
-
-		return array_merge(
-			$css,
-		);
+		return [ 'background' => Color::get_css( isset( $attributes['tableBackgroundH'] ) ? $attributes['tableBackgroundH'] : '' ) ];
 	}
 
 	public function get_cart_sub_row_text_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color'] = $attributes['tableColor'] ?? '';
-
 		$typography_css = isset( $attributes['firstTableTypography'] ) && is_array( $attributes['firstTableTypography'] )
 			? $attributes['firstTableTypography']
 			: [];
@@ -145,43 +133,25 @@ class Block extends BlockBaseAbstract {
 
 		return array_merge(
 			Typography::get_css( $typography_value, $device ),
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['tableColor'] ) ? $attributes['tableColor'] : '' ) ]
 		);
 
 	}
 
 	public function get_cart_sub_row_text_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color'] = $attributes['tableColorH'] ?? '';
-
-		return array_merge(
-			$css,
-		);
+		return [ 'color' => Color::get_css( isset( $attributes['tableColorH'] ) ? $attributes['tableColorH'] : '' ) ];
 
 	}
 
 
 	public function get_cart_sub_row_last_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['background'] = $attributes['tableLastBackground'] ?? '';
-
-		return array_merge(
-			$css,
-		);
+		return [ 'background' => Color::get_css( isset( $attributes['tableLastBackground'] ) ? $attributes['tableLastBackground'] : '' ) ];
 	}
 	public function get_cart_sub_row_last_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['background'] = $attributes['tableLastBackgroundH'] ?? '';
-
-		return array_merge(
-			$css,
-		);
+		return [ 'background' => Color::get_css( isset( $attributes['tableLastBackgroundH'] ) ? $attributes['tableLastBackgroundH'] : '' ) ];
 	}
 
 	public function get_cart_sub_row_last_text_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['tableLastColor'] ?? '';
 
 		$typography_css = isset( $attributes['lastTableTypography'] ) && is_array( $attributes['lastTableTypography'] )
 			? $attributes['lastTableTypography']
@@ -191,18 +161,12 @@ class Block extends BlockBaseAbstract {
 
 		return array_merge(
 			Typography::get_css( $typography_value, $device ),
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['tableLastColor'] ) ? $attributes['tableLastColor'] : '' ) ]
 		);
 
 	}
 	public function get_cart_sub_row_last_text_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['tableLastColorH'] ?? '';
-
-		return array_merge(
-			$css,
-		);
+		return [ 'color' => Color::get_css( isset( $attributes['tableLastColorH'] ) ? $attributes['tableLastColorH'] : '' ) ];
 
 	}
 

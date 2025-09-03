@@ -4,6 +4,8 @@ namespace ABlocks\Blocks\FormPassword;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -82,23 +84,16 @@ class Block extends BlockBaseAbstract {
 
 	public function get_icon_wrapper_css( $attributes, $device = '' ) {
 		$css = [];
-
-		// Check for 'inputIconSize' in the attributes and set font-size
 		if ( isset( $attributes['inputIconSize'] ) ) {
 			$css['font-size'] = $attributes['inputIconSize'] . 'px';
 		}
-
-		// Check for 'iconColor' in the attributes and set fill color
-		if ( isset( $attributes['iconColor'] ) ) {
-			$css['fill'] = $attributes['iconColor'];
-		}
-
-		return $css;
+		return array_merge(
+			$css,
+			[ 'fill' => Color::get_css( isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : '' ) ]
+		);
 	}
 	public function get_icon_space_css( $attributes, $device = '' ) {
 		$css = [];
-
-		// Check for 'inputIconSpace' in the attributes and set padding-left
 		if ( isset( $attributes['inputIconSpace'] ) ) {
 			$css['padding-left'] = $attributes['inputIconSpace'] . 'px';
 		}
@@ -111,11 +106,9 @@ class Block extends BlockBaseAbstract {
 		if ( isset( $attributes['passwordShowHideIconSize'] ) ) {
 			$password_show_hide_icon_wrapper_css['font-size'] = $attributes['passwordShowHideIconSize'] . 'px';
 		}
-
-		if ( ! empty( $attributes['passwordIconColor'] ) ) {
-			$password_show_hide_icon_wrapper_css['fill'] = $attributes['passwordIconColor'];
-		}
-
-		return $password_show_hide_icon_wrapper_css;
+		return array_merge(
+			[ 'fill' => Color::get_css( isset( $attributes['passwordIconColor'] ) ? $attributes['passwordIconColor'] : '' ) ],
+			$password_show_hide_icon_wrapper_css
+		);
 	}
 }

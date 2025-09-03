@@ -14,6 +14,7 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\BoxShadow;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'storeengine-continue-button';
@@ -66,9 +67,9 @@ class Block extends BlockBaseAbstract {
 		if ( $attributes['buttonColor'] !== '' ) {
 			$css['color'] = $attributes['buttonColor'];
 		}
-		if ( $attributes['buttonWidth'] !== '' ) {
-			$css['width'] = $attributes['buttonWidth'] . '%';
-		}
+		// if ( $attributes['buttonWidth'] !== '' ) {
+		// $css['width'] = $attributes['buttonWidth'] . '%';
+		// }
 		if ( $attributes['buttonBackground'] !== '' ) {
 			$css['background'] = $attributes['buttonBackground'];
 		}
@@ -83,27 +84,32 @@ class Block extends BlockBaseAbstract {
 		}
 
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['buttonColor'] ) ? $attributes['buttonColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['buttonBackground'] ) ? $attributes['buttonBackground'] : '' ) ],
 			$css,
-			Typography::get_css( $typography_value, $device ),
+			Typography::get_css( $typography_value, '', $device ),
 			Border::get_css( $attributes['buttonBorder'], '', $device ),
 			$cssPadding,
 			BoxShadow::get_css( $attributes['boxShadow'], '', $device ),
+			Range::get_css([
+				'attributeValue' => $attributes['buttonWidth'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'defaultValue' => 100,
+				'unitDefaultValue' => '%',
+				'property' => 'width',
+				'device' => $device,
+			])
 		);
 	}
 
 	public function get_coutineu_button_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( $attributes['buttonColorH'] !== '' ) {
-			$css['color'] = $attributes['buttonColorH'];
-		}
-		if ( $attributes['buttonBackgroundH'] !== '' ) {
-			$css['background'] = $attributes['buttonBackgroundH'];
-		}
 			return array_merge(
+				[ 'color' => Color::get_css( isset( $attributes['buttonColorH'] ) ? $attributes['buttonColorH'] : '' ) ],
+				[ 'background' => Color::get_css( isset( $attributes['buttonBackgroundH'] ) ? $attributes['buttonBackgroundH'] : '' ) ],
 				Border::get_hover_css( $attributes['buttonBorder'] ?? [], '', $device ),
 				BoxShadow::get_hover_css( $attributes['boxShadow'], '', $device ),
-				$css,
 			);
 
 	}

@@ -72,6 +72,10 @@
             "type": "number",
             "default": 800
         },
+        "paginationType": {
+            "type": "string",
+            "default": "default"
+        },
         "pagination": {
             "type": "boolean",
             "default": true
@@ -108,7 +112,15 @@
             "type": "string",
             "default": "black"
         },
+        "paginationHoverColor": {
+            "type": "string",
+            "default": "black"
+        },
         "paginationActiveColor": {
+            "type": "string",
+            "default": "black"
+        },
+        "paginationActiveHoverColor": {
             "type": "string",
             "default": "black"
         },
@@ -124,7 +136,203 @@
             "type": "string",
             "default": "center"
         },
+        "verticalAlign": {
+            "type": "object",
+            "default": {
+                "value": "center",
+                "valueTablet": "",
+                "valueMobile": ""
+            }
+        },
         "navigationIconBorder": {
+            "type": "object",
+            "default": {
+                "borderStyle": "default",
+                "borderStyleH": "default",
+                "borderColor": "",
+                "borderColorH": "",
+                "isLinkedWidth": true,
+                "isLinkedWidthTablet": true,
+                "isLinkedWidthMobile": true,
+                "commonWidth": "",
+                "commonWidthTablet": "",
+                "commonWidthMobile": "",
+                "topWidth": "",
+                "rightWidth": "",
+                "bottomWidth": "",
+                "leftWidth": "",
+                "topWidthTablet": "",
+                "rightWidthTablet": "",
+                "bottomWidthTablet": "",
+                "leftWidthTablet": "",
+                "topWidthMobile": "",
+                "rightWidthMobile": "",
+                "bottomWidthMobile": "",
+                "leftWidthMobile": "",
+                "unitWidth": "px",
+                "unitWidthTablet": "",
+                "unitWidthMobile": "",
+                "isLinkedWidthH": true,
+                "isLinkedWidthHTablet": true,
+                "isLinkedWidthHMobile": true,
+                "commonWidthH": "",
+                "commonWidthHTablet": "",
+                "commonWidthHMobile": "",
+                "topWidthH": "",
+                "rightWidthH": "",
+                "bottomWidthH": "",
+                "leftWidthH": "",
+                "topWidthHTablet": "",
+                "rightWidthHTablet": "",
+                "bottomWidthHTablet": "",
+                "leftWidthHTablet": "",
+                "topWidthHMobile": "",
+                "rightWidthHMobile": "",
+                "bottomWidthHMobile": "",
+                "leftWidthHMobile": "",
+                "unitWidthH": "px",
+                "unitWidthHTablet": "",
+                "unitWidthHMobile": "",
+                "isLinkedRadius": true,
+                "isLinkedRadiusTablet": true,
+                "isLinkedRadiusMobile": true,
+                "commonRadius": "",
+                "commonRadiusTablet": "",
+                "commonRadiusMobile": "",
+                "topRadius": "",
+                "rightRadius": "",
+                "bottomRadius": "",
+                "leftRadius": "",
+                "topRadiusTablet": "",
+                "rightRadiusTablet": "",
+                "bottomRadiusTablet": "",
+                "leftRadiusTablet": "",
+                "topRadiusMobile": "",
+                "rightRadiusMobile": "",
+                "bottomRadiusMobile": "",
+                "leftRadiusMobile": "",
+                "unitRadius": "px",
+                "unitRadiusTablet": "",
+                "unitRadiusMobile": "",
+                "isLinkedRadiusH": true,
+                "isLinkedRadiusHTablet": true,
+                "isLinkedRadiusHMobile": true,
+                "commonRadiusH": "",
+                "commonRadiusHTablet": "",
+                "commonRadiusHMobile": "",
+                "topRadiusH": "",
+                "rightRadiusH": "",
+                "bottomRadiusH": "",
+                "leftRadiusH": "",
+                "topRadiusHTablet": "",
+                "rightRadiusHTablet": "",
+                "bottomRadiusHTablet": "",
+                "leftRadiusHTablet": "",
+                "topRadiusHMobile": "",
+                "rightRadiusHMobile": "",
+                "bottomRadiusHMobile": "",
+                "leftRadiusHMobile": "",
+                "unitRadiusH": "px",
+                "unitRadiusHTablet": "",
+                "unitRadiusHMobile": "",
+                "transitionDuration": ""
+            }
+        },
+        "paginationBorder": {
+            "type": "object",
+            "default": {
+                "borderStyle": "default",
+                "borderStyleH": "default",
+                "borderColor": "",
+                "borderColorH": "",
+                "isLinkedWidth": true,
+                "isLinkedWidthTablet": true,
+                "isLinkedWidthMobile": true,
+                "commonWidth": "",
+                "commonWidthTablet": "",
+                "commonWidthMobile": "",
+                "topWidth": "",
+                "rightWidth": "",
+                "bottomWidth": "",
+                "leftWidth": "",
+                "topWidthTablet": "",
+                "rightWidthTablet": "",
+                "bottomWidthTablet": "",
+                "leftWidthTablet": "",
+                "topWidthMobile": "",
+                "rightWidthMobile": "",
+                "bottomWidthMobile": "",
+                "leftWidthMobile": "",
+                "unitWidth": "px",
+                "unitWidthTablet": "",
+                "unitWidthMobile": "",
+                "isLinkedWidthH": true,
+                "isLinkedWidthHTablet": true,
+                "isLinkedWidthHMobile": true,
+                "commonWidthH": "",
+                "commonWidthHTablet": "",
+                "commonWidthHMobile": "",
+                "topWidthH": "",
+                "rightWidthH": "",
+                "bottomWidthH": "",
+                "leftWidthH": "",
+                "topWidthHTablet": "",
+                "rightWidthHTablet": "",
+                "bottomWidthHTablet": "",
+                "leftWidthHTablet": "",
+                "topWidthHMobile": "",
+                "rightWidthHMobile": "",
+                "bottomWidthHMobile": "",
+                "leftWidthHMobile": "",
+                "unitWidthH": "px",
+                "unitWidthHTablet": "",
+                "unitWidthHMobile": "",
+                "isLinkedRadius": true,
+                "isLinkedRadiusTablet": true,
+                "isLinkedRadiusMobile": true,
+                "commonRadius": "",
+                "commonRadiusTablet": "",
+                "commonRadiusMobile": "",
+                "topRadius": "",
+                "rightRadius": "",
+                "bottomRadius": "",
+                "leftRadius": "",
+                "topRadiusTablet": "",
+                "rightRadiusTablet": "",
+                "bottomRadiusTablet": "",
+                "leftRadiusTablet": "",
+                "topRadiusMobile": "",
+                "rightRadiusMobile": "",
+                "bottomRadiusMobile": "",
+                "leftRadiusMobile": "",
+                "unitRadius": "px",
+                "unitRadiusTablet": "",
+                "unitRadiusMobile": "",
+                "isLinkedRadiusH": true,
+                "isLinkedRadiusHTablet": true,
+                "isLinkedRadiusHMobile": true,
+                "commonRadiusH": "",
+                "commonRadiusHTablet": "",
+                "commonRadiusHMobile": "",
+                "topRadiusH": "",
+                "rightRadiusH": "",
+                "bottomRadiusH": "",
+                "leftRadiusH": "",
+                "topRadiusHTablet": "",
+                "rightRadiusHTablet": "",
+                "bottomRadiusHTablet": "",
+                "leftRadiusHTablet": "",
+                "topRadiusHMobile": "",
+                "rightRadiusHMobile": "",
+                "bottomRadiusHMobile": "",
+                "leftRadiusHMobile": "",
+                "unitRadiusH": "px",
+                "unitRadiusHTablet": "",
+                "unitRadiusHMobile": "",
+                "transitionDuration": ""
+            }
+        },
+        "activePaginationBorder": {
             "type": "object",
             "default": {
                 "borderStyle": "default",
@@ -255,6 +463,70 @@
                 "valueUnitMobile": ""
             }
         },
+        "paginationPositionX": {
+            "type": "object",
+            "default": {
+                "value": 47,
+                "valueUnit": "%",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "paginationPositionY": {
+            "type": "object",
+            "default": {
+                "value": 100,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "%",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "paginationSize": {
+            "type": "object",
+            "default": {
+                "value": 8,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "paginationHoverSize": {
+            "type": "object",
+            "default": {
+                "value": 8,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "paginationActiveSize": {
+            "type": "object",
+            "default": {
+                "value": 8,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "paginationActiveHoverSize": {
+            "type": "object",
+            "default": {
+                "value": 8,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
         "navigationIconSize": {
             "type": "object",
             "default": {
@@ -286,6 +558,8 @@
             "type": "object",
             "default": {
                 "value": 50,
+                "valueTablet": "",
+                "valueMobile": "",
                 "valueUnit": "%",
                 "valueUnitTablet": "",
                 "valueUnitMobile": ""
@@ -306,6 +580,8 @@
             "type": "object",
             "default": {
                 "value": -3,
+                "valueTablet": "",
+                "valueMobile": "",
                 "valueUnit": "%",
                 "valueUnitTablet": "",
                 "valueUnitMobile": ""

@@ -13,6 +13,7 @@ use ABlocks\Controls\Background;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'academy-enroll-form';
@@ -112,90 +113,62 @@ class Block extends BlockBaseAbstract {
 
 
 	public function getStartButtonCss( $attributes, $device = '' ) {
-		$css = array();
 		$start_btn_typography = ! empty( $attributes['start_btn_typography'] ) ? Typography::get_css( $attributes['start_btn_typography'], '', $device ) : array();
 		$start_btn_padding = ! empty( $attributes['start_btn_padding'] ) ? Dimensions::get_css( $attributes['start_btn_padding'], 'padding', $device ) : array();
 		$start_btn_border = ! empty( $attributes['start_btn_border'] ) ? Border::get_css( $attributes['start_btn_border'], '', $device ) : array();
-		if ( ! empty( $attributes['start_btn_color'] ) ) {
-			$css['color'] = $attributes['start_btn_color'];
-		}
-		if ( ! empty( $attributes['start_btn_bg_color'] ) ) {
-			$css['background'] = $attributes['start_btn_bg_color'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['start_btn_color'] ) ? $attributes['start_btn_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['start_btn_bg_color'] ) ? $attributes['start_btn_bg_color'] : '' ) ],
 			$start_btn_typography,
 			$start_btn_padding,
 			$start_btn_border,
-			$css,
 		);
 	}
 	public function getStartButtonHoverCss( $attributes, $device = '' ) {
-		$css = array();
 		$start_btn_border = ! empty( $attributes['start_btn_border'] ) ? Border::get_hover_css( $attributes['start_btn_border'], '', $device ) : array();
-		if ( ! empty( $attributes['start_btn_color_hover'] ) ) {
-			$css['color'] = $attributes['start_btn_color_hover'];
-		}
-		if ( ! empty( $attributes['start_btn_bg_hover_color'] ) ) {
-			$css['background'] = $attributes['start_btn_bg_hover_color'];
-		}
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['start_btn_color_hover'] ) ? $attributes['start_btn_color_hover'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['start_btn_bg_hover_color'] ) ? $attributes['start_btn_bg_hover_color'] : '' ) ],
 			$start_btn_border
 		);
 	}
 
 	public function getEnrollButtonCss( $attributes, $device = '' ) {
-		$css = array();
 		$enroll_btn_typography = ! empty( $attributes['enroll_btn_typography'] ) ? Typography::get_css( $attributes['enroll_btn_typography'], '', $device ) : array();
 		$enroll_btn_padding = ! empty( $attributes['enroll_btn_padding'] ) ? Dimensions::get_css( $attributes['enroll_btn_padding'], 'padding', $device ) : array();
 		$enroll_btn_border = ! empty( $attributes['enroll_btn_border'] ) ? Border::get_css( $attributes['enroll_btn_border'], '', $device ) : array();
-		if ( ! empty( $attributes['enroll_btn_color'] ) ) {
-			$css['color'] = $attributes['enroll_btn_color'];
-		}
-		if ( ! empty( $attributes['enroll_btn_bg_color'] ) ) {
-			$css['background'] = $attributes['enroll_btn_bg_color'];
-		}
+
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['enroll_btn_color'] ) ? $attributes['enroll_btn_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['enroll_btn_bg_color'] ) ? $attributes['enroll_btn_bg_color'] : '' ) ],
 			$enroll_btn_typography,
 			$enroll_btn_padding,
 			$enroll_btn_border,
-			$css,
 		);
 	}
 	public function getEnrollButtonHoverCss( $attributes, $device = '' ) {
-		$css = array();
 		$enroll_btn_border = ! empty( $attributes['enroll_btn_border'] ) ? Border::get_hover_css( $attributes['enroll_btn_border'], '', $device ) : array();
-		if ( ! empty( $attributes['enroll_btn_color_hover'] ) ) {
-			$css['color'] = $attributes['enroll_btn_color_hover'];
-		}
-		if ( ! empty( $attributes['enroll_btn_bg_hover_color'] ) ) {
-			$css['background'] = $attributes['enroll_btn_bg_hover_color'];
-		}
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['enroll_btn_color_hover'] ) ? $attributes['enroll_btn_color_hover'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['enroll_btn_bg_hover_color'] ) ? $attributes['enroll_btn_bg_hover_color'] : '' ) ],
 			$enroll_btn_border
 		);
 	}
 
 	public function get_massage_title_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['background'] = $attributes['massage_title_bg'] ?? '';
-		$css['color'] = $attributes['massage_title_color'] ?? '';
 		$typography_value = ! empty( $attributes['massage_title_typography'] ) ? Typography::get_css( $attributes['massage_title_typography'], '', $device ) : array();
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['massage_title_color'] ) ? $attributes['massage_title_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['massage_title_bg'] ) ? $attributes['massage_title_bg'] : '' ) ],
 			$typography_value,
 		);
 	}
 	public function get_massage_title_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['background'] = $attributes['massage_title_hover_bg'] ?? '';
-		$css['color'] = $attributes['massage_title_hover_color'] ?? '';
-
-		return $css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['massage_title_hover_color'] ) ? $attributes['massage_title_hover_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['massage_title_hover_bg'] ) ? $attributes['massage_title_hover_bg'] : '' ) ]
+		);
 
 	}
 	public function get_modal_css( $attributes, $device = '' ) {
@@ -216,40 +189,30 @@ class Block extends BlockBaseAbstract {
 
 	public function get_modal_list_css( $attributes, $device = '' ) {
 		$css = [];
-
-		$css['color'] = $attributes['list_color'] ?? '';
 		$css['text-decoration'] = 'none';
-
 		$typography_value = $attributes['list_typography'] ? Typography::get_css( $attributes['list_typography'], '', $device ) : array();
 
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['list_color'] ) ? $attributes['list_color'] : '' ) ],
 			$css,
 			$typography_value,
 		);
 	}
 
 	public function get_modal_list_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color'] = $attributes['list_hover_color'] ?? '#7b68ee';
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['list_hover_color'] ) ? $attributes['list_hover_color'] : '' ) ];
+
 	}
 
 	public function get_price_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color'] = $attributes['price_color'] ?? '';
 		$typography_value = ! empty( $attributes['price_typography'] ) ? Typography::get_css( $attributes['price_typography'], '', $device ) : array();
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['price_color'] ) ? $attributes['price_color'] : '' ) ],
 		$typography_value, );
 	}
 
 	public function get_price_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['price_hover_color'] ?? '';
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['price_hover_color'] ) ? $attributes['price_hover_color'] : '' ) ];
 	}
 
 	public function render_block_content( $attributes, $content, $block_instance ) {

@@ -5,6 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use ABlocks\Helper;
+
 abstract class ControlBaseAbstract {
 	abstract public static function get_attribute_default_value( $is_responsive = false);
 	abstract public static function get_attribute( $attributeName, $is_responsive = false);
@@ -12,22 +14,12 @@ abstract class ControlBaseAbstract {
 	public static function has_value( $value ) {
 		return isset( $value ) && ! empty( $value );
 	}
-	public static function get_unit( $attributeValue, $device = '' ) {
-		$unit = $attributeValue['unit'];
-
-		if ( '' === $device ) {
-			return $unit;
-		}
-
-		$unitTablet = $attributeValue['unitTablet'];
-		$unitMobile = $attributeValue['unitMobile'];
-
-		if ( 'Tablet' === $device ) {
-			return '' !== $unitTablet ? $unitTablet : $unit;
-		} elseif ( 'Mobile' === $device ) {
-			return '' !== $unitMobile ? $unitMobile : ( '' !== $unitTablet ? $unitTablet : $unit );
-		}
-
-		return $unit;
+	public static function get_unit( $attribute_value, $device = '' ) {
+		return Helper::get_responsive_value(
+			$attribute_value,
+			'unit',
+			$device,
+			[]
+		);
 	}
 }

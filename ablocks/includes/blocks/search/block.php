@@ -11,6 +11,7 @@ use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'search';
@@ -194,42 +195,19 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_Input_css( $attributes, $device = '' ) {
-		$css = [];
-		$input_color = isset( $attributes['inputTextColor'] ) ? $attributes['inputTextColor'] : '';
-
-		if ( isset( $attributes['inputTextColor'] ) && ! empty( $attributes['inputTextColor'] ) ) {
-			$css['color'] = $input_color;
-		}
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['inputTextColor'] ) ? $attributes['inputTextColor'] : '' ) ],
 			isset( $attributes['inputTypography'] ) ? Typography::get_css( $attributes['inputTypography'], '', $device ) : [],
 			isset( $attributes['inputTextStroke'] ) ? TextStroke::get_css( $attributes['inputTextStroke'], '', $device ) : [],
 			isset( $attributes['inputTextShadow'] ) ? TextShadow::get_css( $attributes['inputTextShadow'], '', $device ) : [],
 		);
 	}
 	public function get_loading_spinner_css( $attributes, $device = '' ) {
-		$css = [];
-		$loadingSpinnerColor = isset( $attributes['loadingSpinnerColor'] ) ? $attributes['loadingSpinnerColor'] : '';
-
-		if ( isset( $attributes['loadingSpinnerColor'] ) && ! empty( $attributes['loadingSpinnerColor'] ) ) {
-			$css['color'] = $loadingSpinnerColor;
-		}
-
-		return array_merge(
-			$css,
-		);
+		return [ 'color' => Color::get_css( isset( $attributes['loadingSpinnerColor'] ) ? $attributes['loadingSpinnerColor'] : '' ) ];
 	}
 	public function get_search_result_title_css( $attributes, $device = '' ) {
-		$css = [];
-		$searchResTColor = isset( $attributes['searchResTColor'] ) ? $attributes['searchResTColor'] : '';
-
-		if ( isset( $attributes['searchResTColor'] ) && ! empty( $attributes['searchResTColor'] ) ) {
-			$css['color'] = $searchResTColor;
-		}
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['searchResTColor'] ) ? $attributes['searchResTColor'] : '' ) ],
 			isset( $attributes['searchResTypography'] ) ? Typography::get_css( $attributes['searchResTypography'], '', $device ) : [],
 		);
 	}
@@ -361,30 +339,16 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_Button_css( $attributes, $device = '' ) {
-		$css = [];
-		$button_color = isset( $attributes['buttonTextColor'] ) ? $attributes['buttonTextColor'] : '';
-
-		if ( isset( $attributes['buttonTextColor'] ) && ! empty( $attributes['buttonTextColor'] ) ) {
-			$css['color'] = $button_color;
-		}
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['buttonTextColor'] ) ? $attributes['buttonTextColor'] : '' ) ],
 			isset( $attributes['buttonTypography'] ) ? Typography::get_css( $attributes['buttonTypography'], '', $device ) : [],
 			isset( $attributes['buttonTextStroke'] ) ? TextStroke::get_css( $attributes['buttonTextStroke'], '', $device ) : [],
 			isset( $attributes['buttonTextShadow'] ) ? TextStroke::get_css( $attributes['buttonTextShadow'], '', $device ) : [],
 		);
 	}
 	public function get_Button_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		$button_color = isset( $attributes['buttonTextColorH'] ) ? $attributes['buttonTextColorH'] : '';
-
-		if ( isset( $attributes['buttonTextColorH'] ) && ! empty( $attributes['buttonTextColorH'] ) ) {
-			$css['color'] = $button_color;
-		}
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['buttonTextColorH'] ) ? $attributes['buttonTextColorH'] : '' ) ],
 			isset( $attributes['buttonTypographyH'] ) ? Typography::get_css( $attributes['buttonTypographyH'], '', $device ) : [],
 			isset( $attributes['buttonTextStrokeH'] ) ? TextStroke::get_css( $attributes['buttonTextStrokeH'], '', $device ) : [],
 			isset( $attributes['buttonTextShadowH'] ) ? TextStroke::get_css( $attributes['buttonTextShadowH'], '', $device ) : [],

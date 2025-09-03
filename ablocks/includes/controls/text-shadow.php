@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\ControlBaseAbstract;
+use ABlocks\Controls\Color;
 
 class TextShadow extends ControlBaseAbstract {
 	public static function get_attribute_default_value( $is_responsive = false ) {
@@ -44,7 +45,7 @@ class TextShadow extends ControlBaseAbstract {
 			$vertical = '' !== $value['vertical'] ? $value['vertical'] : '0';
 			$blur = '' !== $value['blur'] ? $value['blur'] : '10';
 			$color = '' !== $value['color'] ? $value['color'] : 'rgba(0, 0, 0, 0.3)';
-			$css['text-shadow'] = $horizontal . 'px ' . $vertical . 'px ' . $blur . 'px ' . $color;
+			$css['text-shadow'] = $horizontal . 'px ' . $vertical . 'px ' . $blur . 'px ' . Color::get_css( $color );
 		}
 
 		return $css;

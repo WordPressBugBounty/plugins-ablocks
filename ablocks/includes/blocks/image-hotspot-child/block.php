@@ -6,6 +6,7 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $parent_block_name = 'image-hotspot';
@@ -32,19 +33,13 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_active_content_css( $attributes, $device = '' ) {
-		$css = array();
-
-		// Set background color
-		if ( ! empty( $attributes['backgroundColor'] ) ) {
-			$css['background-color'] = $attributes['backgroundColor'];
-		}
-
 		// Add border and padding styles
 		$border_css = isset( $attributes['contentBorder'] ) ? Border::get_css( $attributes['contentBorder'], '', $device ) : [];
 		$padding_css = isset( $attributes['contentPadding'] ) ? Dimensions::get_css( $attributes['contentPadding'], 'padding', $device ) : [];
 
 		// Merge border and padding styles with the main CSS
-		$css = array_merge( $css, $border_css, $padding_css,
+		$css = array_merge($border_css, $padding_css,
+			[ 'background' => Color::get_css( isset( $attributes['backgroundColor'] ) ? $attributes['backgroundColor'] : '' ) ],
 			Range::get_css(
 				[
 					'attributeValue' => $attributes['contentWidth'],

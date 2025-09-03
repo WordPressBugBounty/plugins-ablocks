@@ -10,6 +10,7 @@ use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Icon;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'star-ratings';
@@ -114,22 +115,10 @@ class Block extends BlockBaseAbstract {
 			$this->get_rating_icon_spacing_css( $attributes, 'Tablet' ),
 			$this->get_rating_icon_spacing_css( $attributes, 'Mobile' ),
 		);
-
-		$get_desktop_rating_number_css = $this->get_rating_number_css( $attributes );
-		if ( ! empty( $attributes['ratingNumberColor'] ) ) {
-			$get_desktop_rating_number_css['color'] = $attributes['ratingNumberColor'];
-		}
-		if ( ! empty( $attributes['ratingNumberPosition'] ) ) {
-			if ( 'left' === $attributes['ratingNumberPosition'] ) {
-				$get_desktop_rating_number_css['order'] = '-5';
-			} else {
-				$get_desktop_rating_number_css['order'] = '10';
-			}
-		}
 		// rating number css
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-star-rating-number',
-			$get_desktop_rating_number_css,
+			$this->get_rating_number_css( $attributes ),
 			$this->get_rating_number_css( $attributes, 'Tablet' ),
 			$this->get_rating_number_css( $attributes, 'Mobile' ),
 		);
@@ -166,7 +155,19 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_rating_number_css( $attributes, $device = '' ) {
-		return Typography::get_css( $attributes['ratingNumberTypography'], '', $device );
+		$css = [];
+		if ( ! empty( $attributes['ratingNumberPosition'] ) ) {
+			if ( 'left' === $attributes['ratingNumberPosition'] ) {
+				$css['order'] = '-5';
+			} else {
+				$css['order'] = '10';
+			}
+		}
+			return array_merge(
+				[ 'color' => Color::get_css( isset( $attributes['ratingNumberColor'] ) ? $attributes['ratingNumberColor'] : '' ) ],
+				Typography::get_css( $attributes['ratingNumberTypography'], '', $device )
+			);
+
 	}
 
 	public function get_rating_css( $attributes, $device = '' ) {

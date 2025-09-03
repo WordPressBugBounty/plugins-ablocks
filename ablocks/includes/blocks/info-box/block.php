@@ -16,6 +16,7 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Icon;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'info-box';
@@ -62,13 +63,19 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-icon-wrap > img.ablocks-image-icon',
+			'{{WRAPPER}}.ablocks-block--info-box .ablocks-block-container > .ablocks-icon-wrap, {{WRAPPER}}.ablocks-block--info-box .ablocks-block-container > a .ablocks-icon-wrap',
+			$this->get_icon_wrapper_extra_css( $attributes ),
+			$this->get_icon_wrapper_extra_css( $attributes, 'Tablet' ),
+			$this->get_icon_wrapper_extra_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-icon-wrap > img.ablocks-image-icon, {{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > a .ablocks-icon-wrap > img.ablocks-image-icon',
 			Icon::get_element_image_css( $attributes ),
 			Icon::get_element_image_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-icon-wrap > img.ablocks-image-icon:hover',
+			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block-container > .ablocks-icon-wrap > img.ablocks-image-icon, {{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block-container > a .ablocks-icon-wrap > img.ablocks-image-icon',
 			Icon::get_element_image_hover_css( $attributes ),
 			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
@@ -80,8 +87,18 @@ class Block extends BlockBaseAbstract {
 			Icon::get_element_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block-container > .ablocks-icon-wrap > svg.ablocks-svg-icon',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box:hover .ablocks-block-container > .ablocks-icon-wrap svg.ablocks-svg-icon , {{WRAPPER}}.ablocks-block--info-box:hover .ablocks-block-container > a .ablocks-icon-wrap svg.ablocks-svg-icon',
 			$this->get_icon_css_hover( $attributes ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--info-box:hover .ablocks-block-container > .ablocks-icon-wrap , {{WRAPPER}}.ablocks-block--info-box:hover .ablocks-block-container > a .ablocks-icon-wrap',
+			$this->get_icon_css_background_hover( $attributes ),
 		);
 
 		// Heading starts
@@ -296,13 +313,22 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}}:not(.ablocks-has-block-container) > .ablocks-icon-wrap > img.ablocks-image-icon, {{WRAPPER}} > .ablocks-block-container > .ablocks-icon-wrap > img.ablocks-image-icon',
+			'{{WRAPPER}}:not(.ablocks-has-block-container) > .ablocks-icon-wrap,
+			 {{WRAPPER}} > .ablocks-block-container > .ablocks-icon-wrap,
+			 {{WRAPPER}}:not(.ablocks-has-block-container) > a .ablocks-icon-wrap,
+			 {{WRAPPER}} > .ablocks-block-container > a .ablocks-icon-wrap',
+			$this->get_icon_wrapper_extra_css( $attributes ),
+			$this->get_icon_wrapper_extra_css( $attributes, 'Tablet' ),
+			$this->get_icon_wrapper_extra_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}:not(.ablocks-has-block-container) > .ablocks-icon-wrap > img.ablocks-image-icon, {{WRAPPER}} > .ablocks-block-container > .ablocks-icon-wrap > img.ablocks-image-icon, {{WRAPPER}} > a .ablocks-icon-wrap > img.ablocks-image-icon',
 			Icon::get_element_image_css( $attributes ),
 			Icon::get_element_image_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}}:not(.ablocks-has-block-container) > .ablocks-icon-wrap > img.ablocks-image-icon:hover, {{WRAPPER}} > .ablocks-block-container > .ablocks-icon-wrap > img.ablocks-image-icon:hover',
+			'{{WRAPPER}}:not(.ablocks-has-block-container):hover > .ablocks-icon-wrap > img.ablocks-image-icon, {{WRAPPER}}:hover > .ablocks-block-container > .ablocks-icon-wrap > img.ablocks-image-icon , {{WRAPPER}}:hover > a .ablocks-icon-wrap > img.ablocks-image-icon',
 			Icon::get_element_image_hover_css( $attributes ),
 			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
@@ -314,62 +340,63 @@ class Block extends BlockBaseAbstract {
 			Icon::get_element_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
+			'{{WRAPPER}}:not(.ablocks-has-block-container):hover > .ablocks-icon-wrap > svg.ablocks-svg-icon, {{WRAPPER}} > .ablocks-block-container > .ablocks-icon-wrap > svg.ablocks-svg-icon',
+			Icon::get_element_image_hover_css( $attributes ),
+			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
+			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
 			'{{WRAPPER}}:not(.ablocks-has-block-container).ablocks-block--info-box:hover > .ablocks-icon-wrap svg.ablocks-svg-icon ,
 			 {{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block-container > .ablocks-icon-wrap svg.ablocks-svg-icon ,
 			 {{WRAPPER}}:not(.ablocks-has-block-container).ablocks-block--info-box:hover > a .ablocks-icon-wrap svg.ablocks-svg-icon ,
 			 {{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block-container > a .ablocks-icon-wrap svg.ablocks-svg-icon',
 			$this->get_icon_css_hover( $attributes ),
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}:not(.ablocks-has-block-container).ablocks-block--info-box:hover > .ablocks-icon-wrap,
+			 {{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block-container > .ablocks-icon-wrap,
+			 {{WRAPPER}}:not(.ablocks-has-block-container).ablocks-block--info-box:hover > a .ablocks-icon-wrap,
+			 {{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block-container > a .ablocks-icon-wrap',
+			$this->get_icon_css_background_hover( $attributes ),
+		);
 
 		// Heading starts
-		$desktop_heading_text_styles = $this->get_heading_text_css( $attributes );
-		if ( ! empty( $attributes['headingTextColor'] ) ) {
-			$desktop_heading_text_styles['color'] = $attributes['headingTextColor'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-heading',
-			$desktop_heading_text_styles,
+			$this->get_heading_text_css( $attributes ),
 			$this->get_heading_text_css( $attributes, 'Tablet' ),
 			$this->get_heading_text_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-heading',
+			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block--info-box__content > .ablocks-info-box-heading',
 			$this->get_heading_text_css_hover( $attributes ),
 			$this->get_heading_text_css_hover( $attributes, 'Tablet' ),
 			$this->get_heading_text_css_hover( $attributes, 'Mobile' )
 		);
 
 		// Sub Heading starts
-		$desktop_sub_heading_text_styles = $this->get_sub_heading_text_css( $attributes );
-		if ( ! empty( $attributes['subHeadingTextColor'] ) ) {
-			$desktop_sub_heading_text_styles['color'] = $attributes['subHeadingTextColor'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-sub-heading',
-			$desktop_sub_heading_text_styles,
+			$this->get_sub_heading_text_css( $attributes ),
 			$this->get_sub_heading_text_css( $attributes, 'Tablet' ),
 			$this->get_sub_heading_text_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-sub-heading',
+			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block--info-box__content > .ablocks-info-box-sub-heading',
 			$this->get_sub_heading_text_css_hover( $attributes ),
 			$this->get_sub_heading_text_css_hover( $attributes, 'Tablet' ),
 			$this->get_sub_heading_text_css_hover( $attributes, 'Mobile' )
 		);
 
 		// Description starts
-		$desktop_des_text_style = $this->get_des_text_css( $attributes );
-		if ( ! empty( $attributes['desTextColor'] ) ) {
-			$desktop_des_text_style['color'] = $attributes['desTextColor'];
-		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-text',
-			$desktop_des_text_style,
+			$this->get_des_text_css( $attributes ),
 			$this->get_des_text_css( $attributes, 'Tablet' ),
 			$this->get_des_text_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-text',
+			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block--info-box__content > .ablocks-info-box-text',
 			$this->get_des_text_css_hover( $attributes ),
 			$this->get_des_text_css_hover( $attributes, 'Tablet' ),
 			$this->get_des_text_css_hover( $attributes, 'Mobile' )
@@ -420,13 +447,13 @@ class Block extends BlockBaseAbstract {
 			$this->get_unfill_rating_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-star-ratings > .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__fill > .ablocks-icon-wrap > svg',
+			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block--info-box__content > .ablocks-info-box-star-ratings > .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__fill > .ablocks-icon-wrap > svg',
 			$this->get_fill_rating_css_hover( $attributes ),
 			$this->get_fill_rating_css_hover( $attributes, 'Tablet' ),
 			$this->get_fill_rating_css_hover( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-star-ratings > .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__unfill > .ablocks-icon-wrap > svg',
+			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block--info-box__content > .ablocks-info-box-star-ratings > .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__unfill > .ablocks-icon-wrap > svg',
 			$this->get_unfill_rating_css_hover( $attributes ),
 			$this->get_unfill_rating_css_hover( $attributes, 'Tablet' ),
 			$this->get_unfill_rating_css_hover( $attributes, 'Mobile' ),
@@ -498,9 +525,23 @@ class Block extends BlockBaseAbstract {
 	public function get_info_box( $attributes, $device = '' ) {
 		$css = [];
 
-		if ( isset( $attributes['stack'] ) ) {
+		// Temporary approch instead of attribute migration. Might remove it in future
+		$iconPlacement = isset( $attributes['iconPlacement'][ 'value' . $device ] ) ? $attributes['iconPlacement'][ 'value' . $device ] : '';
+		if ( 
+			!isset( $attributes['iconPlacement'] ) 
+			|| (
+				$attributes['stack'] !== ''
+				&& $iconPlacement !== $attributes['stack']
+			)
+		) {
+			$attributes['iconPlacement'][ 'value' . $device ] = $attributes['stack'];
+			$attributes['stack'] = '';
+		}
+		// Temporary approch instead of attribute migration. Might remove it in future
+
+		if ( isset( $attributes['iconPlacement'][ 'value' . $device ] ) ) {
 			$css['display'] = 'flex';
-			$css['flex-direction'] = $attributes['stack'];
+			$css['flex-direction'] = $attributes['iconPlacement'][ 'value' . $device ];
 		}
 
 		if ( isset( $attributes['iconAlignment'][ 'value' . $device ] ) ) {
@@ -549,16 +590,17 @@ class Block extends BlockBaseAbstract {
 				$css['left'] = 'auto';
 			}//end if
 		}//end if
-		if ( ! empty( $attributes['badgeTextColor'] ) ) {
-			$css['color'] = $attributes['badgeTextColor'];
-		}
+
 		if ( ! empty( $attributes['badgeBackground'] ) ) {
-			$css['background'] = $attributes['badgeBackground'];
+			$css['background'] = Color::get_css(
+			isset( $attributes['badgeBackground'] ) ? $attributes['badgeBackground'] : '');
+
 		} elseif ( ! empty( $attributes['badgeType'] ) ) {
 			$css['background'] = $attributes['badgeType'];
 		}
 
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['badgeTextColorH'] ) ? $attributes['badgeTextColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['badgeTransition'],
 				'attribute_object_key' => 'value',
@@ -575,16 +617,10 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_badge_hover_css( $attributes, $device = '' ) {
 		$css = [];
-
-		if ( ! empty( $attributes['badgeTextColorH'] ) ) {
-			$css['color'] = $attributes['badgeTextColorH'];
-		}
-		if ( ! empty( $attributes['badgeBackgroundH'] ) ) {
-			$css['background'] = $attributes['badgeBackgroundH'];
-		}
-
 		return array_merge(
 			$css,
+			[ 'color' => Color::get_css( isset( $attributes['badgeTextColorH'] ) ? $attributes['badgeTextColorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['badgeBackgroundH'] ) ? $attributes['badgeBackgroundH'] : '' ) ],
 			Border::get_css( $attributes['badgeBorder'], '', $device ),
 		);
 	}
@@ -592,12 +628,35 @@ class Block extends BlockBaseAbstract {
 		return TextShadow::get_css( $attributes['badgeTextShadow'] );
 	}
 
+	public function get_icon_wrapper_extra_css( $attributes, $device = '' ) {
+		$css = [];
 
+		return array_merge(
+			$css,
+			Dimensions::get_css( $attributes['iconMargin'], 'margin', $device ),
+		);
+	}
 
 	public function get_icon_css_hover( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['iconPrimaryColorH'] ) ) {
-			$css['fill'] = $attributes['iconPrimaryColorH'];
+
+		return array_merge(
+			[ 'fill' => Color::get_css( isset( $attributes['iconPrimaryColorH'] ) ? $attributes['iconPrimaryColorH'] : '' ) ],
+			Range::get_css([
+				'attributeValue' => $attributes['iconTransition'],
+				'attribute_object_key' => 'value',
+				'defaultValue' => 0,
+				'unitDefaultValue' => 's',
+				'property' => 'transition-duration',
+				'device' => $device,
+			]),
+			$css
+		);
+	}
+	public function get_icon_css_background_hover( $attributes, $device = '' ) {
+		$css = [];
+		if ( ! empty( $attributes['iconBackgroundColorH'] ) ) {
+			$css['background'] = $attributes['iconBackgroundColorH'];
 		}
 		return array_merge(
 			Range::get_css([
@@ -651,18 +710,23 @@ class Block extends BlockBaseAbstract {
 			}
 		}
 
-		return array_merge( $css, $typography_css, $textShadowCss, $textStrokeCss );
+		return array_merge(
+			$css,
+			$typography_css,
+			$textShadowCss,
+			$textStrokeCss,
+			[ 'color' => Color::get_css( isset( $attributes['headingTextColor'] ) ? $attributes['headingTextColor'] : '' ) ],
+			Dimensions::get_css( $attributes['headingMargin'], 'margin', $device ),
+		);
 	}
 	public function get_heading_text_css_hover( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['headingTextColorHover'] ) ) {
-			$css['color'] = $attributes['headingTextColorHover'];
-		}
 		if ( ! empty( $attributes['headingTransition'] ) ) {
 			$css['transition-duration'] = $attributes['headingTransition'] . 's';
 		}
 
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['headingTextColorHover'] ) ? $attributes['headingTextColorHover'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['headingTransition'],
 				'attribute_object_key' => 'value',
@@ -693,14 +757,19 @@ class Block extends BlockBaseAbstract {
 			}
 		}
 
-		return array_merge( $css, $typography_css, $textShadowCss, $textStrokeCss );
+		return array_merge(
+			$css,
+			$typography_css,
+			$textShadowCss,
+			$textStrokeCss,
+			[ 'color' => Color::get_css( isset( $attributes['subHeadingTextColor'] ) ? $attributes['subHeadingTextColor'] : '' ) ],
+			Dimensions::get_css( $attributes['subHeadingMargin'], 'margin', $device ),
+		);
 	}
 	public function get_sub_heading_text_css_hover( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['subHeadingTextColorHover'] ) ) {
-			$css['color'] = $attributes['subHeadingTextColorHover'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['subHeadingTextColorHover'] ) ? $attributes['subHeadingTextColorHover'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['subHeadingTransition'],
 				'attribute_object_key' => 'value',
@@ -727,17 +796,17 @@ class Block extends BlockBaseAbstract {
 		}
 		return array_merge(
 			$css,
+			[ 'color' => Color::get_css( isset( $attributes['desTextColor'] ) ? $attributes['desTextColor'] : '' ) ],
 			isset( $attributes['desTypography'] ) ? Typography::get_css( $attributes['desTypography'], '', $device ) : [],
 			isset( $attributes['desTextStroke'] ) ? TextStroke::get_css( $attributes['desTextStroke'], '', $device ) : [],
 			isset( $attributes['desTextShadow'] ) ? TextShadow::get_css( $attributes['desTextShadow'], '', $device ) : [],
+			Dimensions::get_css( $attributes['desMargin'], 'margin', $device ),
 		);
 	}
 	public function get_des_text_css_hover( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['desTextColorHover'] ) ) {
-			$css['color'] = $attributes['desTextColorHover'];
-		}
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['desTextColorHover'] ) ? $attributes['desTextColorHover'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['desTransition'],
 				'attribute_object_key' => 'value',
@@ -752,7 +821,8 @@ class Block extends BlockBaseAbstract {
 	public function get_des_drop_text_css( $attributes, $device = '' ) {
 		$css = [];
 		if ( ! empty( $attributes['desDropCapsTextColor'] ) ) {
-			$css['color'] = $attributes['desDropCapsTextColor'];
+			$css['color'] = Color::get_css(
+			isset( $attributes['desDropCapsTextColor'] ) ? $attributes['desDropCapsTextColor'] : '');
 		}
 		return $css;
 	}
@@ -778,7 +848,9 @@ class Block extends BlockBaseAbstract {
 	public function get_rating_number_css( $attributes, $device = '' ) {
 		$css = [];
 		if ( ! empty( $attributes['ratingNumberColor'] ) ) {
-			$css['color'] = $attributes['ratingNumberColor'];
+			$css['color'] = Color::get_css(
+			isset( $attributes['ratingNumberColor'] ) ? $attributes['ratingNumberColor'] : '');
+
 		}
 		if ( ! empty( $attributes['ratingNumberPosition'] ) ) {
 			if ( 'left' === $attributes['ratingNumberPosition'] ) {
@@ -795,17 +867,8 @@ class Block extends BlockBaseAbstract {
 	public function get_rating_css( $attributes, $device = '' ) {
 		$rating_css = [];
 		return array_merge(
-			Range::get_css([
-				'attributeValue' => $attributes['size'] ?? [],
-				'attribute_object_key' => 'value',
-				'isResponsive' => true,
-				'defaultValue' => 0,
-				'hasUnit' => true,
-				'unitDefaultValue' => 'px',
-				'property' => 'font-size',
-				'device' => $device,
-			]),
 			$rating_css,
+			Dimensions::get_css( $attributes['ratingMargin'], 'margin', $device ),
 		);
 	}
 
@@ -830,11 +893,8 @@ class Block extends BlockBaseAbstract {
 
 	public function get_fill_rating_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['ratingColor'] ) ) {
-			$css['fill'] = $attributes['ratingColor'];
-		}
-
 		return array_merge(
+			[ 'fill' => Color::get_css( isset( $attributes['ratingColor'] ) ? $attributes['ratingColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['ratingTransition'],
 				'attribute_object_key' => 'value',
@@ -849,7 +909,8 @@ class Block extends BlockBaseAbstract {
 	public function get_unfill_rating_css( $attributes, $device = '' ) {
 		$css = [];
 		if ( ! empty( $attributes['ratingColor'] ) ) {
-			$css['fill'] = $attributes['ratingUnmarkedColor'];
+			$css['fill'] = Color::get_css(
+			isset( $attributes['ratingUnmarkedColor'] ) ? $attributes['ratingUnmarkedColor'] : '');
 		}
 		return array_merge(
 			Range::get_css([
@@ -865,11 +926,8 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_fill_rating_css_hover( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['ratingColorHover'] ) ) {
-			$css['fill'] = $attributes['ratingColorHover'];
-		}
-
 		return array_merge(
+			[ 'fill' => Color::get_css( isset( $attributes['ratingColorHover'] ) ? $attributes['ratingColorHover'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['ratingTransition'],
 				'attribute_object_key' => 'value',
@@ -884,7 +942,8 @@ class Block extends BlockBaseAbstract {
 	public function get_unfill_rating_css_hover( $attributes, $device = '' ) {
 		$css = [];
 		if ( ! empty( $attributes['ratingColorHover'] ) ) {
-			$css['fill'] = $attributes['ratingUnmarkedColorHover'];
+			$css['fill'] = Color::get_css(
+			isset( $attributes['ratingUnmarkedColorHover'] ) ? $attributes['ratingUnmarkedColorHover'] : '');
 		}
 		return array_merge(
 			Range::get_css([
@@ -903,7 +962,8 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 
 		if ( ! empty( $attributes['btnBackground'] ) ) {
-			$css['background'] = $attributes['btnBackground'];
+			$css['background'] = Color::get_css(
+			isset( $attributes['btnBackground'] ) ? $attributes['btnBackground'] : '');
 		} else {
 			$css['background'] = $attributes['btnType'];
 		}
@@ -929,24 +989,19 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			]),
 			$css,
-			[ 'color' => $attributes['btnTextColor'] ?? '#000000' ],
+			[ 'color' => Color::get_css( isset( $attributes['btnTextColor'] ) ? $attributes['btnTextColor'] : '' ) ],
 			Border::get_css( $attributes['btnBorder'], '', $device ),
 			Typography::get_css( $attributes['btnTypography'], '', $device ),
 			Dimensions::get_css( $attributes['btnPadding'], 'padding', $device ),
+			Dimensions::get_css( $attributes['btnMargin'], 'margin', $device ),
 		);
 	}
 	public function get_button_hover_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['btnTextColorH'] ) ) {
-			$css['color'] = $attributes['btnTextColorH'];
-		}
-
-		if ( ! empty( $attributes['btnBackgroundH'] ) ) {
-			$css['background'] = $attributes['btnBackgroundH'];
-		}
-
 		return array_merge(
 			$css,
+			[ 'color' => Color::get_css( isset( $attributes['btnTextColorH'] ) ? $attributes['btnTextColorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['btnBackgroundH'] ) ? $attributes['btnBackgroundH'] : '' ) ],
 			Border::get_hover_css( $attributes['btnBorder'], '', $device )
 		);
 	}
@@ -954,12 +1009,6 @@ class Block extends BlockBaseAbstract {
 		return TextShadow::get_css( $attributes['btnTextShadow'] );
 	}
 	public function get_button_icon_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['btnTextColorH'] ) ) {
-			$css['fill'] = $attributes['btnTextColorH'];
-		}
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['textColorH'] ) ? $attributes['textColorH'] : '' ) ];
 	}
 }

@@ -13,6 +13,7 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\TextStroke;
+use ABlocks\Controls\Color;
 
 
 class Block extends BlockBaseAbstract {
@@ -54,32 +55,21 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_log_out_label_color( $attributes, $device = '' ) {
-		$log_out_label_color_css = [];
-		if ( ! empty( $attributes['logOutLabelColor'] ) ) {
-			$log_out_label_color_css['color'] = $attributes['logOutLabelColor'];
-		}
-		if ( ! empty( $attributes['logOutLabelBgColor'] ) ) {
-			$log_out_label_color_css['background'] = $attributes['logOutLabelBgColor'];
-		}
-
 			$typography = isset( $attributes['labelTypography'] ) ? $attributes['labelTypography'] : '';
 			$text_stroke = isset( $attributes['labelTextStroke'] ) ? $attributes['labelTextStroke'] : '';
 			$text_shadow = isset( $attributes['labelTextShadow'] ) ? $attributes['labelTextShadow'] : '';
 
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['logOutLabelColor'] ) ? $attributes['logOutLabelColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['logOutLabelBgColor'] ) ? $attributes['logOutLabelBgColor'] : '' ) ],
 			Typography::get_css( $typography, '', $device ),
 			TextStroke::get_css( $text_stroke, '', $device ),
 			TextShadow::get_css( $text_shadow, '', $device ),
-			$log_out_label_color_css
 		);
 	}
 
 	public function get_log_out_css( $attributes, $device = '' ) {
 		$log_out_css = [];
-
-		if ( ! empty( $attributes['logOutLabelBgColor'] ) ) {
-			$log_out_css ['background'] = $attributes['logOutLabelBgColor'];
-		}
 		if ( ! empty( $attributes['direction'][ 'value' . $device ] ) ) {
 			$log_out_css['flex-direction'] = $attributes['direction'][ 'value' . $device ];
 		}
@@ -88,7 +78,10 @@ class Block extends BlockBaseAbstract {
 			$log_out_css['justify-content'] = $attributes['labelAlignment'][ 'value' . $device ];
 		}
 
-		return $log_out_css;
+		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['logOutLabelBgColor'] ) ? $attributes['logOutLabelBgColor'] : '' ) ],
+			$log_out_css
+		);
 	}
 
 
@@ -126,20 +119,15 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_name_css( $attributes, $device = '' ) {
-		$name_css = [];
-
-		if ( ! empty( $attributes['nameColor'] ) ) {
-			$name_css ['color'] = $attributes['nameColor'];
-		}
 			$typography = isset( $attributes['nameTypography'] ) ? $attributes['nameTypography'] : '';
 			$text_stroke = isset( $attributes['nameTextStroke'] ) ? $attributes['nameTextStroke'] : '';
 			$text_shadow = isset( $attributes['nameTextShadow'] ) ? $attributes['nameTextShadow'] : '';
 
 		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['nameColor'] ) ? $attributes['nameColor'] : '' ) ],
 			Typography::get_css( $typography, '', $device ),
 			TextStroke::get_css( $text_stroke, '', $device ),
-			TextShadow::get_css( $text_shadow, '', $device ),
-			$name_css
+			TextShadow::get_css( $text_shadow, '', $device )
 		);
 	}
 

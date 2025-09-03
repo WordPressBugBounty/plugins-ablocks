@@ -1,5 +1,4 @@
 <?php
-
 namespace ABlocks\Blocks\FormBuilder;
 
 use ABlocks\Blocks\FormBuilder\Actions\Interfaces\FormSubmissionAction;
@@ -38,6 +37,9 @@ final class ValidateFormData {
 	/** @var $form_info */
 	public ?array $form_info = [];
 
+	/** @var $files */
+	public ?array $files = [];
+
 	/**
 	 * Constructor
 	 *
@@ -47,8 +49,10 @@ final class ValidateFormData {
 	public function __construct( ?array $block_data, ?array $input_data ) {
 		$this->block_data = $block_data;
 		$this->input_data = $input_data;
-		$this->is_form_data_empty = count( $input_data ) === 0;
+		$this->is_form_data_empty = ( count( $input_data ) + count( $_FILES ) ) === 0;
 		$this->filter_data_by_whitelisted_key();
+		$this->filtered_data = apply_filters( 'ablocks/form_builder/filtered_data', $this->filtered_data, $this->block_data );
+
 		$this->form_info = [
 			'info' => [
 				'type'    => sanitize_text_field( $block_data['parentAttributes']['formType'] ?? null ),

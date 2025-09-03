@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
 use ABlocks\Helper;
+use ABlocks\Controls\Color;
 
 class Icon {
 	public static function get_attribute_default_value( $is_responsive = false ) {
@@ -153,8 +154,8 @@ class Icon {
 	public static function get_wrapper_css( $attributes, $device = '', $attributePrefix = 'icon' ) {
 		$iconType = $attributes[ $attributePrefix . 'Type' ];
 		$iconShape = $attributes[ $attributePrefix . 'Shape' ];
-		$backgroundColor = $attributes[ $attributePrefix . 'BgColor' ];
-		$primaryColor = $attributes[ $attributePrefix . 'Color' ];
+		$backgroundColor = Color::get_css( $attributes[ $attributePrefix . 'BgColor' ] );
+		$primaryColor = Color::get_css( $attributes[ $attributePrefix . 'Color' ] );
 		$iconViewCSS = [];
 
 		if ( $iconType !== 'default' ) {
@@ -177,13 +178,13 @@ class Icon {
 						'background' => $backgroundColor ? $backgroundColor : 'transparent',
 						'padding' => '.5em',
 						'border-radius' => '50%',
-						'border' => '2px solid ' . ( $primaryColor ? $primaryColor : '#69727d' ),
+						'border' => '2px solid ' . ( Color::get_css( $primaryColor ? $primaryColor : '#69727d' ) ),
 					];
 				} elseif ( $iconShape === 'square' ) {
 					$iconViewCSS = [
 						'background' => $backgroundColor ? $backgroundColor : 'transparent',
 						'padding' => '.5em',
-						'border' => '2px solid ' . ( $primaryColor ? $primaryColor : '#69727d' ),
+						'border' => '2px solid ' . ( Color::get_css( $primaryColor ? $primaryColor : '#69727d' ) ),
 					];
 				}
 			}//end if
@@ -220,7 +221,7 @@ class Icon {
 	public static function get_element_css( $attributes, $device = '', $attributePrefix = 'icon' ) {
 		$iconType = $attributes[ $attributePrefix . 'Type' ] ?? 'default';
 		$iconShape = $attributes[ $attributePrefix . 'Shape' ] ?? '';
-		$primaryColor = $attributes[ $attributePrefix . 'Color' ] ?? '#69727d';
+		$primaryColor = Color::get_css( $attributes[ $attributePrefix . 'Color' ] ?? '#69727d' );
 		$rotate = ! empty( $attributes[ $attributePrefix . 'Rotated' ][ 'value' . $device ] ) ?? 0;
 		$iconViewCSS = [];
 

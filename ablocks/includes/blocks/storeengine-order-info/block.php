@@ -14,6 +14,7 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
 use ABlocks\Classes\CssGeneratorV2;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'storeengine-order-info';
@@ -80,61 +81,37 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_status_title_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['titleContentColor'] ?? '';
 		$typography_value = ! empty( $attributes['titleContentTypography'] ) ? Typography::get_css( $attributes['titleContentTypography'], '', $device ) : array();
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['titleContentColor'] ) ? $attributes['titleContentColor'] : '' ) ],
 			$typography_value
 		);
 	}
-
 	public function get_status_title_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['titleContentColorH'] ?? '';
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['titleContentColorH'] ) ? $attributes['titleContentColorH'] : '' ) ];
 	}
 	public function get_deatils_title_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['detailsColor'] ?? '';
 		$typography_value = ! empty( $attributes['detailsTypography'] ) ? Typography::get_css( $attributes['titleContentTypography'], '', $device ) : array();
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['detailsColor'] ) ? $attributes['detailsColor'] : '' ) ],
 			$typography_value
 		);
 	}
 
 	public function get_deatils_title_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['detailsColorH'] ?? '';
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['detailsColorH'] ) ? $attributes['detailsColorH'] : '' ) ];
 	}
 
 	public function get_email_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['emailColor'] ?? '';
 		$typography_value = ! empty( $attributes['emailTypography'] ) ? Typography::get_css( $attributes['emailTypography'], '', $device ) : array();
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['emailColor'] ) ? $attributes['emailColor'] : '' ) ],
 			$typography_value
 		);
 	}
 	public function get_email_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		$css['color'] = $attributes['emailColorH'] ?? '';
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['emailColorH'] ) ? $attributes['emailColorH'] : '' ) ];
 	}
 
 	public function render_block_content( $attributes, $content, $block_instance ) {

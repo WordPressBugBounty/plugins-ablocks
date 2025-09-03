@@ -9,6 +9,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $parent_block_name = 'price-menu';
@@ -81,15 +82,8 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_title_text_css( $attributes, $device = '' ) {
-		$css = [];
-		$title_color = isset( $attributes['titleColor'] ) ? $attributes['titleColor'] : '';
-
-		if ( isset( $attributes['titleColor'] ) ) {
-			$css['color'] = $title_color;
-		}
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['titleColor'] ) ? $attributes['titleColor'] : '' ) ],
 			isset( $attributes['titleTypography'] ) ? Typography::get_css( $attributes['titleTypography'], '', $device ) : [],
 			isset( $attributes['titleTextStroke'] ) ? TextStroke::get_css( $attributes['titleTextStroke'], '', $device ) : [],
 			isset( $attributes['titleTextShadow'] ) ? TextShadow::get_css( $attributes['titleTextShadow'], '', $device ) : [],
@@ -97,15 +91,9 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_description_text_css( $attributes, $device = '' ) {
-		$css = [];
-		$description_color = isset( $attributes['descriptionColor'] ) ? $attributes['descriptionColor'] : '';
-
-		if ( isset( $attributes['descriptionColor'] ) ) {
-			$css['color'] = $description_color;
-		}
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['descriptionColor'] ) ? $attributes['descriptionColor'] : '' ) ],
 			isset( $attributes['descriptionTypography'] ) ? Typography::get_css( $attributes['descriptionTypography'], '', $device ) : [],
 			isset( $attributes['descriptionTextStroke'] ) ? TextStroke::get_css( $attributes['descriptionTextStroke'], '', $device ) : [],
 			isset( $attributes['descriptionTextShadow'] ) ? TextShadow::get_css( $attributes['descriptionTextShadow'], '', $device ) : [],
@@ -115,11 +103,12 @@ class Block extends BlockBaseAbstract {
 	public function get_divider_css( $attributes, $device = '' ) {
 		$css = [];
 		$divider_width = isset( $attributes['width'][ 'value' . $device ] ) ? $attributes['width'][ 'value' . $device ] : 60;
-		$divider_color = isset( $attributes['color'] ) ? $attributes['color'] : '#000000';
 		$default_Unit = $attributes['allowDescription'] === true ? '%' : 'px';
 
 		if ( ! empty( $attributes['color'] ) ) {
-			$css['--ablocks-divider-pattern-color'] = $divider_color;
+			$css['--ablocks-divider-pattern-color'] = Color::get_css(
+			isset( $attributes['color'] ) ? $attributes['color'] : '#000000');
+
 		}
 
 		$moreRangeCSS = [];
@@ -169,15 +158,8 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_price_text_css( $attributes, $device = '' ) {
-		$css = [];
-		$price_color = isset( $attributes['priceColor'] ) ? $attributes['priceColor'] : '';
-
-		if ( isset( $attributes['priceColor'] ) ) {
-			$css['color'] = $price_color;
-		}
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['priceColor'] ) ? $attributes['priceColor'] : '' ) ],
 			isset( $attributes['priceTypography'] ) ? Typography::get_css( $attributes['priceTypography'], '', $device ) : [],
 			isset( $attributes['priceTextStroke'] ) ? TextStroke::get_css( $attributes['priceTextStroke'], '', $device ) : [],
 			isset( $attributes['priceTextShadow'] ) ? TextShadow::get_css( $attributes['priceTextShadow'], '', $device ) : [],

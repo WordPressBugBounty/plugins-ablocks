@@ -9,6 +9,7 @@ use ABlocks\Classes\CssGenerator;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Classes\CssGeneratorV2;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'menu';
@@ -160,6 +161,10 @@ class Block extends BlockBaseAbstract {
 			$this->get_subMenu_responsive_text_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--menu-child-sub .ablocks-menu-item:hover .ablocks-menu-item__link',
+			$this->get_subMenu__text_hover_css( $attributes )
+		);
+		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-menu-child-mega',
 			$this->getMegaMenuCSS( $attributes ),
 			$this->getMegaMenuCSS( $attributes, 'Tablet' ),
@@ -240,13 +245,6 @@ class Block extends BlockBaseAbstract {
 		if ( isset( $attributes[ 'menuItemAlign' . $device ] ) && ! empty( $attributes[ 'menuItemAlign' . $device ] ) ) {
 			$css['align-items'] = $attributes[ 'menuItemAlign' . $device ];
 		}
-		// Text color
-		if ( ! empty( $attributes['menuItemTextColor'] ) ) {
-			$css['color'] = $attributes['menuItemTextColor'];
-		}
-		if ( ! empty( $attributes['menuItemBackground'] ) ) {
-			$css['background'] = $attributes['menuItemBackground'];
-		}
 		if ( ! empty( $attributes['menuItemTransition'] ) ) {
 			$css['transition'] = $attributes['menuItemTransition'] . 's';
 		}
@@ -254,51 +252,38 @@ class Block extends BlockBaseAbstract {
 			( $attributes['sideBarMenuDevice'] ?? null ) === 'tablet' && in_array( $device, [ 'Tablet', 'Mobile' ], true ) ||
 			( ( $attributes['sideBarMenuDevice'] ?? null ) !== 'tablet' && $device === 'Mobile' )
 		) {
-			$background_color = isset( $attributes['menuResponsiveBackground'] ) ? $attributes['menuResponsiveBackground'] : '';
-			if ( ! empty( $background_color ) ) {
-				$css['background'] = $background_color;
-			}
+				$css['background'] = Color::get_css( isset( $attributes['menuResponsiveBackground'] ) ? $attributes['menuResponsiveBackground'] : '' );
 		}
-		return $css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['menuItemTextColor'] ) ? $attributes['menuItemTextColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['menuItemBackground'] ) ? $attributes['menuItemBackground'] : '' ) ],
+			$css
+		);
 	}
 	private function get_menu_item_link_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['menuItemTextColor'] ) ) {
-			$css['color'] = $attributes['menuItemTextColor'];
-		}
 		if (
 			( $attributes['sideBarMenuDevice'] ?? null ) === 'tablet' && in_array( $device, [ 'Tablet', 'Mobile' ], true ) ||
 			( ( $attributes['sideBarMenuDevice'] ?? null ) !== 'tablet' && $device === 'Mobile' )
 		) {
-			$text_color = isset( $attributes['menuResponsiveTextColor'] ) ? $attributes['menuResponsiveTextColor'] : '';
-			if ( ! empty( $text_color ) ) {
-				$css['color'] = $text_color . ' !important';
-			}
+				$css['color'] = Color::get_css( isset( $attributes['menuResponsiveTextColor'] ) ? $attributes['menuResponsiveTextColor'] : '' ) . ' !important';
+
 		}
-		return $css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['menuItemTextColor'] ) ? $attributes['menuItemTextColor'] : '' ) ],
+			$css
+		);
 	}
 
 	private function get_menu_item_hover_css( $attributes, $device = '' ) {
-		$css = array_merge(
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['menuItemTextColorH'] ) ? $attributes['menuItemTextColorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['menuItemBackgroundH'] ) ? $attributes['menuItemBackgroundH'] : '' ) ],
 			Border::get_hover_css( isset( $attributes['menuItemBorder'] ) ? $attributes['menuItemBorder'] : [], $device )
 		);
-
-		// Text color on hover
-		if ( ! empty( $attributes['menuItemTextColorH'] ) ) {
-			$css['color'] = $attributes['menuItemTextColorH'];
-		}
-		if ( ! empty( $attributes['menuItemBackgroundH'] ) ) {
-			$css['background'] = $attributes['menuItemBackgroundH'];
-		}
-		return $css;
 	}
 	private function get_menu_item_link_hover_css( $attributes ) {
-		$css = [];
-		if ( ! empty( $attributes['menuItemTextColorH'] ) ) {
-			$css['color'] = $attributes['menuItemTextColorH'];
-		}
-
-		return $css;
+		return [ 'color' => Color::get_css( isset( $attributes['menuItemTextColorH'] ) ? $attributes['menuItemTextColorH'] : '' ) ];
 	}
 	private function get_sub_menu_css( $attributes, $device = '' ) {
 		$css = [];
@@ -333,9 +318,6 @@ class Block extends BlockBaseAbstract {
 	}
 	private function get_subMenu_responsive_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['subMenuItemBackground'] ) ) {
-			$css['background'] = $attributes['subMenuItemBackground'];
-		}
 		if ( ! empty( $attributes['subMenuItemTransition'] ) ) {
 			$css['transition-duration'] = $attributes['subMenuItemTransition'] . 's';
 		}
@@ -343,74 +325,61 @@ class Block extends BlockBaseAbstract {
 			( isset( $attributes['sideBarMenuDevice'] ) && $attributes['sideBarMenuDevice'] === 'tablet' && in_array( $device, [ 'Tablet', 'Mobile' ], true ) ) ||
 			( isset( $attributes['sideBarMenuDevice'] ) && $attributes['sideBarMenuDevice'] !== 'tablet' && $device === 'Mobile' )
 		) {
-			$background_color = $attributes['subMenuResponsiveBg'] ?? '';
-			if ( ! empty( $background_color ) ) {
-				$css['background'] = $background_color . '!important';
-			}
+				$css['background'] = Color::get_css( isset( $attributes['subMenuResponsiveBg'] ) ? $attributes['subMenuResponsiveBg'] : '' ) . '!important';
 		}
-		return $css;
+		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['subMenuItemBackground'] ) ? $attributes['subMenuItemBackground'] : '' ) ],
+			$css
+		);
 	}
 
 	private function get_subMenu_responsive_hover_css( $attributes ) {
-		$css = [];
-		if ( ! empty( $attributes['subMenuItemTextColorH'] ) ) {
-			$css['color'] = $attributes['subMenuItemTextColorH'];
-		}
-		if ( ! empty( $attributes['subMenuItemBackgroundH'] ) ) {
-			$css['background'] = $attributes['subMenuItemBackgroundH'];
-		}
-
-		return $css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['subMenuItemTextColorH'] ) ? $attributes['subMenuItemTextColorH'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['subMenuItemBackgroundH'] ) ? $attributes['subMenuItemBackgroundH'] : '' ) ]
+		);
 	}
 	private function get_subMenu_responsive_text_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['subMenuItemTextColor'] ) ) {
-			$css['color'] = $attributes['subMenuItemTextColor'];
-		}
 		if (
 			( $attributes['sideBarMenuDevice'] ?? null ) === 'tablet' && in_array( $device, [ 'Tablet', 'Mobile' ], true ) ||
 			( ( $attributes['sideBarMenuDevice'] ?? null ) !== 'tablet' && $device === 'Mobile' )
 		) {
-			$text_color = isset( $attributes['subMenuResponsiveColor'] ) ? $attributes['subMenuResponsiveColor'] : '';
-			if ( ! empty( $text_color ) ) {
-				$css['color'] = $text_color . ' !important';
-			}
+				$css['color'] = Color::get_css( isset( $attributes['subMenuResponsiveColor'] ) ? $attributes['subMenuResponsiveColor'] : '' ) . ' !important';
 		}
 
-		return $css;
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['subMenuItemTextColor'] ) ? $attributes['subMenuItemTextColor'] : '' ) ],
+			$css
+		);
+	}
+	private function get_subMenu__text_hover_css( $attributes, $device = '' ) {
+		return [ 'color' => Color::get_css( isset( $attributes['subMenuItemTextColorH'] ) ? $attributes['subMenuItemTextColorH'] : '' ) ];
 	}
 	private function getMegaMenuCSS( $attributes, $device = '' ) {
 		$css = [];
 		if ( isset( $attributes['sideBarMenuDevice'] ) && $attributes['sideBarMenuDevice'] === 'tablet' && $device === 'Tablet' ) {
 			$css['position'] = 'static !important';
 		}
-
 		return $css;
 	}
 
 
 	private function get_menu_item_dropdown_icon_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['menuItemTextColor'] ) ) {
-			$css['fill'] = $attributes['menuItemTextColor'];
-		}
 		if (
 			( $attributes['sideBarMenuDevice'] ?? null ) === 'tablet' && in_array( $device, [ 'Tablet', 'Mobile' ], true ) ||
 			( ( $attributes['sideBarMenuDevice'] ?? null ) !== 'tablet' && $device === 'Mobile' )
 		) {
-			$text_color = isset( $attributes['menuResponsiveTextColor'] ) ? $attributes['menuResponsiveTextColor'] : '';
-			if ( ! empty( $text_color ) ) {
-				$css['fill'] = $text_color . ' !important';
-			}
+				$css['fill'] = Color::get_css( isset( $attributes['menuResponsiveTextColor'] ) ? $attributes['menuResponsiveTextColor'] : '' ) . ' !important';
 		}
-		return $css;
+		return array_merge(
+			[ 'fill' => Color::get_css( isset( $attributes['menuItemTextColor'] ) ? $attributes['menuItemTextColor'] : '' ) ],
+			$css
+		);
 	}
 	private function get_menu_item_dropdown_icon_hover_css( $attributes ) {
-		$css = [];
-		if ( ! empty( $attributes['menuItemTextColorH'] ) ) {
-			$css['fill'] = $attributes['menuItemTextColorH'];
-		}
-		return $css;
+		return [ 'fill' => Color::get_css( isset( $attributes['menuItemTextColorH'] ) ? $attributes['menuItemTextColorH'] : '' ) ];
 	}
 	private function get_hamburger_menu_wrapper_css( $attributes ) {
 			$css = [];
@@ -423,12 +392,9 @@ class Block extends BlockBaseAbstract {
 		$hamburger_border_css = ! empty( $attributes['hamburgerBorder'] ) ? Border::get_css( $attributes['hamburgerBorder'], '', $device ) : array();
 		$css = array_merge(
 			$hamburger_border_css,
-			Dimensions::get_css( isset( $attributes['hamburgerPadding'] ) ? $attributes['hamburgerPadding'] : [], 'padding', $device )
+			Dimensions::get_css( isset( $attributes['hamburgerPadding'] ) ? $attributes['hamburgerPadding'] : [], 'padding', $device ),
+			[ 'background' => Color::get_css( isset( $attributes['hamburgerBackground'] ) ? $attributes['hamburgerBackground'] : '' ) ],
 		);
-
-		if ( isset( $attributes['hamburgerBackground'] ) ) {
-			$css['background'] = $attributes['hamburgerBackground'];
-		}
 		$height_humber = 30 + ( isset( $attributes['hamburgerHeight.value'] ) ? $attributes['hamburgerHeight.value'] : 0 );
 		if ( $height_humber ) {
 			$css['height'] = "{$height_humber}px";
@@ -443,13 +409,8 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_hamburger_menu_item_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( isset( $attributes['hamburgerColor'] ) ) {
-			$css['background'] = $attributes['hamburgerColor'];
-		}
-
 		return array_merge(
-			$css,
+			[ 'background' => Color::get_css( isset( $attributes['hamburgerColor'] ) ? $attributes['hamburgerColor'] : '' ) ],
 			Range::get_css([
 				'attributeValue' => $attributes['hamburgerHeight'],
 				'attribute_object_key' => 'value',
