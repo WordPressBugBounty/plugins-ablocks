@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use ABlocks\Controls\Range;
 use ABlocks\Controls\BackgroundOverlay;
 use ABlocks\Components\ButtonGroup;
+use ABlocks\Controls\Link;
 
 $attributes = [
 	'block_id' => array(
@@ -77,6 +78,10 @@ $attributes = [
 		'default' => '',
 	],
 	'layout' => [
+		'type' => 'string',
+		'default' => '',
+	],
+	'htmlTag' => [
 		'type' => 'string',
 		'default' => '',
 	],
@@ -235,6 +240,7 @@ $attributes = array_merge(
 		'unitDefaultValue' => '%',
 	]),
 	BackgroundOverlay::get_attribute( '_backgroundOverlay', true ),
+	Link::get_attribute( 'link' ),
 );
 
 return array_merge( $attributes, \ABlocks\Classes\BlockGlobal::get_attributes() );

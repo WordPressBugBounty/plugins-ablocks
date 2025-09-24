@@ -27,6 +27,10 @@ $attributes = [
 	'product_id' => [
 		'type'    => 'number',
 	],
+	'price_display' => [
+		'type'    => 'string',
+		'default' => 'radio',
+	],
 	'label' => [
 		'type' => 'string',
 		'default' => 'Buy Now',

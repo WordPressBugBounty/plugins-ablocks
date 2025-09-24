@@ -441,12 +441,12 @@ class Block extends BlockBaseAbstract {
 			$tabs_panel_css['justify-content'] = $attributes['tabMenuAlignment'][ 'value' . $device ];
 		}
 
-		$tabsMenuPositioning = $this->get_responsive_attribute_value($attributes['tabsMenuPositioning'], $device);
-		$tabsMenuDirection = $this->get_responsive_attribute_value($attributes['tabsMenuDirection'], $device);
+		$tabsMenuPositioning = $this->get_responsive_attribute_value( $attributes['tabsMenuPositioning'], $device );
+		$tabsMenuDirection = $this->get_responsive_attribute_value( $attributes['tabsMenuDirection'], $device );
 
 		if ( $tabsMenuPositioning === 'left' || $tabsMenuPositioning === 'right' ) {
 			$tabs_panel_css['flex-direction'] = 'column';
-		} else if ( $tabsMenuPositioning === 'top' || $tabsMenuPositioning === 'bottom' ) {
+		} elseif ( $tabsMenuPositioning === 'top' || $tabsMenuPositioning === 'bottom' ) {
 			$tabs_panel_css['flex-direction'] = $tabsMenuDirection;
 			$tabs_panel_css['flex-wrap'] = 'wrap';
 		}
@@ -480,8 +480,8 @@ class Block extends BlockBaseAbstract {
 	public function get_tabs_menu_content_css( $attributes, $device = '' ) {
 		$css = [];
 		$css['display'] = 'flex';
-		
-		$iconPosition = $this->get_responsive_attribute_value($attributes['iconPosition'], $device);
+
+		$iconPosition = $this->get_responsive_attribute_value( $attributes['iconPosition'], $device );
 
 		// Handling icon position
 		if ( $iconPosition === 'top' ) {
@@ -586,17 +586,16 @@ class Block extends BlockBaseAbstract {
 		$tabsSubtitleCSS = array_merge( $tabsSubtitleCSS, $typographyStyles );
 
 		// Determine width based on menu position
-		$tabsWidthType = $this->get_responsive_attribute_value($attributes['tabsWidthType'], $device);
-		$tabsMenuDirection = $this->get_responsive_attribute_value($attributes['tabsMenuDirection'], $device);
-		$position = $this->get_responsive_attribute_value($attributes['tabsMenuPositioning'], $device);
-		if($device === 'Mobile'){
+		$tabsWidthType = $this->get_responsive_attribute_value( $attributes['tabsWidthType'], $device );
+		$tabsMenuDirection = $this->get_responsive_attribute_value( $attributes['tabsMenuDirection'], $device );
+		$position = $this->get_responsive_attribute_value( $attributes['tabsMenuPositioning'], $device );
+		if ( $device === 'Mobile' ) {
 			$tabsSubtitleCSS['width'] = '100%';
-		}else if ( ($position === 'top' || $position === 'bottom') && $tabsMenuDirection === 'column' ) {
+		} elseif ( ( $position === 'top' || $position === 'bottom' ) && $tabsMenuDirection === 'column' ) {
 			$tabsSubtitleCSS['width'] = '100%';
 		} else {
 			$tabsSubtitleCSS['width'] = '160px';
 		}
-
 
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['subTitleTextColor'] ) ? $attributes['subTitleTextColor'] : '' ) ],
@@ -756,8 +755,8 @@ class Block extends BlockBaseAbstract {
 	public function get_tabs_width_css( $attributes, $device = '' ) {
 		$css = [];
 
-		$tabsWidthType = $this->get_responsive_attribute_value($attributes['tabsWidthType'], $device);
-		$tabsMenuPositioning = $this->get_responsive_attribute_value($attributes['tabsMenuPositioning'], $device);
+		$tabsWidthType = $this->get_responsive_attribute_value( $attributes['tabsWidthType'], $device );
+		$tabsMenuPositioning = $this->get_responsive_attribute_value( $attributes['tabsMenuPositioning'], $device );
 
 		if (
 			$tabsMenuPositioning === 'top' ||
@@ -859,18 +858,18 @@ class Block extends BlockBaseAbstract {
 		return $spacing_css;
 	}
 
-	//don't delete this function, it's used in the render method to get responsive attribute values
-	public function get_responsive_attribute_value($attribute, $device) {
+	// don't delete this function, it's used in the render method to get responsive attribute values
+	public function get_responsive_attribute_value( $attribute, $device ) {
 
-		if ($device === 'Mobile') {
-			return !empty($attribute['valueMobile']) ? $attribute['valueMobile']
-				: (!empty($attribute['valueTablet']) ? $attribute['valueTablet']
-				: ($attribute['value'] ?? ''));
+		if ( $device === 'Mobile' ) {
+			return ! empty( $attribute['valueMobile'] ) ? $attribute['valueMobile']
+				: ( ! empty( $attribute['valueTablet'] ) ? $attribute['valueTablet']
+				: ( $attribute['value'] ?? '' ) );
 		}
 
-		if ($device === 'Tablet') {
-			return !empty($attribute['valueTablet']) ? $attribute['valueTablet']
-				: ($attribute['value'] ?? '');
+		if ( $device === 'Tablet' ) {
+			return ! empty( $attribute['valueTablet'] ) ? $attribute['valueTablet']
+				: ( $attribute['value'] ?? '' );
 		}
 
 		// Default (Desktop or others)

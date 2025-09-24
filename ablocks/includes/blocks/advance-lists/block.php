@@ -20,13 +20,6 @@ class Block extends BlockBaseAbstract {
 	public function build_css( $attributes ) {
 		// Generate CSS
 		$css_generator = new CssGenerator( $attributes );
-		// Wrapper CSS
-		$css_generator->add_class_styles(
-			'{{WRAPPER}}',
-			$this->get_wrapper_css( $attributes, '' ),
-			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' ),
-		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--advance-lists > .ablocks-block-container',
@@ -59,15 +52,6 @@ class Block extends BlockBaseAbstract {
 		return $css_generator->generate_css();
 	}
 
-	public function get_wrapper_css( $attributes, $device = '' ) {
-		$typography = isset( $attributes['typography'] ) ? $attributes['typography'] : '';
-		$alignment = isset( $attributes['alignment'] ) ? $attributes['alignment'] : '';
-		return array_merge(
-			Alignment::get_css( $alignment, 'text-align', $device ),
-			Typography::get_css( $typography, $device ),
-		);
-	}
-
 	public function get_container_css( $attributes, $device = '' ) {
 		$css = [];
 		if ( ! empty( $attributes['listsDirection'][ 'value' . $device ] ) ) {
@@ -77,6 +61,7 @@ class Block extends BlockBaseAbstract {
 		$alignment = isset( $attributes['alignment'] ) ? $attributes['alignment'] : '';
 		return array_merge(
 			$css,
+			Alignment::get_css( $alignment, 'text-align', $device ),
 			Alignment::get_css( $alignment, ( $listsDirection && $attributes['listsDirection'][ 'value' . $device ] === 'row' ) ? 'justify-content' : 'align-items', $device ),
 			Range::get_css([
 				'attributeValue' => $attributes['columnGap'],
@@ -149,7 +134,7 @@ class Block extends BlockBaseAbstract {
 				'attributeValue' => $attributes['width'],
 				'attribute_object_key' => 'value',
 				'isResponsive' => true,
-				'defaultValue' => null,
+				'defaultValue' => 100,
 				'hasUnit' => false,
 				'unitDefaultValue' => '%',
 				'property' => 'width',

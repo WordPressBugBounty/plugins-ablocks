@@ -124,6 +124,30 @@ class Block extends BlockBaseAbstract {
 			$this->get_Button_css( $attributes, 'Tablet' ),
 			$this->get_Button_css( $attributes, 'Mobile' )
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-button',
+			$this->get_button_bg_css( $attributes ),
+			$this->get_button_bg_css( $attributes, 'Tablet' ),
+			$this->get_button_bg_css( $attributes, 'Mobile' )
+		);
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-block--search-button',
+				$this->get_button_bg_css( $attributes ),
+				$this->get_button_bg_css( $attributes, 'Tablet' ),
+				$this->get_button_bg_css( $attributes, 'Mobile' )
+			);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-button:hover',
+			$this->get_button_bg_hover_css( $attributes ),
+			$this->get_button_bg_hover_css( $attributes, 'Tablet' ),
+			$this->get_button_bg_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-button:hover',
+			$this->get_button_bg_hover_css( $attributes ),
+			$this->get_button_bg_hover_css( $attributes, 'Tablet' ),
+			$this->get_button_bg_hover_css( $attributes, 'Mobile' )
+		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-button > span > svg',
@@ -355,7 +379,16 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 
-
+	public function get_button_bg_css( $attributes, $device = '' ) {
+		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['buttonBgColor'] ) ? $attributes['buttonBgColor'] : '' ) ],
+		);
+	}
+	public function get_button_bg_hover_css( $attributes, $device = '' ) {
+		return array_merge(
+			[ 'background' => Color::get_css( isset( $attributes['buttonBgColorH'] ) ? $attributes['buttonBgColorH'] : '' ) ],
+		);
+	}
 	public function get_Icon_css( $attributes, $device = '' ) {
 
 		return array_merge(

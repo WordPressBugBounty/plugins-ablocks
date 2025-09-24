@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 5.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -154,6 +154,16 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 8. Instant Style Copy-Paste
 
 == Changelog ==
+
+= 2.2.1 - 24/09/2025 =
+* Added - Container Block Link support
+* Fixed - Typography Control alignment issue
+* Fixed - Image Block extra space issue
+* Fixed - Container Margin Left and right not working
+* Fixed - Academy LMS & StoreEngine Integration Block Control issue
+* Fixed - QR Code block issue 
+* Fixed - Search Block Background not working issue
+* Fixed - Advance List Block issue 
 
 = 2.2.0 - 01/09/2025 =
 * Added - Form Builder Upload Block compatibility

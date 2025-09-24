@@ -199,13 +199,13 @@ class Block extends BlockBaseAbstract {
 		) {
 			$attributes['verticalAlign'][ 'value' . $device ] = $attributes['verticalAlignment'];
 			$attributes['verticalAlignment'] = '';
-		}else if (
+		} elseif (
 			$attributes['verticalAlignment'] !== '' && $attributes['verticalAlignment'] === 'center'
-		){
+		) {
 			$attributes['verticalAlignment'] = '';
 		}
 		// Temporary approch instead of attribute migration. Might remove it in future
-		
+
 		if ( ! empty( $attributes['verticalAlign'][ 'value' . $device ] ) ) {
 			$carousel_css['align-items'] = $attributes['verticalAlign'][ 'value' . $device ];
 		}

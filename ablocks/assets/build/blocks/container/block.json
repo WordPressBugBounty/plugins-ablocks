@@ -101,6 +101,10 @@
             "type": "string",
             "default": ""
         },
+        "htmlTag": {
+            "type": "string",
+            "default": ""
+        },
         "shapeTop": {
             "type": "string",
             "default": ""
@@ -383,6 +387,19 @@
                 "opacityHTablet": "",
                 "opacityHMobile": "",
                 "transitionDuration": ""
+            }
+        },
+        "link": {
+            "type": "object",
+            "default": {
+                "linkDestination": "",
+                "href": "",
+                "lightbox": "",
+                "linkTarget": "",
+                "rel": "",
+                "noFollow": "",
+                "keyValue": "",
+                "linkClass": ""
             }
         },
         "_margin": {

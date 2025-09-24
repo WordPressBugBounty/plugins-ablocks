@@ -1,4 +1,5 @@
 <?php
+
 namespace ABlocks\Blocks\StoreengineCartButton;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -48,11 +49,12 @@ class Block extends BlockBaseAbstract {
 
 		return $css_generator->generate_css();
 	}
+
 	public function get_button_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color'] = $attributes['button_color'] ?? '';
+		$css               = [];
+		$css['color']      = $attributes['button_color'] ?? '';
 		$css['background'] = $attributes['button_bg'] ?? '';
-		$typography_value = isset( $attributes['btn_typography'] ) ? Typography::get_css( $attributes['btn_typography'], '', $device ) : array();
+		$typography_value  = isset( $attributes['btn_typography'] ) ? Typography::get_css( $attributes['btn_typography'], '', $device ) : array();
 
 		if ( ! empty( $attributes['padding'] ) ) {
 			$cssPadding = Dimensions::get_css( $attributes['padding'], 'padding', $device );
@@ -64,22 +66,22 @@ class Block extends BlockBaseAbstract {
 			$cssPadding,
 			Border::get_css( $attributes['buttonBorder'], '', $device ),
 			BoxShadow::get_css( $attributes['boxShadow'], '', $device ),
-			Range::get_css([
-				'attributeValue' => $attributes['button_width'],
+			Range::get_css( [
+				'attributeValue'       => $attributes['button_width'],
 				'attribute_object_key' => 'value',
-				'isResponsive' => true,
-				'defaultValue' => 100,
-				'hasUnit' => true,
-				'unitDefaultValue' => '%',
-				'property' => 'width',
-				'device' => $device,
-			])
+				'isResponsive'         => true,
+				'defaultValue'         => 100,
+				'hasUnit'              => true,
+				'unitDefaultValue'     => '%',
+				'property'             => 'width',
+				'device'               => $device,
+			] )
 		);
 	}
 
 	public function get_button_hover_css( $attributes, $device = '' ) {
-		$css = [];
-		$css['color'] = $attributes['button_color_hover'] ?? '';
+		$css               = [];
+		$css['color']      = $attributes['button_color_hover'] ?? '';
 		$css['background'] = $attributes['button_bg_hover'] ?? '';
 
 		return array_merge(
@@ -98,20 +100,26 @@ class Block extends BlockBaseAbstract {
 
 		return $alignment_css;
 	}
+
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		$attr_array = [
-			'label'  => Helper::get_attribute_value( $attributes, 'label' ),
-			'product_id'  => Helper::get_attribute_value( $attributes, 'product_id' ),
-			'price_id'  => Helper::get_attribute_value( $attributes, 'price_id' ),
-			'variation_id'  => Helper::get_attribute_value( $attributes, 'variation_id' ),
-			'direct_checkout'  => Helper::get_attribute_value( $attributes, 'direct_checkout' ),
-			'quantity'  => Helper::get_attribute_value( $attributes, 'quantity' ),
-			'show_quantity'  => Helper::get_attribute_value( $attributes, 'show_quantity' ),
-			'disabled'  => Helper::get_attribute_value( $attributes, 'disabled' ),
+			'label'           => Helper::get_attribute_value( $attributes, 'label' ),
+			'product_id'      => Helper::get_attribute_value( $attributes, 'product_id' ),
+			'price_id'        => Helper::get_attribute_value( $attributes, 'price_id' ),
+			'variation_id'    => Helper::get_attribute_value( $attributes, 'variation_id' ),
+			'direct_checkout' => Helper::get_attribute_value( $attributes, 'direct_checkout' ) ? 'true' : 'false',
+			'quantity'        => Helper::get_attribute_value( $attributes, 'quantity' ),
+			'show_quantity'   => Helper::get_attribute_value( $attributes, 'show_quantity' ),
+			'disabled'        => Helper::get_attribute_value( $attributes, 'disabled' ),
+			'price_display'   => Helper::get_attribute_value( $attributes, 'price_display' ),
 		];
 
 		if ( isset( $block_instance->context['postId'] ) && ! empty( $block_instance->context['postId'] ) && empty( $attr_array['product_id'] ) ) {
 			$attr_array['product_id'] = $block_instance->context['postId'];
+		}
+
+		if ( isset( $_GET['context'] ) && 'edit' === sanitize_text_field( $_GET['context'] ) ) {
+			$attr_array['dummy'] = true;
 		}
 
 		$shortcode = '[storeengine_add_to_cart ' . Helper::attr_shortcode( $attr_array ) . ']';

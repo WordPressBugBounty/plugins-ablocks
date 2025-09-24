@@ -85,7 +85,7 @@ $attributes = [
 
 	'contentColor' => [
 		'type' => 'string',
-		'default' => 'white'
+		'default' => '#ffffff'
 	]
 ];
 

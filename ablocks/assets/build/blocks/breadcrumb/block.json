@@ -1,11 +1,15 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "ablocks/progress-tracker",
+    "name": "ablocks/breadcrumb",
     "version": "0.1.0",
-    "title": "Progress Tracker",
+    "title": "Breadcrumb",
     "category": "ablocks",
-    "description": "Add customizable, impactful Progress",
+    "description": "Dynamic Breadcrumb Blocks",
+    "keywords": [
+        "ablocks",
+        "breadcrumb"
+    ],
     "example": [],
     "supports": {
         "html": true,
@@ -18,90 +22,82 @@
         "file:./style.css"
     ],
     "editorScript": [
-        "ablocks-common-script",
-        "file:./view.js"
+        "ablocks-common-script"
     ],
     "attributes": {
         "block_id": {
-            "type": "string"
+            "type": "string",
+            "default": ""
         },
         "blockVersion": {
             "type": "number",
+            "default": 2
+        },
+        "homeBreadcrumbs": {
+            "type": "string",
             "default": ""
         },
-        "progressValue": {
-            "type": "number",
-            "default": 100
-        },
-        "maxValue": {
-            "type": "number",
-            "default": 100
-        },
-        "barColor": {
+        "SeparatorChange": {
             "type": "string",
-            "default": "black"
+            "default": ""
         },
-        "trackColor": {
+        "breadcrumbTitlecolor": {
             "type": "string",
-            "default": "#e0e0e0"
+            "default": ""
         },
-        "mediaPosition": {
+        "breadcrumbHoverLinkcolor": {
             "type": "string",
-            "default": "top"
+            "default": ""
         },
-        "isShowPercentage": {
+        "beforeSeparator": {
             "type": "boolean",
-            "default": true
+            "default": false
         },
-        "direction": {
-            "type": "string",
-            "default": "left"
-        },
-        "progressRelative": {
-            "type": "string",
-            "default": "entire_page"
-        },
-        "progressRelativeSelector": {
+        "breadcrumbItemBackground": {
             "type": "string",
             "default": ""
         },
-        "barProgressColor": {
+        "breadcrumbLinkcolor": {
             "type": "string",
-            "default": "#000000"
+            "default": ""
         },
-        "barBackgroundColor": {
+        "breadcrumbseparatorcolor": {
             "type": "string",
-            "default": "#DDDDDF"
+            "default": ""
         },
-        "circleProgressColor": {
+        "beforeBreadcrumbImage": {
             "type": "string",
-            "default": "#000000"
+            "default": ""
         },
-        "circleBackgroundColor": {
+        "beforeBreadcrumbText": {
             "type": "string",
-            "default": "#dadada"
+            "default": ""
         },
-        "circleSize": {
-            "type": "number",
-            "default": 110
+        "beforeBreadcrumbTextImage": {
+            "type": "string",
+            "default": ""
         },
-        "circleStrokeSize": {
+        "beforeBreadcrumbBackgroundcolor": {
+            "type": "string",
+            "default": ""
+        },
+        "beforeTextImage": {
+            "type": "boolean",
+            "default": false
+        },
+        "positionBreadcrumb": {
+            "type": "object",
+            "default": ""
+        },
+        "breadcrumbSpaceBetween": {
             "type": "number",
             "default": 10
         },
-        "contentColor": {
-            "type": "string",
-            "default": "#ffffff"
+        "breadcrumbseparsize": {
+            "type": "number",
+            "default": 20
         },
-        "alignment": {
-            "type": "object",
-            "default": {
-                "value": "center",
-                "valueTablet": "",
-                "valueMobile": ""
-            }
-        },
-        "contentTypography": {
+        "breadcrumbTitleTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
@@ -135,134 +131,108 @@
                 "wordSpacingUnitMobile": "px"
             }
         },
-        "contentTextShadow": {
+        "beforeBreadcrumbBorderRadius": {
             "type": "object",
             "default": {
-                "color": "",
-                "blur": "",
-                "horizontal": "",
-                "vertical": ""
+                "isLinked": true,
+                "isLinkedTablet": true,
+                "isLinkedMobile": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px",
+                "commonTablet": "",
+                "topTablet": "",
+                "rightTablet": "",
+                "bottomTablet": "",
+                "leftTablet": "",
+                "unitTablet": "",
+                "commonMobile": "",
+                "topMobile": "",
+                "rightMobile": "",
+                "bottomMobile": "",
+                "leftMobile": "",
+                "unitMobile": ""
             }
         },
-        "contentTextStroke": {
+        "BreadcrumbBorderRadius": {
             "type": "object",
             "default": {
-                "strokeWidth": "",
-                "strokeWidthTablet": "",
-                "strokeWidthMobile": "",
-                "strokeWidthUnit": "px",
-                "strokeWidthUnitTablet": "px",
-                "strokeWidthUnitMobile": "px",
-                "stroke": ""
+                "isLinked": true,
+                "isLinkedTablet": true,
+                "isLinkedMobile": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px",
+                "commonTablet": "",
+                "topTablet": "",
+                "rightTablet": "",
+                "bottomTablet": "",
+                "leftTablet": "",
+                "unitTablet": "",
+                "commonMobile": "",
+                "topMobile": "",
+                "rightMobile": "",
+                "bottomMobile": "",
+                "leftMobile": "",
+                "unitMobile": ""
             }
         },
-        "barBorder": {
+        "beforeBreadcrumbPaddingcolor": {
             "type": "object",
             "default": {
-                "borderStyle": "default",
-                "borderStyleH": "default",
-                "borderColor": "",
-                "borderColorH": "",
-                "isLinkedWidth": true,
-                "isLinkedWidthTablet": true,
-                "isLinkedWidthMobile": true,
-                "commonWidth": "",
-                "commonWidthTablet": "",
-                "commonWidthMobile": "",
-                "topWidth": "",
-                "rightWidth": "",
-                "bottomWidth": "",
-                "leftWidth": "",
-                "topWidthTablet": "",
-                "rightWidthTablet": "",
-                "bottomWidthTablet": "",
-                "leftWidthTablet": "",
-                "topWidthMobile": "",
-                "rightWidthMobile": "",
-                "bottomWidthMobile": "",
-                "leftWidthMobile": "",
-                "unitWidth": "px",
-                "unitWidthTablet": "",
-                "unitWidthMobile": "",
-                "isLinkedWidthH": true,
-                "isLinkedWidthHTablet": true,
-                "isLinkedWidthHMobile": true,
-                "commonWidthH": "",
-                "commonWidthHTablet": "",
-                "commonWidthHMobile": "",
-                "topWidthH": "",
-                "rightWidthH": "",
-                "bottomWidthH": "",
-                "leftWidthH": "",
-                "topWidthHTablet": "",
-                "rightWidthHTablet": "",
-                "bottomWidthHTablet": "",
-                "leftWidthHTablet": "",
-                "topWidthHMobile": "",
-                "rightWidthHMobile": "",
-                "bottomWidthHMobile": "",
-                "leftWidthHMobile": "",
-                "unitWidthH": "px",
-                "unitWidthHTablet": "",
-                "unitWidthHMobile": "",
-                "isLinkedRadius": true,
-                "isLinkedRadiusTablet": true,
-                "isLinkedRadiusMobile": true,
-                "commonRadius": "",
-                "commonRadiusTablet": "",
-                "commonRadiusMobile": "",
-                "topRadius": "",
-                "rightRadius": "",
-                "bottomRadius": "",
-                "leftRadius": "",
-                "topRadiusTablet": "",
-                "rightRadiusTablet": "",
-                "bottomRadiusTablet": "",
-                "leftRadiusTablet": "",
-                "topRadiusMobile": "",
-                "rightRadiusMobile": "",
-                "bottomRadiusMobile": "",
-                "leftRadiusMobile": "",
-                "unitRadius": "px",
-                "unitRadiusTablet": "",
-                "unitRadiusMobile": "",
-                "isLinkedRadiusH": true,
-                "isLinkedRadiusHTablet": true,
-                "isLinkedRadiusHMobile": true,
-                "commonRadiusH": "",
-                "commonRadiusHTablet": "",
-                "commonRadiusHMobile": "",
-                "topRadiusH": "",
-                "rightRadiusH": "",
-                "bottomRadiusH": "",
-                "leftRadiusH": "",
-                "topRadiusHTablet": "",
-                "rightRadiusHTablet": "",
-                "bottomRadiusHTablet": "",
-                "leftRadiusHTablet": "",
-                "topRadiusHMobile": "",
-                "rightRadiusHMobile": "",
-                "bottomRadiusHMobile": "",
-                "leftRadiusHMobile": "",
-                "unitRadiusH": "px",
-                "unitRadiusHTablet": "",
-                "unitRadiusHMobile": "",
-                "transitionDuration": ""
+                "isLinked": true,
+                "isLinkedTablet": true,
+                "isLinkedMobile": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px",
+                "commonTablet": "",
+                "topTablet": "",
+                "rightTablet": "",
+                "bottomTablet": "",
+                "leftTablet": "",
+                "unitTablet": "",
+                "commonMobile": "",
+                "topMobile": "",
+                "rightMobile": "",
+                "bottomMobile": "",
+                "leftMobile": "",
+                "unitMobile": ""
             }
         },
-        "layout": {
-            "type": "string",
-            "default": "bar"
-        },
-        "barHeightSize": {
+        "breadcrumbItemPadding": {
             "type": "object",
             "default": {
-                "value": 40,
-                "valueTablet": 30,
-                "valueMobile": 30,
-                "valueUnit": "px",
-                "valueUnitTablet": "",
-                "valueUnitMobile": ""
+                "isLinked": true,
+                "isLinkedTablet": true,
+                "isLinkedMobile": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px",
+                "commonTablet": "",
+                "topTablet": "",
+                "rightTablet": "",
+                "bottomTablet": "",
+                "leftTablet": "",
+                "unitTablet": "",
+                "commonMobile": "",
+                "topMobile": "",
+                "rightMobile": "",
+                "bottomMobile": "",
+                "leftMobile": "",
+                "unitMobile": ""
             }
         },
         "_margin": {

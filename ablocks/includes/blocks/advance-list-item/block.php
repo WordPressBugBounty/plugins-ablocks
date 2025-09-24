@@ -36,6 +36,12 @@ class Block extends BlockBaseAbstract {
 			$this->get_marker_css( $attributes, 'Tablet' ),
 			$this->get_marker_css( $attributes, 'Mobile' ),
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--advance-list-item .advance-list-item-marker,{{WRAPPER}}.ablocks-block--advance-list-item .ablocks-icon-wrap',
+			$this->get_icon_order_css( $attributes, '' ),
+			$this->get_icon_order_css( $attributes, 'Tablet' ),
+			$this->get_icon_order_css( $attributes, 'Mobile' ),
+		);
 		// Icon Style
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap',
@@ -107,24 +113,37 @@ class Block extends BlockBaseAbstract {
 
 	public function get_container_css( $attributes, $device = '' ) {
 		$css = [];
-		if ( ! empty( $attributes['alignment'][ 'value' . $device ] ) && $attributes['alignment'][ 'value' . $device ] === 'flex-start' ) {
-			if ( ! empty( $attributes['iconAlignment'][ 'value' . $device ] ) && $attributes['iconAlignment'][ 'value' . $device ] ) {
-				$css['justify-content'] = 'flex-start';
-			} else {
-				$css['justify-content'] = 'flex-end';
-			};
-		} elseif ( ! empty( $attributes['alignment'][ 'value' . $device ] ) && $attributes['alignment'][ 'value' . $device ] === 'flex-end' ) {
-			if ( ! empty( $attributes['iconAlignment'][ 'value' . $device ] ) && $attributes['iconAlignment'][ 'value' . $device ] === 'row' ) {
-				$css['justify-content'] = 'flex-end';
-			} else {
-				$css['justify-content'] = 'flex-start';
-			};
-		} else {
-			$css['justify-content'] = 'center';
-		}
 		return array_merge(
 			$css,
-			isset( $attributes['iconAlignment'] ) ? Alignment::get_css( $attributes['iconAlignment'], 'flex-direction', $device ) : [],
+			isset( $attributes['alignment'] ) ? Alignment::get_css( $attributes['alignment'], 'justify-items', $device ) : [],
+			Range::get_css([
+				'attributeValue' => $attributes['innerGap'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'defaultValue' => null,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'gap',
+				'device' => $device,
+			]),
+		);
+	}
+
+	public function get_icon_order_css( $attributes, $device = '' ) {
+		$css = [];
+
+		$css['margin'] = 'auto';
+
+		$iconAlignmentValue = $this->get_responsive_attribute_value( $attributes['iconAlignment'], $device );
+		if ( $iconAlignmentValue === 'row' ) {
+			$css['order'] = 1;
+		} elseif ( $iconAlignmentValue === 'row-reverse' ) {
+			$css['order'] = 2;
+		}
+
+		return array_merge(
+			$css,
+			isset( $attributes['alignment'] ) ? Alignment::get_css( $attributes['alignment'], 'justify-items', $device ) : [],
 			Range::get_css([
 				'attributeValue' => $attributes['innerGap'],
 				'attribute_object_key' => 'value',
@@ -139,7 +158,15 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_paragraph_text_css( $attributes, $device = '' ) {
+		$css = [];
+		$iconAlignmentValue = $this->get_responsive_attribute_value( $attributes['iconAlignment'], $device );
+		if ( $iconAlignmentValue === 'row' ) {
+			$css['order'] = 2;
+		} elseif ( $iconAlignmentValue === 'row-reverse' ) {
+			$css['order'] = 1;
+		}
 		return array_merge(
+			$css,
 			[ 'color' => Color::get_css( isset( $attributes['textColor'] ) ? $attributes['textColor'] : '' ) ],
 			isset( $attributes['listTypography'] ) ? Typography::get_css( $attributes['listTypography'], '', $device ) : [],
 			isset( $attributes['listTextStroke'] ) ? TextStroke::get_css( $attributes['listTextStroke'], '', $device ) : [],
@@ -152,6 +179,7 @@ class Block extends BlockBaseAbstract {
 
 	public function get_divider_css( $attributes, $device = '' ) {
 		$css = [];
+		$css['order'] = 3;
 		$divider_width = isset( $attributes['width'][ 'value' . $device ] ) ? $attributes['width'][ 'value' . $device ] : 60;
 		$default_Unit = '%';
 
@@ -197,6 +225,7 @@ class Block extends BlockBaseAbstract {
 
 		return array_merge(
 			$css,
+			isset( $attributes['alignment'] ) ? Alignment::get_css( $attributes['alignment'], 'justify-self', $device ) : [],
 			Range::get_css([
 				'attributeValue' => $attributes['width'],
 				'attribute_object_key' => 'value',
@@ -209,6 +238,24 @@ class Block extends BlockBaseAbstract {
 			]),
 			$moreRangeCSS,
 		);
+	}
+
+	// don't delete this function, it's used in the render method to get responsive attribute values
+	public function get_responsive_attribute_value( $attribute, $device ) {
+
+		if ( $device === 'Mobile' ) {
+			return ! empty( $attribute['valueMobile'] ) ? $attribute['valueMobile']
+				: ( ! empty( $attribute['valueTablet'] ) ? $attribute['valueTablet']
+				: ( $attribute['value'] ?? '' ) );
+		}
+
+		if ( $device === 'Tablet' ) {
+			return ! empty( $attribute['valueTablet'] ) ? $attribute['valueTablet']
+				: ( $attribute['value'] ?? '' );
+		}
+
+		// Default (Desktop or others)
+		return $attribute['value'] ?? '';
 	}
 
 }

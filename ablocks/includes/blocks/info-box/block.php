@@ -527,8 +527,7 @@ class Block extends BlockBaseAbstract {
 
 		// Temporary approch instead of attribute migration. Might remove it in future
 		$iconPlacement = isset( $attributes['iconPlacement'][ 'value' . $device ] ) ? $attributes['iconPlacement'][ 'value' . $device ] : '';
-		if ( 
-			!isset( $attributes['iconPlacement'] ) 
+		if ( ! isset( $attributes['iconPlacement'] )
 			|| (
 				$attributes['stack'] !== ''
 				&& $iconPlacement !== $attributes['stack']
@@ -1009,6 +1008,6 @@ class Block extends BlockBaseAbstract {
 		return TextShadow::get_css( $attributes['btnTextShadow'] );
 	}
 	public function get_button_icon_hover_css( $attributes, $device = '' ) {
-		return [ 'color' => Color::get_css( isset( $attributes['textColorH'] ) ? $attributes['textColorH'] : '' ) ];
+		return [ 'fill' => Color::get_css( isset( $attributes['btnTextColorH'] ) ? $attributes['btnTextColorH'] : '' ) ];
 	}
 }

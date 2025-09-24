@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ablocks';
-  src:  url('fonts/ablocks.eot?bscouu');
-  src:  url('fonts/ablocks.eot?bscouu#iefix') format('embedded-opentype'),
-    url('fonts/ablocks.ttf?bscouu') format('truetype'),
-    url('fonts/ablocks.woff?bscouu') format('woff'),
-    url('fonts/ablocks.svg?bscouu#ablocks') format('svg');
+  src:  url('fonts/ablocks.eot?i362yh');
+  src:  url('fonts/ablocks.eot?i362yh#iefix') format('embedded-opentype'),
+    url('fonts/ablocks.ttf?i362yh') format('truetype'),
+    url('fonts/ablocks.woff?i362yh') format('woff'),
+    url('fonts/ablocks.svg?i362yh#ablocks') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ablocks-icon--scroll-to-top:before {
+  content: "\e9d0";
+}
 .ablocks-icon--date-picker:before {
   content: "\e9cc";
 }
@@ -686,4 +689,10 @@
 }
 .ablocks-icon--right:before {
   content: "\e925";
+}
+.ablocks-icon--globe:before {
+  content: "\e9cf";
+}
+.ablocks-icon--trash-can-slash:before {
+  content: "\e9ce";
 }

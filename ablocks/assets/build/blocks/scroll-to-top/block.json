@@ -1,14 +1,18 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "ablocks/progress-tracker",
+    "name": "ablocks/scroll-to-top",
     "version": "0.1.0",
-    "title": "Progress Tracker",
+    "title": "Scroll To Top",
     "category": "ablocks",
-    "description": "Add customizable, impactful Progress",
+    "description": "Add a scroll-to-top button that helps visitors quickly return to the top of the page.",
+    "keywords": [
+        "ablocks",
+        "back to top"
+    ],
     "example": [],
     "supports": {
-        "html": true,
+        "html": false,
         "anchor": true
     },
     "textdomain": "ablocks",
@@ -23,85 +27,229 @@
     ],
     "attributes": {
         "block_id": {
-            "type": "string"
+            "type": "string",
+            "default": ""
         },
         "blockVersion": {
             "type": "number",
             "default": ""
         },
-        "progressValue": {
-            "type": "number",
-            "default": 100
-        },
-        "maxValue": {
-            "type": "number",
-            "default": 100
-        },
-        "barColor": {
+        "appearance": {
             "type": "string",
-            "default": "black"
+            "default": "icon"
         },
-        "trackColor": {
+        "buttonText": {
             "type": "string",
-            "default": "#e0e0e0"
+            "default": "Top"
         },
-        "mediaPosition": {
-            "type": "string",
-            "default": "top"
-        },
-        "isShowPercentage": {
-            "type": "boolean",
-            "default": true
-        },
-        "direction": {
-            "type": "string",
-            "default": "left"
-        },
-        "progressRelative": {
-            "type": "string",
-            "default": "entire_page"
-        },
-        "progressRelativeSelector": {
+        "buttonTextColor": {
             "type": "string",
             "default": ""
         },
-        "barProgressColor": {
+        "buttonTextColorH": {
             "type": "string",
-            "default": "#000000"
+            "default": ""
         },
-        "barBackgroundColor": {
+        "buttonTextColorBg": {
             "type": "string",
-            "default": "#DDDDDF"
+            "default": ""
         },
-        "circleProgressColor": {
+        "buttonTextColorBgH": {
             "type": "string",
-            "default": "#000000"
+            "default": ""
         },
-        "circleBackgroundColor": {
+        "progressColor": {
             "type": "string",
-            "default": "#dadada"
+            "default": "red"
         },
-        "circleSize": {
+        "progressColorBg": {
+            "type": "string",
+            "default": "#EEEEEE"
+        },
+        "strokeSize": {
             "type": "number",
-            "default": 110
+            "default": "3"
         },
-        "circleStrokeSize": {
-            "type": "number",
-            "default": 10
-        },
-        "contentColor": {
-            "type": "string",
-            "default": "#ffffff"
-        },
-        "alignment": {
+        "positionBottom": {
             "type": "object",
             "default": {
-                "value": "center",
+                "value": 20,
                 "valueTablet": "",
                 "valueMobile": ""
             }
         },
-        "contentTypography": {
+        "positionLeft": {
+            "type": "object",
+            "default": {
+                "value": 20,
+                "valueTablet": "",
+                "valueMobile": ""
+            }
+        },
+        "positionRight": {
+            "type": "object",
+            "default": {
+                "value": 20,
+                "valueTablet": "",
+                "valueMobile": ""
+            }
+        },
+        "iconSvgPath": {
+            "type": "string",
+            "default": "M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z",
+            "source": "attribute",
+            "selector": "svg.ablocks-svg-icon path",
+            "attribute": "d"
+        },
+        "iconSvgViewBox": {
+            "type": "string",
+            "default": "0 0 448 512",
+            "source": "attribute",
+            "selector": "svg.ablocks-svg-icon",
+            "attribute": "viewBox"
+        },
+        "iconClass": {
+            "type": "string",
+            "default": "far fa-arrow-alt-circle-up"
+        },
+        "iconImageUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "iconImageID": {
+            "type": "number",
+            "default": 0
+        },
+        "iconImageSize": {
+            "type": "string",
+            "default": ""
+        },
+        "iconColor": {
+            "type": "string",
+            "default": "#69727d"
+        },
+        "iconBgColor": {
+            "type": "string",
+            "default": ""
+        },
+        "iconType": {
+            "type": "string",
+            "default": "default"
+        },
+        "iconShape": {
+            "type": "string",
+            "default": "circle"
+        },
+        "iconPadding": {
+            "type": "object",
+            "default": {
+                "isLinked": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px"
+            }
+        },
+        "iconBorderRadius": {
+            "type": "object",
+            "default": {
+                "isLinked": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px"
+            }
+        },
+        "iconBorderWidth": {
+            "type": "object",
+            "default": {
+                "isLinked": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px"
+            }
+        },
+        "iconSize": {
+            "type": "number",
+            "default": 40
+        },
+        "iconRotate": {
+            "type": "number",
+            "default": 0
+        },
+        "iconSizing": {
+            "type": "object",
+            "default": {
+                "value": 40,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "iconRotated": {
+            "type": "object",
+            "default": {
+                "value": 0,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "deg",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "iconRotateHover": {
+            "type": "object",
+            "default": {
+                "value": 0,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "deg",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "icontransitionDuration": {
+            "type": "number",
+            "default": 0
+        },
+        "iconImageWidth": {
+            "type": "number",
+            "default": 0
+        },
+        "alignment": {
+            "type": "object",
+            "default": {
+                "value": "left",
+                "valueTablet": "",
+                "valueMobile": ""
+            }
+        },
+        "position": {
+            "type": "string",
+            "default": "default"
+        },
+        "textStroke": {
+            "type": "object",
+            "default": {
+                "strokeWidth": "",
+                "strokeWidthTablet": "",
+                "strokeWidthMobile": "",
+                "strokeWidthUnit": "px",
+                "strokeWidthUnitTablet": "px",
+                "strokeWidthUnitMobile": "px",
+                "stroke": ""
+            }
+        },
+        "typography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
@@ -135,28 +283,7 @@
                 "wordSpacingUnitMobile": "px"
             }
         },
-        "contentTextShadow": {
-            "type": "object",
-            "default": {
-                "color": "",
-                "blur": "",
-                "horizontal": "",
-                "vertical": ""
-            }
-        },
-        "contentTextStroke": {
-            "type": "object",
-            "default": {
-                "strokeWidth": "",
-                "strokeWidthTablet": "",
-                "strokeWidthMobile": "",
-                "strokeWidthUnit": "px",
-                "strokeWidthUnitTablet": "px",
-                "strokeWidthUnitMobile": "px",
-                "stroke": ""
-            }
-        },
-        "barBorder": {
+        "border": {
             "type": "object",
             "default": {
                 "borderStyle": "default",
@@ -250,19 +377,25 @@
                 "transitionDuration": ""
             }
         },
-        "layout": {
-            "type": "string",
-            "default": "bar"
-        },
-        "barHeightSize": {
+        "textShadow": {
             "type": "object",
             "default": {
-                "value": 40,
-                "valueTablet": 30,
-                "valueMobile": 30,
-                "valueUnit": "px",
-                "valueUnitTablet": "",
-                "valueUnitMobile": ""
+                "color": "",
+                "blur": "",
+                "horizontal": "",
+                "vertical": ""
+            }
+        },
+        "padding": {
+            "type": "object",
+            "default": {
+                "isLinked": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px"
             }
         },
         "_margin": {

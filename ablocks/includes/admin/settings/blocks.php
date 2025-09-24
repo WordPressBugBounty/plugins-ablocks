@@ -74,8 +74,9 @@ class Blocks {
 			'advance-lists' => true,
 			'stacked-cards' => true,
 			'group-image-effect' => true,
-			'filterable-card' => true,
 			'taxonomy-listing' => true,
+			'scroll-to-top' => true,
+			'breadcrumb' => true,
 			// Academy LMS Blocks
 			'academy-courses' => true,
 			'academy-course-search' => true,

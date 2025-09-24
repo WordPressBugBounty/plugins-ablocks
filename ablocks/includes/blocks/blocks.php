@@ -75,8 +75,10 @@ return [
 	'player',
 	'advance-lists',
 	'taxonomy-listing',
+	'scroll-to-top',
 	'qr-code',
 	'advance-list-item',
+	'breadcrumb',
 	// loop builder
 	'loop-builder',
 	'loop-template',

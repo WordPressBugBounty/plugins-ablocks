@@ -55,6 +55,14 @@ $attributes = [
 		'type' => 'string',
 		'default' => 'Search',
 	],
+	'buttonBgColor' => [
+		'type' => 'string',
+		'default' => '',
+	],
+	'buttonBgColorH' => [
+		'type' => 'string',
+		'default' => '',
+	],
 	'buttonTextColor' => [
 		'type' => 'string',
 		'default' => '',

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 2.2.0\n"
+"Project-Id-Version: aBlocks 2.2.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-03T12:04:07+00:00\n"
+"POT-Creation-Date: 2025-09-24T15:48:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: ablocks\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #. Author of the plugin
 #: ablocks.php
-#: includes/blocks.php:165
+#: includes/blocks.php:167
 msgid "Academy LMS"
 msgstr ""
 
@@ -368,13 +368,55 @@ msgctxt "Google font: on or off"
 msgid "on"
 msgstr ""
 
-#: includes/blocks.php:161
+#: includes/blocks.php:163
 msgid "ABlocks"
 msgstr ""
 
-#: includes/blocks.php:169
+#: includes/blocks.php:171
 #: assets/build/dashboard.js:1
 msgid "StoreEngine"
+msgstr ""
+
+#: includes/blocks/breadcrumb/block.php:177
+msgid "Home"
+msgstr ""
+
+#: includes/blocks/breadcrumb/block.php:185
+msgid "Before Text"
+msgstr ""
+
+#: includes/blocks/breadcrumb/block.php:278
+msgid "Blog"
+msgstr ""
+
+#: includes/blocks/breadcrumb/block.php:411
+msgid "Author: %s"
+msgstr ""
+
+#: includes/blocks/breadcrumb/block.php:430
+msgid "Search: %s"
+msgstr ""
+
+#: includes/blocks/breadcrumb/block.php:439
+msgid "404 Not Found"
+msgstr ""
+
+#: includes/blocks/breadcrumb/block.php:512
+#: assets/build/blocks.js:26
+msgid "Template"
+msgstr ""
+
+#: includes/blocks/breadcrumb/block.php:517
+msgid "Currents Page"
+msgstr ""
+
+#: includes/blocks/breadcrumb/block.php:534
+#: includes/blocks/breadcrumb/block.php:540
+msgid "(no title)"
+msgstr ""
+
+#: includes/blocks/breadcrumb/block.php:624
+msgid "breadcrumb"
 msgstr ""
 
 #: includes/blocks/form-builder/actions/save-form-data.php:41
@@ -429,11 +471,11 @@ msgstr ""
 msgid "No items selected"
 msgstr ""
 
-#: includes/blocks/search/block.php:382
+#: includes/blocks/search/block.php:415
 msgid "Write anything..."
 msgstr ""
 
-#: includes/blocks/search/block.php:387
+#: includes/blocks/search/block.php:420
 #: assets/build/blocks.js:1
 #: assets/build/dashboard.js:1
 msgid "Search"
@@ -473,7 +515,7 @@ msgstr ""
 msgid "Subtitle 3 Content: This tab provides general information about our company"
 msgstr ""
 
-#: includes/blocks/taxonomy-listing/block.php:771
+#: includes/blocks/taxonomy-listing/block.php:761
 #: assets/build/blocks.js:17
 msgid "No posts found."
 msgstr ""
@@ -1106,6 +1148,7 @@ msgid "Border color"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Border Radius"
 msgstr ""
 
@@ -1592,6 +1635,22 @@ msgid "%s"
 msgstr ""
 
 #: assets/build/blocks.js:1
+msgid "Link Options"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Open in new window"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Add nofollow"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Custom Attributes"
+msgstr ""
+
+#: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
 msgid "Flex Start"
 msgstr ""
@@ -1749,6 +1808,18 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 msgid "Flip"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Additional Option"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:7
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:23
+msgid "HTML Tag"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -1970,22 +2041,6 @@ msgid "Word spacing"
 msgstr ""
 
 #: assets/build/blocks.js:1
-msgid "Link Options"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Open in new window"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Add nofollow"
-msgstr ""
-
-#: assets/build/blocks.js:1
-msgid "Custom Attributes"
-msgstr ""
-
-#: assets/build/blocks.js:1
 #: assets/build/blocks.js:7
 #: assets/build/blocks.js:16
 #: assets/build/blocks.js:17
@@ -2018,14 +2073,6 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 msgid "Duration(ms)"
-msgstr ""
-
-#: assets/build/blocks.js:1
-#: assets/build/blocks.js:7
-#: assets/build/blocks.js:16
-#: assets/build/blocks.js:17
-#: assets/build/blocks.js:23
-msgid "HTML Tag"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -2147,6 +2194,55 @@ msgstr ""
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
 msgid "Icon spacing"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/dashboard.js:1
+msgid "Scroll To Top"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
+msgid "Button Text"
+msgstr ""
+
+#: assets/build/blocks.js:1
+#: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
+msgid "Icon Color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Progress Style"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Stroke Size"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Line color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Line Background"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Position Control"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Position Left"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Position Right"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Position Bottom"
 msgstr ""
 
 #: assets/build/blocks.js:1
@@ -3225,11 +3321,6 @@ msgstr ""
 msgid "Speed (s)"
 msgstr ""
 
-#: assets/build/blocks.js:16
-#: assets/build/blocks.js:17
-msgid "Icon Color"
-msgstr ""
-
 #. translators: %s represents the device type option
 #: assets/build/blocks.js:17
 msgid "You have different image for %s. Do you want to use this image for all devices?"
@@ -3266,6 +3357,10 @@ msgstr ""
 
 #: assets/build/blocks.js:17
 msgid "Select"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Position Drag to reorder"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -3335,11 +3430,6 @@ msgstr ""
 
 #: assets/build/blocks.js:17
 msgid "Enable Reload Button"
-msgstr ""
-
-#: assets/build/blocks.js:17
-#: assets/build/blocks.js:26
-msgid "Button Text"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -5356,6 +5446,54 @@ msgid "Sub Title"
 msgstr ""
 
 #: assets/build/blocks.js:17
+msgid "Breadcrumbs Settings"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Home Text Change"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Before Text/Image"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Link Style"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Link Color"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Hover Link Color"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Separator Style"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Separator Change"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Separator Color"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Separator Size"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Select Text/Image"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Before Separator"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "Custom Blank Form"
 msgstr ""
 
@@ -6015,6 +6153,14 @@ msgid "Input Field Style"
 msgstr ""
 
 #: assets/build/blocks.js:17
+msgid "Input Label"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Input Field"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "Form Footer Style"
 msgstr ""
 
@@ -6301,10 +6447,6 @@ msgid "Pattern"
 msgstr ""
 
 #: assets/build/blocks.js:26
-msgid "Template"
-msgstr ""
-
-#: assets/build/blocks.js:26
 #: assets/build/dashboard.js:16
 msgid "Page"
 msgstr ""
@@ -6414,11 +6556,31 @@ msgid "Row Typography"
 msgstr ""
 
 #: assets/build/blocks.js:26
+msgid "Radio"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Dropdown"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Price Range"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Hidden"
+msgstr ""
+
+#: assets/build/blocks.js:26
 msgid "Add To Cart Setting"
 msgstr ""
 
 #: assets/build/blocks.js:26
 msgid "Select Product"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Price display"
 msgstr ""
 
 #: assets/build/blocks.js:26
@@ -6650,6 +6812,10 @@ msgstr ""
 
 #: assets/build/dashboard.js:1
 msgid "QR Code"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Breadcrumb"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -7444,6 +7610,7 @@ msgstr ""
 #: assets/build/blocks/accordion/block.json
 #: assets/build/blocks/accordion/deprecated/block.json
 #: assets/build/blocks/advance-lists/block.json
+#: assets/build/blocks/breadcrumb/block.json
 #: assets/build/blocks/button/block.json
 #: assets/build/blocks/button/deprecated/block.json
 #: assets/build/blocks/chart/block.json
@@ -7476,6 +7643,7 @@ msgstr ""
 #: assets/build/blocks/paypal-button/deprecated/block.json
 #: assets/build/blocks/player/block.json
 #: assets/build/blocks/qr-code/block.json
+#: assets/build/blocks/scroll-to-top/block.json
 #: assets/build/blocks/search/block.json
 #: assets/build/blocks/spacer/block.json
 #: assets/build/blocks/spacer/deprecated/block.json
@@ -7759,6 +7927,21 @@ msgstr ""
 #: assets/build/blocks/lists/deprecated/block.json
 msgctxt "block keyword"
 msgid "point"
+msgstr ""
+
+#: assets/build/blocks/breadcrumb/block.json
+msgctxt "block title"
+msgid "Breadcrumb"
+msgstr ""
+
+#: assets/build/blocks/breadcrumb/block.json
+msgctxt "block description"
+msgid "Dynamic Breadcrumb Blocks"
+msgstr ""
+
+#: assets/build/blocks/breadcrumb/block.json
+msgctxt "block keyword"
+msgid "breadcrumb"
 msgstr ""
 
 #: assets/build/blocks/button/block.json
@@ -8753,6 +8936,21 @@ msgstr ""
 #: assets/build/blocks/qr-code/block.json
 msgctxt "block keyword"
 msgid "qr code"
+msgstr ""
+
+#: assets/build/blocks/scroll-to-top/block.json
+msgctxt "block title"
+msgid "Scroll To Top"
+msgstr ""
+
+#: assets/build/blocks/scroll-to-top/block.json
+msgctxt "block description"
+msgid "Add a scroll-to-top button that helps visitors quickly return to the top of the page."
+msgstr ""
+
+#: assets/build/blocks/scroll-to-top/block.json
+msgctxt "block keyword"
+msgid "back to top"
 msgstr ""
 
 #: assets/build/blocks/search/block.json
