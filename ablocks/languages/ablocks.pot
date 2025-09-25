@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 2.2.1\n"
+"Project-Id-Version: aBlocks 2.2.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-24T15:48:03+00:00\n"
+"POT-Creation-Date: 2025-09-25T17:01:39+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: ablocks\n"
@@ -154,51 +154,55 @@ msgstr ""
 msgid "Theme Builder archives"
 msgstr ""
 
-#: includes/admin.php:68
+#: includes/admin.php:69
 msgid "Docs"
 msgstr ""
 
-#: includes/admin.php:69
+#: includes/admin.php:70
 msgid "View aBlocks documentation"
 msgstr ""
 
-#: includes/admin.php:73
+#: includes/admin.php:74
 msgid "Video Tutorials"
 msgstr ""
 
-#: includes/admin.php:74
+#: includes/admin.php:75
 msgid "See Video Tutorials"
 msgstr ""
 
-#: includes/admin.php:78
+#: includes/admin.php:79
 msgid "Community Support"
 msgstr ""
 
-#: includes/admin.php:79
+#: includes/admin.php:80
 msgid "Visit community forums"
 msgstr ""
 
-#: includes/admin.php:83
+#: includes/admin.php:84
 msgid "Rate the plugin ★★★★★"
 msgstr ""
 
-#: includes/admin.php:84
+#: includes/admin.php:85
 msgid "Rate the plugin."
 msgstr ""
 
-#: includes/admin.php:100
+#: includes/admin.php:101
 #: includes/helper.php:112
 #: assets/build/dashboard.js:1
 #: assets/build/dashboard.js:13
 msgid "Settings"
 msgstr ""
 
-#: includes/admin.php:105
+#: includes/admin.php:106
 msgid "Get aBlocks Pro"
 msgstr ""
 
 #: includes/admin/export.php:55
 msgid "Patterns"
+msgstr ""
+
+#: includes/admin/notice.php:41
+msgid "Dismiss"
 msgstr ""
 
 #: includes/ajax/dashboard.php:60

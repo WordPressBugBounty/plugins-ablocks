@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 5.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -155,7 +155,10 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 
 == Changelog ==
 
-= 2.2.1 - 24/09/2025 =
+= 2.2.2 - 17/09/2025 =
+* Fixed - Block icon issues
+
+= 2.2.1 - 17/09/2025 =
 * Added - Container Block Link support
 * Fixed - Typography Control alignment issue
 * Fixed - Image Block extra space issue

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ablocks';
-  src:  url('fonts/ablocks.eot?i362yh');
-  src:  url('fonts/ablocks.eot?i362yh#iefix') format('embedded-opentype'),
-    url('fonts/ablocks.ttf?i362yh') format('truetype'),
-    url('fonts/ablocks.woff?i362yh') format('woff'),
-    url('fonts/ablocks.svg?i362yh#ablocks') format('svg');
+  src:  url('fonts/ablocks.eot?w597kd');
+  src:  url('fonts/ablocks.eot?w597kd#iefix') format('embedded-opentype'),
+    url('fonts/ablocks.ttf?w597kd') format('truetype'),
+    url('fonts/ablocks.woff?w597kd') format('woff'),
+    url('fonts/ablocks.svg?w597kd#ablocks') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,7 +25,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.ablocks-icon--scroll-to-top:before {
+.ablocks-icon--comments-question:before {
+  content: "\e9d1";
+}
+.ablocks-icon--star:before {
+  content: "\e9d2";
+}
+.ablocks-icon--users:before {
+  content: "\e9d3";
+}
+.ablocks-icon--back-to-top:before {
   content: "\e9d0";
 }
 .ablocks-icon--date-picker:before {
