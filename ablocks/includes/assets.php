@@ -126,6 +126,7 @@ class Assets {
 				'academy_lms' => Helper::is_active_academy(),
 				'storeengine' => Helper::is_active_storeengine(),
 				'wp_map_block' => Helper::is_active_wp_map_block(),
+				'easy_content_manager' => Helper::is_active_easy_content_manager(),
 			]
 		);
 		return apply_filters(

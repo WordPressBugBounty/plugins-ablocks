@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 5.4
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 2.2.2
+Stable tag: 2.3.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -154,6 +154,14 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 8. Instant Style Copy-Paste
 
 == Changelog ==
+
+= 2.3.0 - 29/09/2025 =
+* Added - New BreadCrumb Block 
+* Added - New Featured Image Block
+* Improved - Loop Builder Featured Image
+* Improved - Demo Importer UI
+* Improved - Scroll To Top bar block
+* Improved - StoreEngine Add to cart button block
 
 = 2.2.2 - 17/09/2025 =
 * Fixed - Block icon issues

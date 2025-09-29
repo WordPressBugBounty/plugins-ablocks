@@ -75,6 +75,7 @@ return [
 	'player',
 	'advance-lists',
 	'taxonomy-listing',
+	'featured-image',
 	'scroll-to-top',
 	'qr-code',
 	'advance-list-item',

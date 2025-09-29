@@ -398,6 +398,10 @@
                 "unit": "px"
             }
         },
+        "visibleControl": {
+            "type": "string",
+            "default": "visible"
+        },
         "_margin": {
             "type": "object",
             "default": {

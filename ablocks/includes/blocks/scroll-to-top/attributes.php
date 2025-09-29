@@ -102,6 +102,9 @@ $attributes = array_merge(
 	TextShadow::get_attribute( 'textShadow' ),
 	Dimensions::get_attribute( 'padding', false ),
 	ButtonGroup::get_attribute( 'position', false ),
+	ButtonGroup::get_attribute( 'visibleControl', false, [
+		'value' => 'visible',
+	]),
 );
 
 return array_merge( $attributes, \ABlocks\Classes\BlockGlobal::get_attributes() );

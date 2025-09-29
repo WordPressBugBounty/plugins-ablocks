@@ -75,6 +75,7 @@ class Blocks {
 			'stacked-cards' => true,
 			'group-image-effect' => true,
 			'taxonomy-listing' => true,
+			'featured-image' => true,
 			'scroll-to-top' => true,
 			'breadcrumb' => true,
 			// Academy LMS Blocks

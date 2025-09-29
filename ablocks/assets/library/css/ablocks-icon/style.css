@@ -34,6 +34,18 @@
 .ablocks-icon--users:before {
   content: "\e9d3";
 }
+.ablocks-icon--scroll-to-top:before {
+  content: "\e9d0";
+}
+.ablocks-icon--comments-question:before {
+  content: "\e9d1";
+}
+.ablocks-icon--star:before {
+  content: "\e9d2";
+}
+.ablocks-icon--users:before {
+  content: "\e9d3";
+}
 .ablocks-icon--back-to-top:before {
   content: "\e9d0";
 }

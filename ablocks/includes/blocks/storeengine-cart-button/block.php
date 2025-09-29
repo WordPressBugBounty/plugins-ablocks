@@ -15,6 +15,7 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\BoxShadow;
+use ABlocks\Controls\Color;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'storeengine-cart-button';
@@ -46,6 +47,78 @@ class Block extends BlockBaseAbstract {
 			$this->get_button_alignment_css( $attributes, 'Tablet' ),
 			$this->get_button_alignment_css( $attributes, 'Mobile' )
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .storeengine-add-to-cart-shortcode .storeengine-price.amount',
+			$this->get_price_css( $attributes, '' ),
+			$this->get_price_css( $attributes, 'Tablet' ),
+			$this->get_price_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .storeengine-add-to-cart-shortcode .storeengine-price.amount:hover',
+			$this->get_price_hover_css( $attributes, '' ),
+			$this->get_price_hover_css( $attributes, 'Tablet' ),
+			$this->get_price_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .storeengine-single-product-price-name,
+			{{WRAPPER}} .storeengine-loop-product-price-summery .storeengine-loop-product-price-label',
+			$this->get_price_name_css( $attributes, '' ),
+			$this->get_price_name_css( $attributes, 'Tablet' ),
+			$this->get_price_name_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .storeengine-single-product-price-name:hover,
+			{{WRAPPER}} .storeengine-loop-product-price-summery .storeengine-loop-product-price-label:hover',
+			$this->get_price_name_hover_css( $attributes, '' ),
+			$this->get_price_name_hover_css( $attributes, 'Tablet' ),
+			$this->get_price_name_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .storeengine-single__amount .storeengine-dropdown,
+			{{WRAPPER}} .storeengine-single__amount .storeengine-product__multi-prices,
+			{{WRAPPER}} .storeengine-dropdown.open .storeengine-dropdown-content .storeengine-product__multi-price,
+			{{WRAPPER}} .storeengine-dropdown.open .storeengine-dropdown-content .storeengine-product__multi-price label,
+			{{WRAPPER}} .storeengine-single-product-prices',
+			$this->get_box_css( $attributes, '' ),
+			$this->get_box_css( $attributes, 'Tablet' ),
+			$this->get_box_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .storeengine-single__amount .storeengine-dropdown:hover,
+			{{WRAPPER}} .storeengine-single__amount .storeengine-product__multi-prices:hover,
+			{{WRAPPER}} .storeengine-dropdown.open .storeengine-dropdown-content .storeengine-product__multi-price:hover,
+			{{WRAPPER}} .storeengine-dropdown.open .storeengine-dropdown-content .storeengine-product__multi-price label:hover,
+			{{WRAPPER}} .storeengine-single-product-prices:hover',
+			$this->get_box_hover_css( $attributes, '' ),
+			$this->get_box_hover_css( $attributes, 'Tablet' ),
+			$this->get_box_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .storeengine-single-product-price-summery .storeengine-single-product-price-label input[type=radio]',
+			$this->get_radio_css( $attributes, '' ),
+			$this->get_radio_css( $attributes, 'Tablet' ),
+			$this->get_radio_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .storeengine-single__amount',
+			$this->get_alignment_css( $attributes, '' ),
+			$this->get_alignment_css( $attributes, 'Tablet' ),
+			$this->get_alignment_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .storeengine-add-to-cart-shortcode',
+			$this->get_gap_css( $attributes, '' ),
+			$this->get_gap_css( $attributes, 'Tablet' ),
+			$this->get_gap_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .storeengine-single-product-prices .storeengine-single-product-price,
+			{{WRAPPER}} .storeengine-product__multi-prices .storeengine-dropdown__toggle,
+			{{WRAPPER}} .storeengine-single__amount .storeengine-product__multi-prices',
+			$this->get_price_box_css( $attributes, '' ),
+			$this->get_price_box_css( $attributes, 'Tablet' ),
+			$this->get_price_box_css( $attributes, 'Mobile' )
+		);
 
 		return $css_generator->generate_css();
 	}
@@ -54,16 +127,22 @@ class Block extends BlockBaseAbstract {
 		$css               = [];
 		$css['color']      = $attributes['button_color'] ?? '';
 		$css['background'] = $attributes['button_bg'] ?? '';
+		$alignment_css = [];
 		$typography_value  = isset( $attributes['btn_typography'] ) ? Typography::get_css( $attributes['btn_typography'], '', $device ) : array();
 
 		if ( ! empty( $attributes['padding'] ) ) {
 			$cssPadding = Dimensions::get_css( $attributes['padding'], 'padding', $device );
 		}
 
+		if ( ! empty( $attributes['buttonTextAlign'][ 'value' . $device ] ) ) {
+			$alignment_css['justify-content'] = $attributes['buttonTextAlign'][ 'value' . $device ];
+		}
+
 		return array_merge(
 			$css,
 			$typography_value,
 			$cssPadding,
+			$alignment_css,
 			Border::get_css( $attributes['buttonBorder'], '', $device ),
 			BoxShadow::get_css( $attributes['boxShadow'], '', $device ),
 			Range::get_css( [
@@ -99,6 +178,145 @@ class Block extends BlockBaseAbstract {
 		}
 
 		return $alignment_css;
+	}
+
+	public function get_price_css( $attributes, $device = '' ) {
+		$typography_value  = isset( $attributes['priceTypography'] ) ? Typography::get_css( $attributes['priceTypography'], '', $device ) : array();
+
+		return array_merge(
+			$typography_value,
+			[
+				'color' => Color::get_css(
+					isset( $attributes['priceColor'] ) ? $attributes['priceColor'] : ''
+				),
+			]
+		);
+	}
+
+	public function get_price_hover_css( $attributes, $device = '' ) {
+		return [
+			'color' => Color::get_css(
+				isset( $attributes['priceColorH'] ) ? $attributes['priceColorH'] : ''
+			),
+		];
+	}
+
+	public function get_price_name_css( $attributes, $device = '' ) {
+		$typography_value  = isset( $attributes['priceNameTypography'] ) ? Typography::get_css( $attributes['priceNameTypography'], '', $device ) : array();
+
+		return array_merge(
+			$typography_value,
+			[
+				'color' => Color::get_css(
+					isset( $attributes['priceNameColor'] ) ? $attributes['priceNameColor'] : ''
+				),
+			]
+		);
+	}
+
+	public function get_price_name_hover_css( $attributes, $device = '' ) {
+		return [
+			'color' => Color::get_css(
+				isset( $attributes['priceNameColorH'] ) ? $attributes['priceNameColorH'] : ''
+			),
+		];
+	}
+
+	public function get_box_css( $attributes, $device = '' ) {
+		return array_merge(
+			[
+				'background' => Color::get_css(
+				isset( $attributes['boxBackground'] ) ? $attributes['boxBackground'] : ''),
+			],
+			Range::get_css( [
+				'attributeValue'       => $attributes['boxWidth'],
+				'attribute_object_key' => 'value',
+				'isResponsive'         => true,
+				'defaultValue'         => 100,
+				'hasUnit'              => true,
+				'unitDefaultValue'     => '%',
+				'property'             => 'width',
+				'device'               => $device,
+			] )
+		);
+	}
+
+	public function get_radio_css( $attributes, $device = '' ) {
+		return array_merge(
+			Range::get_css([
+				'attributeValue'       => $attributes['radioWidth'],
+				'attribute_object_key' => 'value',
+				'isResponsive'         => true,
+				'defaultValue'         => 15,
+				'hasUnit'              => true,
+				'unitDefaultValue'     => 'px',
+				'property'             => 'width',
+				'device'               => $device,
+			]),
+			Range::get_css([
+				'attributeValue'       => $attributes['radioHeight'],
+				'attribute_object_key' => 'value',
+				'isResponsive'         => true,
+				'defaultValue'         => 15,
+				'hasUnit'              => true,
+				'unitDefaultValue'     => 'px',
+				'property'             => 'height',
+				'device'               => $device,
+			])
+		);
+	}
+
+	public function get_alignment_css( $attributes, $device = '' ) {
+		$alignment_css = [];
+		$css['display'] = 'flex';
+		if ( ! empty( $attributes['priceAlign'][ 'value' . $device ] ) ) {
+			$alignment_css['justify-content'] = $attributes['priceAlign'][ 'value' . $device ];
+		}
+
+		return array_merge(
+			$alignment_css,
+			$css,
+		);
+	}
+
+
+	public function get_box_hover_css( $attributes, $device = '' ) {
+		return [
+			'background' => Color::get_css(
+			isset( $attributes['boxBackgroundH'] ) ? $attributes['boxBackgroundH'] : ''),
+		];
+	}
+
+	public function get_gap_css( $attributes, $device = '' ) {
+		$css_flex['display'] = 'flex';
+		$css_direction['flex-direction'] = 'column';
+
+		return array_merge(
+			$css_direction,
+			$css_flex,
+			Range::get_css([
+				'attributeValue' => $attributes['elementGap'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'defaultValue' => 12,
+				'hasUnit' => true,
+				'unitDefaultValue' => 'px',
+				'property' => 'gap',
+				'device' => $device,
+			]),
+		);
+	}
+
+	public function get_price_box_css( $attributes, $device = '' ) {
+		if ( ! empty( $attributes['boxPadding'] ) ) {
+			$css_padding = Dimensions::get_css( $attributes['boxPadding'], 'padding', $device );
+		}
+
+		return array_merge(
+			$css_padding,
+			Border::get_css( $attributes['boxBorder'], '', $device ),
+		);
+
 	}
 
 	public function render_block_content( $attributes, $content, $block_instance ) {

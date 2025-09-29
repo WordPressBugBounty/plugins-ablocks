@@ -138,6 +138,7 @@ class Blocks {
 		new \ABlocks\Blocks\AdvanceLists\Block();
 		new \ABlocks\Blocks\AdvanceListItem\Block();
 		new \ABlocks\Blocks\QrCode\Block();
+		new \ABlocks\Blocks\FeaturedImage\Block();
 		new \ABlocks\Blocks\ScrollToTop\Block();
 		new \ABlocks\Blocks\Breadcrumb\Block();
 		// Form Builder

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 2.2.2\n"
+"Project-Id-Version: aBlocks 2.3.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-25T17:01:39+00:00\n"
+"POT-Creation-Date: 2025-09-29T09:39:54+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: ablocks\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #. Author of the plugin
 #: ablocks.php
-#: includes/blocks.php:167
+#: includes/blocks.php:168
 msgid "Academy LMS"
 msgstr ""
 
@@ -129,7 +129,7 @@ msgstr ""
 
 #: addons/theme-builder/database.php:21
 #: addons/theme-builder/database.php:22
-#: includes/helper.php:101
+#: includes/helper.php:105
 #: assets/build/dashboard.js:25
 msgid "Theme Builder"
 msgstr ""
@@ -187,7 +187,7 @@ msgid "Rate the plugin."
 msgstr ""
 
 #: includes/admin.php:101
-#: includes/helper.php:112
+#: includes/helper.php:116
 #: assets/build/dashboard.js:1
 #: assets/build/dashboard.js:13
 msgid "Settings"
@@ -367,16 +367,16 @@ msgstr ""
 msgid "Error. [2]"
 msgstr ""
 
-#: includes/assets.php:273
+#: includes/assets.php:274
 msgctxt "Google font: on or off"
 msgid "on"
 msgstr ""
 
-#: includes/blocks.php:163
+#: includes/blocks.php:164
 msgid "ABlocks"
 msgstr ""
 
-#: includes/blocks.php:171
+#: includes/blocks.php:172
 #: assets/build/dashboard.js:1
 msgid "StoreEngine"
 msgstr ""
@@ -566,33 +566,33 @@ msgstr ""
 msgid "Verification successful."
 msgstr ""
 
-#: includes/helper.php:88
+#: includes/helper.php:92
 msgid "Dashboard"
 msgstr ""
 
-#: includes/helper.php:94
+#: includes/helper.php:98
 msgid "Submissions"
 msgstr ""
 
-#: includes/helper.php:107
+#: includes/helper.php:111
 msgid "Add-ons"
 msgstr ""
 
-#: includes/helper.php:118
+#: includes/helper.php:122
 #: assets/build/dashboard.js:1
 msgid "Get Pro"
 msgstr ""
 
-#: includes/helper.php:128
+#: includes/helper.php:132
 msgid "Loading..."
 msgstr ""
 
 #. translators: %s template
-#: includes/helper.php:555
+#: includes/helper.php:559
 msgid "%s does not exist."
 msgstr ""
 
-#: includes/helper.php:573
+#: includes/helper.php:577
 msgid "action_args should not be overwritten when calling ablocks/get_template."
 msgstr ""
 
@@ -1342,6 +1342,7 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
 msgid "Opacity"
 msgstr ""
 
@@ -1618,6 +1619,7 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "General"
 msgstr ""
 
@@ -2125,6 +2127,7 @@ msgid "Upload Image"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Image sizes"
 msgstr ""
 
@@ -2174,6 +2177,7 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 #: assets/build/dashboard.js:1
 msgid "Button"
 msgstr ""
@@ -2250,6 +2254,10 @@ msgid "Position Bottom"
 msgstr ""
 
 #: assets/build/blocks.js:1
+msgid "The Visible Control is only for the editor view. It does not affect the frontend display. Used for user convenience while designing"
+msgstr ""
+
+#: assets/build/blocks.js:1
 msgid "Lists"
 msgstr ""
 
@@ -2318,32 +2326,39 @@ msgid "Add item"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Aspect ratio"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Object fit"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Image link"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "Open in new tab"
 msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
 msgid "Alt Text"
 msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
 msgid "clear"
 msgstr ""
 
 #: assets/build/blocks.js:1
+#: assets/build/blocks.js:17
 msgid "On Hover image"
 msgstr ""
 
@@ -2355,6 +2370,7 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/blocks.js:16
+#: assets/build/blocks.js:17
 msgid "Transition duration(ms)"
 msgstr ""
 
@@ -3813,6 +3829,7 @@ msgid "Description"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/blocks.js:26
 msgid "Price"
 msgstr ""
 
@@ -5450,6 +5467,11 @@ msgid "Sub Title"
 msgstr ""
 
 #: assets/build/blocks.js:17
+#: assets/build/dashboard.js:1
+msgid "Featured Image"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "Breadcrumbs Settings"
 msgstr ""
 
@@ -6077,6 +6099,7 @@ msgstr ""
 #: assets/build/blocks.js:17
 #: assets/build/blocks.js:23
 #: assets/build/blocks.js:26
+#: assets/build/dashboard.js:1
 msgid "Free"
 msgstr ""
 
@@ -6576,19 +6599,43 @@ msgid "Hidden"
 msgstr ""
 
 #: assets/build/blocks.js:26
-msgid "Add To Cart Setting"
-msgstr ""
-
-#: assets/build/blocks.js:26
 msgid "Select Product"
 msgstr ""
 
 #: assets/build/blocks.js:26
-msgid "Price display"
+msgid "Price Display"
 msgstr ""
 
 #: assets/build/blocks.js:26
-msgid "color"
+msgid "Text Align"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Box Shadow"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Radio Width"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Radio Height"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Price Text"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Price Name"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Box Background"
+msgstr ""
+
+#: assets/build/blocks.js:26
+msgid "Hover Background"
 msgstr ""
 
 #: assets/build/blocks.js:26
@@ -6675,39 +6722,44 @@ msgid "Visit Our Website"
 msgstr ""
 
 #: assets/build/dashboard.js:1
+msgid "Advance Your Website with"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+#: assets/build/dashboard.js:22
+msgid "Activated"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Install"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Build & sell courses easily with Academy LMS today!"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Power your online business and sales fast with StoreEngine."
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Create & Manage Custom Post Types, Fields & Taxonomy"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Quick Access"
+msgstr ""
+
+#: assets/build/dashboard.js:1
 msgid "Technical Support"
 msgstr ""
 
 #: assets/build/dashboard.js:1
-msgid "Get instant support from our expert support team."
-msgstr ""
-
-#: assets/build/dashboard.js:1
-msgid "Get Support →"
-msgstr ""
-
-#: assets/build/dashboard.js:1
-msgid "Join Community"
-msgstr ""
-
-#: assets/build/dashboard.js:1
-msgid "Join our growing community to get all the updates and information instantly."
-msgstr ""
-
-#: assets/build/dashboard.js:1
-msgid "Join →"
+msgid "Join our community"
 msgstr ""
 
 #: assets/build/dashboard.js:1
 msgid "Rate Us"
-msgstr ""
-
-#: assets/build/dashboard.js:1
-msgid "We’d love to hear your feedback! Please take a moment to rate our plugin and share your thoughts."
-msgstr ""
-
-#: assets/build/dashboard.js:1
-msgid "Submit Review →"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -6921,11 +6973,6 @@ msgstr ""
 
 #: assets/build/dashboard.js:1
 msgid "%s Install to unlock this Block!"
-msgstr ""
-
-#: assets/build/dashboard.js:1
-#: assets/build/dashboard.js:22
-msgid "Activated"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -7629,6 +7676,7 @@ msgstr ""
 #: assets/build/blocks/coupon/deprecated/block.json
 #: assets/build/blocks/divider/block.json
 #: assets/build/blocks/divider/deprecated/block.json
+#: assets/build/blocks/featured-image/block.json
 #: assets/build/blocks/heading/block.json
 #: assets/build/blocks/heading/deprecated/block.json
 #: assets/build/blocks/icon/block.json
@@ -8290,6 +8338,32 @@ msgctxt "block description"
 msgid "Craft beautiful, fully customizable Dual Button."
 msgstr ""
 
+#: assets/build/blocks/featured-image/block.json
+msgctxt "block title"
+msgid "Fetured Image"
+msgstr ""
+
+#: assets/build/blocks/featured-image/block.json
+msgctxt "block description"
+msgid "Showcase Featured Image attractively."
+msgstr ""
+
+#: assets/build/blocks/featured-image/block.json
+msgctxt "block keyword"
+msgid "featured"
+msgstr ""
+
+#: assets/build/blocks/featured-image/block.json
+#: assets/build/blocks/icon/block.json
+#: assets/build/blocks/icon/deprecated/block.json
+#: assets/build/blocks/image-scroll/block.json
+#: assets/build/blocks/image-scroll/deprecated/block.json
+#: assets/build/blocks/image/block.json
+#: assets/build/blocks/image/deprecated/block.json
+msgctxt "block keyword"
+msgid "image"
+msgstr ""
+
 #: assets/build/blocks/filterable-cards-item/block.json
 msgctxt "block title"
 msgid "Filterable Cards Item"
@@ -8464,16 +8538,6 @@ msgstr ""
 #: assets/build/blocks/icon/deprecated/block.json
 msgctxt "block keyword"
 msgid "symbol"
-msgstr ""
-
-#: assets/build/blocks/icon/block.json
-#: assets/build/blocks/icon/deprecated/block.json
-#: assets/build/blocks/image-scroll/block.json
-#: assets/build/blocks/image-scroll/deprecated/block.json
-#: assets/build/blocks/image/block.json
-#: assets/build/blocks/image/deprecated/block.json
-msgctxt "block keyword"
-msgid "image"
 msgstr ""
 
 #: assets/build/blocks/image-comparison/block.json

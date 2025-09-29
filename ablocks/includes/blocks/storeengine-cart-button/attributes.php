@@ -55,6 +55,30 @@ $attributes = [
 		'type'    => 'string',
 		'default' => '#008DFF',
 	],
+	'priceColor' => [
+		'type'    => 'string',
+		'default' => '#111',
+	],
+	'priceColorH' => [
+		'type'    => 'string',
+		'default' => '#111',
+	],
+	'priceNameColor' => [
+		'type'    => 'string',
+		'default' => '#101828',
+	],
+	'priceNameColorH' => [
+		'type'    => 'string',
+		'default' => '#101828',
+	],
+	'boxBackground' => [
+		'type'    => 'string',
+		'default' => '#fff',
+	],
+	'boxBackgroundH' => [
+		'type'    => 'string',
+		'default' => '#fff',
+	],
 
 ];
 
@@ -62,9 +86,16 @@ $attributes = array_merge(
 	$attributes,
 	Dimensions::get_attribute( 'padding', true ),
 	Typography::get_attribute( 'btn_typography', true ),
+	Typography::get_attribute( 'priceTypography', true ),
+	Typography::get_attribute( 'priceNameTypography', true ),
+	Typography::get_attribute( 'priceTypography', true ),
 	Border::get_attribute( 'buttonBorder', true ),
 	BoxShadow::get_attribute( 'boxShadow', true ),
+	Dimensions::get_attribute( 'boxPadding', true ),
+	Border::get_attribute( 'boxBorder', true ),
 	Alignment::get_attribute( 'buttonAlign', true, [ 'value' => 'left' ] ),
+	Alignment::get_attribute( 'priceAlign', true, [ 'value' => 'left' ] ),
+	Alignment::get_attribute( 'buttonTextAlign', true, [ 'value' => 'center' ] ),
 	Range::get_attribute( [
 		'attributeName' => 'button_width',
 		'attributeObjectKey' => 'value',
@@ -72,6 +103,38 @@ $attributes = array_merge(
 		'defaultValue' => 100,
 		'hasUnit' => true,
 		'unitDefaultValue' => '%',
+	]),
+	Range::get_attribute( [
+		'attributeName' => 'boxWidth',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 100,
+		'hasUnit' => true,
+		'unitDefaultValue' => '%',
+	]),
+	Range::get_attribute( [
+		'attributeName' => 'radioWidth',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 15,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+	]),
+	Range::get_attribute( [
+		'attributeName' => 'radioHeight',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 15,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+	]),
+	Range::get_attribute( [
+		'attributeName' => 'elementGap',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 12,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
 	]),
 );
 

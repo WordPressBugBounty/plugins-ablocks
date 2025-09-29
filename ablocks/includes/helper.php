@@ -61,6 +61,10 @@ class Helper {
 		$wp_map_block = 'wp-map-block/wp-map-block.php';
 		return self::is_plugin_active( $wp_map_block );
 	}
+	public static function is_active_easy_content_manager() {
+		$easy_content_manager = 'easy-content-manager/easy-content-manager.php';
+		return self::is_plugin_active( $easy_content_manager );
+	}
 
 	public static function is_enabled_assets_generation() {
 		$flag = (bool) self::get_settings( 'enabled_assets_file_generation' );
