@@ -2,6 +2,10 @@
 
 namespace ABlocks\Blocks\Spacer;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Classes\CssGeneratorV2;

@@ -12,7 +12,7 @@ $attributes = [
 	),
 	'label' => [
 		'type' => 'string',
-		'default' => '',
+		'default' => 'Checkbox',
 	],
 
 	'errorMsg' => [

@@ -20,6 +20,7 @@ class DemoImport extends AbstractAjaxHandler {
 		$this->actions = array(
 			'get_demo_list'       => array(
 				'callback' => array( $this, 'get_demo_list' ),
+				'capability'    => 'manage_options',
 				'fields'   => array(
 					'type'      => 'string',
 					'cost_type' => 'string',
@@ -32,6 +33,7 @@ class DemoImport extends AbstractAjaxHandler {
 			),
 			'get_single_demo'     => array(
 				'callback' => array( $this, 'get_single_demo' ),
+				'capability'    => 'manage_options',
 				'fields'   => array(
 					'id'          => 'integer',
 					'with_images' => 'string',
@@ -39,27 +41,32 @@ class DemoImport extends AbstractAjaxHandler {
 			),
 			'get_demo_categories' => array(
 				'callback' => array( $this, 'get_demo_categories' ),
+				'capability'    => 'manage_options',
 				'fields'   => array(
 					'type' => 'string',
 				)
 			),
 			'get_theme_demos'     => array(
 				'callback' => array( $this, 'get_theme_demos' ),
+				'capability'    => 'manage_options',
 			),
 			'check_dependencies'  => array(
 				'callback' => array( $this, 'check_dependencies' ),
+				'capability'    => 'manage_options',
 				'fields'   => array(
 					'dependencies' => 'array|string',
 				)
 			),
 			'install_and_active'  => array(
 				'callback' => array( $this, 'install_and_active' ),
+				'capability'    => 'manage_options',
 				'fields'   => array(
 					'dependency' => 'array|string',
 				)
 			),
 			'import_template'     => array(
 				'callback' => array( $this, 'import_template' ),
+				'capability'    => 'manage_options',
 				'fields'   => array(
 					'file_url'            => 'string',
 					'customizer_file_url' => 'string',
@@ -317,7 +324,9 @@ class DemoImport extends AbstractAjaxHandler {
 
 		// Turn off PHP output compression.
 		// phpcs:disable WordPress.PHP.IniSet.Risky
+		// phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged 
 		ini_set( 'output_buffering', 'off' );
+		// phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged 
 		ini_set( 'zlib.output_compression', false );
 		// phpcs:enable WordPress.PHP.IniSet.Risky
 
@@ -330,6 +339,7 @@ class DemoImport extends AbstractAjaxHandler {
 
 		echo esc_html( ':' . str_repeat( ' ', 2048 ) . "\n\n" ); // 2KB padding for IE.
 
+		// phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged 
 		set_time_limit( 0 );
 
 		// Ensure we're not buffered.
@@ -345,6 +355,20 @@ class DemoImport extends AbstractAjaxHandler {
 		}
 
 		do_action( 'ablocks/import/before_template_import_start', $data );
+
+		if ( ! Helper::get_addon_active_status( 'theme-builder' ) && ! Helper::is_fse_theme() ) {
+			$saved_addons = json_decode( get_option( ABLOCKS_ADDONS_SETTINGS_NAME, '{}' ), true );
+			if ( ! is_array( $saved_addons ) ) {
+				$saved_addons = [];
+			}
+
+			$addon_slug                  = 'theme-builder';
+			$saved_addons[ $addon_slug ] = true;
+			do_action( "ablocks/addons/activated_{$addon_slug}" );
+
+			update_option( ABLOCKS_ADDONS_SETTINGS_NAME, wp_json_encode( $saved_addons ) );
+		}
+
 		$template_import = Helper::import_template( $content_file_path, $with_images );
 		if ( ! is_wp_error( $template_import ) ) {
 			if ( ! empty( $customizer_file_path ) && ! is_wp_error( $customizer_file_path ) ) {
@@ -386,7 +410,7 @@ class DemoImport extends AbstractAjaxHandler {
 		global $wp_version;
 		$response = wp_safe_remote_get( $url, array(
 			'headers' => array(
-				'Accept' => 'application/json',
+				'Accept'     => 'application/json',
 				'user-agent' => sprintf(
 					'aBlocks/%1$s (%2$s; WordPress/%3$s) %4$s',
 					ABLOCKS_VERSION,

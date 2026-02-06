@@ -64,13 +64,12 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_billing_heading_css( $attributes, $device = '' ) {
-		$typography_css = isset( $attributes['heading_typograhy'] )
-		? Typography::get_css( $attributes['heading_typograhy'], '', $device )
-		: [];
+		$typographyValueGlobal = ! empty( $attributes['heading_typograhyGlobal'] ) ? $attributes['heading_typograhyGlobal'] : '';
+		$typography_css = isset( $attributes['heading_typograhy'] ) ? $attributes['heading_typograhy'] : [];
 
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['heading_color'] ) ? $attributes['heading_color'] : '' ) ],
-			$typography_css
+			Typography::get_css( $typography_css, '', $device, $typographyValueGlobal ),
 		);
 	}
 
@@ -81,13 +80,12 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_billing_address_css( $attributes, $device = '' ) {
-		$typography_css = isset( $attributes['address_typograhy'] )
-		? Typography::get_css( $attributes['address_typograhy'], '', $device )
-		: [];
+		$typographyValueGlobal = ! empty( $attributes['address_typograhyGlobal'] ) ? $attributes['address_typograhyGlobal'] : '';
+		$typography_css = isset( $attributes['address_typograhy'] ) ? $attributes['address_typograhy'] : [];
 
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['address_color'] ) ? $attributes['address_color'] : '' ) ],
-			$typography_css
+			Typography::get_css( $typography_css, '', $device, $typographyValueGlobal )
 		);
 	}
 
@@ -97,7 +95,7 @@ class Block extends BlockBaseAbstract {
 
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		$attr_array = [];
-
+		// phpcs:ignore  WordPress.Security.NonceVerification.Recommended,  WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 		if ( isset( $_GET['context'] ) && 'edit' === sanitize_text_field( $_GET['context'] ) ) {
 			$attr_array['dummy'] = true;
 		}

@@ -19,6 +19,7 @@ class Entry extends AbstractAjaxHandler {
 			/** Get entries with pagination */
 			'get_entries' => [
 				'callback' => [ $this, 'get_entries' ],
+				'capability'    => 'manage_options',
 				'fields'    => array(
 					'is_in_trash'  => 'string', // yes/no; default: no
 					'search'       => 'string', // name of form
@@ -37,6 +38,7 @@ class Entry extends AbstractAjaxHandler {
 			/** Get single entry */
 			'get_entry' => [
 				'callback' => [ $this, 'get_entry' ],
+				'capability'    => 'manage_options',
 				'fields'    => array(
 					'entry_id' => 'integer', // int : entry id
 				)
@@ -44,6 +46,7 @@ class Entry extends AbstractAjaxHandler {
 			/** Edit entry */
 			'edit_entry' => [
 				'callback' => [ $this, 'edit_entry' ],
+				'capability'    => 'manage_options',
 				'fields'    => array(
 					'entry_id' => 'integer', // int : entry id
 					'data'     => 'array',
@@ -52,6 +55,7 @@ class Entry extends AbstractAjaxHandler {
 			/** Delete entries */
 			'delete_entries' => [
 				'callback' => [ $this, 'delete_entries' ],
+				'capability'    => 'manage_options',
 				'fields'    => array(
 					'entry_id_array'     => 'array',
 				)
@@ -59,6 +63,7 @@ class Entry extends AbstractAjaxHandler {
 			/** Mark entries as read */
 			'mark_entries_as_read' => [
 				'callback' => [ $this, 'mark_entries_as_read' ],
+				'capability'    => 'manage_options',
 				'fields'    => array(
 					'entry_id_array'     => 'array',
 				)
@@ -66,6 +71,7 @@ class Entry extends AbstractAjaxHandler {
 			/** Mark entries as unread */
 			'mark_entries_as_unread' => [
 				'callback' => [ $this, 'mark_entries_as_unread' ],
+				'capability'    => 'manage_options',
 				'fields'    => array(
 					'entry_id_array'     => 'array',
 				)
@@ -73,6 +79,7 @@ class Entry extends AbstractAjaxHandler {
 			/** Send one or more entries to trash */
 			'send_entries_to_trash' => [
 				'callback' => [ $this, 'send_entries_to_trash' ],
+				'capability'    => 'manage_options',
 				'fields'    => array(
 					'entry_id' => 'integer', // int : entry id
 				)
@@ -80,6 +87,7 @@ class Entry extends AbstractAjaxHandler {
 			/** Send one or more entries to trash */
 			'restore_entries_from_trash' => [
 				'callback' => [ $this, 'restore_entries_from_trash' ],
+				'capability'    => 'manage_options',
 				'fields'    => array(
 					'entry_id' => 'integer', // int : entry id
 				)

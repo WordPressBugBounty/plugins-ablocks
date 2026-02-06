@@ -130,9 +130,10 @@ class Block extends BlockBaseAbstract {
 			: [];
 
 		$typography_value = array_merge( $typography_css, [ 'font-weight' => '400' ] );
+		$typographyValueGlobal = ( isset( $attributes['firstTableTypographyGlobal'] ) ? $attributes['firstTableTypographyGlobal'] : '' );
 
 		return array_merge(
-			Typography::get_css( $typography_value, $device ),
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			[ 'color' => Color::get_css( isset( $attributes['tableColor'] ) ? $attributes['tableColor'] : '' ) ]
 		);
 
@@ -158,9 +159,10 @@ class Block extends BlockBaseAbstract {
 			: [];
 
 		$typography_value = array_merge( $typography_css, [ 'font-weight' => '400' ] );
+		$typographyValueGlobal = ( isset( $attributes['lastTableTypographyGlobal'] ) ? $attributes['lastTableTypographyGlobal'] : '' );
 
 		return array_merge(
-			Typography::get_css( $typography_value, $device ),
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			[ 'color' => Color::get_css( isset( $attributes['tableLastColor'] ) ? $attributes['tableLastColor'] : '' ) ]
 		);
 

@@ -119,7 +119,8 @@ class Block extends BlockBaseAbstract {
 		return isset( $attributes['alignment'] ) ? Alignment::get_css( $attributes['alignment'], 'text-align', $device ) : [];
 	}
 	public function get_heading_text_css( $attributes, $device = '' ) {
-		$typography_css = ! empty( $attributes['typography'] ) ? Typography::get_css( $attributes['typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['typographyGlobal'] ) ? $attributes['typographyGlobal'] : '';
+		$typography_css = ! empty( $attributes['typography'] ) ? Typography::get_css( $attributes['typography'], '', $device, $typographyValueGlobal ) : array();
 		$textShadowCss = ! empty( $attributes['textShadow'] ) ? TextShadow::get_css( $attributes['textShadow'], '', $device ) : array();
 		$textStrokeCss = ! empty( $attributes['textStroke'] ) ? TextStroke::get_css( $attributes['textStroke'], '', $device ) : array();
 
@@ -183,11 +184,12 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_heading_general_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['typographyGlobal'] ) ? $attributes['typographyGlobal'] : '';
 		$typography_value = isset( $attributes['typography'] ) ? $attributes['typography'] : [];
 		$stock_unit_value = isset( $attributes['textStroke'] ) ? $attributes['textStroke'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['textColor'] ) ? $attributes['textColor'] : '' ) ],
-			Typography::get_css( $typography_value, '', $device ),
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			TextStroke::get_css( $stock_unit_value, '', $device ),
 			TextShadow::get_css( isset( $attributes['textShadow'] ) ? $attributes['textShadow'] : [], '', $device )
 		);

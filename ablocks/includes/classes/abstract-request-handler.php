@@ -183,7 +183,7 @@ abstract class AbstractRequestHandler {
 			);
 		}
 
-		$user_cap       = ! empty( $details['capability'] ) ? (string) $details['capability'] : '';
+		$user_cap       = ! empty( $details['capability'] ) ? (string) $details['capability'] : 'manage_options';
 		$allow_visitor  = ! empty( $details['allow_visitor_action'] ) && (bool) $details['allow_visitor_action'];
 		$has_permission = $this->check_permission( $user_cap, $allow_visitor );
 
@@ -261,6 +261,7 @@ abstract class AbstractRequestHandler {
 													$payload[ $key ][ $type_key ][ $type_value_key ] = sanitize_text_field( wp_unslash( $_REQUEST[ $key ][ $type_key ][ $type_value_key ] ) );
 													break;
 												case 'json':
+													// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 													$payload[ $key ][ $type_key ][ $type_value_key ] = Sanitizer::sanitize_json_form_data( $_REQUEST[ $key ][ $type_key ][ $type_value_key ] );
 													break;
 												case 'hex_color':
@@ -273,6 +274,7 @@ abstract class AbstractRequestHandler {
 													$payload[ $key ][ $type_key ][ $type_value_key ] = sanitize_key( wp_unslash( $_REQUEST[ $key ][ $type_key ][ $type_value_key ] ) );
 													break;
 												case 'safe_text':
+													// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 													$payload[ $key ][ $type_key ][ $type_value_key ] = wp_kses( force_balance_tags( stripslashes( wp_unslash( $_REQUEST[ $key ][ $type_key ][ $type_value_key ] ) ) ), $this->safe_text_kses_rules );
 													break;
 												default:
@@ -336,6 +338,7 @@ abstract class AbstractRequestHandler {
 											$payload[ $key ][ $type_key ] = sanitize_text_field( wp_unslash( $_REQUEST[ $key ][ $type_key ] ) );
 											break;
 										case 'json':
+											// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 											$payload[ $key ][ $type_key ] = Sanitizer::sanitize_json_form_data( $_REQUEST[ $key ][ $type_key ] );
 											break;
 										case 'hex_color':
@@ -348,6 +351,7 @@ abstract class AbstractRequestHandler {
 											$payload[ $key ][ $type_key ] = sanitize_key( wp_unslash( $_REQUEST[ $key ][ $type_key ] ) );
 											break;
 										case 'safe_text':
+											// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 											$payload[ $key ][ $type_key ] = wp_kses( force_balance_tags( stripslashes( wp_unslash( $_REQUEST[ $key ][ $type_key ] ) ) ), $this->safe_text_kses_rules );
 											break;
 										default:
@@ -421,6 +425,7 @@ abstract class AbstractRequestHandler {
 								$payload[ $key ] = sanitize_key( wp_unslash( $_REQUEST[ $key ] ) );
 								break;
 							case 'safe_text':
+								// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 								$payload[ $key ] = wp_kses( force_balance_tags( stripslashes( wp_unslash( $_REQUEST[ $key ] ) ) ), $this->safe_text_kses_rules );
 								break;
 							case 'array-string':

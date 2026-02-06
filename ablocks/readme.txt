@@ -1,130 +1,254 @@
-=== aBlocks – WordPress Gutenberg Blocks ===
+=== aBlocks – Gutenberg Blocks, User Dashboard Builder, Popup Builder, Form Builder & Animation Builder ===
 Contributors: kodezen, academylms, tusharimran
 Tags: block, blocks, editor, gutenberg, gutenberg blocks
-Requires at least: 5.4
-Tested up to: 6.8
+Requires at least: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.3.0
+Stable tag: 2.7.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-aBlocks is a Gutenberg-based website builder with flexible blocks and powerful form solutions, allowing you to build any type of form effortlessly!
+aBlocks is a Gutenberg-based website builder with 100+ free flexible blocks and powerful form solutions, allowing you to build any type of form!
 
 == Description ==
 
-aBlocks is a Gutenberg-based website builder that gives you unmatched control over your WordPress website. Whether you're building a blog, portfolio, eLearning, or eCommerce site, aBlocks offers a powerful collection of fully customizable Gutenberg blocks to make your content stand out.  
+**aBlocks is the all in one WordPress website builder that lets you design complete websites, themes, GSAP animations, user dashboards, forms, Popups, and dynamic layouts — all inside the WordPress default editor (Gutenberg)**
 
-With built-in form builder, you can easily create any type of website form—from login, registration, contact, and more. Plus, the demo importer provides a vast library of pre-designed patterns and templates, allowing you to kickstart your website effortlessly without starting from scratch. 
+With over 100 powerful blocks and deep customization control, aBlocks lets you build fully animated(GSAP-powered) websites, user login and dashboard pages, dynamic content layouts, advanced forms, pop-ups, coming soon and maintenance modes, and complete store or course websites — all without relying on multiple plugins. Every block comes with rich styling, animation, and layout controls, so you can shape your site exactly the way you want.
 
-=== Why aBlocks? ===
+=== What You Can Build with aBlocks? ===
+
+**aBlocks is built to replace everything you need to build and scale a WordPress website.**
+
+Instead of stacking plugins for design, layout, animation, forms, dashboards, performance, and launch control, aBlocks delivers one connected system inside the Gutenberg. That’s why aBlocks works as a true all-in-one website and theme builder — not just another block plugin.
+
+====With aBlocks, you can build:====
 
 aBlocks offers a comprehensive collection of highly customizable Gutenberg blocks to elevate your WordPress website. Whether building a simple blog or a complex website, aBlocks provides the flexibility and control you need.
 
-- **Easy to Use**: Intuitive controls make building with Gutenberg simple, even for beginners.
-- **Fully Customizable**: Adjust everything from colors to animations to suit your design vision.
-- **Regular Updates**: New blocks and features are added regularly to keep your website fresh.
-- **Responsive Design**: All blocks are optimized for a flawless experience on any device.
+- **Fully customized websites** with advanced layouts, rich design controls, and smooth animations — from simple sites to complex platforms.
+- **User dashboards** for stores, courses, memberships, or SaaS-style websites, including custom login, registration, and profile pages.
+- **GSAP-powered Animated websites and landing pages** with smooth scrolling, hover effects, motion sections, and interactive elements that feel modern and alive.
+- **Dynamic content layouts** using loop-based templates for blogs, products, courses, listings, and repeatable sections.
+- **Advanced store and course websites** with custom product pages, carts, checkout sections, course grids, enrollment pages, and student views.
+- **Coming soon and maintenance systems** with fully designed pages and proper site visibility control.
+- **All types of forms**, including login, registration, contact, lead collection, subscription, and multi-step forms — built with full layout and style control.
+- **Popups, modals, payments, and interactive elements** to turn static pages into conversion-focused experiences.
+- **Fast, flexible layouts** built with 100+ powerful blocks — each block offering deep customization, animation options, and precise control.
+- **Top-level lightweight performance with smart asset generation**, where only the styles and scripts you actually use are loaded — no unused code, no builder bloat.
+- **A large library of pre-made templates, pages, and patterns**, with a built-in demo importer so you can launch complete designs instantly and customize everything your way.
 
 ==== Check our overview video of aBlocks 👇 ====
 https://youtu.be/rmYGqzHqF8U
 
-==== Check our Form Builder overview 👇 ====
+
+
+===Who aBlocks Is For===
+
+- **Business websites:** For companies that need flexible layouts, strong visuals, and fast-loading pages without design limits.
+- **Agency & client sites:** Build different site types quickly, customize everything deeply, and hand over clean, manageable sites to clients.
+- **eCommerce stores:** Design product pages, carts, checkout flows, and customer areas visually instead of being locked into theme templates.
+- **LMS & education websites:** Create course listings, enrollment pages, student areas, and instructor sections with full layout and motion control.
+- **Membership & community sites:** Build custom login, registration, profile, and member dashboards that feel like real platforms, not basic pages.
+- **User Dashboard Builder:** Design frontend user dashboards, account areas, and role-based experiences directly in WordPress.
+- **Blogs & content-driven sites:** Use dynamic layouts, loop-based templates, and structured designs without heavy builders.
+- **Marketing websites & landing pages:** Create animated, conversion-focused pages with forms, popups, and payment actions built in.
+- **Portfolio & personal sites:** Showcase work with motion, interaction, and full visual control — without performance issues.
+- **Performance-focused websites:** For site owners who care about speed, clean output, and scalable performance as the site grows.
+- **Anyone tired of using 10+ plugins:** For layouts, forms, popups, animations, dashboards, coming soon pages, and performance fixes — all handled in one system.
+
+
+===Why aBlocks Is Different from Other Builders===
+
+If you want visual design, you can use Elementor.
+If you want speed, you can choose Spectra.
+If you want a no-code builder, Divi can work.
+If you want something clean and stable, Beaver Builder is ok.
+If you only need landing pages, SeedProd is enough.
+
+**But if you want all of these together, in one place, aBlocks is the answer.**
+
+aBlocks brings visual freedom, performance, no-code building, stability, and conversion tools into a single all-in-one WordPress website builder. This is what makes aBlocks fundamentally different from every other builder.
+
+And it doesn’t stop there. aBlocks includes deep customization controls, built-in animation and effects, a powerful dashboard builder, an advanced form builder, dynamic content with loop layouts, modal and popup creation, smart asset generation for fast performance, coming soon and maintenance modes, a large library of pre-made templates, pages, and patterns, plus a built-in demo importer — all in one system. Together, these features replace the need for **20+ separate plugins.**
+
+This all-in-one capability is what truly sets aBlocks apart. If you are choosing a plugin for a startup that you plan to grow and scale in the future, aBlocks is a confident, long-term choice. It doesn’t just give you what you need today — it already includes what you’ll need as your website grows. And with every new release, aBlocks continues to expand these capabilities even further.
+
+
+===Launch & Visibility Control System===
+
+aBlocks includes a built-in system to control when and how your website is visible — without using a separate plugin. You can enable **Coming Soon mode or Maintenance mode** and design those pages directly inside the gutenberg.
+
+It supports **SEO-safe Coming Soon pages, proper 503 Maintenance mode**, and **page-level visibility control**, so you can launch, pause, or update your site with full control and clean structure.
+
+===GSAP powered WordPress Animation & Motion System===
+
+aBlocks includes a built-in **motion control system** inside the WordPress default editor (gutenberg). Every block supports scroll-based motion, hover and mouse effects, sticky behavior, entrance animations, floating effects, transform controls and more.
+
+For advanced needs, aBlocks adds **native GSAP-powered animation right inside the gutenberg.** You can trigger GSAP effects on scroll, hover, click, or interaction events directly from block settings, without writing code or installing animation plugin. 
+
+**Result:** WordPress Gutenberg animation revolution by aBlocks
+Professional-grade, smooth, high-performance GSAP animations in WordPress — fully visual, fully controlled, and optimized for speed.
+
+
+===Dashboard Builder===
+
+aBlocks lets you build real user dashboards, not just styled pages. You can design custom login, registration, password reset, and account pages, then connect them into a **complete frontend dashboard** — fully inside the gutenberg.
+
+With role-based layout control and dynamic content support, you can create **store dashboards, LMS student panels, instructor areas, membership accounts, or SaaS-style user frontend dashboards** that look and work like modern apps — not confusing WordPress admin pages
+
+===Performance by Design (Smart Asset Generation)===
+
+aBlocks is built for speed from the core. It uses **smart asset generation**, which means your website loads only the styles and scripts that are actually used on each page — nothing extra, nothing unused.
+
+Every block generates its own CSS and JavaScript only when needed. Editor assets stay in the editor, frontend assets stay on the frontend. This keeps pages clean, lightweight, and fast, even as your site grows.
+
+👉 What this means for you:
+- Faster loading pages
+- No builder bloat
+- Better Core Web Vitals
+- Smooth performance on large sites
+
+You don’t need extra performance plugins just to fix builder overhead. With aBlocks, performance is **designed into the system**, not added later.
+
+
+===Forms, Popups & Conversion Tools===
+aBlocks lets you **collect data, trigger actions, and drive conversions** without relying on separate form or popup plugins. You can build login, registration, contact, lead collection, subscription, survey, and multi-step forms directly inside the gutenberg — with full control over layout, styling, and behavior.
+
+Alongside forms, aBlocks includes a built-in **modal and popup builder** for announcements, offers, gated content, and user actions. You can also add **Stripe and PayPal buttons**, countdowns, notifications, and call-to-action elements to turn static pages into interactive, conversion-focused experiences.
+
 https://youtu.be/MRq5xE9A-RM
 
-=== Available Blocks ===
+===Templates, Pages & Pattern Library with Demo Importer===
 
-- **Container**: Design layouts with precision. Customize padding, margins, backgrounds (solid, gradient, or image), borders, and shadows.
-- **Heading**: Create eye-catching titles with fully customizable typography, background colors, images, and text shadows.
-- **Paragraph**: Add advanced text formatting options like line height, font family, and letter spacing. Customize with drop caps and background colors.
-- **Icon**: Choose from a vast icon library. Customize size, color, background, and hover effects.
-- **Button**: Create attention-grabbing buttons. Customize text, backgrounds, borders, and hover effects.
-- **Image**: Showcase images with customizable alignment, borders, and lightbox effects.
-- **Spacer**: Fine-tune your layout with adjustable spacers to control spacing between elements.
-- **Star Ratings**: Display customizable star ratings for product reviews and testimonials.
-- **Divider**: Separate sections with customizable dividers. Choose from solid, dashed, or dotted styles.
-- **Counter**: Display animated counters with customizable start/end values, duration, and styling.
-- **Countdown**: Create excitement with customizable countdown timers for special events.
-- **Video**: Embed videos from YouTube, Vimeo, or your media library with customizable player controls.
-- **List**: Create engaging lists with customizable bullet points, numbering, and icons.
-- **Toggle**: Add collapsible content sections with customizable icons and animation speed.
-- **Accordion**: Organize content with expandable accordion sections, perfect for FAQs.
-- **Tabs**: Create tabbed content sections for easy navigation across multiple topics.
-- **Flip Box**: Add dynamic flip boxes to reveal content on hover, enhancing user engagement.
-- **Image Comparison**: Showcase before-and-after images with an interactive slider for easy comparison.
-- **Dual Button**: Create multiple buttons with easy alignment options. Control button type, style, and layout for a tailored design.
-- **Carousel**: Design any type of carousel with customizable transitions, autoplay settings, and seamless content display.
-- **Notice**: Show alerts or messages with limitless customization, matching your design needs and user preferences.
-- **Table of Content**: Generate an automatic, structured table of contents that improves page navigation and user experience.
-- **Map**: Embed Google Maps or OpenStreetMap without an API key, with adjustable style, zoom, and markers.
-- **Social Share**: Add social icons for sharing on platforms like Facebook and Twitter, with customizable styles.
-- **SVG Draw**: Create animated SVGs with adjustable icon, color, and more for an engaging, visual touch.
-- **Coupon**: Design coupons with customizable labels and copy buttons, styled to fit your brand.
-- **Content Timeline**: Display events or milestones in a clean, customizable timeline format.
-- **Simple & Mega Menu**: Customize your navigation with simple dropdowns or complex mega menus.
-- **Table Block**: Create responsive, customizable tables to display data neatly, perfect for comparison charts, schedules, and more.
-- **Modal & Popup Builder**: Create eye-catching modals and popups with full customization for user engagement, opt-ins, and announcements.
-- **Form Builder (Any Kind of Form)**: Effortlessly design and integrate login, registration, password recovery, contact, subscription, multi-step, and custom forms to enhance user engagement and streamline accessibility.
-- **Search**: Integrate a sleek, responsive search bar to improve site navigation and boost user discovery.
-- **Price List**: Display service or product pricing in a visually appealing list, perfect for eCommerce and business sites.
-- **Progress Tracker**: Keep users motivated by displaying completion progress in courses, projects, or tasks.
-- **Image Hotspot**: Interactive markers for images. Click specific areas to reveal content or information.
-- **Info Box**: The Info Box Block highlights key information with customizable layouts, icons, images, button and interactive hover effects for a professional, engaging presentation.
-- **PayPal**: PayPal block for Gutenberg enables easy integration of PayPal payments on your website. Accept payments or donations effortlessly with just a click.
-- **News Ticker**: Effortlessly display scrolling headlines to keep your visitors updated with the latest news.
-- **Filterable Cards Block**: Interactive and customizable cards for dynamic content filtering, enhancing user engagement and seamless navigation.
-- **Stripe Button Block**: Easily integrate secure Stripe payment buttons for seamless transactions directly within your WordPress site.
-- **Advance List Block**: Create highly customizable and dynamic lists with icons, colors, and layouts for better content organization.
-- **Logout Block**: Add a simple, customizable logout button to allow users to securely log out from your site.
-- **Marquee Block**: Create eye-catching, customizable scrolling text or content for announcements, highlights, or dynamic visual effects.
-- **Stacked Cards Blocks [PRO]**: Add customizable, impactful Stacked Cards.
-- **Price Menu**: Display your products or services in an elegant price list layout with customizable items, prices, and descriptions.
-- **Chart**: Visualize data with responsive and interactive charts, including bar, line, pie, and more for clear statistics representation.
-- **Image Scroll**: Create smooth horizontal or vertical scrolling galleries to showcase images in an engaging, dynamic way.
-- **Text Path**: Easily curve or align text along custom paths, shapes, or lines for creative typography and eye-catching designs.
+aBlocks includes a complete library of **ready-made templates, full pages, and reusable patterns.** You can import an entire page, a specific section, or a layout pattern with one click, then customize everything freely without restrictions.
 
-- **Demo Importer**: Quickly set up and replicate demo designs with a single click for a seamless start.
+Unlike many builders that require separate demo importer plugins or only offer partial templates, aBlocks provides **templates, pages, and patterns together,** with a **built-in demo importer.** This means you can launch full website designs instantly — then adjust structure, styling, animation, and content without adding any extra plugins.
 
-=== Figma to WordPress: Simplify Your Design Workflow ===
+===aBlocks —  Blocks That Build Real Websites===
 
-Transform your Figma designs into a fully functional WordPress site easily. The Figma to WordPress feature in aBlocks lets you copy design properties with just one click. Save time and eliminate errors by seamlessly transferring typography, colors, shadows, and backgrounds directly from Figma to your WordPress blocks.
-With this feature, you can ensure consistent design across your website without the repetitive and time-consuming manual adjustments.
+aBlocks includes **100+ powerful blocks** designed to build complete websites, systems, and user experiences — not just page sections. Every block comes with advanced layout control, animation support, and deep customization, so you can create complex structures, dynamic content, and interactive interfaces without stacking extra plugins.
 
-=== aBlocks - Academy LMS Integration ===
 
-Unlock the full potential of your eLearning website with aBlocks, designed to integrate seamlessly with Academy LMS:
+====Creative Blocks====
 
-- **Course Grid**: Display courses in a customizable grid layout.
-- **Login Form**: Create a sleek, branded login form that integrates with Academy LMS.
-- **Enroll Form**: Simplify course enrollment with a customizable form.
-- **Student Registration Form**: Customize student registration forms for seamless onboarding.
-- **Instructor Registration Form**: Easily onboard instructors with customizable forms.
-- **Course Search**: Help students discover courses with an intuitive search block.
-- **PDF Embed**: Embed course materials or resources directly into your lessons.
-- **Password Reset Form**: Offer a simple, secure password reset option for users.
+- **Image Comparison:** slider-based before/after views with hover and drag control
+- **Accordion & Tabs:** clean content organization with animation and interaction control
+- **Countdown & Counter:** time-based and number animations for urgency and highlights
+- **Video & Player:** styled video embeds with layout and interaction options
+- **Code Highlighter:** display styled code snippets for docs, tutorials, or dev-focused pages
+- **Stacked Cards:** create layered, scroll-driven card layouts with depth and interaction
+- **Image, Featured Image & Image Scroll:** full control over display, motion, and effects
+- **Image Hotspot & Flip Box:** interactive content reveal with hover and click actions
+- **Content Timeline & Progress Tracker:** step-based and journey-style layouts
+- **Carousel & Stacked Cards:** animated content sliders and layered visual sections
+- **Info Box & Filterable Cards:** structured content blocks with dynamic filtering
+- **SVG Draw & Lottie Animation:** vector and motion graphics with smooth animation
+- **Marquee & Text Path:** moving text and curved text effects for creative sections
+- **Chart & Table:** visual data presentation with layout control
+- **Simple & Mega Menu:** advanced navigation layouts for complex sites
+- **Loop Builder & Dynamic Text:** dynamic content layouts powered by real data
+- **Breadcrumb, Scroll To Top & Logout:** UX-focused blocks for navigation and user flow
+- **Frontend Dashboard:** interactive dashboard layouts built visually
 
-*Note: Academy LMS plugin is required to use these blocks.*
+====Content Blocks====
 
-Don’t settle for ordinary. Download aBlocks today and start building extraordinary WordPress websites with the power of Gutenberg!
+- **Heading:** advanced typography, multi-color text, animations, and link support
+- **Paragraph:** rich text styling with spacing, animation, and layout control
+- **List:** styled lists with icons, spacing control, and clean content flow
+- **Advance Lists:** feature-style lists with icons, alignment, and visual emphasis
+- **Button:** fully customizable buttons with hover effects, icons, and animations
+- **Dual Button:** two-action buttons with balanced layout and interaction control
+- **Toggle:** switchable content blocks for clean, interactive layouts
+- **Icon:** scalable icons with color, size, hover, and animation control
+- **Star Ratings:** visual rating display for reviews, products, and feedback
+- **Table of Contents:** auto-generated navigation for long pages and articles
+- **Search:** styled search layouts with flexible placement and design control
+- **Container:** advanced layout wrapper with spacing, alignment, and responsive control
+- **Spacer:** precise spacing control without breaking layout flow
+- **Divider:** styled separators with size, color, and layout control
+- **Taxonomy Listing:** dynamic display of categories, tags, or custom taxonomies
 
-Get started with aBlocks and take your WordPress website to the next level!
+====Form Blocks====
+- **Form Builder:** one flexible system to create any type of form with full layout, style, and logic control
+- **Login, Registration & Password Forms:** user access flows built visually — login, signup, reset, and account actions
+- **Contact, Newsletter & Lead Forms:** simple to advanced lead collection with full design and field control
+- **Single-step & Multi-step Forms:** clean forms or guided step-by-step flows for better completion rates
+- **Conversational, Survey & Quiz Forms:** interactive, question-based forms that feel natural and engaging
+- **Order, Payment & Donation Forms:** collect orders, payments, or donations directly from the page
+- **Feedback & Custom Forms:** fully customizable forms for any custom workflow or business need
+
+====Academy Blocks====
+
+- **Course Grid & Course Search:** dynamic course listings with filters, layouts, and real-time data
+- **Enroll Form & Enroll Content:** custom enrollment sections with full layout and style control
+- **Student Registration & Instructor Registration Forms:** role-based onboarding flows built visually
+- **Login Form & Password Reset Form:** custom access pages connected to your learning system
+- **PDF Embed & Course Media:** lesson materials, videos, and documents displayed cleanly
+- **Course Curriculum & Course Description:** structured lesson layouts with flexible presentation
+- **Course Instructor & Additional Info:** instructor profiles and metadata shown dynamically
+- **Course Reviews, Reviews Form & Reviews List:** collect and display feedback inside your site
+- **Certificate Builder:** generate and display course certificates with custom design
+
+====eCommerce Blocks====
+
+- **Products, Product Summary & Product Description:** flexible product layouts with full design and content control
+- **Add To Cart, Continue Button & Checkout Button:** conversion-focused actions designed to guide users smoothly
+- **Cart List, Mini Cart & Cart Sub Table:** real-time cart views with clear structure and easy customization
+- **Checkout Form, Billing Info & Shipping Info:** fully customizable checkout sections without theme limits
+- **Order Details & Order Info:** clean order summaries that improve post-purchase clarity
+- **Product Filter & Coupon Form:** smarter browsing and promotions to boost conversions
+- **Product Review & Cart Notice:** trust-building feedback and timely user messages
+
+====Pro Controls====
+- **Display Condition:** show or hide content based on user role, login state, device, page, or rules
+- **Motion Effects & Scrolling Effect:** animate elements on scroll with smooth, controlled movement
+- **Mouse Effects:** react to cursor movement for interactive, modern UI
+- **Sticky & Floating Effect:** keep key elements visible or floating while users scroll
+- **Tooltip:** show contextual info on hover without cluttering layouts
+- **Group Image Effect:** apply shared motion and effects across multiple images
+
+
+
+
+===aBlocks Replaces Multiple Plugins===
+aBlocks is designed to reduce plugin dependency, not increase it. Instead of stacking different tools for design, animation, dashboards, forms, popups, performance, and launch control, aBlocks brings these capabilities into one connected system — built to work together from the start.
+With aBlocks, you can replace the need for:
+
+**Page builders** – visual layouts, advanced blocks, responsive control
+**Theme builders** – headers, footers, templates, dynamic layouts
+**Dashboard plugins** – frontend user dashboards, login, account pages
+**Animation plugins** – scroll, hover, motion, GSAP-powered effects
+**Popup & modal plugins** – popups, modals, notices, interactions
+**Form plugins** – login, registration, lead, payment, survey forms
+**Coming soon plugins** – coming soon & maintenance modes
+**Performance helpers (partially)** – smart asset generation and optimized loading
+
+
+
+The result is a cleaner setup, faster sites, fewer conflicts, and easier scaling.
+Instead of managing 10–20 separate plugins, you build everything inside one flexible builder that grows with your website.
 
 
 ## 🔥 WHAT’S NEXT
 If you like aBlocks, then consider checking out our other WordPress Plugins for FREE:
 
 🔝 [Academy LMS](https://wordpress.org/plugins/academy/) –  eLearning and online course solution for WordPress
-🔝 [WP Map Block](https://wordpress.org/plugins/wp-map-block/) –  Gutenberg Map Block for Google Map and OpenStreet Map
+🔝 [Easy Content Manager](https://wordpress.org/plugins/easy-content-manager/) –  Powerful Custom Post types, Fields, Taxonomy & Settings Builder
+🔝 [StoreEngine](https://wordpress.org/plugins/storeengine/) –  Complete eCommerce Solution with Memberships, Licensing, Affiliates & More
+🔝 [ZenCommunity](https://wordpress.org/plugins/zencommunity/) –  Real-Time Community Plugin with Messaging, Feeds, Live Chat & Support System
 
 ## 🤝 Join the thriving aBlocks community today!
-Unlock a powerful network of website creators, designers, developers, and WordPress enthusiasts with aBlocks. Join us in revolutionizing website building with seamless design and advanced block features! 🚀
 
-Connect with us on social media for the latest news and updates:
-
+👉 [Join Our Community](http://community.kodezen.com)
 👉 [Our Official Facebook Page](https://www.facebook.com/ablocksteam/)
-👉 [Join our Facebook Group](https://www.facebook.com/groups/386840187678401)
 👉 [Follow us on Twitter](https://x.com/aBlocksTeam)
 👉 [Connect in our Linkedin](https://www.linkedin.com/showcase/ablocksteam/)
 👉 [Our Official Support](https://kodezen.com/support/)
+
+<strong>WANT TO CONTRIBUTE TO THE PLUGIN? 🙋</strong>
+
+You may now contribute to the plugin on Github: <a href="https://github.com/kodezen/ablocks" target="_blank" rel="">aBlocks on Github</a>
 
 == Frequently Asked Questions ==
 
@@ -153,7 +277,129 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 7. Advanced Table of Content
 8. Instant Style Copy-Paste
 
+
+== External Services ==
+
+This plugin uses third-party services for payments and map display.
+
+= Stripe =
+Used to process payments through the Stripe Button block.  
+When a user submits a payment, the payment amount, currency, and payment token are sent to Stripe to complete the transaction.
+
+Service provider: Stripe, Inc.  
+Terms: https://stripe.com/legal  
+Privacy: https://stripe.com/privacy  
+
+= Map Services =
+The plugin uses Leaflet to display maps, loading tiles from the following providers:
+
+*OpenStreetMap:*  
+When maps are loaded, the user’s IP address and browser data may be sent to OpenStreetMap servers.  
+Terms: https://wiki.osmfoundation.org/wiki/Terms_of_Use  
+Privacy: https://wiki.osmfoundation.org/wiki/Privacy_Policy  
+
+*Google Maps:*  
+When maps are loaded, the user’s IP address and browser data may be sent to Google servers to load map tiles.  
+Terms: https://maps.google.com/help/terms_maps/  
+Privacy: https://policies.google.com/privacy
+
+== Credits ==
+
+Our external packages use [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT. Additionally, we incorporate [FontAwesome v6](https://fontawesome.com/license/free) under the CC BY 4.0 License, and [dnd kit](https://github.com/clauderic/dnd-kit) licensed under the MIT License.
+
 == Changelog ==
+
+= 2.7.1 - 19/01/2026 =
+* Fixed - Form Builder Email Sending issue 
+* Fixed - Theme Builder Settings Status Update issue
+* Fixed - StoreEngine Continue button block issue
+
+= 2.7.0 - 12/01/2026 =
+* Removed - GSAP integration from the free version; it is now included only in aBlocks Pro. (GSAP is not GPL-licensed, so including it in the free version would violate ORG rules.)
+* Fixed - Multiple security issues.
+
+= 2.6.1 - 25/12/2025 =
+* Fixed – PHPCS and Security Related all issues
+
+= 2.6.0 - 25/12/2025 =
+* Added – GSAP Integration
+
+= 2.5.3 - 23/12/2025 =
+* Added – Marquee Block Up and Down Direction
+* Added – QuizPress plugin compatibility
+* Fixed – Form Builder checkbox block not working issue
+
+= 2.5.2 - 14/12/2025 =
+* Improved - Loop Builder filter button loading UI
+* Fixed –  Redirect issues in Form Login and Registration blocks
+* Added – support for editing dashboard slugs in the Frontend Dashboard
+* Fixed –  Checkbox selection issue in Form Multiselect block
+
+= 2.5.1 - 10/12/2025 =
+* Improved - padding option in countdown block
+* Improved - Added Global data import export feature
+* Improved - Added email template feature and Added Quill Editor Features
+* Improved - Added load-font-locally and font download issues
+* Fixed –  Taxonomy listing issues
+* Fixed –  Frontend Dashboard Active Color
+* Fixed –  Template search undefined issues
+* Fixed –  Form multiple select issues
+
+= 2.5.0 - 24/11/2025 =
+* Added – Dynamic Text Block
+* Improved Added frontend dashboard breadcrumb and quick edit button
+* Improved Added Global data import export feature
+* Improved Added mouse hover effect in our dynamic block
+* Fixed – CSS Classes generated auto when use Entrance Animation
+* Fixed – search block icon and background color
+* Fixed – store engine blocks css conflict issues
+* Fixed – ORG security  issue imp
+* Fixed – feature image block issue in template
+
+= 2.4.1 - 15/11/2025 =
+* Added - Academy Container Block
+* Added - Frontend Dashboard Block
+* Added - StoreEngine Product Gallery Block
+* Added - StoreEngine Product Summary Block
+* Added - StoreEngine Product Description Block
+* Added - StoreEngine Product Review Block
+* Added - StoreEngine Product Comments Block
+* Added - StoreEngine Cart Notice Block
+* Added - Notice Component
+* Improved Added From Builder multiple new features
+* Improved Added Player block autoplay, loop, and mute options
+* Improved Added Icon control border and box-shadow
+* Fixed - Global color multiple issues
+* Fixed - Global typography multiple issues
+* Fixed - Fixed multiple bugs for next release
+
+= 2.4.0 - 30/10/2025 =
+* Added - Global Color & Typography Control support 
+* Added - Social share block new styling control
+* Added - New Academy LMS Media Block
+* Fixed - Dashboard UI issues 
+* Fixed - Table of Content issue
+* Fixed - Tabs Block issue
+
+= 2.3.1 - 07/10/2025 =
+* Added - New Academy Enroll Content Block
+* Added - New Academy Course Description Block
+* Added - New Academy Course Instructor Block
+* Added - New Academy Addition Info Block
+* Added - New Academy Reviews List Block
+* Added - New Academy Reviews Form Block
+* Added - New Academy Course Reviews Block
+* Added - New Academy Course Curriculums Block
+* Added - New Storeengine mini cart Block
+* Fixed -  Advance container position issue 
+* Fixed -  Product Card Gap issues  on Dashboard
+* Fixed -  Dashboard Dynamic page support for blocks
+* Fixed -  Dashboard Dynamic page support for Academy LMS
+* Fixed -  Store and academy active button loading issues
+* Fixed -  Container shape auto css Generation issue
+* Fixed -  Container shape auto css Generation issue
+* Improved - Added Carousel Pagination Border type
+* Improved - Added Form Integration Docs link 
 
 = 2.3.0 - 29/09/2025 =
 * Added - New BreadCrumb Block 
@@ -548,5 +794,5 @@ Yes, each block in aBlocks offers extensive customization options. You can adjus
 * Initial beta release
 
 == Upgrade Notice ==
-= 1.7.0 =
-This is a major update with breaking changes. Please back up your site before proceeding with the update.
+= 2.5.1 =
+If you are using the Form Builder, please reconfigure your email template and re-save the pages that contain the form. Otherwise, the forms may not function correctly. 

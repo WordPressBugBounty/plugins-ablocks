@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\Video;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Classes\CssGeneratorV2;

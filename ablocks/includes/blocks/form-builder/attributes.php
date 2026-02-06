@@ -18,6 +18,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => ''
 	),
+	'email_list_id' => array(
+		'type' => 'string',
+		'default' => ''
+	),
 	'blockVersion' => array(
 		'type' => 'number',
 		'default' => '',
@@ -30,9 +34,17 @@ $attributes = [
 		'type' => 'number',
 		'default' => '',
 	],
+	'email_template_id' => [
+		'type' => 'string',
+		'default' => '',
+	],
 	'showLabels' => [
 		'type' => 'boolean',
 		'default' => true
+	],
+	'subscriberToUser' => [
+		'type' => 'boolean',
+		'default' => false
 	],
 	'loginRedirect' => [
 		'type' => 'boolean',
@@ -113,7 +125,7 @@ $attributes = [
 	// email One settings
 	'emailOneTo' => [
 		'type' => 'string',
-		'default' => 'someone@example.com'
+		'default' => ''
 	],
 	'emailOneSubject' => [
 		'type' => 'string',
@@ -125,7 +137,7 @@ $attributes = [
 	],
 	'emailOneFormEmail' => [
 		'type' => 'string',
-		'default' => 'someone@example.com'
+		'default' => ''
 	],
 	'emailOneFormName' => [
 		'type' => 'string',
@@ -133,7 +145,7 @@ $attributes = [
 	],
 	'emailOneReplyTo' => [
 		'type' => 'string',
-		'default' => 'someone@example.com'
+		'default' => ''
 	],
 	'emailOneCc' => [
 		'type' => 'string',
@@ -150,7 +162,7 @@ $attributes = [
 	// email two settings
 	'emailTwoTo' => [
 		'type' => 'string',
-		'default' => 'someone@example.com'
+		'default' => ''
 	],
 	'emailTwoSubject' => [
 		'type' => 'string',
@@ -162,7 +174,7 @@ $attributes = [
 	],
 	'emailTwoFormEmail' => [
 		'type' => 'string',
-		'default' => 'someone@example.com'
+		'default' => ''
 	],
 	'emailTwoFormName' => [
 		'type' => 'string',
@@ -170,7 +182,7 @@ $attributes = [
 	],
 	'emailTwoReplyTo' => [
 		'type' => 'string',
-		'default' => 'someone@example.com'
+		'default' => ''
 	],
 	'emailTwoCc' => [
 		'type' => 'string',
@@ -508,9 +520,28 @@ $attributes = [
 	'roleSlug' => [
 		'type' => 'string',
 		'default' => '',
-	]
-];
+	],
+	'confirmationNotice' => [
+		'type' => 'string',
+		'default' => 'Form successfully submitted!'
 
+	],
+	'afterFormSubmission' => [
+		'type' => 'string',
+		'default' => 'reset'
+
+	],
+	'customUrl' => [
+		'type' => 'string',
+		'default' => ''
+
+	],
+	'confirmationType' => [
+		'type' => 'string',
+		'default' => 'success'
+
+	],
+];
 $attributes = array_merge(
 	$attributes,
 	Alignment::get_attribute( 'labelAlignment', true, [ 'value' => 'left' ] ),

@@ -2,6 +2,7 @@
 
 namespace ABlocks\import;
 
+use ABlocks\Admin\Settings\Base;
 use ABlocks\Helper;
 use ABlocks\import\XmlParsers\WXR_Parser;
 use WP_Error;
@@ -27,6 +28,10 @@ class WP_Import extends \WP_Importer {
 	public $show_on_front = 'posts';
 	public $page_on_front = 0;
 	public $page_for_posts = 0;
+	public $storeengine_pages = [];
+	public $academy_pages = [];
+	public $ablocks_pages = [];
+	public $ablocks_options = [];
 
 	public $processed_authors = array();
 	public $author_mapping = array();
@@ -69,6 +74,7 @@ class WP_Import extends \WP_Importer {
 		$this->backfill_parents();
 		$this->backfill_attachment_urls();
 		$this->remap_featured_images();
+		$this->save_global_settings();
 
 		$this->import_end();
 
@@ -86,7 +92,7 @@ class WP_Import extends \WP_Importer {
 		}
 
 		Helper::emit_sse_message( [
-			'action' => 'log',
+			'action'  => 'log',
 			'message' => __( 'Import process started...', 'ablocks' )
 		] );
 
@@ -98,14 +104,18 @@ class WP_Import extends \WP_Importer {
 
 		$this->version = $import_data['version'];
 		$this->get_authors_from_import( $import_data );
-		$this->posts          = $import_data['posts'];
-		$this->terms          = $import_data['terms'];
-		$this->categories     = $import_data['categories'];
-		$this->tags           = $import_data['tags'];
-		$this->base_url       = esc_url( $import_data['base_url'] );
-		$this->show_on_front  = $import_data['show_on_front'];
-		$this->page_on_front  = $import_data['page_on_front'];
-		$this->page_for_posts = $import_data['page_for_posts'];
+		$this->posts             = $import_data['posts'];
+		$this->terms             = $import_data['terms'];
+		$this->categories        = $import_data['categories'];
+		$this->tags              = $import_data['tags'];
+		$this->base_url          = esc_url( $import_data['base_url'] );
+		$this->show_on_front     = $import_data['show_on_front'];
+		$this->page_on_front     = $import_data['page_on_front'];
+		$this->page_for_posts    = $import_data['page_for_posts'];
+		$this->storeengine_pages = $import_data['storeengine_pages'];
+		$this->academy_pages     = $import_data['academy_pages'];
+		$this->ablocks_pages     = $import_data['ablocks_pages'];
+		$this->ablocks_options   = $import_data['ablocks_options'];
 
 		wp_defer_term_counting( true );
 		wp_defer_comment_counting( true );
@@ -133,8 +143,8 @@ class WP_Import extends \WP_Importer {
 		do_action( 'ablocks/template_import_end' );
 
 		Helper::emit_sse_message( [
-			'action' => 'log',
-			'level' => 'info',
+			'action'  => 'log',
+			'level'   => 'info',
 			'message' => __( 'Import process Finished.', 'ablocks' ),
 		] );
 	}
@@ -241,8 +251,8 @@ class WP_Import extends \WP_Importer {
 		}//end foreach
 
 		Helper::emit_sse_message( [
-			'action' => 'log',
-			'level' => 'info',
+			'action'  => 'log',
+			'level'   => 'info',
 			'message' => __( 'Categories imported', 'ablocks' ),
 		] );
 
@@ -293,8 +303,8 @@ class WP_Import extends \WP_Importer {
 		}//end foreach
 
 		Helper::emit_sse_message( [
-			'action' => 'log',
-			'level' => 'info',
+			'action'  => 'log',
+			'level'   => 'info',
 			'message' => __( 'Tags imported', 'ablocks' ),
 		] );
 
@@ -355,8 +365,8 @@ class WP_Import extends \WP_Importer {
 		}//end foreach
 
 		Helper::emit_sse_message( [
-			'action' => 'log',
-			'level' => 'info',
+			'action'  => 'log',
+			'level'   => 'info',
 			'message' => __( 'Terms imported', 'ablocks' ),
 		] );
 
@@ -456,9 +466,12 @@ class WP_Import extends \WP_Importer {
 				continue;
 			}
 
-			$post_type_object = get_post_type_object( $post['post_type'] );
-
-			$post_exists = post_exists( $post['post_title'], '', $post['post_date'], $post['post_type'] );
+			$post_exists = post_exists( $post['post_title'], '', '', $post['post_type'] );
+			if ( $post_exists && in_array( $post['post_type'], [ 'wp_template', 'wp_template_part' ], true ) ) {
+				// remove existence template.
+				wp_delete_post( $post_exists, true );
+				$post_exists = false;
+			}
 
 			/**
 			 * Filter ID of the existing post corresponding to post currently importing.
@@ -474,7 +487,7 @@ class WP_Import extends \WP_Importer {
 			 */
 			$post_exists = apply_filters( 'ablocks/template_import_existing_post', $post_exists, $post );
 
-			if ( $post_exists && get_post_type( $post_exists ) === $post['post_type'] ) {
+			if ( ! $this->check_for_known_page( $post ) && $post_exists ) {
 				$comment_post_id                                     = $post_exists;
 				$post_id                                             = $post_exists;
 				$this->processed_posts[ intval( $post['post_id'] ) ] = intval( $post_exists );
@@ -528,7 +541,7 @@ class WP_Import extends \WP_Importer {
 
 				$postdata = wp_slash( $postdata );
 
-				if ( 'attachment' === $postdata['post_type'] ) {
+				if ( 'attachment' === $postdata['post_type'] && ! $post_exists ) {
 					if ( ! $this->fetch_attachments ) {
 						continue;
 					}
@@ -551,15 +564,19 @@ class WP_Import extends \WP_Importer {
 					$comment_post_id = $this->process_attachment( $postdata, $remote_url );
 					$post_id         = $comment_post_id;
 				} else {
-					$comment_post_id = wp_insert_post( $postdata, true );
-					$post_id         = $comment_post_id;
+					if ( $post_exists ) {
+						$comment_post_id = wp_update_post( array_merge( $postdata, array( 'ID' => $post_exists ) ) );
+					} else {
+						$comment_post_id = wp_insert_post( $postdata, true );
+					}
+					$post_id = $comment_post_id;
 					do_action( 'ablocks/template_import_insert_post', $post_id, $original_post_id, $postdata, $post );
 				}//end if
 
 				if ( is_wp_error( $post_id ) ) {
 					Helper::emit_sse_message( [
-						'action' => 'log',
-						'level' => 'warning',
+						'action'  => 'log',
+						'level'   => 'warning',
 						'message' => "Failed to import: {$post['post_type']} - {$post['post_title']}",
 					] );
 					continue;
@@ -570,8 +587,8 @@ class WP_Import extends \WP_Importer {
 				}
 
 				Helper::emit_sse_message( [
-					'action' => 'log',
-					'level' => 'info',
+					'action'  => 'log',
+					'level'   => 'info',
 					'message' => "{$post['post_type']} - {$post['post_title']} imported.",
 				] );
 			}//end if
@@ -582,19 +599,49 @@ class WP_Import extends \WP_Importer {
 				if ( $this->page_on_front === $post['post_id'] ) {
 					update_option( 'page_on_front', $post_id );
 					Helper::emit_sse_message( [
-						'action' => 'log',
-						'level' => 'info',
+						'action'  => 'log',
+						'level'   => 'info',
 						'message' => __( 'Front page setting\'s updated.', 'ablocks' ),
 					] );
 				} elseif ( $post['post_id'] === $this->page_for_posts ) {
 					update_option( 'page_for_posts', $post_id );
 					Helper::emit_sse_message( [
-						'action' => 'log',
-						'level' => 'info',
+						'action'  => 'log',
+						'level'   => 'info',
 						'message' => __( 'Posts page setting\'s updated.', 'ablocks' ),
 					] );
 				}
 			}//end if
+
+			// update storeengine page settings
+			if ( ! empty( $this->storeengine_pages ) && class_exists( 'StoreEngine' ) ) {
+				$se_page = array_search( $post['post_id'], $this->storeengine_pages, true );
+				if ( $se_page ) {
+					\StoreEngine\Admin\Settings\Base::save_settings( [
+						$se_page => $post_id
+					] );
+				}
+			}
+
+			// update academy page settings
+			if ( ! empty( $this->academy_pages ) && class_exists( 'Academy' ) ) {
+				$academy_page = array_search( $post['post_id'], $this->academy_pages, true );
+				if ( $academy_page ) {
+					\Academy\Admin\Settings\Base::save_settings( [
+						$academy_page => $post_id
+					] );
+				}
+			}
+
+			// update ablock page settings
+			if ( ! empty( $this->ablocks_pages ) ) {
+				$ablocks_page = array_search( $post['post_id'], $this->ablocks_pages, true );
+				if ( $ablocks_page ) {
+					Base::save_settings( [
+						$ablocks_page => $post_id
+					] );
+				}
+			}
 
 			// map pre-import ID to local ID
 			$this->processed_posts[ intval( $post['post_id'] ) ] = (int) $post_id;
@@ -610,7 +657,7 @@ class WP_Import extends \WP_Importer {
 				$terms_to_set = array();
 				foreach ( $post['terms'] as $term ) {
 					// back compat with WXR 1.0 map 'tag' to 'post_tag'
-					$taxonomy    = ( 'tag' === $term['domain'] ) ? 'post_tag' : $term['domain'];
+					$taxonomy = ( 'tag' === $term['domain'] ) ? 'post_tag' : $term['domain'];
 					if ( 'wp_theme' === $taxonomy ) {
 						$term['name'] = wp_get_theme()->get_stylesheet();
 						$term['slug'] = wp_get_theme()->get_stylesheet();
@@ -749,10 +796,26 @@ class WP_Import extends \WP_Importer {
 			wp_delete_post( $style );
 		}
 		Helper::emit_sse_message( [
-			'action' => 'log',
-			'level' => 'info',
+			'action'  => 'log',
+			'level'   => 'info',
 			'message' => __( 'Existence gutenberg styles removed.', 'ablocks' ),
 		] );
+	}
+
+	private function check_for_known_page( array $post ) {
+		if ( ! empty( $this->storeengine_pages ) && class_exists( 'StoreEngine' ) ) {
+			return (bool) array_search( $post['post_id'], $this->storeengine_pages, true );
+		}
+
+		if ( ! empty( $this->academy_pages ) && class_exists( 'Academy' ) ) {
+			return (bool) array_search( $post['post_id'], $this->academy_pages, true );
+		}
+
+		if ( ! empty( $this->ablocks_pages ) ) {
+			return (bool) array_search( $post['post_id'], $this->ablocks_pages, true );
+		}
+
+		return false;
 	}
 
 	/**
@@ -933,7 +996,7 @@ class WP_Import extends \WP_Importer {
 		);
 
 		if ( is_wp_error( $remote_response ) ) {
-			// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+			// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.unlink_unlink 
 			@unlink( $tmp_file_name );
 
 			return new WP_Error(
@@ -952,6 +1015,7 @@ class WP_Import extends \WP_Importer {
 		// Make sure the fetch was successful.
 		if ( 200 !== $remote_response_code ) {
 			if ( file_exists( $tmp_file_name ) ) {
+				// phpcs:ignore  WordPress.WP.AlternativeFunctions.unlink_unlink 
 				unlink( $tmp_file_name );
 			}
 
@@ -971,6 +1035,7 @@ class WP_Import extends \WP_Importer {
 		// Request failed.
 		if ( ! $headers ) {
 			if ( file_exists( $tmp_file_name ) ) {
+				// phpcs:ignore  WordPress.WP.AlternativeFunctions.unlink_unlink 
 				unlink( $tmp_file_name );
 			}
 
@@ -981,6 +1046,7 @@ class WP_Import extends \WP_Importer {
 
 		if ( 0 === $filesize ) {
 			if ( file_exists( $tmp_file_name ) ) {
+				// phpcs:ignore  WordPress.WP.AlternativeFunctions.unlink_unlink 
 				unlink( $tmp_file_name );
 			}
 
@@ -989,6 +1055,7 @@ class WP_Import extends \WP_Importer {
 
 		if ( ! isset( $headers['content-encoding'] ) && isset( $headers['content-length'] ) && $filesize !== (int) $headers['content-length'] ) {
 			if ( file_exists( $tmp_file_name ) ) {
+				// phpcs:ignore  WordPress.WP.AlternativeFunctions.unlink_unlink 
 				unlink( $tmp_file_name );
 			}
 
@@ -998,6 +1065,7 @@ class WP_Import extends \WP_Importer {
 		$max_size = (int) $this->max_attachment_size();
 		if ( ! empty( $max_size ) && $filesize > $max_size ) {
 			if ( file_exists( $tmp_file_name ) ) {
+				// phpcs:ignore  WordPress.WP.AlternativeFunctions.unlink_unlink 
 				unlink( $tmp_file_name );
 			}
 
@@ -1049,6 +1117,7 @@ class WP_Import extends \WP_Importer {
 
 		if ( ! $move_new_file ) {
 			if ( file_exists( $tmp_file_name ) ) {
+				// phpcs:ignore  WordPress.WP.AlternativeFunctions.unlink_unlink 
 				unlink( $tmp_file_name );
 			}
 
@@ -1058,6 +1127,7 @@ class WP_Import extends \WP_Importer {
 		// Set correct file permissions.
 		$stat  = stat( dirname( $new_file ) );
 		$perms = $stat['mode'] & 0000666;
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod 
 		chmod( $new_file, $perms );
 
 		$upload = array(
@@ -1100,6 +1170,7 @@ class WP_Import extends \WP_Importer {
 			}
 
 			if ( $local_child_id && $local_parent_id ) {
+				// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->update( $wpdb->posts, array( 'post_parent' => $local_parent_id ), array( 'ID' => $local_child_id ), '%d', '%d' );
 				clean_post_cache( $local_child_id );
 			}
@@ -1138,15 +1209,17 @@ class WP_Import extends \WP_Importer {
 
 		foreach ( $this->url_remap as $from_url => $to_url ) {
 			// remap urls in post_content
+			// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->posts} SET post_content = REPLACE(post_content, %s, %s)", $from_url, $to_url ) );
 			// remap enclosure urls
+			// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->postmeta} SET meta_value = REPLACE(meta_value, %s, %s) WHERE meta_key='enclosure'", $from_url, $to_url ) );
 		}
 
 		if ( ! empty( $this->url_remap ) ) {
 			Helper::emit_sse_message( [
-				'action' => 'log',
-				'level' => 'info',
+				'action'  => 'log',
+				'level'   => 'info',
 				'message' => __( 'Old attachment URLs have been updated.', 'ablocks' ),
 			] );
 		}
@@ -1167,10 +1240,16 @@ class WP_Import extends \WP_Importer {
 			}
 		}
 		Helper::emit_sse_message( [
-			'action' => 'log',
-			'level' => 'info',
+			'action'  => 'log',
+			'level'   => 'info',
 			'message' => __( 'Imported posts `_thumbnail_id` updated.', 'ablocks' ),
 		] );
+	}
+
+	public function save_global_settings() {
+		if ( ! empty( $this->ablocks_options ) ) {
+			Base::save_settings( $this->ablocks_options );
+		}
 	}
 
 	/**

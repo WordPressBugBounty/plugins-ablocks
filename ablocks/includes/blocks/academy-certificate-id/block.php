@@ -43,7 +43,8 @@ class Block extends BlockBaseAbstract {
 
 	public function get_verification_id_css( $attributes, $device = '' ) {
 		$css = array();
-		$typography_css = ! empty( $attributes['typography'] ) ? Typography::get_css( $attributes['typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['typographyGlobal'] ) ? $attributes['typographyGlobal'] : '';
+		$typography_css = ! empty( $attributes['typography'] ) ? Typography::get_css( $attributes['typography'], '', $device, $typographyValueGlobal ) : array();
 		$textAlignCss = ! empty( $attributes['alignment'] ) ? Alignment::get_css( $attributes['alignment'], 'text-align', $device ) : [];
 		$css['width'] = '100%';
 		$css['display'] = 'block';

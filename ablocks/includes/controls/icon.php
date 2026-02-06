@@ -10,6 +10,8 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
 use ABlocks\Helper;
 use ABlocks\Controls\Color;
+use ABlocks\Controls\Border;
+use ABlocks\Controls\BoxShadow;
 
 class Icon {
 	public static function get_attribute_default_value( $is_responsive = false ) {
@@ -93,8 +95,8 @@ class Icon {
 		$attribute = array_merge(
 			$attribute,
 			Dimensions::get_attribute( $attribute_prefix . 'Padding', false ),
-			Dimensions::get_attribute( $attribute_prefix . 'BorderRadius', false ),
-			Dimensions::get_attribute( $attribute_prefix . 'BorderWidth', false ),
+			Border::get_attribute( $attribute_prefix . 'Border', false ),
+			BoxShadow::get_attribute( $attribute_prefix . 'BoxShadow', true ),
 			Range::get_attribute([
 				'attributeName' => $attribute_prefix . 'Size',
 				'isResponsive' => false,
@@ -212,9 +214,17 @@ class Icon {
 			$iconViewCSS,
 			'default' !== $iconType ? array_merge(
 				Dimensions::get_css( $attributes[ $attributePrefix . 'Padding' ], 'padding', $device ),
-				Dimensions::get_css( $attributes[ $attributePrefix . 'BorderRadius' ], 'border-radius', $device ),
-				Dimensions::get_css( $attributes[ $attributePrefix . 'BorderWidth' ], 'border-width', $device )
+				Border::get_css( $attributes[ $attributePrefix . 'Border' ], 'border', $device ),
+				BoxShadow::get_css( $attributes[ $attributePrefix . 'BoxShadow' ], '', $device )
 			) : []
+		);
+	}
+
+	public static function get_wrapper_hover_css( $attributes, $device = '', $attributePrefix = 'icon' ) {
+
+		return array_merge(
+			Border::get_hover_css( $attributes[ $attributePrefix . 'Border' ], 'border', $device ),
+			BoxShadow::get_hover_css( $attributes[ $attributePrefix . 'BoxShadow' ], '', $device )
 		);
 	}
 

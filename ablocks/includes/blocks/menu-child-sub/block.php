@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\MenuChildSub;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Border;
@@ -79,11 +83,12 @@ class Block extends BlockBaseAbstract {
 
 	}
 	private function get_menu_item_css( $attributes, $device = '' ) {
+		$typographyglobal = isset( $attributes['menuItemTypographyGlobal'] ) ? $attributes['menuItemTypographyGlobal'] : '';
 		$css = array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['menuItemTextColor'] ) ? $attributes['menuItemTextColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['menuItemBackground'] ) ? $attributes['menuItemBackground'] : '' ) ],
 			Border::get_css( isset( $attributes['menuItemBorder'] ) ? $attributes['menuItemBorder'] : [], '', $device ),
-			Typography::get_css( isset( $attributes['menuItemTypography'] ) ? $attributes['menuItemTypography'] : [], '', $device ),
+			Typography::get_css( isset( $attributes['menuItemTypography'] ) ? $attributes['menuItemTypography'] : [], '', $device, $typographyglobal ),
 			Dimensions::get_css( isset( $attributes['menuItemPadding'] ) ? $attributes['menuItemPadding'] : [], 'padding', $device ),
 			Dimensions::get_css( isset( $attributes['menuItemMargin'] ) ? $attributes['menuItemMargin'] : [], 'margin', $device )
 		);

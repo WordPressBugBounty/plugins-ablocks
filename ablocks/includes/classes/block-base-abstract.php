@@ -27,6 +27,8 @@ abstract class BlockBaseAbstract {
 	protected $style_depends = [];
 	protected $script_depends = [];
 
+	protected $animation_settings = [];
+
 	public function __construct( $keep_silent = false ) {
 		if ( $this->is_enabled_block() && ! $keep_silent ) {
 			add_action( 'init', array( $this, 'register_block' ), 20 );
@@ -139,6 +141,7 @@ abstract class BlockBaseAbstract {
 	public function render_callback( $attributes, $content, $block_instance ) {
 		$block_name = $block_instance->name;
 		do_action( 'ablocks/before_render_' . explode( '/', $block_name )[1] . '_block_content', $block_name );
+		do_action( 'ablocks/render_callback', $block_name, $attributes );
 
 		// Dynamic block
 		if ( ! $content || $this->is_skip_inner_block ) {
@@ -185,7 +188,7 @@ abstract class BlockBaseAbstract {
 		$script_loading_strategy = \ABlocks\Helper::get_script_loading_strategy();
 		$args = [ 'strategy' => $script_loading_strategy ];
 
-		if ( file_exists( $this->assets_path . 'build/blocks/' . $block_name . '/view.js' ) ) {
+		if ( file_exists( $this->assets_path . 'build/blocks/' . $block_name . '/view.js' ) && ! wp_script_is( 'ablocks-' . $block_name . '-block-static-script', 'enqueued' ) ) {
 			$dependencies = include $this->assets_path . 'build/blocks/' . $block_name . '/view.asset.php';
 			wp_enqueue_script(
 				'ablocks-' . $block_name . '-block-static-script',
@@ -198,7 +201,7 @@ abstract class BlockBaseAbstract {
 			wp_localize_script(
 				'ablocks-' . $block_name . '-block-static-script',
 				'ABlocksGlobal',
-				$Assets->get_localize_script_data()
+				$Assets->get_localize_frontend_data()
 			);
 		}
 
@@ -236,7 +239,7 @@ abstract class BlockBaseAbstract {
 		return '';
 	}
 	public function get_style_depends() {
-		return apply_filters( 'ablocks/block_style_depends', array_merge( $this->style_depends, array( 'ablocks-frontend-google-fonts', 'ablocks-common-style' ) ) );
+		return apply_filters( 'ablocks/block_style_depends', array_merge( $this->style_depends, array( 'ablocks-frontend-google-fonts', 'ablocks-animate-style', 'ablocks-common-style' ) ) );
 	}
 	public function get_script_depends() {
 		return apply_filters( 'ablocks/block_script_depends', array_merge( $this->script_depends, array( 'ablocks-common-script' ) ) );

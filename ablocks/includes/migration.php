@@ -41,6 +41,7 @@ class Migration {
 		if ( version_compare( $version, '1.8.0', '<=' ) ) {
 			global $wpdb;
 			$table_name = $wpdb->prefix . ABLOCKS_PLUGIN_SLUG . '_form_entries';
+			// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.SchemaChange 
 			$wpdb->query( "ALTER TABLE `{$table_name}` MODIFY `post_id` VARCHAR(100) NULL" );
 		}
 	}

@@ -13,6 +13,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\TextStroke;
 use ABlocks\Components\ButtonGroup;
+use ABlocks\Controls\BoxShadow;
 
 $attributes = [
 	'block_id'               => [
@@ -166,6 +167,7 @@ $attributes = array_merge(
 	Dimensions::get_attribute( 'radius', false ),
 	Border::get_attribute( 'border', true ),
 	Border::get_attribute( 'itemBorder', true ),
+	BoxShadow::get_attribute( 'shareItemShadow', true ),
 	ButtonGroup::get_attribute( 'stack', false, [
 		'value' => 'horizontal',
 	] ),

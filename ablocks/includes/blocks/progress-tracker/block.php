@@ -158,9 +158,10 @@ class Block extends BlockBaseAbstract {
 		$typography = isset( $attributes['contentTypography'] ) ? $attributes['contentTypography'] : '';
 		$text_stroke = isset( $attributes['contentTextStroke'] ) ? $attributes['contentTextStroke'] : '';
 		$text_shadow = isset( $attributes['contentTextShadow'] ) ? $attributes['contentTextShadow'] : '';
+		$typographyValueGlobal = ! empty( $attributes['contentTypographyGlobal'] ) ? $attributes['contentTypographyGlobal'] : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['contentColor'] ) ? $attributes['contentColor'] : '' ) ],
-			Typography::get_css( $typography, '', $device ),
+			Typography::get_css( $typography, '', $device, $typographyValueGlobal ),
 			TextStroke::get_css( $text_stroke, '', $device ),
 			TextShadow::get_css( $text_shadow, '', $device )
 		);

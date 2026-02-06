@@ -1,6 +1,10 @@
 <?php
 use ABlocks\Controls\Range;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $attributes = [
 	'block_id' => [
 		'type' => 'string',

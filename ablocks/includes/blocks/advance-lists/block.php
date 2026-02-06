@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\AdvanceLists;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Controls\Alignment;
@@ -77,9 +81,11 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_paragraph_text_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['listTypographyGlobal'] ) ? $attributes['listTypographyGlobal'] : '';
+		$typography_value = isset( $attributes['listTypography'] ) ? $attributes['listTypography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['textColor'] ) ? $attributes['textColor'] : '' ) ],
-			isset( $attributes['listTypography'] ) ? Typography::get_css( $attributes['listTypography'], '', $device ) : [],
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			isset( $attributes['listTextStroke'] ) ? TextStroke::get_css( $attributes['listTextStroke'], '', $device ) : [],
 			isset( $attributes['listTextShadow'] ) ? TextShadow::get_css( $attributes['listTextShadow'] ) : [],
 		);

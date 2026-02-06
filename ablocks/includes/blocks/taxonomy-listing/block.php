@@ -228,9 +228,9 @@ class Block extends BlockBaseAbstract {
 		if ( isset( $attributes['taxonomyTitleDirection'][ 'value' . $device ] ) ) {
 			$css['flex-direction'] = $attributes['taxonomyTitleDirection'][ 'value' . $device ];
 		}
-
+		$typographyValueGlobal = ! empty( $attributes['taxonomyTitleTypographyGlobal'] ) ? $attributes['taxonomyTitleTypographyGlobal'] : [];
 		return array_merge(
-			Typography::get_css( $attributes['taxonomyTitleTypography'] ?? [], '', $device ),
+			Typography::get_css( $attributes['taxonomyTitleTypography'] ?? [], '', $device, $typographyValueGlobal ),
 			Border::get_css( $attributes['taxonomyTitleBorder'] ?? [], '', $device ),
 			Dimensions::get_css( $attributes['taxonomyTitlePadding'] ?? [], 'padding', $device ),
 			$css
@@ -262,10 +262,11 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $attributes['postCountWidth'] ) ) {
 			$css['height'] = $attributes['postCountWidth'] . 'px';
 		}
+		$typographyValueGlobal = ! empty( $attributes['postCountTypographyGlobal'] ) ? $attributes['postCountTypographyGlobal'] : [];
 		return array_merge(
 			Border::get_css( $attributes['postCountBorder'] ?? [], '', $device ),
 			Dimensions::get_css( $attributes['padding'] ?? [], 'padding', $device ),
-			Typography::get_css( $attributes['postCountTypography'] ?? [], '', $device ),
+			Typography::get_css( $attributes['postCountTypography'] ?? [], '', $device, $typographyValueGlobal ),
 			$css
 		);
 	}
@@ -320,10 +321,11 @@ class Block extends BlockBaseAbstract {
 		if ( ! empty( $attributes['postBackgroundColor'] ) ) {
 			$css['background'] = $attributes['postBackgroundColor'];
 		}
+		$typographyValueGlobal = ! empty( $attributes['postTitleTypographyGlobal'] ) ? $attributes['postTitleTypographyGlobal'] : [];
 
 		$typography = Typography::get_css($attributes['postTitleTypography'] ?? [], [
 			'weight' => '500',
-		], $device);
+		], $device, $typographyValueGlobal);
 
 		$postpadding = Dimensions::get_css( $attributes['postPadding'] ?? [], 'padding', $device );
 
@@ -392,9 +394,10 @@ class Block extends BlockBaseAbstract {
 		if ( isset( $attributes['buttonPosition'][ 'value' . $device ] ) ) {
 			$css['display'] = $attributes['buttonPosition'][ 'value' . $device ];
 		}
+		$typographyValueGlobal = ! empty( $attributes['buttonTypographyGlobal'] ) ? $attributes['buttonTypographyGlobal'] : [];
 
 		return array_merge(
-			Typography::get_css( $attributes['buttonTypography'] ?? [], '', $device ),
+			Typography::get_css( $attributes['buttonTypography'] ?? [], '', $device, $typographyValueGlobal ),
 			Border::get_css( $attributes['buttonBorder'] ?? [], '', $device ),
 			Dimensions::get_css( $attributes['buttonPadding'] ?? [], 'padding', $device ),
 			$css
@@ -592,7 +595,7 @@ class Block extends BlockBaseAbstract {
 			return;
 		}
 		echo '<div class="ablocks-reload-button-wrapper">';
-		echo '<a href="' . esc_url( $term_link ) . '" class="ablocks-reload-button">' . esc_html__( $button_text, 'ablocks' ) . '</a>';
+		echo '<a href="' . esc_url( $term_link ) . '" class="ablocks-reload-button">' . esc_html( $button_text ) . '</a>';
 		echo '</div>';
 	}
 
@@ -612,6 +615,7 @@ class Block extends BlockBaseAbstract {
 		$allow_icon = $attributes['allowIcon'] ?? false;
 		$Button_text = $attributes['buttonText'] ?? 'View More';
 		$tab_view = $attributes['showTab'] ?? false;
+		$showTabScrolling = $attributes['showTabScrolling'] ?? false;
 		$icon_class = $attributes['iconClass'] ?? 'far fa-copy';
 		$icon_svg = $attributes['iconSvgPath'] ?? '';
 		$icon_url = $attributes['iconImageUrl'] ?? '';
@@ -631,11 +635,16 @@ class Block extends BlockBaseAbstract {
 
 		$current_post_id = get_queried_object_id();
 
+		$showTabScrollingtrue = $showTabScrolling ? 'ablocks-taxonomy-listing-scrolling' : '';
+
 		?>
-		<div class="ablocks-taxonomy-listing_<?php echo esc_attr( $taxonomy_layout ); ?>" <?php echo $inline_style; ?>>
+		<div class="ablocks-taxonomy-listing_<?php echo esc_attr( $taxonomy_layout ); ?> <?php echo esc_attr( $showTabScrollingtrue ); ?>" <?php
+		// phpcs:ignore  WordPress.Security.EscapeOutput.OutputNotEscaped 
+		echo $inline_style; ?>>
 
 			<?php
 			$accordion_index = 1;
+			$accordion_name  = 'ablocks-blower-group-' . ( $attributes['block_id'] ?? '' );
 
 			foreach ( $active_taxonomy as $taxonomy ) :
 				$term_ids = $selected_terms[ $taxonomy ] ?? [];
@@ -692,7 +701,7 @@ class Block extends BlockBaseAbstract {
 
 					<?php if ( $use_accordion ) : ?>
 						<div class="ablocks-taxonomy-blower ablocks-taxonomy-listing-item">
-						<input type="radio" name="ablocks-blower-group" id="<?php echo esc_attr( $input_id ); ?>" <?php echo $should_open ? 'checked' : ''; ?>>
+						<input type="checkbox" name="<?php echo esc_attr( $accordion_name ); ?>" id="<?php echo esc_attr( $input_id ); ?>" <?php echo $should_open ? 'checked' : ''; ?>>
 						<?php if ( $link_url ) :
 							?><a class="ablocks-taxonomy-title__link" href="<?php echo esc_url( $link_url ); ?>"><?php endif; ?>
 						<label for="<?php echo esc_attr( $input_id ); ?>" class="ablocks-taxonomy-blower__label ablocks-taxonomy-title">

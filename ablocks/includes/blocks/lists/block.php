@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\lists;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Controls\Alignment;
@@ -149,9 +153,10 @@ class Block extends BlockBaseAbstract {
 	public function get_wrapper_css( $attributes, $device = '' ) {
 		$typography = isset( $attributes['typography'] ) ? $attributes['typography'] : '';
 		$alignment = isset( $attributes['alignment'] ) ? $attributes['alignment'] : '';
+		$typographyglobal = ! empty( $attributes['typographyGlobal'] ) ? $attributes['typographyGlobal'] : array();
 		return array_merge(
 			Alignment::get_css( $alignment, 'text-align', $device ),
-			Typography::get_css( $typography, '', $device ),
+			Typography::get_css( $typography, '', $device, $typographyglobal ),
 		);
 	}
 

@@ -8,6 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 use ABlocks\Classes\FileUpload;
 use ABlocks\Classes\AssetsGenerator;
 use ABlocks\Classes\RegisterScripts;
+use ABlocks\Classes\GlobalCssGenerator;
+use ABlocks\Classes\FontLoadLocally;
 use ABlocks\Admin\Menu;
 use ABlocks\Helper;
 
@@ -32,6 +34,8 @@ class Assets {
 		add_action( 'wp_enqueue_block_assets', [ $self, 'global_css_variable' ] );
 		add_action( 'wp_enqueue_scripts', [ $self, 'global_css_variable' ] );
 		add_action( 'enqueue_block_editor_assets', [ $self, 'global_css_variable' ] );
+		add_action( 'enqueue_block_editor_assets', [ $self, 'add_editor_inline_css' ] );
+
 		// Detect page
 		add_action( 'wp', array( $self, 'detect_page' ) );
 
@@ -44,7 +48,6 @@ class Assets {
 				add_action( 'wp', [ $self, 'regenerate_missing_assets' ], 20 );
 			}
 		}
-
 	}
 
 	public function detect_page() {
@@ -98,12 +101,35 @@ class Assets {
 			'site_url'              => site_url(),
 			'route_path'            => wp_parse_url( admin_url(), PHP_URL_PATH ),
 			'ajax_url'              => esc_url( admin_url( 'admin-ajax.php' ) ),
-			'nonce'                 => wp_create_nonce( 'wp_rest' ),
-			'ablocks_nonce'         => wp_create_nonce( 'ablocks_nonce' ),
 			'is_pro'                => (bool) Helper::is_active_ablocks_pro(),
 			'is_archive' => (bool) is_archive(),
 			'archive_post_type' => $this->get_current_archive_post_type(),
 		];
+	}
+
+	public function get_localize_dashboard_data() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return $this->get_localize_script_data();
+		}
+		return array_merge($this->get_localize_script_data(), [
+			'nonce'                 => wp_create_nonce( 'wp_rest' ),
+			'ablocks_nonce'         => wp_create_nonce( 'ablocks_nonce' ),
+		]);
+	}
+	public function get_localize_editor_data() {
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			return $this->get_localize_script_data();
+		}
+		return array_merge($this->get_localize_script_data(), [
+			'nonce'                 => wp_create_nonce( 'wp_rest' ),
+			'ablocks_nonce'         => wp_create_nonce( 'ablocks_nonce' ),
+		]);
+	}
+	public function get_localize_frontend_data() {
+		return array_merge($this->get_localize_script_data(), [
+			'nonce'                 => wp_create_nonce( 'wp_rest' ),
+			'ablocks_nonce'         => wp_create_nonce( 'ablocks_nonce' ),
+		]);
 	}
 
 	public function get_dashboard_localize_script_data() {
@@ -117,6 +143,7 @@ class Assets {
 				'container_element_gap' => Helper::get_settings( 'container_element_gap', 20 ),
 				'enabled_assets_file_generation' => (bool) Helper::get_settings( 'enabled_assets_file_generation', false ),
 				'enabled_block_copy_paste_style' => (bool) Helper::get_settings( 'enabled_block_copy_paste_style', false ),
+				'enabled_load_google_font_locally' => (bool) Helper::get_settings( 'enabled_load_google_font_locally', false ),
 				'enabled_only_selected_fonts' => (bool) Helper::get_settings( 'enabled_only_selected_fonts', false ),
 				'selected_fonts' => (array) Helper::get_settings( 'selected_fonts', [] ),
 			],
@@ -132,7 +159,7 @@ class Assets {
 		return apply_filters(
 			'ablocks/assets/dashboard_scripts_data',
 			array_merge(
-				$this->get_localize_script_data(),
+				$this->get_localize_dashboard_data(),
 				$args
 			)
 		);
@@ -147,8 +174,14 @@ class Assets {
 				'container_element_gap' => Helper::get_settings( 'container_element_gap', 20 ),
 				'enabled_assets_file_generation' => (bool) Helper::get_settings( 'enabled_assets_file_generation', false ),
 				'enabled_block_copy_paste_style' => (bool) Helper::get_settings( 'enabled_block_copy_paste_style', false ),
+				'enabled_load_google_font_locally' => (bool) Helper::get_settings( 'enabled_load_google_font_locally', false ),
 				'enabled_only_selected_fonts' => (bool) Helper::get_settings( 'enabled_only_selected_fonts', false ),
 				'selected_fonts' => (array) Helper::get_settings( 'selected_fonts', [] ),
+				'frontend_dashboard_page' => (int) Helper::get_settings( 'frontend_dashboard_page' ),
+				'global_color' => (array) Helper::get_settings( 'global_color', [] ),
+				'global_typography' => (array) Helper::get_settings( 'global_typography', [] ),
+				'global_typography_list' => wp_list_pluck( Helper::get_settings( 'global_typography', [] ), 'value', 'id' ),
+				'global_font_family_fallback' => (string) Helper::get_settings( 'global_font_family_fallback', 'Sans-serif' ),
 			],
 			'is_gutenberg_editor' => Helper::is_gutenberg_editor(),
 			'has_required_block_attribute_migration' => get_option( 'ablocks_has_required_block_attribute_migration' ),
@@ -156,6 +189,7 @@ class Assets {
 				'academy_lms' => Helper::is_active_academy(),
 				'storeengine' => Helper::is_active_storeengine(),
 				'wp_map_block' => Helper::is_active_wp_map_block(),
+				'quizpress' => Helper::is_active_quizpress(),
 			],
 			'blocks_status' => $ablocks_blocks,
 			'post_types' => $post_types
@@ -163,7 +197,7 @@ class Assets {
 		return apply_filters(
 			'ablocks/assets/editor_scripts_data',
 			array_merge(
-				$this->get_localize_script_data(),
+				$this->get_localize_editor_data(),
 				$args
 			)
 		);
@@ -279,28 +313,29 @@ class Assets {
 
 	public function front_end_google_fonts() {
 		global $ablocks_fonts;
-
 		if ( empty( $ablocks_fonts ) || ! is_array( $ablocks_fonts ) ) {
 			return false;
 		}
 
-		$font_families = [];
+		if ( Helper::get_settings( 'enabled_load_google_font_locally', false ) ) {
+			$FontLoadLocally = new FontLoadLocally();
+			$FontLoadLocally->enqueue_fonts( $ablocks_fonts ); // Attempt to load local fonts (fallback inside method)
+		} else {
+			$font_families = [];
+			foreach ( $ablocks_fonts as $family => $weights ) {
+				$font_family_string = $family;
+				$total_weights = count( $weights );
 
-		foreach ( $ablocks_fonts as $family => $weights ) {
-			$font_family_string = $family;
-			$total_weights = count( $weights );
+				if ( $total_weights > 0 ) {
+					$font_family_string .= ':wght@' . implode( ';', $weights );
+				}
 
-			if ( $total_weights > 0 ) {
-				$font_family_string .= ':wght@' . implode( ';', $weights );
+				$font_families[] = $font_family_string;
 			}
-
-			$font_families[] = $font_family_string;
+			// Generate the URL using the web_fonts_url method
+			$google_fonts_url = $this->web_fonts_url( implode( '|', $font_families ) ) . '&display=swap';
+			wp_register_style( 'ablocks-frontend-google-fonts', esc_url( $google_fonts_url ), array(), ABLOCKS_VERSION );
 		}
-
-		// Generate the URL using the web_fonts_url method
-		$google_fonts_url = $this->web_fonts_url( implode( '|', $font_families ) ) . '&display=swap';
-
-		wp_register_style( 'ablocks-frontend-google-fonts', esc_url( $google_fonts_url ), array(), ABLOCKS_VERSION );
 	}
 
 
@@ -343,7 +378,7 @@ class Assets {
 			wp_enqueue_style( 'ablocks-blocks-combine-style', $this->FileUpload->get_file_url( $this->current_page_slug . '.min.css' ), array(), filemtime( $this->FileUpload->get_file_path( $this->current_page_slug . '.min.css' ) ), 'all' );
 
 			wp_enqueue_script( 'ablocks-blocks-combine-script', $this->FileUpload->get_file_url( $this->current_page_slug . '.min.js' ), array(), filemtime( $this->FileUpload->get_file_path( $this->current_page_slug . '.min.js' ) ), true, [ 'strategy' => $script_loading_strategy ] );
-			wp_localize_script( 'ablocks-blocks-combine-script', 'ABlocksGlobal', $this->get_localize_script_data() );
+			wp_localize_script( 'ablocks-blocks-combine-script', 'ABlocksGlobal', $this->get_localize_frontend_data() );
 			wp_set_script_translations( 'ablocks-blocks-combine-script', 'ablocks', ABLOCKS_ROOT_DIR_PATH . 'languages' );
 		} else {
 			// fallback if assets not available
@@ -411,11 +446,199 @@ class Assets {
 		wp_enqueue_style( 'ablocks-editor-global-styles' );
 
 		$container_padding = Helper::get_settings( 'container_padding', 10 ) . 'px';
-		$css = ":root, body .editor-styles-wrapper {
-			--ablocks-container-padding: $container_padding;
-		}";
+		$css = ":root, body .editor-styles-wrapper {\n";
+		$css .= "    --ablocks-container-padding: $container_padding;\n";
+
+		// Colors
+		$global_color = (array) Helper::get_settings( 'global_color', [] );
+		foreach ( $global_color as $color ) {
+			if ( isset( $color->id, $color->value ) ) {
+				$css .= "    --ablocks-{$color->id}: {$color->value};\n";
+			}
+		}
+
+		// Typography
+		$global_typography = (array) Helper::get_settings( 'global_typography', [] );
+		foreach ( $global_typography as $typography ) {
+			if ( isset( $typography->id, $typography->value ) ) {
+				$id    = $typography->id;
+				$value = $typography->value;
+
+				// Desktop values
+				if ( ! empty( $value->fontFamily ) ) {
+					$css .= "    --ablocks-{$id}-font-family: {$value->fontFamily};\n";
+				}
+				if ( ! empty( $value->weight ) ) {
+					$css .= "    --ablocks-{$id}-weight: {$value->weight};\n";
+				}
+				if ( ! empty( $value->transform ) ) {
+					$css .= "    --ablocks-{$id}-transform: {$value->transform};\n";
+				}
+				if ( ! empty( $value->style ) ) {
+					$css .= "    --ablocks-{$id}-style: {$value->style};\n";
+				}
+				if ( ! empty( $value->decoration ) ) {
+					$css .= "    --ablocks-{$id}-decoration: {$value->decoration};\n";
+				}
+				if ( ! empty( $value->fontSize ) ) {
+					$unit = ! empty( $value->fontSizeUnit ) ? $value->fontSizeUnit : 'px';
+					$css .= "    --ablocks-{$id}-font-size: {$value->fontSize}{$unit};\n";
+				}
+				if ( ! empty( $value->lineHeight ) ) {
+					$unit = ! empty( $value->lineHeightUnit ) ? $value->lineHeightUnit : 'px';
+					$css .= "    --ablocks-{$id}-line-height: {$value->lineHeight}{$unit};\n";
+				}
+				if ( ! empty( $value->letterSpacing ) ) {
+					$unit = ! empty( $value->letterSpacingUnit ) ? $value->letterSpacingUnit : 'px';
+					$css .= "    --ablocks-{$id}-letter-spacing: {$value->letterSpacing}{$unit};\n";
+				}
+				if ( ! empty( $value->wordSpacing ) ) {
+					$unit = ! empty( $value->wordSpacingUnit ) ? $value->wordSpacingUnit : 'px';
+					$css .= "    --ablocks-{$id}-word-spacing: {$value->wordSpacing}{$unit};\n";
+				}
+
+				// Tablet values
+				if ( ! empty( $value->fontSizeTablet ) ) {
+					$unit = ! empty( $value->fontSizeUnitTablet ) ? $value->fontSizeUnitTablet : 'px';
+					$css .= "    --ablocks-{$id}-font-size-tablet: {$value->fontSizeTablet}{$unit};\n";
+				}
+				if ( ! empty( $value->lineHeightTablet ) ) {
+					$unit = ! empty( $value->lineHeightUnitTablet ) ? $value->lineHeightUnitTablet : 'px';
+					$css .= "    --ablocks-{$id}-line-height-tablet: {$value->lineHeightTablet}{$unit};\n";
+				}
+				if ( ! empty( $value->letterSpacingTablet ) ) {
+					$unit = ! empty( $value->letterSpacingUnitTablet ) ? $value->letterSpacingUnitTablet : 'px';
+					$css .= "    --ablocks-{$id}-letter-spacing-tablet: {$value->letterSpacingTablet}{$unit};\n";
+				}
+				if ( ! empty( $value->wordSpacingTablet ) ) {
+					$unit = ! empty( $value->wordSpacingUnitTablet ) ? $value->wordSpacingUnitTablet : 'px';
+					$css .= "    --ablocks-{$id}-word-spacing-tablet: {$value->wordSpacingTablet}{$unit};\n";
+				}
+
+				// Mobile values
+				if ( ! empty( $value->fontSizeMobile ) ) {
+					$unit = ! empty( $value->fontSizeUnitMobile ) ? $value->fontSizeUnitMobile : 'px';
+					$css .= "    --ablocks-{$id}-font-size-mobile: {$value->fontSizeMobile}{$unit};\n";
+				}
+				if ( ! empty( $value->lineHeightMobile ) ) {
+					$unit = ! empty( $value->lineHeightUnitMobile ) ? $value->lineHeightUnitMobile : 'px';
+					$css .= "    --ablocks-{$id}-line-height-mobile: {$value->lineHeightMobile}{$unit};\n";
+				}
+				if ( ! empty( $value->letterSpacingMobile ) ) {
+					$unit = ! empty( $value->letterSpacingUnitMobile ) ? $value->letterSpacingUnitMobile : 'px';
+					$css .= "    --ablocks-{$id}-letter-spacing-mobile: {$value->letterSpacingMobile}{$unit};\n";
+				}
+				if ( ! empty( $value->wordSpacingMobile ) ) {
+					$unit = ! empty( $value->wordSpacingUnitMobile ) ? $value->wordSpacingUnitMobile : 'px';
+					$css .= "    --ablocks-{$id}-word-spacing-mobile: {$value->wordSpacingMobile}{$unit};\n";
+				}
+			}//end if
+		}//end foreach
+
+		$css .= "}\n";
+
+		if ( ! is_admin() && ! Helper::is_gutenberg_editor() ) {
+			$css .= $this->get_common_css();
+		}
 		wp_add_inline_style( 'ablocks-editor-global-styles', $css );
+		wp_add_inline_style( 'ablocks-common-style', $css );
 	}
+
+	public function add_editor_inline_css() {
+		$custom_css = $this->get_common_css( '.editor-styles-wrapper ' );
+		add_theme_support( 'editor-styles' );
+		add_editor_style();
+		wp_add_inline_style( 'wp-block-library', $custom_css );
+	}
+
+	public function get_common_css( $parent_selector = '' ) {
+		global $ablocks_settings;
+		$attributes = [
+			'global_body_text_color' => $ablocks_settings->global_body_text_color,
+			'global_body_typography' => $ablocks_settings->global_body_typography,
+			'global_body_paragraph_space' => $ablocks_settings->global_body_paragraph_space,
+			'global_link_color' => $ablocks_settings->global_link_color,
+			'global_link_hover_color' => $ablocks_settings->global_link_hover_color,
+			'global_link_typography' => $ablocks_settings->global_link_typography,
+			'global_link_hover_typography' => $ablocks_settings->global_link_hover_typography,
+			'global_h1_color' => $ablocks_settings->global_h1_color,
+			'global_h1_typography' => $ablocks_settings->global_h1_typography,
+			'global_h2_color' => $ablocks_settings->global_h2_color,
+			'global_h2_typography' => $ablocks_settings->global_h2_typography,
+			'global_h3_color' => $ablocks_settings->global_h3_color,
+			'global_h3_typography' => $ablocks_settings->global_h3_typography,
+			'global_h4_color' => $ablocks_settings->global_h4_color,
+			'global_h4_typography' => $ablocks_settings->global_h4_typography,
+			'global_h5_color' => $ablocks_settings->global_h5_color,
+			'global_h5_typography' => $ablocks_settings->global_h5_typography,
+			'global_h6_color' => $ablocks_settings->global_h6_color,
+			'global_h6_typography' => $ablocks_settings->global_h6_typography,
+		];
+		$css_generator = new GlobalCssGenerator( $attributes );
+
+		$css_generator->add_class_styles(
+			$parent_selector . 'body',
+			$css_generator->get_body_css( $attributes ),
+			$css_generator->get_body_css( $attributes, 'Tablet' ),
+			$css_generator->get_body_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			$parent_selector . 'p',
+			$css_generator->get_body_paragraph_css( $attributes ),
+			$css_generator->get_body_paragraph_css( $attributes, 'Tablet' ),
+			$css_generator->get_body_paragraph_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			$parent_selector . 'a',
+			$css_generator->get_body_anchor_css( $attributes ),
+			$css_generator->get_body_anchor_css( $attributes, 'Tablet' ),
+			$css_generator->get_body_anchor_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			$parent_selector . 'a:hover',
+			$css_generator->get_body_anchor_hover_css( $attributes ),
+			$css_generator->get_body_anchor_hover_css( $attributes, 'Tablet' ),
+			$css_generator->get_body_anchor_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			$parent_selector . 'h1',
+			$css_generator->get_global_h1_css( $attributes ),
+			$css_generator->get_global_h1_css( $attributes, 'Tablet' ),
+			$css_generator->get_global_h1_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			$parent_selector . 'h2',
+			$css_generator->get_global_h2_css( $attributes ),
+			$css_generator->get_global_h2_css( $attributes, 'Tablet' ),
+			$css_generator->get_global_h2_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			$parent_selector . 'h3',
+			$css_generator->get_global_h3_css( $attributes ),
+			$css_generator->get_global_h3_css( $attributes, 'Tablet' ),
+			$css_generator->get_global_h3_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			$parent_selector . 'h4',
+			$css_generator->get_global_h4_css( $attributes ),
+			$css_generator->get_global_h4_css( $attributes, 'Tablet' ),
+			$css_generator->get_global_h4_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			$parent_selector . 'h5',
+			$css_generator->get_global_h5_css( $attributes ),
+			$css_generator->get_global_h5_css( $attributes, 'Tablet' ),
+			$css_generator->get_global_h5_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			$parent_selector . 'h6',
+			$css_generator->get_global_h6_css( $attributes ),
+			$css_generator->get_global_h6_css( $attributes, 'Tablet' ),
+			$css_generator->get_global_h6_css( $attributes, 'Mobile' )
+		);
+		return $css_generator->generate_css();
+	}
+
 
 	public function is_assets_generated() {
 		$file_name = $this->current_page_slug;

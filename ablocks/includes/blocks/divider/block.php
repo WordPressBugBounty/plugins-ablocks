@@ -2,6 +2,10 @@
 
 namespace ABlocks\Blocks\Divider;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Controls\Alignment;
@@ -52,6 +56,13 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-divider__element-icon .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+		);
+
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-divider__element-icon .ablocks-icon-wrap',
 			array_merge( Icon::get_wrapper_css( $attributes ), $this->get_icon_spacing_margins( $attributes, '' ) ),
@@ -124,6 +135,12 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-divider__element-icon .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-divider__element-icon .ablocks-icon-wrap',
 			array_merge( Icon::get_wrapper_css( $attributes ), $this->get_icon_spacing_margins( $attributes, '' ) ),
 			array_merge( Icon::get_wrapper_css( $attributes, 'Tablet' ), $this->get_icon_spacing_margins( $attributes, 'Tablet' ) ),
@@ -169,7 +186,8 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_divider_element_text_css( $attributes, $device = '' ) {
-
+		$typographyValueGlobal = ! empty( $attributes['elementTextTypographyGlobal'] ) ? $attributes['elementTextTypographyGlobal'] : '';
+		$typography_value = isset( $attributes['elementTextTypographyGlobal'] ) ? $attributes['elementTextTypographyGlobal'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['elementTextColor'] ) ? $attributes['elementTextColor'] : '' ) ],
 			Range::get_css([
@@ -192,7 +210,7 @@ class Block extends BlockBaseAbstract {
 				'property' => 'padding-left',
 				'device' => $device,
 			]),
-			Typography::get_css( $attributes['elementTextTypography'], '', $device ),
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			TextStroke::get_css( $attributes['elementTextStroke'], '', $device ),
 		);
 	}

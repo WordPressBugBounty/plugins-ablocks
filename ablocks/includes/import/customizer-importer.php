@@ -218,6 +218,7 @@ class CustomizerImporter {
 
 			// If error storing permanently, unlink.
 			if ( is_wp_error( $id ) ) {
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.unlink_unlink 
 				unlink( $file_array['tmp_name'] );
 				return $id;
 			}

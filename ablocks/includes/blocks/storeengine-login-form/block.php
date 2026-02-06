@@ -126,20 +126,21 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_form_title_css( $attributes, $device = '' ) {
-		$form_title_typography_css = ! empty( $attributes['title_typography'] ) ? Typography::get_css( $attributes['title_typography'], '', $device ) : array();
-
+		$form_title_typography_css = ! empty( $attributes['title_typography'] ) ? $attributes['title_typography'] : [];
+		$typographyGlobal = ( isset( $attributes['title_typographyGlobal'] ) ? $attributes['title_typographyGlobal'] : '' );
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['title_color'] ) ? $attributes['title_color'] : '' ) ],
-			$form_title_typography_css
+			Typography::get_css( $form_title_typography_css, '', $device, $typographyGlobal ),
 		);
 	}
 
 	public function get_input_field_label_css( $attributes, $device = '' ) {
-		$input_field_label_typography_css = ! empty( $attributes['input_field_label_typography'] ) ? Typography::get_css( $attributes['input_field_label_typography'], '', $device ) : array();
+		$input_field_label_typography_css = ! empty( $attributes['input_field_label_typography'] ) ? $attributes['input_field_label_typography'] : [];
+		$typographyGlobal = ( isset( $attributes['input_field_label_typographyGlobal'] ) ? $attributes['input_field_label_typographyGlobal'] : '' );
 
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['input_field_label_color'] ) ? $attributes['input_field_label_color'] : '' ) ],
-			$input_field_label_typography_css
+			Typography::get_css( $input_field_label_typography_css, '', $device, $typographyGlobal ),
 		);
 	}
 
@@ -173,9 +174,10 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_login_form_button_css( $attributes, $device = '' ) {
-		$login_form_button_typography_css = ! empty( $attributes['login_btn_typography'] ) ? Typography::get_css( $attributes['login_btn_typography'], '', $device ) : array();
+		$login_form_button_typography_css = ! empty( $attributes['login_btn_typography'] ) ? $attributes['login_btn_typography'] : [];
+		$typographyGlobal = ( isset( $attributes['login_btn_typographyGlobal'] ) ? $attributes['login_btn_typographyGlobal'] : '' );
 		return array_merge(
-			$login_form_button_typography_css,
+			Typography::get_css( $login_form_button_typography_css, '', $device, $typographyGlobal ),
 			[ 'background' => Color::get_css( isset( $attributes['login_btn_bg_color'] ) ? $attributes['login_btn_bg_color'] : '' ) ],
 			[ 'color' => Color::get_css( isset( $attributes['login_btn_color'] ) ? $attributes['login_btn_color'] : '' ) ],
 		);
@@ -189,11 +191,13 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_login_form_footer_css( $attributes, $device = '' ) {
-		$login_form_footer_typography_css = ! empty( $attributes['form_footer_title_typography'] ) ? Typography::get_css( $attributes['form_footer_title_typography'], '', $device ) : array();
+		$login_form_footer_typography_css = ! empty( $attributes['form_footer_title_typography'] ) ? $attributes['form_footer_title_typography'] : [];
+		$typographyGlobal = ( isset( $attributes['form_footer_title_typographyGlobal'] ) ? $attributes['form_footer_title_typographyGlobal'] : '' );
 
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['form_footer_title_color'] ) ? $attributes['form_footer_title_color'] : '' ) ],
-			$login_form_footer_typography_css
+			// $login_form_footer_typography_css
+			Typography::get_css( $login_form_footer_typography_css, '', $device, $typographyGlobal ),
 		);
 	}
 
@@ -234,7 +238,7 @@ class Block extends BlockBaseAbstract {
 			'login_redirect_url'     => Helper::get_attribute_value( $attributes, 'login_redirect_url' ),
 			'logout_redirect_url'    => Helper::get_attribute_value( $attributes, 'logout_redirect_url' ),
 		];
-
+		// phpcs:ignore  WordPress.Security.NonceVerification.Recommended,  WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 		if ( isset( $_GET['context'] ) && 'edit' === sanitize_text_field( $_GET['context'] ) ) {
 			add_filter( 'storeengine/shortcode/login_form_is_user_logged_in', function () {
 				return false;

@@ -15,10 +15,12 @@ class Settings extends AbstractAjaxHandler {
 	public function __construct() {
 		$this->actions = array(
 			'get_blocks_visibility'      => array(
-				'callback' => array( $this, 'get_blocks_visibility' ),
+				'callback'      => array( $this, 'get_blocks_visibility' ),
+				'capability'    => 'manage_options'
 			),
 			'save_block_visibility'      => array(
 				'callback' => array( $this, 'save_block_visibility' ),
+				'capability'    => 'manage_options',
 				'fields' => array(
 					'block_name'        => 'string',
 					'status'            => 'boolean',
@@ -26,15 +28,18 @@ class Settings extends AbstractAjaxHandler {
 			),
 			'get_settings'      => array(
 				'callback' => array( $this, 'get_settings' ),
+				'capability'    => 'manage_options',
 			),
 			'save_settings'      => array(
 				'callback' => array( $this, 'save_settings' ),
+				'capability'    => 'manage_options',
 				'fields' => array(
 					'default_container_width' => 'integer',
 					'container_padding' => 'integer',
 					'container_element_gap' => 'integer',
 					'enabled_assets_file_generation' => 'boolean',
 					'enabled_block_copy_paste_style' => 'boolean',
+					'enabled_load_google_font_locally' => 'boolean',
 					'enabled_only_selected_fonts' => 'boolean',
 					'enabled_coming_soon_page' => 'boolean',
 					'coming_soon_page' => 'integer',
@@ -43,20 +48,119 @@ class Settings extends AbstractAjaxHandler {
 					'login_page' => 'integer',
 					'registration_page' => 'integer',
 					'forget_password_page' => 'integer',
-
+					'frontend_dashboard_page' => 'string',
 					'mailchimp_api_key' => 'string',
 					'drip_api_key' => 'string',
 					'getresponse_api_key' => 'string',
 					'convertkit_api_key' => 'string',
 					'mailerlite_api_key' => 'string',
+					// global color & typography
+					'global_color' => 'json',
+					'global_typography' => 'json',
+					'global_font_family_fallback' => 'string',
+					'global_body_text_color' => 'string',
+					'global_body_typography' => 'json',
+					'global_body_paragraph_space' => 'json',
+					'global_link_color' => 'string',
+					'global_link_hover_color' => 'string',
+					'global_link_typography' => 'json',
+					'global_link_hover_typography' => 'json',
+					'global_h1_color' => 'string',
+					'global_h1_typography' => 'json',
+					'global_h2_color' => 'string',
+					'global_h2_typography' => 'json',
+					'global_h3_color' => 'string',
+					'global_h3_typography' => 'json',
+					'global_h4_color' => 'string',
+					'global_h4_typography' => 'json',
+					'global_h5_color' => 'string',
+					'global_h5_typography' => 'json',
+					'global_h6_color' => 'string',
+					'global_h6_typography' => 'json',
 				)
 			),
 			'fetch_posts'      => array(
 				'callback' => array( $this, 'fetch_posts' ),
+				'capability'    => 'manage_options',
 				'fields' => array(
 					'postId'   => 'integer',
 					'postType' => 'string',
 					'keyword'  => 'string',
+				)
+			),
+			'get_fronted_dashboard_pages'      => array(
+				'callback' => array( $this, 'get_fronted_dashboard_pages' ),
+				'capability'    => 'manage_options',
+			),
+			'create_fronted_dashboard_page'      => array(
+				'callback' => array( $this, 'create_fronted_dashboard_page' ),
+				'capability'    => 'manage_options',
+				'fields' => [
+					'label'     => 'string',
+					'slug'      => 'string',
+					'icon'      => 'string',
+					'class_name' => 'string',
+					'priority'  => 'integer',
+					'parent_id'  => 'integer',
+				]
+			),
+			'create_fronted_dashboard_link'      => array(
+				'callback' => array( $this, 'create_fronted_dashboard_link' ),
+				'capability'    => 'manage_options',
+				'fields' => [
+					'label'     => 'string',
+					'link'      => 'string',
+					'icon'      => 'string',
+					'class_name' => 'string',
+					'priority'  => 'integer',
+					'parent_id'  => 'string',
+				]
+			),
+			'edit_fronted_dashboard_link'      => array(
+				'callback' => array( $this, 'edit_fronted_dashboard_link' ),
+				'capability'    => 'manage_options',
+				'fields' => [
+					'label'     => 'string',
+					'link'      => 'string',
+					'icon'      => 'string',
+					'class_name' => 'string',
+					'priority'  => 'integer',
+					'page_id'  => 'string',
+				]
+			),
+			'delete_fronted_dashboard_link'      => array(
+				'callback' => array( $this, 'delete_fronted_dashboard_link' ),
+				'capability'    => 'manage_options',
+				'fields' => array(
+					'page_id' => 'string',
+				)
+			),
+			'edit_fronted_dashboard_page'      => array(
+				'callback' => array( $this, 'edit_fronted_dashboard_page' ),
+				'capability'    => 'manage_options',
+				'fields' => [
+					'label'     => 'string',
+					'slug'      => 'string',
+					'icon'      => 'string',
+					'class_name' => 'string',
+					'priority'  => 'integer',
+					'parent_id'  => 'integer',
+					'page_id'  => 'integer',
+				]
+			),
+			'move_fronted_dashboard_page'      => array(
+				'callback' => array( $this, 'move_fronted_dashboard_page' ),
+				'capability'    => 'manage_options',
+				'fields' => [
+					'reordered_items'  => 'string',
+				]
+			),
+			'delete_fronted_dashboard_page'      => array(
+				'callback' => array( $this, 'delete_fronted_dashboard_page' ),
+				'capability'    => 'manage_options',
+				'fields' => array(
+					'slug'   => 'string',
+					'page_id' => 'integer',
 				)
 			),
 		);
@@ -73,7 +177,7 @@ class Settings extends AbstractAjaxHandler {
 
 		$json_payload = Sanitizer::sanitize_payload([
 			'required_plugin' => 'json',
-		], $_POST); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		], $payload);
 
 		$required_plugin = $json_payload['required_plugin'];
 
@@ -114,7 +218,19 @@ class Settings extends AbstractAjaxHandler {
 		do_action( 'ablocks/before_save_settings', $payload, 'base' );
 		$json_payload = Sanitizer::sanitize_payload([
 			'selected_fonts' => 'json',
-		], $_POST); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			'global_color' => 'json',
+			'global_typography' => 'json',
+			'global_body_typography' => 'json',
+			'global_body_paragraph_space' => 'json',
+			'global_link_typography' => 'json',
+			'global_link_hover_typography' => 'json',
+			'global_h1_typography' => 'json',
+			'global_h2_typography' => 'json',
+			'global_h3_typography' => 'json',
+			'global_h4_typography' => 'json',
+			'global_h5_typography' => 'json',
+			'global_h6_typography' => 'json',
+		], $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		$default = BaseSettings::get_default_data();
 		$is_update = BaseSettings::save_settings( [
@@ -123,12 +239,14 @@ class Settings extends AbstractAjaxHandler {
 			'container_element_gap' => $payload['container_element_gap'] ?? $default['container_element_gap'],
 			'enabled_assets_file_generation' => $payload['enabled_assets_file_generation'] ?? $default['enabled_assets_file_generation'],
 			'enabled_block_copy_paste_style' => $payload['enabled_block_copy_paste_style'] ?? $default['enabled_block_copy_paste_style'],
+			'enabled_load_google_font_locally' => $payload['enabled_load_google_font_locally'] ?? $default['enabled_load_google_font_locally'],
 			'enabled_only_selected_fonts' => $payload['enabled_only_selected_fonts'] ?? $default['enabled_only_selected_fonts'],
 			'selected_fonts' => $json_payload['selected_fonts'] ?? $default['selected_fonts'],
 			'enabled_coming_soon_page' => $payload['enabled_coming_soon_page'] ?? $default['enabled_coming_soon_page'],
 			'coming_soon_page' => $payload['coming_soon_page'] ?? $default['coming_soon_page'],
 			'enabled_maintenance_page' => $payload['enabled_maintenance_page'] ?? $default['enabled_maintenance_page'],
 			'maintenance_page' => $payload['maintenance_page'] ?? $default['maintenance_page'],
+			'frontend_dashboard_page' => $payload['frontend_dashboard_page'] ?? $default['frontend_dashboard_page'],
 			'login_page' => $payload['login_page'] ?? $default['login_page'],
 			'registration_page' => $payload['registration_page'] ?? $default['registration_page'],
 			'forget_password_page' => $payload['forget_password_page'] ?? $default['forget_password_page'],
@@ -138,6 +256,29 @@ class Settings extends AbstractAjaxHandler {
 			'getresponse_api_key' => $payload['getresponse_api_key'] ?? '',
 			'convertkit_api_key' => $payload['convertkit_api_key'] ?? '',
 			'mailerlite_api_key' => $payload['mailerlite_api_key'] ?? '',
+			// Global Color & Typography
+			'global_color' => $json_payload['global_color'] ?? [],
+			'global_typography' => $json_payload['global_typography'] ?? [],
+			'global_font_family_fallback' => $payload['global_font_family_fallback'] ?? '',
+			'global_body_typography' => $json_payload['global_body_typography'] ?? [],
+			'global_body_paragraph_space' => $json_payload['global_body_paragraph_space'] ?? [],
+			'global_link_typography' => $json_payload['global_link_typography'] ?? [],
+			'global_link_hover_typography' => $json_payload['global_link_hover_typography'] ?? [],
+			'global_h1_typography' => $json_payload['global_h1_typography'] ?? [],
+			'global_h2_typography' => $json_payload['global_h2_typography'] ?? [],
+			'global_h3_typography' => $json_payload['global_h3_typography'] ?? [],
+			'global_h4_typography' => $json_payload['global_h4_typography'] ?? [],
+			'global_h5_typography' => $json_payload['global_h5_typography'] ?? [],
+			'global_h6_typography' => $json_payload['global_h6_typography'] ?? [],
+			'global_body_text_color' => $payload['global_body_text_color'] ?? '',
+			'global_link_color' => $payload['global_link_color'] ?? '',
+			'global_link_hover_color' => $payload['global_link_hover_color'] ?? '',
+			'global_h1_color' => $payload['global_h1_color'] ?? '',
+			'global_h2_color' => $payload['global_h2_color'] ?? '',
+			'global_h3_color' => $payload['global_h3_color'] ?? '',
+			'global_h4_color' => $payload['global_h4_color'] ?? '',
+			'global_h5_color' => $payload['global_h5_color'] ?? '',
+			'global_h6_color' => $payload['global_h6_color'] ?? '',
 		]);
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing
 		do_action( 'ablocks/after_save_settings', $is_update, 'base', $payload );
@@ -177,5 +318,361 @@ class Settings extends AbstractAjaxHandler {
 			}
 		}
 		wp_send_json_success( $results );
+	}
+
+	public function get_fronted_dashboard_pages() {
+		$settings = json_decode( get_option( ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME, '{}' ), true );
+		foreach ( $settings as &$item ) {
+			if ( isset( $item['parent_id'] ) ) {
+				$item['parent_id'] = 'null' === $item['parent_id'] ? null : $item['parent_id'];
+			}
+
+			$item['edit_link'] = (
+				'link' !== ( $item['type'] ?? '' ) &&
+				is_numeric( $item['page_id'] )
+			)
+				? str_replace( '&amp;', '&', get_edit_post_link( $item['page_id'] ) )
+				: null;
+
+			if ( is_array( $item['children'] ?? null ) ) {
+				foreach ( $item['children'] as &$child_item ) {
+					if ( isset( $child_item['parent_id'] ) ) {
+						$child_item['parent_id'] = 'null' === $child_item['parent_id'] ? null : $child_item['parent_id'];
+
+					}
+
+					$child_item['edit_link'] = (
+						'link' !== ( $child_item['type'] ?? '' ) &&
+						is_numeric( $child_item['page_id'] )
+					)
+						? str_replace( '&amp;', '&', get_edit_post_link( $child_item['page_id'] ) )
+						: null;
+				}
+			}
+		}//end foreach
+		wp_send_json_success( $settings );
+	}
+	public function create_fronted_dashboard_page( $payload ) {
+		global $wpdb;
+		// Step 1: Get Frontend Dashboard Page ID
+		$frontend_dashboard_id = (int) Helper::get_settings( 'frontend_dashboard_page' );
+		$settings = json_decode( get_option( ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME, '{}' ), true );
+		$root_page_id = 0;
+		// Step 2: Check if "root" page exists under frontend dashboard
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
+		$root_page = $wpdb->get_row( $wpdb->prepare(
+			"SELECT ID, post_parent FROM $wpdb->posts WHERE post_parent=%d AND post_name = %s AND post_type = 'page'",
+			$frontend_dashboard_id,
+			'root'
+		) );
+
+		$post_parent = ! empty( $payload['parent_id'] ) ? $payload['parent_id'] : $frontend_dashboard_id;
+
+		if ( ! $root_page || (int) $root_page->post_parent !== $frontend_dashboard_id ) {
+			// Step 3: Create "root" page as child of frontend dashboard page
+			$root_page_id = wp_insert_post( [
+				'post_title'   => 'Root',
+				'post_name'    => 'root',
+				'post_status'  => 'publish',
+				'post_type'    => 'page',
+				'post_content' => '',
+				'post_parent'  => $frontend_dashboard_id,
+			] );
+
+			$settings[] = [
+				'page_id' => $root_page_id,
+				'label'     => 'Root',
+				'slug'      => 'root',
+				'icon'      => '',
+				'class_name' => '',
+				'priority'  => 0,
+			];
+		}
+
+		$insert_page_id = wp_insert_post( [
+			'post_title'   => $payload['label'],
+			'post_name'    => $payload['slug'],
+			'post_content' => '',
+			'post_status'  => 'publish',
+			'post_type'    => 'page',
+			'post_parent'  => $post_parent,
+		] );
+
+		if ( $insert_page_id ) {
+			$payload['page_id'] = $insert_page_id;
+
+			if ( ! empty( $payload['parent_id'] ) ) {
+				foreach ( $settings as &$setting ) {
+					if ( $setting['page_id'] === $post_parent ) {
+						if ( ! isset( $setting['children'] ) ) {
+							$setting['children'] = [];
+						}
+						$setting['children'][] = $payload;
+					}
+				}
+				unset( $setting ); // important to break reference
+			} else {
+				$settings[] = $payload;
+			}
+
+			update_option( ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME, wp_json_encode( $settings ) );
+			flush_rewrite_rules();
+		}
+
+		wp_send_json_success( get_post( $insert_page_id ) );
+	}
+
+	public function create_fronted_dashboard_link( array $payload ) : void {
+		global $wpdb;
+
+		if ( empty( $payload['link'] ) || empty( $payload['label'] ) ) {
+			wp_send_json_error( __( 'Link/Label is required.', 'ablocks' ) );
+		}
+
+		$settings = json_decode(
+			get_option( ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME, '{}' ),
+			true
+		);
+
+		$payload['type'] = 'link';
+		$parent_id = $payload['parent_id'] = $payload['parent_id'] ?? 0;
+		$payload['page_id'] = 'link_' . time();
+		// print_r($payload);
+		// var_dump(( $parent_id ));
+		if ( empty( $parent_id ) || 'null' === $parent_id ) {
+			$settings[] = $payload;
+		} elseif ( ! is_null(
+			$index = array_search(
+				$parent_id,
+				array_column( $settings, 'page_id' )
+			)
+		)
+		) {
+			$settings[ $index ]['children'][] = $payload;
+		} else {
+			wp_send_json_error( __( 'Invalid parent id.', 'ablocks' ) );
+		}
+
+		update_option(
+			ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME,
+			wp_json_encode( array_values( $settings ) )
+		);
+
+		wp_send_json_success( $payload );
+	}
+
+	public function edit_fronted_dashboard_link( array $payload ) : void {
+		global $wpdb;
+
+		if ( empty( $payload['page_id'] ) ||
+			empty( $payload['link'] ) ||
+			empty( $payload['label'] )
+		) {
+			wp_send_json_error( __( 'Link/Label/ID is required.', 'ablocks' ) );
+		}
+
+		$settings = json_decode(
+			get_option( ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME, '{}' ),
+			true
+		);
+
+		$page_id = $payload['page_id'] = $payload['page_id'] ?? 0;
+
+		foreach ( $settings as &$items ) {
+			// echo $items['page_id'],"\n";
+			// var_dump($page_id ,  $items['page_id']);
+			if ( $page_id === $items['page_id'] ) {
+				$items['label'] = $payload['label'] ?: $items['label'];
+				$items['link'] = $payload['link'] ?: $items['link'];
+				$items['class_name'] = $payload['class_name'] ?: $items['class_name'];
+				$items['icon'] = $payload['icon'] ?: $items['icon'];
+				break;
+			} elseif ( ! empty( $items['children'] ) ) {
+				foreach ( $items['children'] as &$c_items ) {
+					if ( $page_id === $c_items['page_id'] ) {
+						$c_items['label'] = $payload['label'] ?: $c_items['label'];
+						$c_items['link'] = $payload['link'] ?: $c_items['link'];
+						$c_items['class_name'] = $payload['class_name'] ?: $c_items['class_name'];
+						$c_items['icon'] = $payload['icon'] ?: $c_items['icon'];
+						break 2;
+					}
+				}
+			}
+		}//end foreach
+
+		update_option(
+			ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME,
+			wp_json_encode( array_values( $settings ) )
+		);
+
+		wp_send_json_success( $payload );
+	}
+
+	public function delete_fronted_dashboard_link( array $payload ) : void {
+		global $wpdb;
+		// print_r($payload);
+		if ( empty( $payload['page_id'] )
+		) {
+			wp_send_json_error( __( 'ID is required.', 'ablocks' ) );
+		}
+
+		$settings = json_decode(
+			get_option( ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME, '{}' ),
+			true
+		);
+
+		$page_id = $payload['page_id'] = $payload['page_id'] ?? 0;
+
+		foreach ( $settings as &$items ) {
+			// echo $items['page_id'],"\n";
+			// var_dump($page_id ,  $items['page_id']);
+			if ( $page_id === $items['page_id'] ) {
+				$items = null;
+				break;
+			} elseif ( ! empty( $items['children'] ) ) {
+				foreach ( $items['children'] as &$c_items ) {
+					if ( $page_id === $c_items['page_id'] ) {
+						$c_items = null;
+						$items['children'] = array_filter( $items['children'] );
+						break 2;
+					}
+				}
+			}
+		}
+
+		update_option(
+			ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME,
+			wp_json_encode( array_filter( $settings ) )
+		);
+
+		wp_send_json_success( $payload );
+	}
+
+	public function edit_fronted_dashboard_page( $payload ) {
+		if ( empty( $payload['page_id'] ) ) {
+			wp_send_json_error( 'Page ID is required for updating.' );
+		}
+
+		wp_update_post( [
+			'ID' => $payload['page_id'],
+			'post_title' => $payload['label'],
+			'post_slug' => $payload['slug'],
+			'priority' => $payload['priority'],
+			'post_parent'  => ! empty( $payload['parent_id'] ) ? (int) $payload['parent_id'] : 0,
+		], true );
+
+		$settings = json_decode( get_option( ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME, '{}' ), true );
+
+		$update_settings_recursive = null; // initialize first
+		$update_settings_recursive = function ( &$settings ) use ( &$update_settings_recursive, $payload ) {
+			foreach ( $settings as &$setting ) {
+				if ( $setting['page_id'] === $payload['page_id'] ) {
+					$setting['label']      = $payload['label'] ?? $setting['label'];
+					$setting['slug']       = $payload['slug'] ?? $setting['slug'];
+					$setting['icon']       = $payload['icon'] ?? $setting['icon'];
+					$setting['class_name'] = $payload['class_name'] ?? $setting['class_name'];
+					$setting['priority']   = $payload['priority'] ?? ( $setting['priority'] ?? 0 );
+					if ( isset( $payload['slug'] ) ||
+						isset( $payload['label'] )
+					) {
+						wp_update_post( [
+							'ID' => $payload['page_id'],
+							'post_title' => $payload['label'] ?? $setting['label'],
+							'post_name' => $payload['slug'] ?? $setting['slug'],
+						] );
+					}
+					if ( isset( $payload['children'] ) ) {
+						$setting['children'] = $payload['children'];
+					}
+					return true;
+				}//end if
+
+				if ( ! empty( $setting['children'] ) ) {
+					if ( $update_settings_recursive( $setting['children'] ) ) {
+						return true;
+					}
+				}
+			}//end foreach
+			return false;
+		};
+
+		$update_settings_recursive( $settings );
+		update_option( ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME, wp_json_encode( $settings ) );
+
+		flush_rewrite_rules();
+		// Step 4: Return updated page
+		wp_send_json_success( get_post( $payload['page_id'] ) );
+	}
+
+	public function delete_fronted_dashboard_page( $payload ) {
+		// Load existing frontend dashboard sub-pages settings
+		$settings = json_decode( get_option( ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME, '{}' ), true );
+		if ( ! is_array( $settings ) ) {
+			$settings = [];
+		}
+
+		$remove_id   = $payload['page_id'] ?? null;
+		$remove_slug = $payload['slug'] ?? null;
+
+		if ( ! $remove_id && ! $remove_slug ) {
+			wp_send_json_error( 'Page ID or slug is required to delete.' );
+		}
+
+		// Step 1: Delete the post if ID is provided
+		if ( $remove_id ) {
+			wp_delete_post( (int) $remove_id, true );
+		} elseif ( $remove_slug ) {
+			// If only slug is provided, try to find the page
+			$page = get_page_by_path( $remove_slug, OBJECT, 'page' );
+			if ( $page ) {
+				$remove_id = $page->ID;
+				wp_delete_post( $remove_id, true );
+			}
+		}
+
+		// Step 2: Recursively remove from settings
+		$remove_from_settings = function ( &$settings ) use ( &$remove_from_settings, $remove_id, $remove_slug ) {
+			$settings = array_values(array_filter($settings, function ( $item ) use ( $remove_id, $remove_slug ) {
+				$match_id   = isset( $item['page_id'] ) && $remove_id && $item['page_id'] == $remove_id;
+				$match_slug = isset( $item['slug'] ) && $remove_slug && $item['slug'] == $remove_slug;
+				return ! $match_id && ! $match_slug;
+			}));
+
+			// Recurse into children
+			foreach ( $settings as &$item ) {
+				if ( ! empty( $item['children'] ) ) {
+					$remove_from_settings( $item['children'] );
+				}
+			}
+			unset( $item );
+		};
+
+		$remove_from_settings( $settings );
+
+		// Step 3: Save updated settings
+		update_option( ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME, wp_json_encode( $settings ) );
+
+		wp_send_json_success( $remove_id ?? $remove_slug );
+	}
+
+	public function move_fronted_dashboard_page( array $payload ) : void {
+		$reordered_settings = json_decode( $payload['reordered_items'] ?? '{}', true );
+		$settings           = json_decode(
+			get_option(
+				ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME, '{}'
+			),
+			true
+		);
+
+		if ( is_array( $reordered_settings ) &&
+			count( $reordered_settings ) === count( $settings )
+		) {
+			update_option(
+				ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME,
+				$payload['reordered_items'] ?? '{}'
+			);
+			wp_send_json_success( __( 'Success!', 'ablocks' ) );
+		}
+		wp_send_json_error( __( 'Invalid data', 'ablocks' ), 400 );
 	}
 }

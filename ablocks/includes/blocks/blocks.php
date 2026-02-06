@@ -80,6 +80,7 @@ return [
 	'qr-code',
 	'advance-list-item',
 	'breadcrumb',
+	'dynamic-text',
 	// loop builder
 	'loop-builder',
 	'loop-template',
@@ -95,8 +96,10 @@ return [
 	'form-password',
 	'form-select',
 	'form-radio',
+	'frontend-dashboard',
 	'text-path',
 	// Academy LMS
+	'academy-container',
 	'academy-certificate',
 	'academy-certificate-id',
 	'academy-certificate-text',
@@ -108,6 +111,7 @@ return [
 	'academy-password-reset-form',
 	'academy-pdf',
 	'academy-student-registration-form',
+	'academy-course-media',
 	// StoreEngine Blocks
 	'storeengine-products',
 	'storeengine-cart-list',
@@ -123,5 +127,10 @@ return [
 	'storeengine-billing-info',
 	'storeengine-shipping-info',
 	'storeengine-order-details',
-
+	'storeengine-mini-cart',
+	'storeengine-cart-notice',
+	'storeengine-product-gallery',
+	'storeengine-product-summary',
+	'storeengine-product-description',
+	'storeengine-product-review',
 ];

@@ -89,17 +89,18 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 
 		if ( ! empty( $attributes['breadcrumbTitlecolor'] ) ) {
-			$css['color'] = $attributes['breadcrumbTitlecolor'];
+			$css['color'] = Color::get_css( $attributes['breadcrumbTitlecolor'] );
 		}
 
 		$dir     = isset( $attributes['taxonomyTitleDirection'] ) ? $attributes['taxonomyTitleDirection'] : null;
 		$dirCss  = ! is_null( $dir ) ? get_alignment_css( $dir, 'justify-content', $device ) : [];
 		if ( ! empty( $attributes['breadcrumbItemBackground'] ) ) {
-			$css['background-color'] = $attributes['breadcrumbItemBackground'];
+			$css['background-color'] = Color::get_css( $attributes['breadcrumbItemBackground'] );
 		}
+		$typographyValueGlobal = ! empty( $attributes['breadcrumbTitleTypographyGlobal'] ) ? $attributes['breadcrumbTitleTypographyGlobal'] : '';
 		return array_merge(
 			$css, (array) $dirCss,
-			Typography::get_css( $attributes['breadcrumbTitleTypography'] ?? [], '', $device ),
+			Typography::get_css( $attributes['breadcrumbTitleTypography'] ?? [], '', $device, $typographyValueGlobal ),
 			Dimensions::get_css( $attributes['breadcrumbItemPadding'] ?? [], 'padding', $device ),
 			Dimensions::get_css( $attributes['BreadcrumbBorderRadius'] ?? [], 'border-radius', $device ),
 		);
@@ -109,7 +110,7 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 
 		if ( ! empty( $attributes['breadcrumbLinkcolor'] ) ) {
-			$css['color'] = $attributes['breadcrumbLinkcolor'];
+			$css['color'] = Color::get_css( $attributes['breadcrumbLinkcolor'] );
 		}
 
 		return $css;
@@ -119,7 +120,7 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 
 		if ( ! empty( $attributes['breadcrumbHoverLinkcolor'] ) ) {
-			$css['color'] = $attributes['breadcrumbHoverLinkcolor'];
+			$css['color'] = Color::get_css( $attributes['breadcrumbHoverLinkcolor'] );
 		}
 
 		return $css;
@@ -129,7 +130,7 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 
 		if ( ! empty( $attributes['breadcrumbseparatorcolor'] ) ) {
-			$css['color'] = $attributes['breadcrumbseparatorcolor'];
+			$css['color'] = Color::get_css( $attributes['breadcrumbseparatorcolor'] );
 		}
 
 		if ( ! empty( $attributes['breadcrumbseparsize'] ) ) {
@@ -143,7 +144,7 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 
 		if ( ! empty( $attributes['beforeBreadcrumbBackgroundcolor'] ) ) {
-			$css['background-color'] = $attributes['beforeBreadcrumbBackgroundcolor'];
+			$css['background-color'] = Color::get_css( $attributes['beforeBreadcrumbBackgroundcolor'] );
 		}
 
 		return array_merge(
@@ -161,6 +162,7 @@ class Block extends BlockBaseAbstract {
 			return;
 		}
 		$breadcrumb_items = $this->limit_items( $breadcrumb_items, (int) $breadcrumb_normalize['max'] );
+		// phpcs:ignore  WordPress.Security.EscapeOutput.OutputNotEscaped 
 		echo $this->render_html_breadcrumbs( $breadcrumb_items, $breadcrumb_normalize );
 	}
 
@@ -178,7 +180,7 @@ class Block extends BlockBaseAbstract {
 
 		$beforeBreadcrumbImage = ( isset( $attributes['beforeBreadcrumbImage'] ) && $attributes['beforeBreadcrumbImage'] !== '' )
 				? (string) $attributes['beforeBreadcrumbImage']
-				: __( '', 'ablocks' );
+				: ''; // __( '', 'ablocks' );
 
 		$beforeBreadcrumbText = ( isset( $attributes['beforeBreadcrumbText'] ) && $attributes['beforeBreadcrumbText'] !== '' )
 				? (string) $attributes['beforeBreadcrumbText']
@@ -186,15 +188,15 @@ class Block extends BlockBaseAbstract {
 
 		$beforeBreadcrumbTextImage = ( isset( $attributes['beforeBreadcrumbTextImage'] ) && $attributes['beforeBreadcrumbTextImage'] !== '' )
 				? (string) $attributes['beforeBreadcrumbTextImage']
-				: __( '', 'ablocks' );
+				: ''; // __( '', 'ablocks' );
 
 		$beforeTextImage = ( isset( $attributes['beforeTextImage'] ) && $attributes['beforeTextImage'] !== '' )
 				? (string) $attributes['beforeTextImage']
-				: __( '', 'ablocks' );
+				: ''; // __( '', 'ablocks' );
 
 		$beforeSeparator = ( isset( $attributes['beforeSeparator'] ) && $attributes['beforeSeparator'] !== '' )
 				? (string) $attributes['beforeSeparator']
-				: __( '', 'ablocks' );
+				: ''; // __( '', 'ablocks' );
 
 		return wp_parse_args( (array) $attributes, [
 			'separator'       => $separator,
@@ -216,6 +218,7 @@ class Block extends BlockBaseAbstract {
 	private function in_editor() : bool {
 		// More precise REST check: block renderer routes
 		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized 
 			$uri = $_SERVER['REQUEST_URI'] ?? '';
 			if ( strpos( $uri, '/wp/v2/block-renderer' ) !== false
 					|| strpos( $uri, '/wp-block-editor/v1/block-renderer' ) !== false ) {
@@ -408,6 +411,7 @@ class Block extends BlockBaseAbstract {
 			$breadcrumb_u = get_queried_object();
 			if ( $breadcrumb_u ) {
 				$breadcrumb_items[] = [
+					/* translators: %s Name */
 					'label' => sprintf( __( 'Author: %s', 'ablocks' ), $breadcrumb_u->display_name ),
 					'url' => false
 				];
@@ -427,6 +431,7 @@ class Block extends BlockBaseAbstract {
 		// Search
 		if ( is_search() ) {
 			$breadcrumb_items[] = [
+				/* translators: %s Name */
 				'label' => sprintf( __( 'Search: %s', 'ablocks' ), get_search_query() ),
 				'url' => false
 			];
@@ -635,7 +640,7 @@ class Block extends BlockBaseAbstract {
 					<span class="ablocks-breadcrumbs__separator"><?php echo esc_html( $breadcrumb_normalize['separator'] ); ?></span>
 					<?php endif; ?>
 				<?php elseif ( $breadcrumb_normalize['beforeBreadcrumbTextImage'] == 'image' ) : ?>
-					<span class="ablocks-breadcrumbs___before-image"><img src="<?php echo $breadcrumb_normalize['before_breadcrumb_image']; ?>" alt="">
+					<span class="ablocks-breadcrumbs___before-image"><img src="<?php echo esc_url( $breadcrumb_normalize['before_breadcrumb_image'] ); ?>" alt="">
 					</span>
 					<?php if ( $breadcrumb_normalize['beforeSeparator'] == 'true' ) : ?>
 						<span class="ablocks-breadcrumbs__separator"><?php echo esc_html( $breadcrumb_normalize['separator'] ); ?></span>

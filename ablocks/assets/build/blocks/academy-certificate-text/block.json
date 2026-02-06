@@ -3,9 +3,9 @@
     "apiVersion": 3,
     "name": "ablocks/academy-certificate-text",
     "version": "0.1.0",
-    "title": "Academy Certificate Text",
-    "category": "ablocks",
-    "description": "Academy Certificate Text",
+    "title": "Certificate Text",
+    "category": "academy",
+    "description": "Certificate Text Block",
     "example": [],
     "parent": [
         "ablocks/academy-certificate"
@@ -50,11 +50,15 @@
                 "valueMobile": ""
             }
         },
+        "typographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "typography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -581,6 +585,32 @@
                 "transitionDuration": "0"
             }
         },
+        "_gsapAnimation": {
+            "type": "object",
+            "default": {
+                "animationType": "none",
+                "duration": 1,
+                "delay": 0,
+                "triggerType": "scroll",
+                "ease": "none",
+                "x": 0,
+                "y": 0,
+                "rotation": 0,
+                "rotationY": 0,
+                "opacity": 1,
+                "xTo": 0,
+                "yTo": 0,
+                "rotationTo": 0,
+                "rotationYTo": 0,
+                "opacityTo": 1,
+                "easeTo": "none",
+                "loops": false,
+                "numberOfRepeat": 0,
+                "isSmooth": true,
+                "startPoint": 80,
+                "endPoint": 10
+            }
+        },
         "_hide_on_desktop": {
             "type": "boolean",
             "default": false
@@ -596,6 +626,20 @@
         "_custom_css": {
             "type": "string",
             "default": ""
+        },
+        "_animation_element_trigger": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object"
+            }
+        },
+        "_animation_page_trigger": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object"
+            }
         }
     }
 }

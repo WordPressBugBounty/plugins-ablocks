@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;

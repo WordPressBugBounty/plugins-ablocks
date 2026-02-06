@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\FormBuilder;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Blocks\FormBuilder\EmailVerification;
 use SplTempFileObject;
 /**
@@ -82,10 +86,10 @@ class Query {
 		}
 
 		if ( empty( $args ) && empty( $conditions ) ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 			$num_of_entries = $wpdb->get_var( $count_query );
 		} else {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 			$num_of_entries = $wpdb->get_var( $wpdb->prepare( $count_query, ...$args ) );
 		}
 
@@ -103,7 +107,7 @@ class Query {
 
 		// export entries in csv format
 		if ( $do_export_csv ) {
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 			$entries_to_export = $wpdb->get_results( $wpdb->prepare( $query, ...$args ), ARRAY_A ) ?? [];
 
 			// make a temporary file object
@@ -175,7 +179,7 @@ class Query {
 			order by form_type asc
 			";
 		$data = [];
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 		foreach ( $wpdb->get_results( $wpdb->prepare( $query, ...$args ), ARRAY_A ) ?? [] as $item ) {
 			if ( $item['is_in_trash'] === 'yes' ) {
 				$item['status'] = 'trash';
@@ -187,9 +191,9 @@ class Query {
 			'total_entries'   => $num_of_entries,
 			'current_page'    => $current_page,
 			'per_page'        => $entry_per_page,
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 			'available_dates' => $wpdb->get_results( $get_available_date_query, ARRAY_A ) ?? [],
-			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 			'available_forms' => $wpdb->get_results( $get_available_forms_query, ARRAY_A ) ?? [],
 			'data'            => $data,
 		];
@@ -299,13 +303,14 @@ class Query {
 		$table_meta = $wpdb->prefix . ABLOCKS_PLUGIN_SLUG . '_form_meta';
 
 		$query = "SELECT * FROM {$table_entries}  WHERE id = %d";
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 		$entry = $wpdb->get_row( $wpdb->prepare( $query, $id ), ARRAY_A );
 		if ( $entry ) {
 			// mark this entry as reas
 			if ( count( self::update_status_of_entries( [ $id ] ) ) > 0 ) {
 				$entry['status'] = 'read';
 			}
+			// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 			$meta = $wpdb->get_results(
 				$wpdb->prepare(
 					// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared 
@@ -324,7 +329,12 @@ class Query {
 					if (
 						isset( $fields[ $field['meta_key'] ]['radioArr'] )
 					) {
-						$field['meta_value'] = explode( ',', $field['meta_value'] );
+						$decoded_value = json_decode( $field['meta_value'], true );
+						if ( json_last_error() === JSON_ERROR_NONE && is_array( $decoded_value ) ) {
+							$field['meta_value'] = array_values( $decoded_value );
+						} else {
+							$field['meta_value'] = [];
+						}
 					} elseif (
 						! isset( $fields[ $field['meta_key'] ]['radioArr'] ) &&
 						( $fields[ $field['meta_key'] ]['inputType'] ?? '' ) === 'checkbox'
@@ -379,6 +389,7 @@ class Query {
 		$table_meta    = $wpdb->prefix . ABLOCKS_PLUGIN_SLUG . '_form_meta';
 
 		// Check if the entry exists
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 		$is_entry_exists = (int) $wpdb->get_var(
 			$wpdb->prepare( "SELECT COUNT(*) FROM {$table_entries} WHERE id = %d", $id )// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		) > 0;
@@ -388,6 +399,7 @@ class Query {
 		}
 
 		// Get all meta keys for this entry
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 		$get_meta_keys = $wpdb->get_results(
 			$wpdb->prepare(
 				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
@@ -408,6 +420,7 @@ class Query {
 
 			// Check if the input data has this meta key
 			if ( array_key_exists( $meta_key, $data ) ) {
+				// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 				$is_updated = $wpdb->update(
 					$table_meta,
 					[ 'meta_value' => sanitize_text_field( $data[ $meta_key ] ) ],
@@ -437,7 +450,10 @@ class Query {
 		if ( ! empty( $entry_id_array ) ) {
 			foreach ( $entry_id_array as $entry_id ) {
 
+				// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 				if ( $wpdb->delete( $table_entries, [ 'id' => $entry_id ], [ '%d' ] ) ) {
+
+					// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 					$wpdb->delete( $table_meta, [ 'entry_id' => $entry_id ], [ '%d' ] );
 					$total_deleted[] = $entry_id;
 				}
@@ -453,6 +469,7 @@ class Query {
 		if ( ! empty( $entry_id_array ) ) {
 			foreach ( $entry_id_array as $entry_id ) {
 
+				// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 				if ( $wpdb->update( $table_entries, [ 'status' => $status ], [ 'id' => $entry_id ] ) ) {
 					self::update_trash_status_of_entries( $entry_id, 'no' );
 					$total[] = $entry_id;
@@ -467,6 +484,7 @@ class Query {
 		$table_entries = $wpdb->prefix . ABLOCKS_PLUGIN_SLUG . '_form_entries';
 
 		// Retrieve the current status
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 		$status = $wpdb->get_var(
 			$wpdb->prepare( "SELECT status FROM {$table_entries} WHERE id = %d", $id )// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		);
@@ -476,6 +494,7 @@ class Query {
 
 		if ( $id > 0 ) {
 			// Update the trash status
+			// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 			$is_updated = $wpdb->update(
 				$table_entries,
 				[ 'is_in_trash' => sanitize_text_field( $send_to_trash ) ],
@@ -509,6 +528,7 @@ class Query {
 		$table_entries = $wpdb->prefix . ABLOCKS_PLUGIN_SLUG . '_form_entries';
 		$table_meta = $wpdb->prefix . ABLOCKS_PLUGIN_SLUG . '_form_meta';
 		$token = wp_generate_password( 22, false );
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->insert($table_entries,
 			[
 				'form_type'  => $form_type,
@@ -526,11 +546,12 @@ class Query {
 
 		if ( $entry_id ) {
 			foreach ( $meta_data as $input_id => $attr ) {
+				// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->insert($table_meta,
 					[
 						'entry_id'   => $entry_id,
 						'meta_key'   => $input_id,
-						'meta_value' => $attr['value'],
+						'meta_value' => is_array( $attr['value'] ) ? json_encode( $attr['value'] ) : $attr['value'],
 					]
 				);
 			}
@@ -541,6 +562,7 @@ class Query {
 	public static function get_token_by_email( string $email ) {
 		global $wpdb;
 		$table_entries = $wpdb->prefix . ABLOCKS_PLUGIN_SLUG . '_form_entries';
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 		$entry = $wpdb->get_row(
 			$wpdb->prepare(
 				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
@@ -558,7 +580,8 @@ class Query {
 		$table_entries = $wpdb->prefix . ABLOCKS_PLUGIN_SLUG . '_form_entries';
 
 		$query = "select count(user_email) from {$table_entries} where form_type = %s and user_email = %s";
-		return $wpdb->get_var( $wpdb->prepare( $query, $form_type, $email ) ) > 0;// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
+		return $wpdb->get_var( $wpdb->prepare( $query, $form_type, $email ) ) > 0;
 	}
 
 }

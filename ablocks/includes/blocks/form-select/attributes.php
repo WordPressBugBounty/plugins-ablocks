@@ -11,7 +11,7 @@ $attributes = [
 		'default' => ''
 	),
 
-	'labelName' => [
+	'label' => [
 		'type' => 'string',
 		'default' => 'What\'s your favorite programming lang?'
 	],

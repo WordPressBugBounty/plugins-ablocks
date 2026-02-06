@@ -446,6 +446,10 @@
                 "unitMobile": ""
             }
         },
+        "badgeTypographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "badgeTypography": {
             "type": "object",
             "default": {
@@ -557,28 +561,68 @@
                 "unit": "px"
             }
         },
-        "iconBorderRadius": {
+        "iconBorder": {
             "type": "object",
             "default": {
-                "isLinked": true,
-                "common": "",
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": "",
-                "unit": "px"
+                "borderStyle": "default",
+                "borderStyleH": "default",
+                "borderColor": "",
+                "borderColorH": "",
+                "isLinkedWidth": true,
+                "isLinkedWidthTablet": true,
+                "isLinkedWidthMobile": true,
+                "commonWidth": "",
+                "topWidth": "",
+                "rightWidth": "",
+                "bottomWidth": "",
+                "leftWidth": "",
+                "unitWidth": "px",
+                "isLinkedWidthH": true,
+                "isLinkedWidthHTablet": true,
+                "isLinkedWidthHMobile": true,
+                "commonWidthH": "",
+                "topWidthH": "",
+                "rightWidthH": "",
+                "bottomWidthH": "",
+                "leftWidthH": "",
+                "unitWidthH": "px",
+                "isLinkedRadius": true,
+                "commonRadius": "",
+                "topRadius": "",
+                "rightRadius": "",
+                "bottomRadius": "",
+                "leftRadius": "",
+                "unitRadius": "px",
+                "isLinkedRadiusH": true,
+                "isLinkedRadiusHTablet": true,
+                "isLinkedRadiusHMobile": true,
+                "commonRadiusH": "",
+                "topRadiusH": "",
+                "leftRadiusH": "",
+                "unitRadiusH": "px",
+                "transitionDuration": ""
             }
         },
-        "iconBorderWidth": {
+        "iconBoxShadow": {
             "type": "object",
             "default": {
-                "isLinked": true,
-                "common": "",
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": "",
-                "unit": "px"
+                "preset": "",
+                "shadowType": "default",
+                "shadow": "",
+                "horizontal": "",
+                "vertical": "",
+                "blur": "",
+                "spread": "",
+                "color": "",
+                "presetH": "",
+                "shadowTypeH": "default",
+                "shadowH": "",
+                "horizontalH": "",
+                "verticalH": "",
+                "blurH": "",
+                "spreadH": "",
+                "colorH": "",
+                "transitionDuration": "0"
             }
         },
         "iconSize": {
@@ -677,6 +721,10 @@
                 "valueMobile": ""
             }
         },
+        "headingTypographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "headingTypography": {
             "type": "object",
             "default": {
@@ -758,6 +806,10 @@
                 "unitMobile": ""
             }
         },
+        "subHeadingTypographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "subHeadingTypography": {
             "type": "object",
             "default": {
@@ -838,6 +890,10 @@
                 "leftMobile": "",
                 "unitMobile": ""
             }
+        },
+        "desTypographyGlobal": {
+            "type": "string",
+            "default": ""
         },
         "desTypography": {
             "type": "object",
@@ -972,28 +1028,68 @@
                 "unit": "px"
             }
         },
-        "btnIconBorderRadius": {
+        "btnIconBorder": {
             "type": "object",
             "default": {
-                "isLinked": true,
-                "common": "",
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": "",
-                "unit": "px"
+                "borderStyle": "default",
+                "borderStyleH": "default",
+                "borderColor": "",
+                "borderColorH": "",
+                "isLinkedWidth": true,
+                "isLinkedWidthTablet": true,
+                "isLinkedWidthMobile": true,
+                "commonWidth": "",
+                "topWidth": "",
+                "rightWidth": "",
+                "bottomWidth": "",
+                "leftWidth": "",
+                "unitWidth": "px",
+                "isLinkedWidthH": true,
+                "isLinkedWidthHTablet": true,
+                "isLinkedWidthHMobile": true,
+                "commonWidthH": "",
+                "topWidthH": "",
+                "rightWidthH": "",
+                "bottomWidthH": "",
+                "leftWidthH": "",
+                "unitWidthH": "px",
+                "isLinkedRadius": true,
+                "commonRadius": "",
+                "topRadius": "",
+                "rightRadius": "",
+                "bottomRadius": "",
+                "leftRadius": "",
+                "unitRadius": "px",
+                "isLinkedRadiusH": true,
+                "isLinkedRadiusHTablet": true,
+                "isLinkedRadiusHMobile": true,
+                "commonRadiusH": "",
+                "topRadiusH": "",
+                "leftRadiusH": "",
+                "unitRadiusH": "px",
+                "transitionDuration": ""
             }
         },
-        "btnIconBorderWidth": {
+        "btnIconBoxShadow": {
             "type": "object",
             "default": {
-                "isLinked": true,
-                "common": "",
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": "",
-                "unit": "px"
+                "preset": "",
+                "shadowType": "default",
+                "shadow": "",
+                "horizontal": "",
+                "vertical": "",
+                "blur": "",
+                "spread": "",
+                "color": "",
+                "presetH": "",
+                "shadowTypeH": "default",
+                "shadowH": "",
+                "horizontalH": "",
+                "verticalH": "",
+                "blurH": "",
+                "spreadH": "",
+                "colorH": "",
+                "transitionDuration": "0"
             }
         },
         "btnIconSize": {
@@ -1204,11 +1300,15 @@
                 "unitMobile": ""
             }
         },
+        "btnTypographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "btnTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -1255,11 +1355,15 @@
                 "valueMobile": ""
             }
         },
+        "ratingNumberTypographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "ratingNumberTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -1367,28 +1471,68 @@
                 "unit": "px"
             }
         },
-        "starIconBorderRadius": {
+        "starIconBorder": {
             "type": "object",
             "default": {
-                "isLinked": true,
-                "common": "",
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": "",
-                "unit": "px"
+                "borderStyle": "default",
+                "borderStyleH": "default",
+                "borderColor": "",
+                "borderColorH": "",
+                "isLinkedWidth": true,
+                "isLinkedWidthTablet": true,
+                "isLinkedWidthMobile": true,
+                "commonWidth": "",
+                "topWidth": "",
+                "rightWidth": "",
+                "bottomWidth": "",
+                "leftWidth": "",
+                "unitWidth": "px",
+                "isLinkedWidthH": true,
+                "isLinkedWidthHTablet": true,
+                "isLinkedWidthHMobile": true,
+                "commonWidthH": "",
+                "topWidthH": "",
+                "rightWidthH": "",
+                "bottomWidthH": "",
+                "leftWidthH": "",
+                "unitWidthH": "px",
+                "isLinkedRadius": true,
+                "commonRadius": "",
+                "topRadius": "",
+                "rightRadius": "",
+                "bottomRadius": "",
+                "leftRadius": "",
+                "unitRadius": "px",
+                "isLinkedRadiusH": true,
+                "isLinkedRadiusHTablet": true,
+                "isLinkedRadiusHMobile": true,
+                "commonRadiusH": "",
+                "topRadiusH": "",
+                "leftRadiusH": "",
+                "unitRadiusH": "px",
+                "transitionDuration": ""
             }
         },
-        "starIconBorderWidth": {
+        "starIconBoxShadow": {
             "type": "object",
             "default": {
-                "isLinked": true,
-                "common": "",
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": "",
-                "unit": "px"
+                "preset": "",
+                "shadowType": "default",
+                "shadow": "",
+                "horizontal": "",
+                "vertical": "",
+                "blur": "",
+                "spread": "",
+                "color": "",
+                "presetH": "",
+                "shadowTypeH": "default",
+                "shadowH": "",
+                "horizontalH": "",
+                "verticalH": "",
+                "blurH": "",
+                "spreadH": "",
+                "colorH": "",
+                "transitionDuration": "0"
             }
         },
         "starIconSize": {
@@ -1951,6 +2095,32 @@
                 "transitionDuration": "0"
             }
         },
+        "_gsapAnimation": {
+            "type": "object",
+            "default": {
+                "animationType": "none",
+                "duration": 1,
+                "delay": 0,
+                "triggerType": "scroll",
+                "ease": "none",
+                "x": 0,
+                "y": 0,
+                "rotation": 0,
+                "rotationY": 0,
+                "opacity": 1,
+                "xTo": 0,
+                "yTo": 0,
+                "rotationTo": 0,
+                "rotationYTo": 0,
+                "opacityTo": 1,
+                "easeTo": "none",
+                "loops": false,
+                "numberOfRepeat": 0,
+                "isSmooth": true,
+                "startPoint": 80,
+                "endPoint": 10
+            }
+        },
         "_hide_on_desktop": {
             "type": "boolean",
             "default": false
@@ -1966,6 +2136,20 @@
         "_custom_css": {
             "type": "string",
             "default": ""
+        },
+        "_animation_element_trigger": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object"
+            }
+        },
+        "_animation_page_trigger": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object"
+            }
         }
     }
 }

@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\StarRatings;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Typography;

@@ -4,8 +4,8 @@
  * Description:       The WordPress plugin for creating beautiful and functional websites using the Gutenberg editor, with a variety of customizable blocks to design website pages.
  * Requires at least: 6.3
  * Requires PHP:      7.4
- * Version:           2.3.0
- * Author:            Academy LMS
+ * Version:           2.7.1
+ * Author:            Kodezen LLC
  * Author URI:        https://ablocks.pro/
  * License:           GPL-3.0+
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -41,7 +41,7 @@ final class ABlocks {
 	 * Define the plugin constants
 	 */
 	private function define_constants() {
-		define( 'ABLOCKS_VERSION', '2.3.0' );
+		define( 'ABLOCKS_VERSION', '2.7.1' );
 		define( 'ABLOCKS_PLUGIN_SLUG', 'ablocks' );
 		define( 'ABLOCKS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 		define( 'ABLOCKS_ROOT_URL', plugin_dir_url( __FILE__ ) );
@@ -54,6 +54,7 @@ final class ABlocks {
 		define( 'ABLOCKS_BLOCKS_VISIBILITY_SETTINGS_NAME', 'ablocks_blocks' );
 		define( 'ABLOCKS_FONTS_SETTINGS_NAME', 'ablocks_fonts' );
 		define( 'ABLOCKS_SETTINGS_NAME', 'ablocks_settings' );
+		define( 'ABLOCKS_FRONTEND_DASHBOARD_SUB_PAGES_SETTINGS_NAME', 'ablocks_frontend_dashboard_sub_pages' );
 		define( 'ABLOCKS_ADDONS_SETTINGS_NAME', 'ablocks_addons' );
 		define( 'ABLOCKS_TEMPLATE_LIB_HOST', 'template-kits.com' );
 	}
@@ -88,6 +89,7 @@ final class ABlocks {
 
 	public function init_plugin() {
 		ABlocks\Migration::init();
+		ABlocks\PermalinkRewrite::init();
 		ABlocks\Addons::init();
 		ABlocks\Blocks::init();
 		ABlocks\Assets::init();

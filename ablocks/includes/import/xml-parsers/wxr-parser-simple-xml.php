@@ -2,6 +2,7 @@
 
 namespace ABlocks\import\XmlParsers;
 
+use SimpleXMLElement;
 use WP_Error;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -248,17 +249,123 @@ class WXR_Parser_SimpleXML {
 		}//end foreach
 
 		return array(
-			'authors'       => $authors,
-			'posts'         => $posts,
-			'categories'    => $categories,
-			'tags'          => $tags,
-			'terms'         => $terms,
-			'base_url'      => $base_url,
-			'base_blog_url' => $base_blog_url,
-			'version'       => $wxr_version,
-			'show_on_front' => $show_on_front,
-			'page_on_front' => $page_on_front,
-			'page_for_posts' => $page_for_posts,
+			'authors'           => $authors,
+			'posts'             => $posts,
+			'categories'        => $categories,
+			'tags'              => $tags,
+			'terms'             => $terms,
+			'base_url'          => $base_url,
+			'base_blog_url'     => $base_blog_url,
+			'version'           => $wxr_version,
+			'show_on_front'     => $show_on_front,
+			'page_on_front'     => $page_on_front,
+			'page_for_posts'    => $page_for_posts,
+			'storeengine_pages' => $this->get_storeengine_pages( $xml ),
+			'academy_pages'     => $this->get_academy_pages( $xml ),
+			'ablocks_pages'     => $this->get_ablocks_pages( $xml ),
+			'ablocks_options'   => $this->get_ablocks_options( $xml ),
 		);
+	}
+
+	private function get_storeengine_pages( SimpleXMLElement $xml ): array {
+		$storeengine_pages = [
+			'shop_page'                   => 0,
+			'cart_page'                   => 0,
+			'checkout_page'               => 0,
+			'thankyou_page'               => 0,
+			'dashboard_page'              => 0,
+			'membership_pricing_page'     => 0,
+			'affiliate_registration_page' => 0,
+		];
+
+		foreach ( array_keys( $storeengine_pages ) as $page_key ) {
+			$value = $xml->xpath( '/rss/channel/ablocks_options/storeengine_' . $page_key );
+			if ( $value ) {
+				$storeengine_pages[ $page_key ] = (int) $value[0];
+			}
+		}
+
+		return $storeengine_pages;
+	}
+
+	private function get_academy_pages( SimpleXMLElement $xml ): array {
+		$academy_pages = [
+			'frontend_dashboard_page'      => 0,
+			'frontend_student_reg_page'    => 0,
+			'password_reset_page'          => 0,
+			'lessons_page'                 => 0,
+			'course_page'                  => 0,
+			'frontend_instructor_reg_page' => 0,
+			'tutor_booking_page'           => 0,
+		];
+
+		foreach ( array_keys( $academy_pages ) as $page_key ) {
+			$value = $xml->xpath( '/rss/channel/ablocks_options/academy_' . $page_key );
+			if ( $value ) {
+				$academy_pages[ $page_key ] = (int) $value[0];
+			}
+		}
+
+		return $academy_pages;
+	}
+
+	private function get_ablocks_pages( SimpleXMLElement $xml ): array {
+		$ablocks_pages = [
+			'login_page'           => 0,
+			'registration_page'    => 0,
+			'forget_password_page' => 0,
+		];
+
+		foreach ( array_keys( $ablocks_pages ) as $page_key ) {
+			$value = $xml->xpath( '/rss/channel/ablocks_options/ablocks_' . $page_key );
+			if ( $value ) {
+				$ablocks_pages[ $page_key ] = (int) $value[0];
+			}
+		}
+
+		return $ablocks_pages;
+	}
+
+	private function get_ablocks_options( SimpleXMLElement $xml ): array {
+		$ablocks_options = [
+			'default_container_width'      => null,
+			'container_padding'            => null,
+			'container_element_gap'        => null,
+			'global_color'                 => 'json',
+			'global_typography'            => 'json',
+			'global_font_family_fallback'  => null,
+			'global_body_text_color'       => null,
+			'global_body_typography'       => 'json',
+			'global_body_paragraph_space'  => 'json',
+			'global_link_color'            => null,
+			'global_link_hover_color'      => null,
+			'global_link_typography'       => 'json',
+			'global_link_hover_typography' => 'json',
+			'global_h1_color'              => null,
+			'global_h1_typography'         => 'json',
+			'global_h2_color'              => null,
+			'global_h2_typography'         => 'json',
+			'global_h3_color'              => null,
+			'global_h3_typography'         => 'json',
+			'global_h4_color'              => null,
+			'global_h4_typography'         => 'json',
+			'global_h5_color'              => null,
+			'global_h5_typography'         => 'json',
+			'global_h6_color'              => null,
+			'global_h6_typography'         => 'json',
+		];
+
+		foreach ( array_keys( $ablocks_options ) as $page_key ) {
+			$value = $xml->xpath( '/rss/channel/ablocks_options/ablocks_' . $page_key );
+			if ( $value ) {
+				$ablocks_options[ $page_key ] = 'json' === $ablocks_options[ $page_key ] ? json_decode(
+					base64_decode( (string) $value[0] ), true
+				) : (string) $value[0];
+			} else {
+				unset( $ablocks_options[ $page_key ] );
+			}
+		}
+
+		return $ablocks_options;
 	}
 }

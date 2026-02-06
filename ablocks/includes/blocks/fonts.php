@@ -1,4 +1,9 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 return [
 	'ABeeZee' => 'sans-serif',
 	'Abel' => 'sans-serif',
@@ -191,6 +196,7 @@ return [
 	'Droid Serif' => 'serif',
 	'Duru Sans' => 'sans-serif',
 	'Dynalight' => 'display',
+	'DM Sans' => 'sans-serif',
 	'EB Garamond' => 'serif',
 	'Eagle Lake' => 'handwriting',
 	'Eater' => 'display',

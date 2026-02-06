@@ -81,14 +81,14 @@ $attributes = array_merge(
 		'attributeName' => 'space',
 		'isResponsive' => true,
 		'attributeObjectKey' => 'value',
-		'defaultValue' => 0,
+		'defaultValue' => 10,
 		'hasUnit' => false,
 	]),
 	Range::get_attribute([
 		'attributeName' => 'gap',
 		'isResponsive' => true,
 		'attributeObjectKey' => 'value',
-		'defaultValue' => 0,
+		'defaultValue' => 10,
 		'hasUnit' => false,
 	]),
 	Range::get_attribute([

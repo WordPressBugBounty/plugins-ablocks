@@ -21,6 +21,7 @@ class StripePaymentAjax extends AbstractAjaxHandler {
 		$this->actions = [
 			'stripe_get_tax_rates'      => [
 				'callback' => [ $this, 'get_tax_rates' ],
+				'capability' => 'edit_posts',
 				'fields' => array(
 					'api_key' => 'string',
 				)

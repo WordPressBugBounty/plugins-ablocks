@@ -23,7 +23,7 @@ class Notice {
 		// Build dismissal URL (adds parameter to current page)
 		$dismiss_url = add_query_arg(
 			array( 'ablocks_dismiss_offer_notice' => '1' ),
-			$_SERVER['REQUEST_URI']
+			esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) )
 		);
 
 		?>
@@ -38,7 +38,7 @@ class Notice {
 				<p>Ends Sept 29</p>
 				<a class="button button-primary" href="https://ablocks.pro/pricing/" target="_blank" style="background: #13191b; color: #fff;">Get The Deal</a>
 				<a href="<?php echo esc_url( $dismiss_url ); ?>" style="position: absolute; top: 10px; right: 10px;">
-					<?php _e( 'Dismiss', 'ablocks' ); ?>
+					<?php esc_html_e( 'Dismiss', 'ablocks' ); ?>
 				</a>
 			</div>
 		</div>
@@ -46,6 +46,7 @@ class Notice {
 	}
 
 	public function dismiss_admin_offer_notice() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended 
 		if ( isset( $_GET['ablocks_dismiss_offer_notice'] ) && $_GET['ablocks_dismiss_offer_notice'] == '1' ) {
 			update_user_meta( get_current_user_id(), 'ablocks_dismiss_offer_notice', 1 );
 

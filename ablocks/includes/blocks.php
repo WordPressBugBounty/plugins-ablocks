@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use ABlocks\Classes\AssetsGenerator;
 use ABlocks\Helper;
 use ABlocks\Classes\FileUpload;
+use ABlocks\Classes\FontLoadLocally;
 use ABlocks\Blocks\FormBuilder\BlockAttrSanitizer\Sanitizer as BlockSanitizer;
 use ABlocks\Blocks\FormBuilder\Helper as FormBuilderHelper;
 
@@ -21,12 +22,23 @@ class Blocks {
 		// Assets Generator
 		add_action( 'save_post', [ $self, 'generate_block_assets' ], 10, 3 );
 		add_action( 'switch_theme', [ $self, 'clear_generated_block_assets' ] );
+		add_action( 'save_post', [ $self, 'download_google_fonts_locally' ], 20, 3 );
 
 		$self->register_block_sanitizer();
 		$self->form_builder_default_data();
 	}
 
 	public function blocks_init() {
+		// keep it common for Academy LMS and QuizPress
+		if ( ( helper::is_gutenberg_editor() && ( Helper::check_post_type_from_admin( 'academy_certificate' ) || Helper::check_post_type_from_admin( 'qp_certificate' ) ) ) || ( ! helper::is_gutenberg_editor() && ! is_admin() ) ) {
+			new \ABlocks\Blocks\AcademyCertificate\Block();
+			new \ABlocks\Blocks\AcademyCertificateText\Block();
+			new \ABlocks\Blocks\AcademyContainer\Block();
+			if ( Helper::is_plugin_active( 'academy-pro/academy-pro.php' ) ) {
+				new \ABlocks\Blocks\AcademyCertificateId\Block();
+			}
+		}
+		// Academy LMS Block Register Here
 		if ( Helper::is_plugin_active( 'academy/academy.php' ) ) {
 			add_filter( 'academy/is_load_common_scripts', '__return_true' );
 			if ( Helper::is_gutenberg_editor() ) {
@@ -40,15 +52,18 @@ class Blocks {
 			new \ABlocks\Blocks\AcademyPdf\Block();
 			new \ABlocks\Blocks\AcademyPasswordResetForm\Block();
 			new \ABlocks\Blocks\AcademyLoginForm\Block();
+			new \ABlocks\Blocks\AcademyCourseMedia\Block();
 
-			if ( ( helper::is_gutenberg_editor() && Helper::check_post_type_from_admin( 'academy_certificate' ) ) || ( ! helper::is_gutenberg_editor() && ! is_admin() ) ) {
-				new \ABlocks\Blocks\AcademyCertificate\Block();
-				new \ABlocks\Blocks\AcademyCertificateText\Block();
-				if ( Helper::is_plugin_active( 'academy-pro/academy-pro.php' ) ) {
-					new \ABlocks\Blocks\AcademyCertificateId\Block();
-				}
-			}
+			new \ABlocks\Blocks\AcademyCourseCurriculums\Block();
+			new \ABlocks\Blocks\AcademyCourseReviews\Block();
+			new \ABlocks\Blocks\AcademyReviewForm\Block();
+			new \ABlocks\Blocks\AcademyReviewList\Block();
+			new \ABlocks\Blocks\AcademyAdditionInfo\Block();
+			new \ABlocks\Blocks\AcademyCourseDescription\Block();
+			new \ABlocks\Blocks\AcademyCourseInstructor\Block();
+			new \ABlocks\Blocks\AcademyEnrollContent\Block();
 		}//end if
+		// StoreEngine Register Block
 		if ( Helper::is_plugin_active( 'storeengine/storeengine.php' ) ) {
 			new \ABlocks\Blocks\StoreengineProducts\Block();
 			new \ABlocks\Blocks\StoreengineCouponForm\Block();
@@ -63,7 +78,13 @@ class Blocks {
 			new \ABlocks\Blocks\StoreengineOrderInfo\Block();
 			new \ABlocks\Blocks\StoreengineBillingInfo\Block();
 			new \ABlocks\Blocks\StoreengineShippingInfo\Block();
+			new \ABlocks\Blocks\StoreengineCartNotice\Block();
 			new \ABlocks\Blocks\StoreengineOrderDetails\Block();
+			new \ABlocks\Blocks\StoreengineMiniCart\Block();
+			new \ABlocks\Blocks\StoreengineProductGallery\Block();
+			new \ABlocks\Blocks\StoreengineProductSummary\Block();
+			new \ABlocks\Blocks\StoreengineProductDescription\Block();
+			new \ABlocks\Blocks\StoreengineProductReview\Block();
 		}//end if
 		new \ABlocks\Blocks\Container\Block();
 		new \ABlocks\Blocks\Heading\Block();
@@ -129,8 +150,10 @@ class Blocks {
 		new \ABlocks\Blocks\SocialShares\Block();
 		new \ABlocks\Blocks\Notice\Block();
 		new \ABlocks\Blocks\SvgDraw\Block();
+		new \ABlocks\Blocks\FrontendDashboard\Block();
 		new \ABlocks\Blocks\LottieAnimation\Block();
 		new \ABlocks\Blocks\Marquee\Block();
+		new \ABlocks\Blocks\DynamicText\Block();
 		new \ABlocks\Blocks\MarqueeChild\Block();
 		new \ABlocks\Blocks\Logout\Block();
 		new \ABlocks\Blocks\FilterableCards\Block();
@@ -209,6 +232,28 @@ class Blocks {
 		}
 
 		$this->clear_generated_block_assets();
+	}
+
+	public function download_google_fonts_locally( $post_id, $post, $update ) {
+		if ( ! Helper::get_settings( 'enabled_load_google_font_locally', false ) ) {
+			return;
+		}
+
+		if ( isset( $post->post_status ) && 'auto-draft' === $post->post_status ) {
+			return;
+		}
+
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+
+		if ( false !== wp_is_post_revision( $post_id ) ) {
+			return;
+		}
+
+		global $ablocks_fonts;
+		$fontDownloader = new FontLoadLocally();
+		$fontDownloader->process_font_queue( $ablocks_fonts );
 	}
 
 	public function form_builder_default_data(): void {

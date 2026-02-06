@@ -9,6 +9,7 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Border;
 use ABlocks\Components\ButtonGroup;
+use ABlocks\Controls\Dimensions;
 
 
 $attributes = [
@@ -230,6 +231,7 @@ $attributes = array_merge(
 		'hasUnit' => true,
 		'unitDefaultValue' => 'px',
 	] ),
+	Dimensions::get_attribute( 'padding', true ),
 	$attributes
 );
 

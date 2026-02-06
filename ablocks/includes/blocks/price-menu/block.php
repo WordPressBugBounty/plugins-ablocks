@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\PriceMenu;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Classes\CssGeneratorV2;
@@ -272,18 +276,20 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_title_text_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['titleTypographyGlobal'] ) ? $attributes['titleTypographyGlobal'] : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['titleColor'] ) ? $attributes['titleColor'] : '' ) ],
-			isset( $attributes['titleTypography'] ) ? Typography::get_css( $attributes['titleTypography'], '', $device ) : [],
+			isset( $attributes['titleTypography'] ) ? Typography::get_css( $attributes['titleTypography'], '', $device, $typographyValueGlobal ) : [],
 			isset( $attributes['titleTextStroke'] ) ? TextStroke::get_css( $attributes['titleTextStroke'], '', $device ) : [],
 			isset( $attributes['titleTextShadow'] ) ? TextShadow::get_css( $attributes['titleTextShadow'], '', $device ) : [],
 			isset( $attributes['titleAlignment'] ) ? Alignment::get_css( $attributes['titleAlignment'], 'text-align', $device ) : [],
 		);
 	}
 	public function get_description_text_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['descriptionTypographyGlobal'] ) ? $attributes['descriptionTypographyGlobal'] : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['descriptionColor'] ) ? $attributes['descriptionColor'] : '' ) ],
-			isset( $attributes['descriptionTypography'] ) ? Typography::get_css( $attributes['descriptionTypography'], '', $device ) : [],
+			isset( $attributes['descriptionTypography'] ) ? Typography::get_css( $attributes['descriptionTypography'], '', $device, $typographyValueGlobal ) : [],
 			isset( $attributes['descriptionTextStroke'] ) ? TextStroke::get_css( $attributes['descriptionTextStroke'], '', $device ) : [],
 			isset( $attributes['descriptionTextShadow'] ) ? TextShadow::get_css( $attributes['descriptionTextShadow'], '', $device ) : [],
 			isset( $attributes['descriptionAlignment'] ) ? Alignment::get_css( $attributes['descriptionAlignment'], 'text-align', $device ) : [],
@@ -343,9 +349,10 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_price_text_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['priceTypographyGlobal'] ) ? $attributes['priceTypographyGlobal'] : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['priceColor'] ) ? $attributes['priceColor'] : '' ) ],
-			isset( $attributes['priceTypography'] ) ? Typography::get_css( $attributes['priceTypography'], '', $device ) : [],
+			isset( $attributes['priceTypography'] ) ? Typography::get_css( $attributes['priceTypography'], '', $device, $typographyValueGlobal ) : [],
 			isset( $attributes['priceTextStroke'] ) ? TextStroke::get_css( $attributes['priceTextStroke'], '', $device ) : [],
 			isset( $attributes['priceTextShadow'] ) ? TextShadow::get_css( $attributes['priceTextShadow'], '', $device ) : [],
 			isset( $attributes['priceAlignment'] ) ? Alignment::get_css( $attributes['priceAlignment'], 'text-align', $device ) : [],

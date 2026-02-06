@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\StarRatings;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Classes\CssGeneratorV2;
@@ -163,9 +167,11 @@ class Block extends BlockBaseAbstract {
 				$css['order'] = '10';
 			}
 		}
+		$typographyValueGlobal = ! empty( $attributes['ratingNumberTypographyGlobal'] ) ? $attributes['ratingNumberTypographyGlobal'] : array();
+		// rating number css
 			return array_merge(
 				[ 'color' => Color::get_css( isset( $attributes['ratingNumberColor'] ) ? $attributes['ratingNumberColor'] : '' ) ],
-				Typography::get_css( $attributes['ratingNumberTypography'], '', $device )
+				Typography::get_css( $attributes['ratingNumberTypography'], '', $device, $typographyValueGlobal )
 			);
 
 	}

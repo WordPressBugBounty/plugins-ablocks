@@ -1,14 +1,15 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Background;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 
 $attributes = [
 	'block_id' => array(

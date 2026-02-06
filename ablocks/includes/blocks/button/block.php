@@ -69,6 +69,12 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-icon-wrap img.ablocks-image-icon',
@@ -145,6 +151,12 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-icon-wrap img.ablocks-image-icon',
@@ -211,7 +223,7 @@ class Block extends BlockBaseAbstract {
 		if ( isset( $attributes['position'][ 'value' . $device ] ) && $attributes['position'][ 'value' . $device ] === 'stretch' ) {
 			$css['width'] = '100%';
 		}
-
+		$typographyValueGlobal = ! empty( $attributes['typographyGlobal'] ) ? $attributes['typographyGlobal'] : '';
 		return array_merge(
 			Range::get_css([
 				'attributeValue' => $attributes['iconSpace'],
@@ -227,7 +239,7 @@ class Block extends BlockBaseAbstract {
 			[ 'color' => Color::get_css( isset( $attributes['textColor'] ) ? $attributes['textColor'] : '' ) ],
 			Border::get_css( $attributes['border'], '', $device ),
 			BoxShadow::get_css( $attributes['boxShadow'], '', $device ),
-			Typography::get_css( $attributes['typography'], '', $device ),
+			Typography::get_css( $attributes['typography'], '', $device, $typographyValueGlobal ),
 			Dimensions::get_css( $attributes['padding'], 'padding', $device ),
 		);
 	}

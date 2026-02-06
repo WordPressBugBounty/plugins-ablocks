@@ -40,8 +40,8 @@ class Addons {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die();
 		}
-		$academy_addons = json_decode( get_option( ABLOCKS_ADDONS_SETTINGS_NAME, '{}' ) );
-		wp_send_json_success( $academy_addons );
+		$ablocks_addons = json_decode( get_option( ABLOCKS_ADDONS_SETTINGS_NAME, '{}' ) );
+		wp_send_json_success( $ablocks_addons );
 	}
 
 	public function saved_addon_status() {
@@ -49,31 +49,51 @@ class Addons {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die();
 		}
-
+		// phpcs:ignore  WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 		$addon_name = ( isset( $_POST['addon_name'] ) ? sanitize_text_field( $_POST['addon_name'] ) : '' );
+		// phpcs:ignore  WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 		$addon_slug = ( isset( $_POST['addon_slug'] ) ? sanitize_text_field( $_POST['addon_slug'] ) : '' );
+		// phpcs:ignore  WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized 
 		$status = (bool) ( isset( $_POST['status'] ) ? \ABlocks\Helper::sanitize_checkbox_field( $_POST['status'] ) : false );
 
 		if ( empty( $addon_slug ) ) {
-			wp_send_json_error( __( 'Addon Name missing', 'academy' ) );
+			wp_send_json_error( __( 'Addon Name missing', 'ablocks' ) );
 		}
 
 		if ( $status ) {
-			$required_plugin = ( isset( $_POST['required_plugin'] ) ? json_decode( stripslashes( $_POST['required_plugin'] ), true ) : '' );
-			do_action( 'academy/before_active_addon', $addon_slug, $required_plugin );
-			if ( $required_plugin && is_array( $required_plugin ) ) {
+
+			$required_plugin = array();
+
+			if ( isset( $_POST['required_plugin'] ) ) {
+				$raw_json = wp_unslash( $_POST['required_plugin'] );
+				$decoded  = json_decode( $raw_json, true );
+
+				if ( is_array( $decoded ) ) {
+					$required_plugin = map_deep( $decoded, 'sanitize_text_field' );
+				}
+			}
+
+			do_action( 'ablocks/before_active_addon', $addon_slug, $required_plugin );
+
+			if ( ! empty( $required_plugin ) ) {
 				foreach ( $required_plugin as $plugin ) {
-					if ( 'Wishlist Member' === $plugin['plugin_name'] ) {
-						$active_plugins = get_option( 'active_plugins', array() );
-						$plugin['plugin_dir_path'] = in_array( $plugin['plugin_dir_path'], $active_plugins, true ) ? $plugin['plugin_dir_path'] : ( in_array( 'wishlist-member-x/wpm.php', $active_plugins, true ) ? 'wishlist-member-x/wpm.php' : '' );
+
+					if ( empty( $plugin['plugin_dir_path'] ) || empty( $plugin['plugin_name'] ) ) {
+						continue;
 					}
-					if ( ! Helper::is_plugin_active( sanitize_text_field( $plugin['plugin_dir_path'] ) ) ) {
-						$error_message = sprintf( '%s Plugin is required to activate %s addon.', sanitize_text_field( $plugin['plugin_name'] ), $addon_name );
+
+					if ( ! Helper::is_plugin_active( $plugin['plugin_dir_path'] ) ) {
+						$error_message = sprintf(
+							'%s Plugin is required to activate %s addon.',
+							esc_html( $plugin['plugin_name'] ),
+							esc_html( $addon_name )
+						);
+
 						wp_send_json_error( $error_message );
 					}
 				}
 			}
-		}
+		}//end if
 
 		// Saved Data
 		$saved_addons = (array) json_decode( get_option( ABLOCKS_ADDONS_SETTINGS_NAME ), true );

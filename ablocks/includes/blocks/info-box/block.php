@@ -597,6 +597,7 @@ class Block extends BlockBaseAbstract {
 		} elseif ( ! empty( $attributes['badgeType'] ) ) {
 			$css['background'] = $attributes['badgeType'];
 		}
+		$typographyGlobal = ! empty( $attributes['badgeTypographyGlobal'] ) ? $attributes['badgeTypographyGlobal'] : array();
 
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['badgeTextColorH'] ) ? $attributes['badgeTextColor'] : '' ) ],
@@ -610,7 +611,7 @@ class Block extends BlockBaseAbstract {
 			]),
 			$css,
 			Border::get_css( $attributes['badgeBorder'], '', $device ),
-			Typography::get_css( $attributes['badgeTypography'], '', $device ),
+			Typography::get_css( $attributes['badgeTypography'], '', $device, $typographyGlobal ),
 			Dimensions::get_css( $attributes['badgePadding'], 'padding', $device ),
 		);
 	}
@@ -693,7 +694,8 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_heading_text_css( $attributes, $device = '' ) {
-		$typography_css = ! empty( $attributes['headingTypography'] ) ? Typography::get_css( $attributes['headingTypography'], '', $device ) : array();
+		$typographyGlobal = ! empty( $attributes['headingTypographyGlobal'] ) ? $attributes['headingTypographyGlobal'] : array();
+		$typography_css = ! empty( $attributes['headingTypography'] ) ? Typography::get_css( $attributes['headingTypography'], '', $device, $typographyGlobal ) : array();
 		$textShadowCss = ! empty( $attributes['headingTextShadow'] ) ? TextShadow::get_css( $attributes['headingTextShadow'], '', $device ) : array();
 		$textStrokeCss = ! empty( $attributes['headingTextStroke'] ) ? TextStroke::get_css( $attributes['headingTextStroke'], '', $device ) : array();
 
@@ -740,7 +742,8 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_sub_heading_text_css( $attributes, $device = '' ) {
-		$typography_css = ! empty( $attributes['subHeadingTypography'] ) ? Typography::get_css( $attributes['subHeadingTypography'], '', $device ) : array();
+		$typographyGlobal = ! empty( $attributes['subHeadingTypographyGlobal'] ) ? $attributes['subHeadingTypographyGlobal'] : array();
+		$typography_css = ! empty( $attributes['subHeadingTypography'] ) ? Typography::get_css( $attributes['subHeadingTypography'], '', $device, $typographyGlobal ) : array();
 		$textShadowCss = ! empty( $attributes['subHeadingTextShadow'] ) ? TextShadow::get_css( $attributes['subHeadingTextShadow'], '', $device ) : array();
 		$textStrokeCss = ! empty( $attributes['subHeadingTextStroke'] ) ? TextStroke::get_css( $attributes['subHeadingTextStroke'], '', $device ) : array();
 
@@ -793,10 +796,11 @@ class Block extends BlockBaseAbstract {
 				$css['text-align'] = $attributes['alignment'][ 'value' . $device ];
 			}
 		}
+		$typographyGlobal = ! empty( $attributes['desTypographyGlobal'] ) ? $attributes['desTypographyGlobal'] : array();
 		return array_merge(
 			$css,
 			[ 'color' => Color::get_css( isset( $attributes['desTextColor'] ) ? $attributes['desTextColor'] : '' ) ],
-			isset( $attributes['desTypography'] ) ? Typography::get_css( $attributes['desTypography'], '', $device ) : [],
+			isset( $attributes['desTypography'] ) ? Typography::get_css( $attributes['desTypography'], '', $device, $typographyGlobal ) : [],
 			isset( $attributes['desTextStroke'] ) ? TextStroke::get_css( $attributes['desTextStroke'], '', $device ) : [],
 			isset( $attributes['desTextShadow'] ) ? TextShadow::get_css( $attributes['desTextShadow'], '', $device ) : [],
 			Dimensions::get_css( $attributes['desMargin'], 'margin', $device ),
@@ -858,9 +862,10 @@ class Block extends BlockBaseAbstract {
 				$css['order'] = '10';
 			}
 		}
+		$typographyGlobal = ! empty( $attributes['ratingNumberTypographyGlobal'] ) ? $attributes['ratingNumberTypographyGlobal'] : array();
 		return array_merge(
 			$css,
-			isset( $attributes['ratingNumberTypography'] ) ? Typography::get_css( $attributes['ratingNumberTypography'], '', $device ) : [],
+			isset( $attributes['ratingNumberTypography'] ) ? Typography::get_css( $attributes['ratingNumberTypography'], '', $device, $typographyGlobal ) : [],
 		);
 	}
 	public function get_rating_css( $attributes, $device = '' ) {
@@ -970,6 +975,7 @@ class Block extends BlockBaseAbstract {
 		if ( isset( $attributes['btnAlignment'][ 'value' . $device ] ) ) {
 			$css['justify-content'] = $attributes['btnAlignment'][ 'value' . $device ];
 		}
+		$typographyGlobal = ! empty( $attributes['btnTypographyGlobal'] ) ? $attributes['btnTypographyGlobal'] : array();
 
 		return array_merge(
 			Range::get_css([
@@ -990,7 +996,7 @@ class Block extends BlockBaseAbstract {
 			$css,
 			[ 'color' => Color::get_css( isset( $attributes['btnTextColor'] ) ? $attributes['btnTextColor'] : '' ) ],
 			Border::get_css( $attributes['btnBorder'], '', $device ),
-			Typography::get_css( $attributes['btnTypography'], '', $device ),
+			Typography::get_css( $attributes['btnTypography'], '', $device, $typographyGlobal ),
 			Dimensions::get_css( $attributes['btnPadding'], 'padding', $device ),
 			Dimensions::get_css( $attributes['btnMargin'], 'margin', $device ),
 		);

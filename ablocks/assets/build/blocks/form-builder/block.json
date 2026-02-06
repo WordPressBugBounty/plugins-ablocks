@@ -26,6 +26,10 @@
             "type": "string",
             "default": ""
         },
+        "email_list_id": {
+            "type": "string",
+            "default": ""
+        },
         "blockVersion": {
             "type": "number",
             "default": ""
@@ -38,9 +42,17 @@
             "type": "number",
             "default": ""
         },
+        "email_template_id": {
+            "type": "string",
+            "default": ""
+        },
         "showLabels": {
             "type": "boolean",
             "default": true
+        },
+        "subscriberToUser": {
+            "type": "boolean",
+            "default": false
         },
         "loginRedirect": {
             "type": "boolean",
@@ -120,7 +132,7 @@
         },
         "emailOneTo": {
             "type": "string",
-            "default": "someone@example.com"
+            "default": ""
         },
         "emailOneSubject": {
             "type": "string",
@@ -132,7 +144,7 @@
         },
         "emailOneFormEmail": {
             "type": "string",
-            "default": "someone@example.com"
+            "default": ""
         },
         "emailOneFormName": {
             "type": "string",
@@ -140,7 +152,7 @@
         },
         "emailOneReplyTo": {
             "type": "string",
-            "default": "someone@example.com"
+            "default": ""
         },
         "emailOneCc": {
             "type": "string",
@@ -156,7 +168,7 @@
         },
         "emailTwoTo": {
             "type": "string",
-            "default": "someone@example.com"
+            "default": ""
         },
         "emailTwoSubject": {
             "type": "string",
@@ -168,7 +180,7 @@
         },
         "emailTwoFormEmail": {
             "type": "string",
-            "default": "someone@example.com"
+            "default": ""
         },
         "emailTwoFormName": {
             "type": "string",
@@ -176,7 +188,7 @@
         },
         "emailTwoReplyTo": {
             "type": "string",
-            "default": "someone@example.com"
+            "default": ""
         },
         "emailTwoCc": {
             "type": "string",
@@ -499,6 +511,22 @@
             "type": "string",
             "default": ""
         },
+        "confirmationNotice": {
+            "type": "string",
+            "default": "Form successfully submitted!"
+        },
+        "afterFormSubmission": {
+            "type": "string",
+            "default": "reset"
+        },
+        "customUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "confirmationType": {
+            "type": "string",
+            "default": "success"
+        },
         "labelAlignment": {
             "type": "object",
             "default": {
@@ -616,11 +644,15 @@
                 "linkClass": ""
             }
         },
+        "labelTypographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "labelTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -649,12 +681,16 @@
                 "wordSpacingUnitTablet": "px",
                 "wordSpacingUnitMobile": "px"
             }
+        },
+        "helperTextTypographyGlobal": {
+            "type": "string",
+            "default": ""
         },
         "helperTextTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -683,12 +719,16 @@
                 "wordSpacingUnitTablet": "px",
                 "wordSpacingUnitMobile": "px"
             }
+        },
+        "inputTypographyGlobal": {
+            "type": "string",
+            "default": ""
         },
         "inputTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -717,12 +757,16 @@
                 "wordSpacingUnitTablet": "px",
                 "wordSpacingUnitMobile": "px"
             }
+        },
+        "buttonTypographyGlobal": {
+            "type": "string",
+            "default": ""
         },
         "buttonTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -751,12 +795,16 @@
                 "wordSpacingUnitTablet": "px",
                 "wordSpacingUnitMobile": "px"
             }
+        },
+        "navigatorTypographyGlobal": {
+            "type": "string",
+            "default": ""
         },
         "navigatorTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -786,11 +834,15 @@
                 "wordSpacingUnitMobile": "px"
             }
         },
+        "successErrorTypographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "successErrorTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -1583,6 +1635,32 @@
                 "transitionDuration": "0"
             }
         },
+        "_gsapAnimation": {
+            "type": "object",
+            "default": {
+                "animationType": "none",
+                "duration": 1,
+                "delay": 0,
+                "triggerType": "scroll",
+                "ease": "none",
+                "x": 0,
+                "y": 0,
+                "rotation": 0,
+                "rotationY": 0,
+                "opacity": 1,
+                "xTo": 0,
+                "yTo": 0,
+                "rotationTo": 0,
+                "rotationYTo": 0,
+                "opacityTo": 1,
+                "easeTo": "none",
+                "loops": false,
+                "numberOfRepeat": 0,
+                "isSmooth": true,
+                "startPoint": 80,
+                "endPoint": 10
+            }
+        },
         "_hide_on_desktop": {
             "type": "boolean",
             "default": false
@@ -1598,6 +1676,20 @@
         "_custom_css": {
             "type": "string",
             "default": ""
+        },
+        "_animation_element_trigger": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object"
+            }
+        },
+        "_animation_page_trigger": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object"
+            }
         }
     }
 }

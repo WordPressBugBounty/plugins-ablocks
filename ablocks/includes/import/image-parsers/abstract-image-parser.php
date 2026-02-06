@@ -70,7 +70,7 @@ abstract class AbstractImageParser {
 		$attachment_id = media_handle_sideload( $file );
 		update_post_meta( $attachment_id, '_ablocks_demo_ref', $url );
 
-		// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+		// phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged, WordPress.WP.AlternativeFunctions.unlink_unlink 
 		@unlink( $temp_file );
 
 		return $attachment_id;

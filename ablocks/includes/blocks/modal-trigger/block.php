@@ -2,6 +2,10 @@
 
 namespace ABlocks\Blocks\ModalTrigger;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 

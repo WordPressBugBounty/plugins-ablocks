@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\Player;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Controls\CssFilter;

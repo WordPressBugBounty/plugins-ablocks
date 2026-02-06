@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\Countdown;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Classes\CssGeneratorV2;
@@ -10,6 +14,7 @@ use ABlocks\Controls\Border;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Color;
+use ABlocks\Controls\Dimensions;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'countdown';
@@ -187,6 +192,7 @@ class Block extends BlockBaseAbstract {
 	public function get_countdown_item_css( $attributes, $device = '' ) {
 		$css = [];
 		$width_css = [];
+		// $css['padding'] = '0';
 		$label_position       = ! empty( $attributes['labelPosition'] ) ? $attributes['labelPosition'] : '';
 		$orient               = ! empty( $attributes['orient'] ) ? $attributes['orient'] : [];
 
@@ -232,7 +238,8 @@ class Block extends BlockBaseAbstract {
 			] ),
 			$border_css,
 			$css,
-			BoxShadow::get_css( ! empty( $attributes['boxShadow'] ) ? $attributes['boxShadow'] : '', $device )
+			BoxShadow::get_css( ! empty( $attributes['boxShadow'] ) ? $attributes['boxShadow'] : '', $device ),
+			Dimensions::get_css( $attributes['padding'], 'padding', $device ),
 		);
 	}
 
@@ -255,10 +262,11 @@ class Block extends BlockBaseAbstract {
 			$css['justify-content'] = 'center';
 			$css['align-items'] = 'center';
 		}
+		$typographyGlobal = ( isset( $attributes['labelTypographyGlobal'] ) ? $attributes['labelTypographyGlobal'] : '' );
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['labelColor'] ) ? $attributes['labelColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['labelBgColor'] ) ? $attributes['labelBgColor'] : '' ) ],
-			! empty( $attributes['labelTypography'] ) ? Typography::get_css( $attributes['labelTypography'], '', $device ) : array(),
+			! empty( $attributes['labelTypography'] ) ? Typography::get_css( $attributes['labelTypography'], '', $device, $typographyGlobal ) : array(),
 			$css
 		);
 	}
@@ -272,18 +280,20 @@ class Block extends BlockBaseAbstract {
 			$css['justify-content'] = 'center';
 			$css['align-items'] = 'center';
 		}
+		$typographyGlobal = ( isset( $attributes['numberTypographyGlobal'] ) ? $attributes['numberTypographyGlobal'] : '' );
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['numberColor'] ) ? $attributes['numberColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['numberBgColor'] ) ? $attributes['numberBgColor'] : '' ) ],
-			! empty( $attributes['numberTypography'] ) ? Typography::get_css( $attributes['numberTypography'], '', $device ) : array(),
+			! empty( $attributes['numberTypography'] ) ? Typography::get_css( $attributes['numberTypography'], '', $device, $typographyGlobal ) : array(),
 			$css
 		);
 	}
 
 	public function get_separator_css( $attributes, $device = '' ) {
+		$typographyGlobal = ( isset( $attributes['separatorTypographyGlobal'] ) ? $attributes['separatorTypographyGlobal'] : '' );
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['separatorColor'] ) ? $attributes['separatorColor'] : '' ) ],
-			! empty( $attributes['separatorTypography'] ) ? Typography::get_css( $attributes['separatorTypography'], '', $device ) : array(),
+			! empty( $attributes['separatorTypography'] ) ? Typography::get_css( $attributes['separatorTypography'], '', $device, $typographyGlobal ) : array(),
 		);
 	}
 }

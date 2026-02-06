@@ -15,6 +15,8 @@ use ABlocks\Helper;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'container';
+	protected $style_depends = [ 'ablocks-swiper-style' ];
+
 
 	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
@@ -418,9 +420,6 @@ class Block extends BlockBaseAbstract {
 		$attributes['shapeTop'] !== '' ) {
 			$css['z-index'] = 1;
 			$css['position'] = 'absolute';
-		} else {
-			$css['z-index'] = 0;
-			$css['position'] = 'absolute';
 		}
 		return $css;
 	}
@@ -432,15 +431,16 @@ class Block extends BlockBaseAbstract {
 		$attributes['shapeBottom'] !== '' ) {
 			$css['z-index'] = 1;
 			$css['position'] = 'absolute';
-		} else {
-			$css['z-index'] = 0;
-			$css['position'] = 'absolute';
 		}
 		return $css;
 	}
 
 	public function getContainerShapeTopSvgCSS( $attributes, $device = '' ) {
 		$css = [];
+
+		if ( empty( $attributes['shapeTop'] ) ) {
+			return [];
+		}
 
 		if ( ! empty( $attributes['shapeTopColor'] ) ) {
 			$css['fill'] = $attributes['shapeTopColor'];
@@ -481,6 +481,10 @@ class Block extends BlockBaseAbstract {
 
 	public function getContainerShapeBottomSvgCSS( $attributes, $device = '' ) {
 		$css = [];
+
+		if ( empty( $attributes['shapeBottom'] ) ) {
+			return [];
+		}
 
 		if ( ! empty( $attributes['shapeBottomColor'] ) ) {
 			$css['fill'] = $attributes['shapeBottomColor'];

@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\ToggleChild;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 

@@ -110,6 +110,7 @@ final class SendEmail implements FormSubmissionAction {
 	 * @return void
 	 */
 	private function contact_form_send_email( string $num = 'One' ): void {
+		$this->user_email = $this->apply_vars( $this->user_email );
 		// check email notification is enabled or not
 		$nums = [
 			'One' => '',
@@ -124,26 +125,28 @@ final class SendEmail implements FormSubmissionAction {
 		}
 		$config = $this->validateformdata->form_info['info']['config'];
 
-		$to_email = sanitize_text_field( $config[ 'email' . $num . 'To' ] ?? $this->admin_email );
+		$to_email = $this->apply_vars( sanitize_text_field( $config[ 'email' . $num . 'To' ] ?? $this->admin_email ) );
 
-		$subject = sanitize_text_field( $config[ 'email' . $num . 'Subject' ] ?? '' );
+		$subject = $this->apply_vars( sanitize_text_field( $config[ 'email' . $num . 'Subject' ] ?? '' ) );
 		// translators: %s is email
 		$subject = $subject ? $subject : ( $this->user_email ? sprintf( __( 'You have a message from %s', 'ablocks' ), $this->user_email ) : __( 'You have a message', 'ablocks' ) );
 
 		$type    = strtolower( sanitize_text_field( $config[ 'email' . $num . 'Type' ] ?? 'html' ) );
-		$message = sanitize_text_field( $config[ 'email' . $num . 'Message' ] ?? '' );
+		$message = $this->apply_vars( sanitize_text_field( $config[ 'email' . $num . 'Message' ] ?? '' ) );
 		// check {all-fields} exists or not
+		$message = empty( $message ) ? '{all-fields}' : $message;
 		if ( preg_match( '|\{all\-fields\}|im', $message ) ) {
 			// if exist then replace this text to data table
 			$message = str_replace( '{all-fields}', $this->get_data_as_table_format( $type ), $message );
-		} elseif ( $message ) {
-			// if message is defined by user and {all-fields} is not available
-			// then insert datatable at the end of msg
-			$message .= $this->get_data_as_table_format( $type );
-		} else {
-			// if msg is not defined by user, the add only datatable
-			$message = $this->get_data_as_table_format( $type );
 		}
+		// elseif ( $message ) {
+		// if message is defined by user and {all-fields} is not available
+		// then insert datatable at the end of msg
+		// $message .= $this->get_data_as_table_format( $type );
+		// } else {
+		// if msg is not defined by user, the add only datatable
+		// $message = $this->get_data_as_table_format( $type );
+		// }
 		$headers = [];
 
 		$from_email = sanitize_text_field( $config[ 'email' . $num . 'FormEmail' ] ?? '' );
@@ -160,14 +163,24 @@ final class SendEmail implements FormSubmissionAction {
 		if ( $reply_to ) {
 			$headers[] = 'Reply-To: ' . $reply_to;
 		}
-
 		if ( $cc ) {
-			$headers[] = 'CC: ' . $cc;
+			$headers[] = 'CC: ' . implode( ',', array_unique(
+				preg_split(
+					'|[,\s]|', $this->apply_vars( strval( $cc ) )
+				)
+			) );
 		}
 		if ( $bcc ) {
-			$headers[] = 'BCC: ' . $bcc;
+			$headers[] = 'BCC: ' . implode( ',', array_unique(
+				preg_split(
+					'|[,\s]|', $this->apply_vars( strval( $bcc ) )
+				)
+			) );
 		}
 
+		if ( $type === 'plain' ) {
+			$headers[] = 'Content-Type: text/plain; charset=UTF-8';
+		}
 		$template = $type === 'plain' ? 'email/plain-text/contact-email.php' : 'email/contact-email.php';
 
 		ob_start();
@@ -177,8 +190,35 @@ final class SendEmail implements FormSubmissionAction {
 			]);
 
 		$data = ob_get_clean();
+		foreach ( array_unique( preg_split( '|[,\s]|', strval( $to_email ) ) ) as $email ) {
+			$email = trim( $email );
+			if ( ! empty( $email ) ) {
+				$this->send_email( $subject, $data, $email, $headers );
+			}
+		}
 
-		$this->send_email( $subject, $data, $to_email, $headers );
+	}
+
+	private function apply_vars( ?string $msg ): ?string {
+		$admin_email = get_option( 'admin_email' );
+		$current_user = wp_get_current_user();
+		$current_user_email = $current_user->user_email;
+
+		$fields = array_merge(
+			$this->validateformdata->form_info['data'] ?? [],
+			[
+				'admin_email'  => [ 'value' => $admin_email ],
+				'user_email'   => [ 'value' => $current_user_email ]
+			]
+		);
+		// wp_send_json($fields);
+		foreach ( $fields as $key => [ 'value' => $val ] ) {
+			if ( is_array( $val ) ) {
+				$val = implode( ', ', $val );
+			}
+			$msg = str_replace( "{{$key}}", $val, $msg );
+		}
+		return $msg;
 	}
 
 	/**

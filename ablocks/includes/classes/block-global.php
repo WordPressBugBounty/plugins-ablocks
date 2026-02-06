@@ -15,6 +15,7 @@ use ABlocks\Controls\Transform;
 use ABlocks\Controls\Mask;
 use ABlocks\Controls\Animation;
 use ABlocks\Controls\BoxShadow;
+use ABlocks\Controls\GsapAnimation;
 use ABlocks\Helper;
 
 class BlockGlobal {
@@ -35,7 +36,21 @@ class BlockGlobal {
 			'_custom_css' => [
 				'type' => 'string',
 				'default' => '',
-			]
+			],
+			'_animation_element_trigger' => [
+				'type' => 'array',
+				'default' => [],
+				'items' => [
+					'type' => 'object'
+				]
+			],
+			'_animation_page_trigger' => [
+				'type' => 'array',
+				'default' => [],
+				'items' => [
+					'type' => 'object'
+				]
+			],
 		];
 		$attributes = array_merge(
 			Dimensions::get_attribute( '_margin', true ),
@@ -50,6 +65,7 @@ class BlockGlobal {
 			Animation::get_attribute( '_animation', true ),
 			BoxShadow::get_attribute( '_boxShadow', true ),
 			Transform::get_attribute( '_transform', true ),
+			GsapAnimation::get_attribute( '_gsapAnimation', true ),
 			$attributes,
 		);
 		return apply_filters( 'ablocks/get_block_common_attributes', $attributes );

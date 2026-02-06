@@ -2,6 +2,10 @@
 
 namespace ABlocks\Blocks\Tabs;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Classes\CssGeneratorV2;
@@ -185,6 +189,12 @@ class Block extends BlockBaseAbstract {
 				$mobile_styles
 			);
 		}
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' ),
+		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap img.ablocks-image-icon',
@@ -344,6 +354,12 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' ),
+		);
+		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap',
 			$this->get_icon_spacing_css( $attributes ),
 			$this->get_icon_spacing_css( $attributes, 'Tablet' ),
@@ -437,18 +453,35 @@ class Block extends BlockBaseAbstract {
 	public function get_tabs_panel_css( $attributes, $device = '' ) {
 		$tabs_panel_css = [];
 
-		if ( isset( $attributes['tabMenuAlignment'][ 'value' . $device ] ) ) {
-			$tabs_panel_css['justify-content'] = $attributes['tabMenuAlignment'][ 'value' . $device ];
-		}
-
+		$tabMenuAlignment = ! empty( $attributes['tabMenuAlignment'][ 'value' . $device ] ) ? $attributes['tabMenuAlignment'][ 'value' . $device ] : '';
 		$tabsMenuPositioning = $this->get_responsive_attribute_value( $attributes['tabsMenuPositioning'], $device );
 		$tabsMenuDirection = $this->get_responsive_attribute_value( $attributes['tabsMenuDirection'], $device );
+
+		// Handle tabMenuAlign for the given device
+		if ( $tabsMenuPositioning === 'top' || $tabsMenuPositioning === 'bottom' ) {
+			if ( $tabsMenuDirection === 'row' ) {
+				$tabs_panel_css['justify-content'] = $tabMenuAlignment;
+			} elseif ( $tabsMenuDirection === 'column' ) {
+				$tabs_panel_css['align-items'] = $tabMenuAlignment;
+			}
+			if ( $tabMenuAlignment && $attributes['tabsWidthType'][ 'value' . $device ] === 'auto' ) {
+				if ( $tabMenuAlignment === 'flex-start' ) {
+					$tabs_panel_css['margin-right'] = 'auto';
+				} elseif ( $tabMenuAlignment === 'center' ) {
+					$tabs_panel_css['margin-inline'] = 'auto';
+				}if ( $tabMenuAlignment === 'flex-end' ) {
+					$tabs_panel_css['margin-left'] = 'auto';
+				}
+			}
+		}
 
 		if ( $tabsMenuPositioning === 'left' || $tabsMenuPositioning === 'right' ) {
 			$tabs_panel_css['flex-direction'] = 'column';
 		} elseif ( $tabsMenuPositioning === 'top' || $tabsMenuPositioning === 'bottom' ) {
 			$tabs_panel_css['flex-direction'] = $tabsMenuDirection;
-			$tabs_panel_css['flex-wrap'] = 'wrap';
+			if ( ! empty( $attributes['tabWrap'][ 'value' . $device ] ) ) {
+				$tabs_panel_css['flex-wrap'] = $attributes['tabWrap'][ 'value' . $device ];
+			}
 		}
 
 		return array_merge(
@@ -482,6 +515,13 @@ class Block extends BlockBaseAbstract {
 		$css['display'] = 'flex';
 
 		$iconPosition = $this->get_responsive_attribute_value( $attributes['iconPosition'], $device );
+		$tabsMenuPositioning = $this->get_responsive_attribute_value( $attributes['tabsMenuPositioning'], $device );
+		$tabsContentWidthType = ! empty( $attributes['tabsContentWidthType'][ 'value' . $device ] ) ? $attributes['tabsContentWidthType'][ 'value' . $device ] : '';
+		$tabsMenuDirection = ! empty( $attributes['tabsMenuDirection'][ 'value' . $device ] ) ? $attributes['tabsMenuDirection'][ 'value' . $device ] : '';
+
+		if ( ( $tabsMenuPositioning === 'top' || $tabsMenuPositioning === 'bottom' ) && $tabsContentWidthType === '100%' ) {
+			$css['width'] = '100%';
+		}
 
 		// Handling icon position
 		if ( $iconPosition === 'top' ) {
@@ -524,31 +564,12 @@ class Block extends BlockBaseAbstract {
 
 	public function get_tabs_menu_content_active_css( $attributes, $device = '' ) {
 		$tabs_menu_content_active_css = [];
-		if ( isset( $attributes['tabsMenuPositioning'][ 'value' . $device ] ) ) {
-			switch ( $attributes['tabsMenuPositioning'][ 'value' . $device ] ) {
-				case 'top':
-					$tabs_menu_content_active_css['border-bottom-color'] = 'none';
-					break;
-				case 'bottom':
-					$tabs_menu_content_active_css['border-top-color'] = 'none';
-					break;
-				case 'left':
-					$tabs_menu_content_active_css['border-right-color'] = 'none';
-					break;
-				case 'right':
-					$tabs_menu_content_active_css['border-left-color'] = 'none';
-					break;
-			}
-		}
-		$border_width = isset( $attributes['menuContentBorder']['commonWidth'] ) && ! empty( $attributes['menuContentBorder']['commonWidth'] )
-		? $attributes['menuContentBorder']['commonWidth']
-		: '2px';
+
 		if ( isset( $attributes['activeColorOptions'] ) && $attributes['activeColorOptions'] === 'background' ) {
 			if ( isset( $attributes['tabActiveBackgroundColor'] ) ) {
 				$tabs_menu_content_active_css['background-color'] = Color::get_css( isset( $attributes['tabActiveBackgroundColor'] ) ? $attributes['tabActiveBackgroundColor'] : '' ) . ' !important';
 			}
 		} elseif ( isset( $attributes['activeColorOptions'] ) && $attributes['activeColorOptions'] === 'border' ) {
-			$tabs_menu_content_active_css['border-width'] = $border_width;
 			if ( isset( $attributes['activeBorderColor'] ) ) {
 				$tabs_menu_content_active_css['border-color'] = Color::get_css( isset( $attributes['activeBorderColor'] ) ? $attributes['activeBorderColor'] : '' ) . ' !important';
 			}
@@ -566,9 +587,10 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_tabs_title_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['titleTypographyGlobal'] ) ? $attributes['titleTypographyGlobal'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['titleTextColor'] ) ? $attributes['titleTextColor'] : '' ) ],
-		Typography::get_css( $attributes['titleTypography'] ?? [], '', $device ));
+		Typography::get_css( $attributes['titleTypography'] ?? [], '', $device, $typographyValueGlobal ));
 	}
 
 	public function get_tabs_active_title_css( $attributes, $device = '' ) {
@@ -582,19 +604,17 @@ class Block extends BlockBaseAbstract {
 			$tabsSubtitleCSS['display'] = 'none';
 		}
 		// Get typography styles
-		$typographyStyles = Typography::get_css( $attributes['subTitleTypography'] ?? [], '', $device );
+		$typographyValueGlobal = ! empty( $attributes['subTitleTypographyGlobal'] ) ? $attributes['subTitleTypographyGlobal'] : [];
+		$typographyStyles = Typography::get_css( $attributes['subTitleTypography'] ?? [], '', $device, $typographyValueGlobal );
 		$tabsSubtitleCSS = array_merge( $tabsSubtitleCSS, $typographyStyles );
 
 		// Determine width based on menu position
-		$tabsWidthType = $this->get_responsive_attribute_value( $attributes['tabsWidthType'], $device );
-		$tabsMenuDirection = $this->get_responsive_attribute_value( $attributes['tabsMenuDirection'], $device );
+		$tabsContentWidthType = $this->get_responsive_attribute_value( $attributes['tabsContentWidthType'], $device );
 		$position = $this->get_responsive_attribute_value( $attributes['tabsMenuPositioning'], $device );
 		if ( $device === 'Mobile' ) {
 			$tabsSubtitleCSS['width'] = '100%';
-		} elseif ( ( $position === 'top' || $position === 'bottom' ) && $tabsMenuDirection === 'column' ) {
-			$tabsSubtitleCSS['width'] = '100%';
-		} else {
-			$tabsSubtitleCSS['width'] = '160px';
+		} elseif ( ( $position === 'top' || $position === 'bottom' ) && $tabsContentWidthType === 'auto' ) {
+			$tabsSubtitleCSS['max-width'] = '160px';
 		}
 
 		return array_merge(
@@ -762,23 +782,27 @@ class Block extends BlockBaseAbstract {
 			$tabsMenuPositioning === 'top' ||
 			$tabsMenuPositioning === 'bottom'
 		) {
-			$css['margin-inline'] = 'auto';
 			$css['width'] = $tabsWidthType;
 			return $css;
 		}
 
-		return array_merge(
-			Range::get_css([
-				'attributeValue' => $attributes['tabsWidth'],
-				'attribute_object_key' => 'value',
-				'isResponsive' => true,
-				'defaultValue' => 30,
-				'hasUnit' => false,
-				'unitDefaultValue' => '%',
-				'property' => 'width',
-				'device' => $device,
-			]),
-		);
+		if (
+			$tabsMenuPositioning === 'left' ||
+			$tabsMenuPositioning === 'right'
+		) {
+			return array_merge(
+				Range::get_css([
+					'attributeValue' => $attributes['tabsWidth'],
+					'attribute_object_key' => 'value',
+					'isResponsive' => true,
+					'defaultValue' => 30,
+					'hasUnit' => false,
+					'unitDefaultValue' => '%',
+					'property' => 'width',
+					'device' => $device,
+				]),
+			);
+		}
 	}
 
 	public function get_content_width_css( $attributes, $device = '' ) {

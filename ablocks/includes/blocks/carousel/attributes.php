@@ -1,10 +1,15 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Icon;
 use ABlocks\Controls\Border;
 use ABlocks\Components\ButtonGroup;
 use ABlocks\Controls\Dimensions;
+use ABlocks\Controls\BoxShadow;
 $attributes = [
 	'block_id'          => [
 		'type'          => 'string',
@@ -129,6 +134,7 @@ $attributes = array_merge(
 	Border::get_attribute( 'paginationBorder', true ),
 	Border::get_attribute( 'activePaginationBorder', true ),
 	Dimensions::get_attribute( 'navigationIconPadding', true ),
+	BoxShadow::get_attribute( 'navigationIconBoxShadow', true ),
 	Range::get_attribute([
 		'attributeName' => 'carouselHeight',
 		'attributeObjectKey' => 'value',

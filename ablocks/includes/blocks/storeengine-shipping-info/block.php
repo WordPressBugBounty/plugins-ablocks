@@ -67,8 +67,9 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_shipping_heading_css( $attributes, $device = '' ) {
-		$typography_value = isset( $attributes['shipping_heading_typograhy'] ) ?
-			Typography::get_css( $attributes['shipping_heading_typograhy'], '', $device )
+		$typographyGlobal = ( isset( $attributes['shipping_heading_typograhyGlobal'] ) ? $attributes['shipping_heading_typograhyGlobal'] : '' );
+		$typography_value = isset( $attributes['shipping_heading_typography'] ) ?
+			Typography::get_css( $attributes['shipping_heading_typography'], '', $device, $typographyGlobal )
 			: [];
 
 		return array_merge(
@@ -82,8 +83,9 @@ class Block extends BlockBaseAbstract {
 		return [ 'color' => Color::get_css( isset( $attributes['shipping_heading_hover_color'] ) ? $attributes['shipping_heading_hover_color'] : '' ) ];
 	}
 	public function get_shipping_address_css( $attributes, $device = '' ) {
-		$typography_value = isset( $attributes['shipping_address_typograhy'] ) ?
-			Typography::get_css( $attributes['shipping_address_typograhy'], '', $device )
+		$typographyGlobal = ( isset( $attributes['shipping_address_typographyGlobal'] ) ? $attributes['shipping_address_typograhyGlobal'] : '' );
+		$typography_value = isset( $attributes['shipping_address_typography'] ) ?
+			Typography::get_css( $attributes['shipping_address_typography'], '', $device, $typographyGlobal )
 			: [];
 
 		return array_merge(
@@ -100,6 +102,7 @@ class Block extends BlockBaseAbstract {
 	public function render_block_content( $attributes, $content, $block_instance ) {
 		$attr_array = [];
 
+		// phpcs:ignore  WordPress.Security.NonceVerification.Recommended,  WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 		if ( isset( $_GET['context'] ) && 'edit' === sanitize_text_field( $_GET['context'] ) ) {
 			$attr_array['dummy'] = true;
 		}

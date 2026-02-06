@@ -2,6 +2,10 @@
 
 namespace ABlocks\Blocks\FormBuilder;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Controls\Alignment;
@@ -43,7 +47,7 @@ class Block extends BlockBaseAbstract {
 		);
 
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-form-builder__field',
+			'{{WRAPPER}} > .ablocks-form-builder__field',
 			$this->get_field_css( $attributes ),
 			$this->get_field_css( $attributes, 'Tablet' ),
 			$this->get_field_css( $attributes, 'Mobile' ),
@@ -157,7 +161,7 @@ class Block extends BlockBaseAbstract {
 				);
 
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-form-builder__field',
+			'{{WRAPPER}} > .ablocks-form-builder__field',
 			$this->get_field_css( $attributes ),
 			$this->get_field_css( $attributes, 'Tablet' ),
 			$this->get_field_css( $attributes, 'Mobile' ),
@@ -291,9 +295,10 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_label_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['labelTypographyGlobal'] ) ? $attributes['labelTypographyGlobal'] : array();
 		$label_css = array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['labelColor'] ) ? $attributes['labelColor'] : '' ) ],
-			Typography::get_css( $attributes['labelTypography'], '', $device ),
+			Typography::get_css( $attributes['labelTypography'], '', $device, $typographyValueGlobal ),
 			Alignment::get_css( $attributes['labelAlignment'], 'text-align', $device ),
 			Range::get_css([
 				'attributeValue' => $attributes['labelSpacing'],
@@ -315,9 +320,10 @@ class Block extends BlockBaseAbstract {
 		return $label_css;
 	}
 	public function get_helper_text_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['helperTextTypographyGlobal'] ) ? $attributes['helperTextTypographyGlobal'] : array();
 		$helper_text_css = array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['helperTextColor'] ) ? $attributes['helperTextColor'] : '' ) ],
-			Typography::get_css( $attributes['helperTextTypography'], '', $device ),
+			Typography::get_css( $attributes['helperTextTypography'], '', $device, $typographyValueGlobal ),
 			Alignment::get_css( $attributes['labelAlignment'], 'text-align', $device ),
 			Range::get_css([
 				'attributeValue' => $attributes['helperTextSpacing'],
@@ -348,11 +354,12 @@ class Block extends BlockBaseAbstract {
 			$css['border'] = '1px solid #A7AAAD';
 			$css['border-radius'] = '5px';
 		}
+		$typographyValueGlobal = ! empty( $attributes['inputTypographyGlobal'] ) ? $attributes['inputTypographyGlobal'] : array();
 		$input_css = array_merge(
 			[ 'background' => Color::get_css( isset( $attributes['inputBgColor'] ) ? $attributes['inputBgColor'] : '' ) ],
 			$css,
 			Alignment::get_css( $attributes['inputAlignment'], 'text-align', $device ),
-			Typography::get_css( $attributes['inputTypography'], '', $device ),
+			Typography::get_css( $attributes['inputTypography'], '', $device, $typographyValueGlobal ),
 			Border::get_css( $attributes['inputBorder'], '', $device ),
 			Dimensions::get_css( $attributes['inputPadding'], 'padding', $device )
 		);
@@ -393,8 +400,9 @@ class Block extends BlockBaseAbstract {
 		return $input_focus_css;
 	}
 	public function get_input_placeholder_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['inputTypographyGlobal'] ) ? $attributes['inputTypographyGlobal'] : array();
 		$placeholder_css = array_merge(
-			Typography::get_css( $attributes['inputTypography'], '', $device ),
+			Typography::get_css( $attributes['inputTypography'], '', $device, $typographyValueGlobal ),
 			Alignment::get_css( $attributes['inputAlignment'], 'text-align', $device )
 		);
 		if ( ! empty( $attributes['inputPlaceholderColor'] ) ) {
@@ -428,11 +436,12 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_submit_button_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['buttonTypographyGlobal'] ) ? $attributes['buttonTypographyGlobal'] : array();
 		$button_css = array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['buttonColor'] ) ? $attributes['buttonColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['buttonBgColor'] ) ? $attributes['buttonBgColor'] : '' ) ],
 			Border::get_css( $attributes['buttonBorder'], '', $device ),
-			Typography::get_css( $attributes['buttonTypography'], '', $device ),
+			Typography::get_css( $attributes['buttonTypography'], '', $device, $typographyValueGlobal ),
 			Dimensions::get_css( $attributes['buttonPadding'], 'padding', $device ),
 		);
 		return $button_css;
@@ -446,9 +455,10 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_navigator_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['navigatorTypographyGlobal'] ) ? $attributes['navigatorTypographyGlobal'] : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['navigatorColor'] ) ? $attributes['navigatorColor'] : '' ) ],
-			Typography::get_css( $attributes['navigatorTypography'], '', $device ),
+			Typography::get_css( $attributes['navigatorTypography'], '', $device, $typographyValueGlobal ),
 			Dimensions::get_css( $attributes['navigatorPadding'], 'padding', $device ),
 			Alignment::get_css( $attributes['navigatorAlignment'], 'text-align', $device ),
 		);
@@ -481,8 +491,9 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_success_error_common_styles_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['successErrorTypographyGlobal'] ) ? $attributes['successErrorTypographyGlobal'] : array();
 		return array_merge(
-			Typography::get_css( $attributes['successErrorTypography'], '', $device ),
+			Typography::get_css( $attributes['successErrorTypography'], '', $device, $typographyValueGlobal ),
 			Alignment::get_css( $attributes['successErrorAlignment'], 'text-align', $device ),
 			Dimensions::get_css( $attributes['successErrorPadding'], 'padding', $device ),
 		);

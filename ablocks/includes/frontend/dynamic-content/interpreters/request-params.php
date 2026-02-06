@@ -22,23 +22,27 @@ class RequestParams extends Abstracts\Interpreter {
 		$this->field = empty( $this->field ) ? 'get' : $this->field;
 	}
 	public function content() : string {
+		if ( ! is_admin() ) {
+			switch ( $this->field ) {
+				case 'get':
+						// phpcs:ignore  WordPress.Security.NonceVerification.Recommended 
+						$this->content = $this->req_param_value( $_GET );
+					break;
 
-		switch ( $this->field ) {
-			case 'get':
-					$this->content = $this->req_param_value( $_GET );
-				break;
+				case 'post':
+						// phpcs:ignore  WordPress.Security.NonceVerification.Missing 
+						$this->content = $this->req_param_value( $_POST );
+					break;
 
-			case 'post':
-					$this->content = $this->req_param_value( $_POST );
-				break;
+				case 'query var':
+						$this->content = get_query_var( $this->param, '' );
+					break;
 
-			case 'query var':
-					$this->content = get_query_var( $this->param, '' );
-				break;
-
-			default:
-					$this->content = '';
+				default:
+						$this->content = '';
+			}
 		}
+
 		return $this->pre . ( $this->content === '' ? $this->default : $this->content ) . $this->post;
 	}
 	public function req_param_value( array $params ) : string {

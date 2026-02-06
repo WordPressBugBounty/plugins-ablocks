@@ -125,7 +125,8 @@ class Block extends BlockBaseAbstract {
 					break;
 			}
 		}
-		$typography_css = ! empty( $attributes['labelTypography'] ) ? Typography::get_css( $attributes['labelTypography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['labelTypographyGlobal'] ) ? $attributes['labelTypographyGlobal'] : array();
+		$typography_css = ! empty( $attributes['labelTypography'] ) ? Typography::get_css( $attributes['labelTypography'], '', $device, $typographyValueGlobal ) : array();
 		$textShadowCss = ! empty( $attributes['labelTextShadow'] ) ? TextShadow::get_css( $attributes['labelTextShadow'], '', $device ) : array();
 		$textStrokeCss = ! empty( $attributes['labelTextStroke'] ) ? TextStroke::get_css( $attributes['labelTextStroke'], '', $device ) : array();
 		return array_merge(
@@ -213,8 +214,8 @@ class Block extends BlockBaseAbstract {
 					$ticker_list_styles_css['list-style'] = 'none';
 			}
 		}
-
-		$typography_css = ! empty( $attributes['tickerTypography'] ) ? Typography::get_css( $attributes['tickerTypography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['tickerTypographyGlobal'] ) ? $attributes['tickerTypographyGlobal'] : array();
+		$typography_css = ! empty( $attributes['tickerTypography'] ) ? Typography::get_css( $attributes['tickerTypography'], '', $device, $typographyValueGlobal ) : array();
 		$textShadowCss = ! empty( $attributes['tickerTextShadow'] ) ? TextShadow::get_css( $attributes['tickerTextShadow'], '', $device ) : array();
 		$textStrokeCss = ! empty( $attributes['tickerTextStroke'] ) ? TextStroke::get_css( $attributes['tickerTextStroke'], '', $device ) : array();
 
@@ -329,7 +330,7 @@ class Block extends BlockBaseAbstract {
 							<li class="ablocks-block-news-ticker__item">
 							<span class="ablocks-block-news-ticker__custom-text">
 								<?php if ( ! empty( $href ) ) : ?>
-									<a href="<?php echo esc_url( $href ); ?>" <?php echo $target; ?>>
+									<a href="<?php echo esc_url( $href ); ?>" <?php echo esc_html( $target ); ?>>
 										<?php echo esc_html( $text ); ?>
 									</a>
 								<?php else : ?>
@@ -352,18 +353,20 @@ class Block extends BlockBaseAbstract {
 								<a href="<?php echo esc_url( $post_link ); ?>" target="<?php echo esc_attr( $link_target ); ?>">
 									<li class="ablocks-block-news-ticker__item">
 										<?php echo esc_html( $title ); ?>
-										<span class="ablocks-block-news-ticker--date"><?php echo $date; ?></span>
+										<span class="ablocks-block-news-ticker--date"><?php echo esc_html( $date ); ?></span>
 									</li>
 								</a>
 							<?php else : ?>
 								<li class="ablocks-block-news-ticker__item">
 									<?php echo esc_html( $title ); ?>
-									<span class="ablocks-block-news-ticker--date"><?php echo $date; ?></span>
+									<span class="ablocks-block-news-ticker--date"><?php echo esc_html( $date ); ?></span>
 								</li>
 							<?php endif; ?>
 							<?php endwhile; ?>
 						<?php else : ?>
-							<li><?php echo esc_html( sprintf( __( 'No %s found in the selection', 'ablocks' ), $post_type . 's' ) ); ?></li>
+							<li><?php
+								/* translators: %s template */
+								echo esc_html( sprintf( __( 'No %s found in the selection', 'ablocks' ), $post_type . 's' ) ); ?></li>
 						<?php endif; ?>
 					<?php else : ?>
 						<li><?php esc_html_e( 'No items selected', 'ablocks' ); ?></li>

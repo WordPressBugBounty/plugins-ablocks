@@ -86,6 +86,10 @@
         "iconColor": {
             "type": "string"
         },
+        "activeColor": {
+            "type": "string",
+            "default": "#2763f3"
+        },
         "headerBG": {
             "type": "string",
             "default": "#ddd"
@@ -94,11 +98,15 @@
             "type": "string",
             "default": ""
         },
+        "titleTypographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "titleTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -128,11 +136,15 @@
                 "wordSpacingUnitMobile": "px"
             }
         },
+        "contentTypographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "contentTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -256,7 +268,149 @@
                 "transitionDuration": ""
             }
         },
+        "iconBorder": {
+            "type": "object",
+            "default": {
+                "borderStyle": "default",
+                "borderStyleH": "default",
+                "borderColor": "",
+                "borderColorH": "",
+                "isLinkedWidth": true,
+                "isLinkedWidthTablet": true,
+                "isLinkedWidthMobile": true,
+                "commonWidth": "",
+                "commonWidthTablet": "",
+                "commonWidthMobile": "",
+                "topWidth": "",
+                "rightWidth": "",
+                "bottomWidth": "",
+                "leftWidth": "",
+                "topWidthTablet": "",
+                "rightWidthTablet": "",
+                "bottomWidthTablet": "",
+                "leftWidthTablet": "",
+                "topWidthMobile": "",
+                "rightWidthMobile": "",
+                "bottomWidthMobile": "",
+                "leftWidthMobile": "",
+                "unitWidth": "px",
+                "unitWidthTablet": "",
+                "unitWidthMobile": "",
+                "isLinkedWidthH": true,
+                "isLinkedWidthHTablet": true,
+                "isLinkedWidthHMobile": true,
+                "commonWidthH": "",
+                "commonWidthHTablet": "",
+                "commonWidthHMobile": "",
+                "topWidthH": "",
+                "rightWidthH": "",
+                "bottomWidthH": "",
+                "leftWidthH": "",
+                "topWidthHTablet": "",
+                "rightWidthHTablet": "",
+                "bottomWidthHTablet": "",
+                "leftWidthHTablet": "",
+                "topWidthHMobile": "",
+                "rightWidthHMobile": "",
+                "bottomWidthHMobile": "",
+                "leftWidthHMobile": "",
+                "unitWidthH": "px",
+                "unitWidthHTablet": "",
+                "unitWidthHMobile": "",
+                "isLinkedRadius": true,
+                "isLinkedRadiusTablet": true,
+                "isLinkedRadiusMobile": true,
+                "commonRadius": "",
+                "commonRadiusTablet": "",
+                "commonRadiusMobile": "",
+                "topRadius": "",
+                "rightRadius": "",
+                "bottomRadius": "",
+                "leftRadius": "",
+                "topRadiusTablet": "",
+                "rightRadiusTablet": "",
+                "bottomRadiusTablet": "",
+                "leftRadiusTablet": "",
+                "topRadiusMobile": "",
+                "rightRadiusMobile": "",
+                "bottomRadiusMobile": "",
+                "leftRadiusMobile": "",
+                "unitRadius": "px",
+                "unitRadiusTablet": "",
+                "unitRadiusMobile": "",
+                "isLinkedRadiusH": true,
+                "isLinkedRadiusHTablet": true,
+                "isLinkedRadiusHMobile": true,
+                "commonRadiusH": "",
+                "commonRadiusHTablet": "",
+                "commonRadiusHMobile": "",
+                "topRadiusH": "",
+                "rightRadiusH": "",
+                "bottomRadiusH": "",
+                "leftRadiusH": "",
+                "topRadiusHTablet": "",
+                "rightRadiusHTablet": "",
+                "bottomRadiusHTablet": "",
+                "leftRadiusHTablet": "",
+                "topRadiusHMobile": "",
+                "rightRadiusHMobile": "",
+                "bottomRadiusHMobile": "",
+                "leftRadiusHMobile": "",
+                "unitRadiusH": "px",
+                "unitRadiusHTablet": "",
+                "unitRadiusHMobile": "",
+                "transitionDuration": ""
+            }
+        },
+        "iconBoxShadow": {
+            "type": "object",
+            "default": {
+                "preset": "",
+                "shadowType": "default",
+                "shadow": "",
+                "horizontal": "",
+                "vertical": "",
+                "blur": "",
+                "spread": "",
+                "color": "",
+                "presetH": "",
+                "shadowTypeH": "default",
+                "shadowH": "",
+                "horizontalH": "",
+                "verticalH": "",
+                "blurH": "",
+                "spreadH": "",
+                "colorH": "",
+                "transitionDuration": "0"
+            }
+        },
         "header_padding": {
+            "type": "object",
+            "default": {
+                "isLinked": true,
+                "isLinkedTablet": true,
+                "isLinkedMobile": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px",
+                "commonTablet": "",
+                "topTablet": "",
+                "rightTablet": "",
+                "bottomTablet": "",
+                "leftTablet": "",
+                "unitTablet": "",
+                "commonMobile": "",
+                "topMobile": "",
+                "rightMobile": "",
+                "bottomMobile": "",
+                "leftMobile": "",
+                "unitMobile": ""
+            }
+        },
+        "icon_padding": {
             "type": "object",
             "default": {
                 "isLinked": true,
@@ -366,28 +520,68 @@
                 "unit": "px"
             }
         },
-        "openIconBorderRadius": {
+        "openIconBorder": {
             "type": "object",
             "default": {
-                "isLinked": true,
-                "common": "",
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": "",
-                "unit": "px"
+                "borderStyle": "default",
+                "borderStyleH": "default",
+                "borderColor": "",
+                "borderColorH": "",
+                "isLinkedWidth": true,
+                "isLinkedWidthTablet": true,
+                "isLinkedWidthMobile": true,
+                "commonWidth": "",
+                "topWidth": "",
+                "rightWidth": "",
+                "bottomWidth": "",
+                "leftWidth": "",
+                "unitWidth": "px",
+                "isLinkedWidthH": true,
+                "isLinkedWidthHTablet": true,
+                "isLinkedWidthHMobile": true,
+                "commonWidthH": "",
+                "topWidthH": "",
+                "rightWidthH": "",
+                "bottomWidthH": "",
+                "leftWidthH": "",
+                "unitWidthH": "px",
+                "isLinkedRadius": true,
+                "commonRadius": "",
+                "topRadius": "",
+                "rightRadius": "",
+                "bottomRadius": "",
+                "leftRadius": "",
+                "unitRadius": "px",
+                "isLinkedRadiusH": true,
+                "isLinkedRadiusHTablet": true,
+                "isLinkedRadiusHMobile": true,
+                "commonRadiusH": "",
+                "topRadiusH": "",
+                "leftRadiusH": "",
+                "unitRadiusH": "px",
+                "transitionDuration": ""
             }
         },
-        "openIconBorderWidth": {
+        "openIconBoxShadow": {
             "type": "object",
             "default": {
-                "isLinked": true,
-                "common": "",
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": "",
-                "unit": "px"
+                "preset": "",
+                "shadowType": "default",
+                "shadow": "",
+                "horizontal": "",
+                "vertical": "",
+                "blur": "",
+                "spread": "",
+                "color": "",
+                "presetH": "",
+                "shadowTypeH": "default",
+                "shadowH": "",
+                "horizontalH": "",
+                "verticalH": "",
+                "blurH": "",
+                "spreadH": "",
+                "colorH": "",
+                "transitionDuration": "0"
             }
         },
         "openIconSize": {
@@ -497,28 +691,68 @@
                 "unit": "px"
             }
         },
-        "closeIconBorderRadius": {
+        "closeIconBorder": {
             "type": "object",
             "default": {
-                "isLinked": true,
-                "common": "",
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": "",
-                "unit": "px"
+                "borderStyle": "default",
+                "borderStyleH": "default",
+                "borderColor": "",
+                "borderColorH": "",
+                "isLinkedWidth": true,
+                "isLinkedWidthTablet": true,
+                "isLinkedWidthMobile": true,
+                "commonWidth": "",
+                "topWidth": "",
+                "rightWidth": "",
+                "bottomWidth": "",
+                "leftWidth": "",
+                "unitWidth": "px",
+                "isLinkedWidthH": true,
+                "isLinkedWidthHTablet": true,
+                "isLinkedWidthHMobile": true,
+                "commonWidthH": "",
+                "topWidthH": "",
+                "rightWidthH": "",
+                "bottomWidthH": "",
+                "leftWidthH": "",
+                "unitWidthH": "px",
+                "isLinkedRadius": true,
+                "commonRadius": "",
+                "topRadius": "",
+                "rightRadius": "",
+                "bottomRadius": "",
+                "leftRadius": "",
+                "unitRadius": "px",
+                "isLinkedRadiusH": true,
+                "isLinkedRadiusHTablet": true,
+                "isLinkedRadiusHMobile": true,
+                "commonRadiusH": "",
+                "topRadiusH": "",
+                "leftRadiusH": "",
+                "unitRadiusH": "px",
+                "transitionDuration": ""
             }
         },
-        "closeIconBorderWidth": {
+        "closeIconBoxShadow": {
             "type": "object",
             "default": {
-                "isLinked": true,
-                "common": "",
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": "",
-                "unit": "px"
+                "preset": "",
+                "shadowType": "default",
+                "shadow": "",
+                "horizontal": "",
+                "vertical": "",
+                "blur": "",
+                "spread": "",
+                "color": "",
+                "presetH": "",
+                "shadowTypeH": "default",
+                "shadowH": "",
+                "horizontalH": "",
+                "verticalH": "",
+                "blurH": "",
+                "spreadH": "",
+                "colorH": "",
+                "transitionDuration": "0"
             }
         },
         "closeIconSize": {
@@ -1046,6 +1280,32 @@
                 "transitionDuration": "0"
             }
         },
+        "_gsapAnimation": {
+            "type": "object",
+            "default": {
+                "animationType": "none",
+                "duration": 1,
+                "delay": 0,
+                "triggerType": "scroll",
+                "ease": "none",
+                "x": 0,
+                "y": 0,
+                "rotation": 0,
+                "rotationY": 0,
+                "opacity": 1,
+                "xTo": 0,
+                "yTo": 0,
+                "rotationTo": 0,
+                "rotationYTo": 0,
+                "opacityTo": 1,
+                "easeTo": "none",
+                "loops": false,
+                "numberOfRepeat": 0,
+                "isSmooth": true,
+                "startPoint": 80,
+                "endPoint": 10
+            }
+        },
         "_hide_on_desktop": {
             "type": "boolean",
             "default": false
@@ -1061,6 +1321,20 @@
         "_custom_css": {
             "type": "string",
             "default": ""
+        },
+        "_animation_element_trigger": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object"
+            }
+        },
+        "_animation_page_trigger": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object"
+            }
         }
     }
 }

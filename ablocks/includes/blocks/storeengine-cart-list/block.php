@@ -134,9 +134,10 @@ class Block extends BlockBaseAbstract {
 			: [];
 
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
+		$typographyValueGlobal = ( isset( $attributes['tableHeaderTypographyGlobal'] ) ? $attributes['tableHeaderTypographyGlobal'] : '' );
 
 		return array_merge(
-			Typography::get_css( $typography_value, $device ),
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 		);
 	}
 
@@ -146,10 +147,12 @@ class Block extends BlockBaseAbstract {
 			: array();
 
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
-			return array_merge(
-				Typography::get_css( $typography_value, $device ),
-				[ 'color' => Color::get_css( isset( $attributes['productTitleColor'] ) ? $attributes['productTitleColor'] : '' ) ]
-			);
+		$typographyValueGlobal = ( isset( $attributes['productTitleTypographyGlobal'] ) ? $attributes['productTitleTypographyGlobal'] : '' );
+
+		return array_merge(
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
+			[ 'color' => Color::get_css( isset( $attributes['productTitleColor'] ) ? $attributes['productTitleColor'] : '' ) ]
+		);
 
 	}
 	public function get_cart_list_product_title_hover_css( $attributes, $device = '' ) {
@@ -162,10 +165,11 @@ class Block extends BlockBaseAbstract {
 			: [];
 
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
-			return array_merge(
-				Typography::get_css( $typography_value, $device ),
-				[ 'color' => Color::get_css( isset( $attributes['productSubTiteColor'] ) ? $attributes['productSubTiteColor'] : '' ) ]
-			);
+		$typographyValueGlobal = ( isset( $attributes['productsubTitleTypographyGlobal'] ) ? $attributes['productsubTitleTypographyGlobal'] : '' );
+		return array_merge(
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
+			[ 'color' => Color::get_css( isset( $attributes['productSubTiteColor'] ) ? $attributes['productSubTiteColor'] : '' ) ]
+		);
 
 	}
 
@@ -178,9 +182,9 @@ class Block extends BlockBaseAbstract {
 			: [];
 
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
-
+		$typographyValueGlobal = ( isset( $attributes['productPriceTypographyGlobal'] ) ? $attributes['productPriceTypographyGlobal'] : '' );
 		return array_merge(
-			Typography::get_css( $typography_value, $device ),
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			[ 'color' => Color::get_css( isset( $attributes['productPriceColor'] ) ? $attributes['productPriceColor'] : '' ) ]
 		);
 

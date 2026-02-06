@@ -106,9 +106,37 @@
         },
         "price_hover_color": {
             "type": "string",
-            "default": ""
+            "default": "#111"
         },
         "price_color": {
+            "type": "string",
+            "default": "#111"
+        },
+        "price_title_hover_color": {
+            "type": "string",
+            "default": "#111"
+        },
+        "price_title_color": {
+            "type": "string",
+            "default": "#111"
+        },
+        "info_color_hover": {
+            "type": "string",
+            "default": "#7b68ee"
+        },
+        "info_color": {
+            "type": "string",
+            "default": "#7b68ee"
+        },
+        "info_bg_hover": {
+            "type": "string",
+            "default": "#eae8fa"
+        },
+        "info_bg": {
+            "type": "string",
+            "default": "#eae8fa"
+        },
+        "start_btn_typographyGlobal": {
             "type": "string",
             "default": ""
         },
@@ -116,7 +144,7 @@
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -145,12 +173,16 @@
                 "wordSpacingUnitTablet": "px",
                 "wordSpacingUnitMobile": "px"
             }
+        },
+        "price_typographyGlobal": {
+            "type": "string",
+            "default": ""
         },
         "price_typography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -179,12 +211,54 @@
                 "wordSpacingUnitTablet": "px",
                 "wordSpacingUnitMobile": "px"
             }
+        },
+        "price_title_typographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
+        "price_title_typography": {
+            "type": "object",
+            "default": {
+                "fontFamily": "",
+                "weight": "",
+                "transform": "",
+                "style": "",
+                "decoration": "",
+                "fontSize": "",
+                "fontSizeUnit": "px",
+                "lineHeight": "",
+                "lineHeightUnit": "px",
+                "letterSpacing": "",
+                "letterSpacingUnit": "px",
+                "wordSpacing": "",
+                "wordSpacingUnit": "px",
+                "fontSizeTablet": "",
+                "fontSizeMobile": "",
+                "fontSizeUnitTablet": "px",
+                "fontSizeUnitMobile": "px",
+                "lineHeightTablet": "",
+                "lineHeightMobile": "",
+                "lineHeightUnitTablet": "px",
+                "lineHeightUnitMobile": "px",
+                "letterSpacingTablet": "",
+                "letterSpacingMobile": "",
+                "letterSpacingUnitTablet": "px",
+                "letterSpacingUnitMobile": "px",
+                "wordSpacingTablet": "",
+                "wordSpacingMobile": "",
+                "wordSpacingUnitTablet": "px",
+                "wordSpacingUnitMobile": "px"
+            }
+        },
+        "list_typographyGlobal": {
+            "type": "string",
+            "default": ""
         },
         "list_typography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -214,11 +288,53 @@
                 "wordSpacingUnitMobile": "px"
             }
         },
+        "massage_title_typographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "massage_title_typography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
+                "transform": "",
+                "style": "",
+                "decoration": "",
+                "fontSize": "",
+                "fontSizeUnit": "px",
+                "lineHeight": "",
+                "lineHeightUnit": "px",
+                "letterSpacing": "",
+                "letterSpacingUnit": "px",
+                "wordSpacing": "",
+                "wordSpacingUnit": "px",
+                "fontSizeTablet": "",
+                "fontSizeMobile": "",
+                "fontSizeUnitTablet": "px",
+                "fontSizeUnitMobile": "px",
+                "lineHeightTablet": "",
+                "lineHeightMobile": "",
+                "lineHeightUnitTablet": "px",
+                "lineHeightUnitMobile": "px",
+                "letterSpacingTablet": "",
+                "letterSpacingMobile": "",
+                "letterSpacingUnitTablet": "px",
+                "letterSpacingUnitMobile": "px",
+                "wordSpacingTablet": "",
+                "wordSpacingMobile": "",
+                "wordSpacingUnitTablet": "px",
+                "wordSpacingUnitMobile": "px"
+            }
+        },
+        "info_typographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
+        "info_typography": {
+            "type": "object",
+            "default": {
+                "fontFamily": "",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -300,11 +416,15 @@
                 "unitMobile": ""
             }
         },
+        "enroll_btn_typographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "enroll_btn_typography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -532,6 +652,10 @@
                 "valueUnitTablet": "",
                 "valueUnitMobile": ""
             }
+        },
+        "bg_transition": {
+            "type": "number",
+            "default": 0
         },
         "_margin": {
             "type": "object",
@@ -996,6 +1120,32 @@
                 "transitionDuration": "0"
             }
         },
+        "_gsapAnimation": {
+            "type": "object",
+            "default": {
+                "animationType": "none",
+                "duration": 1,
+                "delay": 0,
+                "triggerType": "scroll",
+                "ease": "none",
+                "x": 0,
+                "y": 0,
+                "rotation": 0,
+                "rotationY": 0,
+                "opacity": 1,
+                "xTo": 0,
+                "yTo": 0,
+                "rotationTo": 0,
+                "rotationYTo": 0,
+                "opacityTo": 1,
+                "easeTo": "none",
+                "loops": false,
+                "numberOfRepeat": 0,
+                "isSmooth": true,
+                "startPoint": 80,
+                "endPoint": 10
+            }
+        },
         "_hide_on_desktop": {
             "type": "boolean",
             "default": false
@@ -1011,6 +1161,20 @@
         "_custom_css": {
             "type": "string",
             "default": ""
+        },
+        "_animation_element_trigger": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object"
+            }
+        },
+        "_animation_page_trigger": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object"
+            }
         }
     }
 }

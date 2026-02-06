@@ -101,10 +101,11 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_form_input_label_css( $attributes, $device = '' ) {
-		$input_label_typography_css = ! empty( $attributes['input_label_typhography'] ) ? Typography::get_css( $attributes['input_label_typhography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['input_label_typhographyGlobal'] ) ? $attributes['input_label_typhographyGlobal'] : '';
+		$input_label_typography_css = isset( $attributes['input_label_typhography'] ) ? $attributes['input_label_typhography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['input_label_color'] ) ? $attributes['input_label_color'] : '' ) ],
-			$input_label_typography_css
+			Typography::get_css( $input_label_typography_css, '', $device, $typographyValueGlobal ),
 		);
 	}
 
@@ -130,13 +131,14 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_form_button_css( $attributes, $device = '' ) {
-		$form_button_typography_css = ! empty( $attributes['form_button_typhography'] ) ? Typography::get_css( $attributes['form_button_typhography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['form_button_typhographyGlobal'] ) ? $attributes['form_button_typhographyGlobal'] : '';
+		$form_button_typography_css = isset( $attributes['form_button_typhography'] ) ? $attributes['form_button_typhography'] : [];
 		$form_button_padding = ! empty( $attributes['form_button_padding'] ) ? Dimensions::get_css( $attributes['form_button_padding'], 'padding', $device ) : array();
 		$form_button_border_css = ! empty( $attributes['form_button_border'] ) ? Border::get_css( $attributes['form_button_border'], '', $device ) : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['form_button_color'] ) ? $attributes['form_button_color'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['form_button_background'] ) ? $attributes['form_button_background'] : '' ) ],
-			$form_button_typography_css,
+			Typography::get_css( $form_button_typography_css, '', $device, $typographyValueGlobal ),
 			$form_button_padding,
 			$form_button_border_css,
 		);

@@ -104,6 +104,7 @@ class Block extends BlockBaseAbstract {
 		$typography = isset( $attributes['typography'] ) && is_array( $attributes['typography'] )
 			? $attributes['typography']
 			: [];
+		$typographyValueGlobal = ! empty( $attributes['typographyGlobal'] ) ? $attributes['typographyGlobal'] : [];
 
 		$text_shadow = ! empty( $attributes['textShadow'] )
 			? TextShadow::get_css( $attributes['textShadow'], '', $device ) : [];
@@ -111,7 +112,7 @@ class Block extends BlockBaseAbstract {
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
 
 		return array_merge(
-			Typography::get_css( $typography_value, $device ),
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			$text_shadow
 		);
 	}

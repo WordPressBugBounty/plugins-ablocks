@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ablocks';
-  src:  url('fonts/ablocks.eot?w597kd');
-  src:  url('fonts/ablocks.eot?w597kd#iefix') format('embedded-opentype'),
-    url('fonts/ablocks.ttf?w597kd') format('truetype'),
-    url('fonts/ablocks.woff?w597kd') format('woff'),
-    url('fonts/ablocks.svg?w597kd#ablocks') format('svg');
+  src:  url('fonts/ablocks.eot?gewiwc');
+  src:  url('fonts/ablocks.eot?gewiwc#iefix') format('embedded-opentype'),
+    url('fonts/ablocks.ttf?gewiwc') format('truetype'),
+    url('fonts/ablocks.woff?gewiwc') format('woff'),
+    url('fonts/ablocks.svg?gewiwc#ablocks') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,17 +25,32 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.ablocks-icon--comments-question:before {
-  content: "\e9d1";
+.ablocks-icon--page-trigger:before {
+  content: "\e9d9";
 }
-.ablocks-icon--star:before {
-  content: "\e9d2";
+.ablocks-icon--element-trigger:before {
+  content: "\e9da";
 }
-.ablocks-icon--users:before {
-  content: "\e9d3";
+.ablocks-icon--minus:before {
+  content: "\e9db";
 }
-.ablocks-icon--scroll-to-top:before {
-  content: "\e9d0";
+.ablocks-icon--play:before {
+  content: "\e9dc";
+}
+.ablocks-icon--code-highlight:before {
+  content: "\e9d8";
+}
+.ablocks-icon--shortcode:before {
+  content: "\e9d7";
+}
+.ablocks-icon--frontend-dashboard:before {
+  content: "\e9d6";
+}
+.ablocks-icon--time-picker:before {
+  content: "\e9d5";
+}
+.ablocks-icon--dynamic-text:before {
+  content: "\e9d4";
 }
 .ablocks-icon--comments-question:before {
   content: "\e9d1";

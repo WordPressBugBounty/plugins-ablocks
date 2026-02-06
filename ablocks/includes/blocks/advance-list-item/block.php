@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\AdvanceListItem;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Controls\Alignment;
@@ -48,6 +52,12 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap img.ablocks-image-icon',
@@ -160,6 +170,9 @@ class Block extends BlockBaseAbstract {
 	public function get_paragraph_text_css( $attributes, $device = '' ) {
 		$css = [];
 		$iconAlignmentValue = $this->get_responsive_attribute_value( $attributes['iconAlignment'], $device );
+		$typographyValueGlobal = ! empty( $attributes['listTypographyGlobal'] ) ? $attributes['listTypographyGlobal'] : '';
+		$typography_value = isset( $attributes['listTypography'] ) ? $attributes['listTypography'] : [];
+
 		if ( $iconAlignmentValue === 'row' ) {
 			$css['order'] = 2;
 		} elseif ( $iconAlignmentValue === 'row-reverse' ) {
@@ -168,7 +181,7 @@ class Block extends BlockBaseAbstract {
 		return array_merge(
 			$css,
 			[ 'color' => Color::get_css( isset( $attributes['textColor'] ) ? $attributes['textColor'] : '' ) ],
-			isset( $attributes['listTypography'] ) ? Typography::get_css( $attributes['listTypography'], '', $device ) : [],
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			isset( $attributes['listTextStroke'] ) ? TextStroke::get_css( $attributes['listTextStroke'], '', $device ) : [],
 			isset( $attributes['listTextShadow'] ) ? TextShadow::get_css( $attributes['listTextShadow'] ) : [],
 		);

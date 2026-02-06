@@ -106,14 +106,14 @@ class Block extends BlockBaseAbstract {
 		);
 
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .academy-courses--grid .academy-row .academy-course .academy-add-to-wishlist-btn',
+			'{{WRAPPER}} .academy-courses .academy-course__header .academy-course-header-meta .academy-course__wishlist',
 			$this->get_wish_icon_css( $attributes ),
 			$this->get_wish_icon_css( $attributes, 'Tablet' ),
 			$this->get_wish_icon_css( $attributes, 'Mobile' )
 		);
 
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .academy-courses--grid .academy-row .academy-course .academy-add-to-wishlist-btn:hover',
+			'{{WRAPPER}} .academy-courses .academy-course__header .academy-course-header-meta .academy-course__wishlist:hover',
 			$this->get_wish_icon_hover_css( $attributes ),
 			$this->get_wish_icon_hover_css( $attributes, 'Tablet' ),
 			$this->get_wish_icon_hover_css( $attributes, 'Mobile' )
@@ -123,10 +123,11 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_course_card_category_css( $attributes, $device = '' ) {
-		$course_category_typography_css = ! empty( $attributes['cat_typography'] ) ? Typography::get_css( $attributes['cat_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['cat_typographyGlobal'] ) ? $attributes['cat_typographyGlobal'] : '';
+		$typography_value = isset( $attributes['typography'] ) ? $attributes['typography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['category_color'] ) ? $attributes['category_color'] : '' ) ],
-			$course_category_typography_css
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal )
 		);
 	}
 	public function course_category_desktop_hover_css( $attributes ) {
@@ -149,34 +150,39 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_course_card_title_css( $attributes, $device = '' ) {
-		$course_title_typography_css = ! empty( $attributes['title_typography'] ) ? Typography::get_css( $attributes['title_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['title_typographyGlobal'] ) ? $attributes['title_typographyGlobal'] : '';
+		$course_title_typography_css = isset( $attributes['title_typography'] ) ? $attributes['title_typography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['title_color'] ) ? $attributes['title_color'] : '' ) ],
-			$course_title_typography_css
+			Typography::get_css( $course_title_typography_css, '', $device, $typographyValueGlobal ),
 		);
 	}
 
 	public function get_course_card_author_css( $attributes, $device = '' ) {
-		$course_author_typography_css = ! empty( $attributes['author_typography'] ) ? Typography::get_css( $attributes['author_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['author_typographyGlobal'] ) ? $attributes['author_typographyGlobal'] : '';
+		$course_author_typography_css = isset( $attributes['author_typography'] ) ? $attributes['author_typography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['author_color'] ) ? $attributes['author_color'] : '' ) ],
-			$course_author_typography_css
+			Typography::get_css( $course_author_typography_css, '', $device, $typographyValueGlobal ),
 		);
 	}
 
 	public function get_course_card_rating_css( $attributes, $device = '' ) {
-		$course_rating_typography_css = ! empty( $attributes['rating_typography'] ) ? Typography::get_css( $attributes['rating_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['rating_typographyGlobal'] ) ? $attributes['rating_typographyGlobal'] : '';
+		$typography_value = isset( $attributes['rating_typography'] ) ? $attributes['rating_typography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['rating_color'] ) ? $attributes['rating_color'] : '' ) ],
-			$course_rating_typography_css
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 		);
 	}
 
 	public function get_course_card_price_css( $attributes, $device = '' ) {
-		$course_price_typography_css = ! empty( $attributes['price_typography'] ) ? Typography::get_css( $attributes['price_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['price_typographyGlobal'] ) ? $attributes['price_typographyGlobal'] : '';
+
+		$course_price_typography_css = ! empty( $attributes['price_typography'] ) ? $attributes['price_typography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['price_color'] ) ? $attributes['price_color'] : '' ) ],
-			$course_price_typography_css
+			Typography::get_css( $course_price_typography_css, '', $device, $typographyValueGlobal ),
 		);
 	}
 

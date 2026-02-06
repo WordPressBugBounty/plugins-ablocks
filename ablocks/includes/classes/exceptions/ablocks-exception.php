@@ -52,6 +52,7 @@ class AblocksException extends Exception {
 	 * @throws self
 	 */
 	public static function throw( string $message, $data = null, int $code = 0, ?Throwable $previous = null ) {
+		// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped 
 		throw new self( $message, '', $data, $code, $previous );
 	}
 

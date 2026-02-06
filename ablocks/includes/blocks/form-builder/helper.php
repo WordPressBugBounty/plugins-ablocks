@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\FormBuilder;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Blocks\FormBuilder\EmailVerification;
 use SplTempFileObject;
 /**
@@ -13,11 +17,13 @@ class Helper {
 		bool $check_alloed_host = false
 	) : string {
 		$parsed_url = wp_parse_url( $url );
+		$curr_host = wp_parse_url( home_url( '/' ), PHP_URL_HOST );
 		$parsed_url['query'] = $parsed_url['query'] ?? '';
 		$parsed_url['scheme'] = $parsed_url['scheme'] ?? '';
-		$parsed_url['host'] = $parsed_url['host'] ?? '';
+		$parsed_url['host'] = $parsed_url['host'] ?? $curr_host;
 		$parsed_url['path'] = $parsed_url['path'] ?? '';
 
+		// wp_send_json($parsed_url);
 		if (
 			$check_alloed_host &&
 			! in_array(
@@ -25,7 +31,7 @@ class Helper {
 				array_merge(
 					apply_filters( 'allowed_redirect_hosts', [] ),
 					[
-						wp_parse_url( home_url( '/' ), PHP_URL_HOST )
+						$curr_host
 					]
 				),
 				true

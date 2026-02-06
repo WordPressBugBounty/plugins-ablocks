@@ -117,27 +117,30 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_login_form_button_css( $attributes, $device = '' ) {
-		$login_form_button_typography_css = ! empty( $attributes['login_btn_typography'] ) ? Typography::get_css( $attributes['login_btn_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['login_btn_typographyGlobal'] ) ? $attributes['login_btn_typographyGlobal'] : '';
+		$login_form_button_typography_css = isset( $attributes['login_btn_typography'] ) ? $attributes['login_btn_typography'] : [];
 		return array_merge(
-			$login_form_button_typography_css,
+			Typography::get_css( $login_form_button_typography_css, '', $device, $typographyValueGlobal ),
 			[ 'color' => Color::get_css( isset( $attributes['login_btn_color'] ) ? $attributes['login_btn_color'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['login_btn_bg_color'] ) ? $attributes['login_btn_bg_color'] : '' ) ]
 		);
 	}
 
 	public function get_login_form_footer_css( $attributes, $device = '' ) {
-		$login_form_footer_typography_css = ! empty( $attributes['form_footer_title_typography'] ) ? Typography::get_css( $attributes['form_footer_title_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['form_footer_title_typographyGlobal'] ) ? $attributes['form_footer_title_typographyGlobal'] : '';
+		$login_form_footer_typography_css = isset( $attributes['form_footer_title_typography'] ) ? $attributes['form_footer_title_typography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['form_footer_title_color'] ) ? $attributes['form_footer_title_color'] : '' ) ],
-			$login_form_footer_typography_css
+			Typography::get_css( $login_form_footer_typography_css, '', $device, $typographyValueGlobal ),
 		);
 	}
 
 	public function get_form_title_css( $attributes, $device = '' ) {
-		$form_title_typography_css = ! empty( $attributes['title_typography'] ) ? Typography::get_css( $attributes['title_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['title_typographyGlobal'] ) ? $attributes['title_typographyGlobal'] : '';
+		$form_title_typography_css  = isset( $attributes['title_typography'] ) ? $attributes['title_typography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['title_color'] ) ? $attributes['title_color'] : '' ) ],
-			$form_title_typography_css
+			Typography::get_css( $form_title_typography_css, '', $device, $typographyValueGlobal ),
 		);
 	}
 	public function form_title_desktop_hover_css( $attributes ) {
@@ -146,15 +149,19 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_course_card_title_css( $attributes, $device = '' ) {
-		$course_title_typography_css = ! empty( $attributes['title_typography'] ) ? Typography::get_css( $attributes['title_typography'], '', $device ) : array();
-		return $course_title_typography_css;
+		$typographyValueGlobal = ! empty( $attributes['title_typographyGlobal'] ) ? $attributes['title_typographyGlobal'] : '';
+		$course_title_typography_css = isset( $attributes['title_typography'] ) ? $attributes['title_typography'] : [];
+		return array_merge(
+			Typography::get_css( $course_title_typography_css, '', $device, $typographyValueGlobal ),
+		);
 	}
 
 	public function get_input_field_label_css( $attributes, $device = '' ) {
-		$input_field_label_typography_css = ! empty( $attributes['input_field_label_typography'] ) ? Typography::get_css( $attributes['input_field_label_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['input_field_label_typographyGlobal'] ) ? $attributes['input_field_label_typographyGlobal'] : '';
+		$input_field_label_typography_css = isset( $attributes['input_field_label_typography'] ) ? $attributes['input_field_label_typography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['input_field_label_color'] ) ? $attributes['input_field_label_color'] : '' ) ],
-			$input_field_label_typography_css
+			Typography::get_css( $input_field_label_typography_css, '', $device, $typographyValueGlobal ),
 		);
 	}
 
@@ -197,8 +204,11 @@ class Block extends BlockBaseAbstract {
 
 	public function get_form_card_hover_css( $attributes, $device = '' ) {
 		$form_background_hover_css = ! empty( $attributes['form_bg_color'] ) ? Background::get_hover_css( $attributes['form_bg_color'], 'background', $device ) : array();
-
-		return $form_background_hover_css;
+		$form_border = ! empty( $attributes['form_border'] ) ? Border::get_hover_css( $attributes['form_border'], '', $device ) : array();
+		return array_merge(
+			$form_background_hover_css,
+			$form_border
+		);
 	}
 
 

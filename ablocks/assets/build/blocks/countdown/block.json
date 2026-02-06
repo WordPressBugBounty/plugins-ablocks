@@ -156,11 +156,15 @@
                 "transitionDuration": ""
             }
         },
+        "actionMessageTypographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "actionMessageTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -189,12 +193,16 @@
                 "wordSpacingUnitTablet": "px",
                 "wordSpacingUnitMobile": "px"
             }
+        },
+        "labelTypographyGlobal": {
+            "type": "string",
+            "default": ""
         },
         "labelTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -223,12 +231,16 @@
                 "wordSpacingUnitTablet": "px",
                 "wordSpacingUnitMobile": "px"
             }
+        },
+        "numberTypographyGlobal": {
+            "type": "string",
+            "default": ""
         },
         "numberTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -258,11 +270,15 @@
                 "wordSpacingUnitMobile": "px"
             }
         },
+        "separatorTypographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "separatorTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",
@@ -362,6 +378,32 @@
                 "valueUnit": "px",
                 "valueUnitTablet": "",
                 "valueUnitMobile": ""
+            }
+        },
+        "padding": {
+            "type": "object",
+            "default": {
+                "isLinked": true,
+                "isLinkedTablet": true,
+                "isLinkedMobile": true,
+                "common": "",
+                "top": "",
+                "right": "",
+                "bottom": "",
+                "left": "",
+                "unit": "px",
+                "commonTablet": "",
+                "topTablet": "",
+                "rightTablet": "",
+                "bottomTablet": "",
+                "leftTablet": "",
+                "unitTablet": "",
+                "commonMobile": "",
+                "topMobile": "",
+                "rightMobile": "",
+                "bottomMobile": "",
+                "leftMobile": "",
+                "unitMobile": ""
             }
         },
         "block_id": {
@@ -979,6 +1021,32 @@
                 "transitionDuration": "0"
             }
         },
+        "_gsapAnimation": {
+            "type": "object",
+            "default": {
+                "animationType": "none",
+                "duration": 1,
+                "delay": 0,
+                "triggerType": "scroll",
+                "ease": "none",
+                "x": 0,
+                "y": 0,
+                "rotation": 0,
+                "rotationY": 0,
+                "opacity": 1,
+                "xTo": 0,
+                "yTo": 0,
+                "rotationTo": 0,
+                "rotationYTo": 0,
+                "opacityTo": 1,
+                "easeTo": "none",
+                "loops": false,
+                "numberOfRepeat": 0,
+                "isSmooth": true,
+                "startPoint": 80,
+                "endPoint": 10
+            }
+        },
         "_hide_on_desktop": {
             "type": "boolean",
             "default": false
@@ -994,6 +1062,20 @@
         "_custom_css": {
             "type": "string",
             "default": ""
+        },
+        "_animation_element_trigger": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object"
+            }
+        },
+        "_animation_page_trigger": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object"
+            }
         }
     }
 }

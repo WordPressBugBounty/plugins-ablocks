@@ -76,6 +76,7 @@ class Block extends BlockBaseAbstract {
 		$typography = isset( $attributes['buttonTypography'] ) && is_array( $attributes['buttonTypography'] )
 			? $attributes['buttonTypography']
 			: [];
+		$typographyValueGlobal = ( isset( $attributes['buttonTypographyGlobal'] ) ? $attributes['buttonTypographyGlobal'] : '' );
 
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
 
@@ -87,7 +88,7 @@ class Block extends BlockBaseAbstract {
 			[ 'color' => Color::get_css( isset( $attributes['buttonColor'] ) ? $attributes['buttonColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['buttonBackground'] ) ? $attributes['buttonBackground'] : '' ) ],
 			$css,
-			Typography::get_css( $typography_value, '', $device ),
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			Border::get_css( $attributes['buttonBorder'], '', $device ),
 			$cssPadding,
 			BoxShadow::get_css( $attributes['boxShadow'], '', $device ),

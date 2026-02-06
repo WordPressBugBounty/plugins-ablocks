@@ -50,29 +50,57 @@ class Sanitizer {
 		return $sanitized_payload;
 	}
 	public static function sanitize_json_form_data( $data, $schema = [] ) {
-		$data = is_array( $data ) ? $data : json_decode( stripslashes( $data ) );
-		if ( is_array( $data ) ) {
-			$results = [];
-			$has_schema = count( $schema );
-			foreach ( $data as $key => $value ) {
-				if ( $has_schema && ! isset( $schema[ $key ] ) ) {
-					continue;
-				}
-				if ( is_array( $value ) || is_object( $value ) ) {
-					$value = (array) $value;
-					$child_array = [];
-					foreach ( $value as $child_key => $child_value ) {
-						$child_array[ sanitize_key( $child_key ) ] = sanitize_text_field( $child_value );
-					}
-					$results[] = $child_array;
-				} else {
-					$results[ sanitize_key( $key ) ] = sanitize_text_field( $value );
-				}
-			}
-			return $results;
+		$data = is_array( $data ) ? $data : json_decode( stripslashes( $data ), true );
+
+		if ( ! is_array( $data ) ) {
+			return self::cast_value_type( sanitize_text_field( $data ) );
 		}
-		return sanitize_text_field( $data );
+
+		$sanitize_recursive = function ( $item, $child_schema = [] ) use ( &$sanitize_recursive ) {
+			if ( is_array( $item ) ) {
+				$result = [];
+				foreach ( $item as $key => $value ) {
+					$sanitized_key = sanitize_text_field( $key );
+
+					if ( is_array( $value ) || is_object( $value ) ) {
+						// Recursively sanitize nested arrays/objects
+						$result[ $sanitized_key ] = $sanitize_recursive( (array) $value, $child_schema[ $sanitized_key ]['schema'] ?? [] );
+					} else {
+						// sanitize value and auto-cast type
+						$clean_value     = sanitize_text_field( $value );
+						$result[ $sanitized_key ]  = self::cast_value_type( $clean_value );
+					}
+				}
+				return $result;
+			}
+
+			return self::cast_value_type( sanitize_text_field( $item ) );
+		};
+
+		return $sanitize_recursive( $data, $schema );
 	}
+
+	private static function cast_value_type( $value ) {
+		// Check for boolean
+		if ( is_string( $value ) ) {
+			$lower = strtolower( $value );
+			if ( $lower === 'true' ) {
+				return true;
+			}
+			if ( $lower === 'false' ) {
+				return false;
+			}
+		}
+
+		// Check for numeric
+		if ( is_numeric( $value ) ) {
+			return strpos( $value, '.' ) !== false ? (float) $value : (int) $value;
+		}
+
+		// Default: string
+		return (string) $value;
+	}
+
 	public static function sanitize_array_field( $array_data ) {
 		$array_data = is_array( $array_data ) ? $array_data : json_decode( stripslashes( $array_data ) );
 		$boolean = [ 'true', 'false', '1', '0' ];

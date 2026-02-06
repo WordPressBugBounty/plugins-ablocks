@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\FormBuilder;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use Exception;
 /**
  * @class EmailVerification
@@ -26,7 +30,7 @@ class EmailVerification {
 		} else {
 			$query = "SELECT id, user_email, email_verification_token, expire, is_email_verified FROM {$table_entries}  WHERE user_email = %s";
 		}
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 		$entry = $wpdb->get_row( $wpdb->prepare( $query, $id_or_email ), ARRAY_A );
 
 		if (
@@ -74,6 +78,7 @@ class EmailVerification {
 	public function mark_email_as_verified() {
 		global $wpdb;
 		$table_entries = $wpdb->prefix . ABLOCKS_PLUGIN_SLUG . '_form_entries';
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 		if ( $wpdb->update( $table_entries, [ 'is_email_verified' => 'yes' ], [ 'id' => $this->id ] ) ) {
 			return true;
 		}

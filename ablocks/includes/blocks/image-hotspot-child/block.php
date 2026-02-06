@@ -1,6 +1,11 @@
 <?php
 namespace ABlocks\Blocks\ImageHotspotChild;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Range;

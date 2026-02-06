@@ -136,7 +136,7 @@ class Insights {
 		echo '<div class="notice notice-info" style="padding:0;border-top:0;border-right:0;border-bottom:0;margin:1rem; display: flex; border-left-color: #13191B;">
             <div style="padding: 24px; background: #F4F4F5; display:flex; flex-direction: column; justify-content:center; align-item: center;">
 				<img src="' . esc_url( ABLOCKS_ASSETS_URL . 'images/logo.svg' ) . '" width="100" alt="logo" style="margin-bottom: 20px;" />
-				<p>Connect with over 1,000+ <br/>Web Design professionals.</p>
+				<p>Connect with over 2,000+ <br/>Web Design professionals.</p>
 				<a href="https://www.facebook.com/groups/386840187678401" target="_blank" style="color: #13191B;">Join the community</a>
 			</div>
             <div style="padding: 24px;">

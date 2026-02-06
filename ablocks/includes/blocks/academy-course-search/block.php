@@ -51,11 +51,12 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_search_form_css( $attributes, $device = '' ) {
-		$search_typography_css = ! empty( $attributes['search_typography'] ) ? Typography::get_css( $attributes['search_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['search_typographyGlobal'] ) ? $attributes['search_typographyGlobal'] : '';
+		$typography_value = isset( $attributes['search_typography'] ) ? $attributes['search_typography'] : [];
 		$search_border_css = ! empty( $attributes['search_border'] ) ? Border::get_css( $attributes['search_border'], '', $device ) : array();
 
 		return array_merge(
-			$search_typography_css,
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			$search_border_css,
 			[ 'color' => Color::get_css( isset( $attributes['search_box_color'] ) ? $attributes['search_box_color'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['search_background_color'] ) ? $attributes['search_background_color'] : '' ) ],

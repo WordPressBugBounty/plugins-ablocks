@@ -37,6 +37,12 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-icon-wrap img.ablocks-image-icon',
@@ -93,6 +99,12 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
 		);
 
 		$css_generator->add_class_styles(
@@ -164,23 +176,25 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_coupon_text_css( $attributes, $device = '' ) {
+		$typographyGlobal = ( isset( $attributes['couponTypographyGlobal'] ) ? $attributes['couponTypographyGlobal'] : '' );
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['couponCodeColor'] ) ? $attributes['couponCodeColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['couponCodeBgColor'] ) ? $attributes['couponCodeBgColor'] : '' ) ],
 			isset( $attributes['couponBorder'] ) ? Border::get_css( $attributes['couponBorder'], '', $device ) : [],
 			isset( $attributes['couponPadding'] ) ? Dimensions::get_css( $attributes['couponPadding'], 'padding', $device ) : [],
-			Typography::get_css( $attributes['couponTypography'], '', $device ),
+			Typography::get_css( $attributes['couponTypography'], '', $device, $typographyGlobal ),
 			TextShadow::get_css( $attributes['couponTextShadow'], '', $device )
 		);
 	}
 
 	public function get_btn_text_css( $attributes, $device = '' ) {
+		$typographyGlobal = ( isset( $attributes['buttonTypographyGlobal'] ) ? $attributes['buttonTypographyGlobal'] : '' );
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['couponBtnTextColor'] ) ? $attributes['couponBtnTextColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['couponBtnBgColor'] ) ? $attributes['couponBtnBgColor'] : '' ) ],
 			Border::get_css( $attributes['buttonBorder'], '', $device ),
 			Dimensions::get_css( $attributes['buttonPadding'], 'padding', $device ),
-			Typography::get_css( $attributes['buttonTypography'], '', $device ),
+			Typography::get_css( $attributes['buttonTypography'], '', $device, $typographyGlobal ),
 			TextShadow::get_css( $attributes['buttonTextShadow'], '', $device )
 		);
 	}

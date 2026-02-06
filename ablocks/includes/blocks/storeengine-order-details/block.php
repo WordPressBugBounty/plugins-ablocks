@@ -126,28 +126,18 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_order_details_css( $attributes, $device = '' ) {
-		$css = [];
-		if ( ! empty( $attributes['titleColor'] ) ) {
-			$css['color'] = $attributes['titleColor'];
-		}
-
-		$title_typography_css = ! empty( $attributes['titleTypography'] ) ? Typography::get_css( $attributes['titleTypography'], '', $device ) : array();
+		$title_typography_css = ! empty( $attributes['titleTypography'] ) ? $attributes['titleTypography'] : [];
+		$typographyGlobal = ( isset( $attributes['titleTypographyGlobal'] ) ? $attributes['titleTypographyGlobal'] : '' );
 
 		return array_merge(
-			$css,
-			$title_typography_css,
+			[ 'color' => Color::get_css( isset( $attributes['titleColor'] ) ? $attributes['titleColor'] : '' ) ],
+			Typography::get_css( $title_typography_css, '', $device, $typographyGlobal )
 		);
 	}
 
 	public function get_order_details_hover_css( $attributes, $device = '' ) {
-		$css = [];
-
-		if ( ! empty( $attributes['titleColor'] ) ) {
-			$css['color'] = $attributes['titleColorH'];
-		}
-
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['titleColorH'] ) ? $attributes['titleColorH'] : '' ) ],
 		);
 	}
 
@@ -178,10 +168,12 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_order_details_product_title_css( $attributes, $device = '' ) {
-		$title_typography_css = ! empty( $attributes['ProductTitleTypography'] ) ? Typography::get_css( $attributes['ProductTitleTypography'], '', $device ) : array();
+		$title_typography_css = ! empty( $attributes['ProductTitleTypography'] ) ? $attributes['ProductTitleTypography'] : [];
+		$typographyGlobal = ( isset( $attributes['ProductTitleTypographyGlobal'] ) ? $attributes['ProductTitleTypographyGlobal'] : '' );
+
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['productTitleColor'] ) ? $attributes['productTitleColor'] : '' ) ],
-			$title_typography_css,
+			Typography::get_css( $title_typography_css, '', $device, $typographyGlobal )
 		);
 	}
 
@@ -190,10 +182,11 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_order_details_price_css( $attributes, $device = '' ) {
-		$typography_value = isset( $attributes['discountPriceTypography'] ) ? Typography::get_css( $attributes['ProductTitleTypography'], '', $device ) : array();
+		$typography_value = isset( $attributes['discountPriceTypography'] ) ? $attributes['discountPriceTypography'] : [];
+		$typographyGlobal = ( isset( $attributes['discountPriceTypographyGlobal'] ) ? $attributes['discountPriceTypographyGlobal'] : '' );
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['discountPriceColor'] ) ? $attributes['discountPriceColor'] : '' ) ],
-			$typography_value,
+			Typography::get_css( $typography_value, '', $device, $typographyGlobal )
 		);
 	}
 
@@ -203,11 +196,12 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_order_details_regular_price_css( $attributes, $device = '' ) {
-		$typography_value = isset( $attributes['regularPriceTypography'] ) ? Typography::get_css( $attributes['regularPriceTypography'], '', $device ) : array();
+		$typography_value = isset( $attributes['regularPriceTypography'] ) ? $attributes['regularPriceTypography'] : [];
+		$typographyGlobal = ( isset( $attributes['regularPriceTypographyGlobal'] ) ? $attributes['regularPriceTypographyGlobal'] : '' );
 
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['regularPriceColor'] ) ? $attributes['regularPriceColor'] : '' ) ],
-			$typography_value,
+			Typography::get_css( $typography_value, '', $device, $typographyGlobal )
 		);
 	}
 
@@ -217,11 +211,12 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_order_details_quality_css( $attributes, $device = '' ) {
-		$typography_value = isset( $attributes['qualityTypography'] ) ? Typography::get_css( $attributes['qualityTypography'], '', $device ) : array();
+		$typography_value = isset( $attributes['qualityTypography'] ) ? $attributes['qualityTypography'] : [];
+		$typographyGlobal = ( isset( $attributes['qualityTypographyGlobal'] ) ? $attributes['qualityTypographyGlobal'] : '' );
 
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['qualityColor'] ) ? $attributes['qualityColor'] : '' ) ],
-			$typography_value,
+			Typography::get_css( $typography_value, '', $device, $typographyGlobal )
 		);
 	}
 
@@ -231,13 +226,12 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_table_text_css( $attributes, $device = '' ) {
-		$typography_value = isset( $attributes['tableTextTypography'] ) ?
-			Typography::get_css( $attributes['tableTextTypography'], '', $device )
-			: array();
+		$typography_value = isset( $attributes['tableTextTypography'] ) ? $attributes['tableTextTypography'] : [];
+		$typographyGlobal = ( isset( $attributes['tableTextTypographyGlobal'] ) ? $attributes['tableTextTypographyGlobal'] : '' );
 
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['tableTextColor'] ) ? $attributes['tableTextColor'] : '' ) ],
-			$typography_value
+			Typography::get_css( $typography_value, '', $device, $typographyGlobal )
 		);
 	}
 	public function get_table_text_hover_css( $attributes, $device = '' ) {
@@ -251,6 +245,7 @@ class Block extends BlockBaseAbstract {
 			// 'ids'  => Helper::get_attribute_value( $attributes, 'products_ids' ),
 		];
 
+		// phpcs:ignore  WordPress.Security.NonceVerification.Recommended,  WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 		if ( isset( $_GET['context'] ) && 'edit' === sanitize_text_field( $_GET['context'] ) ) {
 			$attr_array['dummy'] = true;
 		}

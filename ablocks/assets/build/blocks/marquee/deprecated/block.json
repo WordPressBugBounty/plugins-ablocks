@@ -33,7 +33,7 @@
     },
     "marqueeDirection": {
       "type": "string",
-      "default": "left"
+      "default": "normal"
     },
     "marqueeSpeed": {
       "type": "number",

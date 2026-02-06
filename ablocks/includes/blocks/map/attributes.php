@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Controls\Range;
 use ABlocks\Controls\CssFilter;
 use ABlocks\Controls\Icon;

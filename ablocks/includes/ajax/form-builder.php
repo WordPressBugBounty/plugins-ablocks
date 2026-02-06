@@ -13,6 +13,7 @@ use ABlocks\Classes\Sanitizer;
 use ABlocks\Blocks\FormBuilder\ValidateFormData;
 use ABlocks\Blocks\FormBuilder\Actions\SaveFormData;
 use ABlocks\Blocks\FormBuilder\Actions\SendEmail;
+use ABlocks\Blocks\FormBuilder\Actions\SendEmails;
 use ABlocks\Blocks\FormBuilder\Actions\Subscribe;
 
 use ABlocks\Blocks\FormBuilder\Subscribe\Mailchimp;
@@ -49,6 +50,8 @@ class FormBuilder extends AbstractAjaxHandler {
 				'callback' => array( $this, 'form_builder_forget_password_handler' ),
 				'allow_visitor_action' => true,
 				'fields' => array(
+					'current_post_id'    => 'integer',
+					'block_id'           => 'string',
 					'email' => 'string',
 				)
 			),
@@ -62,6 +65,7 @@ class FormBuilder extends AbstractAjaxHandler {
 			),
 			'form_builder_action_setting_data'      => array(
 				'callback' => array( $this, 'action_setting_data' ),
+				'capability' => 'edit_posts',
 				'fields' => array(
 					'type' => 'string',
 					'api'  => 'string',
@@ -75,6 +79,33 @@ class FormBuilder extends AbstractAjaxHandler {
 		);
 
 	}
+
+	public function prepare_res( array $data, array $block_data, string $redirect_url ) : array {
+		$formType = $block_data['parentAttributes']['formType'] ?? '';
+
+		// confirmationType based on formType
+		if ( $formType == 'login' ) {
+			$confirmationType = ( $block_data['parentAttributes']['loginRedirect'] ?? false ) ? 'redirect' : 'success';
+		} elseif ( $formType == 'registration' ) {
+			$confirmationType = ( $block_data['parentAttributes']['registerRedirect'] ?? false ) ? 'redirect' : 'success';
+		} else {
+			$confirmationType = $block_data['parentAttributes']['confirmationType'] ?? 'success';
+		}
+
+		return array_merge(
+			$data,
+			[
+				'afterFormSubmission' => $block_data['parentAttributes']['afterFormSubmission'] ?? 'reset',
+				'confirmationType' => $confirmationType,
+				'confirmationNotice' => $block_data['parentAttributes']['confirmationNotice'] ?? $data['message'] ?? __( 'Form successfully submitted!', 'ablocks' ),
+				'redirect_url' => esc_url( $redirect_url ),
+				'no_follow' => $block_data['parentAttributes']['link']['noFollow'] ?? '',
+				'link_target' => $block_data['parentAttributes']['link']['linkTarget'] ?? '',
+				'formType' => $formType,
+			]
+		);
+	}
+
 	public function form_builder_login_handler( $payload ) {
 		$block_data = Helper::get_block_attributes( $payload['current_post_id'], $payload['block_id'], 'ablocks/form-builder' );
 
@@ -99,7 +130,14 @@ class FormBuilder extends AbstractAjaxHandler {
 		), $secure_cookie );
 
 		if ( is_wp_error( $user_signon ) ) {
-			wp_send_json_error( [ 'message' => $user_signon->get_error_message() ] );
+			wp_send_json_error(
+				$this->prepare_res(
+					[ 'message' => $user_signon->get_error_message() ],
+					$block_data,
+					$redirect_url
+				),
+				400
+			);
 		}
 
 		wp_set_current_user( $user_signon->ID );
@@ -107,12 +145,15 @@ class FormBuilder extends AbstractAjaxHandler {
 		if ( empty( $redirect_url ) ) {
 			$redirect_url = home_url( '/' );
 		}
-		wp_send_json_success([
-			'message'      => __( 'You have logged in successfully. Redirecting...', 'ablocks' ),
-			'redirect_url' => esc_url( $redirect_url ),
-			'no_follow'    => $block_data['parentAttributes']['link']['noFollow'] ?? '',
-			'link_target'  => $block_data['parentAttributes']['link']['linkTarget'] ?? '',
-		]);
+		wp_send_json_success(
+			$this->prepare_res(
+				[
+					'message' => __( 'You have logged in successfully. Redirecting...', 'ablocks' ),
+				],
+				$block_data,
+				$redirect_url
+			)
+		);
 	}
 
 	public function registration_form_setting_data( $payload ) {
@@ -130,18 +171,6 @@ class FormBuilder extends AbstractAjaxHandler {
 	public function form_builder_registration_handler( $payload ) {
 		$block_data = Helper::get_block_attributes( $payload['current_post_id'], $payload['block_id'], 'ablocks/form-builder' );
 
-		if ( ! get_option( 'users_can_register' ) ) {
-			wp_send_json_error([
-				'message' => __( 'User registration is turned off. Turn it on to allow user registration.', 'ablocks' )
-			]);
-		}
-
-		if ( ( $block_data['parentAttributes']['formType'] ?? '' ) !== 'registration' ) {
-			wp_send_json_error([
-				'message' => __( 'Error.', 'ablocks' )
-			]);
-		}
-
 		$redirect_url = '';
 		if ( $block_data['parentAttributes']['registerRedirect'] ?? false ) {
 			$redirect_url = \ABlocks\Blocks\FormBuilder\Helper::merge_query_params(
@@ -151,14 +180,58 @@ class FormBuilder extends AbstractAjaxHandler {
 			);
 		}
 
+		if ( ! get_option( 'users_can_register' ) ) {
+			wp_send_json_error(
+				$this->prepare_res(
+					[
+						'message' => __( 'User registration is turned off. Turn it on to allow user registration.', 'ablocks' ),
+					],
+					$block_data,
+					$redirect_url
+				),
+				400
+			);
+		}
+
+		if ( ( $block_data['parentAttributes']['formType'] ?? '' ) !== 'registration' ) {
+			wp_send_json_error(
+				$this->prepare_res(
+					[
+						'message' => __( 'Error.', 'ablocks' ),
+					],
+					$block_data,
+					$redirect_url
+				),
+				400
+			);
+		}
+
 		$errors = $this->validate_registration_data( $payload );
 		if ( $errors ) {
-			wp_send_json_error( [ 'message' => $errors ] );
+			wp_send_json_error(
+				$this->prepare_res(
+					[
+						'message' => $errors,
+					],
+					$block_data,
+					$redirect_url
+				),
+				400
+			);
 		}
 
 		$user_id = wp_create_user( $payload['username'], $payload['password'], $payload['email'] );
 		if ( is_wp_error( $user_id ) ) {
-			wp_send_json_error( [ 'message' => $user_id->get_error_message() ] );
+			wp_send_json_error(
+				$this->prepare_res(
+					[
+						'message' => $user_id->get_error_message(),
+					],
+					$block_data,
+					$redirect_url
+				),
+				400
+			);
 		}
 		$role = ( $block_data['parentAttributes']['roleSlug'] ?? '' );
 		if (
@@ -170,6 +243,7 @@ class FormBuilder extends AbstractAjaxHandler {
 			$user->set_role( $role );
 		}
 
+		// phpcs:ignore  WordPress.Security.NonceVerification.Missing 
 		$custom_fields = $this->get_custom_fields( $_POST );
 
 		if ( ! empty( $block_data ) ) {
@@ -188,12 +262,16 @@ class FormBuilder extends AbstractAjaxHandler {
 		if ( empty( $redirect_url ) ) {
 			$redirect_url = home_url( '/' );
 		}
-		wp_send_json_success([
-			'message'      => __( 'Registration completed successfully. Redirecting...', 'ablocks' ),
-			'redirect_url' => esc_url( $redirect_url ),
-			'no_follow'    => $block_data['parentAttributes']['link']['noFollow'] ?? '',
-			'link_target'  => $block_data['parentAttributes']['link']['linkTarget'] ?? '',
-		]);
+
+		wp_send_json_success(
+			$this->prepare_res(
+				[
+					'message' => __( 'Registration completed successfully. Redirecting...', 'ablocks' ),
+				],
+				$block_data,
+				$redirect_url
+			)
+		);
 	}
 
 	private function validate_registration_data( $payload ) {
@@ -224,40 +302,86 @@ class FormBuilder extends AbstractAjaxHandler {
 	}
 
 	public function form_builder_forget_password_handler( $payload ) {
+		$block_data = Helper::get_block_attributes( $payload['current_post_id'], $payload['block_id'], 'ablocks/form-builder' );
+		$redirect_url = '';
+		if ( $block_data['parentAttributes']['registerRedirect'] ?? false ) {
+			$redirect_url = \ABlocks\Blocks\FormBuilder\Helper::merge_query_params(
+				$block_data['parentAttributes']['link']['href'] ?? '',
+				$block_data['parentAttributes']['link']['keyValue'] ?? '',
+				true
+			);
+		}
 		if ( empty( $payload['email'] ?? '' ) ) {
-			wp_send_json_error([
-				'message' => __( 'email field is required.', 'ablocks' )
-			], 400);
+
+			wp_send_json_error(
+				$this->prepare_res(
+					[
+						'message' => __( 'email field is required', 'ablocks' ),
+					],
+					$block_data,
+					$redirect_url
+				),
+				400
+			);
 		}
 
 		if ( ! is_email( $payload['email'] ) ) {
-			wp_send_json_error([
-				'message' => __( 'provide a valid email.', 'ablocks' )
-			], 400);
+			wp_send_json_error(
+				$this->prepare_res(
+					[
+						'message' => __( 'provide a valid email', 'ablocks' ),
+					],
+					$block_data,
+					$redirect_url
+				),
+				400
+			);
 		}
 
 		if ( ! email_exists( $payload['email'] ) ) {
-			wp_send_json_error([
-				'message' => __( 'this email is not exists.', 'ablocks' )
-			], 400);
+			wp_send_json_error(
+				$this->prepare_res(
+					[
+						'message' => __( 'this email is not exists', 'ablocks' ),
+					],
+					$block_data,
+					$redirect_url
+				),
+				400
+			);
 		}
 		$error = retrieve_password( $payload['email'] );
 		if ( is_wp_error( $error ) ) {
-			wp_send_json_error([
-				'message' => esc_html( $error->get_error_message() )
-			], 500);
+			wp_send_json_error(
+				$this->prepare_res(
+					[
+						'message' => esc_html( $error->get_error_message() ),
+					],
+					$block_data,
+					$redirect_url
+				),
+				400
+			);
 		}
-		wp_send_json_success([
-			'message' => __( 'Password reset email is sent.', 'ablocks' )
-		]);
+		wp_send_json_success(
+			$this->prepare_res(
+				[
+					'message' => __( 'Password reset email is sent', 'ablocks' ),
+				],
+				$block_data,
+				$redirect_url
+			)
+		);
 	}
 
 	public function handle_form_submission( $payload ) {
 		$fields_to_skip = [ 'current_post_id', 'block_id', 'security', 'action' ];
+		// phpcs:ignore  WordPress.Security.NonceVerification.Missing 
 		$all_fields = array_diff_key( $_POST, array_flip( $fields_to_skip ) );
 		$block_data = Helper::get_block_attributes( $payload['current_post_id'], $payload['block_id'], 'ablocks/form-builder' );
 
 		$actions = apply_filters('ablocks/form_builder/actions', [
+			SendEmails::class,
 			SaveFormData::class,
 			SendEmail::class,
 			Subscribe::class,
@@ -268,11 +392,19 @@ class FormBuilder extends AbstractAjaxHandler {
 		$validate_data->actions( $actions );
 
 		$output = $validate_data->get_output();
+		$output['afterFormSubmission'] = $block_data['parentAttributes']['afterFormSubmission'] ?? 'reset';
+		$output['confirmationType'] = $block_data['parentAttributes']['confirmationType'] ?? 'success';
+		$output['formType'] = $block_data['parentAttributes']['formType'] ?? '';
+		$output['redirect_url'] = $block_data['parentAttributes']['link']['href'] ?? '';
+		$output['link_target'] = $block_data['parentAttributes']['link']['linkTarget'] ?? '';
+
 		if ( $validate_data->has_error() ) {
 			$output['message'] = $validate_data->get_error_message();
 			wp_send_json_error( $output );
 		} elseif ( $validate_data->has_message() ) {
+			$output['confirmationNotice'] = $block_data['parentAttributes']['confirmationNotice'] ?? __( 'Form successfully submitted!', 'ablocks' );
 			$output['message'] = $validate_data->get_message();
+
 			wp_send_json_success( $output );
 		}
 

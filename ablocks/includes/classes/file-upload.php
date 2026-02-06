@@ -141,16 +141,16 @@ class FileUpload {
 
 		// Get all files in the directory
 		$files = $wp_filesystem->dirlist( $upload_dir );
-
-		foreach ( $files as $file => $fileinfo ) {
-			$file_path = $upload_dir . '/' . $file;
-			if ( $wp_filesystem->is_file( $file_path ) ) {
-				$wp_filesystem->delete( $file_path );
-			} elseif ( $wp_filesystem->is_dir( $file_path ) ) {
-				$wp_filesystem->rmdir( $file_path, true );
+		if ( is_array( $files ) && count( $files ) ) {
+			foreach ( $files as $file => $fileinfo ) {
+				$file_path = $upload_dir . '/' . $file;
+				if ( $wp_filesystem->is_file( $file_path ) ) {
+					$wp_filesystem->delete( $file_path );
+				} elseif ( $wp_filesystem->is_dir( $file_path ) ) {
+					$wp_filesystem->rmdir( $file_path, true );
+				}
 			}
 		}
-
 		return true;
 	}
 }

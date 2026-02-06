@@ -23,7 +23,7 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
-	'inputType' => [
+	'nameType' => [
 		'type' => 'string',
 		'default' => '',
 	],
@@ -32,7 +32,7 @@ $attributes = [
 		'default' => 'This field is required',
 	],
 
-	'labelName' => [
+	'label' => [
 		'type' => 'string',
 		'default' => 'Message'
 	],

@@ -9,6 +9,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 class RegisterScripts {
 	public static function get_register_styles() {
 		return apply_filters('ablocks/register_styles', [
+			'ablocks-prism-style' => [
+				'path'  => ABLOCKS_ASSETS_PATH . 'library/prism/prism.css',
+				'url'   => ABLOCKS_ASSETS_URL . 'library/prism/prism.css',
+				'deps'  => array(),
+				'ver'   => false,
+				'media' => 'all'
+			],
+			'ablocks-prism-line-numbers-style' => [
+				'path' => ABLOCKS_ASSETS_PATH . 'library/prism/prism-line-numbers.css',
+				'url'  => ABLOCKS_ASSETS_URL . 'library/prism/prism-line-numbers.css',
+				'deps' => array(),
+				'ver'  => false,
+				'media' => 'all'
+			],
+			'ablocks-prism-line-highlight-style' => [
+				'path' => ABLOCKS_ASSETS_PATH . 'library/prism/prism-line-highlight.css',
+				'url'  => ABLOCKS_ASSETS_URL . 'library/prism/prism-line-highlight.css',
+				'deps' => array(),
+				'ver'  => false,
+				'media' => 'all'
+			],
 			'ablocks-leaflet-style' => [
 				'path'  => ABLOCKS_ASSETS_PATH . 'library/leaflet/leaflet.css',
 				'url'   => ABLOCKS_ASSETS_URL . 'library/leaflet/leaflet.css',
@@ -57,6 +78,27 @@ class RegisterScripts {
 		$script_loading_strategy = \ABlocks\Helper::get_script_loading_strategy();
 		$args = [ 'strategy' => $script_loading_strategy ];
 		return apply_filters('ablocks/register_scripts', [
+			'ablocks-prism-script' => [
+				'path'          => ABLOCKS_ASSETS_PATH . 'library/prism/prism.js',
+				'url'           => ABLOCKS_ASSETS_URL . 'library/prism/prism.js',
+				'deps'          => array(),
+				'ver'           => false,
+				'args'          => $args
+			],
+			'ablocks-prism-line-numbers-script' => [
+				'path'          => ABLOCKS_ASSETS_PATH . 'library/prism/prism-line-numbers.js',
+				'url'           => ABLOCKS_ASSETS_URL . 'library/prism/prism-line-numbers.js',
+				'deps'          => array(),
+				'ver'           => false,
+				'args'          => $args
+			],
+			'ablocks-prism-line-highlight-script' => [
+				'path'          => ABLOCKS_ASSETS_PATH . 'library/prism/prism-line-highlight.js',
+				'url'           => ABLOCKS_ASSETS_URL . 'library/prism/prism-line-highlight.js',
+				'deps'          => array(),
+				'ver'           => false,
+				'args'          => $args
+			],
 			'ablocks-leaflet-script' => [
 				'path'          => ABLOCKS_ASSETS_PATH . 'library/leaflet/leaflet.js',
 				'url'           => ABLOCKS_ASSETS_URL . 'library/leaflet/leaflet.js',

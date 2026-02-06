@@ -25,12 +25,14 @@ class Assets {
 
 		$options[] = [
 			'value' => $post_name . '|all',
+			/* translators: %s template */
 			'label' => sprintf( __( 'All %s', 'ablocks' ), $post_label ),
 		];
 
 		if ( 'pages' !== $post_key ) {
 			$options[] = [
 				'value' => $post_name . '|all|archive',
+				/* translators: %s template */
 				'label' => sprintf( __( 'All %s Archive', 'ablocks' ), $post_label ),
 			];
 		}
@@ -41,6 +43,7 @@ class Assets {
 
 			$options[] = [
 				'value' => $post_name . '|all|taxarchive|' . $tax_name,
+				/* translators: %s template */
 				'label' => sprintf( __( 'All %s Archive', 'ablocks' ), $tax_label ),
 			];
 		}
@@ -253,7 +256,7 @@ class Assets {
 				if ( file_exists( $js_file_path ) ) {
 					$js_file_url = $FileUpload->get_file_url( $post_id . '.min.js' );
 					wp_enqueue_script( 'ablocks-blocks-' . $template_type . '-' . $post_id . '-combine-script', $js_file_url, array(), filemtime( $js_file_path ), true );
-					wp_localize_script( 'ablocks-blocks-' . $template_type . '-' . $post_id . '-combine-script', 'ABlocksGlobal', $CoreAssets->get_localize_script_data() );
+					wp_localize_script( 'ablocks-blocks-' . $template_type . '-' . $post_id . '-combine-script', 'ABlocksGlobal', $CoreAssets->get_localize_frontend_data() );
 				}
 			}
 		}

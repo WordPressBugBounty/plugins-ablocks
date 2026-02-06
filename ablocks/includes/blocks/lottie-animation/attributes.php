@@ -17,11 +17,11 @@ $attributes = [
 	),
 	'asset_url' => [
 		'type' => 'string',
-		'default' => 'https://assets10.lottiefiles.com/packages/lf20_5tl1xxnz.json',
+		'default' => '',
 	],
 	'custom_url' => [
 		'type' => 'string',
-		'default' => 'https://assets10.lottiefiles.com/packages/lf20_5tl1xxnz.json',
+		'default' => '',
 	],
 	'uploaded_json' => [
 		'type' => 'object',

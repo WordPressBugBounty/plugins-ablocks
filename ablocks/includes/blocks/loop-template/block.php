@@ -90,6 +90,7 @@ class Block extends BlockBaseAbstract {
 	public function render_block_content( $attributes, $content, $block ) {
 		$page_key            = isset( $block->context['queryId'] ) ? 'query-' . $block->context['queryId'] . '-page' : 'query-page';
 		$enhanced_pagination = isset( $block->context['enhancedPagination'] ) && $block->context['enhancedPagination'];
+		// phpcs:ignore  WordPress.Security.NonceVerification.Recommended 
 		$page                = empty( $_GET[ $page_key ] ) ? 1 : (int) $_GET[ $page_key ];
 
 		// Use global query if needed.

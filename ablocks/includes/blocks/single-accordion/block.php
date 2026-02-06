@@ -113,7 +113,8 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_title_css( $attributes, $device = '' ) {
-		$typography_css = Typography::get_css( $attributes['headerTypography'], '', $device );
+		$typographyValueGlobal = ! empty( $attributes['headerTypographyGlobal'] ) ? $attributes['headerTypographyGlobal'] : array();
+		$typography_css = Typography::get_css( $attributes['headerTypography'], '', $device, $typographyValueGlobal );
 		$textShadowCss = TextShadow::get_css( $attributes['headerTextShadow'], '', $device );
 		$textStrokeCss = TextStroke::get_css( $attributes['headerTextStroke'], '', $device );
 		return array_merge(

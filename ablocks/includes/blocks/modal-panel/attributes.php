@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $attributes = [
 	'block_id' => array(
 		'type' => 'string',

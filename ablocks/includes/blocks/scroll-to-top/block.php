@@ -47,6 +47,12 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap img.ablocks-image-icon',
@@ -134,9 +140,10 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_button_text_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['typographyGlobal'] ) ? $attributes['typographyGlobal'] : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['buttonTextColor'] ) ? $attributes['buttonTextColor'] : '' ) ],
-			Typography::get_css( $attributes['typography'], '', $device ),
+			Typography::get_css( $attributes['typography'], '', $device, $typographyValueGlobal ),
 			TextShadow::get_css( $attributes['textShadow'], '', $device ),
 			TextStroke::get_css( $attributes['textStroke'], '', $device ),
 			[ 'background' => Color::get_css( isset( $attributes['buttonTextColorBg'] ) ? $attributes['buttonTextColorBg'] : '' ) ],

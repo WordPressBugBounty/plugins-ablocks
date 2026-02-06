@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\Counter;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGeneratorV2;
 use ABlocks\Classes\CssGenerator;
@@ -73,6 +77,13 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
 		);
+				$css_generator->add_class_styles(
+					'{{WRAPPER}} .ablocks-icon-wrap:hover',
+					Icon::get_wrapper_hover_css( $attributes ),
+					Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
+					Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+				);
+
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-icon-wrap img.ablocks-image-icon',
 			Icon::get_element_image_css( $attributes ),
@@ -177,6 +188,12 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-icon-wrap img.ablocks-image-icon',
 			Icon::get_element_image_css( $attributes ),
 			Icon::get_element_image_css( $attributes, 'Tablet' ),
@@ -253,18 +270,20 @@ class Block extends BlockBaseAbstract {
 		} else {
 			$css['display'] = 'block';
 		}
+		$typographyGlobal = ( isset( $attributes['numberTypographyGlobal'] ) ? $attributes['numberTypographyGlobal'] : '' );
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['numberColor'] ) ? $attributes['numberColor'] : '' ) ],
-			isset( $attributes['numberTypography'] ) ? Typography::get_css( $attributes['numberTypography'], '', $device ) : [],
+			isset( $attributes['numberTypography'] ) ? Typography::get_css( $attributes['numberTypography'], '', $device, $typographyGlobal ) : [],
 			isset( $attributes['numberMargin'] ) ? Dimensions::get_css( $attributes['numberMargin'], 'margin', '', $device ) : [],
 			$css
 		);
 	}
 
 	public function get_heading_text_css( $attributes, $device = '' ) {
+		$typographyGlobal = ( isset( $attributes['headingTypographyGlobal'] ) ? $attributes['headingTypographyGlobal'] : '' );
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['headingColor'] ) ? $attributes['headingColor'] : '' ) ],
-			isset( $attributes['headingTypography'] ) ? Typography::get_css( $attributes['headingTypography'], '', $device ) : [],
+			isset( $attributes['headingTypography'] ) ? Typography::get_css( $attributes['headingTypography'], '', $device, $typographyGlobal ) : [],
 			isset( $attributes['headingMargin'] ) ? Dimensions::get_css( $attributes['headingMargin'], 'margin', $device ) : [],
 		);
 	}

@@ -160,8 +160,10 @@ class Helper {
 			}//end switch
 
 			$meta_where = implode( ' OR ', $meta_conditions );
+			// phpcs:ignore  WordPress.DB.PreparedSQL.NotPrepared 
 			$query      = $wpdb->prepare( $query, $location, $post_type ) . " AND ({$meta_where}) ORDER BY p.post_date DESC";
 
+			// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared 
 			$posts = $wpdb->get_results( $query );
 
 			foreach ( $posts as $local_post ) {
@@ -474,6 +476,7 @@ class Helper {
 
 	public static function get_info_popup_builder_content() {
 		global $wpdb;
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching 
 		return $wpdb->get_results("
 			SELECT p.ID, p.post_content
 			FROM {$wpdb->prefix}posts AS p

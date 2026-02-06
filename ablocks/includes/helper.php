@@ -27,6 +27,21 @@ class Helper {
 		return $default;
 	}
 
+	public static function get_page_permalink( $page, $fallback = null ) {
+		$page_id   = self::get_settings( $page );
+		$permalink = 0 < $page_id ? get_permalink( $page_id ) : '';
+		if ( ! $permalink ) {
+			$permalink = is_null( $fallback ) ? get_home_url() : $fallback;
+		}
+
+		return apply_filters( 'ablocks/get_' . $page . '_permalink', $permalink );
+	}
+
+	public static function get_logout_url( $redirect = '' ) {
+		$redirect = $redirect ? $redirect : apply_filters( 'ablocks/logout_default_redirect_url', self::get_page_permalink( 'dashboard_page' ) );
+
+		return wp_logout_url( $redirect );
+	}
 	public static function is_enabled_block( $block_name, $parent_block_name = '' ) {
 		global $ablocks_blocks;
 		$block_name = ! empty( $parent_block_name ) ? $parent_block_name : $block_name;
@@ -60,6 +75,9 @@ class Helper {
 	public static function is_active_wp_map_block() {
 		$wp_map_block = 'wp-map-block/wp-map-block.php';
 		return self::is_plugin_active( $wp_map_block );
+	}
+	public static function is_active_quizpress() {
+		return class_exists( 'QuizPress' );
 	}
 	public static function is_active_easy_content_manager() {
 		$easy_content_manager = 'easy-content-manager/easy-content-manager.php';
@@ -688,6 +706,7 @@ class Helper {
 				\Breeze_Purge::breeze_cache_flush();
 			}
 		} catch ( \Throwable $e ) {
+			// phpcs:ignore  WordPress.PHP.DevelopmentFunctions.error_log_error_log 
 			error_log( 'Breeze Cache Clear Failed: ' . $e->getMessage() );
 		}
 
@@ -697,6 +716,7 @@ class Helper {
 				\w3tc_flush_all();
 			}
 		} catch ( \Throwable $e ) {
+			// phpcs:ignore  WordPress.PHP.DevelopmentFunctions.error_log_error_log 
 			error_log( 'W3 Total Cache Clear Failed: ' . $e->getMessage() );
 		}
 
@@ -706,6 +726,7 @@ class Helper {
 				\wp_cache_clear_cache();
 			}
 		} catch ( \Throwable $e ) {
+			// phpcs:ignore  WordPress.PHP.DevelopmentFunctions.error_log_error_log 
 			error_log( 'WP Super Cache Clear Failed: ' . $e->getMessage() );
 		}
 
@@ -715,6 +736,7 @@ class Helper {
 				\LiteSpeed_Cache_API::purge_all();
 			}
 		} catch ( \Throwable $e ) {
+			// phpcs:ignore  WordPress.PHP.DevelopmentFunctions.error_log_error_log 
 			error_log( 'LiteSpeed Cache Clear Failed: ' . $e->getMessage() );
 		}
 
@@ -725,6 +747,7 @@ class Helper {
 				$wpfc->deleteCache();
 			}
 		} catch ( \Throwable $e ) {
+			// phpcs:ignore  WordPress.PHP.DevelopmentFunctions.error_log_error_log 
 			error_log( 'WP Fastest Cache Clear Failed: ' . $e->getMessage() );
 		}
 
@@ -734,8 +757,8 @@ class Helper {
 				\autoptimize_clearall();
 			}
 		} catch ( \Throwable $e ) {
+			// phpcs:ignore  WordPress.PHP.DevelopmentFunctions.error_log_error_log 
 			error_log( 'Autoptimize Clear Failed: ' . $e->getMessage() );
 		}
 	}
-
 }

@@ -85,7 +85,19 @@ $attributes = [
 	'posterImage' => [
 		'type' => 'string',
 		'default' => ''
-	]
+	],
+	'autoplay' => [
+		'type' => 'boolean',
+		'default' => false,
+	],
+	'mute' => [
+		'type' => 'boolean',
+		'default' => false,
+	],
+	'loop' => [
+		'type' => 'boolean',
+		'default' => false,
+	],
 
 ];
 $attributes = array_merge(

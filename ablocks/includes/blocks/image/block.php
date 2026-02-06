@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\Image;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Classes\CssGeneratorV2;
@@ -250,12 +254,12 @@ class Block extends BlockBaseAbstract {
 			$css['bottom'] = 0;
 			$css['left'] = 0;
 		}
-
+		$typographyGlobal = isset( $attributes['captionTypographyGlobal'] ) ? $attributes['captionTypographyGlobal'] : [];
 		return array_merge(
 			$css,
 			( isset( $attributes['captionPadding'] ) ) ? Dimensions::get_css( $attributes['captionPadding'], 'padding', $device ) : [],
 			( isset( $attributes['captionAlignment'] ) ) ? Alignment::get_css( $attributes['captionAlignment'], 'text-align', $device ) : [],
-			( isset( $attributes['captionTypography'] ) ) ? Typography::get_css( $attributes['captionTypography'], '', $device ) : [],
+			( isset( $attributes['captionTypography'] ) ) ? Typography::get_css( $attributes['captionTypography'], '', $device, $typographyGlobal ) : [],
 			( isset( $attributes['captionBorder'] ) ) ? Border::get_css( $attributes['captionBorder'], '', $device ) : [],
 		);
 	}

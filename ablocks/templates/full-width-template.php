@@ -1,4 +1,8 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 /*
  * Template Name: aBlocks Full Width
  * Description: A full-width template with no sidebar.

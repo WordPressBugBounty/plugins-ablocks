@@ -188,6 +188,7 @@ class DynamicContent extends AbstractAjaxHandler {
             AND pm.meta_key NOT LIKE '\_%'
         ";
 
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared 
 		$meta_keys = $wpdb->get_col( $wpdb->prepare( $query, $post_type ) );
 
 		wp_send_json_success( $meta_keys );
@@ -229,6 +230,7 @@ class DynamicContent extends AbstractAjaxHandler {
                 ORDER BY post_date DESC
                 LIMIT 5
             ";
+			// phpcs:ignore  WordPress.DB.PreparedSQL.NotPrepared 
 			$prepared_query = $wpdb->prepare( $query, ...$included_post_types );
 		} else {
 			$query = "
@@ -240,8 +242,10 @@ class DynamicContent extends AbstractAjaxHandler {
                 LIMIT 5
             ";
 			$safe_query = '%' . $wpdb->esc_like( $search_query ) . '%';
+			// phpcs:ignore  WordPress.DB.PreparedSQL.NotPrepared 
 			$prepared_query = $wpdb->prepare( $query, array_merge( [ $safe_query ], $included_post_types ) );
 		}//end if
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared 
 		$results = $wpdb->get_results( $prepared_query, ARRAY_A );
 		wp_send_json_success( $results );
 	}
@@ -333,11 +337,9 @@ class DynamicContent extends AbstractAjaxHandler {
 		$media_id = $payload['mediaId'] ?? 0;
 
 		if ( empty( $search_query ) ) {
-			$prepared_query = $wpdb->prepare(
-				"SELECT ID, post_title FROM {$wpdb->posts} 
+			$prepared_query = "SELECT ID, post_title FROM {$wpdb->posts} 
                 WHERE post_type = 'attachment' AND post_status = 'inherit'
-                ORDER BY post_date DESC LIMIT 5"
-			);
+                ORDER BY post_date DESC LIMIT 5";
 		} else {
 			$prepared_query = $wpdb->prepare(
 				"SELECT ID, post_title FROM {$wpdb->posts} 
@@ -348,6 +350,7 @@ class DynamicContent extends AbstractAjaxHandler {
 			);
 		}
 
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared 
 		$results = $wpdb->get_results( $prepared_query, ARRAY_A );
 
 		$media_items = array_map(function ( $media ) {
@@ -362,6 +365,7 @@ class DynamicContent extends AbstractAjaxHandler {
 		$media_id_present_in_result = $media_id && ! in_array( "{$media_id}", array_column( $media_items, 'value' ) );
 
 		if ( $media_id_present_in_result ) {
+			// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 			$media_item = $wpdb->get_row($wpdb->prepare(
 				"SELECT ID, post_title FROM {$wpdb->posts} 
                     WHERE ID = %d AND post_type = 'attachment' AND post_status = 'inherit'",

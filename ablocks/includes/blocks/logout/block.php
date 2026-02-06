@@ -58,11 +58,11 @@ class Block extends BlockBaseAbstract {
 			$typography = isset( $attributes['labelTypography'] ) ? $attributes['labelTypography'] : '';
 			$text_stroke = isset( $attributes['labelTextStroke'] ) ? $attributes['labelTextStroke'] : '';
 			$text_shadow = isset( $attributes['labelTextShadow'] ) ? $attributes['labelTextShadow'] : '';
-
+			$typographyglobal = ! empty( $attributes['labelTypographyGlobal'] ) ? $attributes['labelTypographyGlobal'] : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['logOutLabelColor'] ) ? $attributes['logOutLabelColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['logOutLabelBgColor'] ) ? $attributes['logOutLabelBgColor'] : '' ) ],
-			Typography::get_css( $typography, '', $device ),
+			Typography::get_css( $typography, '', $device, $typographyglobal ),
 			TextStroke::get_css( $text_stroke, '', $device ),
 			TextShadow::get_css( $text_shadow, '', $device ),
 		);
@@ -122,10 +122,10 @@ class Block extends BlockBaseAbstract {
 			$typography = isset( $attributes['nameTypography'] ) ? $attributes['nameTypography'] : '';
 			$text_stroke = isset( $attributes['nameTextStroke'] ) ? $attributes['nameTextStroke'] : '';
 			$text_shadow = isset( $attributes['nameTextShadow'] ) ? $attributes['nameTextShadow'] : '';
-
+			$typographyglobal = ! empty( $attributes['nameTypographyGlobal'] ) ? $attributes['nameTypographyGlobal'] : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['nameColor'] ) ? $attributes['nameColor'] : '' ) ],
-			Typography::get_css( $typography, '', $device ),
+			Typography::get_css( $typography, '', $device, $typographyglobal ),
 			TextStroke::get_css( $text_stroke, '', $device ),
 			TextShadow::get_css( $text_shadow, '', $device )
 		);
@@ -135,6 +135,7 @@ class Block extends BlockBaseAbstract {
 		$logout_redirect_option = isset( $attributes['logoutRedirect'] ) ? $attributes['logoutRedirect'] : 'current-url';
 
 		if ( $logout_redirect_option === 'current-url' ) {
+			// phpcs:ignore  WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 			$logout_redirect_url = ( is_ssl() ? 'https://' : 'http://' ) . sanitize_text_field( $_SERVER['HTTP_HOST'] ) . sanitize_text_field( $_SERVER['REQUEST_URI'] );
 		} elseif ( $logout_redirect_option === 'custom-url' ) {
 			$logout_redirect_url = isset( $attributes['logoutCustomUrl'] ) && ! empty( $attributes['logoutCustomUrl'] )
@@ -145,6 +146,7 @@ class Block extends BlockBaseAbstract {
 		$login_redirect_option = isset( $attributes['loginRedirect'] ) ? $attributes['loginRedirect'] : 'current-url';
 
 		if ( $login_redirect_option === 'current-url' ) {
+			// phpcs:ignore  WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 			$login_redirect_url = ( is_ssl() ? 'https://' : 'http://' ) . sanitize_text_field( $_SERVER['HTTP_HOST'] ) . sanitize_text_field( $_SERVER['REQUEST_URI'] );
 		} elseif ( $login_redirect_option === 'custom-url' ) {
 			$login_redirect_url = isset( $attributes['loginCustomUrl'] ) && ! empty( $attributes['loginCustomUrl'] )

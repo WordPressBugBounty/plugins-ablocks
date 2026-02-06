@@ -16,6 +16,7 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Color;
+use ABlocks\Controls\BoxShadow;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'table-of-content';
@@ -43,10 +44,16 @@ class Block extends BlockBaseAbstract {
 			$this->get_toc_body_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}}  .ablocks-toc__header-toggle-icon svg',
+			'{{WRAPPER}}  .ablocks-toc__header-toggle-icon .ablocks-toc__show',
 			$this->get_toc_header_icon_css( $attributes ),
 			$this->get_toc_header_icon_css( $attributes, 'Tablet' ),
 			$this->get_toc_header_icon_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-toc__header-toggle-icon .ablocks-toc__show:hover',
+			$this->get_toc_header_icon_hover_css( $attributes ),
+			$this->get_toc_header_icon_hover_css( $attributes, 'Tablet' ),
+			$this->get_toc_header_icon_hover_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-block-container .ablocks-toc-list,
@@ -80,10 +87,16 @@ class Block extends BlockBaseAbstract {
 			$this->get_toc_body_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}}  .ablocks-toc__header-toggle-icon svg',
+			'{{WRAPPER}}  .ablocks-toc__header-toggle-icon .ablocks-toc__show',
 			$this->get_toc_header_icon_css( $attributes ),
 			$this->get_toc_header_icon_css( $attributes, 'Tablet' ),
 			$this->get_toc_header_icon_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}  .ablocks-toc__header-toggle-icon .ablocks-toc__show:hover',
+			$this->get_toc_header_icon_hover_css( $attributes ),
+			$this->get_toc_header_icon_hover_css( $attributes, 'Tablet' ),
+			$this->get_toc_header_icon_hover_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-toc-body .ablocks-toc-list',
@@ -98,6 +111,18 @@ class Block extends BlockBaseAbstract {
 			$this->get_list_item_css( $attributes, 'Tablet' ),
 			$this->get_list_item_css( $attributes, 'Mobile' )
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-toc-body .ablocks-toc-list li a',
+			$this->get_list_item_gap_css( $attributes ),
+			$this->get_list_item_gap_css( $attributes, 'Tablet' ),
+			$this->get_list_item_gap_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} a.ablocks-toc-item-link.active',
+			$this->get_active_list_item_css( $attributes ),
+			$this->get_active_list_item_css( $attributes, 'Tablet' ),
+			$this->get_active_list_item_css( $attributes, 'Mobile' )
+		);
 
 		return $css_generator->generate_css();
 	}
@@ -111,7 +136,8 @@ class Block extends BlockBaseAbstract {
 
 
 	public function get_toc_title_css( $attributes, $device = '' ) {
-		$toc_title_typography_css = ! empty( $attributes['titleTypography'] ) ? Typography::get_css( $attributes['titleTypography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['titleTypographyGlobal'] ) ? $attributes['titleTypographyGlobal'] : array();
+		$toc_title_typography_css = ! empty( $attributes['titleTypography'] ) ? Typography::get_css( $attributes['titleTypography'], '', $device, $typographyValueGlobal ) : array();
 		return array_merge( $toc_title_typography_css,
 		[ 'color' => Color::get_css( isset( $attributes['titleColor'] ) ? $attributes['titleColor'] : '' ) ], );
 	}
@@ -132,33 +158,39 @@ class Block extends BlockBaseAbstract {
 		$css = array_merge(
 			[ 'fill' => Color::get_css( isset( $attributes['iconColor'] ) ? $attributes['iconColor'] : '' ) ],
 			Range::get_css([
-				'attributeValue' => $attributes['iconSize'],
+				'attributeValue' => $attributes['iconSize'] ?? null,
 				'isResponsive' => false,
 				'defaultValue' => 20,
 				'unitDefaultValue' => 'px',
-				'property' => 'width',
+				'property' => 'font-size',
 				'device' => $device,
 			]),
-			Range::get_css([
-				'attributeValue' => $attributes['iconSize'],
-				'isResponsive' => false,
-				'defaultValue' => 20,
-				'unitDefaultValue' => 'px',
-				'property' => 'height',
-				'device' => $device,
-			]),
+			Dimensions::get_css( $attributes['icon_padding'] ?? [], 'padding', $device ),
+			Border::get_css( $attributes['iconBorder'] ?? [], '', $device ),
+			BoxShadow::get_css( $attributes['iconBoxShadow'] ?? [], $device ),
 		);
-		if ( ! empty( $attributes['iconSize'] ) ) {
-			$css['width'] = $attributes['iconSize'] . 'px';
-			$css['height'] = $attributes['iconSize'] . 'px';
-		}
+		return $css;
+	}
+
+	public function get_toc_header_icon_hover_css( $attributes, $device = '' ) {
+		$css = array_merge(
+			Border::get_hover_css( $attributes['iconBorder'], $device ),
+			BoxShadow::get_hover_css( $attributes['iconBoxShadow'], $device )
+		);
 		return $css;
 	}
 
 	public function get_list_item_css( $attributes, $device = '' ) {
-		$contentTypography = ! empty( $attributes['contentTypography'] ) ? Typography::get_css( $attributes['contentTypography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['contentTypographyGlobal'] ) ? $attributes['contentTypographyGlobal'] : array();
+		$contentTypography = ! empty( $attributes['contentTypography'] ) ? Typography::get_css( $attributes['contentTypography'], '', $device, $typographyValueGlobal ) : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['itemColor'] ) ? $attributes['itemColor'] : '' ) ],
+			$contentTypography,
+		);
+	}
+
+	public function get_list_item_gap_css( $attributes, $device = '' ) {
+		return array_merge(
 			Range::get_css([
 				'attributeValue' => $attributes['listItemGap'],
 				'attribute_object_key' => 'value',
@@ -169,7 +201,11 @@ class Block extends BlockBaseAbstract {
 				'hasUnit' => true,
 				'device' => $device,
 			]),
-			$contentTypography,
+		);
+	}
+	public function get_active_list_item_css( $attributes, $device = '' ) {
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['activeColor'] ) ? $attributes['activeColor'] : '' ) ],
 		);
 	}
 

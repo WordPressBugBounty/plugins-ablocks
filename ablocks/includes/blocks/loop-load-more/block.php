@@ -85,12 +85,12 @@ class Block extends BlockBaseAbstract {
 			class="ablocks-loop-load-more__text" 
 			data-post-id="' . esc_attr( $current_post_id ) . '" 
 			data-term-id="' . esc_attr( $term_id ) . '" 
-			data-no-item-text="' . $no_more_items_text . '" 
-			data-more-button-text="' . $load_more_text . '" 
-			data-taxonomy="' . $taxonomy . '" 
-			data-is-archive="' . $is_archive . '" 
-			data-archive-post-type="' . $archive_post_type . '"
-		>' . $load_more_text . '</span>';
+			data-no-item-text="' . esc_attr( $no_more_items_text ) . '" 
+			data-more-button-text="' . esc_attr( $load_more_text ) . '" 
+			data-taxonomy="' . esc_attr( $taxonomy ) . '" 
+			data-is-archive="' . esc_attr( $is_archive ) . '" 
+			data-archive-post-type="' . esc_attr( $archive_post_type ) . '"
+		>' . esc_attr( $load_more_text ) . '</span>';
 	}
 
 
@@ -115,12 +115,14 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	private function loop_load_More_button( $attributes, $device = '' ) {
+		$typographyGlobal = isset( $attributes['moreButtonTypographyGlobal'] ) ? $attributes['moreButtonTypographyGlobal'] : array();
+
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['loadMoreButtonTextColor'] ) ? $attributes['loadMoreButtonTextColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['loadMoreButtonBackground'] ) ? $attributes['loadMoreButtonBackground'] : '' ) ],
 			Border::get_css( $attributes['moreButtonBorder'], '', $device ),
 			BoxShadow::get_css( $attributes['moreButtonboxShadow'], '', $device ),
-			Typography::get_css( $attributes['moreButtonTypography'], $device ),
+			Typography::get_css( $attributes['moreButtonTypography'], '', $device, $typographyGlobal ),
 			Dimensions::get_css( $attributes['moreButtonPadding'], 'padding', $device ),
 		);
 	}

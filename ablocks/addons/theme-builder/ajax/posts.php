@@ -21,6 +21,7 @@ class Posts extends AbstractAjaxHandler {
 		);
 	}
 	public function search_anything() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing,  WordPress.Security.ValidatedSanitizedInput.MissingUnslash  
 		$search_string = isset( $_POST['keyword'] ) ? sanitize_text_field( $_POST['keyword'] ) : '';
 		$result = array();
 

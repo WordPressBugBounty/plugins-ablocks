@@ -158,7 +158,7 @@ class Block extends BlockBaseAbstract {
 				'attributeValue' => $attributes['space'],
 				'attribute_object_key' => 'value',
 				'isResponsive' => true,
-				'defaultValue' => 0,
+				'defaultValue' => 10,
 				'unitDefaultValue' => 'px',
 				'property' => 'margin-bottom',
 				'device' => $device,
@@ -174,7 +174,7 @@ class Block extends BlockBaseAbstract {
 			'attributeValue' => $attributes['gap'],
 			'attribute_object_key' => 'value',
 			'isResponsive' => true,
-			'defaultValue' => 0,
+			'defaultValue' => 10,
 			'unitDefaultValue' => 'px',
 			'property' => 'gap',
 			'device' => $device,
@@ -191,7 +191,8 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_toggle_label_css( $attributes, $device = '' ) {
-		$labelCSS = isset( $attributes['labelTypography'] ) ? Typography::get_css( $attributes['labelTypography'], '', $device ) : [];
+		$typographyValueGlobal = ! empty( $attributes['labelTypographyGlobal'] ) ? $attributes['labelTypographyGlobal'] : [];
+		$labelCSS = isset( $attributes['labelTypography'] ) ? Typography::get_css( $attributes['labelTypography'], '', $device, $typographyValueGlobal ) : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['labelNormalColor'] ) ? $attributes['labelNormalColor'] : '' ) ],
 			$labelCSS

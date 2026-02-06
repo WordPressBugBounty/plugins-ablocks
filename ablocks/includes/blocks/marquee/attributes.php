@@ -35,10 +35,15 @@ $attributes = [
 		'type' => 'boolean',
 		'default' => false,
 	],
+	'enableShadow' => [
+		'type' => 'boolean',
+		'default' => true,
+	],
 	'loopCount' => [
 		'type' => 'number',
 		'default' => 2,
 	],
+
 ];
 
 $attributes = array_merge(

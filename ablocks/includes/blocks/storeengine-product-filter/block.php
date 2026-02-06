@@ -36,8 +36,9 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_product_filter_select_css( $attributes, $device = '' ) {
 		$cssWidth['width'] = $attributes['selectWidth'] . 'px';
+		$typographyGlobal = ( isset( $attributes['selectTypographyGlobal'] ) ? $attributes['selectTypographyGlobal'] : '' );
 
-		$typographyValue = ! empty( $attributes['selectTypography'] ) ? Typography::get_css( $attributes['selectTypography'], '', $device ) : array();
+		$typographyValue = ! empty( $attributes['selectTypography'] ) ? Typography::get_css( $attributes['selectTypography'], '', $device, $typographyGlobal ) : array();
 
 		if ( ! empty( $attributes['selectPadding'] ) ) {
 			$cssPadding = Dimensions::get_css( $attributes['selectPadding'], '', $device );

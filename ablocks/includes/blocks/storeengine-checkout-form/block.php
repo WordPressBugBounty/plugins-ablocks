@@ -95,10 +95,11 @@ class Block extends BlockBaseAbstract {
 			: [];
 
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
+		$typographyValueGlobal = ( isset( $attributes['titleTypographyGlobal'] ) ? $attributes['titleTypographyGlobal'] : '' );
 
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['titleColor'] ) ? $attributes['titleColor'] : '' ) ],
-			Typography::get_css( $typography_value, $device ),
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 		);
 
 	}
@@ -113,10 +114,11 @@ class Block extends BlockBaseAbstract {
 			: [];
 
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
+		$typographyValueGlobal = ( isset( $attributes['labelTypographyGlobal'] ) ? $attributes['labelTypographyGlobal'] : '' );
 
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['labelColor'] ) ? $attributes['labelColor'] : '' ) ],
-			Typography::get_css( $typography_value, $device ),
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 		);
 	}
 	public function get_Cheackout_form_label_hover_css( $attributes, $device = '' ) {
@@ -141,7 +143,8 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_cheackout_form_select_css( $attributes, $device = '' ) {
-		$typographyValue = ! empty( $attributes['selectTypography'] ) ? Typography::get_css( $attributes['selectTypography'], '', $device ) : array();
+		$typographyValue = ! empty( $attributes['selectTypography'] ) ? $attributes['selectTypography'] : [];
+		$typographyValueGlobal = ( isset( $attributes['selectTypographyGlobal'] ) ? $attributes['selectTypographyGlobal'] : '' );
 		if ( ! empty( $attributes['selectPadding'] ) ) {
 			$cssPadding = Dimensions::get_css( $attributes['selectPadding'], '', $device );
 		}
@@ -165,19 +168,20 @@ class Block extends BlockBaseAbstract {
 			]),
 			$cssBorder,
 			$cssPadding,
-			$typographyValue,
+			Typography::get_css( $typographyValue, '', $device, $typographyValueGlobal )
 			// $cssWidth,
 		);
 
 	}
 
 	public function get_cheackout_form_button_css( $attributes, $device = '' ) {
-		$typographyValue = ! empty( $attributes['buttonTypography'] ) ? Typography::get_css( $attributes['buttonTypography'], '', $device ) : array();
+		$typographyValue = ! empty( $attributes['buttonTypography'] ) ? $attributes['buttonTypography'] : [];
+		$typographyValueGlobal = ( isset( $attributes['buttonTypographyGlobal'] ) ? $attributes['buttonTypographyGlobal'] : '' );
 
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['buttonColor'] ) ? $attributes['buttonColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['buttonBackground'] ) ? $attributes['buttonBackground'] : '' ) ],
-			$typographyValue,
+			Typography::get_css( $typographyValue, '', $device, $typographyValueGlobal )
 		);
 	}
 

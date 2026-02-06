@@ -1,4 +1,9 @@
 <?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Icon;
@@ -261,8 +266,14 @@ $attributes = array_merge(
 	ButtonGroup::get_attribute( 'tabsWidthType', true, [
 		'value' => 'auto',
 	] ),
+	ButtonGroup::get_attribute( 'tabsContentWidthType', true, [
+		'value' => 'auto',
+	] ),
+	ButtonGroup::get_attribute( 'tabWrap', true, [
+		'value' => 'wrap',
+	] ),
 	ButtonGroup::get_attribute( 'tabMenuAlignment', true, [
-		'value' => '',
+		'value' => 'center',
 	] ),
 	ButtonGroup::get_attribute( 'menuContentAlignment', true, [
 		'value' => 'center',

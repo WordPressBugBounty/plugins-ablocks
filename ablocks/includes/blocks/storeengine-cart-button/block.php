@@ -124,11 +124,11 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_button_css( $attributes, $device = '' ) {
-		$css               = [];
-		$css['color']      = $attributes['button_color'] ?? '';
-		$css['background'] = $attributes['button_bg'] ?? '';
-		$alignment_css = [];
-		$typography_value  = isset( $attributes['btn_typography'] ) ? Typography::get_css( $attributes['btn_typography'], '', $device ) : array();
+		$css            = [];
+		$cssPadding     = [];
+		$alignment_css  = [];
+		$typographyValueGlobal = ( isset( $attributes['btn_typographyGlobal'] ) ? $attributes['btn_typographyGlobal'] : '' );
+		$typography_value  = isset( $attributes['btn_typography'] ) ? $attributes['btn_typography'] : [];
 
 		if ( ! empty( $attributes['padding'] ) ) {
 			$cssPadding = Dimensions::get_css( $attributes['padding'], 'padding', $device );
@@ -139,9 +139,10 @@ class Block extends BlockBaseAbstract {
 		}
 
 		return array_merge(
-			$css,
-			$typography_value,
+			[ 'color' => Color::get_css( isset( $attributes['button_color'] ) ? $attributes['button_color'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['button_bg'] ) ? $attributes['button_bg'] : '' ) ],
 			$cssPadding,
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			$alignment_css,
 			Border::get_css( $attributes['buttonBorder'], '', $device ),
 			BoxShadow::get_css( $attributes['boxShadow'], '', $device ),
@@ -159,12 +160,10 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_button_hover_css( $attributes, $device = '' ) {
-		$css               = [];
-		$css['color']      = $attributes['button_color_hover'] ?? '';
-		$css['background'] = $attributes['button_bg_hover'] ?? '';
 
 		return array_merge(
-			$css,
+			[ 'color' => Color::get_css( isset( $attributes['button_color_hover'] ) ? $attributes['button_color_hover'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['button_bg_hover'] ) ? $attributes['button_bg_hover'] : '' ) ],
 			Border::get_hover_css( $attributes['buttonBorder'] ?? [], '', $device ),
 			BoxShadow::get_hover_css( $attributes['boxShadow'], '', $device ),
 		);
@@ -181,10 +180,11 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_price_css( $attributes, $device = '' ) {
-		$typography_value  = isset( $attributes['priceTypography'] ) ? Typography::get_css( $attributes['priceTypography'], '', $device ) : array();
-
+		$typographyValueGlobal = ( isset( $attributes['priceTypographyGlobal'] ) ? $attributes['priceTypographyGlobal'] : '' );
+		$typography_value  = isset( $attributes['priceTypography'] ) ? $attributes['priceTypography'] : [];
 		return array_merge(
 			$typography_value,
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			[
 				'color' => Color::get_css(
 					isset( $attributes['priceColor'] ) ? $attributes['priceColor'] : ''
@@ -202,10 +202,12 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_price_name_css( $attributes, $device = '' ) {
-		$typography_value  = isset( $attributes['priceNameTypography'] ) ? Typography::get_css( $attributes['priceNameTypography'], '', $device ) : array();
+		$typographyValueGlobal = ( isset( $attributes['priceNameTypographyGlobal'] ) ? $attributes['priceNameTypographyGlobal'] : '' );
+		$typography_value  = isset( $attributes['priceNameTypography'] ) ? $attributes['priceNameTypography'] : [];
 
 		return array_merge(
 			$typography_value,
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			[
 				'color' => Color::get_css(
 					isset( $attributes['priceNameColor'] ) ? $attributes['priceNameColor'] : ''
@@ -336,6 +338,7 @@ class Block extends BlockBaseAbstract {
 			$attr_array['product_id'] = $block_instance->context['postId'];
 		}
 
+		// phpcs:ignore  WordPress.Security.NonceVerification.Recommended,  WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 		if ( isset( $_GET['context'] ) && 'edit' === sanitize_text_field( $_GET['context'] ) ) {
 			$attr_array['dummy'] = true;
 		}

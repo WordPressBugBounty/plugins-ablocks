@@ -216,11 +216,12 @@ class Block extends BlockBaseAbstract {
 		$filter_border_css = ! empty( $attributes['filterButtonBorder'] )
 			? Border::get_css( $attributes['filterButtonBorder'], '', $device )
 			: array();
+		$typographyGlobal = ( isset( $attributes['filterButtonTypographyGlobal'] ) ? $attributes['filterButtonTypographyGlobal'] : '' );
 		$css = array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['filterButtonColor'] ) ? $attributes['filterButtonColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['filterButtonBackground'] ) ? $attributes['filterButtonBackground'] : '' ) ],
 			$filter_border_css,
-			Typography::get_css( isset( $attributes['filterButtonTypography'] ) ? $attributes['filterButtonTypography'] : [], $device ),
+			Typography::get_css( isset( $attributes['filterButtonTypography'] ) ? $attributes['filterButtonTypography'] : [], '', $device, $typographyGlobal ),
 			Dimensions::get_css( isset( $attributes['filterButtonPadding'] ) ? $attributes['filterButtonPadding'] : [], 'padding', $device ),
 			Dimensions::get_css( isset( $attributes['filterButtonMargin'] ) ? $attributes['filterButtonMargin'] : [], 'margin', $device ),
 		);
@@ -356,12 +357,13 @@ class Block extends BlockBaseAbstract {
 		return $css;
 	}
 	private function filterable_loadMore_button( $attributes, $device = '' ) {
+		$typographyGlobal = ( isset( $attributes['moreButtonTypographyGlobal'] ) ? $attributes['moreButtonTypographyGlobal'] : '' );
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['loadMoreButtonTextColor'] ) ? $attributes['loadMoreButtonTextColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['loadMoreButtonBackground'] ) ? $attributes['loadMoreButtonBackground'] : '' ) ],
 			Border::get_css( $attributes['moreButtonBorder'], '', $device ),
 			BoxShadow::get_css( $attributes['moreButtonboxShadow'], '', $device ),
-			Typography::get_css( $attributes['moreButtonTypography'], $device ),
+			Typography::get_css( $attributes['moreButtonTypography'], '', $device, $typographyGlobal ),
 			Dimensions::get_css( $attributes['moreButtonPadding'], 'padding', $device ),
 		);
 	}

@@ -88,12 +88,12 @@ class Block extends BlockBaseAbstract {
 
 				$is_active = (string) $active_term_id === (string) $term_value ? ' ablocks-loop-term-filter--active' : '';
 
-				echo '<span class="ablocks-loop-term-filter' . $is_active . '" '
+				echo '<span class="ablocks-loop-term-filter' . esc_attr( $is_active ) . '" '
 					. 'data-post-id="' . esc_attr( $current_post_id ) . '" '
 					. 'data-term-id="' . esc_attr( $term_value ) . '" '
 					. 'data-taxonomy="' . esc_attr( $taxonomy ) . '" '
-					. 'data-is-archive="' . $is_archive . '" '
-					. 'data-archive-post-type="' . $archive_post_type . '" '
+					. 'data-is-archive="' . esc_attr( $is_archive ) . '" '
+					. 'data-archive-post-type="' . esc_attr( $archive_post_type ) . '" '
 					. 'type="button">'
 					. esc_html( $term_label )
 					. '</span>';
@@ -140,12 +140,12 @@ class Block extends BlockBaseAbstract {
 
 	public function get_button_style( $attributes, $device = '' ) {
 		$normal_button_border = ! empty( $attributes['filterBtnBorder'] ) ? Border::get_css( $attributes['filterBtnBorder'], '', $device ) : array();
-
+		$typographyGlobal = ! empty( $attributes['typographyGlobal'] ) ? $attributes['typographyGlobal'] : array();
 		$css = array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['filterBtnTextColor'] ) ? $attributes['filterBtnTextColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['filterBtnBgColor'] ) ? $attributes['filterBtnBgColor'] : '' ) ],
 			$normal_button_border,
-			Typography::get_css( isset( $attributes['typography'] ) ? $attributes['typography'] : array(), $device ),
+			Typography::get_css( isset( $attributes['typography'] ) ? $attributes['typography'] : array(), '', $device, $typographyGlobal ),
 			Dimensions::get_css( isset( $attributes['filterButtonPadding'] ) ? $attributes['filterButtonPadding'] : [], 'padding', $device ),
 			Dimensions::get_css( isset( $attributes['filterButtonMargin'] ) ? $attributes['filterButtonMargin'] : [], 'margin', $device ),
 		);
@@ -162,12 +162,12 @@ class Block extends BlockBaseAbstract {
 		$button_border_css = ! empty( $attributes['activeBtnBorder'] )
 		? Border::get_css( $attributes['activeBtnBorder'], '', $device )
 		: array();
-
+		$typographyGlobal = ! empty( $attributes['typographyGlobal'] ) ? $attributes['typographyGlobal'] : array();
 		$css = array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['activeBtnTextColor'] ) ? $attributes['activeBtnTextColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['activeBtnBgColor'] ) ? $attributes['activeBtnBgColor'] : '' ) ],
 			$button_border_css,
-			Typography::get_css( isset( $attributes['typography'] ) ? $attributes['typography'] : array(), $device ),
+			Typography::get_css( isset( $attributes['typography'] ) ? $attributes['typography'] : array(), '', $device, $typographyGlobal ),
 		);
 		return $css;
 	}

@@ -1,7 +1,12 @@
 <?php
 namespace ABlocks\Blocks\DualButton;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
+use ABlocks\Controls\Typography;
 use ABlocks\Controls\Alignment;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Classes\CssGeneratorV2;
@@ -21,6 +26,12 @@ class Block extends BlockBaseAbstract {
 			$this->getDualButtonCss( $attributes, 'Tablet' ),
 			$this->getDualButtonCss( $attributes, 'Mobile' )
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-button',
+			$this->get_button_css( $attributes ),
+			$this->get_button_css( $attributes, 'Tablet' ),
+			$this->get_button_css( $attributes, 'Mobile' )
+		);
 
 		return $css_generator->generate_css();
 	}
@@ -33,6 +44,12 @@ class Block extends BlockBaseAbstract {
 			$this->getDualButtonCss( $attributes ),
 			$this->getDualButtonCss( $attributes, 'Tablet' ),
 			$this->getDualButtonCss( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-button',
+			$this->get_button_css( $attributes ),
+			$this->get_button_css( $attributes, 'Tablet' ),
+			$this->get_button_css( $attributes, 'Mobile' )
 		);
 
 		return $css_generator->generate_css();
@@ -71,6 +88,14 @@ class Block extends BlockBaseAbstract {
 			]),
 			$css,
 			isset( $attributes['alignment'] ) ? Alignment::get_css( $attributes['alignment'], $attributes['stack'] === 'horizontal' ? 'justify-content' : 'align-items', $device ) : [],
+		);
+	}
+	public function get_button_css( $attributes, $device = '' ) {
+		$css = [];
+		$typographyValueGlobal = ! empty( $attributes['typographyGlobal'] ) ? $attributes['typographyGlobal'] : '';
+		return array_merge(
+			$css,
+			Typography::get_css( $attributes['typography'], '', $device, $typographyValueGlobal ),
 		);
 	}
 }

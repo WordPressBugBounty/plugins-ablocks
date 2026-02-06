@@ -382,11 +382,15 @@
                 "transitionDuration": ""
             }
         },
+        "menuItemTypographyGlobal": {
+            "type": "string",
+            "default": ""
+        },
         "menuItemTypography": {
             "type": "object",
             "default": {
                 "fontFamily": "",
-                "weight": "400",
+                "weight": "",
                 "transform": "",
                 "style": "",
                 "decoration": "",

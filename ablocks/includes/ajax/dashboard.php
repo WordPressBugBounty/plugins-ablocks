@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Classes\AbstractAjaxHandler;
 use ABlocks\Classes\FileUpload;
+use ABlocks\Classes\FontLoadLocally;
 use ABlocks\Helper;
 
 class Dashboard extends AbstractAjaxHandler {
@@ -15,18 +16,27 @@ class Dashboard extends AbstractAjaxHandler {
 		$this->actions = array(
 			'get_admin_menu_items'      => array(
 				'callback' => array( $this, 'get_admin_menu_items' ),
+				'capability'    => 'manage_options',
 			),
 			'regenerate_assets'      => array(
 				'callback' => array( $this, 'regenerate_assets' ),
+				'capability'    => 'manage_options',
 			),
 			'clear_demo_transients'      => array(
 				'callback' => array( $this, 'clear_demo_transients' ),
+				'capability'    => 'manage_options',
 			),
 			'install_academy_lms'      => array(
 				'callback' => array( $this, 'install_academy_lms' ),
+				'capability'    => 'manage_options',
 			),
 			'install_storeengine'      => array(
 				'callback' => array( $this, 'install_storeengine' ),
+				'capability'    => 'manage_options',
+			),
+			'download_google_fonts'      => array(
+				'callback' => array( $this, 'download_google_fonts' ),
+				'capability'    => 'manage_options',
 			),
 		);
 	}
@@ -46,6 +56,7 @@ class Dashboard extends AbstractAjaxHandler {
 	public function clear_demo_transients() {
 		global $wpdb;
 
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->query( "DELETE FROM $wpdb->options WHERE option_name LIKE '_transient_ablocks_demo_%' OR option_name LIKE '_transient_timeout_ablocks_demo_%'" );
 
 		if ( ! empty( $wpdb->last_error ) ) {
@@ -164,5 +175,11 @@ class Dashboard extends AbstractAjaxHandler {
 		}
 
 		return maybe_unserialize( wp_remote_retrieve_body( $response ) );
+	}
+
+	public function download_google_fonts() {
+		global $ablocks_fonts;
+		$fontDownloader = new FontLoadLocally();
+		$fontDownloader->process_font_queue( $ablocks_fonts );
 	}
 }

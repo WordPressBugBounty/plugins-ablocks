@@ -103,6 +103,7 @@ class Block extends BlockBaseAbstract {
 			: [];
 
 		$typography_value = array_merge( $typography, [ 'font-weight' => '400' ] );
+		$typgraphyGlobal = ( isset( $attributes['buttonTypographyGlobal'] ) ? $attributes['buttonTypographyGlobal'] : '' );
 
 		if ( ! empty( $attributes['padding'] ) ) {
 			$cssPadding = Dimensions::get_css( $attributes['padding'], 'padding', $device );
@@ -111,7 +112,7 @@ class Block extends BlockBaseAbstract {
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['buttonColor'] ) ? $attributes['buttonColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['buttonBackground'] ) ? $attributes['buttonBackground'] : '' ) ],
-			Typography::get_css( $typography_value, $device ),
+			Typography::get_css( $typography_value, '', $device, $typgraphyGlobal ),
 			Border::get_css( $attributes['buttonBorder'], '', $device ),
 			$cssPadding,
 			BoxShadow::get_css( $attributes['boxShadow'], '', $device ),

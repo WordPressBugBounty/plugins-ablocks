@@ -8,6 +8,7 @@ use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Icon;
+use ABlocks\Controls\BoxShadow;
 use ABlocks\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -74,6 +75,10 @@ $attributes = [
 	'iconColor' => array(
 		'type' => 'string',
 	),
+	'activeColor' => array(
+		'type' => 'string',
+		'default' => '#2763f3',
+	),
 	'headerBG' => array(
 		'type' => 'string',
 		'default' => '#ddd',
@@ -90,7 +95,10 @@ $attributes = array_merge(
 	Typography::get_attribute( 'titleTypography', true ),
 	Typography::get_attribute( 'contentTypography', true ),
 	Border::get_attribute( 'headerBorder', true ),
+	Border::get_attribute( 'iconBorder', true ),
+	BoxShadow::get_attribute( 'iconBoxShadow', true ),
 	Dimensions::get_attribute( 'header_padding', true ),
+	Dimensions::get_attribute( 'icon_padding', true ),
 	Dimensions::get_attribute( 'list_padding', true ),
 	Icon::get_attribute( 'openIcon', [
 		'path' => 'M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z',

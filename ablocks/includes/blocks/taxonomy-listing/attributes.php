@@ -182,6 +182,10 @@ $attributes = [
 		'type' => 'boolean',
 		'default' => false
 	],
+	'showTabScrolling' => [
+		'type' => 'boolean',
+		'default' => false
+	],
 	'hoverPostBackgroundColor' => [
 		'type' => 'string',
 		'default' => '',

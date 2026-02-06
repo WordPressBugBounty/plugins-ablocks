@@ -48,7 +48,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_products_card_title_hover_css( $attributes ),
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .storeengine-product ins .storeengine-price',
+			'{{WRAPPER}} .storeengine-ajax__amount .storeengine-product__simple-price',
 			$this->get_products_price_css( $attributes ),
 			$this->get_products_price_css( $attributes, 'Tablet' ),
 			$this->get_products_price_css( $attributes, 'Mobile' )
@@ -102,26 +102,45 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_products_price_css( $attributes, $device = '' ) {
-		$products_price_typography_css = ! empty( $attributes['price_typography'] ) ? Typography::get_css( $attributes['price_typography'], '', $device ) : array();
+		$alignment_css = [];
+
+		if ( ! empty( $attributes['priceTextAlign'][ 'value' . $device ] ) ) {
+			$alignment_css['justify-content'] = $attributes['priceTextAlign'][ 'value' . $device ];
+		}
+
+		$typographyGlobal = ( isset( $attributes['price_typographyGlobal'] ) ? $attributes['price_typographyGlobal'] : '' );
+		$products_price_typography_css = ! empty( $attributes['price_typography'] ) ? Typography::get_css( $attributes['price_typography'], '', $device, $typographyGlobal ) : array();
 		return array_merge(
+			$alignment_css,
 			[ 'color' => Color::get_css( isset( $attributes['price_color'] ) ? $attributes['price_color'] : '' ) ],
 			$products_price_typography_css
 		);
 	}
 	public function get_products_card_title_css( $attributes, $device = '' ) {
-		$course_title_typography_css = ! empty( $attributes['title_typography'] ) ? Typography::get_css( $attributes['title_typography'], '', $device ) : array();
+		$alignment_css = [];
+
+		if ( ! empty( $attributes['titleTextAlign'][ 'value' . $device ] ) ) {
+			$alignment_css['text-align'] = $attributes['titleTextAlign'][ 'value' . $device ];
+		}
+
+		$typographyGlobal = ( isset( $attributes['title_typographyGlobal'] ) ? $attributes['title_typographyGlobal'] : '' );
+		$course_title_typography_css = ! empty( $attributes['title_typography'] ) ? Typography::get_css( $attributes['title_typography'], '', $device, $typographyGlobal ) : array();
 		return array_merge(
+			$alignment_css,
 			[ 'color' => Color::get_css( isset( $attributes['title_color'] ) ? $attributes['title_color'] : '' ) ],
 			$course_title_typography_css
 		);
 	}
 
 	public function get_products_cart_button_css( $attributes, $device = '' ) {
-		$typography_value = ! empty( $attributes['cart_button_typography'] ) ? Typography::get_css( $attributes['cart_button_typography'], '', $device ) : array();
+		$typographyGlobal = ( isset( $attributes['cart_button_typographyGlobal'] ) ? $attributes['cart_button_typographyGlobal'] : '' );
+		$typography_value = ! empty( $attributes['cart_button_typography'] ) ? Typography::get_css( $attributes['cart_button_typography'], '', $device, $typographyGlobal ) : array();
+		$products_border_css = ! empty( $attributes['cart_border'] ) ? Border::get_css( $attributes['cart_border'], '', $device ) : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['cart_button_text_color'] ) ? $attributes['cart_button_text_color'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['cart_button_color'] ) ? $attributes['cart_button_color'] : '' ) ],
 			$typography_value,
+			$products_border_css,
 			Range::get_css([
 				'attributeValue' => $attributes['buttonWidth'],
 				'attribute_object_key' => 'value',
@@ -136,7 +155,10 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_products_cart_button_hover_css( $attributes, $device = '' ) {
+		$products_border_hover_css = ! empty( $attributes['cart_border'] ) ? Border::get_hover_css( $attributes['cart_border'], '', $device ) : array();
+
 		return array_merge(
+			$products_border_hover_css,
 			[ 'color' => Color::get_css( isset( $attributes['cart_button_text_hover_color'] ) ? $attributes['cart_button_text_hover_color'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['cart_button_hover_color'] ) ? $attributes['cart_button_hover_color'] : '' ) ],
 		);

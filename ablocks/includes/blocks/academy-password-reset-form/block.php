@@ -112,21 +112,23 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function getResetFormLabelCss( $attributes, $device = '' ) {
-		$reset_form_label_typography_css = ! empty( $attributes['label_typography'] ) ? Typography::get_css( $attributes['label_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['label_typographyGlobal'] ) ? $attributes['label_typographyGlobal'] : '';
+		$reset_form_label_typography_css = isset( $attributes['label_typography'] ) ? $attributes['label_typography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['label_color'] ) ? $attributes['label_color'] : '' ) ],
-			$reset_form_label_typography_css,
+			Typography::get_css( $reset_form_label_typography_css, '', $device, $typographyValueGlobal ),
 		);
 	}
 	public function getResetFormInputCss( $attributes, $device = '' ) {
 		$form_input_border_css = ! empty( $attributes['input_border'] ) ? Border::get_css( $attributes['input_border'], '', $device ) : array();
 		$form_input_padding_css = ! empty( $attributes['input_padding'] ) ? Dimensions::get_css( $attributes['input_padding'], 'padding', $device ) : array();
-		$form_input_typography_css = ! empty( $attributes['input_field_typography'] ) ? Typography::get_css( $attributes['input_field_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['input_field_typographyGlobal'] ) ? $attributes['input_field_typographyGlobal'] : '';
+		$form_input_typography_css = isset( $attributes['input_field_typography'] ) ? $attributes['input_field_typography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['input_field_color'] ) ? $attributes['input_field_color'] : '' ) ],
 			$form_input_border_css,
 			$form_input_padding_css,
-			$form_input_typography_css,
+			Typography::get_css( $form_input_typography_css, '', $device, $typographyValueGlobal ),
 		);
 	}
 	public function getResetFormInputHoverCss( $attributes, $device = '' ) {
@@ -138,13 +140,14 @@ class Block extends BlockBaseAbstract {
 	public function getResetFormButtonCss( $attributes, $device = '' ) {
 		$button_border = ! empty( $attributes['button_border'] ) ? Border::get_css( $attributes['button_border'], '', $device ) : array();
 		$button_padding = ! empty( $attributes['button_padding'] ) ? Dimensions::get_css( $attributes['button_padding'], 'padding', $device ) : array();
-		$button_typography = ! empty( $attributes['button_typography'] ) ? Typography::get_css( $attributes['button_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['button_typographyGlobal'] ) ? $attributes['button_typographyGlobal'] : '';
+		$button_typography = isset( $attributes['button_typography'] ) ? $attributes['button_typography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['button_color'] ) ? $attributes['button_color'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['button_background_color'] ) ? $attributes['button_background_color'] : '' ) ],
 			$button_border,
 			$button_padding,
-			$button_typography,
+			Typography::get_css( $button_typography, '', $device, $typographyValueGlobal ), $button_typography,
 		);
 	}
 	public function getResetFormButtonHoverCss( $attributes, $device = '' ) {
@@ -156,17 +159,19 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function getResetFormHeaderCss( $attributes, $device = '' ) {
-		$form_title_typography = ! empty( $attributes['form_title_typography'] ) ? Typography::get_css( $attributes['form_title_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['form_title_typographyGlobal'] ) ? $attributes['form_title_typographyGlobal'] : '';
+		$form_title_typography = isset( $attributes['form_title_typography'] ) ? $attributes['form_title_typography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['form_title_color'] ) ? $attributes['form_title_color'] : '' ) ],
-			$form_title_typography,
+			Typography::get_css( $form_title_typography, '', $device, $typographyValueGlobal ),
 		);
 	}
 	public function getResetFormFooterCss( $attributes, $device = '' ) {
-		$form_footer_title_typography = ! empty( $attributes['form_footer_title_typography'] ) ? Typography::get_css( $attributes['form_footer_title_typography'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['form_footer_title_typographyGlobal'] ) ? $attributes['form_footer_title_typographyGlobal'] : '';
+		$form_footer_title_typography = isset( $attributes['form_footer_title_typography'] ) ? $attributes['form_footer_title_typography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['form_footer_title_color'] ) ? $attributes['form_footer_title_color'] : '' ) ],
-			$form_footer_title_typography,
+			Typography::get_css( $form_footer_title_typography, '', $device, $typographyValueGlobal ),
 		);
 	}
 

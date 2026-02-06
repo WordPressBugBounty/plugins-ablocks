@@ -64,7 +64,7 @@ abstract class Common {
 		$query = "SELECT COUNT(*) FROM {$wpdb->postmeta} 
             WHERE meta_key = %s 
 			AND meta_value = %s";
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 		return intval( $wpdb->get_var( $wpdb->prepare( $query, 'ablock_page_type', $meta_value ) ) ) > 0;
 	}
 }

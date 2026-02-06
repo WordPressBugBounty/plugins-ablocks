@@ -473,10 +473,10 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_content_timeline_date_css( $attributes, $device = '' ) {
-
+		$typographyValueGlobal = $attributes['dateTypographyGlobal'] ? $attributes['dateTypographyGlobal'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['dateColor'] ) ? $attributes['dateColor'] : '' ) ],
-			Typography::get_css( $attributes['dateTypography'] ?? [], '', $device )
+			Typography::get_css( $attributes['dateTypography'] ?? [], '', $device, $typographyValueGlobal )
 		);
 	}
 	public function get_content_timeline_date_mobile_css( $attributes, $device = '' ) {

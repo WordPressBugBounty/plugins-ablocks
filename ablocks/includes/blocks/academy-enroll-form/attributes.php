@@ -85,20 +85,47 @@ $attributes = [
 	),
 	'price_hover_color' => array(
 		'type' => 'string',
-		'default' => '',
+		'default' => '#111',
 	),
 	'price_color' => array(
 		'type' => 'string',
-		'default' => '',
+		'default' => '#111',
 	),
+	'price_title_hover_color' => array(
+		'type' => 'string',
+		'default' => '#111',
+	),
+	'price_title_color' => array(
+		'type' => 'string',
+		'default' => '#111',
+	),
+	'info_color_hover' => array(
+		'type' => 'string',
+		'default' => '#7b68ee',
+	),
+	'info_color' => array(
+		'type' => 'string',
+		'default' => '#7b68ee',
+	),
+	'info_bg_hover' => array(
+		'type' => 'string',
+		'default' => '#eae8fa',
+	),
+	'info_bg' => array(
+		'type' => 'string',
+		'default' => '#eae8fa',
+	),
+
 ];
 
 $attributes = array_merge(
 	$attributes,
 	Typography::get_attribute( 'start_btn_typography', true ),
 	Typography::get_attribute( 'price_typography', true ),
+	Typography::get_attribute( 'price_title_typography', true ),
 	Typography::get_attribute( 'list_typography', true ),
 	Typography::get_attribute( 'massage_title_typography', true ),
+	Typography::get_attribute( 'info_typography', true ),
 	Dimensions::get_attribute( 'start_btn_padding', true ),
 	Dimensions::get_attribute( 'enroll_btn_padding', true ),
 	Typography::get_attribute( 'enroll_btn_typography', true ),
@@ -113,6 +140,14 @@ $attributes = array_merge(
 		'defaultValueMobile' => 80,
 		'hasUnit' => true,
 		'unitDefaultValue' => 'px',
+	]),
+	Range::get_attribute([
+		'attributeName' => 'bg_transition',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => false,
+		'defaultValue' => 0,
+		'hasUnit' => false,
+		'unitDefaultValue' => 's',
 	]),
 );
 

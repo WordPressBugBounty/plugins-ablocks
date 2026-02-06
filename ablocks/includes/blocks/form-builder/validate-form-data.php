@@ -2,6 +2,7 @@
 namespace ABlocks\Blocks\FormBuilder;
 
 use ABlocks\Blocks\FormBuilder\Actions\Interfaces\FormSubmissionAction;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -49,6 +50,7 @@ final class ValidateFormData {
 	public function __construct( ?array $block_data, ?array $input_data ) {
 		$this->block_data = $block_data;
 		$this->input_data = $input_data;
+		// phpcs:ignore  WordPress.Security.NonceVerification.Missing 
 		$this->is_form_data_empty = ( count( $input_data ) + count( $_FILES ) ) === 0;
 		$this->filter_data_by_whitelisted_key();
 		$this->filtered_data = apply_filters( 'ablocks/form_builder/filtered_data', $this->filtered_data, $this->block_data );
@@ -70,6 +72,15 @@ final class ValidateFormData {
 				break;
 		}
 	}
+
+	public function get_block_data() : ?array {
+		return $this->block_data;
+	}
+
+	public function get_block_id() : ?string {
+		return $this->block_data['parentAttributes']['block_id'] ?? null;
+	}
+
 	/**
 	 * @method filter_data_by_whitelisted_key
 	 * @return array
@@ -84,7 +95,9 @@ final class ValidateFormData {
 					// check current input name exists in $all_fields
 					if ( $name && array_key_exists( $name, $this->input_data ) ) {
 						$this->filtered_data[ $name ] = [
-							'value' => sanitize_text_field( $this->input_data[ $name ] ), // sanitize value
+							'value' => is_array( $this->input_data[ $name ] ) ?
+								array_map( 'sanitize_text_field', $this->input_data[ $name ] ) :
+								sanitize_text_field( $this->input_data[ $name ] ),
 						];
 					}
 				}
@@ -101,7 +114,9 @@ final class ValidateFormData {
 				// check current input name exists in $all_fields
 				if ( $name && array_key_exists( $name, $this->input_data ) ) {
 					$this->filtered_data[ $name ] = [
-						'value' => sanitize_text_field( $this->input_data[ $name ] ), // sanitize value
+						'value' => is_array( $this->input_data[ $name ] ) ?
+							array_map( 'sanitize_text_field', $this->input_data[ $name ] ) :
+							sanitize_text_field( $this->input_data[ $name ] ),
 					];
 				}
 			}

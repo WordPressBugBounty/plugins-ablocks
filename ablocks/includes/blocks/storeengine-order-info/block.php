@@ -81,7 +81,8 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_status_title_css( $attributes, $device = '' ) {
-		$typography_value = ! empty( $attributes['titleContentTypography'] ) ? Typography::get_css( $attributes['titleContentTypography'], '', $device ) : array();
+		$typographyGlobal = ( isset( $attributes['titleContentTypographyGlobal'] ) ? $attributes['titleContentTypographyGlobal'] : '' );
+		$typography_value = ! empty( $attributes['titleContentTypography'] ) ? Typography::get_css( $attributes['titleContentTypography'], '', $device, $typographyGlobal ) : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['titleContentColor'] ) ? $attributes['titleContentColor'] : '' ) ],
 			$typography_value
@@ -91,7 +92,8 @@ class Block extends BlockBaseAbstract {
 		return [ 'color' => Color::get_css( isset( $attributes['titleContentColorH'] ) ? $attributes['titleContentColorH'] : '' ) ];
 	}
 	public function get_deatils_title_css( $attributes, $device = '' ) {
-		$typography_value = ! empty( $attributes['detailsTypography'] ) ? Typography::get_css( $attributes['titleContentTypography'], '', $device ) : array();
+		$typographyGlobal = ( isset( $attributes['detailsTypographyGlobal'] ) ? $attributes['detailsTypographyGlobal'] : '' );
+		$typography_value = ! empty( $attributes['detailsTypography'] ) ? Typography::get_css( $attributes['detailsTypography'], '', $device, $typographyGlobal ) : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['detailsColor'] ) ? $attributes['detailsColor'] : '' ) ],
 			$typography_value
@@ -103,7 +105,8 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_email_css( $attributes, $device = '' ) {
-		$typography_value = ! empty( $attributes['emailTypography'] ) ? Typography::get_css( $attributes['emailTypography'], '', $device ) : array();
+		$typographyGlobal = ( isset( $attributes['emailTypographyGlobal'] ) ? $attributes['emailTypographyGlobal'] : '' );
+		$typography_value = ! empty( $attributes['emailTypography'] ) ? Typography::get_css( $attributes['emailTypography'], '', $device, $typographyGlobal ) : array();
 
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['emailColor'] ) ? $attributes['emailColor'] : '' ) ],
@@ -119,6 +122,7 @@ class Block extends BlockBaseAbstract {
 			'ids'         => Helper::get_attribute_value( $attributes, 'products_ids' ),
 			'dummy' => false,
 		];
+		// phpcs:ignore  WordPress.Security.NonceVerification.Recommended,  WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 		if ( isset( $_GET['context'] ) && 'edit' === sanitize_text_field( $_GET['context'] ) ) {
 			$attr_array['dummy'] = true;
 		}

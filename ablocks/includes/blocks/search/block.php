@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\Search;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Classes\CssGeneratorV2;
@@ -24,6 +28,12 @@ class Block extends BlockBaseAbstract {
 			$this->get_SearchBar_css( $attributes ),
 			$this->get_SearchBar_css( $attributes, 'Tablet' ),
 			$this->get_SearchBar_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-form:hover',
+			$this->get_SearchBar_Hover_CSS( $attributes ),
+			$this->get_SearchBar_Hover_CSS( $attributes, 'Tablet' ),
+			$this->get_SearchBar_Hover_CSS( $attributes, 'Mobile' )
 		);
 
 		$css_generator->add_class_styles(
@@ -105,6 +115,12 @@ class Block extends BlockBaseAbstract {
 			$this->get_SearchBar_css( $attributes, 'Tablet' ),
 			$this->get_SearchBar_css( $attributes, 'Mobile' )
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-form:hover',
+			$this->get_SearchBar_Hover_CSS( $attributes ),
+			$this->get_SearchBar_Hover_CSS( $attributes, 'Tablet' ),
+			$this->get_SearchBar_Hover_CSS( $attributes, 'Mobile' )
+		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-input',
@@ -123,6 +139,12 @@ class Block extends BlockBaseAbstract {
 			$this->get_Button_css( $attributes ),
 			$this->get_Button_css( $attributes, 'Tablet' ),
 			$this->get_Button_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block--search-button:hover > span',
+			$this->get_Button_hover_css( $attributes ),
+			$this->get_Button_hover_css( $attributes, 'Tablet' ),
+			$this->get_Button_hover_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-button',
@@ -215,13 +237,22 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			]),
 			isset( $attributes['fullscreenButtonAlignment'] ) ? Alignment::get_css( $attributes['fullscreenButtonAlignment'], 'justify-content', $device ) : [],
+			isset( $attributes['searchBoxBorder'] ) ? Border::get_css( $attributes['searchBoxBorder'], '', $device ) : [],
+		);
+	}
+
+	public function get_SearchBar_Hover_CSS( $attributes, $device = '' ) {
+		return array_merge(
+			isset( $attributes['searchBoxBorder'] ) ? Border::get_hover_css( $attributes['searchBoxBorder'], '', $device ) : [],
 		);
 	}
 
 	public function get_Input_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['inputTypographyGlobal'] ) ? $attributes['inputTypographyGlobal'] : array();
 		return array_merge(
-			[ 'color' => Color::get_css( isset( $attributes['inputTextColor'] ) ? $attributes['inputTextColor'] : '' ) ],
-			isset( $attributes['inputTypography'] ) ? Typography::get_css( $attributes['inputTypography'], '', $device ) : [],
+			[ 'background' => Color::get_css( isset( $attributes['inputBgColor'] ) ? $attributes['inputBgColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['inputBgColor'] ) ? $attributes['inputBgColor'] : '' ) ],
+			isset( $attributes['inputTypography'] ) ? Typography::get_css( $attributes['inputTypography'], '', $device, $typographyValueGlobal ) : [],
 			isset( $attributes['inputTextStroke'] ) ? TextStroke::get_css( $attributes['inputTextStroke'], '', $device ) : [],
 			isset( $attributes['inputTextShadow'] ) ? TextShadow::get_css( $attributes['inputTextShadow'], '', $device ) : [],
 		);
@@ -230,13 +261,15 @@ class Block extends BlockBaseAbstract {
 		return [ 'color' => Color::get_css( isset( $attributes['loadingSpinnerColor'] ) ? $attributes['loadingSpinnerColor'] : '' ) ];
 	}
 	public function get_search_result_title_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['searchResTypographyGlobal'] ) ? $attributes['searchResTypographyGlobal'] : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['searchResTColor'] ) ? $attributes['searchResTColor'] : '' ) ],
-			isset( $attributes['searchResTypography'] ) ? Typography::get_css( $attributes['searchResTypography'], '', $device ) : [],
+			isset( $attributes['searchResTypography'] ) ? Typography::get_css( $attributes['searchResTypography'], '', $device, $typographyValueGlobal ) : [],
 		);
 	}
 	public function get_search_result_list( $attributes, $device = '' ) {
 		$css = [];
+		$css['overflow'] = 'auto';
 		$defaultUnit = 'px';
 		$offset_top = Range::get_css([
 			'attributeValue' => $attributes['verticalOffset'],
@@ -300,6 +333,16 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			]),
 			Range::get_css([
+				'attributeValue' => $attributes['searchItemHeight'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'hasUnit' => true,
+				'defaultValue' => 300,
+				'unitDefaultValue' => 'px',
+				'property' => 'height',
+				'device' => $device,
+			]),
+			Range::get_css([
 				'attributeValue' => $attributes['listGap'],
 				'attribute_object_key' => 'value',
 				'isResponsive' => true,
@@ -327,7 +370,9 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_search_result_item( $attributes, $device = '' ) {
+		$css = [];
 		return array_merge(
+			$css,
 			Range::get_css([
 				'attributeValue' => $attributes['itemWidth'],
 				'attribute_object_key' => 'value',
@@ -363,17 +408,29 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function get_Button_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['buttonTypographyGlobal'] ) ? $attributes['buttonTypographyGlobal'] : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['buttonTextColor'] ) ? $attributes['buttonTextColor'] : '' ) ],
-			isset( $attributes['buttonTypography'] ) ? Typography::get_css( $attributes['buttonTypography'], '', $device ) : [],
+			isset( $attributes['buttonTypography'] ) ? Typography::get_css( $attributes['buttonTypography'], '', $device, $typographyValueGlobal ) : [],
 			isset( $attributes['buttonTextStroke'] ) ? TextStroke::get_css( $attributes['buttonTextStroke'], '', $device ) : [],
 			isset( $attributes['buttonTextShadow'] ) ? TextStroke::get_css( $attributes['buttonTextShadow'], '', $device ) : [],
+			Range::get_css([
+				'attributeValue' => $attributes['searchBtnWidth'],
+				'attribute_object_key' => 'value',
+				'isResponsive' => true,
+				'defaultValue' => 70,
+				'unitDefaultValue' => 'px',
+				'hasUnit' => true,
+				'property' => 'width',
+				'device' => $device,
+			]),
 		);
 	}
 	public function get_Button_hover_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['buttonTypographyHGlobal'] ) ? $attributes['buttonTypographyHGlobal'] : array();
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['buttonTextColorH'] ) ? $attributes['buttonTextColorH'] : '' ) ],
-			isset( $attributes['buttonTypographyH'] ) ? Typography::get_css( $attributes['buttonTypographyH'], '', $device ) : [],
+			isset( $attributes['buttonTypographyH'] ) ? Typography::get_css( $attributes['buttonTypographyH'], '', $device, $typographyValueGlobal ) : [],
 			isset( $attributes['buttonTextStrokeH'] ) ? TextStroke::get_css( $attributes['buttonTextStrokeH'], '', $device ) : [],
 			isset( $attributes['buttonTextShadowH'] ) ? TextStroke::get_css( $attributes['buttonTextShadowH'], '', $device ) : [],
 		);

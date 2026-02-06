@@ -8,6 +8,7 @@ use ABlocks\Classes\BlockBaseAbstract;
 use ABlocks\Classes\CssGenerator;
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\Border;
+use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\TextStroke;
@@ -130,8 +131,7 @@ class Block extends BlockBaseAbstract {
 				$this->get_item_border_css( $attributes, 'Mobile' )
 			);
 			$css_generator->add_class_styles(
-				'{{WRAPPER}} :not(.ablocks-has-container) .ablocks-social-share-item:hover ,
-                 {{WRAPPER}} .ablocks-block-container .ablocks-social-share-item:hover',
+				'{{WRAPPER}} .ablocks-social-share-item:hover',
 				$this->get_Item_border_hover_css( $attributes ),
 				$this->get_Item_border_hover_css( $attributes, 'Tablet' ),
 				$this->get_Item_border_hover_css( $attributes, 'Mobile' )
@@ -305,11 +305,15 @@ class Block extends BlockBaseAbstract {
 		$css = ( isset( $attributes['itemBorder'] )
 		? Border::get_css( $attributes['itemBorder'], '', $device )
 		: [] );
-		return $css;
+		return array_merge(
+			$css,
+			BoxShadow::get_css( $attributes['shareItemShadow'], '', $device ),
+		);
 	}
 	public function get_Item_border_hover_css( $attributes, $device = '' ) {
 		return array_merge(
-			( isset( $attributes['itemBorder'] ) ? Border::get_hover_css( $attributes['itemBorder'], '', $device ) : [] )
+			( isset( $attributes['itemBorder'] ) ? Border::get_hover_css( $attributes['itemBorder'], '', $device ) : [] ),
+			BoxShadow::get_hover_css( $attributes['shareItemShadow'], '', $device )
 		);
 	}
 	public function get_share_item_text_css( $attributes, $device = '' ) {
@@ -334,12 +338,13 @@ class Block extends BlockBaseAbstract {
 			'property' => 'height',
 			'device' => $device,
 		] );
+		$typographyValueGlobal = ! empty( $attributes['typographyGlobal'] ) ? $attributes['typographyGlobal'] : array();
 		return array_merge(
 			$css,
 			$range_width,
 			$range_height,
 			isset( $attributes['alignment'] ) ? Alignment::get_css( $attributes['alignment'], 'text-align', $device ) : [],
-			isset( $attributes['typography'] ) ? Typography::get_css( $attributes['typography'], '', $device ) : [],
+			isset( $attributes['typography'] ) ? Typography::get_css( $attributes['typography'], '', $device, $typographyValueGlobal ) : [],
 			isset( $attributes['textShadow'] ) ? TextShadow::get_css( $attributes['textShadow'], '', $device ) : [],
 			isset( $attributes['textStroke'] ) ? TextStroke::get_css( $attributes['textStroke'], '', $device ) : []
 		);

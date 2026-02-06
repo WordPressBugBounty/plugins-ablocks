@@ -11,7 +11,7 @@ class Typography extends ControlBaseAbstract {
 	public static function get_attribute_default_value( $is_responsive = false, $default = [] ) {
 		$base_values = [
 			'fontFamily' => '',
-			'weight' => '400',
+			'weight' => '',
 			'transform' => '',
 			'style' => '',
 			'decoration' => '',
@@ -53,6 +53,10 @@ class Typography extends ControlBaseAbstract {
 
 	public static function get_attribute( $attributeName, $isResponsive = false, $default = [] ) {
 		return [
+			$attributeName . 'Global'  => [
+				'type' => 'string',
+				'default' => '',
+			],
 			$attributeName => [
 				'type' => 'object',
 				'default' => self::get_attribute_default_value( $isResponsive, $default ),
@@ -60,20 +64,37 @@ class Typography extends ControlBaseAbstract {
 		];
 	}
 
-	public static function get_css( $attribute_value, $property = '', $device = '' ) {
+	public static function get_css( $attribute_value, $property = '', $device = '', $attribute_global_name = '' ) {
 		global $ablocks_fonts;
-		if ( empty( $attribute_value ) ) {
+		$global_value = [];
+		if ( $attribute_global_name ) {
+			$global_typography = wp_list_pluck( \Ablocks\Helper::get_settings( 'global_typography', [] ), 'value', 'id' );
+			$global_value = ( isset( $global_typography[ $attribute_global_name ] ) ? (array) $global_typography[ $attribute_global_name ] : [] );
+		}
+
+		if ( empty( $attribute_value ) && ! count( $global_value ) ) {
 			return [];
 		}
+
 		$default_attr_value = self::get_attribute_default_value( (bool) $device );
 		$value = wp_parse_args( $attribute_value, $default_attr_value );
 		$css = [];
 
-		// Parse font family
-		if ( ! empty( $value['fontFamily'] ) ) {
+		// Helper: add CSS property with global fallback
+		$add_prop = function( $prop, $local_val, $local_unit, $global_key, $css_var_name ) use ( $attribute_global_name, $global_value, &$css ) {
+			if ( ! empty( $global_value[ $global_key ] ) ) {
+				$css[ $prop ] = "var(--ablocks-{$attribute_global_name}-{$css_var_name})";
+			} elseif ( ! empty( $local_val ) ) {
+				$css[ $prop ] = $local_unit ? $local_val . $local_unit : $local_val;
+			}
+		};
+
+		// Font family (special: also track font weights for enqueue)
+		if ( ! empty( $global_value['fontFamily'] ) ) {
+			$css['font-family'] = "var(--ablocks-{$attribute_global_name}-font-family)";
+		} elseif ( ! empty( $value['fontFamily'] ) ) {
 			$font_family = $value['fontFamily'];
 			$font_weight = ! empty( $value['weight'] ) ? $value['weight'] : '400';
-
 			$css['font-family'] = $font_family;
 
 			if ( isset( $ablocks_fonts[ $font_family ] ) ) {
@@ -86,29 +107,30 @@ class Typography extends ControlBaseAbstract {
 			update_option( ABLOCKS_FONTS_SETTINGS_NAME, wp_json_encode( $ablocks_fonts ) );
 		}
 
-		// For desktop-specific styles
+		// Desktop-only styles
 		if ( empty( $device ) ) {
-			if ( ! empty( $value['weight'] ) && $value['weight'] !== '400' ) {
-				$css['font-weight'] = $value['weight'];
-			}
-			if ( ! empty( $value['transform'] ) ) {
-				$css['text-transform'] = $value['transform'];
-			}
-			if ( ! empty( $value['style'] ) ) {
-				$css['font-style'] = $value['style'];
-			}
-			if ( ! empty( $value['decoration'] ) ) {
-				$css['text-decoration'] = $value['decoration'];
-			}
+			$add_prop( 'font-weight', $value['weight'] ?? '', null, 'weight', 'weight' );
+			$add_prop( 'text-transform', $value['transform'] ?? '', null, 'transform', 'transform' );
+			$add_prop( 'font-style', $value['style'] ?? '', null, 'style', 'style' );
+			$add_prop( 'text-decoration', $value['decoration'] ?? '', null, 'decoration', 'decoration' );
 		}
 
-		// Device-specific font properties
-		$properties = [ 'fontSize', 'lineHeight', 'letterSpacing', 'wordSpacing' ];
-		foreach ( $properties as $prop ) {
-			if ( ! empty( $value[ $prop . $device ] ) && ! empty( $value[ $prop . 'Unit' . $device ] ) ) {
-				$css_prop = strtolower( preg_replace( '/([a-z])([A-Z])/', '$1-$2', $prop ) );
-				$css[ $css_prop ] = $value[ $prop . $device ] . $value[ $prop . 'Unit' . $device ];
-			}
+		// Device-specific typography
+		$map = [
+			'fontSize'      => 'font-size',
+			'lineHeight'    => 'line-height',
+			'letterSpacing' => 'letter-spacing',
+			'wordSpacing'   => 'word-spacing',
+		];
+
+		foreach ( $map as $prop => $css_prop ) {
+			$local_val  = $value[ $prop . $device ] ?? '';
+			$local_unit = $value[ $prop . 'Unit' . $device ] ?? '';
+			$global_key = $prop . $device;
+
+			$css_var_name = $css_prop . ( $device ? '-' . strtolower( $device ) : '' );
+
+			$add_prop( $css_prop, $local_val, $local_unit, $global_key, $css_var_name );
 		}
 
 		return $css;

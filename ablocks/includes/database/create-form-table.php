@@ -41,10 +41,11 @@ class CreateFormTable {
             FOREIGN KEY (entry_id) REFERENCES $table_entries(id) ON DELETE CASCADE ON UPDATE CASCADE
         ) $charset_collate;";
 
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared 
 		if ( $wpdb->get_var( "SHOW TABLES LIKE '{$table_entries}'" ) !== $table_entries ) {
 			dbDelta( $sql_entries );
 		}
-
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared 
 		if ( $wpdb->get_var( "SHOW TABLES LIKE '{$table_meta}'" ) !== $table_meta ) {
 			dbDelta( $sql_meta );
 		}
@@ -57,6 +58,7 @@ class CreateFormTable {
 		$table_meta = $prefix . ABLOCKS_PLUGIN_SLUG . '_form_meta';
 
 		$sql = "DROP TABLE IF EXISTS $table_meta, $table_entries;";
+		// phpcs:ignore  WordPress.DB.DirectDatabaseQuery.DirectQuery,  WordPress.DB.DirectDatabaseQuery.NoCaching,  WordPress.DB.PreparedSQL.NotPrepared 
 		$wpdb->query( $sql );
 	}
 }

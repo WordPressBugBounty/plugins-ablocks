@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\Menu;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Controls\Typography;
 use ABlocks\Controls\Dimensions;
 use ABlocks\Controls\Border;
@@ -35,7 +39,19 @@ class Block extends BlockBaseAbstract {
 			$this->get_menu_item_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-main-menu > .ablocks-menu-item .ablocks-menu-item__link',
+			$this->get_menu_item_css( $attributes ),
+			$this->get_menu_item_css( $attributes, 'Tablet' ),
+			$this->get_menu_item_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-main-menu > .ablocks-menu-item:hover',
+			$this->get_menu_item_hover_css( $attributes, '' ),
+			$this->get_menu_item_hover_css( $attributes, 'Tablet' ),
+			$this->get_menu_item_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-main-menu > .ablocks-menu-item > .ablocks-menu-item__link:hover',
 			$this->get_menu_item_hover_css( $attributes, '' ),
 			$this->get_menu_item_hover_css( $attributes, 'Tablet' ),
 			$this->get_menu_item_hover_css( $attributes, 'Mobile' )
@@ -127,7 +143,19 @@ class Block extends BlockBaseAbstract {
 			$this->get_menu_item_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-main-menu > .ablocks-menu-item .ablocks-menu-item__link',
+			$this->get_menu_item_css( $attributes ),
+			$this->get_menu_item_css( $attributes, 'Tablet' ),
+			$this->get_menu_item_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-main-menu > .ablocks-menu-item:hover',
+			$this->get_menu_item_hover_css( $attributes, '' ),
+			$this->get_menu_item_hover_css( $attributes, 'Tablet' ),
+			$this->get_menu_item_hover_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-main-menu > .ablocks-menu-item .ablocks-menu-item__link:hover',
 			$this->get_menu_item_hover_css( $attributes, '' ),
 			$this->get_menu_item_hover_css( $attributes, 'Tablet' ),
 			$this->get_menu_item_hover_css( $attributes, 'Mobile' )
@@ -225,9 +253,10 @@ class Block extends BlockBaseAbstract {
 
 	private function get_menu_item_css( $attributes, $device = '' ) {
 		$menu_border_css = ! empty( $attributes['menuItemBorder'] ) ? Border::get_css( $attributes['menuItemBorder'], '', $device ) : array();
+		$typographyValueGlobal = ! empty( $attributes['menuItemTypographyGlobal'] ) ? $attributes['menuItemTypographyGlobal'] : array();
 		$css = array_merge(
 			$menu_border_css,
-			Typography::get_css( isset( $attributes['menuItemTypography'] ) ? $attributes['menuItemTypography'] : [], '', $device ),
+			isset( $attributes['menuItemTypography'] ) ? Typography::get_css( $attributes['menuItemTypography'], '', $device, $typographyValueGlobal ) : [],
 			Dimensions::get_css( isset( $attributes['menuItemPadding'] ) ? $attributes['menuItemPadding'] : [], 'padding', $device ),
 			Dimensions::get_css( isset( $attributes['menuItemMargin'] ) ? $attributes['menuItemMargin'] : [], 'margin', $device )
 		);

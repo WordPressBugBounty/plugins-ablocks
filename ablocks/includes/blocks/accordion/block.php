@@ -207,6 +207,8 @@ class Block extends BlockBaseAbstract {
 		);
 	}
 	public function get_title_css( $attributes, $device = '' ) {
+		$typographyValueGlobal = ! empty( $attributes['headerTypographyGlobal'] ) ? $attributes['headerTypographyGlobal'] : '';
+		$typography_value = isset( $attributes['headerTypography'] ) ? $attributes['headerTypography'] : [];
 		return array_merge(
 			[ 'color' => Color::get_css( isset( $attributes['headerTextColor'] ) ? $attributes['headerTextColor'] : '' ) ],
 			Range::get_css([
@@ -217,7 +219,7 @@ class Block extends BlockBaseAbstract {
 				'property' => 'margin-left',
 				'device' => $device,
 			]),
-			Typography::get_css( $attributes['headerTypography'], '', $device ),
+			Typography::get_css( $typography_value, '', $device, $typographyValueGlobal ),
 			TextShadow::get_css( $attributes['headerTextShadow'], '', $device ),
 			TextStroke::get_css( $attributes['headerTextStroke'], '', $device )
 		);

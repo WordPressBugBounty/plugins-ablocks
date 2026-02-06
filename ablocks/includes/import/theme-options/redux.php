@@ -67,16 +67,16 @@ class Redux {
 				Helper::emit_sse_message( [
 					'action'  => 'log',
 					'level'   => 'info',
+					/* translators: %s - the name of the Redux option. */
 					'message' => sprintf( esc_html__(
-						/* translators: %s - the name of the Redux option. */
 					'Redux settings import for: %s finished successfully!', 'ablocks' ), $redux_item['option_name'] ),
 				] );
 			} else {
 				Helper::emit_sse_message( [
 					'action'  => 'log',
 					'level'   => 'warning',
+					/* translators: %s - the name of the Redux option. */
 					'message' => sprintf( esc_html__(
-						/* translators: %s - the name of the Redux option. */
 					'The Redux option name: %s, was not found in this WP site, so it was not imported!', 'ablocks' ), $redux_item['option_name'] ),
 				] );
 			}//end if

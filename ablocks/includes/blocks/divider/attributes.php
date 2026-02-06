@@ -1,6 +1,10 @@
 <?php
 namespace ABlocks\Blocks\Divider;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use ABlocks\Controls\Alignment;
 use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Typography;
