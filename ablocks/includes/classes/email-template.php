@@ -22,21 +22,21 @@ class EmailTemplate {
 		return $this->email_template_id;
 	}
 
-	public function get_templates() : array {
+	public function get_templates( bool $status = false ) : array {
 		return get_option(
 			$this->get_option_name(),
 			[
 				'default' => [
 					'from'      => '{admin_email}',
 					'from_name' => '{site_name}',
-					'to'        => 'info@example.com',
+					'to'        => ! $status ? '{admin_email}' : \get_option( 'admin_email' ),
 					'subject'   => 'New message',
 					'body'      => 'Tables: {all-fields}',
 					'reply_to'   => '',
 					'cc'         => '',
 					'bcc'        => '',
 					'format'     => 'html',
-					'status'     => false,
+					'status'     => ! $status,
 				]
 			]
 		);

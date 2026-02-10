@@ -316,6 +316,14 @@
             "type": "string",
             "default": ""
         },
+        "iconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "iconHoverBgColor": {
+            "type": "string",
+            "default": ""
+        },
         "iconPadding": {
             "type": "object",
             "default": {

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'ablocks';
-  src:  url('fonts/ablocks.eot?gewiwc');
-  src:  url('fonts/ablocks.eot?gewiwc#iefix') format('embedded-opentype'),
-    url('fonts/ablocks.ttf?gewiwc') format('truetype'),
-    url('fonts/ablocks.woff?gewiwc') format('woff'),
-    url('fonts/ablocks.svg?gewiwc#ablocks') format('svg');
+  src:  url('fonts/ablocks.eot?f66il3');
+  src:  url('fonts/ablocks.eot?f66il3#iefix') format('embedded-opentype'),
+    url('fonts/ablocks.ttf?f66il3') format('truetype'),
+    url('fonts/ablocks.woff?f66il3') format('woff'),
+    url('fonts/ablocks.svg?f66il3#ablocks') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,43 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ablocks-icon--starts:before {
+  content: "\e9de";
+  color: #fcb022;
+}
+.ablocks-icon--more:before {
+  content: "\e9dd";
+}
+.ablocks-icon--floating-effect:before {
+  content: "\e9df";
+}
+.ablocks-icon--mouse-effect:before {
+  content: "\e9e4";
+}
+.ablocks-icon--scrolling-effect:before {
+  content: "\e9e5";
+}
+.ablocks-icon--block:before {
+  content: "\e9e0";
+}
+.ablocks-icon--checks:before {
+  content: "\e9e1";
+  color: #2c8c3e;
+}
+.ablocks-icon--cross:before {
+  content: "\e9e2";
+  color: #d12e46;
+}
+.ablocks-icon--crown:before {
+  content: "\e9e3";
+}
+.ablocks-icon--interactive-circle:before {
+  content: "\e9e7";
+}
+.ablocks-icon--template:before {
+  content: "\e9f2";
+  color: #00ad6b;
+}
 .ablocks-icon--page-trigger:before {
   content: "\e9d9";
 }

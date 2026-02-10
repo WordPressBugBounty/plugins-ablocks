@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.7.1
+Stable tag: 2.7.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -308,6 +308,22 @@ Privacy: https://policies.google.com/privacy
 Our external packages use [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT. Additionally, we incorporate [FontAwesome v6](https://fontawesome.com/license/free) under the CC BY 4.0 License, and [dnd kit](https://github.com/clauderic/dnd-kit) licensed under the MIT License.
 
 == Changelog ==
+
+= 2.7.2 - 20/02/2026 =
+* Improvement - Added Icon block hover color and bg color feature
+* Improvement - Added Menu block Active style color
+* Improvement -  Added Bulk deactivated options for block
+* Improvement - Default Mail Sending Control option
+* Improvement -  Update Welcome Page
+* Fixed - Modal block width range issue
+* Fixed - info box border hover issue
+* Fixed -  Counter block  % width issue fix
+* Fixed -  ladvance list block icon hover css issue
+* Fixed - form submission trash data not deleted
+* Fixed -  icon attempt issue
+* Fixed -  Block theme demo import header footer issue
+* Fixed -  Image block wp-core error notice add
+* Fixed -  Taxonomy listing count issu
 
 = 2.7.1 - 19/01/2026 =
 * Fixed - Form Builder Email Sending issue 

@@ -167,6 +167,14 @@
             "type": "string",
             "default": ""
         },
+        "contentTimeLineIconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "contentTimeLineIconHoverBgColor": {
+            "type": "string",
+            "default": ""
+        },
         "contentTimeLineIconType": {
             "type": "string",
             "default": "default"

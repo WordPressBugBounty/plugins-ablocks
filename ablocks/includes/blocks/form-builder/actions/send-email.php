@@ -51,6 +51,7 @@ final class SendEmail implements FormSubmissionAction {
 	 */
 	public function action() {
 
+			// wp_send_json($this->validateformdata->form_info['info']);
 		// if already subscribe, dont send any email
 		if (
 			$this->validateformdata->form_info['info']['type'] === 'subscription' &&
@@ -62,12 +63,15 @@ final class SendEmail implements FormSubmissionAction {
 		// send email verification email to user
 		$this->send_verification_email();
 
-		if ( $this->form_type === 'subscription' ) {
+		if ( 
+			$this->form_type === 'subscription' &&
+			( $this->validateformdata->form_info['info']['config']['adminNotify'] ?? true )
+		) {
 			$this->subscription_form_send_email();
 		}
 
-		$this->contact_form_send_email();
-		$this->contact_form_send_email( 'Two' );
+		// $this->contact_form_send_email();
+		// $this->contact_form_send_email( 'Two' );
 
 	}
 

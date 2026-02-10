@@ -26,6 +26,13 @@ class Settings extends AbstractAjaxHandler {
 					'status'            => 'boolean',
 				)
 			),
+			'save_bulk_block_visibility'      => array(
+				'callback' => array( $this, 'save_bulk_block_visibility' ),
+				'capability'    => 'manage_options',
+				'fields' => array(
+					'blocks'        => 'json',
+				)
+			),
 			'get_settings'      => array(
 				'callback' => array( $this, 'get_settings' ),
 				'capability'    => 'manage_options',
@@ -207,6 +214,13 @@ class Settings extends AbstractAjaxHandler {
 			do_action( "ablocks/block/deactivated_{$block_name}", $status );
 		}
 		wp_send_json_success( $saved_blocks );
+	}
+	public function save_bulk_block_visibility( $payload ) {
+		$blocks = wp_list_pluck(\json_decode($payload['blocks'], true), 'status', 'block_name');
+		$saved_blocks = (array) json_decode( get_option( ABLOCKS_BLOCKS_VISIBILITY_SETTINGS_NAME ), true );
+		$updated_settings = wp_parse_args($blocks, $saved_blocks);
+		update_option( ABLOCKS_BLOCKS_VISIBILITY_SETTINGS_NAME, wp_json_encode( $updated_settings ) );
+		wp_send_json_success( $updated_settings );
 	}
 	public function get_settings() {
 		$settings = BaseSettings::get_saved_data();

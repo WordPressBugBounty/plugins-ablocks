@@ -61,7 +61,7 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
-		);
+		);	
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box .ablocks-block-container > .ablocks-icon-wrap, {{WRAPPER}}.ablocks-block--info-box .ablocks-block-container > a .ablocks-icon-wrap',
 			$this->get_icon_wrapper_extra_css( $attributes ),
@@ -312,6 +312,16 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
 			Icon::get_wrapper_css( $attributes, 'Mobile' )
 		);
+			// Icon Style
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}:not(.ablocks-has-block-container) > .ablocks-icon-wrap:hover,
+			 {{WRAPPER}} > .ablocks-block-container > .ablocks-icon-wrap:hover,
+			 {{WRAPPER}}:not(.ablocks-has-block-container) > a .ablocks-icon-wrap:hover,
+			 {{WRAPPER}} > .ablocks-block-container > a .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+		);	
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}:not(.ablocks-has-block-container) > .ablocks-icon-wrap,
 			 {{WRAPPER}} > .ablocks-block-container > .ablocks-icon-wrap,

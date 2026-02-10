@@ -1248,7 +1248,13 @@ class WP_Import extends \WP_Importer {
 
 	public function save_global_settings() {
 		if ( ! empty( $this->ablocks_options ) ) {
-			Base::save_settings( $this->ablocks_options );
+			$settings = $this->ablocks_options;
+			if ( ! empty( $settings['frontend_dashboard_sub_pages'] ) ) {
+				update_option( 'ablocks_frontend_dashboard_sub_pages', wp_json_encode( $settings['frontend_dashboard_sub_pages'] ) );
+				unset( $settings['frontend_dashboard_sub_pages'] );
+			}
+
+			Base::save_settings( $settings );
 		}
 	}
 

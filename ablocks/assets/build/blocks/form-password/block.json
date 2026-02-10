@@ -204,6 +204,14 @@
             "type": "string",
             "default": ""
         },
+        "iconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "iconHoverBgColor": {
+            "type": "string",
+            "default": ""
+        },
         "iconType": {
             "type": "string",
             "default": "default"
@@ -369,6 +377,14 @@
             "type": "string",
             "default": ""
         },
+        "passwordShowHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "passwordShowHoverBgColor": {
+            "type": "string",
+            "default": ""
+        },
         "passwordShowType": {
             "type": "string",
             "default": "default"
@@ -531,6 +547,14 @@
             "default": "#69727d"
         },
         "passwordHideBgColor": {
+            "type": "string",
+            "default": ""
+        },
+        "passwordHideHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "passwordHideHoverBgColor": {
             "type": "string",
             "default": ""
         },

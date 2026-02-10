@@ -46,6 +46,10 @@ $attributes = [
 		'type' => 'boolean',
 		'default' => false
 	],
+	'adminNotify' => [
+		'type' => 'boolean',
+		'default' => true
+	],
 	'loginRedirect' => [
 		'type' => 'boolean',
 		'default' => false

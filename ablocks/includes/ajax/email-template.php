@@ -18,6 +18,7 @@ class EmailTemplate extends AbstractAjaxHandler {
 				'capability' => 'manage_options',
 				'fields' => [
 					'email_template_id' => 'string',
+					'isSubscription' => 'boolean',
 				]
 			],
 			'update_template'      => [
@@ -58,10 +59,11 @@ class EmailTemplate extends AbstractAjaxHandler {
 
 	public function get_templates( array $payload ) : void {
 		$email_template_id = $payload['email_template_id'] ?? '';
+		$isSubscription = boolval( $payload['isSubscription'] ?? false );
 		try {
 			wp_send_json_success(
 				EmailTemplateModel::ins( $email_template_id )
-					->get_templates()
+					->get_templates( $isSubscription )
 			);
 		} catch ( Exception $e ) {
 			wp_send_json_error(

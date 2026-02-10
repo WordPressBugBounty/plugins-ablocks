@@ -500,6 +500,14 @@
             "type": "string",
             "default": ""
         },
+        "openIconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "openIconHoverBgColor": {
+            "type": "string",
+            "default": ""
+        },
         "openIconType": {
             "type": "string",
             "default": "default"
@@ -668,6 +676,14 @@
             "default": "#69727d"
         },
         "closeIconBgColor": {
+            "type": "string",
+            "default": ""
+        },
+        "closeIconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "closeIconHoverBgColor": {
             "type": "string",
             "default": ""
         },

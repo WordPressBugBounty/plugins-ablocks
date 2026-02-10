@@ -528,7 +528,7 @@ class DynamicContent extends AbstractAjaxHandler {
 			$html .= serialize_block( $block );
 		}
 
-		$rendered = do_blocks( $html );
+		$rendered = apply_filters( 'the_content', do_blocks( $html ) );
 
 		wp_send_json_success([
 			'html' => $rendered,

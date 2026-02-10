@@ -641,6 +641,14 @@
             "type": "string",
             "default": ""
         },
+        "leftIconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "leftIconHoverBgColor": {
+            "type": "string",
+            "default": ""
+        },
         "leftIconType": {
             "type": "string",
             "default": "default"
@@ -803,6 +811,14 @@
             "default": "#69727d"
         },
         "rightIconBgColor": {
+            "type": "string",
+            "default": ""
+        },
+        "rightIconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "rightIconHoverBgColor": {
             "type": "string",
             "default": ""
         },

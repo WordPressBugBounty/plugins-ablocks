@@ -15,8 +15,6 @@ use ABlocks\Helper;
 
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'container';
-	protected $style_depends = [ 'ablocks-swiper-style' ];
-
 
 	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );

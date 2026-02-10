@@ -440,6 +440,14 @@
             "type": "string",
             "default": ""
         },
+        "leftCloseIconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "leftCloseIconHoverBgColor": {
+            "type": "string",
+            "default": ""
+        },
         "leftCloseIconType": {
             "type": "string",
             "default": "default"
@@ -602,6 +610,14 @@
             "default": "#69727d"
         },
         "leftActiveIconBgColor": {
+            "type": "string",
+            "default": ""
+        },
+        "leftActiveIconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "leftActiveIconHoverBgColor": {
             "type": "string",
             "default": ""
         },
@@ -770,6 +786,14 @@
             "type": "string",
             "default": ""
         },
+        "rightCloseIconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "rightCloseIconHoverBgColor": {
+            "type": "string",
+            "default": ""
+        },
         "rightCloseIconType": {
             "type": "string",
             "default": "default"
@@ -932,6 +956,14 @@
             "default": "#69727d"
         },
         "rightActiveIconBgColor": {
+            "type": "string",
+            "default": ""
+        },
+        "rightActiveIconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "rightActiveIconHoverBgColor": {
             "type": "string",
             "default": ""
         },

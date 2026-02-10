@@ -73,6 +73,14 @@
             "type": "string",
             "default": ""
         },
+        "iconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "iconHoverBgColor": {
+            "type": "string",
+            "default": ""
+        },
         "iconType": {
             "type": "string",
             "default": "default"

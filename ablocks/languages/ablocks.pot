@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 2.7.1\n"
+"Project-Id-Version: aBlocks 2.7.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-19T14:38:45+00:00\n"
+"POT-Creation-Date: 2026-02-10T16:33:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: ablocks\n"
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Get aBlocks Pro"
 msgstr ""
 
-#: includes/admin/export.php:118
+#: includes/admin/export.php:120
 msgid "Patterns"
 msgstr ""
 
@@ -233,11 +233,11 @@ msgstr ""
 msgid "Argument should not be empty."
 msgstr ""
 
-#: includes/ajax/demo-import.php:133
+#: includes/ajax/demo-import.php:134
 msgid "id is required."
 msgstr ""
 
-#: includes/ajax/demo-import.php:352
+#: includes/ajax/demo-import.php:350
 msgid "Invalid content path."
 msgstr ""
 
@@ -254,7 +254,7 @@ msgstr ""
 msgid "Sorry, Post ID and Meta Key is required!"
 msgstr ""
 
-#: includes/ajax/email-template.php:108
+#: includes/ajax/email-template.php:110
 msgid "Templates deleted."
 msgstr ""
 
@@ -269,11 +269,11 @@ msgid "Entry not found"
 msgstr ""
 
 #: includes/ajax/entry.php:177
-#: includes/ajax/settings.php:674
+#: includes/ajax/settings.php:688
 #: includes/ajax/stripe-payment-ajax.php:163
 #: includes/blocks/form-builder/actions/save-form-data.php:90
-#: includes/blocks/form-builder/actions/send-email.php:264
-#: includes/blocks/form-builder/actions/send-emails.php:190
+#: includes/blocks/form-builder/actions/send-email.php:268
+#: includes/blocks/form-builder/actions/send-emails.php:192
 msgid "Success!"
 msgstr ""
 
@@ -367,27 +367,27 @@ msgstr ""
 msgid "Unspecified service type"
 msgstr ""
 
-#: includes/ajax/settings.php:185
+#: includes/ajax/settings.php:192
 msgid "Block Name missing"
 msgstr ""
 
-#: includes/ajax/settings.php:429
+#: includes/ajax/settings.php:443
 msgid "Link/Label is required."
 msgstr ""
 
-#: includes/ajax/settings.php:453
+#: includes/ajax/settings.php:467
 msgid "Invalid parent id."
 msgstr ""
 
-#: includes/ajax/settings.php:471
+#: includes/ajax/settings.php:485
 msgid "Link/Label/ID is required."
 msgstr ""
 
-#: includes/ajax/settings.php:516
+#: includes/ajax/settings.php:530
 msgid "ID is required."
 msgstr ""
 
-#: includes/ajax/settings.php:676
+#: includes/ajax/settings.php:690
 msgid "Invalid data"
 msgstr ""
 
@@ -404,7 +404,7 @@ msgstr ""
 msgid "Error. [2]"
 msgstr ""
 
-#: includes/assets.php:308
+#: includes/assets.php:309
 msgctxt "Google font: on or off"
 msgid "on"
 msgstr ""
@@ -482,28 +482,28 @@ msgstr ""
 msgid "Failed to save data"
 msgstr ""
 
-#: includes/blocks/form-builder/actions/send-email.php:90
+#: includes/blocks/form-builder/actions/send-email.php:94
 #: assets/build/blocks.js:17
 msgid "Email Verification"
 msgstr ""
 
 #. translators: %s is email
-#: includes/blocks/form-builder/actions/send-email.php:132
+#: includes/blocks/form-builder/actions/send-email.php:136
 msgid "You have a message from %s"
 msgstr ""
 
 #. translators: %s is email
-#: includes/blocks/form-builder/actions/send-email.php:132
+#: includes/blocks/form-builder/actions/send-email.php:136
 msgid "You have a message"
 msgstr ""
 
 #. translators: %s is email
-#: includes/blocks/form-builder/actions/send-email.php:240
+#: includes/blocks/form-builder/actions/send-email.php:244
 msgid "You have a new Subscriber  [%s]"
 msgstr ""
 
-#: includes/blocks/form-builder/actions/send-email.php:268
-#: includes/blocks/form-builder/actions/send-emails.php:194
+#: includes/blocks/form-builder/actions/send-email.php:272
+#: includes/blocks/form-builder/actions/send-emails.php:196
 msgid "Failed to send email"
 msgstr ""
 
@@ -579,7 +579,7 @@ msgstr ""
 msgid "Subtitle 3 Content: This tab provides general information about our company"
 msgstr ""
 
-#: includes/blocks/taxonomy-listing/block.php:770
+#: includes/blocks/taxonomy-listing/block.php:773
 #: assets/build/blocks.js:17
 msgid "No posts found."
 msgstr ""
@@ -2347,6 +2347,14 @@ msgid "Primary color"
 msgstr ""
 
 #: assets/build/blocks.js:1
+msgid "Hover Primary color"
+msgstr ""
+
+#: assets/build/blocks.js:1
+msgid "Hover Background color"
+msgstr ""
+
+#: assets/build/blocks.js:1
 #: assets/build/blocks.js:7
 #: assets/build/blocks.js:17
 #: assets/build/dashboard.js:1
@@ -3802,6 +3810,10 @@ msgstr ""
 
 #: assets/build/blocks.js:17
 msgid "Submenu Style"
+msgstr ""
+
+#: assets/build/blocks.js:17
+msgid "Menu Active Style"
 msgstr ""
 
 #: assets/build/blocks.js:17
@@ -5984,6 +5996,10 @@ msgid "Convert Subscriber to User"
 msgstr ""
 
 #: assets/build/blocks.js:17
+msgid "Admin Notification"
+msgstr ""
+
+#: assets/build/blocks.js:17
 msgid "Rows Spacing"
 msgstr ""
 
@@ -6395,6 +6411,7 @@ msgstr ""
 #: assets/build/blocks.js:26
 #: assets/build/blocks.js:29
 #: assets/build/dashboard.js:1
+#: assets/build/dashboard.js:4
 msgid "Free"
 msgstr ""
 
@@ -7334,19 +7351,36 @@ msgid "Template Kits"
 msgstr ""
 
 #: assets/build/dashboard.js:1
-msgid "Welcome to aBlocks"
+msgid "Free VS Pro"
 msgstr ""
 
 #: assets/build/dashboard.js:1
-msgid "Power Up Your Gutenberg Editor Website Building Experience With aBlocks."
+msgid "Get PRO Access & Unlock More Features!"
 msgstr ""
 
 #: assets/build/dashboard.js:1
-msgid "Create New Page"
+msgid "Unlock powerful features and elevate your workflow instantly."
 msgstr ""
 
 #: assets/build/dashboard.js:1
-msgid "Visit Our Website"
+#: assets/build/dashboard.js:4
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Upgrade Today And Get Massive Discounts"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "1 site at $39"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Unlimited at $199 (LTD)"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Get Flat 50% OFF"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -7371,7 +7405,19 @@ msgid "Power your online business and sales fast with StoreEngine."
 msgstr ""
 
 #: assets/build/dashboard.js:1
+msgid "Build strong online communities easily with ZenCommunity."
+msgstr ""
+
+#: assets/build/dashboard.js:1
 msgid "Create & Manage Custom Post Types, Fields & Taxonomy"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Plan, track, and manage work visually with GemBoards today!(59)"
+msgstr ""
+
+#: assets/build/dashboard.js:1
+msgid "Create interactive quizzes effortlessly with QuizPress today!"
 msgstr ""
 
 #: assets/build/dashboard.js:1
@@ -7709,6 +7755,14 @@ msgid "Sorry, you can't disable required block."
 msgstr ""
 
 #: assets/build/dashboard.js:4
+msgid "Enable All"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Disable All"
+msgstr ""
+
+#: assets/build/dashboard.js:4
 msgid "StoreEngine Integration Blocks"
 msgstr ""
 
@@ -7743,6 +7797,10 @@ msgstr ""
 #: assets/build/dashboard.js:4
 #: assets/build/dashboard.js:25
 msgid "Inactive"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Failed to update blocks"
 msgstr ""
 
 #: assets/build/dashboard.js:4
@@ -7815,6 +7873,34 @@ msgstr ""
 #: assets/build/dashboard.js:4
 #: assets/build/demo-import.js:1
 msgid "No item found"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Free vs Pro"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Compare the features to find the best option for your website."
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Features"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Want Advanced "
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Features?"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Get more powerful Blocks & extensions to elevate your website"
+msgstr ""
+
+#: assets/build/dashboard.js:4
+msgid "Overview"
 msgstr ""
 
 #: assets/build/dashboard.js:4
@@ -7945,7 +8031,7 @@ msgid "Api Key"
 msgstr ""
 
 #: assets/build/dashboard.js:13
-msgid "To integrate with our forms you need an"
+msgid "To integrate with our forms you need an "
 msgstr ""
 
 #: assets/build/dashboard.js:13

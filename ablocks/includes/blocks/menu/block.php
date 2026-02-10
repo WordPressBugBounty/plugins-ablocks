@@ -225,8 +225,15 @@ class Block extends BlockBaseAbstract {
 			$this->get_hamburgerHoverCSS( $attributes, 'Tablet' ),
 			$this->get_hamburgerHoverCSS( $attributes, 'Mobile' ),
 		);
-		$css_generator->add_class_styles( '{{WRAPPER}} .ablocks-menu__trigger-wrapper .ablocks-menu__trigger .ablocks-menu__trigger-item ', $this->get_hamburger_menu_item_css( $attributes ) );
-
+		$css_generator->add_class_styles( '{{WRAPPER}} .ablocks-menu__trigger-wrapper .ablocks-menu__trigger .ablocks-menu__trigger-item ',
+		 $this->get_hamburger_menu_item_css( $attributes )
+		  );
+        //menu active syle 
+		$css_generator->add_class_styles( '{{WRAPPER}} .ablocks-block--menu-item-active',
+			$this->get_menu_active_styles_css( $attributes ),
+			$this->get_menu_active_styles_css( $attributes, 'Tablet' ),
+			$this->get_menu_active_styles_css( $attributes, 'Mobile' )
+		);
 		return $css_generator->generate_css();
 	}
 
@@ -461,5 +468,12 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			])
 		);
-	}
+	}	
+	//menu active color syle
+	public function get_menu_active_styles_css( $attributes, $device = '' ) {
+		return array_merge(
+			[ 'color' => Color::get_css( isset( $attributes['menuActveColor'] ) ? $attributes['menuActveColor'] : '' ) ],
+			[ 'background' => Color::get_css( isset( $attributes['menuActveColorBg'] ) ? $attributes['menuActveColorBg'] : '' ) ],
+		);
+	}	
 }

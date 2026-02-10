@@ -176,12 +176,20 @@ class WXR_Parser_SimpleXML {
 			$dc                  = $item->children( 'http://purl.org/dc/elements/1.1/' );
 			$post['post_author'] = (string) $dc->creator;
 
-			$content              = $item->children( 'http://purl.org/rss/1.0/modules/content/' );
-			$excerpt              = $item->children( $namespaces['excerpt'] );
-			$post['post_content'] = (string) $content->encoded;
+			$wp      = $item->children( $namespaces['wp'] );
+			$content = $item->children( 'http://purl.org/rss/1.0/modules/content/' );
+			$excerpt = $item->children( $namespaces['excerpt'] );
+			$content = (string) $content->encoded;
+			if ( in_array( (string) $wp->post_type, array( 'wp_template', 'wp_template_part' ), true ) ) {
+				$content = preg_replace(
+					'/\s*,?\s*"theme"\s*:\s*"[^"]+"/',
+					'',
+					$content
+				);
+			}
+			$post['post_content'] = $content;
 			$post['post_excerpt'] = (string) $excerpt->encoded;
 
-			$wp                     = $item->children( $namespaces['wp'] );
 			$post['post_id']        = (int) $wp->post_id;
 			$post['post_date']      = (string) $wp->post_date;
 			$post['post_date_gmt']  = (string) $wp->post_date_gmt;
@@ -353,6 +361,8 @@ class WXR_Parser_SimpleXML {
 			'global_h5_typography'         => 'json',
 			'global_h6_color'              => null,
 			'global_h6_typography'         => 'json',
+			'frontend_dashboard_page'      => null,
+			'frontend_dashboard_sub_pages' => 'json',
 		];
 
 		foreach ( array_keys( $ablocks_options ) as $page_key ) {

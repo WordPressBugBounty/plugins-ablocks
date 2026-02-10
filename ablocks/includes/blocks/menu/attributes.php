@@ -100,6 +100,14 @@ $attributes = [
 		'type' => 'number',
 		'default' => 0,
 	],
+	'menuActveColor' => [
+		'type'    => 'string',
+		'default' => '',
+	],
+	'menuActveColorBg' => [
+		'type'    => 'string',
+		'default' => '',
+	],
 
 ];
 

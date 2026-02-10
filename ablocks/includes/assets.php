@@ -48,6 +48,7 @@ class Assets {
 				add_action( 'wp', [ $self, 'regenerate_missing_assets' ], 20 );
 			}
 		}
+
 	}
 
 	public function detect_page() {

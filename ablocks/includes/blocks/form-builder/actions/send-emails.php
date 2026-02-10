@@ -50,7 +50,9 @@ final class SendEmails implements FormSubmissionAction {
 			$this->validateformdata
 					->get_block_data()['parentAttributes']['email_template_id'] ?? ''
 		)
-			->get_templates();
+			->get_templates(
+				'subscription' === $this->validateformdata->form_info['info']['type']
+			);
 	}
 
 	/**
@@ -66,7 +68,7 @@ final class SendEmails implements FormSubmissionAction {
 			return;
 		}
 
-		// wp_send_json($this->validateformdata->get_block_data()['email_template_id']);
+		// wp_send_json($this->lists);
 		foreach ( $this->lists ?? [] as $slug => $mail_templ ) {
 			if (
 				! $mail_templ['status'] ||

@@ -25,7 +25,7 @@ class Export {
 	 */
 	public function add_options_to_rss() {
 		global $pagenow;
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Don't need nonce verification here, we're just checking if content's value.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Don't need nonce verification here, we're just checking if content's value.
 		if ( 'export.php' !== $pagenow || ! isset( $_GET['content'] ) || 'all' !== sanitize_text_field( wp_unslash( $_GET['content'] ) ) ) {
 			return;
 		}
@@ -63,6 +63,8 @@ class Export {
 			'ablocks_global_h5_typography'         => $this->process_ablocks_json_data( 'global_h5_typography' ),
 			'ablocks_global_h6_color'              => Helper::get_settings( 'global_h6_color', $default_settings['global_h6_color'] ),
 			'ablocks_global_h6_typography'         => $this->process_ablocks_json_data( 'global_h6_typography' ),
+			'ablocks_frontend_dashboard_page'      => $this->process_ablocks_json_data( 'frontend_dashboard_page' ),
+			'ablocks_frontend_dashboard_sub_pages' => base64_encode( get_option( 'ablocks_frontend_dashboard_sub_pages', [] ) )
 		);
 
 		if ( class_exists( 'StoreEngine' ) ) {
@@ -95,7 +97,7 @@ class Export {
 		}
 		$custom_data_xml .= '</ablocks_options>';
 
-        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Want to put valid xml in RSS head.
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Want to put valid xml in RSS head.
 		echo $custom_data_xml;
 	}
 
@@ -112,12 +114,12 @@ class Export {
 	 */
 	public function add_patterns_radio() {
 		?>
-		<p>
-			<label>
-				<input type="radio" name="content" value="wp_block"/>
+        <p>
+            <label>
+                <input type="radio" name="content" value="wp_block"/>
 				<?php esc_html_e( 'Patterns', 'ablocks' ); ?>
-			</label>
-		</p>
+            </label>
+        </p>
 		<?php
 	}
 

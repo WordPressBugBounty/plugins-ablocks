@@ -27,6 +27,7 @@ class Icon {
 			'size' => 55,
 			'color' => '#69727d',
 			'BgColor' => '',
+			'hoverColor' => '',
 			'iconType' => 'default',
 			'iconShape' => 'circle',
 		]);
@@ -68,6 +69,14 @@ class Icon {
 				'default' => $default_args['color'],
 			],
 			$attribute_prefix . 'BgColor' => [
+				'type' => 'string',
+				'default' => $default_args['BgColor'],
+			],
+			$attribute_prefix . 'HoverColor' => [
+				'type' => 'string',
+				'default' => $default_args['hoverColor'],
+			],
+			$attribute_prefix . 'HoverBgColor' => [
 				'type' => 'string',
 				'default' => $default_args['BgColor'],
 			],
@@ -221,10 +230,17 @@ class Icon {
 	}
 
 	public static function get_wrapper_hover_css( $attributes, $device = '', $attributePrefix = 'icon' ) {
-
+		$primaryHoverColor = Color::get_css( $attributes[ $attributePrefix . 'HoverBgColor' ] ?? '' );
+		$iconViewHoverCSS = [];
+		
+		if ( $primaryHoverColor ) {
+			$iconViewHoverCSS['background'] = $primaryHoverColor;
+		}
+		
 		return array_merge(
 			Border::get_hover_css( $attributes[ $attributePrefix . 'Border' ], 'border', $device ),
-			BoxShadow::get_hover_css( $attributes[ $attributePrefix . 'BoxShadow' ], '', $device )
+			BoxShadow::get_hover_css( $attributes[ $attributePrefix . 'BoxShadow' ], '', $device ),
+			$iconViewHoverCSS
 		);
 	}
 
@@ -293,6 +309,7 @@ class Icon {
 	public static function get_element_image_hover_css( $attributes, $device = '', $attributePrefix = 'icon' ) {
 		$rotateHover = $attributes[ $attributePrefix . 'RotateHover' ][ 'value' . $device ] ?? 0;
 		$transitionHover = $attributes[ $attributePrefix . 'transitionDuration' ] ?? 0;
+		$HoverColor = Color::get_css( $attributes[ $attributePrefix . 'HoverColor' ] ?? '' );
 		$iconViewCSS = [];
 		if ( isset( $attributes[ $attributePrefix . 'RotateHover' ][ 'value' . $device ] ) ) {
 			$rotateHover = $attributes[ $attributePrefix . 'RotateHover' ][ 'value' . $device ];
@@ -303,7 +320,10 @@ class Icon {
 		if ( $transitionHover ) {
 			$iconViewCSS['transition'] = $transitionHover . 's';
 		}
-
+		
+		if ( $HoverColor ) {
+			$iconViewCSS['fill'] = $HoverColor;
+		}
 		return array_merge(
 			$iconViewCSS
 		);

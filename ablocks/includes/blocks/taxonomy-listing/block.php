@@ -536,6 +536,7 @@ class Block extends BlockBaseAbstract {
 	protected function build_term_query( string $taxonomy, int $term_id, string $post_type, int $per_page, string $orderby, string $order ): \WP_Query {
 		return new \WP_Query([
 			'post_type' => $post_type,
+			'post_status' => 'publish',
 			'posts_per_page' => $per_page,
 			'orderby' => $orderby,
 			'order' => $order,
@@ -656,6 +657,7 @@ class Block extends BlockBaseAbstract {
 						continue; }
 
 					$query = $this->build_term_query( $taxonomy, (int) $term_id, $selected_post_type, (int) $number_of_posts, $post_order_by, $post_order );
+					$term_public_count = (int) $query->found_posts;
 
 					$input_id    = 'ablocks-blower-' . $accordion_index++;
 					$should_open = $this->should_open_section( $query, (int) $current_post_id );
@@ -673,8 +675,8 @@ class Block extends BlockBaseAbstract {
 						'fields'              => 'ids',
 						'post_status'         => 'publish',
 						'posts_per_page'      => 1,
-						'orderby'             => 'date',
-						'order'               => 'ASC',
+						'orderby'             => $post_order_by,
+						'order'               => $post_order,
 						'ignore_sticky_posts' => true,
 						'no_found_rows'       => true,
 						'tax_query'           => [
@@ -731,7 +733,8 @@ class Block extends BlockBaseAbstract {
 							if ( $show_term_count && ( $showIconDffent == true ) ) :
 								?>
 								<span class="ablocks-taxonomy-title__post-count">
-								<?php echo intval( $term->count ); ?><?php if ( $show_Count_Prefix ) : ?>
+									
+								<?php echo $term_public_count; ?><?php if ( $show_Count_Prefix ) : ?>
 										<span><?php echo esc_html( $count_prefix_text ); ?></span>
 									<?php endif; ?>
 								</span>
@@ -740,7 +743,7 @@ class Block extends BlockBaseAbstract {
 
 						<?php if ( $show_term_count && ( $showIconDffent == false ) ) : ?>
 							<span class="ablocks-taxonomy-title__post-count">
-								<?php echo intval( $term->count ); ?><?php if ( $show_Count_Prefix ) : ?>
+								<?php echo $term_public_count; ?><?php if ( $show_Count_Prefix ) : ?>
 									<span><?php echo esc_html( $count_prefix_text ); ?></span>
 								<?php endif; ?>
 							</span>

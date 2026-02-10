@@ -541,6 +541,14 @@
             "type": "string",
             "default": ""
         },
+        "iconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "iconHoverBgColor": {
+            "type": "string",
+            "default": ""
+        },
         "iconType": {
             "type": "string",
             "default": "default"
@@ -1008,6 +1016,14 @@
             "type": "string",
             "default": ""
         },
+        "btnIconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "btnIconHoverBgColor": {
+            "type": "string",
+            "default": ""
+        },
         "btnIconType": {
             "type": "string",
             "default": "default"
@@ -1448,6 +1464,14 @@
             "default": "#69727d"
         },
         "starIconBgColor": {
+            "type": "string",
+            "default": ""
+        },
+        "starIconHoverColor": {
+            "type": "string",
+            "default": ""
+        },
+        "starIconHoverBgColor": {
             "type": "string",
             "default": ""
         },
