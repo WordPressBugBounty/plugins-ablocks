@@ -171,6 +171,17 @@ final class SendEmails implements FormSubmissionAction {
 		);
 		// wp_send_json($fields);
 		foreach ( $fields as $key => [ 'value' => $val ] ) {
+			// Convert arrays and files to string representation
+			if ( is_array( $val ) ) {
+				// Handle file uploads
+				if ( isset( $val['name'] ) && isset( $val['tmp_name'] ) ) {
+					$val = $val['name'];
+				} else {
+					// Handle multi-select or other arrays
+					$val = implode( ', ', $val );
+
+				}
+			}
 			$msg = str_replace( "{{$key}}", $val, $msg );
 		}
 		return $msg;

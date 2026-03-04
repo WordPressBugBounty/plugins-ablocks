@@ -332,6 +332,7 @@ class Block extends BlockBaseAbstract {
 			'show_quantity'   => Helper::get_attribute_value( $attributes, 'show_quantity' ),
 			'disabled'        => Helper::get_attribute_value( $attributes, 'disabled' ),
 			'price_display'   => Helper::get_attribute_value( $attributes, 'price_display' ),
+			'button_display'  => Helper::get_attribute_value( $attributes, 'button_display' ),
 		];
 
 		if ( isset( $block_instance->context['postId'] ) && ! empty( $block_instance->context['postId'] ) && empty( $attr_array['product_id'] ) ) {

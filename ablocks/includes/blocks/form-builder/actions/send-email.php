@@ -63,8 +63,7 @@ final class SendEmail implements FormSubmissionAction {
 		// send email verification email to user
 		$this->send_verification_email();
 
-		if ( 
-			$this->form_type === 'subscription' &&
+		if ( $this->form_type === 'subscription' &&
 			( $this->validateformdata->form_info['info']['config']['adminNotify'] ?? true )
 		) {
 			$this->subscription_form_send_email();
@@ -72,7 +71,6 @@ final class SendEmail implements FormSubmissionAction {
 
 		// $this->contact_form_send_email();
 		// $this->contact_form_send_email( 'Two' );
-
 	}
 
 	private function send_verification_email() {

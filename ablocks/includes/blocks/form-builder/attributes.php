@@ -552,7 +552,7 @@ $attributes = array_merge(
 	Alignment::get_attribute( 'inputAlignment', true, [ 'value' => 'left' ] ),
 	Alignment::get_attribute( 'buttonTextAlignment', true, [ 'value' => 'center' ] ),
 	Alignment::get_attribute( 'navigatorAlignment', true, [ 'value' => 'left' ] ),
-	Alignment::get_attribute( 'buttonAlignment', true, [ 'value' => '' ] ),
+	Alignment::get_attribute( 'buttonAlignment', true, [ 'value' => 'center' ] ),
 	Alignment::get_attribute( 'successErrorAlignment', true, [ 'value' => 'center' ] ),
 	Range::get_attribute( [
 		'attributeName' => 'rowsSpacing',

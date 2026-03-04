@@ -232,11 +232,11 @@ class Icon {
 	public static function get_wrapper_hover_css( $attributes, $device = '', $attributePrefix = 'icon' ) {
 		$primaryHoverColor = Color::get_css( $attributes[ $attributePrefix . 'HoverBgColor' ] ?? '' );
 		$iconViewHoverCSS = [];
-		
+
 		if ( $primaryHoverColor ) {
 			$iconViewHoverCSS['background'] = $primaryHoverColor;
 		}
-		
+
 		return array_merge(
 			Border::get_hover_css( $attributes[ $attributePrefix . 'Border' ], 'border', $device ),
 			BoxShadow::get_hover_css( $attributes[ $attributePrefix . 'BoxShadow' ], '', $device ),
@@ -320,7 +320,7 @@ class Icon {
 		if ( $transitionHover ) {
 			$iconViewCSS['transition'] = $transitionHover . 's';
 		}
-		
+
 		if ( $HoverColor ) {
 			$iconViewCSS['fill'] = $HoverColor;
 		}

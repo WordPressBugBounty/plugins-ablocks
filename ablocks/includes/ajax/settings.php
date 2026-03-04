@@ -216,9 +216,9 @@ class Settings extends AbstractAjaxHandler {
 		wp_send_json_success( $saved_blocks );
 	}
 	public function save_bulk_block_visibility( $payload ) {
-		$blocks = wp_list_pluck(\json_decode($payload['blocks'], true), 'status', 'block_name');
+		$blocks = wp_list_pluck( \json_decode( $payload['blocks'], true ), 'status', 'block_name' );
 		$saved_blocks = (array) json_decode( get_option( ABLOCKS_BLOCKS_VISIBILITY_SETTINGS_NAME ), true );
-		$updated_settings = wp_parse_args($blocks, $saved_blocks);
+		$updated_settings = wp_parse_args( $blocks, $saved_blocks );
 		update_option( ABLOCKS_BLOCKS_VISIBILITY_SETTINGS_NAME, wp_json_encode( $updated_settings ) );
 		wp_send_json_success( $updated_settings );
 	}

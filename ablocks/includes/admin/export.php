@@ -114,12 +114,12 @@ class Export {
 	 */
 	public function add_patterns_radio() {
 		?>
-        <p>
-            <label>
-                <input type="radio" name="content" value="wp_block"/>
+		<p>
+			<label>
+				<input type="radio" name="content" value="wp_block"/>
 				<?php esc_html_e( 'Patterns', 'ablocks' ); ?>
-            </label>
-        </p>
+			</label>
+		</p>
 		<?php
 	}
 

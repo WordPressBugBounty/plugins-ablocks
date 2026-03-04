@@ -400,6 +400,7 @@ return [
 	'Mate' => 'serif',
 	'Mate SC' => 'serif',
 	'Maven Pro' => 'sans-serif',
+	'Manrope' => 'sans-serif',
 	'McLaren' => 'display',
 	'Meddon' => 'handwriting',
 	'MedievalSharp' => 'display',

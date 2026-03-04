@@ -566,7 +566,7 @@
         "buttonAlignment": {
             "type": "object",
             "default": {
-                "value": "",
+                "value": "center",
                 "valueTablet": "",
                 "valueMobile": ""
             }

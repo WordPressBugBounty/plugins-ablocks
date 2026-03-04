@@ -275,19 +275,6 @@ class Block extends BlockBaseAbstract {
 		preg_match_all( '/<h([1-6])[^>]*>(.*?)<\/h\1>/', $post_content, $matches, PREG_SET_ORDER );
 		$toc = '';
 
-		// Build TOC header
-		if ( (bool) $attributes['hideTitle'] === true ) :
-			$toc = '<div class="ablocks-toc__header">';
-			$toc .= '<span class="ablocks-toc__header-title">' . esc_html( $attributes['tocTableTitle'] ) . '</span>';
-			if ( $attributes['collapSible'] ) :
-				$toc .= '<div class="ablocks-toc__header-toggle-icon">';
-				$toc .= '<span class="ablocks-toc__show">' . Helper::render_svg_icon_using_attr( $close_icon_attributes ) . '</span>';
-				$toc .= '<span class="ablocks-toc__hide">' . Helper::render_svg_icon_using_attr( $open_icon_attributes ) . '</span>';
-				$toc .= '</div>';
-			endif;
-			$toc .= '</div>';
-		endif;
-
 		$headings = [];
 		$unique_anchors = [];
 
@@ -323,9 +310,25 @@ class Block extends BlockBaseAbstract {
 			}
 		}//end foreach
 
+		$toc_list = $this->generate_toc_list( $attributes, $headings );
+		$has_toc  = $toc_list !== '';
+
+		// Build TOC header
+		if ( (bool) $attributes['hideTitle'] === true ) :
+			$toc .= '<div class="ablocks-toc__header">';
+			$toc .= $has_toc ? '<span class="ablocks-toc__header-title">' . esc_html( $attributes['tocTableTitle'] ) . '</span>' : '';
+			if ( $attributes['collapSible'] ) :
+				$toc .= '<div class="ablocks-toc__header-toggle-icon">';
+				$toc .= '<span class="ablocks-toc__show">' . Helper::render_svg_icon_using_attr( $close_icon_attributes ) . '</span>';
+				$toc .= '<span class="ablocks-toc__hide">' . Helper::render_svg_icon_using_attr( $open_icon_attributes ) . '</span>';
+				$toc .= '</div>';
+			endif;
+			$toc .= '</div>';
+		endif;
+
 		// Build TOC body
 		$toc .= '<div class="ablocks-toc-body">';
-		$toc .= $this->generate_toc_list( $attributes, $headings );
+		$toc .= $toc_list;
 		$toc .= '</div>';
 
 		return $toc;

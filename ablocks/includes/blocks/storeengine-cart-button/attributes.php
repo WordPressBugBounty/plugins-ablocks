@@ -71,6 +71,10 @@ $attributes = [
 		'type'    => 'string',
 		'default' => '#101828',
 	],
+	'button_display' => [
+		'type'    => 'string',
+		'default' => 'yes',
+	],
 	'boxBackground' => [
 		'type'    => 'string',
 		'default' => '#fff',

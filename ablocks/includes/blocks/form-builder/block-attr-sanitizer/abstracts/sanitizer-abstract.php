@@ -66,7 +66,7 @@ abstract class SanitizerAbstract implements SanitizerInterface {
 			}
 
 			$post_content = preg_replace(
-				'|<!--\s*wp:ablocks\/form-builder\s*\{.*?' . ( $block['attrs']['block_id'] ?? '' ) . '.*?\}\s*-->.*?<!--\s*\/wp:ablocks\/form-builder\s*-->|ims',
+				'|<!--\s*wp:ablocks\/form-builder\b[^>]*"block_id":"' . preg_quote( $block['attrs']['block_id'] ?? '' ) . '"[^>]*-->.*?<!--\s*\/wp:ablocks\/form-builder\s*-->|ims',
 				serialize_block( $block ),
 				$post_content
 			);

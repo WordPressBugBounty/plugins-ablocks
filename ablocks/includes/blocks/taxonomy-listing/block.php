@@ -635,6 +635,15 @@ class Block extends BlockBaseAbstract {
 		$use_accordion = ( $taxonomy_layout === 'list' && $tab_view );
 
 		$current_post_id = get_queried_object_id();
+		$current_term_id = 0;
+		$current_taxonomy = '';
+		if ( is_category() || is_tag() || is_tax() ) {
+			$current_term = get_queried_object();
+			if ( $current_term && ! is_wp_error( $current_term ) ) {
+				$current_term_id = (int) $current_term->term_id;
+				$current_taxonomy = (string) $current_term->taxonomy;
+			}
+		}
 
 		$showTabScrollingtrue = $showTabScrolling ? 'ablocks-taxonomy-listing-scrolling' : '';
 
@@ -661,6 +670,15 @@ class Block extends BlockBaseAbstract {
 
 					$input_id    = 'ablocks-blower-' . $accordion_index++;
 					$should_open = $this->should_open_section( $query, (int) $current_post_id );
+					if (
+						$use_accordion &&
+						$showTabScrolling &&
+						$current_term_id &&
+						$current_taxonomy === $taxonomy &&
+						(int) $term_id === $current_term_id
+					) {
+						$should_open = true;
+					}
 
 					$term_link  = get_term_link( $term );
 

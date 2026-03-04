@@ -254,33 +254,20 @@ class Block extends BlockBaseAbstract {
 			return $this->build_items_editor( $breadcrumb_normalize );
 		}
 		$breadcrumb_items = [];
-		$breadcrumb_before_image = [
-			'label' => (string) $breadcrumb_normalize['before_breadcrumb_image'],
-			'url' => home_url( '>' )
-		];
+
 		// Front page
 		if ( is_front_page() ) {
-			$breadcrumb_items[] = [
-				'label' => (string) $breadcrumb_normalize['home_text'],
-				'url' => false
-			];
+			$this->add_item( $breadcrumb_items, $breadcrumb_normalize['home_text'] );
 			return $breadcrumb_items;
 		}
 
 		// Home
-		$breadcrumb_items[] = [
-			'label' => (string) $breadcrumb_normalize['home_text'],
-			'url' => home_url( '>' )
-		];
-		// Home
+		$this->add_item( $breadcrumb_items, $breadcrumb_normalize['home_text'], home_url( '>' ) );
 
 		// Posts page (static front)
 		if ( is_home() && ! is_front_page() ) {
 			$pid = (int) get_option( 'page_for_posts' );
-			$breadcrumb_items[] = [
-				'label' => $pid ? get_the_title( $pid ) : __( 'Blog', 'ablocks' ),
-				'url'   => false,
-			];
+			$this->add_item( $breadcrumb_items, $pid ? get_the_title( $pid ) : __( 'Blog', 'ablocks' ) );
 			return $breadcrumb_items;
 		}
 
@@ -290,10 +277,7 @@ class Block extends BlockBaseAbstract {
 
 			if ( ! $post ) {
 				if ( ! empty( $breadcrumb_normalize['include_current'] ) ) {
-					$breadcrumb_items[] = [
-						'label' => $this->current_title_safe(),
-						'url' => false
-					];
+					$this->add_item( $breadcrumb_items, $this->current_title_safe() );
 				}
 				return $breadcrumb_items;
 			}
@@ -306,64 +290,28 @@ class Block extends BlockBaseAbstract {
 			if ( $is_wc_product ) {
 				$shop_id = wc_get_page_id( 'shop' );
 				if ( $shop_id && 'publish' === get_post_status( $shop_id ) ) {
-					$breadcrumb_items[] = [
-						'label' => get_the_title( $shop_id ),
-						'url' => get_permalink( $shop_id )
-					];
+					$this->add_item( $breadcrumb_items, get_the_title( $shop_id ), get_permalink( $shop_id ) );
 				}
 			}
 
 			// Post type label/archive (avoid for product since Shop already added)
-			if ( $breadcrumb_pto && ! $is_wc_product ) {
-				if ( ! empty( $breadcrumb_pto->has_archive ) ) {
-					$breadcrumb_items[] = [
-						'label' => $breadcrumb_pto->labels->name,
-						'url' => get_post_type_archive_link( $breadcrumb_pt )
-					];
-				} elseif ( ! in_array( $breadcrumb_pt, [ 'post', 'page' ], true ) ) {
-					$breadcrumb_items[] = [
-						'label' => $breadcrumb_pto->labels->name,
-						'url' => false
-					];
-				}
+			if ( ! $is_wc_product ) {
+				$this->add_post_type_item( $breadcrumb_items, $breadcrumb_pt, $breadcrumb_pto, [ 'post', 'page' ] );
 			}
 
 			// Hierarchical (page / hierarchical CPT)
 			if ( is_page() || ( $breadcrumb_pto && is_post_type_hierarchical( $breadcrumb_pt ) ) ) {
-				foreach ( array_reverse( get_post_ancestors( $post ) ) as $aid ) {
-					if ( (int) $aid === (int) get_option( 'page_on_front' ) ) {
-						continue; }
-					$breadcrumb_items[] = [
-						'label' => get_the_title( $aid ),
-						'url' => get_permalink( $aid )
-					];
-				}
+				$this->add_post_ancestors( $breadcrumb_items, $post );
+
+				// Also include taxonomy trail (categories/tags) on single pages if available.
+				$this->append_taxonomy_trail( $breadcrumb_items, $post->ID, $breadcrumb_pt, $breadcrumb_normalize['tax'] );
 			} else {
-				// Non-hierarchical: taxonomy trail or archive fallback
-				$breadcrumb_tax = $this->preferred_tax( $breadcrumb_pt, $breadcrumb_normalize['tax'] );
-				if ( $breadcrumb_tax ) {
-					$primary = $this->primary_term( $post->ID, $breadcrumb_tax );
-					if ( $primary ) {
-						foreach ( $this->term_chain( $primary ) as $breadcrumb_t ) {
-							$breadcrumb_items[] = [
-								'label' => $breadcrumb_t->name,
-								'url' => get_term_link( $breadcrumb_t )
-							];
-						}
-					}
-				} elseif ( $breadcrumb_pto && ! empty( $breadcrumb_pto->has_archive ) && ! $is_wc_product ) {
-					$breadcrumb_items[] = [
-						'label' => $breadcrumb_pto->labels->name,
-						'url' => get_post_type_archive_link( $breadcrumb_pt )
-					];
-				}
+				// Non-hierarchical: taxonomy trail (if any).
+				$this->append_taxonomy_trail( $breadcrumb_items, $post->ID, $breadcrumb_pt, $breadcrumb_normalize['tax'] );
 			}//end if
 
 			if ( ! empty( $breadcrumb_normalize['include_current'] ) ) {
-				$breadcrumb_items[] = [
-					'label' => $this->current_title_safe( $post ),
-					'url' => false
-				];
+				$this->add_item( $breadcrumb_items, $this->current_title_safe( $post ) );
 			}
 			return $breadcrumb_items;
 		}//end if
@@ -371,24 +319,9 @@ class Block extends BlockBaseAbstract {
 		// Tax archives
 		if ( is_category() || is_tag() || is_tax() ) {
 			$term = get_queried_object();
-			if ( $term && ! is_wp_error( $term ) ) {
-				if ( $term->parent ) {
-					foreach ( array_reverse( get_ancestors( $term->term_id, $term->taxonomy, 'taxonomy' ) ) as $id ) {
-						$breadcrumb_t = get_term( $id, $term->taxonomy );
-						if ( $breadcrumb_t && ! is_wp_error( $breadcrumb_t ) ) {
-							$breadcrumb_items[] = [
-								'label' => $breadcrumb_t->name,
-								'url' => get_term_link( $breadcrumb_t )
-							];
-						}
-					}
-				}
-				$breadcrumb_items[] = [
-					'label' => single_term_title( '', false ),
-					'url' => false
-				];
-				return $breadcrumb_items;
-			}
+			return ( $term && ! is_wp_error( $term ) )
+				? $this->build_taxonomy_archive_items( $breadcrumb_items, $term )
+				: $breadcrumb_items;
 		}//end if
 
 		// Post type archive
@@ -398,10 +331,7 @@ class Block extends BlockBaseAbstract {
 				$breadcrumb_pt = reset( $breadcrumb_pt ); }
 			$po = $breadcrumb_pt ? get_post_type_object( $breadcrumb_pt ) : null;
 			if ( $po ) {
-				$breadcrumb_items[] = [
-					'label' => $po->labels->name,
-					'url' => false
-				];
+				$this->add_item( $breadcrumb_items, $po->labels->name );
 				return $breadcrumb_items;
 			}
 		}
@@ -410,40 +340,26 @@ class Block extends BlockBaseAbstract {
 		if ( is_author() ) {
 			$breadcrumb_u = get_queried_object();
 			if ( $breadcrumb_u ) {
-				$breadcrumb_items[] = [
-					/* translators: %s Name */
-					'label' => sprintf( __( 'Author: %s', 'ablocks' ), $breadcrumb_u->display_name ),
-					'url' => false
-				];
+				$this->add_item( $breadcrumb_items, sprintf( __( 'Author: %s', 'ablocks' ), $breadcrumb_u->display_name ) );
 				return $breadcrumb_items;
 			}
 		}
 
 		// Date
 		if ( is_year() || is_month() || is_day() ) {
-			$breadcrumb_items[] = [
-				'label' => get_the_date( is_year() ? 'Y' : ( is_month() ? 'F Y' : 'F j, Y' ) ),
-				'url' => false
-			];
+			$this->add_item( $breadcrumb_items, get_the_date( is_year() ? 'Y' : ( is_month() ? 'F Y' : 'F j, Y' ) ) );
 			return $breadcrumb_items;
 		}
 
 		// Search
 		if ( is_search() ) {
-			$breadcrumb_items[] = [
-				/* translators: %s Name */
-				'label' => sprintf( __( 'Search: %s', 'ablocks' ), get_search_query() ),
-				'url' => false
-			];
+			$this->add_item( $breadcrumb_items, sprintf( __( 'Search: %s', 'ablocks' ), get_search_query() ) );
 			return $breadcrumb_items;
 		}
 
 		// 404
 		if ( is_404() ) {
-			$breadcrumb_items[] = [
-				'label' => __( '404 Not Found', 'ablocks' ),
-				'url' => false
-			];
+			$this->add_item( $breadcrumb_items, __( '404 Not Found', 'ablocks' ) );
 			return $breadcrumb_items;
 		}
 
@@ -456,10 +372,7 @@ class Block extends BlockBaseAbstract {
 	private function build_items_editor( array $breadcrumb_normalize ) : array {
 		$breadcrumb_items   = [];
 		$home_label = (string) $breadcrumb_normalize['home_text']; // attributes → fallback "Home"
-		$breadcrumb_items[] = [
-			'label' => $home_label,
-			'url' => home_url( '>' )
-		];
+		$this->add_item( $breadcrumb_items, $home_label, home_url( '>' ) );
 
 		global $post;
 		if ( $post instanceof WP_Post ) {
@@ -467,61 +380,25 @@ class Block extends BlockBaseAbstract {
 			$breadcrumb_pto = $breadcrumb_pt ? get_post_type_object( $breadcrumb_pt ) : null;
 
 			if ( is_post_type_hierarchical( $breadcrumb_pt ) ) {
-				foreach ( array_reverse( get_post_ancestors( $post ) ) as $aid ) {
-					if ( (int) $aid === (int) get_option( 'page_on_front' ) ) {
-						continue; }
-					$breadcrumb_items[] = [
-						'label' => get_the_title( $aid ),
-						'url' => get_permalink( $aid )
-					];
-				}
+				$this->add_post_ancestors( $breadcrumb_items, $post );
+
+				// Also include taxonomy trail (categories/tags) on single pages if available.
+				$this->append_taxonomy_trail( $breadcrumb_items, $post->ID, $breadcrumb_pt, $breadcrumb_normalize['tax'] );
 			} else {
-				if ( $breadcrumb_pto ) {
-					if ( ! empty( $breadcrumb_pto->has_archive ) ) {
-						$breadcrumb_items[] = [
-							'label' => $breadcrumb_pto->labels->name,
-							'url' => get_post_type_archive_link( $breadcrumb_pt )
-						];
-					} elseif ( ! in_array( $breadcrumb_pt, [ 'post', 'page' ], true ) ) {
-						$breadcrumb_items[] = [
-							'label' => $breadcrumb_pto->labels->name,
-							'url' => false
-						];
-					}
-				}
-				$breadcrumb_tax = $this->preferred_tax( $breadcrumb_pt, $breadcrumb_normalize['tax'] );
-				if ( $breadcrumb_tax ) {
-					$primary = $this->primary_term( $post->ID, $breadcrumb_tax );
-					if ( $primary ) {
-						foreach ( $this->term_chain( $primary ) as $breadcrumb_t ) {
-							$breadcrumb_items[] = [
-								'label' => $breadcrumb_t->name,
-								'url' => get_term_link( $breadcrumb_t )
-							];
-						}
-					}
-				}
+				$this->add_post_type_item( $breadcrumb_items, $breadcrumb_pt, $breadcrumb_pto, [ 'post', 'page' ] );
+				$this->append_taxonomy_trail( $breadcrumb_items, $post->ID, $breadcrumb_pt, $breadcrumb_normalize['tax'] );
 			}//end if
 
 			if ( ! empty( $breadcrumb_normalize['include_current'] ) ) {
-				$breadcrumb_items[] = [
-					'label' => $this->current_title_safe( $post ),
-					'url' => false
-				];
+				$this->add_item( $breadcrumb_items, $this->current_title_safe( $post ) );
 			}
 			return $breadcrumb_items;
 		}//end if
 
 		// No $post in editor (e.g., site editor template) → sample trail
-		$breadcrumb_items[] = [
-			'label' => __( 'Template', 'ablocks' ),
-			'url' => home_url( '/Template/' )
-		];
+		$this->add_item( $breadcrumb_items, __( 'Template', 'ablocks' ), home_url( '/Template/' ) );
 		if ( ! empty( $breadcrumb_normalize['include_current'] ) ) {
-			$breadcrumb_items[] = [
-				'label' => __( 'Currents Page', 'ablocks' ),
-				'url' => false
-			];
+			$this->add_item( $breadcrumb_items, __( 'Currents Page', 'ablocks' ) );
 		}
 		return $breadcrumb_items;
 	}
@@ -548,6 +425,101 @@ class Block extends BlockBaseAbstract {
 	}
 
 	/**
+	 * Add a breadcrumb item.
+	 */
+	private function add_item( array &$breadcrumb_items, $label, $url = false ) : void {
+		$breadcrumb_items[] = [
+			'label' => (string) $label,
+			'url' => $url
+		];
+	}
+
+	/**
+	 * Add a term breadcrumb item (linked).
+	 */
+	private function add_term_item( array &$breadcrumb_items, $term ) : void {
+		if ( ! $term || is_wp_error( $term ) ) {
+			return;
+		}
+		$link = get_term_link( $term );
+		$this->add_item( $breadcrumb_items, $term->name, is_wp_error( $link ) ? false : $link );
+	}
+
+	/**
+	 * Add post ancestors (linked).
+	 */
+	private function add_post_ancestors( array &$breadcrumb_items, $post ) : void {
+		foreach ( array_reverse( get_post_ancestors( $post ) ) as $aid ) {
+			if ( (int) $aid === (int) get_option( 'page_on_front' ) ) {
+				continue;
+			}
+			$this->add_item( $breadcrumb_items, get_the_title( $aid ), get_permalink( $aid ) );
+		}
+	}
+
+	/**
+	 * Add a post type item.
+	 */
+	private function add_post_type_item( array &$breadcrumb_items, $post_type, $post_type_obj = null, array $skip_types = [] ) : bool {
+		if ( $post_type && in_array( $post_type, $skip_types, true ) ) {
+			return false;
+		}
+		$breadcrumb_pto = $post_type_obj ?: ( $post_type ? get_post_type_object( $post_type ) : null );
+		if ( ! $breadcrumb_pto ) {
+			return false;
+		}
+		$url = ! empty( $breadcrumb_pto->has_archive ) ? get_post_type_archive_link( $post_type ) : false;
+		$this->add_item( $breadcrumb_items, $breadcrumb_pto->labels->name, $url );
+		return true;
+	}
+
+	/**
+	 * Add term ancestors (linked).
+	 */
+	private function add_term_ancestors( array &$breadcrumb_items, $term ) : void {
+		foreach ( array_reverse( get_ancestors( $term->term_id, $term->taxonomy, 'taxonomy' ) ) as $id ) {
+			$this->add_term_item( $breadcrumb_items, get_term( $id, $term->taxonomy ) );
+		}
+	}
+
+	/**
+	 * Append taxonomy trail (category + tag when available) to breadcrumb items.
+	 * Returns true if any taxonomy items were appended.
+	 */
+	private function append_taxonomy_trail( array &$breadcrumb_items, int $post_id, string $post_type, string $preferred_tax = '' ) : bool {
+		$breadcrumb_tax = $this->preferred_tax( $post_type, $preferred_tax );
+		if ( ! $breadcrumb_tax ) {
+			return false;
+		}
+
+		$secondary = ( $preferred_tax === '' ) ? $this->secondary_tax( $post_type, $breadcrumb_tax ) : '';
+		$taxes = array_filter( array_unique( [ $breadcrumb_tax, $secondary ] ) );
+		$seen_terms = [];
+		foreach ( $taxes as $taxonomy ) {
+			$primary = $this->primary_term( $post_id, $taxonomy );
+			if ( ! $primary ) {
+				continue;
+			}
+
+			foreach ( array_reverse( get_ancestors( $primary->term_id, $primary->taxonomy, 'taxonomy' ) ) as $id ) {
+				$breadcrumb_t = get_term( $id, $primary->taxonomy );
+				$key = $breadcrumb_t ? $breadcrumb_t->taxonomy . ':' . $breadcrumb_t->term_id : '';
+				if ( ! $breadcrumb_t || is_wp_error( $breadcrumb_t ) || isset( $seen_terms[ $key ] ) ) {
+					continue;
+				}
+				$seen_terms[ $key ] = true;
+				$this->add_term_item( $breadcrumb_items, $breadcrumb_t );
+			}
+			$key = $primary->taxonomy . ':' . $primary->term_id;
+			if ( ! isset( $seen_terms[ $key ] ) ) {
+				$seen_terms[ $key ] = true;
+				$this->add_term_item( $breadcrumb_items, $primary );
+			}
+		}//end foreach
+		return ! empty( $seen_terms );
+	}
+
+	/**
 	 * Preferred taxonomy
 	 */
 	private function preferred_tax( $post_type, $preferred = '' ) {
@@ -555,9 +527,6 @@ class Block extends BlockBaseAbstract {
 			return $preferred;
 		}
 		$taxes = get_object_taxonomies( $post_type, 'objects' );
-		if ( empty( $taxes ) ) {
-			return false;
-		}
 		foreach ( $taxes as $breadcrumb_t ) {
 			if ( $breadcrumb_t->public && $breadcrumb_t->hierarchical ) {
 				return $breadcrumb_t->name;
@@ -569,6 +538,52 @@ class Block extends BlockBaseAbstract {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Secondary taxonomy (first public non-hierarchical) when primary is hierarchical.
+	 */
+	private function secondary_tax( $post_type, $primary_tax = '' ) {
+		$primary = $primary_tax ? get_taxonomy( $primary_tax ) : null;
+		if ( $primary && empty( $primary->hierarchical ) ) {
+			return false;
+		}
+
+		foreach ( get_object_taxonomies( $post_type, 'objects' ) as $breadcrumb_t ) {
+			if ( $breadcrumb_t->public && ! $breadcrumb_t->hierarchical && $breadcrumb_t->name !== $primary_tax ) {
+				return $breadcrumb_t->name;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Get a representative post type for a taxonomy.
+	 */
+	private function taxonomy_post_type( $taxonomy ) {
+		$tax = $taxonomy ? get_taxonomy( $taxonomy ) : null;
+		if ( ! $tax || empty( $tax->object_type ) ) {
+			return false;
+		}
+		$object_types = (array) $tax->object_type;
+		if ( in_array( 'listing', $object_types, true ) ) {
+			return 'listing';
+		}
+		return reset( $object_types );
+	}
+
+	/**
+	 * Build taxonomy archive items: Post Type > Term ancestors > Term (linked).
+	 */
+	private function build_taxonomy_archive_items( array $breadcrumb_items, $term ) : array {
+		$breadcrumb_pt = $this->taxonomy_post_type( $term->taxonomy );
+		$breadcrumb_pto = $breadcrumb_pt ? get_post_type_object( $breadcrumb_pt ) : null;
+		$this->add_post_type_item( $breadcrumb_items, $breadcrumb_pt, $breadcrumb_pto );
+
+		$this->add_term_ancestors( $breadcrumb_items, $term );
+		$this->add_term_item( $breadcrumb_items, $term );
+
+		return $breadcrumb_items;
 	}
 
 	/**
@@ -587,26 +602,6 @@ class Block extends BlockBaseAbstract {
 		}
 		$terms = get_the_terms( $post_id, $taxonomy );
 		return ( $terms && ! is_wp_error( $terms ) ) ? array_shift( $terms ) : null;
-	}
-
-	/**
-	 * Term ancestors + self
-	 */
-	private function term_chain( $term ) {
-		$out = [];
-		if ( $term && $term->parent ) {
-			$ids = array_reverse( get_ancestors( $term->term_id, $term->taxonomy, 'taxonomy' ) );
-			foreach ( $ids as $id ) {
-				$breadcrumb_t = get_term( $id, $term->taxonomy );
-				if ( $breadcrumb_t && ! is_wp_error( $breadcrumb_t ) ) {
-					$out[] = $breadcrumb_t;
-				}
-			}
-		}
-		if ( $term ) {
-			$out[] = $term;
-		}
-		return $out;
 	}
 
 	/**
@@ -706,8 +701,5 @@ class Block extends BlockBaseAbstract {
 		return $this->render_html_breadcrumbs( $breadcrumb_items, $breadcrumb_normalize );
 	}
 
-	/**
-	 * Public helper for theme templates
-	 */
 
 }

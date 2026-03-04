@@ -12,7 +12,6 @@ use ABlocks\Ajax\Settings;
 use ABlocks\Ajax\Dashboard;
 use ABlocks\Ajax\DemoImport;
 use ABlocks\Ajax\DynamicContent;
-use ABlocks\Ajax\SearchBlock;
 use ABlocks\Ajax\FormBuilder;
 use ABlocks\Ajax\Entry;
 use ABlocks\Ajax\StripePaymentAjax;
@@ -31,7 +30,6 @@ class Ajax {
 		( new Dashboard() )->dispatch_actions();
 		( new Settings() )->dispatch_actions();
 		( new DynamicContent() )->dispatch_actions();
-		( new SearchBlock() )->dispatch_actions();
 		( new FormBuilder() )->dispatch_actions();
 		( new Entry() )->dispatch_actions();
 		( new StripePaymentAjax() )->dispatch_actions();
