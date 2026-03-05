@@ -621,23 +621,15 @@ class FormBuilderController {
 
 	private function submit_schema() {
 		return [
-
 			'current_post_id' => [
 				'required'          => true,
-				'type'              => 'integer',
-				'sanitize_callback' => 'absint',
-				'validate_callback' => function( $value ) {
-					return $value > 0 && get_post( $value );
-				},
+				'type'     => 'string',
+				'sanitize_callback' => 'sanitize_text_field',
 			],
-
 			'block_id' => [
 				'required'          => true,
 				'type'              => 'string',
 				'sanitize_callback' => 'sanitize_text_field',
-				'validate_callback' => function( $value ) {
-					return preg_match( '/^[a-zA-Z0-9_\-]+$/', $value );
-				},
 			],
 		];
 	}

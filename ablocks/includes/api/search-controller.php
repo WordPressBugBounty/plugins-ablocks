@@ -30,12 +30,9 @@ class SearchController {
 				'args' => array(
 					'current_page_id' => array(
 						'required'          => true,
-						'type'              => 'integer',
+						'type'              => 'string',
 						'description'       => 'Current page ID to exclude from results.',
-						'sanitize_callback' => 'absint',
-						'validate_callback' => function( $param ) {
-							return is_numeric( $param ) && $param > 0;
-						},
+						'sanitize_callback' => 'sanitize_text_field',
 					),
 
 					'searchQuery' => array(
@@ -72,9 +69,12 @@ class SearchController {
 			's'              => $searchQuery,
 			'posts_per_page' => -1,
 			'post_type'      => $source,
-			'post__not_in'   => array( $current_page_id ),
 			'post_status'    => 'publish',
 		);
+
+		if($current_page_id){
+			$args['post__not_in'] =  array( $current_page_id );
+		}
 
 		$query = new WP_Query( $args );
 

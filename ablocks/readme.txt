@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.7.4
+Stable tag: 2.7.5
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -309,11 +309,19 @@ Our external packages use [Lottie](https://github.com/chenqingspring/react-lotti
 
 == Changelog ==
 
+= 2.7.5 - 05/03/2026 =
+* Fixed - Search & Form Block Rest API validation issues
+
 = 2.7.4 - 04/03/2026 =
 * Fixed - v2.7.3 file missing issue solved 
 
 = 2.7.3 - 04/03/2026 =
-* Improvement - Free vs pro sections hide when active ablocks pro imp
+* Improvement - Free vs pro sections hide when active ablocks pro
+* Improvement - StoreEngine Cart Button Block show/hide option
+* Fixed - Table of content extra space removed
+* Fixed - Manrope font fallback
+* Fixed - Same page multiple from type not working issue
+* Fixed - Multi step form submit button issue
 * Fixed -  form submit button responsive issue
 * Fixed - submission data fetch issue
 * Fixed - Support korean language in textarea
