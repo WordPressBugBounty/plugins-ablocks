@@ -6,16 +6,20 @@
     "title": "News Ticker",
     "category": "ablocks",
     "description": "Add your news ticker",
-    "example": [],
     "supports": {
         "html": true,
         "anchor": true
     },
     "textdomain": "ablocks",
     "editorStyle": [
+        "ablocks-animate-style",
+        "ablocks-common-style",
         "file:./style.css"
     ],
-    "viewScript": "file:./view.js",
+    "editorScript": [
+        "ablocks-common-script",
+        "file:./view.js"
+    ],
     "attributes": {
         "block_id": {
             "type": "string",

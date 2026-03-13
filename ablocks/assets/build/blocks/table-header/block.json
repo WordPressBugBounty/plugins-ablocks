@@ -15,9 +15,6 @@
         "anchor": true
     },
     "textdomain": "ablocks",
-    "editorStyle": [
-        "file:./style.css"
-    ],
     "attributes": {
         "block_id": {
             "type": "string",

@@ -30,7 +30,7 @@
         "file:./style.css"
     ],
     "editorScript": [
-        "file:./view.js"
+        "ablocks-common-script"
     ],
     "attributes": {
         "block_id": {

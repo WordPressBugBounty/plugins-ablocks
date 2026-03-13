@@ -16,10 +16,6 @@
         "anchor": true
     },
     "textdomain": "ablocks",
-    "editorStyle": [],
-    "editorScript": [
-        "ablocks-common-script"
-    ],
     "attributes": {
         "block_id": {
             "type": "string",

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 2.7.6\n"
+"Project-Id-Version: aBlocks 2.7.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-08T13:22:22+00:00\n"
+"POT-Creation-Date: 2026-03-12T11:03:27+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: ablocks\n"
@@ -1695,9 +1695,9 @@ msgstr ""
 #: src/blocks/storeengine-login-form/settings.js:369
 #: src/blocks/storeengine-login-form/settings.js:377
 #: src/blocks/storeengine-login-form/settings.js:399
-#: src/blocks/storeengine-mini-cart/settings.js:47
-#: src/blocks/storeengine-mini-cart/settings.js:100
-#: src/blocks/storeengine-mini-cart/settings.js:118
+#: src/blocks/storeengine-mini-cart/settings.js:61
+#: src/blocks/storeengine-mini-cart/settings.js:114
+#: src/blocks/storeengine-mini-cart/settings.js:132
 #: src/blocks/storeengine-order-details/settings.js:103
 #: src/blocks/storeengine-order-details/settings.js:114
 #: src/blocks/storeengine-order-details/settings.js:147
@@ -2216,8 +2216,8 @@ msgstr ""
 #: src/blocks/storeengine-login-form/settings.js:144
 #: src/blocks/storeengine-login-form/settings.js:149
 #: src/blocks/storeengine-login-form/settings.js:297
-#: src/blocks/storeengine-mini-cart/settings.js:93
-#: src/blocks/storeengine-mini-cart/settings.js:111
+#: src/blocks/storeengine-mini-cart/settings.js:107
+#: src/blocks/storeengine-mini-cart/settings.js:125
 #: src/blocks/storeengine-product-review/settings.js:186
 #: src/blocks/storeengine-product-summary/settings.js:403
 #: src/blocks/storeengine-product-summary/settings.js:538
@@ -2706,6 +2706,8 @@ msgstr ""
 #: src/blocks/storeengine-login-form/settings.js:158
 #: src/blocks/storeengine-login-form/settings.js:163
 #: src/blocks/storeengine-login-form/settings.js:336
+#: src/blocks/storeengine-mini-cart/settings.js:40
+#: src/blocks/storeengine-mini-cart/settings.js:45
 #: src/blocks/storeengine-product-filter/settings.js:125
 #: src/blocks/storeengine-product-review/settings.js:213
 #: src/blocks/storeengine-product-summary/settings.js:318
@@ -3906,7 +3908,7 @@ msgstr ""
 #: src/blocks/storeengine-login-form/settings.js:190
 #: src/blocks/storeengine-login-form/settings.js:239
 #: src/blocks/storeengine-login-form/settings.js:360
-#: src/blocks/storeengine-mini-cart/settings.js:75
+#: src/blocks/storeengine-mini-cart/settings.js:89
 #: src/blocks/storeengine-order-details/settings.js:86
 #: src/blocks/storeengine-order-details/settings.js:130
 #: src/blocks/storeengine-order-details/settings.js:174
@@ -10115,12 +10117,12 @@ msgid "Opacity Hover"
 msgstr ""
 
 #: assets/build/blocks.js:17
-#: src/blocks/loop-builder/settings.js:222
+#: src/blocks/loop-builder/settings.js:223
 msgid "Post Types"
 msgstr ""
 
 #: assets/build/blocks.js:17
-#: src/blocks/loop-builder/settings.js:279
+#: src/blocks/loop-builder/settings.js:278
 msgid "Posts Per Page"
 msgstr ""
 
@@ -10353,7 +10355,7 @@ msgstr ""
 #: src/blocks/storeengine-cart-sub-table/settings.js:167
 #: src/blocks/storeengine-checkout-button/settings.js:125
 #: src/blocks/storeengine-continue-button/settings.js:125
-#: src/blocks/storeengine-mini-cart/settings.js:58
+#: src/blocks/storeengine-mini-cart/settings.js:72
 #: src/blocks/storeengine-order-info/settings.js:73
 #: src/blocks/storeengine-order-info/settings.js:117
 #: src/blocks/storeengine-order-info/settings.js:161

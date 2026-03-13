@@ -72,8 +72,8 @@ class SearchController {
 			'post_status'    => 'publish',
 		);
 
-		if($current_page_id){
-			$args['post__not_in'] =  array( $current_page_id );
+		if ( $current_page_id ) {
+			$args['post__not_in'] = array( $current_page_id );
 		}
 
 		$query = new WP_Query( $args );

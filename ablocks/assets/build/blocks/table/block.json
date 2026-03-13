@@ -17,6 +17,9 @@
         "ablocks-common-style",
         "file:./styles.css"
     ],
+    "editorScript": [
+        "ablocks-common-script"
+    ],
     "attributes": {
         "block_id": {
             "type": "string"

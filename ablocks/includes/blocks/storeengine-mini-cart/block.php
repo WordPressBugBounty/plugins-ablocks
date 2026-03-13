@@ -35,6 +35,12 @@ class Block extends BlockBaseAbstract {
 			$this->get_icon_button_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
+			'{{WRAPPER}} .storeengine-mini-cart',
+			$this->get_wrapper_css( $attributes, '' ),
+			$this->get_wrapper_css( $attributes, 'Tablet' ),
+			$this->get_wrapper_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-mini-cart-link svg:hover',
 			$this->get_icon_button_hover_css( $attributes, '' ),
 			$this->get_icon_button_hover_css( $attributes, 'Tablet' ),
@@ -84,6 +90,16 @@ class Block extends BlockBaseAbstract {
 			[ 'color' => Color::get_css( isset( $attributes['countColor'] ) ? $attributes['countColor'] : '' ) ],
 			[ 'background' => Color::get_css( isset( $attributes['countBg'] ) ? $attributes['countBg'] : '' ) ],
 		);
+	}
+
+	public function get_wrapper_css( $attributes, $device = '' ) {
+		$css_padding = [];
+
+		if ( ! empty( $attributes['padding'] ) ) {
+			$css_padding = Dimensions::get_css( $attributes['padding'], 'padding', $device );
+		}
+
+		return $css_padding;
 	}
 
 	public function get_icon_text_hover_css( $attributes, $device = '' ) {

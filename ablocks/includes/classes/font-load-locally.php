@@ -220,8 +220,7 @@ class FontLoadLocally {
 						$font_weight = '400';
 					}
 
-					$css .= "
-					@font-face {
+					$css .= "@font-face {
 						font-family: '{$family}';
 						font-style: normal;
 						font-weight: {$font_weight};
@@ -238,7 +237,7 @@ class FontLoadLocally {
 		if ( ! empty( $css ) ) {
 			wp_register_style( 'ablocks-local-fonts', false );
 			wp_enqueue_style( 'ablocks-local-fonts' );
-			wp_add_inline_style( 'ablocks-local-fonts', $css );
+			wp_add_inline_style( 'ablocks-local-fonts', AssetsGenerator::minify_css( $css ) );
 		}
 
 		/**

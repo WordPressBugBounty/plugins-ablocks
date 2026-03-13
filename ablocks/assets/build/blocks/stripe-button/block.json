@@ -22,7 +22,6 @@
         "anchor": true
     },
     "textdomain": "ablocks",
-    "viewScript": "file:./view.js",
     "editorStyle": [
         "ablocks-animate-style",
         "ablocks-common-style",

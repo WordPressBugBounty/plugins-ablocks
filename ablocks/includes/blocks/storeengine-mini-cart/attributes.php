@@ -48,6 +48,7 @@ $attributes = [
 $attributes = array_merge(
 	$attributes,
 	Typography::get_attribute( 'countTypography', true ),
+	Dimensions::get_attribute( 'padding', true ),
 );
 
 return array_merge( $attributes, \ABlocks\Classes\BlockGlobal::get_attributes() );

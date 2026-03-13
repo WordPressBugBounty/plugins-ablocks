@@ -530,6 +530,7 @@ return [
 	'Pontano Sans' => 'sans-serif',
 	'Port Lligat Sans' => 'sans-serif',
 	'Port Lligat Slab' => 'serif',
+	'Poppins' => 'sans-serif',
 	'Pragati Narrow' => 'sans-serif',
 	'Prata' => 'serif',
 	'Preahvihear' => 'display',

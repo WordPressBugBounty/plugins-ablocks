@@ -17,7 +17,6 @@
     },
     "textdomain": "ablocks",
     "style": [],
-    "viewScript": "file:./view.js",
     "attributes": {
         "block_id": {
             "type": "string",

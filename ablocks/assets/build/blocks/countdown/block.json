@@ -20,7 +20,8 @@
     "textdomain": "ablocks",
     "editorStyle": [
         "ablocks-animate-style",
-        "ablocks-common-style"
+        "ablocks-common-style",
+        "file:./style.css"
     ],
     "editorScript": [
         "ablocks-common-script",

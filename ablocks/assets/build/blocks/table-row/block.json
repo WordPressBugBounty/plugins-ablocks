@@ -15,9 +15,7 @@
         "anchor": true
     },
     "textdomain": "ablocks",
-    "editorStyle": [],
     "editorScript": [
-        "ablocks-common-script",
         "file:./view.js"
     ],
     "attributes": {

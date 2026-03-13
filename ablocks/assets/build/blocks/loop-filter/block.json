@@ -18,13 +18,6 @@
         "ablocks/query"
     ],
     "textdomain": "ablocks",
-    "editorStyle": [
-        "ablocks-animate-style",
-        "ablocks-common-style"
-    ],
-    "editorScript": [
-        "ablocks-common-script"
-    ],
     "usesContext": [
         "queryId",
         "query",

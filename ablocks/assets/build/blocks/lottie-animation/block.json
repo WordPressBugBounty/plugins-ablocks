@@ -13,7 +13,8 @@
     },
     "textdomain": "ablocks",
     "editorStyle": [
-        "file:./style.css"
+        "ablocks-animate-style",
+        "ablocks-common-style"
     ],
     "editorScript": [
         "ablocks-common-script",

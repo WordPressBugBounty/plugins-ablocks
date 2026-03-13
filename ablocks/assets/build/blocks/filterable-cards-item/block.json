@@ -15,13 +15,6 @@
         "anchor": true
     },
     "textdomain": "ablocks",
-    "editorStyle": [
-        "ablocks-animate-style",
-        "ablocks-common-style"
-    ],
-    "editorScript": [
-        "ablocks-common-script"
-    ],
     "attributes": {
         "block_id": {
             "type": "string"

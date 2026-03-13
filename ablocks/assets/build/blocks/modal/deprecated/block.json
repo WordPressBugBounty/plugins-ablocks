@@ -16,6 +16,7 @@
     "file:./style.css"
   ],
   "editorStyle": [
+    "ablocks-animate-style",
     "ablocks-common-style",
     "file:./editor.scss"
   ],

@@ -18,9 +18,7 @@
         "file:./style.css"
     ],
     "editorScript": [
-        "ablocks-common-script"
-    ],
-    "viewScript": [
+        "ablocks-common-script",
         "file:./view.js"
     ],
     "usesContext": [
