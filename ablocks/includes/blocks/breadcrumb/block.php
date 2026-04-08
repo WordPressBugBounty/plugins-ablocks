@@ -58,7 +58,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_breadcrumb_separator_css( $attributes, 'Mobile' )
 		);
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-breadcrumbs___before-image',
+			'{{WRAPPER}} .ablocks-breadcrumbs___before-image , {{WRAPPER}} .ablocks-breadcrumbs__before-text',
 			$this->get_breadcrumb_before_text_image_css( $attributes ),
 			$this->get_breadcrumb_before_text_image_css( $attributes, 'Tablet' ),
 			$this->get_breadcrumb_before_text_image_css( $attributes, 'Mobile' )
@@ -195,8 +195,14 @@ class Block extends BlockBaseAbstract {
 				: ''; // __( '', 'ablocks' );
 
 		$beforeSeparator = ( isset( $attributes['beforeSeparator'] ) && $attributes['beforeSeparator'] !== '' )
-				? (string) $attributes['beforeSeparator']
-				: ''; // __( '', 'ablocks' );
+					? (string) $attributes['beforeSeparator']
+					: ''; // __( '', 'ablocks' );
+
+		$enable_faq_schema = false;
+		if ( isset( $attributes['enableFaqSchema'] ) ) {
+			$parsed_enable_faq_schema = filter_var( $attributes['enableFaqSchema'], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
+			$enable_faq_schema = ( null === $parsed_enable_faq_schema ) ? false : $parsed_enable_faq_schema;
+		}
 
 		return wp_parse_args( (array) $attributes, [
 			'separator'       => $separator,
@@ -206,6 +212,7 @@ class Block extends BlockBaseAbstract {
 			'before_breadcrumb_text_image'       => $beforeBreadcrumbTextImage,
 			'before_text_image'       => $beforeTextImage,
 			'before_separator'       => $beforeSeparator,
+			'enableFaqSchema'       => $enable_faq_schema,
 			'include_current' => true,
 			'tax'             => '',
 			'max'             => 0,
@@ -262,7 +269,7 @@ class Block extends BlockBaseAbstract {
 		}
 
 		// Home
-		$this->add_item( $breadcrumb_items, $breadcrumb_normalize['home_text'], home_url( '>' ) );
+		$this->add_item( $breadcrumb_items, $breadcrumb_normalize['home_text'], home_url( '/' ) );
 
 		// Posts page (static front)
 		if ( is_home() && ! is_front_page() ) {
@@ -372,10 +379,10 @@ class Block extends BlockBaseAbstract {
 	private function build_items_editor( array $breadcrumb_normalize ) : array {
 		$breadcrumb_items   = [];
 		$home_label = (string) $breadcrumb_normalize['home_text']; // attributes → fallback "Home"
-		$this->add_item( $breadcrumb_items, $home_label, home_url( '>' ) );
+		$this->add_item( $breadcrumb_items, $home_label, home_url( '/' ) );
 
 		global $post;
-		if ( $post instanceof WP_Post ) {
+		if ( $post instanceof \WP_Post ) {
 			$breadcrumb_pt  = get_post_type( $post );
 			$breadcrumb_pto = $breadcrumb_pt ? get_post_type_object( $breadcrumb_pt ) : null;
 
@@ -407,7 +414,7 @@ class Block extends BlockBaseAbstract {
 	 * Safe current title (fallbacks when get_the_title() empty in editor)
 	 */
 	private function current_title_safe( $p = null ) : string {
-		if ( $p instanceof WP_Post ) {
+		if ( $p instanceof \WP_Post ) {
 			$breadcrumb_t = get_the_title( $p );
 			if ( $breadcrumb_t === '' ) {
 				$breadcrumb_t = $p->post_title;
@@ -615,14 +622,38 @@ class Block extends BlockBaseAbstract {
 	}
 
 	/**
+	 * Best-effort current request URL for schema item fallback.
+	 */
+	private function current_request_url() : string {
+		if ( ! empty( $_SERVER['REQUEST_URI'] ) ) {
+			$request_uri = wp_unslash( $_SERVER['REQUEST_URI'] );
+			$request_uri = esc_url_raw( $request_uri );
+
+			return home_url( $request_uri );
+		}
+
+		$permalink = get_permalink();
+		if ( ! empty( $permalink ) ) {
+			return $permalink;
+		}
+
+		return home_url( '/' );
+	}
+
+	/**
 	 * Breadcrumbs-style HTML (matches Breadcrumbs classes; includes microdata)
 	 */
 	private function render_html_breadcrumbs( array $breadcrumb_items, array $breadcrumb_normalize ) {
-
+		$enable_schema = ! empty( $breadcrumb_normalize['enableFaqSchema'] );
 		ob_start();
 		?>
 		<div aria-label="<?php esc_attr_e( 'breadcrumb', 'ablocks' ); ?>"
-			 class="ablocks-breadcrumbs">
+			 class="ablocks-breadcrumbs"
+			 role="navigation"
+			<?php if ( $enable_schema ) : ?>
+			 itemscope
+			 itemtype="https://schema.org/BreadcrumbList"
+			<?php endif; ?>>
 
 			<?php
 
@@ -643,18 +674,29 @@ class Block extends BlockBaseAbstract {
 				<?php endif; ?>
 			<?php endif; ?>
 
-			<?php foreach ( $breadcrumb_items as $i => $breadcrumb_it ) : ?>
-								<span class="ablocks-breadcrumbs__item" >
+					<?php foreach ( $breadcrumb_items as $i => $breadcrumb_it ) : ?>
+								<span class="ablocks-breadcrumbs__item"
+									<?php if ( $enable_schema ) : ?>
+										itemprop="itemListElement"
+										itemscope
+										itemtype="https://schema.org/ListItem"
+									<?php endif; ?>>
 
-					<?php if ( ! empty( $breadcrumb_it['url'] ) ) : ?>
-						<a  href="<?php echo esc_url( $breadcrumb_it['url'] ); ?>">
-							<span><?php echo esc_html( $breadcrumb_it['label'] ); ?></span>
-						</a>
-					<?php else : ?>
-						<span  class="ablocks-breadcrumbs__item-current"><?php echo esc_html( $breadcrumb_it['label'] ); ?></span>
-					<?php endif; ?>
-					<meta content="<?php echo (int) ( $i + 1 ); ?>" />
-				</span>
+							<?php if ( ! empty( $breadcrumb_it['url'] ) ) : ?>
+								<a <?php if ( $enable_schema ) : ?>itemprop="item"<?php endif; ?> href="<?php echo esc_url( $breadcrumb_it['url'] ); ?>">
+									<span <?php if ( $enable_schema ) : ?>itemprop="name"<?php endif; ?>><?php echo esc_html( $breadcrumb_it['label'] ); ?></span>
+								</a>
+							<?php else : ?>
+								<span class="ablocks-breadcrumbs__item-current" <?php if ( $enable_schema ) : ?>itemprop="name"<?php endif; ?>><?php echo esc_html( $breadcrumb_it['label'] ); ?></span>
+								<?php $current_item_url = $this->current_request_url(); ?>
+								<?php if ( $enable_schema && ! empty( $current_item_url ) ) : ?>
+									<meta itemprop="item" content="<?php echo esc_url( $current_item_url ); ?>" />
+								<?php endif; ?>
+							<?php endif; ?>
+							<?php if ( $enable_schema ) : ?>
+								<meta itemprop="position" content="<?php echo (int) ( $i + 1 ); ?>" />
+							<?php endif; ?>
+						</span>
 				<?php if ( $i < count( $breadcrumb_items ) - 1 ) : ?>
 					<span class="ablocks-breadcrumbs__separator"><?php echo esc_html( $breadcrumb_normalize['separator'] ); ?></span>
 				<?php endif; ?>
@@ -677,7 +719,7 @@ class Block extends BlockBaseAbstract {
 		if ( $block_instance && ! empty( $block_instance->context['postId'] ) ) {
 			$maybe = get_post( (int) $block_instance->context['postId'] );
 
-			if ( $maybe instanceof WP_Post ) {
+			if ( $maybe instanceof \WP_Post ) {
 				global $post;
 				$restore_post = $post ?? null;
 				$post = $maybe;

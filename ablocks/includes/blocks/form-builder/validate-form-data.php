@@ -27,9 +27,9 @@ final class ValidateFormData {
 	/** @var $filtered_data */
 	private ?array $filtered_data = [];
 	/** @var $errors */
-	private ?array $errors = [];
+	public ?array $errors = [];
 	/** @var $messages */
-	private ?array $messages = [
+	public ?array $messages = [
 		'default' => [],
 	];
 	/** @var $output */
@@ -183,7 +183,7 @@ final class ValidateFormData {
 		if ( in_array( $msg, array_key_exists( $key, $this->messages ) ? $this->messages[ $key ] : [], true ) ) {
 			return;
 		}
-		$this->messages[ $key ][] = sanitize_text_field( $msg );
+		$this->messages[ $key ][] = sanitize_text_field( $this->apply_vars( $msg ) );
 	}
 	/**
 	 * Check msg
@@ -193,6 +193,38 @@ final class ValidateFormData {
 	public function has_message() {
 		return count( $this->messages ) > 0;
 	}
+	
+	public function apply_vars( ?string $msg ): ?string {
+		$admin_email = get_option( 'admin_email' );
+		$current_user = wp_get_current_user();
+		$current_user_email = $current_user->user_email;
+
+		$fields = array_merge(
+			$this->form_info['data'] ?? [],
+			[
+				'admin_email'  => [ 'value' => $admin_email ],
+				'user_email'   => [ 'value' => $current_user_email ],
+				'site_name'   => [ 'value' => get_bloginfo( 'name' ) ],
+			]
+		);
+		// wp_send_json($fields);
+		foreach ( $fields as $key => [ 'value' => $val ] ) {
+			// Convert arrays and files to string representation
+			if ( is_array( $val ) ) {
+				// Handle file uploads
+				if ( isset( $val['name'] ) && isset( $val['tmp_name'] ) ) {
+					$val = $val['name'];
+				} else {
+					// Handle multi-select or other arrays
+					$val = implode( ', ', $val );
+
+				}
+			}
+			$msg = str_replace( "{{$key}}", $val, $msg );
+		}
+		return $msg;
+	}
+	
 	/**
 	 * Get output as array
 	 *

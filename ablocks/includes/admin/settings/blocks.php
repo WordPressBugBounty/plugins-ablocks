@@ -80,6 +80,7 @@ class Blocks {
 			'featured-image' => true,
 			'scroll-to-top' => true,
 			'breadcrumb' => true,
+			'interactive-circle-infographic' => true,
 			'code-highlighter' => true,
 			// Academy LMS Blocks
 			'academy-courses' => true,

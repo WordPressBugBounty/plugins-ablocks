@@ -156,16 +156,17 @@ class Block extends BlockBaseAbstract {
 		$css['display'] = 'block';
 
 		// Border calculations
-		$topDiff = ! empty( $attributes['border']['commonWidth'] ) ? (int) $attributes['border']['commonWidth'] : (int) $attributes['border']['topWidth'];
-		$bottomDiff = ! empty( $attributes['border']['commonWidth'] ) ? (int) $attributes['border']['commonWidth'] : (int) $attributes['border']['bottomWidth'];
-		$leftDiff = ! empty( $attributes['border']['commonWidth'] ) ? (int) $attributes['border']['commonWidth'] : (int) $attributes['border']['leftWidth'];
-		$rightDiff = ! empty( $attributes['border']['commonWidth'] ) ? (int) $attributes['border']['commonWidth'] : (int) $attributes['border']['rightWidth'];
+		$border = $attributes['border'] ?? [];
+		$topDiff = ! empty( $border['commonWidth'] ) ? (int) $border['commonWidth'] : (int) ( $border['topWidth'] ?? 0 );
+		$bottomDiff = ! empty( $border['commonWidth'] ) ? (int) $border['commonWidth'] : (int) ( $border['bottomWidth'] ?? 0 );
+		$leftDiff = ! empty( $border['commonWidth'] ) ? (int) $border['commonWidth'] : (int) ( $border['leftWidth'] ?? 0 );
+		$rightDiff = ! empty( $border['commonWidth'] ) ? (int) $border['commonWidth'] : (int) ( $border['rightWidth'] ?? 0 );
 
 		// Border radius calculations
-		$topRadiusValue = ! empty( $attributes['border']['commonRadius'] ) ? (int) $attributes['border']['commonRadius'] : (int) $attributes['border']['topRadius'];
-		$leftRadiusValue = ! empty( $attributes['border']['commonRadius'] ) ? (int) $attributes['border']['commonRadius'] : (int) $attributes['border']['leftRadius'];
-		$rightRadiusValue = ! empty( $attributes['border']['commonRadius'] ) ? (int) $attributes['border']['commonRadius'] : (int) $attributes['border']['rightRadius'];
-		$bottomRadiusValue = ! empty( $attributes['border']['commonRadius'] ) ? (int) $attributes['border']['commonRadius'] : (int) $attributes['border']['bottomRadius'];
+		$topRadiusValue = ! empty( $border['commonRadius'] ) ? (int) $border['commonRadius'] : (int) ( $border['topRadius'] ?? 0 );
+		$leftRadiusValue = ! empty( $border['commonRadius'] ) ? (int) $border['commonRadius'] : (int) ( $border['leftRadius'] ?? 0 );
+		$rightRadiusValue = ! empty( $border['commonRadius'] ) ? (int) $border['commonRadius'] : (int) ( $border['rightRadius'] ?? 0 );
+		$bottomRadiusValue = ! empty( $border['commonRadius'] ) ? (int) $border['commonRadius'] : (int) ( $border['bottomRadius'] ?? 0 );
 
 		// Apply border radius with differences taken into account
 		$css['border-top-left-radius'] = ( $topRadiusValue - $topDiff ) . 'px';
@@ -313,16 +314,17 @@ class Block extends BlockBaseAbstract {
 		$alignment_value = $attributes['alignment'][ 'value' . $device ] ?? '';
 
 		$css = [];
-		$topDiff = ! empty( $attributes['border']['commonWidth'] ) ? (int) $attributes['border']['commonWidth'] : (int) $attributes['border']['topWidth'];
-		$bottomDiff = ! empty( $attributes['border']['commonWidth'] ) ? (int) $attributes['border']['commonWidth'] : (int) $attributes['border']['bottomWidth'];
-		$leftDiff = ! empty( $attributes['border']['commonWidth'] ) ? (int) $attributes['border']['commonWidth'] : (int) $attributes['border']['leftWidth'];
-		$rightDiff = ! empty( $attributes['border']['commonWidth'] ) ? (int) $attributes['border']['commonWidth'] : (int) $attributes['border']['rightWidth'];
+		$border = $attributes['border'] ?? [];
+		$topDiff = ! empty( $border['commonWidth'] ) ? (int) $border['commonWidth'] : (int) ( $border['topWidth'] ?? 0 );
+		$bottomDiff = ! empty( $border['commonWidth'] ) ? (int) $border['commonWidth'] : (int) ( $border['bottomWidth'] ?? 0 );
+		$leftDiff = ! empty( $border['commonWidth'] ) ? (int) $border['commonWidth'] : (int) ( $border['leftWidth'] ?? 0 );
+		$rightDiff = ! empty( $border['commonWidth'] ) ? (int) $border['commonWidth'] : (int) ( $border['rightWidth'] ?? 0 );
 
 		// Border radius calculations
-		$topRadiusValue = ! empty( $attributes['border']['commonRadius'] ) ? (int) $attributes['border']['commonRadius'] : (int) $attributes['border']['topRadius'];
-		$leftRadiusValue = ! empty( $attributes['border']['commonRadius'] ) ? (int) $attributes['border']['commonRadius'] : (int) $attributes['border']['leftRadius'];
-		$rightRadiusValue = ! empty( $attributes['border']['commonRadius'] ) ? (int) $attributes['border']['commonRadius'] : (int) $attributes['border']['rightRadius'];
-		$bottomRadiusValue = ! empty( $attributes['border']['commonRadius'] ) ? (int) $attributes['border']['commonRadius'] : (int) $attributes['border']['bottomRadius'];
+		$topRadiusValue = ! empty( $border['commonRadius'] ) ? (int) $border['commonRadius'] : (int) ( $border['topRadius'] ?? 0 );
+		$leftRadiusValue = ! empty( $border['commonRadius'] ) ? (int) $border['commonRadius'] : (int) ( $border['leftRadius'] ?? 0 );
+		$rightRadiusValue = ! empty( $border['commonRadius'] ) ? (int) $border['commonRadius'] : (int) ( $border['rightRadius'] ?? 0 );
+		$bottomRadiusValue = ! empty( $border['commonRadius'] ) ? (int) $border['commonRadius'] : (int) ( $border['bottomRadius'] ?? 0 );
 
 		// Apply border radius with differences taken into account
 		$css['border-top-left-radius'] = ( $topRadiusValue - $topDiff ) . 'px';

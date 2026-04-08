@@ -67,7 +67,10 @@ class Block extends BlockBaseAbstract {
 		);
 
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-form-builder__input',
+			'{{WRAPPER}} .ablocks-form-builder__input ,
+			 {{WRAPPER}} .ablocks-form-builder__select ,
+			 {{WRAPPER}} .ablocks-form-builder-timepicker-input , 
+			 {{WRAPPER}} .ablocks-form-builder-datepicker-input',
 			$this->get_input_css( $attributes ),
 			$this->get_input_css( $attributes, 'Tablet' ),
 			$this->get_input_css( $attributes, 'Mobile' ),
@@ -181,7 +184,10 @@ class Block extends BlockBaseAbstract {
 		);
 
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-form-builder__input',
+		    '{{WRAPPER}} .ablocks-form-builder__input ,
+			 {{WRAPPER}} .ablocks-form-builder__select ,
+			 {{WRAPPER}} .ablocks-form-builder-timepicker-input , 
+			 {{WRAPPER}} .ablocks-form-builder-datepicker-input',
 			$this->get_input_css( $attributes ),
 			$this->get_input_css( $attributes, 'Tablet' ),
 			$this->get_input_css( $attributes, 'Mobile' ),

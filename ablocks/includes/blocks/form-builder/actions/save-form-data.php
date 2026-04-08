@@ -91,7 +91,8 @@ final class SaveFormData implements FormSubmissionAction {
 
 			if (
 				'subscription' === $this->validateformdata->form_info['info']['type'] &&
-				$this->validateformdata->form_info['info']['config']['subscriberToUser'] ?? false
+				isset($this->validateformdata->form_info['info']['config']['subscriberToUser']) &&
+				(bool) $this->validateformdata->form_info['info']['config']['subscriberToUser'] === true
 			) {
 				$this->create_user(
 					$this->validateformdata->form_info['data']

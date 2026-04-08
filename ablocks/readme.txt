@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.7.7
+Stable tag: 2.8.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -309,12 +309,22 @@ Our external packages use [Lottie](https://github.com/chenqingspring/react-lotti
 
 == Changelog ==
 
+= 2.8.0 - 08/04/2026 =
+* Improved – Update form builder block UI
+* Improved – Breadcrumb block schema support (SEO)
+* Improved – Accordion block schema support (SEO)
+* Fixed – Form success message dynamic data issue 
+* Fixed – All content export fatal error
+* Fixed – Image scroll border radius issue in editor 
+* Fixed – Form submit button width issue and input style 
+* Fixed – Block extension enable disable active button color issues 
+* Added – Interactive Circle Infographic Block
+
 = 2.7.7 - 13/03/2026 =
 * Fixed - form duplicate api data saving issue
 * Fixed - counter alignment issue
 * Fixed - Menu child block duplicate assets loading issue
 * Fixed - child script loading issue
-
 
 = 2.7.6 - 08/03/2026 =
 * Fixed - Search Block, Loop Builder and Form Builder conflict with assets generation

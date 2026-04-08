@@ -64,7 +64,7 @@ class Export {
 			'ablocks_global_h6_color'              => Helper::get_settings( 'global_h6_color', $default_settings['global_h6_color'] ),
 			'ablocks_global_h6_typography'         => $this->process_ablocks_json_data( 'global_h6_typography' ),
 			'ablocks_frontend_dashboard_page'      => $this->process_ablocks_json_data( 'frontend_dashboard_page' ),
-			'ablocks_frontend_dashboard_sub_pages' => base64_encode( get_option( 'ablocks_frontend_dashboard_sub_pages', [] ) )
+			'ablocks_frontend_dashboard_sub_pages' => base64_encode( get_option( 'ablocks_frontend_dashboard_sub_pages', '' ) )
 		);
 
 		if ( class_exists( 'StoreEngine' ) ) {

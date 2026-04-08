@@ -26,6 +26,10 @@ $attributes = [
 		'type' => 'boolean',
 		'default' => false,
 	],
+	'enableFaqSchema' => [
+		'type' => 'boolean',
+		'default' => false,
+	],
 	'initialOpen' => [
 		'type' => 'number',
 		'default' => 1,

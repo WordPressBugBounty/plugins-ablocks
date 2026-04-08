@@ -22,6 +22,51 @@ use ABlocks\Controls\Color;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'accordion';
 
+	public function render_callback( $attributes, $content, $block_instance ) {
+		$content = parent::render_callback( $attributes, $content, $block_instance );
+		if ( ! empty( $attributes['enableFaqSchema'] ) ) {
+			static $faq_schema_rendered = false;
+			if ( ! $faq_schema_rendered ) {
+				$schema = $this->generate_faq_schema( $block_instance );
+				if ( $schema ) {
+					$content .= '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>';
+					$faq_schema_rendered = true;
+				}
+			}
+		}
+		return $content;
+	}
+
+	private function generate_faq_schema( $block_instance ) {
+		$items = [];
+		foreach ( $block_instance->inner_blocks as $inner_block ) {
+			if ( $inner_block->name !== 'ablocks/single-accordion' ) {
+				continue;
+			}
+			$question = isset( $inner_block->attributes['accordionTitle'] ) ? wp_strip_all_tags( $inner_block->attributes['accordionTitle'] ) : '';
+			$answer_parts = [];
+			foreach ( $inner_block->inner_blocks as $child ) {
+				$answer_parts[] = wp_strip_all_tags( render_block( $child->parsed_block ) );
+			}
+			$answer = trim( preg_replace( '/\s+/', ' ', implode( ' ', $answer_parts ) ) );
+			if ( $question && $answer ) {
+				$items[] = [
+					'@type'          => 'Question',
+					'name'           => $question,
+					'acceptedAnswer' => [ '@type' => 'Answer', 'text' => $answer ],
+				];
+			}
+		}
+		if ( empty( $items ) ) {
+			return null;
+		}
+		return [
+			'@context'   => 'https://schema.org',
+			'@type'      => 'FAQPage',
+			'mainEntity' => $items,
+		];
+	}
+
 	public function build_css_v1( $attributes ) {
 		$css_generator = new CssGenerator( $attributes );
 

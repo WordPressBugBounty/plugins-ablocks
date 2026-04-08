@@ -23,6 +23,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => '',
 	],
+	'enableFaqSchema' => [
+		'type' => 'boolean',
+		'default' => false,
+	],	
 	'SeparatorChange' => [
 		'type' => 'string',
 		'default' => '',

@@ -164,6 +164,7 @@ class Blocks {
 		new \ABlocks\Blocks\FeaturedImage\Block();
 		new \ABlocks\Blocks\ScrollToTop\Block();
 		new \ABlocks\Blocks\Breadcrumb\Block();
+		new \ABlocks\Blocks\InteractiveCircleInfographic\Block();
 		// Form Builder
 		new \ABlocks\Blocks\FormBuilder\Block();
 		new \ABlocks\Blocks\FormInput\Block();

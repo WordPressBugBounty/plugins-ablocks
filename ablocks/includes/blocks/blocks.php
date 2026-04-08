@@ -76,6 +76,7 @@ return [
 	'advance-lists',
 	'taxonomy-listing',
 	'featured-image',
+	'interactive-circle-infographic',
 	'scroll-to-top',
 	'qr-code',
 	'advance-list-item',

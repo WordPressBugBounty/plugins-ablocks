@@ -477,7 +477,7 @@ class FormBuilderController {
 			$output['message'] = $validate->get_error_message();
 			wp_send_json_error( $output );
 		} elseif ( $validate->has_message() ) {
-			$output['confirmationNotice'] = $block_data['parentAttributes']['confirmationNotice'] ?? __( 'Form successfully submitted!', 'ablocks' );
+			$output['confirmationNotice'] = $validate->apply_vars( $block_data['parentAttributes']['confirmationNotice'] ?? __( 'Form successfully submitted!', 'ablocks' ) );
 			$output['message'] = $validate->get_message();
 
 			wp_send_json_success( $output );

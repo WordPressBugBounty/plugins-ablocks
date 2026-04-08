@@ -88,15 +88,15 @@ final class SendEmails implements FormSubmissionAction {
 	 * @return void
 	 */
 	private function send_mail( array $config ): void {
-		$this->user_email = $this->apply_vars( $this->user_email );
+		$this->user_email = $this->validateformdata->apply_vars( $this->user_email );
 
-		$to_email = $this->apply_vars( sanitize_text_field( $config['to'] ) );
+		$to_email = $this->validateformdata->apply_vars( sanitize_text_field( $config['to'] ) );
 
-		$subject = $this->apply_vars( sanitize_text_field( $config['subject'] ?? '' ) );
+		$subject = $this->validateformdata->apply_vars( sanitize_text_field( $config['subject'] ?? '' ) );
 
 		$type    = strtolower( sanitize_text_field( $config['format'] ?? 'html' ) );
 
-		$message = $this->apply_vars( wp_kses_post( $config['body'] ?? '' ) );
+		$message = $this->validateformdata->apply_vars( wp_kses_post( $config['body'] ?? '' ) );
 		// check {all-fields} exists or not
 		$message = empty( $message ) ? '{all-fields}' : $message;
 		if ( preg_match( '|\{all\-fields\}|im', $message ) ) {
@@ -106,12 +106,12 @@ final class SendEmails implements FormSubmissionAction {
 
 		$headers = [];
 
-		$from_email = $this->apply_vars( sanitize_text_field( $config['from'] ?? $this->admin_email ) );
-		$from_name  = $this->apply_vars( sanitize_text_field( $config['from_name'] ?? '' ) );
+		$from_email = $this->validateformdata->apply_vars( sanitize_text_field( $config['from'] ?? $this->admin_email ) );
+		$from_name  = $this->validateformdata->apply_vars( sanitize_text_field( $config['from_name'] ?? '' ) );
 
-		$reply_to   = $this->apply_vars( sanitize_text_field( $config['reply_to'] ?? '' ) );
-		$cc        = $this->apply_vars( sanitize_text_field( $config['cc'] ?? '' ) );
-		$bcc       = $this->apply_vars( sanitize_text_field( $config['bcc'] ?? '' ) );
+		$reply_to   = $this->validateformdata->apply_vars( sanitize_text_field( $config['reply_to'] ?? '' ) );
+		$cc        = $this->validateformdata->apply_vars( sanitize_text_field( $config['cc'] ?? '' ) );
+		$bcc       = $this->validateformdata->apply_vars( sanitize_text_field( $config['bcc'] ?? '' ) );
 
 		if ( $from_email ) {
 			$headers[] = $from_name ? 'From: ' . $from_name . ' <' . $from_email . '>' : 'From: ' . $from_email;
@@ -123,14 +123,14 @@ final class SendEmails implements FormSubmissionAction {
 		if ( $cc ) {
 			$headers[] = 'CC: ' . implode( ',', array_unique(
 				preg_split(
-					'|[,\s]|', $this->apply_vars( strval( $cc ) )
+					'|[,\s]|', $this->validateformdata->apply_vars( strval( $cc ) )
 				)
 			) );
 		}
 		if ( $bcc ) {
 			$headers[] = 'BCC: ' . implode( ',', array_unique(
 				preg_split(
-					'|[,\s]|', $this->apply_vars( strval( $bcc ) )
+					'|[,\s]|', $this->validateformdata->apply_vars( strval( $bcc ) )
 				)
 			) );
 		}
@@ -154,37 +154,6 @@ final class SendEmails implements FormSubmissionAction {
 			}
 		}
 
-	}
-
-	private function apply_vars( ?string $msg ): ?string {
-		$admin_email = get_option( 'admin_email' );
-		$current_user = wp_get_current_user();
-		$current_user_email = $current_user->user_email;
-
-		$fields = array_merge(
-			$this->validateformdata->form_info['data'] ?? [],
-			[
-				'admin_email'  => [ 'value' => $admin_email ],
-				'user_email'   => [ 'value' => $current_user_email ],
-				'site_name'   => [ 'value' => get_bloginfo( 'name' ) ],
-			]
-		);
-		// wp_send_json($fields);
-		foreach ( $fields as $key => [ 'value' => $val ] ) {
-			// Convert arrays and files to string representation
-			if ( is_array( $val ) ) {
-				// Handle file uploads
-				if ( isset( $val['name'] ) && isset( $val['tmp_name'] ) ) {
-					$val = $val['name'];
-				} else {
-					// Handle multi-select or other arrays
-					$val = implode( ', ', $val );
-
-				}
-			}
-			$msg = str_replace( "{{$key}}", $val, $msg );
-		}
-		return $msg;
 	}
 
 	/**
