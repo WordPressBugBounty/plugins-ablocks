@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.8.0
+Stable tag: 2.8.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -308,6 +308,9 @@ Privacy: https://policies.google.com/privacy
 Our external packages use [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT. Additionally, we incorporate [FontAwesome v6](https://fontawesome.com/license/free) under the CC BY 4.0 License, and [dnd kit](https://github.com/clauderic/dnd-kit) licensed under the MIT License.
 
 == Changelog ==
+
+= 2.8.1 - 23/04/2026 =
+* Added – Kodezen Store License support
 
 = 2.8.0 - 08/04/2026 =
 * Improved – Update form builder block UI

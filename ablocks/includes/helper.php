@@ -5,8 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use ABlocks\Classes\FileUpload;
-use ABlocks\Classes\BlockGlobal;
 use ABlocks\traits\Importer;
 
 class Helper {

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 2.8.0\n"
+"Project-Id-Version: aBlocks 2.8.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-08T07:19:41+00:00\n"
+"POT-Creation-Date: 2026-04-23T06:37:46+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: ablocks\n"
@@ -130,7 +130,7 @@ msgstr ""
 
 #: addons/theme-builder/database.php:21
 #: addons/theme-builder/database.php:22
-#: includes/helper.php:123
+#: includes/helper.php:121
 #: assets/build/dashboard.js:22
 msgid "Theme Builder"
 msgstr ""
@@ -159,47 +159,47 @@ msgstr ""
 msgid "Addon Name missing"
 msgstr ""
 
-#: includes/admin.php:69
+#: includes/admin.php:78
 msgid "Docs"
 msgstr ""
 
-#: includes/admin.php:70
+#: includes/admin.php:79
 msgid "View aBlocks documentation"
 msgstr ""
 
-#: includes/admin.php:74
+#: includes/admin.php:83
 msgid "Video Tutorials"
 msgstr ""
 
-#: includes/admin.php:75
+#: includes/admin.php:84
 msgid "See Video Tutorials"
 msgstr ""
 
-#: includes/admin.php:79
+#: includes/admin.php:88
 msgid "Community Support"
 msgstr ""
 
-#: includes/admin.php:80
+#: includes/admin.php:89
 msgid "Visit community forums"
 msgstr ""
 
-#: includes/admin.php:84
+#: includes/admin.php:93
 msgid "Rate the plugin ★★★★★"
 msgstr ""
 
-#: includes/admin.php:85
+#: includes/admin.php:94
 msgid "Rate the plugin."
 msgstr ""
 
-#: includes/admin.php:101
-#: includes/helper.php:134
+#: includes/admin.php:110
+#: includes/helper.php:132
 #: assets/build/blocks.js:1
 #: assets/build/dashboard.js:1
 #: assets/build/dashboard.js:13
 msgid "Settings"
 msgstr ""
 
-#: includes/admin.php:106
+#: includes/admin.php:115
 msgid "Get aBlocks Pro"
 msgstr ""
 
@@ -529,7 +529,7 @@ msgstr ""
 
 #: includes/blocks/frontend-dashboard/block.php:280
 #: includes/blocks/frontend-dashboard/block.php:340
-#: includes/helper.php:110
+#: includes/helper.php:108
 msgid "Dashboard"
 msgstr ""
 
@@ -650,29 +650,29 @@ msgstr ""
 msgid "Verification successful."
 msgstr ""
 
-#: includes/helper.php:116
+#: includes/helper.php:114
 msgid "Submissions"
 msgstr ""
 
-#: includes/helper.php:129
+#: includes/helper.php:127
 msgid "Add-ons"
 msgstr ""
 
-#: includes/helper.php:140
+#: includes/helper.php:138
 #: assets/build/dashboard.js:1
 msgid "Get Pro"
 msgstr ""
 
-#: includes/helper.php:150
+#: includes/helper.php:148
 msgid "Loading..."
 msgstr ""
 
 #. translators: %s template
-#: includes/helper.php:577
+#: includes/helper.php:575
 msgid "%s does not exist."
 msgstr ""
 
-#: includes/helper.php:595
+#: includes/helper.php:593
 msgid "action_args should not be overwritten when calling ablocks/get_template."
 msgstr ""
 
@@ -3244,6 +3244,7 @@ msgstr ""
 
 #: assets/build/blocks.js:1
 #: assets/build/dashboard.js:4
+#: assets/build/dashboard.js:13
 #: assets/build/dashboard.js:22
 msgid "Active"
 msgstr ""
@@ -7682,6 +7683,7 @@ msgid "Close"
 msgstr ""
 
 #: assets/build/dashboard.js:1
+#: assets/build/dashboard.js:13
 msgid "License"
 msgstr ""
 
@@ -8379,6 +8381,10 @@ msgid "Failed to validate %s Api key"
 msgstr ""
 
 #: assets/build/dashboard.js:13
+msgid "Integrations"
+msgstr ""
+
+#: assets/build/dashboard.js:13
 msgid "MailChimp"
 msgstr ""
 
@@ -8387,7 +8393,7 @@ msgid "Api Key"
 msgstr ""
 
 #: assets/build/dashboard.js:13
-msgid "To integrate with our forms you need an"
+msgid "To integrate with our forms you need an "
 msgstr ""
 
 #: assets/build/dashboard.js:13
@@ -8396,6 +8402,10 @@ msgstr ""
 
 #: assets/build/dashboard.js:13
 msgid "ConvertKit"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Page Setup"
 msgstr ""
 
 #: assets/build/dashboard.js:13
@@ -8415,11 +8425,135 @@ msgid "Forget Password Page"
 msgstr ""
 
 #: assets/build/dashboard.js:13
-msgid "Integrations"
+msgid "Need Expert Help? Hire Our Professionals"
 msgstr ""
 
 #: assets/build/dashboard.js:13
-msgid "Page Setup"
+msgid "Get access to a skilled team of designers, developers, marketers, and content experts—ready to bring your ideas to life."
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Hire Us"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Learn More"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "aBlocks Pro — License Active"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "You have access to automatic updates, priority support, and all pro tools."
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Deactivate License"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "License deactivated successfully."
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Failed to deactivate license."
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Deactivating…"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Manage License"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Failed to update opt-in setting."
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Allow usage tracking to help improve aBlocks Pro."
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Status:"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Last Checked:"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Refresh status"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Expires:"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "N/A"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Activation Remaining:"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Unlimited"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "%1$d out of %2$s"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Automatic Update:"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Enabled"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Activate aBlocks Pro for updates & support."
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Activate aBlocks Pro to unlock automatic updates, priority support, and all tools to build stunning WordPress pages."
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Enter your license key"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Activate License"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "License activated successfully."
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Failed to activate license."
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Please enter a license key."
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Activating…"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Don't have license key? <PurchaseButton/>"
+msgstr ""
+
+#: assets/build/dashboard.js:13
+msgid "Purchase one here"
 msgstr ""
 
 #: assets/build/dashboard.js:13

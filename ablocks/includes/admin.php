@@ -45,19 +45,28 @@ class Admin {
 		$hosts[] = 'ablocks.pro';
 		return $hosts;
 	}
+
 	public function conditional_loaded() {
 		$screen = get_current_screen();
 
-		if ( ! $screen ) {
-			return;
-		}
+		if ( $screen && $screen->id == 'ablocks_page_ablocks-get-pro' ) {
+			$link = add_query_arg(
+				[
+					'utm_source'   => 'ablocks-plugin',
+					'utm_medium'   => 'admin-dashboard',
+					'utm_campaign' => 'upgrade-to-pro',
+					'utm_content'  => 'get-pro-button',
+					'utm_term'     => 'free-user',
+					'locale'       => get_locale(),
+				],
+				'https://ablocks.pro/pricing/'
+			);
 
-		switch ( $screen->id ) {
-			case 'ablocks_page_ablocks-get-pro':
-				wp_safe_redirect( 'https://ablocks.pro/pricing/' );
-				exit;
+			wp_safe_redirect( $link );
+			exit;
 		}
 	}
+
 	public function add_plugin_links( $links, $file ) {
 		if ( ABLOCKS_PLUGIN_BASENAME !== $file ) {
 			return $links;
