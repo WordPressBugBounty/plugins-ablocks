@@ -175,8 +175,23 @@ class FormBuilderController {
 
 		$params = $request->get_params();
 
+		$post_id = $params['current_post_id'];
+
+		if ( is_numeric( $post_id ) &&
+			! current_user_can( 'manage_options' ) &&
+			get_post_status( $post_id ) !== 'publish'
+		) {
+			return new WP_REST_Response(
+				[
+					'success' => false,
+					'data'    => [ 'message' => __( 'Invalid post.', 'ablocks' ) ],
+				],
+				400
+			);
+		}
+
 		$block_data = Helper::get_block_attributes(
-			$params['current_post_id'],
+			$post_id,
 			$params['block_id'],
 			'ablocks/form-builder'
 		);
@@ -288,7 +303,8 @@ class FormBuilderController {
 		if (
 			! empty( $role ) &&
 			strtolower( $role ) !== 'default' &&
-			array_key_exists( $role, wp_roles()->roles )
+			array_key_exists( $role, wp_roles()->roles ) &&
+			$this->is_safe_registration_role( $role )
 		) {
 			( new \WP_User( $user_id ) )->set_role( $role );
 		}
@@ -618,6 +634,26 @@ class FormBuilderController {
 		];
 	}
 
+
+	private function is_safe_registration_role( string $role ) : bool {
+		$role_obj = get_role( $role );
+		if ( ! $role_obj ) {
+			return false;
+		}
+		$privileged_caps = [
+			'manage_options',
+			'edit_users',
+			'delete_users',
+			'create_users',
+			'promote_users',
+		];
+		foreach ( $privileged_caps as $cap ) {
+			if ( ! empty( $role_obj->capabilities[ $cap ] ) ) {
+				return false;
+			}
+		}
+		return true;
+	}
 
 	private function submit_schema() {
 		return [

@@ -117,6 +117,26 @@ $attributes = [
 		'type' => 'boolean',
 		'default' => true,
 	],
+	'evergreen' => [
+		'type' => 'boolean',
+		'default' => false,
+	],
+	'evergreenDays' => [
+		'type' => 'number',
+		'default' => 0,
+	],
+	'evergreenHours' => [
+		'type' => 'number',
+		'default' => 0,
+	],
+	'evergreenMinutes' => [
+		'type' => 'number',
+		'default' => 0,
+	],
+	'evergreenRestart' => [
+		'type' => 'boolean',
+		'default' => false,
+	],
 	'action' => [
 		'type' => 'string',
 		'default' => 'none',

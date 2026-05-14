@@ -34,6 +34,9 @@ class Dashboard extends AbstractAjaxHandler {
 				'callback' => array( $this, 'install_storeengine' ),
 				'capability'    => 'manage_options',
 			),
+			'install_ecm'      => array(
+				'callback' => array( $this, 'install_ecm' ),
+			),
 			'download_google_fonts'      => array(
 				'callback' => array( $this, 'download_google_fonts' ),
 				'capability'    => 'manage_options',
@@ -111,7 +114,29 @@ class Dashboard extends AbstractAjaxHandler {
 		}
 		wp_send_json_success( __( 'Plugin installed and activated successfully!', 'ablocks' ) );
 	}
+	public function install_ecm() {
+		// Check user permissions
+		if ( ! current_user_can( 'install_plugins' ) ) {
+			wp_send_json_error( __( 'You do not have sufficient permissions to install plugins.', 'ablocks' ) );
+		}
 
+		// Check if the plugin is already installed
+		if ( ! Helper::is_plugin_installed( 'easy-content-manager/easy-content-manager.php' ) ) {
+
+			$plugin_status = $this->install_plugin( 'easy-content-manager', true );
+			if ( $plugin_status ) {
+				wp_send_json_success( __( 'Plugin installed and activated successfully!', 'ablocks' ) );
+			}
+			wp_send_json_error( __( 'Sorry, failed to download.', 'ablocks' ) );
+		}
+
+		// Activate the plugin
+		$activate_status = activate_plugin( 'easy-content-manager/easy-content-manager.php' );
+		if ( is_wp_error( $activate_status ) ) {
+			wp_send_json_error( 'Plugin activation failed: ' . $activate_status->get_error_message() );
+		}
+		wp_send_json_success( __( 'Plugin installed and activated successfully!', 'ablocks' ) );
+	}
 	public function install_plugin( $slug = '', $active = true ) {
 		if ( empty( $slug ) ) {
 			return new \WP_Error( 'empty_arg', __( 'Argument should not be empty.', 'ablocks' ) );

@@ -124,6 +124,21 @@ class Blocks {
 			'storeengine-product-summary' => true,
 			'storeengine-product-description' => true,
 			'storeengine-product-review' => true,
+
+			// Easy Content Manager Blocks
+			'ecm-bookmark-button' => true,
+			'ecm-bookmark-badge' => true,
+			'ecm-bookmark-list' => true,
+			'ecm-bookmark-count' => true,
+			'ecm-reaction-list' => true,
+			'ecm-reaction' => true,
+			'ecm-upvote' => true,
+			'ecm-upvote-count' => true,
+			'ecm-upvote-list' => true,
+			'ecm-claim-button' => true,
+			'ecm-claim-badge' => true,
+			'ecm-claim-list' => true,
+			'ecm-claim-count' => true,
 		]);
 	}
 

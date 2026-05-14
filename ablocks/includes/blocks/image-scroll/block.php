@@ -110,6 +110,16 @@ class Block extends BlockBaseAbstract {
 				'property' => 'height',
 				'device' => $device,
 			]),
+			Range::get_css([
+				'attributeValue' => $attributes['scrollWidth'],
+				'attributeObjectKey' => 'value',
+				'isResponsive' => true,
+				'defaultValue' => 100,
+				'hasUnit' => true,
+				'unitDefaultValue' => '%',
+				'property' => 'width',
+				'device' => $device,
+			]),
 		);
 	}
 	public function get_scroll_option_css( $attributes, $device = '' ) {

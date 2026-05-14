@@ -86,6 +86,24 @@ class Blocks {
 			new \ABlocks\Blocks\StoreengineProductDescription\Block();
 			new \ABlocks\Blocks\StoreengineProductReview\Block();
 		}//end if
+		
+		if ( class_exists('EasyContentManager') ) {
+			// Easy Content Manager Register Block
+			new \ABlocks\Blocks\EcmBookmarkButton\Block();
+			new \ABlocks\Blocks\EcmBookmarkBadge\Block();
+			new \ABlocks\Blocks\EcmBookmarkList\Block();
+			new \ABlocks\Blocks\EcmBookmarkCount\Block();
+			new \ABlocks\Blocks\EcmReactionList\Block();
+			new \ABlocks\Blocks\EcmReaction\Block();
+			new \ABlocks\Blocks\EcmUpvote\Block();
+			new \ABlocks\Blocks\EcmUpvoteCount\Block();
+			new \ABlocks\Blocks\EcmUpvoteList\Block();
+			new \ABlocks\Blocks\EcmClaimButton\Block();
+			new \ABlocks\Blocks\EcmClaimBadge\Block();
+			new \ABlocks\Blocks\EcmClaimList\Block();
+			new \ABlocks\Blocks\EcmClaimCount\Block();
+		}
+		
 		new \ABlocks\Blocks\Container\Block();
 		new \ABlocks\Blocks\Heading\Block();
 		new \ABlocks\Blocks\Paragraph\Block();
@@ -194,6 +212,10 @@ class Blocks {
 				[
 					'slug' => 'storeengine',
 					'title' => __( 'StoreEngine', 'ablocks' ),
+				],
+				[
+					'slug' => 'easy-content-manager',
+					'title' => __( 'Easy Content Manager', 'ablocks' ),
 				],
 			],
 			$categories

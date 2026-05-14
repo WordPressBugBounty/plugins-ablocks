@@ -310,6 +310,19 @@
                 "unitMobile": ""
             }
         },
+        "link": {
+            "type": "object",
+            "default": {
+                "linkDestination": "",
+                "href": "",
+                "lightbox": "",
+                "linkTarget": "",
+                "rel": "",
+                "noFollow": "",
+                "keyValue": "",
+                "linkClass": ""
+            }
+        },
         "opacity": {
             "type": "number",
             "default": 1
@@ -343,6 +356,17 @@
                 "value": 200,
                 "valueTablet": "",
                 "valueMobile": ""
+            }
+        },
+        "scrollWidth": {
+            "type": "object",
+            "default": {
+                "value": 100,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "%",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
             }
         },
         "_margin": {

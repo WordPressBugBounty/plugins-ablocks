@@ -9,6 +9,7 @@ use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Border;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Icon;
+use ABlocks\Controls\Link;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -104,6 +105,7 @@ $attributes = array_merge(
 		'size' => '20',
 		'color' => '#000',
 	] ),
+	Link::get_attribute( 'link' ),
 	Alignment::get_attribute( 'iconAlignment', true, [ 'value' => 'row' ] ),
 	Alignment::get_attribute( 'alignment', true, [ 'value' => '' ] ),
 	GroupButton::get_attribute( 'listsDirection', true, [

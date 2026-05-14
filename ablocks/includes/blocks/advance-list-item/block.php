@@ -28,7 +28,7 @@ class Block extends BlockBaseAbstract {
 		$css_generator = new CssGenerator( $attributes );
 
 		$css_generator->add_class_styles(
-			'{{WRAPPER}}.ablocks-block--advance-list-item .ablocks-block-container',
+			'{{WRAPPER}}.ablocks-block--advance-list-item .ablocks-block-container .ablocks-advance-list-item-link',
 			$this->get_container_css( $attributes, '' ),
 			$this->get_container_css( $attributes, 'Tablet' ),
 			$this->get_container_css( $attributes, 'Mobile' ),

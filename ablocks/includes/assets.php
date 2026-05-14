@@ -35,6 +35,7 @@ class Assets {
 		add_action( 'wp_enqueue_scripts', [ $self, 'global_css_variable' ] );
 		add_action( 'enqueue_block_editor_assets', [ $self, 'global_css_variable' ] );
 		add_action( 'enqueue_block_editor_assets', [ $self, 'add_editor_inline_css' ] );
+		add_action( 'enqueue_block_editor_assets', [ $self, 'editor_google_fonts' ] );
 
 		// Detect page
 		add_action( 'wp', array( $self, 'detect_page' ) );
@@ -191,6 +192,7 @@ class Assets {
 				'storeengine' => Helper::is_active_storeengine(),
 				'wp_map_block' => Helper::is_active_wp_map_block(),
 				'quizpress' => Helper::is_active_quizpress(),
+				'easy_content_manager' => Helper::is_active_easy_content_manager(),
 			],
 			'blocks_status' => $ablocks_blocks,
 			'post_types' => $post_types
@@ -304,12 +306,22 @@ class Assets {
 		wp_set_script_translations( 'ablocks-demo-import-scripts', 'ablocks', ABLOCKS_ROOT_DIR_PATH . 'languages' );
 	}
 
-	public function web_fonts_url( $font ) {
-		$font_url = '';
-		if ( 'off' !== _x( 'on', 'Google font: on or off', 'ablocks' ) ) {
-			$font_url = add_query_arg( 'family', rawurlencode( $font ), '//fonts.googleapis.com/css' );
+	public function build_google_fonts_url( array $fonts ): string {
+		$family_strings = [];
+		foreach ( $fonts as $family => $weights ) {
+			$family_encoded = str_replace( ' ', '+', $family );
+			$weights = array_unique( array_map( 'strval', (array) $weights ) );
+			sort( $weights );
+			$family_strings[] = ! empty( $weights ) ? $family_encoded . ':wght@' . implode( ';', $weights ) : $family_encoded;
 		}
-		return $font_url;
+		return '//fonts.googleapis.com/css2?family=' . implode( '&family=', $family_strings ) . '&display=swap';
+	}
+
+	public function web_fonts_url( $font ) {
+		if ( 'off' === _x( 'on', 'Google font: on or off', 'ablocks' ) ) {
+			return '';
+		}
+		return '//fonts.googleapis.com/css2?family=' . $font;
 	}
 
 	public function front_end_google_fonts() {
@@ -320,22 +332,11 @@ class Assets {
 
 		if ( Helper::get_settings( 'enabled_load_google_font_locally', false ) ) {
 			$FontLoadLocally = new FontLoadLocally();
-			$FontLoadLocally->enqueue_fonts( $ablocks_fonts ); // Attempt to load local fonts (fallback inside method)
+			$FontLoadLocally->enqueue_fonts( $ablocks_fonts );
 		} else {
-			$font_families = [];
-			foreach ( $ablocks_fonts as $family => $weights ) {
-				$font_family_string = $family;
-				$total_weights = count( $weights );
-
-				if ( $total_weights > 0 ) {
-					$font_family_string .= ':wght@' . implode( ';', $weights );
-				}
-
-				$font_families[] = $font_family_string;
-			}
-			// Generate the URL using the web_fonts_url method
-			$google_fonts_url = $this->web_fonts_url( implode( '|', $font_families ) ) . '&display=swap';
-			wp_register_style( 'ablocks-frontend-google-fonts', esc_url( $google_fonts_url ), array(), ABLOCKS_VERSION );
+			$url = $this->build_google_fonts_url( $ablocks_fonts );
+			error_log( 'Enqueuing Google Fonts: ' . $url );
+			wp_enqueue_style( 'ablocks-frontend-google-fonts', $url, array(), null );
 		}
 	}
 
@@ -543,6 +544,15 @@ class Assets {
 		}
 		wp_add_inline_style( 'ablocks-editor-global-styles', $css );
 		wp_add_inline_style( 'ablocks-common-style', $css );
+	}
+
+	public function editor_google_fonts() {
+		$saved_fonts = json_decode( get_option( ABLOCKS_FONTS_SETTINGS_NAME, '{}' ), true );
+		if ( empty( $saved_fonts ) || ! is_array( $saved_fonts ) ) {
+			return;
+		}
+		$url = $this->build_google_fonts_url( $saved_fonts );
+		wp_enqueue_style( 'ablocks-editor-google-fonts', $url, array(), null );
 	}
 
 	public function add_editor_inline_css() {

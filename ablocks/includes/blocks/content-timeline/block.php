@@ -60,36 +60,26 @@ class Block extends BlockBaseAbstract {
 			$this->get_content_timeline_content_background_css( $attributes, 'Tablet' ),
 			$this->get_content_timeline_content_background_css( $attributes, 'Mobile' )
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline--outer-wrap .ablocks__in-view-icon',
+			$this->get_content_timeline_connector_alignment_css( $attributes ),
+			$this->get_content_timeline_connector_alignment_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_connector_alignment_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline-child__date',
+			$this->get_content_timeline_date_alignment_css( $attributes ),
+			$this->get_content_timeline_date_alignment_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_date_alignment_css( $attributes, 'Mobile' )
+		);
 		// Conditional CSS generation based on arrowAlignment
-		$arrowAlignment = $attributes['arrowAlignment'] ?? 'top';
 
-		if ( $arrowAlignment === 'top' ) {
-			$css_generator->add_class_styles(
-				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-top .ablocks-block-content-timeline-child__arrow',
+		$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-center .ablocks-block-content-timeline-child__arrow',
 				$this->get_content_timeline_arrow_css( $attributes ),
 				$this->get_content_timeline_arrow_css( $attributes, 'Tablet' ),
 				$this->get_content_timeline_arrow_css( $attributes, 'Mobile' )
 			);
-			$css_generator->add_class_styles(
-				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-top .ablocks-block-content-timeline-child__date',
-				$this->get_content_timeline_date_alignment_css( $attributes ),
-				$this->get_content_timeline_date_alignment_css( $attributes, 'Tablet' ),
-				$this->get_content_timeline_date_alignment_css( $attributes, 'Mobile' )
-			);
-		} elseif ( $arrowAlignment === 'bottom' ) {
-			$css_generator->add_class_styles(
-				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-bottom .ablocks-block-content-timeline-child__arrow',
-				$this->get_content_timeline_arrow_css( $attributes ),
-				$this->get_content_timeline_arrow_css( $attributes, 'Tablet' ),
-				$this->get_content_timeline_arrow_css( $attributes, 'Mobile' )
-			);
-			$css_generator->add_class_styles(
-				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-bottom .ablocks-block-content-timeline-child__date',
-				$this->get_content_timeline_date_alignment_css( $attributes ),
-				$this->get_content_timeline_date_alignment_css( $attributes, 'Tablet' ),
-				$this->get_content_timeline_date_alignment_css( $attributes, 'Mobile' )
-			);
-		}//end if
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-content-timeline-child__date,.ablocks-block-content-timeline-child__inner-content-date',
 			$this->get_content_timeline_date_css( $attributes ),
@@ -171,36 +161,26 @@ class Block extends BlockBaseAbstract {
 			$this->get_content_timeline_content_background_css( $attributes, 'Tablet' ),
 			$this->get_content_timeline_content_background_css( $attributes, 'Mobile' )
 		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline--outer-wrap .ablocks__in-view-icon',
+			$this->get_content_timeline_connector_alignment_css( $attributes ),
+			$this->get_content_timeline_connector_alignment_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_connector_alignment_css( $attributes, 'Mobile' )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-content-timeline-child__date',
+			$this->get_content_timeline_date_alignment_css( $attributes ),
+			$this->get_content_timeline_date_alignment_css( $attributes, 'Tablet' ),
+			$this->get_content_timeline_date_alignment_css( $attributes, 'Mobile' )
+		);
 		// Conditional CSS generation based on arrowAlignment
-		$arrowAlignment = $attributes['arrowAlignment'] ?? 'top';
 
-		if ( $arrowAlignment === 'top' ) {
 			$css_generator->add_class_styles(
-				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-top .ablocks-block-content-timeline-child__arrow',
+				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-center .ablocks-block-content-timeline-child__arrow',
 				$this->get_content_timeline_arrow_css( $attributes ),
 				$this->get_content_timeline_arrow_css( $attributes, 'Tablet' ),
 				$this->get_content_timeline_arrow_css( $attributes, 'Mobile' )
 			);
-			$css_generator->add_class_styles(
-				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-top .ablocks-block-content-timeline-child__date',
-				$this->get_content_timeline_date_alignment_css( $attributes ),
-				$this->get_content_timeline_date_alignment_css( $attributes, 'Tablet' ),
-				$this->get_content_timeline_date_alignment_css( $attributes, 'Mobile' )
-			);
-		} elseif ( $arrowAlignment === 'bottom' ) {
-			$css_generator->add_class_styles(
-				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-bottom .ablocks-block-content-timeline-child__arrow',
-				$this->get_content_timeline_arrow_css( $attributes ),
-				$this->get_content_timeline_arrow_css( $attributes, 'Tablet' ),
-				$this->get_content_timeline_arrow_css( $attributes, 'Mobile' )
-			);
-			$css_generator->add_class_styles(
-				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-bottom .ablocks-block-content-timeline-child__date',
-				$this->get_content_timeline_date_alignment_css( $attributes ),
-				$this->get_content_timeline_date_alignment_css( $attributes, 'Tablet' ),
-				$this->get_content_timeline_date_alignment_css( $attributes, 'Mobile' )
-			);
-		}//end if
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-content-timeline-child__date,.ablocks-block-content-timeline-child__inner-content-date',
 			$this->get_content_timeline_date_css( $attributes ),
@@ -442,17 +422,59 @@ class Block extends BlockBaseAbstract {
 		}
 		return $css;
 	}
+	// public function get_content_timeline_arrow_css( $attributes, $device = '' ) {
+	// 	$css = [];
+	// 	$arrowAlignment = $attributes['arrowAlignment'] ?? '';
+	// 	$iconBackgroundSize = $attributes['iconBackgroundSize'] ?? '';
+
+	// 	if ( $arrowAlignment === 'top' ) {
+	// 		$css['height'] = '0px';
+	// 		$css['top'] = $iconBackgroundSize ? ( $iconBackgroundSize / 2 ) . 'px' : '0';
+	// 	} elseif ( $arrowAlignment === 'bottom' ) {
+	// 		$css['height'] = $iconBackgroundSize ? ( $iconBackgroundSize / 2 ) . 'px' : '0';
+	// 		$css['bottom'] = '0';
+	// 	}
+
+	// 	return $css;
+	// }
+
 	public function get_content_timeline_arrow_css( $attributes, $device = '' ) {
+			$css = [];
+			$arrowAlignment = $attributes['arrowAlignment'] ?? '';
+			$iconBackgroundSize = $attributes['iconBackgroundSize'] ?? '';
+
+			// Existing logic + updated styles
+			if ( $arrowAlignment === 'top' ) {
+				$css['height'] = '35px';
+				$css['top'] = '10%';
+				$css['transform'] = 'translateY(-50%)';
+				$css['-webkit-transform'] = 'translateY(-50%)';
+
+			} elseif ( $arrowAlignment === 'bottom' ) {
+				$css['height'] = '35px';
+				$css['top'] = '90%';
+				$css['transform'] = 'translateY(-50%)';
+				$css['-webkit-transform'] = 'translateY(-50%)';
+
+			} elseif ( $arrowAlignment === 'centre' ) {
+				$css['height'] = '35px';
+				$css['top'] = '50%';
+				$css['transform'] = 'translateY(-50%)';
+				$css['-webkit-transform'] = 'translateY(-50%)';
+			}
+
+			return $css;
+	}
+	public function get_content_timeline_connector_alignment_css( $attributes, $device = '' ) {
 		$css = [];
 		$arrowAlignment = $attributes['arrowAlignment'] ?? '';
-		$iconBackgroundSize = $attributes['iconBackgroundSize'] ?? '';
 
 		if ( $arrowAlignment === 'top' ) {
-			$css['height'] = '0px';
-			$css['top'] = $iconBackgroundSize ? ( $iconBackgroundSize / 2 ) . 'px' : '0';
+			$css['align-self'] = 'flex-start';
 		} elseif ( $arrowAlignment === 'bottom' ) {
-			$css['height'] = $iconBackgroundSize ? ( $iconBackgroundSize / 2 ) . 'px' : '0';
-			$css['bottom'] = '0';
+			$css['align-self'] = 'flex-end';
+		} else {
+			$css['align-self'] = 'center';
 		}
 
 		return $css;
@@ -462,6 +484,14 @@ class Block extends BlockBaseAbstract {
 
 		$arrowAlignment = $attributes['arrowAlignment'] ?? '';
 		$iconBackgroundSize = $attributes['iconBackgroundSize'] ?? '';
+
+		if ( $arrowAlignment === 'top' ) {
+			$css['align-self'] = 'flex-start';
+		} elseif ( $arrowAlignment === 'bottom' ) {
+			$css['align-self'] = 'flex-end';
+		} else {
+			$css['align-self'] = 'center';
+		}
 
 		if ( $arrowAlignment === 'top' ) {
 			$css['margin-top'] = $iconBackgroundSize ? ( $iconBackgroundSize / 4 ) . 'px' : '0';

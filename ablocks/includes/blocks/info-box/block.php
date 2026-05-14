@@ -265,7 +265,12 @@ class Block extends BlockBaseAbstract {
 			Icon::get_element_image_hover_css( $attributes, 'Tablet', 'btnIcon' ),
 			Icon::get_element_image_hover_css( $attributes, 'Mobile', 'btnIcon' ),
 		);
-
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-btn-link > .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes, '', 'btnIcon' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet', 'btnIcon' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile', 'btnIcon' ),
+		);
 		return $css_generator->generate_css();
 	}
 	public function build_css_v2( $attributes ) {
@@ -522,7 +527,12 @@ class Block extends BlockBaseAbstract {
 			Icon::get_element_image_hover_css( $attributes, 'Tablet', 'btnIcon' ),
 			Icon::get_element_image_hover_css( $attributes, 'Mobile', 'btnIcon' ),
 		);
-
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-info-box-btn-link > .ablocks-icon-wrap:hover',
+			Icon::get_wrapper_hover_css( $attributes, '', 'btnIcon' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Tablet', 'btnIcon' ),
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile', 'btnIcon' ),
+		);
 		return $css_generator->generate_css();
 	}
 	public function build_css( $attributes ) {

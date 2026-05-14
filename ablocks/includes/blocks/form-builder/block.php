@@ -47,7 +47,7 @@ class Block extends BlockBaseAbstract {
 		);
 
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} > .ablocks-form-builder__field',
+			'{{WRAPPER}} .ablocks-form-builder__field',
 			$this->get_field_css( $attributes ),
 			$this->get_field_css( $attributes, 'Tablet' ),
 			$this->get_field_css( $attributes, 'Mobile' ),
@@ -67,10 +67,10 @@ class Block extends BlockBaseAbstract {
 		);
 
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-form-builder__input ,
-			 {{WRAPPER}} .ablocks-form-builder__select ,
-			 {{WRAPPER}} .ablocks-form-builder-timepicker-input , 
-			 {{WRAPPER}} .ablocks-form-builder-datepicker-input',
+			'{{WRAPPER}} input.ablocks-form-builder__input ,
+			 {{WRAPPER}} input.ablocks-form-builder__select ,
+			 {{WRAPPER}} input.ablocks-form-builder-timepicker-input , 
+			 {{WRAPPER}} input.ablocks-form-builder-datepicker-input',
 			$this->get_input_css( $attributes ),
 			$this->get_input_css( $attributes, 'Tablet' ),
 			$this->get_input_css( $attributes, 'Mobile' ),
@@ -164,7 +164,7 @@ class Block extends BlockBaseAbstract {
 				);
 
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} > .ablocks-form-builder__field',
+			'{{WRAPPER}} .ablocks-form-builder__field',
 			$this->get_field_css( $attributes ),
 			$this->get_field_css( $attributes, 'Tablet' ),
 			$this->get_field_css( $attributes, 'Mobile' ),
@@ -367,7 +367,7 @@ class Block extends BlockBaseAbstract {
 			Alignment::get_css( $attributes['inputAlignment'], 'text-align', $device ),
 			Typography::get_css( $attributes['inputTypography'], '', $device, $typographyValueGlobal ),
 			Border::get_css( $attributes['inputBorder'], '', $device ),
-			Dimensions::get_css( $attributes['inputPadding'], 'padding', $device )
+			$this->add_important_to_css( Dimensions::get_css( $attributes['inputPadding'], 'padding', $device ) )
 		);
 
 		if ( ! empty( $attributes['inputColor'] ) ) {
@@ -520,6 +520,13 @@ class Block extends BlockBaseAbstract {
 		}
 
 		return $css;
+	}
+
+	private function add_important_to_css( $css_array ) {
+		foreach ( $css_array as $key => $value ) {
+			$css_array[$key] = $value . ' !important';
+		}
+		return $css_array;
 	}
 
 

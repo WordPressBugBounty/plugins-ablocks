@@ -134,4 +134,19 @@ return [
 	'storeengine-product-summary',
 	'storeengine-product-description',
 	'storeengine-product-review',
+
+	// Easy Content Manager Blocks
+	'ecm-bookmark-button',
+	'ecm-bookmark-badge',
+	'ecm-bookmark-list',
+	'ecm-bookmark-count',
+	'ecm-reaction-list',
+	'ecm-reaction',
+	'ecm-upvote',
+	'ecm-upvote-count',
+	'ecm-upvote-list',
+	'ecm-claim-button',
+	'ecm-claim-badge',
+	'ecm-claim-list',
+	'ecm-claim-count',
 ];

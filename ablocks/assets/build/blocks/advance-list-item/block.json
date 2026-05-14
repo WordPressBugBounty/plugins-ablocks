@@ -273,6 +273,19 @@
             "type": "number",
             "default": 0
         },
+        "link": {
+            "type": "object",
+            "default": {
+                "linkDestination": "",
+                "href": "",
+                "lightbox": "",
+                "linkTarget": "",
+                "rel": "",
+                "noFollow": "",
+                "keyValue": "",
+                "linkClass": ""
+            }
+        },
         "iconAlignment": {
             "type": "object",
             "default": {

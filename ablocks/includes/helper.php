@@ -78,8 +78,7 @@ class Helper {
 		return class_exists( 'QuizPress' );
 	}
 	public static function is_active_easy_content_manager() {
-		$easy_content_manager = 'easy-content-manager/easy-content-manager.php';
-		return self::is_plugin_active( $easy_content_manager );
+		return class_exists( 'EasyContentManager' );
 	}
 
 	public static function is_enabled_assets_generation() {
@@ -392,6 +391,12 @@ class Helper {
 
 	public static function get_content_by_object_id( string $id_or_fse_slug ) : ?string {
 		if ( is_numeric( $id_or_fse_slug ) ) {
+			if (
+				! current_user_can( 'manage_options' ) &&
+				get_post_status( $id_or_fse_slug ) !== 'publish'
+			) {
+				return null;
+			}
 			return get_post_field( 'post_content', intval( $id_or_fse_slug ) );
 		} elseif (
 			! empty( $template = get_block_template( $id_or_fse_slug, 'wp_template_part' ) ) ||

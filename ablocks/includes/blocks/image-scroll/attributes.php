@@ -11,6 +11,8 @@ use ABlocks\Controls\Typography;
 use ABlocks\Controls\CssFilter;
 use ABlocks\Controls\BoxShadow;
 use ABlocks\Controls\Range;
+use ABlocks\Controls\LinkControl;
+use ABlocks\Controls\Link;
 
 $attributes = [
 	'block_id'                   => [
@@ -145,6 +147,7 @@ $attributes = array_merge(
 	Alignment::get_attribute( 'alignment', true, [ 'value' => 'left' ] ),
 	Border::get_attribute( 'border', true ),
 	Dimensions::get_attribute( 'padding', true ),
+	Link::get_attribute( 'link' ),
 	Range::get_attribute([
 		'attributeName' => 'opacity',
 		'defaultValue' => 1
@@ -176,6 +179,14 @@ $attributes = array_merge(
 		'attributeObjectKey' => 'value',
 		'isResponsive' => true,
 		'defaultValue' => 200,
+	] ),
+	Range::get_attribute( [
+		'attributeName' => 'scrollWidth',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => 100,
+		'hasUnit' => true,
+		'unitDefaultValue' => '%',
 	] ),
 );
 
