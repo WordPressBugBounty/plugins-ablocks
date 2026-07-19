@@ -271,6 +271,21 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_hover_css( $attributes, 'Tablet', 'btnIcon' ),
 			Icon::get_wrapper_hover_css( $attributes, 'Mobile', 'btnIcon' ),
 		);
+		// Specificity override: the flex rule above has (0,2,0); the global hide rule also has (0,2,0) but
+		// comes earlier in the CSS output, so flex wins due to source order. This override uses
+		// {{WRAPPER}}:not(.ablocks-has-block-container).ablocks-hide-on-* → (0,3,0), placed last,
+		// so display:none always beats display:flex regardless of order. Restore uses flex (not block)
+		// so the Info Box layout stays intact when a device-hidden block becomes visible at a smaller breakpoint.
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}:not(.ablocks-has-block-container).ablocks-hide-on-desktop,{{WRAPPER}}:not(.ablocks-has-block-container).ablocks-hide-on-tablet,{{WRAPPER}}:not(.ablocks-has-block-container).ablocks-hide-on-mobile',
+			! empty( $attributes['_hide_on_desktop'] ) ? [ 'display' => 'none' ] : [],
+			! empty( $attributes['_hide_on_tablet'] )
+				? [ 'display' => 'none' ]
+				: ( ! empty( $attributes['_hide_on_desktop'] ) ? [ 'display' => 'flex' ] : [] ),
+			! empty( $attributes['_hide_on_mobile'] )
+				? [ 'display' => 'none' ]
+				: ( ! empty( $attributes['_hide_on_tablet'] ) ? [ 'display' => 'flex' ] : [] )
+		);
 		return $css_generator->generate_css();
 	}
 	public function build_css_v2( $attributes ) {
@@ -532,6 +547,16 @@ class Block extends BlockBaseAbstract {
 			Icon::get_wrapper_hover_css( $attributes, '', 'btnIcon' ),
 			Icon::get_wrapper_hover_css( $attributes, 'Tablet', 'btnIcon' ),
 			Icon::get_wrapper_hover_css( $attributes, 'Mobile', 'btnIcon' ),
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}:not(.ablocks-has-block-container).ablocks-hide-on-desktop,{{WRAPPER}}:not(.ablocks-has-block-container).ablocks-hide-on-tablet,{{WRAPPER}}:not(.ablocks-has-block-container).ablocks-hide-on-mobile',
+			! empty( $attributes['_hide_on_desktop'] ) ? [ 'display' => 'none' ] : [],
+			! empty( $attributes['_hide_on_tablet'] )
+				? [ 'display' => 'none' ]
+				: ( ! empty( $attributes['_hide_on_desktop'] ) ? [ 'display' => 'flex' ] : [] ),
+			! empty( $attributes['_hide_on_mobile'] )
+				? [ 'display' => 'none' ]
+				: ( ! empty( $attributes['_hide_on_tablet'] ) ? [ 'display' => 'flex' ] : [] )
 		);
 		return $css_generator->generate_css();
 	}

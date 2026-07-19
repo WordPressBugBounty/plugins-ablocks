@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.9.0
+Stable tag: 2.10.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -308,6 +308,16 @@ Privacy: https://policies.google.com/privacy
 Our external packages use [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT. Additionally, we incorporate [FontAwesome v6](https://fontawesome.com/license/free) under the CC BY 4.0 License, and [dnd kit](https://github.com/clauderic/dnd-kit) licensed under the MIT License.
 
 == Changelog ==
+
+= 2.10.0 - 05/07/2026 =
+* Improved – Fonts are now self-hosted and loaded per page for faster, privacy-friendly rendering (no external Google Fonts request when hosted locally, and no font-related database writes while rendering a page)
+* Improved – Faster block editor: Lottie, Map and Chart blocks and the Custom CSS editor now load on demand, reducing the editor bundle size
+* Improved – Smoother typing in block settings with debounced text inputs
+* Improved – Lower server load with cached global styles, dynamic content and parsed-block lookups, plus cached library asset reads during generation
+* Improved – Safer asset caching: editing a single page no longer clears every page's generated assets
+* Fixed – Chart block not rendering in the editor
+* Fixed – Dynamic content processing no longer runs on unrelated blocks
+* Fixed – Removed a leftover debug log from the fonts loader
 
 2.9.0 – 14/05/2026
 * Added - ECM shortcode blocks, Bookmark Button, Bookmark Badge, Bookmark Count, Bookmark List, Claim Button, Claim Badge, Claim Count, Claim List, Upvote, Upvote List, Upvote Count, Rection, Reaction List

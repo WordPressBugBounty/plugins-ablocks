@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-product-summary",
     "version": "0.1.0",
-    "title": "StoreEngine Product Summary",
+    "title": "Product Summary",
     "category": "storeengine",
     "description": "Display key product information description, and excerpt in a clean, organized layout.",
     "keywords": [
@@ -1115,7 +1115,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

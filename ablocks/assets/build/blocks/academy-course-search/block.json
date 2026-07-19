@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/academy-course-search",
     "version": "0.1.0",
-    "title": "Academy Course Searchbar",
+    "title": "Course Searchbar",
     "category": "academy",
     "description": "Course search bar for Academy LMS.",
     "keywords": [
@@ -609,7 +609,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

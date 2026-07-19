@@ -27,7 +27,8 @@ class Assets {
 		add_action( 'admin_enqueue_scripts', [ $self, 'demo_importer_scripts' ], 10 );
 		add_action( 'enqueue_block_assets', [ $self, 'block_editor_assets' ] );
 		add_action( 'enqueue_block_assets', [ $self, 'register_scripts' ] );
-		add_action( 'wp_enqueue_scripts', [ $self, 'front_end_google_fonts' ], 999 );
+		// Frontend fonts are now emitted by core via CoreFontRegistry (theme.json
+		// @font-face) with a Google Fonts fallback. See docs/FONT-MANAGEMENT-PLAN.md.
 
 		add_action( 'wp_enqueue_scripts', [ $self, 'enqueue_frontend_assets' ], 99 );
 		// Global CSS
@@ -324,21 +325,6 @@ class Assets {
 		return '//fonts.googleapis.com/css2?family=' . $font;
 	}
 
-	public function front_end_google_fonts() {
-		global $ablocks_fonts;
-		if ( empty( $ablocks_fonts ) || ! is_array( $ablocks_fonts ) ) {
-			return false;
-		}
-
-		if ( Helper::get_settings( 'enabled_load_google_font_locally', false ) ) {
-			$FontLoadLocally = new FontLoadLocally();
-			$FontLoadLocally->enqueue_fonts( $ablocks_fonts );
-		} else {
-			$url = $this->build_google_fonts_url( $ablocks_fonts );
-			error_log( 'Enqueuing Google Fonts: ' . $url );
-			wp_enqueue_style( 'ablocks-frontend-google-fonts', $url, array(), null );
-		}
-	}
 
 
 	public function block_editor_assets() {
@@ -377,7 +363,27 @@ class Assets {
 		if ( $this->current_page_slug ) {
 			// Enqueue google fonts
 			wp_enqueue_style( 'ablocks-frontend-google-fonts' );
-			wp_enqueue_style( 'ablocks-blocks-combine-style', $this->FileUpload->get_file_url( $this->current_page_slug . '.min.css' ), array(), filemtime( $this->FileUpload->get_file_path( $this->current_page_slug . '.min.css' ) ), 'all' );
+
+			$css_path = $this->FileUpload->get_file_path( $this->current_page_slug . '.min.css' );
+
+			// Performance Suite — inline the page CSS when it's small enough to
+			// avoid a render-blocking request; fall back to a normal <link> above
+			// the threshold. Opt-in via perf_inline_css.
+			$inline_css = (bool) apply_filters(
+				'ablocks/perf/perf_inline_css',
+				(bool) Helper::get_settings( 'perf_inline_css', true )
+			);
+			$inline_max = (int) apply_filters( 'ablocks/perf/inline_css_max_bytes', 50 * 1024 );
+			$css_size = file_exists( $css_path ) ? (int) filesize( $css_path ) : 0;
+
+			if ( $inline_css && $css_size > 0 && $css_size <= $inline_max ) {
+				wp_register_style( 'ablocks-blocks-combine-style', false, array(), ABLOCKS_VERSION );
+				wp_enqueue_style( 'ablocks-blocks-combine-style' );
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+				wp_add_inline_style( 'ablocks-blocks-combine-style', (string) file_get_contents( $css_path ) );
+			} else {
+				wp_enqueue_style( 'ablocks-blocks-combine-style', $this->FileUpload->get_file_url( $this->current_page_slug . '.min.css' ), array(), filemtime( $css_path ), 'all' );
+			}
 
 			wp_enqueue_script( 'ablocks-blocks-combine-script', $this->FileUpload->get_file_url( $this->current_page_slug . '.min.js' ), array(), filemtime( $this->FileUpload->get_file_path( $this->current_page_slug . '.min.js' ) ), true, [ 'strategy' => $script_loading_strategy ] );
 			wp_localize_script( 'ablocks-blocks-combine-script', 'ABlocksGlobal', $this->get_localize_frontend_data() );
@@ -447,6 +453,11 @@ class Assets {
 		wp_register_style( 'ablocks-editor-global-styles', false, array(), ABLOCKS_VERSION );
 		wp_enqueue_style( 'ablocks-editor-global-styles' );
 
+		// The :root variables only change when global settings change, so cache
+		// the generated string and rebuild it on settings save (see Blocks
+		// ::clear_global_css_cache) instead of looping settings on every request.
+		$css = get_transient( 'ablocks_global_css_vars' );
+		if ( false === $css ) {
 		$container_padding = Helper::get_settings( 'container_padding', 10 ) . 'px';
 		$css = ":root, body .editor-styles-wrapper {\n";
 		$css .= "    --ablocks-container-padding: $container_padding;\n";
@@ -538,6 +549,8 @@ class Assets {
 		}//end foreach
 
 		$css .= "}\n";
+			set_transient( 'ablocks_global_css_vars', $css, DAY_IN_SECONDS );
+		}
 
 		if ( ! is_admin() && ! Helper::is_gutenberg_editor() ) {
 			$css .= $this->get_common_css();
@@ -547,11 +560,25 @@ class Assets {
 	}
 
 	public function editor_google_fonts() {
-		$saved_fonts = json_decode( get_option( ABLOCKS_FONTS_SETTINGS_NAME, '{}' ), true );
-		if ( empty( $saved_fonts ) || ! is_array( $saved_fonts ) ) {
+		// Load the fonts already used by the post being edited (plus globals) so
+		// existing content previews correctly on editor load. Live selections are
+		// handled client-side by the typography control.
+		$fonts = \ABlocks\Classes\FontCollector::get_global_fonts();
+
+		$post_id = 0;
+		if ( function_exists( 'get_the_ID' ) && get_the_ID() ) {
+			$post_id = (int) get_the_ID();
+		} elseif ( isset( $_GET['post'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$post_id = absint( $_GET['post'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		}
+		if ( $post_id ) {
+			$fonts = \ABlocks\Classes\FontCollector::merge( $fonts, \ABlocks\Classes\FontCollector::get_post_fonts( $post_id ) );
+		}
+
+		if ( empty( $fonts ) ) {
 			return;
 		}
-		$url = $this->build_google_fonts_url( $saved_fonts );
+		$url = $this->build_google_fonts_url( $fonts );
 		wp_enqueue_style( 'ablocks-editor-google-fonts', $url, array(), null );
 	}
 

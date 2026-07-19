@@ -23,6 +23,13 @@ class Blocks {
 		add_action( 'save_post', [ $self, 'generate_block_assets' ], 10, 3 );
 		add_action( 'switch_theme', [ $self, 'clear_generated_block_assets' ] );
 		add_action( 'save_post', [ $self, 'download_google_fonts_locally' ], 20, 3 );
+		// PERF-2: pre-warm the page's generated assets in the background after save,
+		// so the first visitor doesn't pay the parse/generate/write cost.
+		add_action( 'save_post', [ $self, 'prewarm_page_assets' ], 30, 3 );
+		// Recompute global typography fonts whenever the plugin's global settings change.
+		add_action( 'ablocks/after_save_settings', [ $self, 'refresh_global_fonts' ] );
+		// Bust the cached global CSS variables when global settings change.
+		add_action( 'ablocks/after_save_settings', [ $self, 'clear_global_css_cache' ] );
 
 		$self->register_block_sanitizer();
 		$self->form_builder_default_data();
@@ -80,6 +87,12 @@ class Blocks {
 			new \ABlocks\Blocks\StoreengineShippingInfo\Block();
 			new \ABlocks\Blocks\StoreengineCartNotice\Block();
 			new \ABlocks\Blocks\StoreengineOrderDetails\Block();
+			// Funnel Builder blocks (render the funnel shortcodes).
+			new \ABlocks\Blocks\StoreengineFunnelCheckout\Block();
+			new \ABlocks\Blocks\StoreengineFunnelOffer\Block();
+			new \ABlocks\Blocks\StoreengineFunnelAccept\Block();
+			new \ABlocks\Blocks\StoreengineFunnelDecline\Block();
+			new \ABlocks\Blocks\StoreengineFunnelContinue\Block();
 			new \ABlocks\Blocks\StoreengineMiniCart\Block();
 			new \ABlocks\Blocks\StoreengineProductGallery\Block();
 			new \ABlocks\Blocks\StoreengineProductSummary\Block();
@@ -248,20 +261,27 @@ class Blocks {
 		}
 
 		$uploader = new \ABlocks\Classes\FileUpload();
-		if ( file_exists( $uploader->get_file_path( $post_id . '.min.css' ) ) ) {
-			$uploader->delete_file( $post_id . '.min.css' );
-			$uploader->delete_file( $post_id . '.min.js' );
+
+		// Template-like content is shared across many pages, so a change there must
+		// invalidate every page's combined assets. Regular content only affects its
+		// own page — scope the invalidation to that one post so a single edit can't
+		// wipe the whole site's asset cache and cause a regeneration stampede.
+		$global_impact_post_types = apply_filters(
+			'ablocks/global_asset_invalidation_post_types',
+			[ 'ablocks_tb', 'wp_template', 'wp_template_part', 'wp_block' ]
+		);
+
+		if ( in_array( get_post_type( $post_id ), $global_impact_post_types, true ) ) {
+			$this->clear_generated_block_assets();
 			return;
 		}
 
-		$this->clear_generated_block_assets();
+		// Drop just this post's cached files; they regenerate on next visit.
+		$uploader->delete_file( $post_id . '.min.css' );
+		$uploader->delete_file( $post_id . '.min.js' );
 	}
 
 	public function download_google_fonts_locally( $post_id, $post, $update ) {
-		if ( ! Helper::get_settings( 'enabled_load_google_font_locally', false ) ) {
-			return;
-		}
-
 		if ( isset( $post->post_status ) && 'auto-draft' === $post->post_status ) {
 			return;
 		}
@@ -274,9 +294,80 @@ class Blocks {
 			return;
 		}
 
-		global $ablocks_fonts;
-		$fontDownloader = new FontLoadLocally();
-		$fontDownloader->process_font_queue( $ablocks_fonts );
+		// Only process content that can contain aBlocks fonts (aBlocks blocks or
+		// reusable blocks that might wrap them).
+		if ( empty( $post->post_content )
+			|| ( false === strpos( $post->post_content, 'wp:ablocks' ) && false === strpos( $post->post_content, 'wp:block' ) ) ) {
+			return;
+		}
+
+		// Collect the fonts this post actually uses from its saved attributes,
+		// cache them in post meta, and self-host them locally.
+		// See docs/FONT-MANAGEMENT-PLAN.md.
+		\ABlocks\Classes\FontCollector::save_post_fonts( $post_id );
+	}
+
+	/**
+	 * Pre-warm a published page's combined CSS/JS in the background after save,
+	 * via a non-blocking loopback request. This moves the parse/generate/write
+	 * cost off the first visitor's request (PERF-2). If loopback is unavailable,
+	 * the existing on-request generation still runs as a fallback.
+	 */
+	public function prewarm_page_assets( $post_id, $post, $update ) {
+		if ( ! Helper::is_enabled_assets_generation() ) {
+			return;
+		}
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+			return;
+		}
+		if ( false !== wp_is_post_revision( $post_id ) ) {
+			return;
+		}
+		if ( ! ( $post instanceof \WP_Post ) ) {
+			$post = get_post( $post_id );
+		}
+		if ( ! $post || 'publish' !== $post->post_status || ! is_post_type_viewable( $post->post_type ) ) {
+			return;
+		}
+		// Only for content that actually has aBlocks (or wrapping) blocks.
+		if ( empty( $post->post_content )
+			|| ( false === strpos( $post->post_content, 'wp:ablocks' ) && false === strpos( $post->post_content, 'wp:block' ) ) ) {
+			return;
+		}
+		if ( ! (bool) apply_filters( 'ablocks/perf/prewarm_assets', true, $post_id ) ) {
+			return;
+		}
+
+		$url = get_permalink( $post_id );
+		if ( ! $url ) {
+			return;
+		}
+
+		wp_remote_get(
+			$url,
+			[
+				'blocking'  => false,
+				'timeout'   => 0.01,
+				'sslverify' => false,
+				'headers'   => [ 'X-ABlocks-Prewarm' => '1' ],
+			]
+		);
+	}
+
+	/**
+	 * Recompute the global typography font set after settings are saved.
+	 * Re-primes the in-memory settings so the collector reads fresh values.
+	 */
+	public function refresh_global_fonts() {
+		$GLOBALS['ablocks_settings'] = json_decode( get_option( ABLOCKS_SETTINGS_NAME, '{}' ) );
+		\ABlocks\Classes\FontCollector::update_global_fonts();
+	}
+
+	/**
+	 * Invalidate the cached global CSS variables (see Assets::global_css_variable).
+	 */
+	public function clear_global_css_cache() {
+		delete_transient( 'ablocks_global_css_vars' );
 	}
 
 	public function form_builder_default_data(): void {

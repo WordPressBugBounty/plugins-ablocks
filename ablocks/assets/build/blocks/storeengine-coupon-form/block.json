@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-coupon-form",
     "version": "0.1.0",
-    "title": "StoreEngine Coupon Form",
+    "title": "Coupon Form",
     "category": "storeengine",
     "description": "Allows users to apply discount codes during the checkout process. Supports error and success message handling.",
     "keywords": [
@@ -890,7 +890,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

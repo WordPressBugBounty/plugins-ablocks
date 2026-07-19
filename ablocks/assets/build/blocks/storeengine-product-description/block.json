@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-product-description",
     "version": "0.1.0",
-    "title": "StoreEngine Product Description",
+    "title": "Product Description",
     "category": "storeengine",
     "description": "Show you Product Description Customizeable UI",
     "keywords": [
@@ -658,7 +658,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

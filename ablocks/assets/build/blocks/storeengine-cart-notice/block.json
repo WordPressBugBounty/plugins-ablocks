@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-cart-notice",
     "version": "0.1.0",
-    "title": "StoreEngine Cart Notice",
+    "title": "Cart Notice",
     "category": "storeengine",
     "description": "Display a customizable notice or confirmation message when a product is added to the cart. Perfect for upsells, promotions, or feedback.",
     "keywords": [
@@ -737,7 +737,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

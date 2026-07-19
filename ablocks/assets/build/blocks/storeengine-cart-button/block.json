@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-cart-button",
     "version": "0.1.0",
-    "title": "StoreEngine Add To Cart",
+    "title": "Add To Cart",
     "category": "storeengine",
     "description": "A customizable Add to Cart button that adds products and advances customers in the purchase process.",
     "keywords": [
@@ -986,7 +986,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

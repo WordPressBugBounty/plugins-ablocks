@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-products",
     "version": "0.1.0",
-    "title": "StoreEngine Products",
+    "title": "Products",
     "category": "storeengine",
     "description": "Display a dynamic list of products with customizable layout and sorting options.",
     "keywords": [
@@ -1302,7 +1302,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

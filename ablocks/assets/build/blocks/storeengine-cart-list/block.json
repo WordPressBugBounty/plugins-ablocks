@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-cart-list",
     "version": "0.1.0",
-    "title": "StoreEngine Cart List",
+    "title": "Cart List",
     "category": "storeengine",
     "description": "Displays the list of products currently added to the shopping cart, including quantity, price, and remove buttons.",
     "keywords": [
@@ -664,7 +664,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

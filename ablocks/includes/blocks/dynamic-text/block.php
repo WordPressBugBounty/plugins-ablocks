@@ -82,12 +82,19 @@ class Block extends BlockBaseAbstract {
 				return '<a href="' . esc_url( $url ) . '">' . esc_html( $url ) . '</a>';
 			case 'core:content':
 				static $guard = false;
+				static $content_cache = [];
 				if ( $guard ) {
 					return '';
 				}
-				$guard   = true;
-				$content = do_blocks( get_post_field( 'post_content', $post_id ) );
-				$guard   = false;
+				// Render the post's content once per request; multiple dynamic-text
+				// "content" blocks (or a loop/archive) would otherwise re-run
+				// do_blocks() on the full post each time.
+				if ( ! isset( $content_cache[ $post_id ] ) ) {
+					$guard = true;
+					$content_cache[ $post_id ] = do_blocks( get_post_field( 'post_content', $post_id ) );
+					$guard = false;
+				}
+				$content = $content_cache[ $post_id ];
 				if (
 				  empty( trim( wp_strip_all_tags( $content ) ) )
 				  && $this->is_editor_preview()

@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-shipping-info",
     "version": "0.1.0",
-    "title": "StoreEngine Shipping Info",
+    "title": "Shipping Info",
     "category": "storeengine",
     "description": "Show the shipping address provided during the checkout process.",
     "keywords": [
@@ -556,7 +556,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

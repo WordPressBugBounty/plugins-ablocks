@@ -17,7 +17,15 @@ $attributes = [
 				'value' => 'Step One'
 			]
 		]
-	]
+	],
+	'submitButtonText' => array(
+		'type' => 'string',
+		'default' => 'Submit'
+	),
+	'submitButtonSize' => array(
+		'type' => 'string',
+		'default' => 'default'
+	)
 ];
 
 $attributes = array_merge(

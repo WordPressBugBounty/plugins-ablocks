@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-product-review",
     "version": "0.1.0",
-    "title": "StoreEngine Product Review",
+    "title": "Product Review",
     "category": "storeengine",
     "description": "Display key product Review Overview, and excerpt in a clean, organized layout.",
     "keywords": [
@@ -886,7 +886,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

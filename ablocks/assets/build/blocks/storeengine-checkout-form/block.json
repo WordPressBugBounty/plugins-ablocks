@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-checkout-form",
     "version": "0.1.0",
-    "title": "StoreEngine Checkout Form",
+    "title": "Checkout Form",
     "category": "storeengine",
     "description": "Renders the full checkout form, including billing, shipping, and payment sections.",
     "keywords": [
@@ -915,7 +915,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

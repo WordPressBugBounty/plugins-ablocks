@@ -408,10 +408,18 @@ class Helper {
 	}
 
 	public static function get_block_attributes( string $post_id, string $block_id, string $block_name ) : array {
-		if ( ! is_null( $post_content = self::get_content_by_object_id( $post_id ) ) ) {
-			if ( is_array( $blocks = parse_blocks( $post_content ) ) ) {
-				return self::get_block_attributes_recursive( $block_id, $block_name, $blocks );
-			}
+		// Cache parsed blocks per object id for the request — this is called once
+		// per loop/REST lookup and would otherwise re-fetch + re-parse the whole
+		// post content every time.
+		static $parsed_cache = [];
+		if ( ! array_key_exists( $post_id, $parsed_cache ) ) {
+			$post_content = self::get_content_by_object_id( $post_id );
+			$parsed_cache[ $post_id ] = ( ! is_null( $post_content ) && is_array( $blocks = parse_blocks( $post_content ) ) )
+				? $blocks
+				: null;
+		}
+		if ( is_array( $parsed_cache[ $post_id ] ) ) {
+			return self::get_block_attributes_recursive( $block_id, $block_name, $parsed_cache[ $post_id ] );
 		}
 		return [];
 	}

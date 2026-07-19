@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/academy-student-registration-form",
     "version": "0.1.0",
-    "title": "Academy Student Registration Form",
+    "title": "Student Registration Form",
     "category": "academy",
     "description": "Showcase Academy LMS Student Registration form attractively.",
     "keywords": [
@@ -1052,7 +1052,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

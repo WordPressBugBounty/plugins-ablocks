@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/ecm-reaction",
     "version": "0.1.0",
-    "title": "ECM Reaction",
+    "title": "Reaction",
     "category": "easy-content-manager",
     "description": "A customizable reaction for Easy Content Manager.",
     "keywords": [
@@ -829,7 +829,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

@@ -145,7 +145,16 @@ abstract class BlockBaseAbstract {
 
 		// Dynamic block
 		if ( ! $content || $this->is_skip_inner_block ) {
-			$content = $this->get_dynamic_block_wrap( $attributes, $content, $block_instance );
+			// When called from the editor's ServerSideRender (REST API), RenderContainer (JS) already
+			// provides the outer ablocks-block-{blockId} wrapper via useBlockProps. Including it here
+			// too causes the Advanced-settings CSS selector to match two elements → double border/padding.
+			if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+				ob_start();
+				echo $this->render_block_content( $attributes, $content, $block_instance );
+				$content = ob_get_clean();
+			} else {
+				$content = $this->get_dynamic_block_wrap( $attributes, $content, $block_instance );
+			}
 		}
 
 		// Static Block but control render from php
@@ -165,6 +174,19 @@ abstract class BlockBaseAbstract {
 		return $content;
 	}
 
+	/**
+	 * file_exists + filemtime for a per-block asset, memoized per request so
+	 * repeated instances of the same block don't re-stat the same file.
+	 * Returns the mtime (cache-bust version) or false when the file is missing.
+	 */
+	private static $asset_version_cache = [];
+	private function cached_asset_version( $path ) {
+		if ( ! array_key_exists( $path, self::$asset_version_cache ) ) {
+			self::$asset_version_cache[ $path ] = file_exists( $path ) ? filemtime( $path ) : false;
+		}
+		return self::$asset_version_cache[ $path ];
+	}
+
 	private function enqueue_static_assets( $block_name ) {
 		// Library
 		if ( count( $this->get_style_depends() ) ) {
@@ -181,14 +203,15 @@ abstract class BlockBaseAbstract {
 		}
 
 		// block static css
-		if ( file_exists( $this->assets_path . 'build/blocks/' . $block_name . '/style.css' ) ) {
-			wp_enqueue_style( 'ablocks-' . $block_name . '-block-static-style', $this->assets_url . 'build/blocks/' . $block_name . '/style.css', array(), filemtime( $this->assets_path . 'build/blocks/' . $block_name . '/style.css' ), 'all' );
+		$style_version = $this->cached_asset_version( $this->assets_path . 'build/blocks/' . $block_name . '/style.css' );
+		if ( false !== $style_version ) {
+			wp_enqueue_style( 'ablocks-' . $block_name . '-block-static-style', $this->assets_url . 'build/blocks/' . $block_name . '/style.css', array(), $style_version, 'all' );
 		}
 
 		$script_loading_strategy = \ABlocks\Helper::get_script_loading_strategy();
 		$args = [ 'strategy' => $script_loading_strategy ];
 
-		if ( file_exists( $this->assets_path . 'build/blocks/' . $block_name . '/view.js' ) && ! wp_script_is( 'ablocks-' . $block_name . '-block-static-script', 'enqueued' ) ) {
+		if ( false !== $this->cached_asset_version( $this->assets_path . 'build/blocks/' . $block_name . '/view.js' ) && ! wp_script_is( 'ablocks-' . $block_name . '-block-static-script', 'enqueued' ) ) {
 			$dependencies = include $this->assets_path . 'build/blocks/' . $block_name . '/view.asset.php';
 			wp_enqueue_script(
 				'ablocks-' . $block_name . '-block-static-script',

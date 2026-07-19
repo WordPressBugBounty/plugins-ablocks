@@ -18,10 +18,6 @@ class FontLoadLocally {
 		if ( ! is_array( $fonts ) || empty( $fonts ) ) {
 			return;
 		}
-		if ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
-			// phpcs:ignore  WordPress.PHP.DevelopmentFunctions.error_log_error_log, WordPress.PHP.DevelopmentFunctions.error_log_print_r 
-			error_log( print_r( $fonts, true ) );
-		}
 		foreach ( $fonts as $family => $weights ) {
 			if ( ! is_array( $weights ) ) {
 				continue;
@@ -265,12 +261,68 @@ class FontLoadLocally {
 
 
 	/**
+	 * Return locally-available @font-face descriptors for a family.
+	 *
+	 * @param string $family
+	 * @param array  $weights Requested weights.
+	 * @return array [ [ 'weight' => '400', 'src' => 'https://.../400-xxx.woff2' ], ... ]
+	 */
+	public function get_local_font_faces( $family, $weights = [] ) {
+		$upload_dir = wp_upload_dir();
+		$dir        = trailingslashit( $upload_dir['basedir'] ) . self::FONTS_FOLDER . '/' . $this->sanitize_family( $family );
+		$url_base   = trailingslashit( $upload_dir['baseurl'] ) . self::FONTS_FOLDER . '/' . $this->sanitize_family( $family );
+
+		if ( ! is_dir( $dir ) ) {
+			return [];
+		}
+
+		$faces = [];
+		foreach ( (array) glob( $dir . '/*.woff2' ) as $file_path ) {
+			$file_name   = basename( $file_path );
+			$font_weight = preg_match( '/^(\d+)-/', $file_name, $m ) ? $m[1] : '400';
+
+			// If specific weights were requested, only include those.
+			if ( ! empty( $weights ) && ! in_array( (string) $font_weight, array_map( 'strval', $weights ), true ) ) {
+				continue;
+			}
+
+			$faces[] = [
+				'weight' => (string) $font_weight,
+				'src'    => $url_base . '/' . $file_name,
+			];
+		}
+
+		return $faces;
+	}
+
+	/**
+	 * From a [family => weights] map, return the subset not available locally.
+	 *
+	 * @param array $fonts
+	 * @return array [family => [missing weights]]
+	 */
+	public function get_missing( $fonts ) {
+		$missing = [];
+		if ( ! is_array( $fonts ) ) {
+			return $missing;
+		}
+		foreach ( $fonts as $family => $weights ) {
+			foreach ( (array) $weights as $weight ) {
+				if ( ! $this->is_font_weight_available( $family, $weight ) ) {
+					$missing[ $family ][] = (string) $weight;
+				}
+			}
+		}
+		return $missing;
+	}
+
+	/**
 	 * Sanitize font family for folder names
 	 *
 	 * @param string $family
 	 * @return string
 	 */
-	private function sanitize_family( $family ) {
+	public function sanitize_family( $family ) {
 		return str_replace( ' ', '-', strtolower( $family ) );
 	}
 }

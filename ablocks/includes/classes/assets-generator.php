@@ -16,6 +16,10 @@ class AssetsGenerator {
 
 		self::recursive_block_parser( $parse_blocks_content, $aBlocks, $style_depends, $scripts_depends );
 
+		// Dedupe once, after the whole block tree has been walked.
+		$style_depends = array_unique( $style_depends );
+		$scripts_depends = array_unique( $scripts_depends );
+
 		$register_styles = RegisterScripts::get_register_styles();
 		$register_scripts = RegisterScripts::get_register_scripts();
 		$library_css = '';
@@ -40,16 +44,14 @@ class AssetsGenerator {
 		// css
 		foreach ( $style_depends as $style_depend ) {
 			if ( isset( $register_styles[ $style_depend ]['path'] ) ) {
-				 // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-				$library_css .= file_get_contents( $register_styles[ $style_depend ]['path'] ) . "\n";
+				$library_css .= self::read_library_file( $register_styles[ $style_depend ]['path'] ) . "\n";
 			}
 		}
 
 		// js
 		foreach ( $scripts_depends as $script_depend ) {
 			if ( isset( $register_scripts[ $script_depend ]['path'] ) ) {
-				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-				$library_js .= file_get_contents( $register_scripts[ $script_depend ]['path'] ) . "\n";
+				$library_js .= self::read_library_file( $register_scripts[ $script_depend ]['path'] ) . "\n";
 			}
 		}
 
@@ -62,17 +64,22 @@ class AssetsGenerator {
 		return $aBlocks;
 	}
 
-	public static function recursive_block_parser( $parse_content, &$aBlocks, &$style_depends, &$scripts_depends ) {
+	public static function recursive_block_parser( $parse_content, &$aBlocks, &$style_depends, &$scripts_depends, &$seen_refs = [] ) {
 		if ( count( $parse_content ) > 0 ) {
 			foreach ( $parse_content as $item ) {
 				if ( ! empty( $item['blockName'] ) ) {
 					// Handle reusable blocks or patterns using "ref"
 					if ( $item['blockName'] === 'core/block' && ! empty( $item['attrs']['ref'] ) ) {
-						$ref_post_id = $item['attrs']['ref'];
+						$ref_post_id = (int) $item['attrs']['ref'];
+						// Guard against circular / repeated reusable-block references.
+						if ( in_array( $ref_post_id, $seen_refs, true ) ) {
+							continue;
+						}
+						$seen_refs[] = $ref_post_id;
 						$ref_post = get_post( $ref_post_id ); // Get the reusable block or pattern
 						if ( $ref_post ) {
 							$ref_content = parse_blocks( $ref_post->post_content ); // Parse the reusable block's content
-							self::recursive_block_parser( $ref_content, $aBlocks, $style_depends, $scripts_depends ); // Recursively parse the referenced block/pattern
+							self::recursive_block_parser( $ref_content, $aBlocks, $style_depends, $scripts_depends, $seen_refs ); // Recursively parse the referenced block/pattern
 						}
 					} elseif ( strpos( $item['blockName'], 'ablocks' ) !== false ) {
 						$block_name_class = str_replace( ' ', '', ucwords( str_replace( '-', ' ', explode( '/', $item['blockName'] )[1] ) ) );
@@ -98,11 +105,13 @@ class AssetsGenerator {
 							// 'ablocks-animate-style',
 							// if animation is used then added ablocks-animate-style dependency
 							if ( isset( $attributes['_animation']['animationType'] ) && ! empty( $attributes['_animation']['animationType'] ) && $attributes['_animation']['animationType'] !== 'none' ) {
-								$style_depends = array_unique( array_merge( $style_depends, [ 'ablocks-animate-style' ] ) );
+								$style_depends[] = 'ablocks-animate-style';
 							}
-							// Capture library scripts
-							$style_depends = array_unique( array_merge( $style_depends, $instance->get_style_depends() ) );
-							$scripts_depends = array_unique( array_merge( $scripts_depends, $instance->get_script_depends() ) );
+							// Capture library scripts. Just accumulate here; the caller
+							// dedups once after the full tree is walked (avoids O(n^2)
+							// array_unique on every block).
+							$style_depends = array_merge( $style_depends, $instance->get_style_depends() );
+							$scripts_depends = array_merge( $scripts_depends, $instance->get_script_depends() );
 
 							// Capture dynamic CSS
 							if ( isset( $item['attrs']['ref'] ) || isset( $item['attrs']['block_id'] ) ) {
@@ -117,11 +126,25 @@ class AssetsGenerator {
 
 					// Check for inner blocks and recursively process them
 					if ( is_array( $item['innerBlocks'] ) && count( $item['innerBlocks'] ) ) {
-						self::recursive_block_parser( $item['innerBlocks'], $aBlocks, $style_depends, $scripts_depends );
+						self::recursive_block_parser( $item['innerBlocks'], $aBlocks, $style_depends, $scripts_depends, $seen_refs );
 					}
 				}//end if
 			}//end foreach
 		}//end if
+	}
+
+	/**
+	 * Read a static library asset file, cached per request so the same library
+	 * file isn't re-read from disk when multiple pages are generated in one
+	 * request (e.g. regenerate-all).
+	 */
+	private static $library_file_cache = [];
+	private static function read_library_file( $path ) {
+		if ( ! isset( self::$library_file_cache[ $path ] ) ) {
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+			self::$library_file_cache[ $path ] = (string) file_get_contents( $path );
+		}
+		return self::$library_file_cache[ $path ];
 	}
 
 	public static function minify_css( $css_string ) {

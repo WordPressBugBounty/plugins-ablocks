@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "ablocks/academy-addition-info",
   "version": "0.1.0",
-  "title": "Academy Addition Info",
+  "title": "Addition Info",
   "category": "academy",
   "description": "Display detailed additional information for a specific course.",
   "keywords": [

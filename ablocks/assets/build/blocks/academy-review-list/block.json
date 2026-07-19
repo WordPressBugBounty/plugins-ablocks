@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "ablocks/academy-review-list",
   "version": "0.1.0",
-  "title": "Academy Review List",
+  "title": "Review List",
   "category": "academy",
   "description": "Showcase student reviews and testimonials in a styled list.",
   "keywords": [

@@ -65,7 +65,6 @@ class Typography extends ControlBaseAbstract {
 	}
 
 	public static function get_css( $attribute_value, $property = '', $device = '', $attribute_global_name = '' ) {
-		global $ablocks_fonts;
 		$global_value = [];
 		if ( $attribute_global_name ) {
 			$global_typography = wp_list_pluck( \Ablocks\Helper::get_settings( 'global_typography', [] ), 'value', 'id' );
@@ -90,21 +89,14 @@ class Typography extends ControlBaseAbstract {
 		};
 
 		// Font family (special: also track font weights for enqueue)
+		// Font family. Output the CSS value only — font *discovery* is no longer
+		// done at render time. The set of fonts a page uses is collected from
+		// saved block attributes (FontCollector) and emitted by core via
+		// theme.json (CoreFontRegistry). See docs/FONT-MANAGEMENT-PLAN.md.
 		if ( ! empty( $global_value['fontFamily'] ) ) {
 			$css['font-family'] = "var(--ablocks-{$attribute_global_name}-font-family)";
 		} elseif ( ! empty( $value['fontFamily'] ) ) {
-			$font_family = $value['fontFamily'];
-			$font_weight = ! empty( $value['weight'] ) ? $value['weight'] : '400';
-			$css['font-family'] = $font_family;
-
-			if ( isset( $ablocks_fonts[ $font_family ] ) ) {
-				if ( ! in_array( $font_weight, $ablocks_fonts[ $font_family ], true ) ) {
-					$ablocks_fonts[ $font_family ][] = $font_weight;
-				}
-			} else {
-				$ablocks_fonts[ $font_family ] = [ $font_weight ];
-			}
-			update_option( ABLOCKS_FONTS_SETTINGS_NAME, wp_json_encode( $ablocks_fonts ) );
+			$css['font-family'] = $value['fontFamily'];
 		}
 
 		// Desktop-only styles

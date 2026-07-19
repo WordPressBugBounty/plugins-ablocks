@@ -27,6 +27,22 @@ class Base {
 			'enabled_load_google_font_locally' => false,
 			'enabled_only_selected_fonts' => false,
 			'selected_fonts' => [],
+			// Performance Suite — platform optimizations (opt-in; default off so
+			// existing sites are unchanged until the user enables them).
+			'perf_disable_emojis' => false,
+			'perf_disable_embeds' => false,
+			'perf_disable_dashicons' => false,
+			'perf_disable_jquery_migrate' => false,
+			'perf_control_heartbeat' => false,
+			'perf_heartbeat_frequency' => 60,
+			// Performance Suite — delay JS until interaction.
+			'perf_delay_js' => false,
+			'perf_delay_js_timeout' => 5000,
+			// Performance Suite — image loading (safe: on by default).
+			'perf_lazy_images' => true,
+			'perf_lcp_eager_count' => 1,
+			// Performance Suite — inline small page CSS (safe: on by default).
+			'perf_inline_css' => true,
 			'enabled_coming_soon_page' => false,
 			'coming_soon_page' => '',
 			'enabled_maintenance_page' => false,

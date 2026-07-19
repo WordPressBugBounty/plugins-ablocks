@@ -656,6 +656,19 @@ class Block extends BlockBaseAbstract {
 			$accordion_index = 1;
 			$accordion_name  = 'ablocks-blower-group-' . ( $attributes['block_id'] ?? '' );
 
+			// Prime term caches for every listed term in one query so the per-term
+			// get_term()/get_term_link()/get_taxonomy() calls below are served from
+			// cache instead of hitting the DB per term.
+			$all_term_ids = [];
+			foreach ( $active_taxonomy as $prime_taxonomy ) {
+				foreach ( ( $selected_terms[ $prime_taxonomy ] ?? [] ) as $prime_term_id ) {
+					$all_term_ids[] = (int) $prime_term_id;
+				}
+			}
+			if ( ! empty( $all_term_ids ) ) {
+				_prime_term_caches( array_values( array_unique( $all_term_ids ) ) );
+			}
+
 			foreach ( $active_taxonomy as $taxonomy ) :
 				$term_ids = $selected_terms[ $taxonomy ] ?? [];
 

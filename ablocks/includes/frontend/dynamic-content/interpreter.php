@@ -54,6 +54,13 @@ class Interpreter {
 	}
 
 	public static function init( string $content, $block, $instance ) : string {
+		// This filter runs for EVERY block on the page (including core and
+		// third-party blocks). The regex in parse() is expensive, so skip it
+		// unless the block actually contains a dynamic-content marker.
+		if ( false === strpos( $content, 'ablocks_dc' )
+			&& false === strpos( $content, 'ablocks-richtext-dynamic-content' ) ) {
+			return $content;
+		}
 		$ins = new self( $content, $instance->context );
 		return $ins->content;
 	}

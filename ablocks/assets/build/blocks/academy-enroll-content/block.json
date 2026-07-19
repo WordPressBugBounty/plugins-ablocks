@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "ablocks/academy-enroll-content",
   "version": "0.1.0",
-  "title": "Academy Enroll Content",
+  "title": "Enroll Content",
   "category": "academy",
   "description": "Display detailed additional information for a specific course.",
   "keywords": [

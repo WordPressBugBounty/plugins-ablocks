@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-continue-button",
     "version": "0.1.0",
-    "title": "StoreEngine Continue Button",
+    "title": "Continue Button",
     "category": "storeengine",
     "description": "A customizable button that takes users to the next step in the shopping or checkout process (e.g., from cart to checkout).",
     "keywords": [
@@ -676,7 +676,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

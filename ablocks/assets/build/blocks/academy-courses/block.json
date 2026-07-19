@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/academy-courses",
     "version": "0.1.0",
-    "title": "Academy Courses",
+    "title": "Courses",
     "category": "academy",
     "description": "Showcase Academy LMS courses attractively.",
     "keywords": [
@@ -1138,7 +1138,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

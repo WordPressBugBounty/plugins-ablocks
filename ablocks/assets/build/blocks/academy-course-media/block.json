@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/academy-course-media",
     "version": "0.1.0",
-    "title": "Academy Course Media",
+    "title": "Course Media",
     "category": "academy",
     "description": "Easily customize the main course image/video in one click",
     "keywords": [
@@ -615,7 +615,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

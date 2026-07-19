@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-checkout-button",
     "version": "0.1.0",
-    "title": "StoreEngine Checkout Button",
+    "title": "Checkout Button",
     "category": "storeengine",
     "description": "Displays the final button for confirming and placing the order after all required checkout fields are completed.",
     "keywords": [
@@ -676,7 +676,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

@@ -88,7 +88,7 @@ class BlockGlobal {
 		$css = array_merge(
 			Dimensions::get_css( $attribute['_margin'], 'margin', $device ),
 			Dimensions::get_css( $attribute['_padding'], 'padding', $device ),
-			Mask::get_css( $attribute['_mask'], $device ),
+			Mask::get_css( $attribute['_mask'], '', $device ),
 			Background::get_css( $attribute['_background'], 'background', $device ),
 			Border::get_css( $attribute['_border'], '', $device ),
 			Width::get_css( $attribute['_width'], 'width', $device ),

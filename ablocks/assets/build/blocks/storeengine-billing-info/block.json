@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-billing-info",
     "version": "0.1.0",
-    "title": "StoreEngine Billing Info",
+    "title": "Billing Info",
     "category": "storeengine",
     "description": "Show the billing address associated with the customer\u2019s order.",
     "keywords": [
@@ -556,7 +556,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

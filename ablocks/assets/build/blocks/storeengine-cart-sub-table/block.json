@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-cart-sub-table",
     "version": "0.1.0",
-    "title": "StoreEngine Cart Sub Table",
+    "title": "Cart Sub Table",
     "category": "storeengine",
     "description": "Shows the cart summary table, including subtotal, shipping cost, tax, and total price. Useful to display in cart or checkout pages.",
     "keywords": [
@@ -584,7 +584,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/academy-login-form",
     "version": "0.1.0",
-    "title": "Academy Login Form",
+    "title": "Login Form",
     "category": "academy",
     "description": "Showcase Academy LMS login form attractively.",
     "keywords": [
@@ -1038,7 +1038,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

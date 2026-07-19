@@ -14,6 +14,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class FormBuilderController {
 
+	/**
+	 * Verify the REST request nonce to protect the public form endpoints
+	 * against CSRF.
+	 *
+	 * The frontend sends the standard WordPress REST nonce via the
+	 * `X-WP-Nonce` header (see `ABlocksGlobal.nonce`, generated with
+	 * `wp_create_nonce( 'wp_rest' )`).
+	 *
+	 * @param WP_REST_Request $request
+	 *
+	 * @return true|WP_REST_Response True when valid, error response otherwise.
+	 */
+	private function verify_nonce( WP_REST_Request $request ) {
+		$nonce = $request->get_header( 'X-WP-Nonce' );
+
+		if ( empty( $nonce ) ) {
+			$nonce = $request->get_param( 'security' );
+		}
+
+		if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, 'wp_rest' ) ) {
+			return new WP_REST_Response(
+				[
+					'success' => false,
+					'data'    => [
+						'message' => __( 'Security check failed. Please reload the page and try again.', 'ablocks' ),
+					],
+				],
+				403
+			);
+		}
+
+		return true;
+	}
+
 	public function register_routes() {
 
 		register_rest_route(
@@ -108,6 +142,11 @@ class FormBuilderController {
 
 	public function login( WP_REST_Request $request ) {
 
+		$nonce_check = $this->verify_nonce( $request );
+		if ( true !== $nonce_check ) {
+			return $nonce_check;
+		}
+
 		$params = $request->get_params();
 
 		$block_data = Helper::get_block_attributes(
@@ -172,6 +211,11 @@ class FormBuilderController {
 	}
 
 	public function register( WP_REST_Request $request ) {
+
+		$nonce_check = $this->verify_nonce( $request );
+		if ( true !== $nonce_check ) {
+			return $nonce_check;
+		}
 
 		$params = $request->get_params();
 
@@ -345,6 +389,11 @@ class FormBuilderController {
 
 	public function forget_password( WP_REST_Request $request ) {
 
+		$nonce_check = $this->verify_nonce( $request );
+		if ( true !== $nonce_check ) {
+			return $nonce_check;
+		}
+
 		$params = $request->get_params();
 
 		$block_data = Helper::get_block_attributes(
@@ -403,42 +452,14 @@ class FormBuilderController {
 			);
 		}
 
-		if ( ! email_exists( $params['email'] ) ) {
-			return new WP_REST_Response(
-				[
-					'success' => false,
-					'data'    => $this->prepare_res(
-						[ 'message' => __( 'This email does not exist', 'ablocks' ) ],
-						$block_data,
-						$redirect_url
-					),
-				],
-				400
-			);
-		}
-
-		$result = retrieve_password( $params['email'] );
-
-		if ( is_wp_error( $result ) ) {
-			return new WP_REST_Response(
-				[
-					'success' => false,
-					'data'    => $this->prepare_res(
-						[ 'message' => esc_html( $result->get_error_message() ) ],
-						$block_data,
-						$redirect_url
-					),
-				],
-				400
-			);
-		}
-
-		return new WP_REST_Response(
+		// Generic response used whether or not the account exists, to avoid
+		// leaking which emails are registered (user enumeration).
+		$generic_response = new WP_REST_Response(
 			[
 				'success' => true,
 				'data'    => $this->prepare_res(
 					[
-						'message' => __( 'Password reset email is sent', 'ablocks' ),
+						'message' => __( 'If an account exists for that email, a password reset link has been sent.', 'ablocks' ),
 					],
 					$block_data,
 					$redirect_url
@@ -446,10 +467,25 @@ class FormBuilderController {
 			],
 			200
 		);
+
+		if ( ! email_exists( $params['email'] ) ) {
+			return $generic_response;
+		}
+
+		// Ignore the result: a failure (e.g. an invalid user) must not reveal
+		// account existence, so we still return the generic response.
+		retrieve_password( $params['email'] );
+
+		return $generic_response;
 	}
 
 
 	public function submit( WP_REST_Request $request ) {
+
+		$nonce_check = $this->verify_nonce( $request );
+		if ( true !== $nonce_check ) {
+			return $nonce_check;
+		}
 
 		$params = $request->get_params();
 
@@ -495,6 +531,17 @@ class FormBuilderController {
 		} elseif ( $validate->has_message() ) {
 			$output['confirmationNotice'] = $validate->apply_vars( $block_data['parentAttributes']['confirmationNotice'] ?? __( 'Form successfully submitted!', 'ablocks' ) );
 			$output['message'] = $validate->get_message();
+
+			/**
+			 * Fires after a form-builder submission has been validated and processed
+			 * successfully. Third-party automations (e.g. Zaplane) can hook this to
+			 * react to submissions.
+			 *
+			 * @param array            $form_info { 'info' => [ type, postId, email, actions, config ], 'data' => [ field => [ 'value' => mixed ] ] }.
+			 * @param array            $block_data Resolved form block attributes/inner blocks.
+			 * @param ValidateFormData $validate   The validation object ( state_data holds submission_id ).
+			 */
+			do_action( 'ablocks/form_builder/after_submission', $validate->form_info, $block_data, $validate );
 
 			wp_send_json_success( $output );
 		}

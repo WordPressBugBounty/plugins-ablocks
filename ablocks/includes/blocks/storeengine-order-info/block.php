@@ -118,14 +118,11 @@ class Block extends BlockBaseAbstract {
 	}
 
 	public function render_block_content( $attributes, $content, $block_instance ) {
+		// StoreEngine core falls back to sample content when there's no real
+		// order (e.g. in the editor), so no dummy flag is needed here.
 		$attr_array = [
-			'ids'         => Helper::get_attribute_value( $attributes, 'products_ids' ),
-			'dummy' => false,
+			'ids' => Helper::get_attribute_value( $attributes, 'products_ids' ),
 		];
-		// phpcs:ignore  WordPress.Security.NonceVerification.Recommended,  WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
-		if ( isset( $_GET['context'] ) && 'edit' === sanitize_text_field( $_GET['context'] ) ) {
-			$attr_array['dummy'] = true;
-		}
 
 		$shortcode = '[storeengine_thankyou_order_info ' . Helper::attr_shortcode( $attr_array ) . ']';
 		echo do_shortcode( $shortcode );

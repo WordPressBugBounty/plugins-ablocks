@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/academy-password-reset-form",
     "version": "0.1.0",
-    "title": "Academy Password Reset",
+    "title": "Password Reset",
     "category": "academy",
     "description": "Showcase Academy LMS password reset form attractively.",
     "keywords": [
@@ -1286,7 +1286,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

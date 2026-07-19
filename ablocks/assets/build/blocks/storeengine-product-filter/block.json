@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-product-filter",
     "version": "0.1.0",
-    "title": "StoreEngine Products Filter",
+    "title": "Products Filter",
     "category": "storeengine",
     "description": "Adds filter options (by category, price, tag, etc.) to your product archive or shop page for improved user experience.",
     "keywords": [
@@ -637,7 +637,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",

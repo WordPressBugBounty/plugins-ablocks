@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "ablocks/storeengine-mini-cart",
     "version": "0.1.0",
-    "title": "StoreEngine Mini Cart Button",
+    "title": "Mini Cart Button",
     "category": "storeengine",
     "description": "Display a button for shoppers to quickly view their cart.",
     "keywords": [
@@ -555,7 +555,7 @@
                 "xPosition": "",
                 "xPositionTablet": "0",
                 "xPositionMobile": "0",
-                "yPositionUnit": "0",
+                "yPositionUnit": "px",
                 "yPositionUnitTablet": "px",
                 "yPositionUnitMobile": "px",
                 "yPosition": "0",
