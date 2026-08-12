@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.10.0
+Stable tag: 2.11.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -308,6 +308,27 @@ Privacy: https://policies.google.com/privacy
 Our external packages use [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT. Additionally, we incorporate [FontAwesome v6](https://fontawesome.com/license/free) under the CC BY 4.0 License, and [dnd kit](https://github.com/clauderic/dnd-kit) licensed under the MIT License.
 
 == Changelog ==
+
+= 2.11.0 - 12/08/2026 =
+* Added – Performance Suite full-page cache: rendered pages are saved to disk so repeat visits skip WordPress, block parsing and theme rendering, with scheduled cache maintenance and background warming from your sitemap
+* Added – Site Scanner: a scored, interactive audit that runs 22 checks across caching, images, fonts, assets, search visibility and server configuration, and for anything it flags tells you what was found, why it matters and how to fix it
+* Added – Image optimization tools: on-server compression in three levels (gentle/balanced/aggressive) with optional WebP, unused-media cleanup, content-based duplicate detection, and gates that require meaningful filenames and alt text (no external API or quota)
+* Added – Responsive images (srcset/sizes) and LCP image preload for faster largest-contentful-paint
+* Added – Critical-CSS inlining and async CSS loading, split by property so applying deferred styles never causes layout shift (CLS-safe)
+* Added – Design system lock: optionally disable one-off typography and color/gradient picks in the editor so blocks can only use your global presets and palette
+* Added – Cache controls in the admin toolbar (aBlocks Cache) for quick purging
+* Added – Template-resolution cache, fragment cache for FSE template parts and a shared object-cache backend to lower server load
+* Improved – Self-hosted fonts are emitted as real font stacks and loaded on every page type
+* Improved – Smaller generated CSS: editor-only rules are stripped from the frontend, styles are deduped in the build, and no-op transitions and invalid unit-only values are removed
+* Improved – Mobile touch-target sizing for more tappable controls
+* Improved – Performance settings reorganized into focused sub-tabs
+* Improved – New controls for the hamburger / mobile menu
+* Fixed – DeferJs breaking the storefront for logged-out visitors
+* Fixed – Container link and aspect-ratio issues
+* Fixed – Menu trigger and submenu click issues
+* Fixed – Link reference passthrough not passing correctly
+* Fixed – Global localize issues
+* Fixed – Editor-CSS stripping accidentally removing valid frontend rules
 
 = 2.10.0 - 05/07/2026 =
 * Improved – Fonts are now self-hosted and loaded per page for faster, privacy-friendly rendering (no external Google Fonts request when hosted locally, and no font-related database writes while rendering a page)

@@ -129,10 +129,47 @@ class Assets {
 		]);
 	}
 	public function get_localize_frontend_data() {
-		return array_merge($this->get_localize_script_data(), [
+		$data = array_merge($this->get_localize_script_data(), [
 			'nonce'                 => wp_create_nonce( 'wp_rest' ),
 			'ablocks_nonce'         => wp_create_nonce( 'ablocks_nonce' ),
 		]);
+		// The absolute server path is only meaningful to admin-side code; on the
+		// frontend it would publish the filesystem layout in page source. No
+		// frontend script reads it (it is re-exported but never consumed).
+		unset( $data['plugin_root_path'] );
+		return $data;
+	}
+
+	/**
+	 * Whether the frontend ABlocksGlobal payload has been attached this request.
+	 *
+	 * @var bool
+	 */
+	private static $globals_localized = false;
+
+	/**
+	 * Attach the frontend ABlocksGlobal payload to the shared data-only
+	 * `ablocks-globals` handle, at most once per request.
+	 *
+	 * Previously each per-block script handle localized its own copy, so a page
+	 * using N block types printed N identical `var ABlocksGlobal = {...}` blocks
+	 * (and called wp_create_nonce() N times). Every aBlocks frontend script now
+	 * depends on `ablocks-globals`, so WP prints the object once, before any
+	 * consumer, in both asset-generation modes.
+	 */
+	public static function localize_globals_once() {
+		if ( self::$globals_localized ) {
+			return;
+		}
+		self::$globals_localized = true;
+		// Self-register so callers never depend on RegisterScripts having run
+		// first — theme-builder templates and block render callbacks fire on
+		// different hooks, and a missing handle would drop the payload silently.
+		if ( ! wp_script_is( 'ablocks-globals', 'registered' ) ) {
+			wp_register_script( 'ablocks-globals', false, array(), ABLOCKS_VERSION, array() );
+		}
+		$self = new self();
+		wp_localize_script( 'ablocks-globals', 'ABlocksGlobal', $self->get_localize_frontend_data() );
 	}
 
 	public function get_dashboard_localize_script_data() {
@@ -149,6 +186,9 @@ class Assets {
 				'enabled_load_google_font_locally' => (bool) Helper::get_settings( 'enabled_load_google_font_locally', false ),
 				'enabled_only_selected_fonts' => (bool) Helper::get_settings( 'enabled_only_selected_fonts', false ),
 				'selected_fonts' => (array) Helper::get_settings( 'selected_fonts', [] ),
+				'font_metric_fallback' => (bool) Helper::get_settings( 'font_metric_fallback', true ),
+				// Global typography picks from the same list the editor offers.
+				'theme_fonts' => \ABlocks\Classes\FontStack::get_theme_font_families(),
 			],
 			'is_gutenberg_editor'   => Helper::is_gutenberg_editor(),
 			'is_fse_theme'          => Helper::is_fse_theme(),
@@ -180,11 +220,19 @@ class Assets {
 				'enabled_load_google_font_locally' => (bool) Helper::get_settings( 'enabled_load_google_font_locally', false ),
 				'enabled_only_selected_fonts' => (bool) Helper::get_settings( 'enabled_only_selected_fonts', false ),
 				'selected_fonts' => (array) Helper::get_settings( 'selected_fonts', [] ),
+				// Design system lock — the editor hides the custom pickers when these
+				// are on, leaving only the global presets.
+				'lock_global_typography' => (bool) Helper::get_settings( 'lock_global_typography', false ),
+				'lock_global_typography_strict' => (bool) Helper::get_settings( 'lock_global_typography_strict', false ),
+				'lock_global_colors' => (bool) Helper::get_settings( 'lock_global_colors', false ),
 				'frontend_dashboard_page' => (int) Helper::get_settings( 'frontend_dashboard_page' ),
 				'global_color' => (array) Helper::get_settings( 'global_color', [] ),
 				'global_typography' => (array) Helper::get_settings( 'global_typography', [] ),
 				'global_typography_list' => wp_list_pluck( Helper::get_settings( 'global_typography', [] ), 'value', 'id' ),
 				'global_font_family_fallback' => (string) Helper::get_settings( 'global_font_family_fallback', 'Sans-serif' ),
+				// Theme.json + Font Library families, so uploaded/theme fonts are
+				// selectable next to the Google catalog.
+				'theme_fonts' => \ABlocks\Classes\FontStack::get_theme_font_families(),
 			],
 			'is_gutenberg_editor' => Helper::is_gutenberg_editor(),
 			'has_required_block_attribute_migration' => get_option( 'ablocks_has_required_block_attribute_migration' ),
@@ -383,15 +431,75 @@ class Assets {
 				wp_add_inline_style( 'ablocks-blocks-combine-style', (string) file_get_contents( $css_path ) );
 			} else {
 				wp_enqueue_style( 'ablocks-blocks-combine-style', $this->FileUpload->get_file_url( $this->current_page_slug . '.min.css' ), array(), filemtime( $css_path ), 'all' );
+
+				// Performance Suite — when the page stylesheet is too large to inline,
+				// load it non-blocking (media="print" + onload swap) so it no longer
+				// delays first paint. Opt-in via perf_async_css (default off: a too-
+				// aggressive critical set risks FOUC, so promote after QA). Editors
+				// viewing the frontend are bypassed so previews render immediately.
+				$async_css = (bool) apply_filters(
+					'ablocks/perf/perf_async_css',
+					(bool) Helper::get_settings( 'perf_async_css', false )
+				);
+				// Critical CSS — inline the above-the-fold/structural subset in
+				// <head> and load the full stylesheet non-blocking. This is a
+				// stronger form of async (it prevents the FOUC async alone can
+				// cause), so enabling it implies async delivery of the full file.
+				$critical_css = (bool) apply_filters(
+					'ablocks/perf/perf_critical_css',
+					(bool) Helper::get_settings( 'perf_critical_css', false )
+				);
+				$bypass_for_editor = is_user_logged_in() && current_user_can( 'edit_posts' )
+					&& (bool) apply_filters( 'ablocks/perf/bypass_optimizations_for_editors', true );
+
+				if ( ( $async_css || $critical_css ) && ! $bypass_for_editor ) {
+					// Before deferring the full stylesheet, always inline the
+					// layout-critical CSS so the page paints with correct box
+					// sizes and never reflows when the deferred file loads. The
+					// split is property-based: the deferred remainder is cosmetic
+					// only (colors, shadows, hover states), so it cannot cause a
+					// layout shift (CLS). This makes async delivery safe.
+					// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+					list( $critical ) = \ABlocks\Classes\CriticalCss::split( (string) file_get_contents( $css_path ) );
+					if ( '' !== trim( (string) $critical ) ) {
+						wp_register_style( 'ablocks-critical-css', false, array(), ABLOCKS_VERSION );
+						wp_enqueue_style( 'ablocks-critical-css' );
+						wp_add_inline_style( 'ablocks-critical-css', $critical );
+					}
+					add_filter( 'style_loader_tag', [ $this, 'async_combined_style_tag' ], 20, 2 );
+				}
 			}
 
-			wp_enqueue_script( 'ablocks-blocks-combine-script', $this->FileUpload->get_file_url( $this->current_page_slug . '.min.js' ), array(), filemtime( $this->FileUpload->get_file_path( $this->current_page_slug . '.min.js' ) ), true, [ 'strategy' => $script_loading_strategy ] );
-			wp_localize_script( 'ablocks-blocks-combine-script', 'ABlocksGlobal', $this->get_localize_frontend_data() );
+			wp_enqueue_script( 'ablocks-blocks-combine-script', $this->FileUpload->get_file_url( $this->current_page_slug . '.min.js' ), array( 'ablocks-globals' ), filemtime( $this->FileUpload->get_file_path( $this->current_page_slug . '.min.js' ) ), true, [ 'strategy' => $script_loading_strategy ] );
+			self::localize_globals_once();
 			wp_set_script_translations( 'ablocks-blocks-combine-script', 'ablocks', ABLOCKS_ROOT_DIR_PATH . 'languages' );
 		} else {
 			// fallback if assets not available
 			add_filter( 'ablocks/is_allow_block_inline_assets', '__return_true' );
 		}
+	}
+
+	/**
+	 * Rewrite the combined page stylesheet <link> so it loads without blocking
+	 * render: fetch as media="print", then flip to media="all" on load, with a
+	 * <noscript> fallback for JS-disabled clients. Only touches the aBlocks
+	 * combined handle — third-party stylesheets are left untouched.
+	 */
+	public function async_combined_style_tag( $tag, $handle ) {
+		if ( 'ablocks-blocks-combine-style' !== $handle ) {
+			return $tag;
+		}
+		$async_tag = preg_replace(
+			[ "/media=(['\"])[^'\"]*\\1/", '/>$/', '/\/>$/' ],
+			[ 'media="print" onload="this.media=\'all\'"', '>', '/>' ],
+			trim( $tag )
+		);
+		// Guarantee the print/onload attributes even if the original tag had no media.
+		if ( strpos( $async_tag, 'onload=' ) === false ) {
+			$async_tag = str_replace( '<link ', '<link media="print" onload="this.media=\'all\'" ', $async_tag );
+		}
+		$noscript = '<noscript>' . $tag . '</noscript>';
+		return $async_tag . "\n" . $noscript;
 	}
 
 	public function regenerate_missing_assets() {
@@ -437,7 +545,18 @@ class Assets {
 		foreach ( $register_scripts as $register_handler => $register_script ) {
 			if ( isset( $register_script['dependencies'] ) ) {
 				$dependencies = include $register_script['dependencies'];
-				$register_script['deps'] = $dependencies['dependencies'];
+				// Merge rather than overwrite: the generated asset.php only knows
+				// about build-time (@wordpress/*) dependencies, so replacing the
+				// declared list would silently drop hand-declared handles such as
+				// ablocks-globals.
+				$register_script['deps'] = array_values(
+					array_unique(
+						array_merge(
+							isset( $register_script['deps'] ) ? (array) $register_script['deps'] : array(),
+							$dependencies['dependencies']
+						)
+					)
+				);
 				$register_script['ver'] = $dependencies['version'];
 			}
 			wp_register_script(
@@ -447,7 +566,7 @@ class Assets {
 				$register_script['ver'],
 				$register_script['args']
 			);
-		}
+		}//end foreach
 	}
 	public function global_css_variable() {
 		wp_register_style( 'ablocks-editor-global-styles', false, array(), ABLOCKS_VERSION );
@@ -479,7 +598,15 @@ class Assets {
 
 				// Desktop values
 				if ( ! empty( $value->fontFamily ) ) {
-					$css .= "    --ablocks-{$id}-font-family: {$value->fontFamily};\n";
+					// Every consumer of this variable drops it straight into
+					// font-family, so it has to carry the whole stack.
+					$font_stack = \ABlocks\Classes\FontStack::build(
+						$value->fontFamily,
+						isset( $value->fontFallback ) ? $value->fontFallback : ''
+					);
+					if ( '' !== $font_stack ) {
+						$css .= "    --ablocks-{$id}-font-family: {$font_stack};\n";
+					}
 				}
 				if ( ! empty( $value->weight ) ) {
 					$css .= "    --ablocks-{$id}-weight: {$value->weight};\n";

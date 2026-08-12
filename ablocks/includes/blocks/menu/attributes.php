@@ -64,6 +64,14 @@ $attributes = [
 		'type' => 'string',
 		'default' => 'mobile'
 	],
+	'mobileMenuPosition' => [
+		'type' => 'string',
+		'default' => 'below-header'
+	],
+	'subMenuTrigger' => [
+		'type' => 'string',
+		'default' => 'hover'
+	],
 	'menuResponsiveBackground' => [
 		'type' => 'string',
 		'default' => ''

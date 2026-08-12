@@ -175,7 +175,7 @@ class Block extends BlockBaseAbstract {
 	public function get_item_css( $attributes, $device = '' ) {
 		$css = [];
 
-		if ( isset( $attributes['transition'] ) ) {
+		if ( ! empty( $attributes['transition'] ) ) {
 			$css['transition-duration'] = $attributes['transition'] . 's';
 		}
 		return array_merge(

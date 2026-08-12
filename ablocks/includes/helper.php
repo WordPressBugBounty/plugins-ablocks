@@ -82,7 +82,13 @@ class Helper {
 	}
 
 	public static function is_enabled_assets_generation() {
-		$flag = (bool) self::get_settings( 'enabled_assets_file_generation' );
+		// Default OFF — combining/generating per-page asset files churns while a
+		// site is still being built, so it's recommended (via the Performance tab
+		// notice) once the site is complete rather than forced on. When enabled it
+		// merges every block's CSS/JS into one per-page file, inlined when small
+		// (see Assets::enqueue_frontend_assets), removing the per-block
+		// render-blocking stylesheets.
+		$flag = (bool) self::get_settings( 'enabled_assets_file_generation', false );
 		return apply_filters( 'ablocks/is_enabled_assets_generation', $flag );
 	}
 
@@ -124,6 +130,11 @@ class Helper {
 		$menu[ ABLOCKS_PLUGIN_SLUG . '-addons' ]   = [
 			'parent_slug' => ABLOCKS_PLUGIN_SLUG,
 			'title'       => __( 'Add-ons', 'ablocks' ),
+			'capability'  => 'manage_options',
+		];
+		$menu[ ABLOCKS_PLUGIN_SLUG . '-scanner' ]   = [
+			'parent_slug' => ABLOCKS_PLUGIN_SLUG,
+			'title'       => __( 'Site Scanner', 'ablocks' ),
 			'capability'  => 'manage_options',
 		];
 		$menu[ ABLOCKS_PLUGIN_SLUG . '-settings' ]   = [

@@ -16,6 +16,8 @@ class Migration {
 	}
 
 	public function run_migration() {
+		$this->migrate_font_stack();
+
 		$ablocks_version = get_option( 'ablocks_version' );
 		// Save Version Number, flash role management and save permalink
 		if ( ABLOCKS_VERSION !== $ablocks_version ) {
@@ -24,6 +26,35 @@ class Migration {
 			$this->migrate_1_8_0( $ablocks_version );
 			update_option( 'ablocks_version', ABLOCKS_VERSION );
 		}
+	}
+
+	/**
+	 * font-family declarations are now emitted as full stacks (quoted family +
+	 * metric fallback + generic) instead of a bare family name.
+	 *
+	 * Block CSS is cached in generated files and the global CSS variables live in
+	 * a transient, so both hold the old single-name output until something forces
+	 * a rebuild. Clear them once so existing pages pick up the new stacks without
+	 * anyone having to re-save every page.
+	 */
+	public function migrate_font_stack() {
+		if ( get_option( 'ablocks_font_stack_migrated' ) ) {
+			return;
+		}
+
+		// Deleting generated files needs WP_Filesystem; keep that out of visitor
+		// requests. The first admin page load after the update does the work.
+		if ( ! is_admin() && ! ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+			return;
+		}
+
+		( new \ABlocks\Classes\FileUpload() )->delete_files();
+		delete_transient( 'ablocks_global_css_vars' );
+		// Force a rebuild of the template/part/theme-builder font set, which did
+		// not exist before this release.
+		\ABlocks\Classes\FontCollector::flush_site_fonts();
+
+		update_option( 'ablocks_font_stack_migrated', '1' );
 	}
 
 	public function migrate_1_6_3( $version ) {

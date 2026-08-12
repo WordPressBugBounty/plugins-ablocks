@@ -39,7 +39,6 @@ class Admin {
 		add_filter( 'plugin_action_links_' . ABLOCKS_PLUGIN_BASENAME, array( $this, 'plugin_action_links' ) );
 		add_filter( 'plugin_row_meta', array( $this, 'add_plugin_links' ), 10, 2 );
 		add_action( 'admin_init', array( $this, 'dispatch_activation_redirect' ), 99 );
-		$this->dispatch_insights();
 	}
 	public function add_white_listed_redirect_hosts( $hosts ) {
 		$hosts[] = 'ablocks.pro';
@@ -122,43 +121,5 @@ class Admin {
 			wp_safe_redirect( admin_url( 'admin.php?page=ablocks' ) );
 			exit;
 		}
-	}
-	public function dispatch_insights() {
-		Admin\Insights::init(
-			'https://kodezen.com',
-			ABLOCKS_PLUGIN_SLUG,
-			'plugin',
-			ABLOCKS_VERSION,
-			[
-				'logo' => ABLOCKS_ASSETS_URL . 'images/logo-shape.svg', // default logo URL
-				'optin_message' => 'Help improve aBlocks LMS! Allow anonymous usage tracking?',
-				'deactivation_message' => 'If you have a moment, please share why you are deactivating aBlocks:',
-				'deactivation_reasons' => [
-					'no_longer_needed' => [
-						'label' => 'I no longer need the plugin',
-					],
-					'found_a_better_plugin' => [
-						'label' => 'I found a better plugin',
-						'has_custom_reason' => true,
-						'custom_reason_placeholder' => 'Please share which plugin',
-					],
-					'couldnt_get_the_plugin_to_work' => [
-						'label' => 'I couldn\'t get the plugin to work',
-					],
-					'temporary_deactivation' => [
-						'label' => 'It\'s a temporary deactivation',
-					],
-					'have_academy_pro' => [
-						'label' => 'I have aBlocks Pro',
-						'toggle_text' => 'Wait! Don\'t deactivate aBlocks. You have to activate both aBlocks and aBlocks Pro in order for the plugin to work.',
-					],
-					'other' => [
-						'label' => 'Other',
-						'has_custom_reason' => true,
-						'custom_reason_placeholder' => 'Please share the reason',
-					],
-				],
-			]
-		);
 	}
 }

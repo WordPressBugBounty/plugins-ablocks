@@ -4,7 +4,7 @@
  * Description:       The WordPress plugin for creating beautiful and functional websites using the Gutenberg editor, with a variety of customizable blocks to design website pages.
  * Requires at least: 6.8
  * Requires PHP:      7.4
- * Version:           2.10.0
+ * Version:           2.11.0
  * Author:            Kodezen LLC
  * Author URI:        https://ablocks.pro/
  * License:           GPL-3.0+
@@ -22,8 +22,12 @@ final class ABlocks {
 		// define constants
 		$this->define_constants();
 		$this->load_dependency();
+		// Register the free product with the shared StoreEngine SDK (loaded in
+		// load_dependency) so the SDK owns the deactivation popup + opt-in.
+		\ABlocks\Admin\StoreLicense::init();
 		$this->load_cli();
 		register_activation_hook( __FILE__, [ $this, 'activate' ] );
+		register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
 		$this->set_global_settings();
 		add_action( 'plugins_loaded', [ $this, 'on_plugins_loaded' ] );
 		add_action( 'ablocks_loaded', [ $this, 'init_plugin' ] );
@@ -41,7 +45,7 @@ final class ABlocks {
 	 * Define the plugin constants
 	 */
 	private function define_constants() {
-		define( 'ABLOCKS_VERSION', '2.10.0' );
+		define( 'ABLOCKS_VERSION', '2.11.0' );
 		define( 'ABLOCKS_PLUGIN_SLUG', 'ablocks' );
 		define( 'ABLOCKS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 		define( 'ABLOCKS_ROOT_URL', plugin_dir_url( __FILE__ ) );
@@ -62,6 +66,26 @@ final class ABlocks {
 
 	public function load_dependency() {
 		require_once ABLOCKS_INCLUDES_DIR_PATH . 'autoload.php';
+
+		// Load the shared StoreEngine License Management Client SDK. aBlocks (free)
+		// owns this version-managed library (Composer package
+		// `storeengine/wordpress-sdk`); aBlocks Pro (and any add-on) reuses the
+		// already-loaded SDK rather than bundling its own copy.
+		if ( file_exists( ABLOCKS_ROOT_DIR_PATH . 'vendor/autoload.php' ) ) {
+			require_once ABLOCKS_ROOT_DIR_PATH . 'vendor/autoload.php';
+		}
+
+		// Require the SDK bootstrap DIRECTLY, not only through Composer's files
+		// autoload. Composer de-dupes the SDK's init.php by a package-stable hash,
+		// so when several active plugins each bundle this SDK only the first one's
+		// autoloader includes it and the rest never register their version. Loading
+		// it here guarantees aBlocks' bundled SDK version always joins the
+		// "newest version wins" election regardless of plugin load order. Requiring
+		// init.php registers this SDK version and, on `plugins_loaded`, loads
+		// functions.php (defining se_license_init()) and the SDK class autoloader.
+		if ( file_exists( ABLOCKS_ROOT_DIR_PATH . 'vendor/storeengine/wordpress-sdk/init.php' ) ) {
+			require_once ABLOCKS_ROOT_DIR_PATH . 'vendor/storeengine/wordpress-sdk/init.php';
+		}
 	}
 	public function load_cli() {
 		if ( file_exists( ABLOCKS_ROOT_DIR_PATH . 'dev-cli.php' ) ) {
@@ -97,7 +121,16 @@ final class ABlocks {
 		ABlocks\Classes\CoreFontRegistry::init();
 		ABlocks\Performance\Optimizations::init();
 		ABlocks\Performance\DelayJs::init();
+		ABlocks\Performance\DeferJs::init();
 		ABlocks\Performance\ImageOptimizer::init();
+		ABlocks\Performance\LcpPreload::init();
+		ABlocks\Performance\TouchTargets::init();
+		ABlocks\Performance\PageCache::init();
+		ABlocks\Performance\StyleConsolidator::init();
+		ABlocks\Performance\FragmentCache::init();
+		ABlocks\Performance\TemplateCache::init();
+		ABlocks\Performance\ImageTools::init();
+		ABlocks\Classes\Images\UploadGuard::init();
 		ABlocks\Ajax::init();
 		ABlocks\API::init();
 		if ( is_admin() ) {
@@ -109,6 +142,17 @@ final class ABlocks {
 
 	public function activate() {
 		ABlocks\Installer::init();
+	}
+
+	/**
+	 * Leave no scheduled work behind when the plugin is switched off.
+	 *
+	 * Cached files are deliberately left in place: deactivation is often
+	 * temporary, and re-activating should not mean rebuilding the whole cache.
+	 * They are removed on uninstall, or on demand from the Performance tab.
+	 */
+	public function deactivate() {
+		ABlocks\Classes\PageCache\Scheduler::clear_events();
 	}
 }
 

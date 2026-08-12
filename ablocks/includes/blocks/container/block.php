@@ -33,6 +33,19 @@ class Block extends BlockBaseAbstract {
 		);
 
 		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--container-has-link-overlay',
+			$this->get_link_overlay_wrapper_css( $attributes )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--container-has-link-overlay > .ablocks-block-container__link-overlay',
+			$this->get_link_overlay_css( $attributes )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--container-has-link-overlay > *:not(.ablocks-block-container__link-overlay):not(.ablocks-background--video):not(.ablocks-background-video-wrapper)',
+			$this->get_link_overlay_content_css( $attributes )
+		);
+
+		$css_generator->add_class_styles(
 			'{{WRAPPER}} > .ablocks-block-container',
 			$this->get_block_container_css( $attributes ),
 			$this->get_block_container_css( $attributes, 'Tablet' ),
@@ -108,6 +121,19 @@ class Block extends BlockBaseAbstract {
 			$this->get_main_wrapper_css( $attributes ),
 			$this->get_main_wrapper_css( $attributes, 'Tablet' ),
 			$this->get_main_wrapper_css( $attributes, 'Mobile' )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--container-has-link-overlay',
+			$this->get_link_overlay_wrapper_css( $attributes )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--container-has-link-overlay > .ablocks-block-container__link-overlay',
+			$this->get_link_overlay_css( $attributes )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}.ablocks-block--container-has-link-overlay > *:not(.ablocks-block-container__link-overlay):not(.ablocks-background--video):not(.ablocks-background-video-wrapper)',
+			$this->get_link_overlay_content_css( $attributes )
 		);
 
 		// Block Container only available root block
@@ -394,6 +420,45 @@ class Block extends BlockBaseAbstract {
 			$css
 		);
 	}
+
+	// The container's link (HTML Tag = a) is rendered as an overlay <a>, not as
+	// the wrapping tag, so nested blocks can never end up with an <a> nested
+	// inside another <a>. These three methods position that overlay and lift
+	// the container's real content above it so nested interactive elements
+	// (e.g. an InfoBox button) stay independently clickable.
+	public function get_link_overlay_wrapper_css( $attributes, $device = '' ) {
+		if ( empty( $attributes['htmlTag'] ) || 'a' !== $attributes['htmlTag'] ) {
+			return [];
+		}
+		return [ 'position' => 'relative' ];
+	}
+
+	public function get_link_overlay_css( $attributes, $device = '' ) {
+		if ( empty( $attributes['htmlTag'] ) || 'a' !== $attributes['htmlTag'] ) {
+			return [];
+		}
+		return [
+			'position' => 'absolute',
+			'top' => '0',
+			'left' => '0',
+			'right' => '0',
+			'bottom' => '0',
+			'width' => '100%',
+			'height' => '100%',
+			'z-index' => '0',
+		];
+	}
+
+	public function get_link_overlay_content_css( $attributes, $device = '' ) {
+		if ( empty( $attributes['htmlTag'] ) || 'a' !== $attributes['htmlTag'] ) {
+			return [];
+		}
+		return [
+			'position' => 'relative',
+			'z-index' => '1',
+		];
+	}
+
 	public static function get_container_before_css( $attributes, $device = '' ) {
 		if ( ! isset( $attributes['_backgroundOverlay']['backgroundOverlayType'] ) || $attributes['_backgroundOverlay']['backgroundOverlayType'] === 'none' ) {
 			return [];

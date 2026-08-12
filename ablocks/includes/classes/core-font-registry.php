@@ -25,6 +25,31 @@ class CoreFontRegistry {
 		add_filter( 'wp_theme_json_data_theme', [ $self, 'register_page_fonts' ] );
 		// Remote fallback for fonts not yet downloaded locally.
 		add_action( 'wp_enqueue_scripts', [ $self, 'enqueue_remote_fallback' ], 999 );
+		// Metric-adjusted local faces, so the pre-swap render is the right size.
+		add_action( 'wp_enqueue_scripts', [ $self, 'enqueue_fallback_faces' ], 5 );
+	}
+
+	/**
+	 * Emit the metric-adjusted fallback @font-face rules for this page's fonts.
+	 *
+	 * These reference locally installed system fonts via local() — nothing is
+	 * downloaded. Their only job is to make the fallback render occupy exactly the
+	 * space the real font will, so the swap doesn't shift the layout.
+	 */
+	public function enqueue_fallback_faces() {
+		$fonts = $this->page_fonts();
+		if ( empty( $fonts ) ) {
+			return;
+		}
+
+		$css = FontStack::get_fallback_face_css( $fonts );
+		if ( '' === $css ) {
+			return;
+		}
+
+		wp_register_style( 'ablocks-font-fallbacks', false, [], ABLOCKS_VERSION );
+		wp_enqueue_style( 'ablocks-font-fallbacks' );
+		wp_add_inline_style( 'ablocks-font-fallbacks', $css );
 	}
 
 	/**
@@ -132,5 +157,29 @@ class CoreFontRegistry {
 
 		$url = 'https://fonts.googleapis.com/css2?family=' . implode( '&family=', $family_strings ) . '&display=swap';
 		wp_enqueue_style( 'ablocks-google-fonts', esc_url( $url ), [], null );
+
+		// Warm up the font connections early so the render-blocking stylesheet +
+		// its font files resolve faster (helps FCP/LCP). Only added when a remote
+		// font is actually loaded.
+		add_filter( 'wp_resource_hints', [ $this, 'preconnect_google_fonts' ], 10, 2 );
+	}
+
+	/**
+	 * Add preconnect hints for the Google Fonts origins.
+	 *
+	 * @param array  $hints    Resource hint URLs/attributes for this relation.
+	 * @param string $relation Current relation type (preconnect, dns-prefetch, …).
+	 * @return array
+	 */
+	public function preconnect_google_fonts( $hints, $relation ) {
+		if ( 'preconnect' !== $relation ) {
+			return $hints;
+		}
+		$hints[] = [ 'href' => 'https://fonts.googleapis.com' ];
+		$hints[] = [
+			'href'        => 'https://fonts.gstatic.com',
+			'crossorigin' => 'anonymous',
+		];
+		return $hints;
 	}
 }

@@ -60,7 +60,11 @@ class BoxShadow extends ControlBaseAbstract {
 			}
 		}
 		if ( $value['transitionDuration'] ) {
-			$css['transition'] = $property . ' ' . $value['transitionDuration'] . 's';
+			// This control animates the box-shadow, so the transition property is
+			// always "box-shadow". Previously it used $property, which callers
+			// pass inconsistently (often the device string), producing invalid
+			// CSS like "transition:Tablet 0.3s".
+			$css['transition'] = 'box-shadow ' . $value['transitionDuration'] . 's';
 		}
 		return $css;
 	}

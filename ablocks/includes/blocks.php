@@ -23,6 +23,12 @@ class Blocks {
 		add_action( 'save_post', [ $self, 'generate_block_assets' ], 10, 3 );
 		add_action( 'switch_theme', [ $self, 'clear_generated_block_assets' ] );
 		add_action( 'save_post', [ $self, 'download_google_fonts_locally' ], 20, 3 );
+		add_action( 'deleted_post', [ $self, 'flush_site_fonts_on_delete' ], 10, 2 );
+		// Self-hosting template fonts discovered on a front-end request happens
+		// here, off the visitor's request.
+		add_action( 'ablocks/download_site_fonts', [ '\ABlocks\Classes\FontCollector', 'update_site_fonts' ] );
+		// A theme swap changes which templates and template parts exist.
+		add_action( 'switch_theme', [ '\ABlocks\Classes\FontCollector', 'flush_site_fonts' ] );
 		// PERF-2: pre-warm the page's generated assets in the background after save,
 		// so the first visitor doesn't pay the parse/generate/write cost.
 		add_action( 'save_post', [ $self, 'prewarm_page_assets' ], 30, 3 );
@@ -305,6 +311,28 @@ class Blocks {
 		// cache them in post meta, and self-host them locally.
 		// See docs/FONT-MANAGEMENT-PLAN.md.
 		\ABlocks\Classes\FontCollector::save_post_fonts( $post_id );
+
+		// Templates, template parts and theme builder layouts render on pages that
+		// are not the queried post, so their fonts are tracked site-wide. Recompute
+		// (and download) here rather than on a visitor's request.
+		if ( in_array( get_post_type( $post_id ), \ABlocks\Classes\FontCollector::get_site_font_post_types(), true ) ) {
+			\ABlocks\Classes\FontCollector::update_site_fonts();
+		}
+	}
+
+	/**
+	 * Deleting a template/part/layout can remove the last user of a font.
+	 *
+	 * @param int      $post_id Post being deleted.
+	 * @param \WP_Post $post    The deleted post — by this point it is gone from the
+	 *                          database, so the type has to come from here.
+	 */
+	public function flush_site_fonts_on_delete( $post_id, $post = null ) {
+		$post_type = $post instanceof \WP_Post ? $post->post_type : get_post_type( $post_id );
+
+		if ( in_array( $post_type, \ABlocks\Classes\FontCollector::get_site_font_post_types(), true ) ) {
+			\ABlocks\Classes\FontCollector::flush_site_fonts();
+		}
 	}
 
 	/**

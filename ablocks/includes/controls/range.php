@@ -97,7 +97,10 @@ class Range {
 			if ( $args['property'] === 'value' ) {
 				$css['value']     = $value;
 				$css['valueUnit'] = $args['unitDefaultValue'];
-			} else {
+			} elseif ( '' !== (string) $value ) {
+				// Skip when there's no value — otherwise we emit the unit alone
+				// (e.g. "transition-duration:s"), invalid CSS that bloats every
+				// block's generated stylesheet.
 				$css[ $args['property'] ] = $value . $args['unitDefaultValue'];
 			}
 			return $css;

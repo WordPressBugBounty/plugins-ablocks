@@ -23,6 +23,7 @@ class FontCollector {
 
 	const POST_META_KEY      = '_ablocks_fonts';
 	const GLOBAL_OPTION_NAME = 'ablocks_global_fonts';
+	const SITE_OPTION_NAME   = 'ablocks_site_fonts';
 
 	/**
 	 * Recursively collect [ family => [weights] ] from a list of parsed blocks.
@@ -76,7 +77,10 @@ class FontCollector {
 
 		if ( isset( $node['fontFamily'] ) && is_string( $node['fontFamily'] ) ) {
 			$family = trim( $node['fontFamily'] );
-			if ( '' !== $family && 'Default' !== $family ) {
+			// 'Default' sets no font and 'inherit' defers to the theme; neither is
+			// a downloadable family. A stored stack came from a custom value, so
+			// its files are the author's responsibility.
+			if ( '' !== $family && 'Default' !== $family && 'inherit' !== strtolower( $family ) && false === strpos( $family, ',' ) ) {
 				$weight = '400';
 				if ( isset( $node['weight'] ) && '' !== $node['weight'] && 'Default' !== $node['weight'] ) {
 					$weight = (string) $node['weight'];
@@ -207,12 +211,112 @@ class FontCollector {
 	}
 
 	/* -------------------------------------------------------------------------
+	 * Site-wide content (templates, template parts, theme builder layouts)
+	 * ---------------------------------------------------------------------- */
+
+	/**
+	 * Post types whose content is rendered outside the queried post: block theme
+	 * templates and template parts (header/footer/archive markup) and aBlocks
+	 * theme builder layouts.
+	 *
+	 * These are not `is_singular()` on the front end, so their fonts were never
+	 * requested — a header built with aBlocks got `font-family: X` in CSS with no
+	 * font-face rule and no Google stylesheet behind it.
+	 *
+	 * @return string[]
+	 */
+	public static function get_site_font_post_types() {
+		return (array) apply_filters(
+			'ablocks/site_font_post_types',
+			[ 'wp_template', 'wp_template_part', 'ablocks_tb' ]
+		);
+	}
+
+	/**
+	 * Collect fonts from every template / template part / theme builder layout.
+	 *
+	 * Which template WordPress will render is not known while `wp_head` runs, so
+	 * the union of them is used. The result is cached in an option and only
+	 * recomputed when one of those posts is saved, so the front end pays a single
+	 * option read. Self-hosted faces are lazy — declaring one the page does not
+	 * use costs a line of CSS, not a download.
+	 */
+	public static function collect_from_site_content() {
+		$fonts = [];
+
+		$post_ids = get_posts(
+			[
+				'post_type'              => self::get_site_font_post_types(),
+				'post_status'            => [ 'publish', 'draft', 'auto-draft', 'inherit' ],
+				'posts_per_page'         => 200,
+				'fields'                 => 'ids',
+				'no_found_rows'          => true,
+				'update_post_meta_cache' => false,
+				'update_post_term_cache' => false,
+				'suppress_filters'       => true,
+			]
+		);
+
+		foreach ( $post_ids as $post_id ) {
+			$fonts = self::merge( $fonts, self::collect_from_post( $post_id ) );
+		}
+
+		return $fonts;
+	}
+
+	/**
+	 * Recompute and store the site-wide font set, then self-host it.
+	 */
+	public static function update_site_fonts() {
+		$fonts = self::collect_from_site_content();
+		update_option( self::SITE_OPTION_NAME, $fonts );
+		self::download( $fonts );
+		return $fonts;
+	}
+
+	/**
+	 * Get the site-wide font set, computing + caching on first access.
+	 *
+	 * Self-hosting downloads font files over the network, which must not happen
+	 * inside a visitor's request. On the front end the set is collected and cached
+	 * immediately (so the fonts do load, remotely) and the download is handed to a
+	 * one-off cron event.
+	 */
+	public static function get_site_fonts() {
+		$fonts = get_option( self::SITE_OPTION_NAME, null );
+		if ( is_array( $fonts ) ) {
+			return $fonts;
+		}
+
+		if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
+			return self::update_site_fonts();
+		}
+
+		$fonts = self::collect_from_site_content();
+		update_option( self::SITE_OPTION_NAME, $fonts );
+
+		if ( ! empty( $fonts ) && ! wp_next_scheduled( 'ablocks/download_site_fonts' ) ) {
+			wp_schedule_single_event( time() + 30, 'ablocks/download_site_fonts' );
+		}
+
+		return $fonts;
+	}
+
+	/**
+	 * Drop the cached site-wide font set (a template/part/layout changed).
+	 */
+	public static function flush_site_fonts() {
+		delete_option( self::SITE_OPTION_NAME );
+	}
+
+	/* -------------------------------------------------------------------------
 	 * Frontend
 	 * ---------------------------------------------------------------------- */
 
 	/**
-	 * The complete set of fonts the current request needs: global typography
-	 * (every page) plus the current singular post's fonts. Cached per request.
+	 * The complete set of fonts the current request needs: global typography and
+	 * site-wide content (templates, parts, theme builder layouts) on every page,
+	 * plus the queried post's own fonts. Cached per request.
 	 */
 	public static function get_page_fonts() {
 		static $cache = null;
@@ -220,7 +324,7 @@ class FontCollector {
 			return $cache;
 		}
 
-		$fonts = self::get_global_fonts();
+		$fonts = self::merge( self::get_global_fonts(), self::get_site_fonts() );
 
 		if ( is_singular() ) {
 			$post_id = get_queried_object_id();
@@ -229,7 +333,7 @@ class FontCollector {
 			}
 		}
 
-		$cache = $fonts;
+		$cache = (array) apply_filters( 'ablocks/page_fonts', $fonts );
 		return $cache;
 	}
 

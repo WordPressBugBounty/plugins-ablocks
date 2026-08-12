@@ -88,15 +88,26 @@ class Typography extends ControlBaseAbstract {
 			}
 		};
 
-		// Font family (special: also track font weights for enqueue)
 		// Font family. Output the CSS value only — font *discovery* is no longer
 		// done at render time. The set of fonts a page uses is collected from
 		// saved block attributes (FontCollector) and emitted by core via
 		// theme.json (CoreFontRegistry). See docs/FONT-MANAGEMENT-PLAN.md.
+		//
+		// The stored attribute is a bare family name (that name doubles as the
+		// download key), so FontStack turns it into a real stack — quoted, with a
+		// metric-adjusted fallback face and a generic tail derived from the font's
+		// own category. There is no per-block fallback field: `fontFallback` is
+		// read only so a value set through a filter still wins.
 		if ( ! empty( $global_value['fontFamily'] ) ) {
 			$css['font-family'] = "var(--ablocks-{$attribute_global_name}-font-family)";
 		} elseif ( ! empty( $value['fontFamily'] ) ) {
-			$css['font-family'] = $value['fontFamily'];
+			$stack = \ABlocks\Classes\FontStack::build(
+				$value['fontFamily'],
+				isset( $value['fontFallback'] ) ? $value['fontFallback'] : ''
+			);
+			if ( '' !== $stack ) {
+				$css['font-family'] = $stack;
+			}
 		}
 
 		// Desktop-only styles

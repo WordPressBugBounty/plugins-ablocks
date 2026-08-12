@@ -198,14 +198,20 @@ class Border extends ControlBaseAbstract {
 				$css['border-width'] = $value[ 'commonWidth' . $device ] . $widthUnit;
 			}
 		} else {
-			$topWidth = ! empty( $value[ 'topWidth' . $device ] ) ? $value[ 'topWidth' . $device ] : 0;
-			$rightWidth = ! empty( $value[ 'rightWidth' . $device ] ) ? $value[ 'rightWidth' . $device ] : 0;
-			$bottomWidth = ! empty( $value[ 'bottomWidth' . $device ] ) ? $value[ 'bottomWidth' . $device ] : 0;
-			$leftWidth = ! empty( $value[ 'leftWidth' . $device ] ) ? $value[ 'leftWidth' . $device ] : 0;
+			// Only emit border-width when at least one side was actually set —
+			// otherwise every unlinked border produced "border-width:0px 0px 0px 0px".
+			$has_width = '' !== $value[ 'topWidth' . $device ] || '' !== $value[ 'rightWidth' . $device ]
+				|| '' !== $value[ 'bottomWidth' . $device ] || '' !== $value[ 'leftWidth' . $device ];
+			if ( $has_width ) {
+				$topWidth = ! empty( $value[ 'topWidth' . $device ] ) ? $value[ 'topWidth' . $device ] : 0;
+				$rightWidth = ! empty( $value[ 'rightWidth' . $device ] ) ? $value[ 'rightWidth' . $device ] : 0;
+				$bottomWidth = ! empty( $value[ 'bottomWidth' . $device ] ) ? $value[ 'bottomWidth' . $device ] : 0;
+				$leftWidth = ! empty( $value[ 'leftWidth' . $device ] ) ? $value[ 'leftWidth' . $device ] : 0;
 
-			$borderWidth = $topWidth . $widthUnit . ' ' . $rightWidth . $widthUnit . ' ' . $bottomWidth . $widthUnit . ' ' . $leftWidth . $widthUnit;
+				$borderWidth = $topWidth . $widthUnit . ' ' . $rightWidth . $widthUnit . ' ' . $bottomWidth . $widthUnit . ' ' . $leftWidth . $widthUnit;
 
-			$css['border-width'] = $borderWidth;
+				$css['border-width'] = $borderWidth;
+			}
 		}
 
 		// Handle border style and color

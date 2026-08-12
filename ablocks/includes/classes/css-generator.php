@@ -6,9 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\AssetsGenerator;
+use ABlocks\Classes\FontStack;
 
 class CssGenerator {
-	private $font_category;
 	private $custom_css = '';
 	private $parent_class;
 	private $class_styles = [];
@@ -22,7 +22,6 @@ class CssGenerator {
 			$this->custom_css = $attributes['_custom_css'];
 		}
 
-		$this->font_category = include ABLOCKS_BLOCKS_DIR_PATH . 'fonts.php';
 
 		// Alert - don't touch here
 		if ( isset( $attributes['_margin'] ) ) { // check has advanced tab or not
@@ -154,13 +153,15 @@ class CssGenerator {
 		$styles = [];
 
 		foreach ( $base_styles as $prop => $value ) {
-			if ( 'font-family' === $prop && isset( $this->font_category[ $value ] ) ) {
-				$value = $this->get_font_family_css( $value, $this->font_category[ $value ] );
+			if ( 'font-family' === $prop ) {
+				// Safety net for styles that bypass the Typography control and set a
+				// bare family name directly. FontStack leaves finished values alone.
+				$value = FontStack::build( $value );
 			}
 			// Trim value to avoid whitespace-only entries
 			$trimmed = trim( $value );
 			// // Remove if empty, or if it matches only a unit (like 'px', '%', 'em') without any number
-			if ( $trimmed === '' || preg_match( '/^(px|em|rem|vh|vw|vmin|vmax|cm|mm|in|pt|pc|%)$/i', $trimmed ) ) {
+			if ( $trimmed === '' || preg_match( '/^(px|em|rem|vh|vw|vmin|vmax|cm|mm|in|pt|pc|%|s|ms|deg|fr|ch|ex)$/i', $trimmed ) ) {
 				continue;
 			}
 
@@ -181,7 +182,7 @@ class CssGenerator {
 			$trimmed = trim( $value );
 
 			// // Remove if empty, or if it matches only a unit (like 'px', '%', 'em') without any number
-			if ( $trimmed === '' || preg_match( '/^(px|em|rem|vh|vw|vmin|vmax|cm|mm|in|pt|pc|%)$/i', $trimmed ) ) {
+			if ( $trimmed === '' || preg_match( '/^(px|em|rem|vh|vw|vmin|vmax|cm|mm|in|pt|pc|%|s|ms|deg|fr|ch|ex)$/i', $trimmed ) ) {
 				continue;
 			}
 
@@ -195,34 +196,9 @@ class CssGenerator {
 	}
 
 
-	public function get_font_family_css( string $font_name, string $category ): string {
-		// Quote font name if it contains spaces
-		if ( strpos( $font_name, ' ' ) !== false ) {
-			$font_name = '"' . $font_name . '"';
-		}
-
-		// Map category to fallback
-		switch ( $category ) {
-			case 'serif':
-				$fallback = 'serif';
-				break;
-			case 'sans-serif':
-				$fallback = 'sans-serif';
-				break;
-			case 'monospace':
-				$fallback = 'monospace';
-				break;
-			case 'display':
-				$fallback = 'sans-serif';
-				break;
-			case 'handwriting':
-				$fallback = 'cursive';
-				break;
-			default:
-				$fallback = 'sans-serif';
-		}
-
-		return $font_name . ', ' . $fallback;
+	public function get_font_family_css( string $font_name, string $category = '' ): string {
+		// Kept for back-compat; the stack is built centrally now.
+		return FontStack::build( $font_name );
 	}
 }
 

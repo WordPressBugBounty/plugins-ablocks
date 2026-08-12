@@ -143,6 +143,11 @@ abstract class BlockBaseAbstract {
 		do_action( 'ablocks/before_render_' . explode( '/', $block_name )[1] . '_block_content', $block_name );
 		do_action( 'ablocks/render_callback', $block_name, $attributes );
 
+		// Animation CSS is no longer a global dependency (see get_style_depends).
+		// In the fallback path (asset-generation off) enqueue it only when this
+		// block actually animates, so pages without animation never load it.
+		$this->maybe_enqueue_animate_style( $attributes );
+
 		// Dynamic block
 		if ( ! $content || $this->is_skip_inner_block ) {
 			// When called from the editor's ServerSideRender (REST API), RenderContainer (JS) already
@@ -187,6 +192,21 @@ abstract class BlockBaseAbstract {
 		return self::$asset_version_cache[ $path ];
 	}
 
+	/**
+	 * Enqueue the animate.css library only when a block actually uses an
+	 * animation, and only in the fallback (per-block) asset path — with
+	 * asset-generation on, the combined generator bakes it in on demand instead.
+	 */
+	private function maybe_enqueue_animate_style( $attributes ) {
+		if ( is_admin() || Helper::is_enabled_assets_generation() ) {
+			return;
+		}
+		$animation_type = isset( $attributes['_animation']['animationType'] ) ? $attributes['_animation']['animationType'] : '';
+		if ( ! empty( $animation_type ) && 'none' !== $animation_type ) {
+			wp_enqueue_style( 'ablocks-animate-style' );
+		}
+	}
+
 	private function enqueue_static_assets( $block_name ) {
 		// Library
 		if ( count( $this->get_style_depends() ) ) {
@@ -213,19 +233,17 @@ abstract class BlockBaseAbstract {
 
 		if ( false !== $this->cached_asset_version( $this->assets_path . 'build/blocks/' . $block_name . '/view.js' ) && ! wp_script_is( 'ablocks-' . $block_name . '-block-static-script', 'enqueued' ) ) {
 			$dependencies = include $this->assets_path . 'build/blocks/' . $block_name . '/view.asset.php';
+			// Depend on the shared data-only handle so ABlocksGlobal is printed
+			// before this script runs, without each block carrying its own copy.
+			$deps = array_values( array_unique( array_merge( array( 'ablocks-globals' ), $dependencies['dependencies'] ) ) );
 			wp_enqueue_script(
 				'ablocks-' . $block_name . '-block-static-script',
 				$this->assets_url . 'build/blocks/' . $block_name . '/view.js',
-				$dependencies['dependencies'],
+				$deps,
 				$dependencies['version'],
 				$args
 			);
-			$Assets = new Assets();
-			wp_localize_script(
-				'ablocks-' . $block_name . '-block-static-script',
-				'ABlocksGlobal',
-				$Assets->get_localize_frontend_data()
-			);
+			Assets::localize_globals_once();
 		}
 
 	}
@@ -246,10 +264,86 @@ abstract class BlockBaseAbstract {
 			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 			$has_static_css = file_get_contents( $this->assets_path . 'build/blocks/' . $this->block_name . '/style.css' );
 			if ( $has_static_css ) {
-				return $has_static_css;
+				// A block's style.css doubles as its editorStyle, so it can carry
+				// editor-chrome rules (.block-editor-*, .editor-styles-wrapper …)
+				// that never match on the front end. Strip them from the frontend
+				// static CSS (this getter feeds the combined/inline page CSS; the
+				// editor loads style.css directly via block.json).
+				return self::strip_editor_only_css( $has_static_css );
 			}
 		}
 		return '';
+	}
+
+	/**
+	 * Remove rules whose selector is entirely editor-chrome (every
+	 * comma-separated part references an editor-only class), leaving mixed and
+	 * front-end rules untouched. Brace-aware so @media blocks stay intact.
+	 */
+	private static $editor_css_cache = [];
+	public static function strip_editor_only_css( $css ) {
+		$key = md5( $css );
+		if ( isset( self::$editor_css_cache[ $key ] ) ) {
+			return self::$editor_css_cache[ $key ];
+		}
+		$markers = [ '.block-editor-', '.editor-styles-wrapper', '.block-list-appender', '.components-base-control', '.block-editor-block-variation-picker', '.block-editor-button-block-appender' ];
+
+		$out = '';
+		$len = strlen( $css );
+		$i   = 0;
+		$buf = '';
+		while ( $i < $len ) {
+			$ch   = $css[ $i ];
+			$buf .= $ch;
+			if ( '{' === $ch ) {
+				$prelude = trim( substr( $buf, 0, -1 ) );
+				$depth   = 1;
+				$i++;
+				while ( $i < $len && $depth > 0 ) {
+					$c    = $css[ $i ];
+					$buf .= $c;
+					if ( '{' === $c ) {
+						$depth++;
+					} elseif ( '}' === $c ) {
+						$depth--;
+					}
+					$i++;
+				}
+				$drop = false;
+				if ( '' !== $prelude && '@' !== $prelude[0] ) {
+					$parts = array_map( 'trim', explode( ',', $prelude ) );
+					$drop  = true;
+					foreach ( $parts as $part ) {
+						// Drop :not(...) negations first — a selector like
+						// ":not(.block-editor-block-list__block) .foo" is a FRONT-END
+						// rule (applies everywhere except the editor), NOT editor
+						// chrome, so the marker inside :not() must not count.
+						$positive  = preg_replace( '/:not\([^)]*\)/', '', $part );
+						$is_editor = false;
+						foreach ( $markers as $m ) {
+							if ( false !== strpos( $positive, $m ) ) {
+								$is_editor = true;
+								break;
+							}
+						}
+						if ( ! $is_editor ) {
+							$drop = false; // a front-end part exists — keep the rule
+							break;
+						}
+					}
+				}
+				if ( ! $drop ) {
+					$out .= $buf;
+				}
+				$buf = '';
+				continue;
+			}
+			$i++;
+		}
+		$out .= $buf;
+
+		self::$editor_css_cache[ $key ] = $out;
+		return $out;
 	}
 	public function get_static_js() {
 		if ( file_exists( $this->assets_path . 'build/blocks/' . $this->block_name . '/view.js' ) ) {
@@ -262,7 +356,12 @@ abstract class BlockBaseAbstract {
 		return '';
 	}
 	public function get_style_depends() {
-		return apply_filters( 'ablocks/block_style_depends', array_merge( $this->style_depends, array( 'ablocks-frontend-google-fonts', 'ablocks-animate-style', 'ablocks-common-style' ) ) );
+		// NOTE: 'ablocks-animate-style' is intentionally NOT included here. Animation
+		// CSS is heavy and most blocks don't animate, so it's added on demand only:
+		// the combined generator adds it when a block's _animation attribute is set
+		// (AssetsGenerator::recursive_block_parser), and the fallback render path
+		// enqueues it per-block via maybe_enqueue_animate_style().
+		return apply_filters( 'ablocks/block_style_depends', array_merge( $this->style_depends, array( 'ablocks-frontend-google-fonts', 'ablocks-common-style' ) ) );
 	}
 	public function get_script_depends() {
 		return apply_filters( 'ablocks/block_script_depends', array_merge( $this->script_depends, array( 'ablocks-common-script' ) ) );

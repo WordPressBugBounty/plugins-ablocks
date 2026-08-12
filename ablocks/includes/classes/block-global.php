@@ -78,8 +78,12 @@ class BlockGlobal {
 			'_boxShadow' => 'box-shadow',
 		];
 		foreach ( $transition_types as $key => $property ) {
-			if ( isset( $attribute[ $key ] ) ) {
-				$duration = ! empty( $attribute[ $key ]['transitionDuration'] ) ? $attribute[ $key ]['transitionDuration'] : '0';
+			// Only add a transition when the user actually set a non-zero
+			// duration. Previously every block emitted the no-op
+			// "transition:border 0s ease,background 0s ease,box-shadow 0s ease"
+			// on its wrapper (0s = no transition) — dead CSS on every block.
+			if ( isset( $attribute[ $key ]['transitionDuration'] ) && (float) $attribute[ $key ]['transitionDuration'] > 0 ) {
+				$duration = $attribute[ $key ]['transitionDuration'];
 				$transitions[] = "{$property} {$duration}s ease";
 			}
 		}
@@ -95,7 +99,8 @@ class BlockGlobal {
 			BoxShadow::get_css( $attribute['_boxShadow'], $device ),
 			Position::get_css( $attribute['_position'], 'position', $device ),
 			Zindex::get_css( $attribute['_zIndex'], 'z-index', $device ),
-			[ 'transition' => $transition_string ]
+			// Only emit transition when there's a real (non-zero) one.
+			'' !== $transition_string ? [ 'transition' => $transition_string ] : []
 		);
 		return apply_filters( 'ablocks/get_block_common_wrapper_css', $css, $attribute, $device );
 	}

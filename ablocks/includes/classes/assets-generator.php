@@ -55,6 +55,14 @@ class AssetsGenerator {
 			}
 		}
 
+		// Merge per-instance rules that share an identical body into a single
+		// grouped selector (see CssDedupe). Always applied during generation —
+		// it produces byte-for-byte equivalent styling, just smaller. Filterable
+		// as a code-level escape hatch (no UI setting).
+		if ( (bool) apply_filters( 'ablocks/perf/dedupe_css', true ) ) {
+			$dynamic_css = CssDedupe::process( $dynamic_css );
+		}
+
 		$FileUpload = new FileUpload();
 		$destination_folder = $FileUpload->get_upload_dir();
 		self::copy_build_image_folder_to_uploads( $destination_folder );

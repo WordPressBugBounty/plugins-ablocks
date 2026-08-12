@@ -78,6 +78,18 @@ class RegisterScripts {
 		$script_loading_strategy = \ABlocks\Helper::get_script_loading_strategy();
 		$args = [ 'strategy' => $script_loading_strategy ];
 		return apply_filters('ablocks/register_scripts', [
+			// Data-only handle (no src) that hosts the single frontend
+			// ABlocksGlobal payload. Every aBlocks frontend script depends on it
+			// — directly, or transitively through ablocks-common-script — so WP
+			// prints the object exactly once per page instead of once per block
+			// script handle (asset-generation off) or once per combined template
+			// script (asset-generation on). See Assets::localize_globals_once().
+			'ablocks-globals' => [
+				'url'           => false,
+				'deps'          => array(),
+				'ver'           => ABLOCKS_VERSION,
+				'args'          => array(),
+			],
 			'ablocks-prism-script' => [
 				'path'          => ABLOCKS_ASSETS_PATH . 'library/prism/prism.js',
 				'url'           => ABLOCKS_ASSETS_URL . 'library/prism/prism.js',
@@ -138,7 +150,11 @@ class RegisterScripts {
 			'ablocks-common-script' => [
 				'path'          => ABLOCKS_ASSETS_PATH . 'build/blocks-common.js',
 				'url'           => ABLOCKS_ASSETS_URL . 'build/blocks-common.js',
-				'deps'          => array(),
+				// Every block script depends on this handle (see
+				// BlockBaseAbstract::get_script_depends), so hanging
+				// ablocks-globals off it makes the payload reachable from any
+				// rendered block without touching each block's own deps.
+				'deps'          => array( 'ablocks-globals' ),
 				'ver'           => false,
 				'args'          => $args,
 				'dependencies'  => ABLOCKS_ASSETS_PATH . 'build/blocks-common.asset.php'

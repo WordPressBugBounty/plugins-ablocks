@@ -239,7 +239,6 @@ class Assets {
 			'footer'
 		];
 
-		$CoreAssets = new CoreAssets();
 		$FileUpload = new FileUpload();
 		foreach ( $template_types as $template_type ) {
 			$post_id = Helper::get_template_id( $template_type );
@@ -255,10 +254,13 @@ class Assets {
 				$js_file_path = $FileUpload->get_file_path( $post_id . '.min.js' );
 				if ( file_exists( $js_file_path ) ) {
 					$js_file_url = $FileUpload->get_file_url( $post_id . '.min.js' );
-					wp_enqueue_script( 'ablocks-blocks-' . $template_type . '-' . $post_id . '-combine-script', $js_file_url, array(), filemtime( $js_file_path ), true );
-					wp_localize_script( 'ablocks-blocks-' . $template_type . '-' . $post_id . '-combine-script', 'ABlocksGlobal', $CoreAssets->get_localize_frontend_data() );
+					// One shared ABlocksGlobal for the whole page: without this each
+					// template type (header/footer/single/archive) printed its own
+					// identical copy on top of the page combine script's.
+					wp_enqueue_script( 'ablocks-blocks-' . $template_type . '-' . $post_id . '-combine-script', $js_file_url, array( 'ablocks-globals' ), filemtime( $js_file_path ), true );
+					CoreAssets::localize_globals_once();
 				}
 			}
-		}
+		}//end foreach
 	}
 }
