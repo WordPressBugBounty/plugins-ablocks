@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 2.11.0\n"
+"Project-Id-Version: aBlocks 2.11.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-08-12T15:54:50+00:00\n"
+"POT-Creation-Date: 2026-08-14T15:47:01+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ablocks\n"
@@ -2328,7 +2328,7 @@ msgstr ""
 #: src/blocks/frontend-dashboard/settings.js:312
 #: src/blocks/heading/settings.js:358
 #: src/blocks/heading/settings.js:398
-#: src/blocks/image/settings.js:699
+#: src/blocks/image/settings.js:707
 #: src/blocks/info-box/components/badge/settings.js:106
 #: src/blocks/info-box/components/button/settings.js:100
 #: src/blocks/info-box/components/description/settings.js:73
@@ -2455,7 +2455,7 @@ msgstr ""
 #: src/blocks/heading/settings.js:273
 #: src/blocks/icon/settings.js:63
 #: src/blocks/image-scroll/settings.js:317
-#: src/blocks/image/settings.js:429
+#: src/blocks/image/settings.js:437
 #: src/blocks/info-box/components/button/settings.js:83
 #: src/blocks/info-box/components/icon/settings.js:34
 #: src/blocks/interactive-circle-infographic/settings.js:1228
@@ -2850,7 +2850,7 @@ msgstr ""
 #: src/blocks/frontend-dashboard/settings.js:320
 #: src/blocks/heading/settings.js:392
 #: src/blocks/image-hotspot/settings.js:289
-#: src/blocks/image/settings.js:683
+#: src/blocks/image/settings.js:691
 #: src/blocks/info-box/components/badge/settings.js:122
 #: src/blocks/info-box/components/badge/settings.js:130
 #: src/blocks/info-box/components/badge/settings.js:154
@@ -3255,8 +3255,8 @@ msgstr ""
 #: src/blocks/frontend-dashboard/settings.js:297
 #: src/blocks/image-hotspot-child/settings.js:133
 #: src/blocks/image-scroll/settings.js:425
-#: src/blocks/image/settings.js:587
-#: src/blocks/image/settings.js:717
+#: src/blocks/image/settings.js:595
+#: src/blocks/image/settings.js:725
 #: src/blocks/info-box/components/badge/settings.js:192
 #: src/blocks/info-box/components/button/settings.js:186
 #: src/blocks/interactive-circle-infographic/settings.js:611
@@ -3431,8 +3431,8 @@ msgstr ""
 #: src/blocks/form-builder/settings.js:816
 #: src/blocks/heading/settings.js:263
 #: src/blocks/icon/settings.js:39
-#: src/blocks/image/settings.js:346
-#: src/blocks/image/settings.js:665
+#: src/blocks/image/settings.js:354
+#: src/blocks/image/settings.js:673
 #: src/blocks/logout/settings.js:94
 #: src/blocks/loop-load-more/settings.js:78
 #: src/blocks/menu-child-sub/settings.js:209
@@ -3505,7 +3505,7 @@ msgstr ""
 #: src/blocks/heading/settings.js:79
 #: src/blocks/heading/settings.js:237
 #: src/blocks/image-scroll/settings.js:287
-#: src/blocks/image/settings.js:419
+#: src/blocks/image/settings.js:427
 #: src/blocks/info-box/components/description/settings.js:42
 #: src/blocks/info-box/components/heading/settings.js:40
 #: src/blocks/info-box/components/sub-heading/settings.js:40
@@ -3990,7 +3990,7 @@ msgid "General"
 msgstr ""
 
 #: src/blocks/academy-course-media/settings.js:45
-#: src/blocks/image/settings.js:374
+#: src/blocks/image/settings.js:382
 #: src/blocks/storeengine-product-gallery/settings.js:107
 msgid "Image Dimensions"
 msgstr ""
@@ -4015,7 +4015,7 @@ msgstr ""
 #: src/blocks/image-hotspot-child/settings.js:65
 #: src/blocks/image-hotspot/settings.js:793
 #: src/blocks/image-scroll/settings.js:222
-#: src/blocks/image/settings.js:378
+#: src/blocks/image/settings.js:386
 #: src/blocks/lists/settings.js:983
 #: src/blocks/logout/settings.js:341
 #: src/blocks/map/settings.js:262
@@ -4060,7 +4060,7 @@ msgstr ""
 #: src/blocks/container/settings.js:832
 #: src/blocks/featured-image/settings.js:323
 #: src/blocks/image-scroll/settings.js:210
-#: src/blocks/image/settings.js:390
+#: src/blocks/image/settings.js:398
 #: src/blocks/logout/settings.js:309
 #: src/blocks/map/settings.js:284
 #: src/blocks/modal/settings.js:131
@@ -4079,8 +4079,8 @@ msgstr ""
 #: src/blocks/featured-image/settings.js:486
 #: src/blocks/image-scroll/settings.js:366
 #: src/blocks/image-scroll/settings.js:391
-#: src/blocks/image/settings.js:528
-#: src/blocks/image/settings.js:553
+#: src/blocks/image/settings.js:536
+#: src/blocks/image/settings.js:561
 #: src/blocks/storeengine-product-gallery/settings.js:190
 #: src/controls/background/overlay/options/index.js:124
 #: src/controls/background/overlay/options/index.js:171
@@ -4126,8 +4126,8 @@ msgstr ""
 #: src/blocks/filterable-cards/settings.js:426
 #: src/blocks/filterable-cards/settings.js:431
 #: src/blocks/image-hotspot/settings.js:868
-#: src/blocks/image/settings.js:599
-#: src/blocks/image/settings.js:604
+#: src/blocks/image/settings.js:607
+#: src/blocks/image/settings.js:612
 #: src/blocks/interactive-circle-infographic/settings.js:631
 #: src/blocks/interactive-circle-infographic/settings.js:636
 #: src/blocks/interactive-circle-infographic/settings.js:829
@@ -4278,7 +4278,7 @@ msgstr ""
 #: src/blocks/frontend-dashboard/settings.js:261
 #: src/blocks/frontend-dashboard/settings.js:290
 #: src/blocks/image-hotspot-child/settings.js:124
-#: src/blocks/image/settings.js:708
+#: src/blocks/image/settings.js:716
 #: src/blocks/info-box/components/badge/settings.js:203
 #: src/blocks/info-box/components/button/settings.js:197
 #: src/blocks/interactive-circle-infographic/settings.js:623
@@ -4902,7 +4902,7 @@ msgstr ""
 
 #: src/blocks/academy-password-reset-form/settings.js:116
 #: src/blocks/academy-password-reset-form/settings.js:133
-#: src/blocks/image/settings.js:690
+#: src/blocks/image/settings.js:698
 #: src/blocks/notice/settings.js:139
 #: src/blocks/storeengine-checkout-form/settings.js:192
 #: src/blocks/storeengine-checkout-form/settings.js:211
@@ -7668,14 +7668,14 @@ msgid "Featured Image"
 msgstr ""
 
 #: src/blocks/featured-image/settings.js:218
-#: src/blocks/image/settings.js:285
+#: src/blocks/image/settings.js:293
 #: src/controls/icon-upload/index.js:290
 #: src/utils/deprecated/icon-upload/index.js:257
 msgid "Image sizes"
 msgstr ""
 
 #: src/blocks/featured-image/settings.js:231
-#: src/blocks/image/settings.js:298
+#: src/blocks/image/settings.js:306
 #: src/blocks/video/settings.js:503
 msgid "Aspect ratio"
 msgstr ""
@@ -7685,40 +7685,40 @@ msgid "Featured Image Dimensions"
 msgstr ""
 
 #: src/blocks/featured-image/settings.js:339
-#: src/blocks/image/settings.js:406
+#: src/blocks/image/settings.js:414
 msgid "Object fit"
 msgstr ""
 
 #: src/blocks/featured-image/settings.js:379
-#: src/blocks/image/settings.js:446
+#: src/blocks/image/settings.js:454
 msgid "Image link"
 msgstr ""
 
 #: src/blocks/featured-image/settings.js:397
-#: src/blocks/image/settings.js:464
+#: src/blocks/image/settings.js:472
 msgid "Open in new tab"
 msgstr ""
 
 #: src/blocks/featured-image/settings.js:409
 #: src/blocks/image-scroll/settings.js:297
-#: src/blocks/image/settings.js:476
+#: src/blocks/image/settings.js:484
 msgid "Alt Text"
 msgstr ""
 
 #: src/blocks/featured-image/settings.js:416
 #: src/blocks/image-scroll/settings.js:304
-#: src/blocks/image/settings.js:483
+#: src/blocks/image/settings.js:491
 msgid "clear"
 msgstr ""
 
 #: src/blocks/featured-image/settings.js:433
-#: src/blocks/image/settings.js:500
+#: src/blocks/image/settings.js:508
 msgid "On Hover image"
 msgstr ""
 
 #: src/blocks/featured-image/settings.js:446
 #: src/blocks/image-scroll/settings.js:351
-#: src/blocks/image/settings.js:513
+#: src/blocks/image/settings.js:521
 msgid "Filter & Opacity"
 msgstr ""
 
@@ -7726,8 +7726,8 @@ msgstr ""
 #: src/blocks/featured-image/settings.js:479
 #: src/blocks/image-scroll/settings.js:359
 #: src/blocks/image-scroll/settings.js:384
-#: src/blocks/image/settings.js:521
-#: src/blocks/image/settings.js:546
+#: src/blocks/image/settings.js:529
+#: src/blocks/image/settings.js:554
 #: src/blocks/map/settings.js:303
 #: src/blocks/video/settings.js:539
 msgid "CSS Filters"
@@ -7735,7 +7735,7 @@ msgstr ""
 
 #: src/blocks/featured-image/settings.js:500
 #: src/blocks/image-scroll/settings.js:405
-#: src/blocks/image/settings.js:567
+#: src/blocks/image/settings.js:575
 msgid "Transition duration(ms)"
 msgstr ""
 
@@ -9411,7 +9411,7 @@ msgstr ""
 
 #: src/blocks/image-scroll/settings.js:448
 #: src/blocks/image/render.js:158
-#: src/blocks/image/settings.js:622
+#: src/blocks/image/settings.js:630
 #: src/blocks/interactive-circle-infographic/settings.js:1107
 #: src/controls/image-control/index.js:74
 #: src/utils/block-lists.js:62
@@ -9449,15 +9449,15 @@ msgstr ""
 msgid "This file type is not supported."
 msgstr ""
 
-#: src/blocks/image/settings.js:633
+#: src/blocks/image/settings.js:641
 msgid "Caption"
 msgstr ""
 
-#: src/blocks/image/settings.js:641
+#: src/blocks/image/settings.js:649
 msgid "Captions"
 msgstr ""
 
-#: src/blocks/image/settings.js:651
+#: src/blocks/image/settings.js:659
 msgid "Caption text"
 msgstr ""
 

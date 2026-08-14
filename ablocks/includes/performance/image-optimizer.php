@@ -115,14 +115,37 @@ class ImageOptimizer {
 			}
 		}
 
-		// CLS fix — reserve space by giving images that have neither width nor
-		// height their intrinsic dimensions.
-		if ( $this->do_dimensions
-			&& false === stripos( $tag, 'width=' )
-			&& false === stripos( $tag, 'height=' ) ) {
-			$dim = $this->resolve_dimensions( $tag );
-			if ( $dim ) {
-				$attrs .= ' width="' . (int) $dim[0] . '" height="' . (int) $dim[1] . '"';
+		// CLS fix — make sure the image always carries BOTH width and height so the
+		// browser has an intrinsic aspect ratio. A missing dimension is as harmful as
+		// missing both: an <img> with width but no height (e.g. a block with a custom
+		// width) has no aspect ratio, so once core's "sizes=auto" is added the
+		// `contain-intrinsic-size:3000px 1500px` fallback stretches it tall. When only
+		// one dimension is present we derive the other from the intrinsic ratio rather
+		// than skipping. This runs when the dimensions feature is on OR responsive
+		// images are on — adding a srcset is what triggers "sizes=auto", so any image
+		// that gets a srcset must also carry both dimensions.
+		if ( $this->do_dimensions || $this->do_responsive ) {
+			$has_w = false !== stripos( $tag, 'width=' );
+			$has_h = false !== stripos( $tag, 'height=' );
+			if ( ! $has_w || ! $has_h ) {
+				$dim = $this->resolve_dimensions( $tag );
+				if ( $dim && $dim[0] > 0 && $dim[1] > 0 ) {
+					if ( ! $has_w && ! $has_h ) {
+						$attrs .= ' width="' . (int) $dim[0] . '" height="' . (int) $dim[1] . '"';
+					} elseif ( $has_w ) {
+						// Width present, height missing → height = width × (natH / natW).
+						$w = $this->get_attr( $tag, 'width' );
+						if ( preg_match( '/^\d+$/', $w ) && (int) $w > 0 ) {
+							$attrs .= ' height="' . (int) round( (int) $w * $dim[1] / $dim[0] ) . '"';
+						}
+					} else {
+						// Height present, width missing → width = height × (natW / natH).
+						$h = $this->get_attr( $tag, 'height' );
+						if ( preg_match( '/^\d+$/', $h ) && (int) $h > 0 ) {
+							$attrs .= ' width="' . (int) round( (int) $h * $dim[0] / $dim[1] ) . '"';
+						}
+					}
+				}
 			}
 		}
 

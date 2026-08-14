@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.8
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.11.0
+Stable tag: 2.11.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -308,6 +308,9 @@ Privacy: https://policies.google.com/privacy
 Our external packages use [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT. Additionally, we incorporate [FontAwesome v6](https://fontawesome.com/license/free) under the CC BY 4.0 License, and [dnd kit](https://github.com/clauderic/dnd-kit) licensed under the MIT License.
 
 == Changelog ==
+
+= 2.11.1 - 14/08/2026 =
+* Fixed – Images with a custom width rendered too tall when "Serve responsive images" was on: adding a srcset triggers WordPress core's "sizes=auto", and an image with a width but no height had no aspect ratio, so the browser's contain-intrinsic-size fallback stretched it. The Performance Suite now always emits both width and height (deriving the missing one from the intrinsic ratio) before adding a srcset.
 
 = 2.11.0 - 12/08/2026 =
 * Added – Performance Suite full-page cache: rendered pages are saved to disk so repeat visits skip WordPress, block parsing and theme rendering, with scheduled cache maintenance and background warming from your sitemap

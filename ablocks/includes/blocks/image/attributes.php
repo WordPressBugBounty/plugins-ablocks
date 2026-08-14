@@ -59,6 +59,10 @@ $attributes = [
 			'valueMobile'      => '',
 		],
 	],
+	'imageDataAttribute'         => [
+		'type'                   => 'object',
+		'default'                => [],
+	],
 	'aspectRatio'                => [
 		'type'                   => 'object',
 		'default'                => [

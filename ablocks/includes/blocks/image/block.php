@@ -41,7 +41,7 @@ class Block extends BlockBaseAbstract {
 		);
 		// Image css
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-block--featured-image img',
+			'{{WRAPPER}} .ablocks-image-figure img',
 			$this->get_image_css( $attributes ),
 			$this->get_image_css( $attributes, 'Tablet' ),
 			$this->get_image_css( $attributes, 'Mobile' ),
@@ -49,7 +49,7 @@ class Block extends BlockBaseAbstract {
 
 		// Image hover css
 		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-block--featured-image img:hover',
+			'{{WRAPPER}} .ablocks-image-figure img:hover',
 			$this->get_image_hover_css( $attributes ),
 			$this->get_image_hover_css( $attributes, 'Tablet' ),
 			$this->get_image_hover_css( $attributes, 'Mobile' ),
