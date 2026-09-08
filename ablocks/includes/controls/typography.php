@@ -64,7 +64,16 @@ class Typography extends ControlBaseAbstract {
 		];
 	}
 
-	public static function get_css( $attribute_value, $property = '', $device = '', $attribute_global_name = '' ) {
+	/**
+	 * @param mixed  $attribute_value       Stored typography object.
+	 * @param string $property              Unused legacy argument.
+	 * @param string $device                Device suffix.
+	 * @param string $attribute_global_name Global typography id, if any.
+	 * @param bool   $expand_font_stack     Whether to turn the stored family into
+	 *                                      a full stack. The atomic compiler must
+	 *                                      pass false — see below.
+	 */
+	public static function get_css( $attribute_value, $property = '', $device = '', $attribute_global_name = '', $expand_font_stack = true ) {
 		$global_value = [];
 		if ( $attribute_global_name ) {
 			$global_typography = wp_list_pluck( \Ablocks\Helper::get_settings( 'global_typography', [] ), 'value', 'id' );
@@ -101,12 +110,20 @@ class Typography extends ControlBaseAbstract {
 		if ( ! empty( $global_value['fontFamily'] ) ) {
 			$css['font-family'] = "var(--ablocks-{$attribute_global_name}-font-family)";
 		} elseif ( ! empty( $value['fontFamily'] ) ) {
-			$stack = \ABlocks\Classes\FontStack::build(
-				$value['fontFamily'],
-				isset( $value['fontFallback'] ) ? $value['fontFallback'] : ''
-			);
-			if ( '' !== $stack ) {
-				$css['font-family'] = $stack;
+			// A stored family becomes a full stack everywhere EXCEPT the atomic
+			// compiler, whose declarations are hashed in JS at save time and
+			// again here at render time and must agree byte for byte. A stack
+			// cannot take part in that: it depends on the metrics table, the
+			// `font_metric_fallback` setting and the `ablocks/font_stack`
+			// filter, none of which the editor can see.
+			$family = $expand_font_stack
+				? \ABlocks\Classes\FontStack::build(
+					$value['fontFamily'],
+					isset( $value['fontFallback'] ) ? $value['fontFallback'] : ''
+				)
+				: $value['fontFamily'];
+			if ( '' !== $family ) {
+				$css['font-family'] = $family;
 			}
 		}
 
@@ -134,6 +151,30 @@ class Typography extends ControlBaseAbstract {
 			$css_var_name = $css_prop . ( $device ? '-' . strtolower( $device ) : '' );
 
 			$add_prop( $css_prop, $local_val, $local_unit, $global_key, $css_var_name );
+		}
+
+		/*
+		 * Columns, direction and text stroke. Appended after the original
+		 * members so anything saved before these existed compiles byte-for-byte
+		 * as it did — for atomic blocks the style class is a hash of this
+		 * output. Desktop-only, like weight/transform/style/decoration above,
+		 * and with no global-typography equivalent to fall back to. Mirrors the
+		 * tail of typographyPairs() in src/blocks/atomic-shared/styles.js.
+		 */
+		if ( empty( $device ) ) {
+			if ( isset( $value['columns'] ) && '' !== $value['columns'] ) {
+				$css['column-count'] = $value['columns'];
+			}
+			if ( ! empty( $value['direction'] ) ) {
+				$css['direction'] = $value['direction'];
+			}
+			if ( isset( $value['strokeWidth'] ) && '' !== $value['strokeWidth'] ) {
+				$stroke_unit = ! empty( $value['strokeWidthUnit'] ) ? $value['strokeWidthUnit'] : 'px';
+				$css['-webkit-text-stroke-width'] = $value['strokeWidth'] . $stroke_unit;
+			}
+			if ( ! empty( $value['strokeColor'] ) ) {
+				$css['-webkit-text-stroke-color'] = $value['strokeColor'];
+			}
 		}
 
 		return $css;

@@ -37,7 +37,15 @@ class DelayJs {
 			return;
 		}
 		$self = new self();
-		add_filter( 'script_loader_tag', [ $self, 'delay_tag' ], 20, 3 );
+		// The tag rewriting is shared with consent gating; see ScriptGate.
+		( new ScriptGate(
+			'ablocks/delayed',
+			function ( $handle ) use ( $self ) {
+				return $self->should_delay( $handle );
+			},
+			null,
+			true
+		) )->hook( 20 );
 		add_action( 'wp_footer', [ $self, 'print_loader' ], 99 );
 	}
 
@@ -49,24 +57,14 @@ class DelayJs {
 	}
 
 	/**
-	 * Rewrite the target script tag so the browser doesn't execute it yet.
-	 */
-	public function delay_tag( $tag, $handle, $src ) {
-		if ( ! $this->should_delay( $handle ) ) {
-			return $tag;
-		}
-		// Move src out of the way and mark the tag as delayed.
-		$tag = preg_replace( '/\ssrc=/', ' data-ablocks-src=', $tag, 1 );
-		$tag = preg_replace( '/^<script\s/', '<script type="ablocks/delayed" ', $tag, 1 );
-		return $tag;
-	}
-
-	/**
 	 * Whether a script handle should be delayed. Covers the combined per-page
 	 * script (assets-generation on) and the per-block frontend scripts
 	 * (assets-generation off), so delay works in both modes.
+	 *
+	 * @param string $handle Script handle.
+	 * @return bool
 	 */
-	private function should_delay( $handle ) {
+	public function should_delay( $handle ) {
 		if ( in_array( $handle, $this->handles(), true ) ) {
 			return true;
 		}

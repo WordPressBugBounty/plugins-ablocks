@@ -16,6 +16,7 @@ class API {
 			( new \ABlocks\API\FormBuilderController() )->register_routes();
 			( new \ABlocks\API\SearchController() )->register_routes();
 			( new \ABlocks\API\LoopBuilderController() )->register_routes();
+			( new \ABlocks\API\PasteController() )->register_routes();
 		});
 	}
 }

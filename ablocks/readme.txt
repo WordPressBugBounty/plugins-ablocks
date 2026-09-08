@@ -2,9 +2,9 @@
 Contributors: kodezen, academylms, tusharimran
 Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.8
-Tested up to: 6.9
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.11.1
+Stable tag: 2.12.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -308,6 +308,36 @@ Privacy: https://policies.google.com/privacy
 Our external packages use [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT. Additionally, we incorporate [FontAwesome v6](https://fontawesome.com/license/free) under the CC BY 4.0 License, and [dnd kit](https://github.com/clauderic/dnd-kit) licensed under the MIT License.
 
 == Changelog ==
+
+= 2.12.0 - 03/09/2026 =
+* Added – Atomic blocks: a new family of primitives — Text, Div, Flex, Grid, Image and SVG — that render one semantic tag with no wrapper markup, share a single style system, and emit one small stylesheet per unique design instead of one per block
+* Added – Reusable global classes: name a set of styles once, apply it to any atomic block, and edit it in one place to update every block using it, with a class manager for renaming, duplicating and deleting across the site
+* Added – Interaction states: style Hover, Focus, Focus (keyboard) and Active on any atomic block or global class, and preview each state in the canvas while you edit it
+* Added – Custom responsive breakpoints: register your own breakpoints with min and max widths, switch the canvas to them from the block toolbar, and choose whether values cascade down to narrower screens or apply only within their own range
+* Added – Interactions for atomic blocks: several animations per block, each with its own trigger, easing, repeat and per-breakpoint settings, including scroll-linked animations that follow the scroll position
+* Added – Paste from Google Docs: a pasted document becomes aBlocks blocks — headings, paragraphs, lists and tables — and its images are imported into the media library as WebP, deduplicated and named after their alt text. Pastes from anywhere else are untouched
+* Added – Cookie Consent: a consent banner with per-category tag blocking, so scripts you register stay blocked until the visitor agrees, and every form submission records the consent that was in force when it was sent
+* Added – Roles and permissions: grant editing, advanced settings or dashboard access per role, so a content-only author gets a content-only editor
+* Improved – A page now loads only the global classes it actually uses, rather than the whole library
+* Improved – The atomic inspector follows the layout conventions authors already know: panels that hold saved settings are marked, repeatable lists drag to reorder, and units sit on the label row
+* Improved – Enable Tablet Hamburger Menu control for the navigation block
+* Improved – Updated the StoreEngine SDK to 1.5.6
+* Fixed – Global classes could be lost when several were saved at once: each save rewrote the whole library, so a slow request could land last and overwrite every class created while it was in flight. Saves are now serialized and applied atomically on the server
+* Fixed – Class edits made just before switching to another class, closing the tab or saving the post were silently dropped
+* Fixed – Creating, duplicating or converting a class waited for the server before the editor responded, so on a slow connection it looked as though nothing had happened — and a class could end up applied to a block without ever being saved
+* Fixed – Pasting content into an Atomic Text block could replace it with a plain paragraph, losing the block's styles and classes
+* Fixed – Nested atomic blocks rendered without their styles on the frontend of block themes
+* Fixed – A block's own styles silently overrode the global class being edited, with nothing on screen to say so; the Style tab now names the properties responsible and can clear them
+* Fixed – A global class applied to a block did not stay selected after a reload, so the next edit landed on the block's own styles instead of the class
+* Fixed – Duplicating a block did not carry its class styles across correctly
+* Fixed – Custom width was ignored on Div, Flex and Grid while min and max width worked
+* Fixed – A child Div did not fill the available width inside a row-direction Flex container
+* Fixed – Div and Flex containers set to the same width rendered at different sizes on the frontend
+* Fixed – A single Div or Flex block was hard to select with the sidebar closed
+* Fixed – Flex direction was set to row but the Row icon did not read as active
+* Fixed – The active class colour did not persist after clicking away
+* Fixed – Accordion title index IDs and the font selection UI
+* Security – Block attribute values are escaped before being written into a `<style>` element, so a crafted attribute cannot break out of its own rule
 
 = 2.11.1 - 14/08/2026 =
 * Fixed – Images with a custom width rendered too tall when "Serve responsive images" was on: adding a srcset triggers WordPress core's "sizes=auto", and an image with a width but no height had no aspect ratio, so the browser's contain-intrinsic-size fallback stretched it. The Performance Suite now always emits both width and height (deriving the missing one from the intrinsic ratio) before adding a srcset.

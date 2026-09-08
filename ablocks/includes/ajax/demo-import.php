@@ -21,7 +21,7 @@ class DemoImport extends AbstractAjaxHandler {
 		$this->actions = array(
 			'get_demo_list'       => array(
 				'callback'   => array( $this, 'get_demo_list' ),
-				'capability' => 'manage_options',
+				'capability' => 'ablocks_import_templates',
 				'fields'     => array(
 					'type'      => 'string',
 					'cost_type' => 'string',
@@ -34,7 +34,7 @@ class DemoImport extends AbstractAjaxHandler {
 			),
 			'get_single_demo'     => array(
 				'callback'   => array( $this, 'get_single_demo' ),
-				'capability' => 'manage_options',
+				'capability' => 'ablocks_import_templates',
 				'fields'     => array(
 					'id'          => 'integer',
 					'with_images' => 'string',
@@ -42,32 +42,35 @@ class DemoImport extends AbstractAjaxHandler {
 			),
 			'get_demo_categories' => array(
 				'callback'   => array( $this, 'get_demo_categories' ),
-				'capability' => 'manage_options',
+				'capability' => 'ablocks_import_templates',
 				'fields'     => array(
 					'type' => 'string',
 				)
 			),
 			'get_theme_demos'     => array(
 				'callback'   => array( $this, 'get_theme_demos' ),
-				'capability' => 'manage_options',
+				'capability' => 'ablocks_import_templates',
 			),
 			'check_dependencies'  => array(
 				'callback'   => array( $this, 'check_dependencies' ),
-				'capability' => 'manage_options',
+				'capability' => 'ablocks_import_templates',
 				'fields'     => array(
 					'dependencies' => 'array|string',
 				)
 			),
 			'install_and_active'  => array(
 				'callback'   => array( $this, 'install_and_active' ),
-				'capability' => 'manage_options',
+				// A demo's dependencies are plugins. Importing templates is a
+				// design permission; installing plugins is not, and must never
+				// become reachable through one.
+				'capability' => 'install_plugins',
 				'fields'     => array(
 					'dependency' => 'array|string',
 				)
 			),
 			'import_template'     => array(
 				'callback'   => array( $this, 'import_template' ),
-				'capability' => 'manage_options',
+				'capability' => 'ablocks_import_templates',
 				'fields'     => array(
 					'file_url'            => 'string',
 					'customizer_file_url' => 'string',

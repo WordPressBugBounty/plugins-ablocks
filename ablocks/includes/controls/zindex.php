@@ -31,7 +31,7 @@ class Zindex extends ControlBaseAbstract {
 	}
 
 	public static function get_css( $attribute_value, $property = '', $device = '' ) {
-		$default_attar_value = self::get_attribute_default_value( (bool) $device );
+		$default_attar_value = $device ? self::responsive_defaults() : self::get_attribute_default_value( false );
 		$value = wp_parse_args( $attribute_value, $default_attar_value );
 		$css = [];
 		if ( $value[ 'zIndex' . $device ] ) {

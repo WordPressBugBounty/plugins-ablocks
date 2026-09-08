@@ -22,6 +22,16 @@ class Base {
 			'default_container_width' => 1140,
 			'container_padding' => 10,
 			'container_element_gap' => 20,
+			// Responsive breakpoint widths (px). Consumed by every CSS generator
+			// and the block editor; see Helper::get_breakpoints().
+			'breakpoint_tablet' => 800,
+			'breakpoint_mobile' => 480,
+			// How breakpoint queries relate: 'cascade' (max-width envelopes — a
+			// Tablet value also applies on Mobile) or 'strict' (exclusive bands).
+			// See Helper::get_breakpoint_mode().
+			'breakpoint_mode' => 'cascade',
+			// User-registered extra breakpoints: [ { key, label, width } ].
+			'breakpoint_custom' => [],
 			'enabled_assets_file_generation' => false,
 			'enabled_block_copy_paste_style' => true,
 			// Design system lock: authors may only use the global typography /
@@ -61,6 +71,11 @@ class Base {
 			'perf_async_css' => false,
 			'perf_critical_css' => false,
 			'perf_defer_js' => false,
+			// Editor — turn a document pasted from Google Docs into aBlocks blocks
+			// and take its images into the media library as WebP.
+			'paste_google_docs' => true,
+			'paste_convert_webp' => true,
+			'paste_webp_quality' => 92,
 			// Performance Suite — full-page HTML cache. Off by default: unlike
 			// the toggles above it changes what every visitor receives, so it
 			// needs a deliberate decision rather than inheriting a default.

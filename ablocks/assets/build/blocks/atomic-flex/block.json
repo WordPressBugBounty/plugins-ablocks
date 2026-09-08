@@ -1,0 +1,113 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ablocks/atomic-flex",
+  "version": "0.1.0",
+  "title": "Atomic Flex",
+  "category": "ablocks-atomic",
+  "description": "A flexbox container — arrange inner blocks in a row or column with the full atomic style system.",
+  "keywords": [
+    "ablocks",
+    "flex",
+    "flexbox",
+    "row",
+    "column",
+    "layout",
+    "atomic"
+  ],
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ],
+    "html": false,
+    "anchor": true,
+    "className": false
+  },
+  "textdomain": "ablocks",
+  "editorStyle": [
+    "ablocks-common-style",
+    "file:./style.css"
+  ],
+  "style": [
+    "file:./style.css"
+  ],
+  "editorScript": [
+    "ablocks-common-script"
+  ],
+  "viewScript": [
+    "file:./view.js"
+  ],
+  "attributes": {
+    "block_id": {
+      "type": "string",
+      "default": ""
+    },
+    "blockVersion": {
+      "type": "number",
+      "default": 3
+    },
+    "htmlTag": {
+      "type": "string",
+      "default": "div"
+    },
+    "globalClasses": {
+      "type": "array",
+      "default": []
+    },
+    "htmlId": {
+      "type": "string",
+      "default": ""
+    },
+    "link": {
+      "type": "object",
+      "default": {
+        "url": "",
+        "newTab": false,
+        "noFollow": false
+      }
+    },
+    "animation": {
+      "type": "object",
+      "default": {
+        "type": "",
+        "duration": "0.6",
+        "delay": "0"
+      }
+    },
+    "animations": {
+      "type": "array",
+      "default": []
+    },
+    "transitionDuration": {
+      "type": "string",
+      "default": ""
+    },
+    "alignment": {
+      "type": "object",
+      "default": {
+        "value": "",
+        "valueTablet": "",
+        "valueMobile": ""
+      }
+    },
+    "styles": {
+      "type": "object",
+      "default": {
+        "v": 3
+      }
+    },
+    "customCSS": {
+      "type": "string",
+      "default": ""
+    },
+    "hideOn": {
+      "type": "object",
+      "default": {
+        "desktop": false,
+        "tablet": false,
+        "mobile": false
+      }
+    }
+  }
+}

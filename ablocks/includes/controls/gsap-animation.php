@@ -73,65 +73,23 @@ class GsapAnimation extends ControlBaseAbstract {
 		];
 	}
 
+	/**
+	 * GSAP animations are driven entirely by the frontend script (see the
+	 * gsap view scripts) — this control contributes no CSS.
+	 *
+	 * The body used to compile a mask-image rule from `mask*` members and then
+	 * throw the result away with an unconditional `return []`. Since the control
+	 * declares no mask members at all, every one of those reads was an
+	 * "Undefined array key" notice on any page carrying a GSAP animation. Dead
+	 * code that could only emit warnings, so it is gone; masking lives in the
+	 * Mask control.
+	 *
+	 * @param mixed  $attribute_value Stored control value.
+	 * @param string $property        Unused.
+	 * @param string $device          Unused.
+	 * @return array Always empty.
+	 */
 	public static function get_css( $attribute_value, $property = '', $device = '' ) {
-		$default_attar_value = self::get_attribute_default_value( (bool) $device );
-		$value = wp_parse_args( $attribute_value, $default_attar_value );
-
-		$css = [];
-
-		/**
-		 * Generated CSS
-		 * css property
-		 * mask-image
-		 * mask-size
-		 * mask-position
-		 * mask-repeat
-		 */
-
-		if ( $value['mask'] ) {
-			if ( 'custom' === $value['maskShape'] ) {
-				$css['mask-image'] = 'url(' . $value['customMaskShape'] . ')';
-			} else {
-				$css['mask-image'] = 'url(' . ABLOCKS_ROOT_URL . '/assets/images/mask-shapes/' . $value['maskShape'] . '.svg)';
-			}
-			$css['mask-size'] = 'contain';
-			$css['mask-position'] = 'center center';
-			$css['mask-repeat'] = 'no-repeat';
-		}
-
-		if ( $value[ 'maskSize' . $device ] && 'custom' !== $value[ 'maskSize' . $device ] ) {
-			$css['mask-size'] = $value[ 'maskSize' . $device ];
-		}
-
-		if (
-			$value[ 'maskSize' . $device ] &&
-			'custom' === $value[ 'maskSize' . $device ] &&
-			$value[ 'scaleUnit' . $device ]
-		) {
-			$css['mask-size'] = $value[ 'scale' . $device ] . $value[ 'scaleUnit' . $device ];
-		}
-
-		if (
-			'custom' === $value[ 'maskPosition' . $device ] &&
-			$value[ 'xPosition' . $device ] &&
-			$value[ 'xPositionUnit' . $device ]
-		) {
-			$css['-webkit-mask-position-x'] = $value[ 'xPosition' . $device ] . $value[ 'xPositionUnit' . $device ];
-			$css['-webkit-mask-position-y'] = $value[ 'yPosition' . $device ] . $value[ 'yPositionUnit' . $device ];
-		}
-
-		if (
-			'custom' === $value[ 'maskPosition' . $device ] &&
-			$value[ 'yPosition' . $device ] &&
-			$value[ 'yPositionUnit' . $device ]
-		) {
-			$css['-webkit-mask-position-y'] = $value[ 'yPosition' . $device ] . $value[ 'yPositionUnit' . $device ];
-		}
-
-		if ( $value[ 'maskRepeat' . $device ] ) {
-			$css['mask-repeat'] = $value[ 'maskRepeat' . $device ];
-		}
-
 		return [];
 	}
 

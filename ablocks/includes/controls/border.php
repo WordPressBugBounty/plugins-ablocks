@@ -178,7 +178,7 @@ class Border extends ControlBaseAbstract {
 		];
 	}
 	public static function get_css( $attribute_value, $property = '', $device = '' ) {
-		$value = wp_parse_args( $attribute_value, self::get_attribute_default_value( true ) );
+		$value = wp_parse_args( $attribute_value, self::responsive_defaults() );
 		$css = [];
 
 		// Separate handling of width units
@@ -192,27 +192,35 @@ class Border extends ControlBaseAbstract {
 			$widthUnit = $value['unitWidth'];
 		}
 
-		// Handle width
-		if ( $value[ 'isLinkedWidth' . $device ] ) {
-			if ( '' !== $value[ 'commonWidth' . $device ] ) {
-				$css['border-width'] = $value[ 'commonWidth' . $device ] . $widthUnit;
+		// Handle width. Read every device-suffixed member through device_member():
+		// a custom breakpoint (or the generator's value-less probe suffix) has no
+		// key of its own in the control's defaults, and indexing it directly is
+		// what produced "Undefined array key …" notices on every page.
+		if ( self::device_member( $value, 'isLinkedWidth', $device ) ) {
+			$commonWidth = self::device_member( $value, 'commonWidth', $device );
+			if ( '' !== $commonWidth ) {
+				$css['border-width'] = $commonWidth . $widthUnit;
 			}
 		} else {
+			$topWidth    = self::device_member( $value, 'topWidth', $device );
+			$rightWidth  = self::device_member( $value, 'rightWidth', $device );
+			$bottomWidth = self::device_member( $value, 'bottomWidth', $device );
+			$leftWidth   = self::device_member( $value, 'leftWidth', $device );
+
 			// Only emit border-width when at least one side was actually set —
 			// otherwise every unlinked border produced "border-width:0px 0px 0px 0px".
-			$has_width = '' !== $value[ 'topWidth' . $device ] || '' !== $value[ 'rightWidth' . $device ]
-				|| '' !== $value[ 'bottomWidth' . $device ] || '' !== $value[ 'leftWidth' . $device ];
+			$has_width = '' !== $topWidth || '' !== $rightWidth || '' !== $bottomWidth || '' !== $leftWidth;
 			if ( $has_width ) {
-				$topWidth = ! empty( $value[ 'topWidth' . $device ] ) ? $value[ 'topWidth' . $device ] : 0;
-				$rightWidth = ! empty( $value[ 'rightWidth' . $device ] ) ? $value[ 'rightWidth' . $device ] : 0;
-				$bottomWidth = ! empty( $value[ 'bottomWidth' . $device ] ) ? $value[ 'bottomWidth' . $device ] : 0;
-				$leftWidth = ! empty( $value[ 'leftWidth' . $device ] ) ? $value[ 'leftWidth' . $device ] : 0;
+				$topWidth    = ! empty( $topWidth ) ? $topWidth : 0;
+				$rightWidth  = ! empty( $rightWidth ) ? $rightWidth : 0;
+				$bottomWidth = ! empty( $bottomWidth ) ? $bottomWidth : 0;
+				$leftWidth   = ! empty( $leftWidth ) ? $leftWidth : 0;
 
 				$borderWidth = $topWidth . $widthUnit . ' ' . $rightWidth . $widthUnit . ' ' . $bottomWidth . $widthUnit . ' ' . $leftWidth . $widthUnit;
 
 				$css['border-width'] = $borderWidth;
 			}
-		}
+		}//end if
 
 		// Handle border style and color
 		if ( '' !== $value['borderStyle'] && 'default' !== $value['borderStyle'] ) {
@@ -234,22 +242,23 @@ class Border extends ControlBaseAbstract {
 		}
 
 		// Handle radius
-		if ( $value[ 'isLinkedRadius' . $device ] ) {
-			if ( '' !== $value[ 'commonRadius' . $device ] ) {
-				$css['border-radius'] = $value[ 'commonRadius' . $device ] . $radiusUnit;
+		if ( self::device_member( $value, 'isLinkedRadius', $device ) ) {
+			$commonRadius = self::device_member( $value, 'commonRadius', $device );
+			if ( '' !== $commonRadius ) {
+				$css['border-radius'] = $commonRadius . $radiusUnit;
 			}
 		} else {
-			if ( '' !== $value[ 'topRadius' . $device ] ) {
-				$css['border-top-left-radius'] = $value[ 'topRadius' . $device ] . $radiusUnit;
-			}
-			if ( '' !== $value[ 'rightRadius' . $device ] ) {
-				$css['border-top-right-radius'] = $value[ 'rightRadius' . $device ] . $radiusUnit;
-			}
-			if ( '' !== $value[ 'bottomRadius' . $device ] ) {
-				$css['border-bottom-right-radius'] = $value[ 'bottomRadius' . $device ] . $radiusUnit;
-			}
-			if ( '' !== $value[ 'leftRadius' . $device ] ) {
-				$css['border-bottom-left-radius'] = $value[ 'leftRadius' . $device ] . $radiusUnit;
+			$corners = [
+				'topRadius'    => 'border-top-left-radius',
+				'rightRadius'  => 'border-top-right-radius',
+				'bottomRadius' => 'border-bottom-right-radius',
+				'leftRadius'   => 'border-bottom-left-radius',
+			];
+			foreach ( $corners as $member => $property_name ) {
+				$corner = self::device_member( $value, $member, $device );
+				if ( '' !== $corner ) {
+					$css[ $property_name ] = $corner . $radiusUnit;
+				}
 			}
 		}
 
@@ -275,8 +284,9 @@ class Border extends ControlBaseAbstract {
 		if ( ! empty( $value['borderStyleH'] ) && 'default' !== $value['borderStyleH'] ) {
 			// Handle hover width
 			if ( ! empty( $value[ 'isLinkedWidthH' . $device ] ) ) {
-				if ( '' !== $value[ 'commonWidthH' . $device ] ) {
-					$css['border-width'] = $value[ 'commonWidthH' . $device ] . $widthUnit;
+				$commonWidthH = self::device_member( $value, 'commonWidthH', $device );
+				if ( '' !== $commonWidthH ) {
+					$css['border-width'] = $commonWidthH . $widthUnit;
 				}
 			} else {
 				$topWidth = ! empty( $value[ 'topWidthH' . $device ] ) ? $value[ 'topWidthH' . $device ] : 0;
@@ -291,7 +301,7 @@ class Border extends ControlBaseAbstract {
 			if ( ! empty( $value['borderColorH'] ) ) {
 				$css['border-color'] = Color::get_css( $value['borderColorH'] );
 			}
-		}
+		}//end if
 
 		// Handle hover border style
 		if ( ! empty( $value['borderStyleH'] ) && 'default' !== $value['borderStyleH'] ) {

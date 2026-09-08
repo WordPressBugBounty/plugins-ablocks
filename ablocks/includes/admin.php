@@ -11,12 +11,16 @@ class Admin {
 		$self->dispatch_hooks();
 
 		add_filter( 'upload_mimes', [ $self, 'allow_lottie_json_uploads' ] );
+		add_filter( 'upload_mimes', [ $self, 'allow_svg_uploads' ] );
 		add_filter( 'wp_check_filetype_and_ext', function ( $data, $file, $filename ) {
 			$ext = pathinfo( $filename, PATHINFO_EXTENSION );
 
 			if ( 'json' === $ext ) {
 				$data['ext']  = 'json';
 				$data['type'] = 'application/json';
+			} elseif ( 'svg' === strtolower( $ext ) && current_user_can( 'unfiltered_html' ) ) {
+				$data['ext']  = 'svg';
+				$data['type'] = 'image/svg+xml';
 			}
 
 			return $data;
@@ -26,6 +30,19 @@ class Admin {
 	function allow_lottie_json_uploads( $mimes ) {
 		$mimes['json'] = 'application/json';
 		$mimes['lottie'] = 'application/json';
+		return $mimes;
+	}
+
+	// Gated to unfiltered_html (administrators, by default) rather than opened
+	// for every role: an SVG file can carry a <script>, and unlike the Atomic
+	// SVG block's own read path (which strips scripts/handlers before inlining
+	// markup — see atomic-svg/edit.js `cleanSvg`), the raw file the media
+	// library stores is unsanitised and can execute if it is ever opened
+	// directly as a top-level document.
+	function allow_svg_uploads( $mimes ) {
+		if ( current_user_can( 'unfiltered_html' ) ) {
+			$mimes['svg'] = 'image/svg+xml';
+		}
 		return $mimes;
 	}
 

@@ -11,6 +11,9 @@ class Helper {
 
 	use Importer;
 
+	/** Memoized responsive device list (see get_responsive_devices). */
+	private static $responsive_devices_cache = null;
+
 	public static function get_time() {
 		return time() + ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS );
 	}
@@ -23,6 +26,236 @@ class Helper {
 		}
 
 		return $default;
+	}
+
+	/**
+	 * Responsive breakpoint widths (px) for the whole plugin. User-configurable
+	 * via Settings; defaults preserve the historical 800/480 values. Every CSS
+	 * generator and the block editor reads these so breakpoints stay in sync.
+	 */
+	/**
+	 * Make one CSS property or declaration value safe to write into a stylesheet.
+	 *
+	 * Block attributes reach the compiled CSS verbatim and that CSS is echoed
+	 * inside a `<style>` element, so a value carrying `</style>` closes the
+	 * element and everything after it is parsed as HTML — a stored XSS
+	 * available to anyone who can set a block attribute, which includes a
+	 * Contributor editing their own draft. `{` and `}` are the same problem one
+	 * level down: they close the rule and let the value choose its own
+	 * selector.
+	 *
+	 * Only those four characters are removed. A declaration value never needs
+	 * them, and everything a real one does need survives: data URIs (which
+	 * carry `;`), gradients, `calc()` and `var()` (parentheses and commas),
+	 * font stacks (quotes), `content` escapes (backslashes), and shorthand
+	 * slashes such as `font: 12px/1.5`.
+	 *
+	 * `;` is deliberately kept. With the braces gone, an injected `;` can only
+	 * add declarations to the same rule — which targets the block's own
+	 * element, exactly what its style controls already allow — so removing it
+	 * would break data URIs to buy nothing.
+	 *
+	 * @param mixed $value A CSS property name or declaration value.
+	 * @return string The value with the escape characters removed.
+	 */
+	public static function esc_css_value( $value ) {
+		if ( ! is_scalar( $value ) ) {
+			return '';
+		}
+		return str_replace( [ '<', '>', '{', '}' ], '', (string) $value );
+	}
+
+	public static function get_breakpoints() {
+		$tablet = (int) self::get_settings( 'breakpoint_tablet', 800 );
+		$mobile = (int) self::get_settings( 'breakpoint_mobile', 480 );
+
+		// Guard against nonsensical config (mobile must be below tablet).
+		if ( $tablet < 1 ) {
+			$tablet = 800;
+		}
+		if ( $mobile < 1 || $mobile >= $tablet ) {
+			$mobile = min( 480, $tablet - 1 );
+		}
+
+		return array(
+			'tablet' => $tablet,
+			'mobile' => $mobile,
+		);
+	}
+
+	/**
+	 * The full ordered list of responsive devices the atomic style system emits
+	 * for: the base (Desktop, width 0 = no media query), the two built-in
+	 * breakpoints, then any user-registered custom breakpoints. Each entry:
+	 *   id     - stable identifier (also the WP device name for the built-ins)
+	 *   label  - shown in the editor device switcher
+	 *   suffix - appended to responsive attribute keys (e.g. fontSize + suffix)
+	 *   width  - max-width px for the @media rule (0 = base, no media query)
+	 *
+	 * Ordering is load-bearing, not cosmetic: the base comes first and every
+	 * other device follows widest-first, so narrower breakpoints emit later and
+	 * win in `cascade` mode. Precedence therefore follows the breakpoint's own
+	 * bounds rather than the order a custom breakpoint happened to be
+	 * registered in.
+	 */
+	public static function get_responsive_devices() {
+		if ( null !== self::$responsive_devices_cache ) {
+			return self::$responsive_devices_cache;
+		}
+
+		$bp      = self::get_breakpoints();
+		// Built-ins are max-width only (min 0). `width` is the sort key
+		// (max-width, or a large value for min-only so it sorts widest).
+		$devices = array(
+			array( 'id' => 'Desktop', 'label' => 'Desktop', 'suffix' => '', 'width' => 0, 'min' => 0, 'max' => 0 ),
+			array( 'id' => 'Tablet', 'label' => 'Tablet', 'suffix' => 'Tablet', 'width' => $bp['tablet'], 'min' => 0, 'max' => $bp['tablet'] ),
+			array( 'id' => 'Mobile', 'label' => 'Mobile', 'suffix' => 'Mobile', 'width' => $bp['mobile'], 'min' => 0, 'max' => $bp['mobile'] ),
+		);
+
+		$custom = self::get_settings( 'breakpoint_custom', array() );
+		if ( is_array( $custom ) ) {
+			foreach ( $custom as $c ) {
+				$c = (array) $c;
+				// Advanced breakpoints support a min and/or max width. `width` is
+				// kept as a legacy alias for max-width.
+				$max = isset( $c['maxWidth'] ) ? (int) $c['maxWidth'] : ( isset( $c['width'] ) ? (int) $c['width'] : 0 );
+				$min = isset( $c['minWidth'] ) ? (int) $c['minWidth'] : 0;
+				if ( $max < 1 && $min < 1 ) {
+					continue; // needs at least one bound
+				}
+				// Stable, alphanumeric suffix so stored values survive label edits.
+				$key    = ! empty( $c['key'] ) ? preg_replace( '/[^a-zA-Z0-9]/', '', $c['key'] ) : (string) ( $max ? $max : $min );
+				$suffix = 'Bp' . ucfirst( $key );
+				$label  = ! empty( $c['label'] ) ? $c['label'] : self::breakpoint_auto_label( $min, $max );
+				$devices[] = array(
+					'id'     => $suffix,
+					'label'  => $label,
+					'suffix' => $suffix,
+					'width'  => $max > 0 ? $max : 999999, // sort key (min-only = widest)
+					'min'    => $min,
+					'max'    => $max,
+				);
+			}
+		}
+
+		self::$responsive_devices_cache = self::sort_responsive_devices( $devices );
+		return self::$responsive_devices_cache;
+	}
+
+	/**
+	 * Base first, then widest-first. Ties break on id so the order is stable
+	 * regardless of the PHP version's sort stability.
+	 */
+	private static function sort_responsive_devices( $devices ) {
+		$base = array();
+		$rest = array();
+		foreach ( $devices as $d ) {
+			if ( empty( $d['min'] ) && empty( $d['max'] ) ) {
+				$base[] = $d;
+			} else {
+				$rest[] = $d;
+			}
+		}
+
+		usort(
+			$rest,
+			function ( $a, $b ) {
+				$cmp = (int) $b['width'] - (int) $a['width'];
+				return 0 !== $cmp ? $cmp : strcmp( (string) $a['id'], (string) $b['id'] );
+			}
+		);
+
+		return array_merge( $base, $rest );
+	}
+
+	/** Drop the memoized device list (settings changed mid-request). */
+	public static function flush_responsive_devices_cache() {
+		self::$responsive_devices_cache = null;
+	}
+
+	/** A readable fallback label for a min/max breakpoint. */
+	public static function breakpoint_auto_label( $min, $max ) {
+		if ( $min > 0 && $max > 0 ) {
+			return $min . '–' . $max . 'px';
+		}
+		if ( $max > 0 ) {
+			return '≤ ' . $max . 'px';
+		}
+		return '≥ ' . $min . 'px';
+	}
+
+	/** Compose a CSS media condition (no `@media` keyword) from min/max px. */
+	public static function breakpoint_media_condition( $min, $max ) {
+		$parts = array();
+		if ( $min > 0 ) {
+			$parts[] = '(min-width:' . (int) $min . 'px)';
+		}
+		if ( $max > 0 ) {
+			$parts[] = '(max-width:' . (int) $max . 'px)';
+		}
+		return implode( ' and ', $parts );
+	}
+
+	/**
+	 * How breakpoint queries relate to each other, site-wide.
+	 *
+	 *   cascade (default) - max-width envelopes. A Tablet value still applies at
+	 *                       Mobile widths unless Mobile overrides it. This is how
+	 *                       aBlocks v1/v2 blocks behave, so a page mixing block
+	 *                       versions stays consistent.
+	 *   strict            - exclusive bands. A Tablet value applies only between
+	 *                       the Mobile bound and the Tablet bound, matching
+	 *                       WordPress core and block themes.
+	 */
+	public static function get_breakpoint_mode() {
+		return 'strict' === self::get_settings( 'breakpoint_mode', 'cascade' ) ? 'strict' : 'cascade';
+	}
+
+	/**
+	 * The single place an atomic media query is built. Returns the complete
+	 * `@media …` prelude for a device entry, or '' for the base device (which
+	 * needs no query at all).
+	 *
+	 * Both bounds are honoured, so a custom breakpoint declared with only a
+	 * `minWidth` produces a real min-width query instead of being skipped —
+	 * animations already behaved this way, style rules did not.
+	 */
+	public static function breakpoint_media_query( $device ) {
+		$device = (array) $device;
+		$min    = isset( $device['min'] ) ? (int) $device['min'] : 0;
+		$max    = isset( $device['max'] ) ? (int) $device['max'] : 0;
+
+		if ( $min < 1 && $max < 1 ) {
+			return '';
+		}
+
+		/*
+		 * Strict mode bounds a max-width breakpoint from below with the next
+		 * narrower breakpoint, turning overlapping envelopes into exclusive
+		 * bands. A breakpoint that already declares its own min is left alone —
+		 * the author has stated the band explicitly.
+		 */
+		if ( 'strict' === self::get_breakpoint_mode() && $max > 0 && $min < 1 ) {
+			$narrower = self::next_narrower_max( $max );
+			if ( $narrower > 0 ) {
+				$min = $narrower + 1;
+			}
+		}
+
+		$condition = self::breakpoint_media_condition( $min, $max );
+		return '' === $condition ? '' : '@media screen and ' . $condition;
+	}
+
+	/** The largest max-width bound narrower than $max, or 0 if none. */
+	private static function next_narrower_max( $max ) {
+		$best = 0;
+		foreach ( self::get_responsive_devices() as $d ) {
+			$dmax = isset( $d['max'] ) ? (int) $d['max'] : 0;
+			if ( $dmax > 0 && $dmax < $max && $dmax > $best ) {
+				$best = $dmax;
+			}
+		}
+		return $best;
 	}
 
 	public static function get_page_permalink( $page, $fallback = null ) {
@@ -106,47 +339,55 @@ class Helper {
 		}
 	}
 
+	/**
+	 * The aBlocks submenu.
+	 *
+	 * Each item declares the aBlocks capability that owns it rather than
+	 * manage_options, so a site can hand somebody the Theme Builder without
+	 * handing them the whole of WordPress. Administrators hold every one of
+	 * these, so nothing changes for them. See Permissions.
+	 */
 	public static function get_admin_menu_list() {
 		$menu                                     = [];
 		$menu[ ABLOCKS_PLUGIN_SLUG ]              = [
 			'parent_slug' => ABLOCKS_PLUGIN_SLUG,
 			'title'       => __( 'Dashboard', 'ablocks' ),
-			'capability'  => 'manage_options',
+			'capability'  => Permissions::ACCESS,
 		];
 		if ( self::is_enabled_block( 'form-builder' ) ) {
 			$menu[ ABLOCKS_PLUGIN_SLUG . '-submissions' ]   = [
 				'parent_slug' => ABLOCKS_PLUGIN_SLUG,
 				'title'       => __( 'Submissions', 'ablocks' ),
-				'capability'  => 'manage_options',
+				'capability'  => 'ablocks_view_submissions',
 			];
 		}
 		if ( self::get_addon_active_status( 'theme-builder' ) ) {
 			$menu[ ABLOCKS_PLUGIN_SLUG . '-theme-builder' ]   = [
 				'parent_slug' => ABLOCKS_PLUGIN_SLUG,
 				'title'       => __( 'Theme Builder', 'ablocks' ),
-				'capability'  => 'manage_options',
+				'capability'  => 'ablocks_manage_theme_builder',
 			];
 		}
 		$menu[ ABLOCKS_PLUGIN_SLUG . '-addons' ]   = [
 			'parent_slug' => ABLOCKS_PLUGIN_SLUG,
 			'title'       => __( 'Add-ons', 'ablocks' ),
-			'capability'  => 'manage_options',
+			'capability'  => 'ablocks_manage_addons',
 		];
 		$menu[ ABLOCKS_PLUGIN_SLUG . '-scanner' ]   = [
 			'parent_slug' => ABLOCKS_PLUGIN_SLUG,
 			'title'       => __( 'Site Scanner', 'ablocks' ),
-			'capability'  => 'manage_options',
+			'capability'  => 'ablocks_run_scanner',
 		];
 		$menu[ ABLOCKS_PLUGIN_SLUG . '-settings' ]   = [
 			'parent_slug' => ABLOCKS_PLUGIN_SLUG,
 			'title'       => __( 'Settings', 'ablocks' ),
-			'capability'  => 'manage_options',
+			'capability'  => Permissions::SAVE_SETTINGS,
 		];
 		if ( ! defined( 'ABLOCKS_PRO_VERSION' ) ) {
 			$menu[ ABLOCKS_PLUGIN_SLUG . '-get-pro' ] = [
 				'parent_slug' => ABLOCKS_PLUGIN_SLUG,
 				'title'       => '<span class="dashicons dashicons-awards academy-blue-color"></span> ' . __( 'Get Pro', 'ablocks' ),
-				'capability'  => 'manage_options',
+				'capability'  => Permissions::ACCESS,
 			];
 		}
 		return apply_filters( 'ablocks/admin_menu_list', $menu );
@@ -403,7 +644,7 @@ class Helper {
 	public static function get_content_by_object_id( string $id_or_fse_slug ) : ?string {
 		if ( is_numeric( $id_or_fse_slug ) ) {
 			if (
-				! current_user_can( 'manage_options' ) &&
+				! current_user_can( 'edit_post', $id_or_fse_slug ) &&
 				get_post_status( $id_or_fse_slug ) !== 'publish'
 			) {
 				return null;

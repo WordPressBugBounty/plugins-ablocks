@@ -15,7 +15,7 @@ class EmailTemplate extends AbstractAjaxHandler {
 		$this->actions = [
 			'get_templates'      => [
 				'callback' => [ $this, 'get_templates' ],
-				'capability' => 'manage_options',
+				'capability' => 'ablocks_manage_forms',
 				'fields' => [
 					'email_template_id' => 'string',
 					'isSubscription' => 'boolean',
@@ -23,7 +23,7 @@ class EmailTemplate extends AbstractAjaxHandler {
 			],
 			'update_template'      => [
 				'callback' => [ $this, 'update_template' ],
-				'capability' => 'manage_options',
+				'capability' => 'ablocks_manage_forms',
 				'fields' => [
 					'from' => 'string',
 					'email_template_id' => 'string',
@@ -41,7 +41,7 @@ class EmailTemplate extends AbstractAjaxHandler {
 			],
 			'delete_template'      => [
 				'callback' => [ $this, 'delete_template' ],
-				'capability' => 'manage_options',
+				'capability' => 'ablocks_manage_forms',
 				'fields' => [
 					'email_template_id' => 'string',
 					'slug'     => 'string',
@@ -49,7 +49,7 @@ class EmailTemplate extends AbstractAjaxHandler {
 			],
 			'remove_templates'      => [
 				'callback' => [ $this, 'remove_templates' ],
-				'capability' => 'manage_options',
+				'capability' => 'ablocks_manage_forms',
 				'fields' => [
 					'email_template_id' => 'string',
 				]

@@ -4,6 +4,7 @@ namespace ABlocks\import;
 
 use ABlocks\Admin\Settings\Base;
 use ABlocks\Helper;
+use ABlocks\Classes\GlobalClasses;
 use ABlocks\import\XmlParsers\WXR_Parser;
 use WP_Error;
 
@@ -1254,8 +1255,96 @@ class WP_Import extends \WP_Importer {
 				unset( $settings['frontend_dashboard_sub_pages'] );
 			}
 
+			if ( isset( $settings['global_classes'] ) ) {
+				$this->import_global_classes( $settings['global_classes'] );
+				unset( $settings['global_classes'] );
+			}
+
 			Base::save_settings( $settings );
 		}
+	}
+
+	/**
+	 * Sanitise one imported class record.
+	 *
+	 * The file is untrusted input, so a record gets the same treatment
+	 * GlobalClasses::upsert() gives one saved from the editor: the id through
+	 * `sanitize_html_class` so it cannot escape the selector it is written
+	 * into, and the legacy raw `css` declaration string stripped of braces and
+	 * angle brackets so it cannot close its own rule and open another.
+	 *
+	 * @param array $class One record from the imported library.
+	 * @return array The sanitised record.
+	 */
+	private function sanitize_global_class( $class ) {
+		$clean = [
+			'id'    => sanitize_html_class( $class['id'] ),
+			'label' => isset( $class['label'] ) ? sanitize_text_field( $class['label'] ) : '',
+		];
+
+		if ( isset( $class['styles'] ) && is_array( $class['styles'] ) ) {
+			// Structured buckets are compiled through the styles schema, which
+			// only emits properties it knows, so they need no extra stripping.
+			$clean['styles'] = $class['styles'];
+		} elseif ( isset( $class['css'] ) ) {
+			$clean['css'] = trim( preg_replace( '/[{}<>]/', '', (string) $class['css'] ) );
+		}
+
+		return $clean;
+	}
+
+	/**
+	 * Merge the imported global-class library into this site's.
+	 *
+	 * A class already on this site wins: overwriting it would silently restyle
+	 * blocks that are already published here, which is a worse surprise than an
+	 * imported block keeping the local definition of a class it names. Skipped
+	 * ids are reported so the collision is visible rather than guessed at.
+	 *
+	 * @param array $incoming Class records from the imported file.
+	 */
+	private function import_global_classes( $incoming ) {
+		if ( ! is_array( $incoming ) || empty( $incoming ) ) {
+			return;
+		}
+
+		$existing = GlobalClasses::get_all();
+		$known    = [];
+		foreach ( $existing as $class ) {
+			if ( ! empty( $class['id'] ) ) {
+				$known[ $class['id'] ] = true;
+			}
+		}
+
+		$added   = [];
+		$skipped = [];
+		foreach ( $incoming as $class ) {
+			if ( empty( $class['id'] ) || '' === sanitize_html_class( $class['id'] ) ) {
+				continue;
+			}
+			if ( isset( $known[ $class['id'] ] ) ) {
+				$skipped[] = $class['id'];
+				continue;
+			}
+			$existing[] = $this->sanitize_global_class( $class );
+			$added[]    = $class['id'];
+		}
+
+		if ( ! empty( $added ) ) {
+			update_option( 'ablocks_global_classes', wp_json_encode( array_values( $existing ) ), false );
+			GlobalClasses::bump_revision();
+		}
+
+		Helper::emit_sse_message( [
+			'action'  => 'log',
+			'level'   => 'info',
+			'message' => sprintf(
+				/* translators: 1: number of imported global classes, 2: number skipped because the id already existed. */
+				__( 'Global classes: %1$d imported, %2$d skipped (id already in use).', 'ablocks' ),
+				count( $added ),
+				count( $skipped )
+			),
+		] );
 	}
 
 	/**

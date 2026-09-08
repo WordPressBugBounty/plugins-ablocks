@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'kodezen/ablocks',
-        'pretty_version' => 'dev-1.0-beta2',
-        'version' => 'dev-1.0-beta2',
-        'reference' => '9bea34fa32cb3420f7a7121c3ee10dba7b17c89b',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '42cf1f676fbfb8821a7c286e56a3ba425dd7eada',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -29,9 +29,9 @@
             'dev_requirement' => true,
         ),
         'kodezen/ablocks' => array(
-            'pretty_version' => 'dev-1.0-beta2',
-            'version' => 'dev-1.0-beta2',
-            'reference' => '9bea34fa32cb3420f7a7121c3ee10dba7b17c89b',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '42cf1f676fbfb8821a7c286e56a3ba425dd7eada',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -308,9 +308,9 @@
             'dev_requirement' => true,
         ),
         'storeengine/wordpress-sdk' => array(
-            'pretty_version' => 'v1.5.5',
-            'version' => '1.5.5.0',
-            'reference' => 'f39fc2f64d450290ee266178c248bfc6111a9105',
+            'pretty_version' => 'v1.5.7',
+            'version' => '1.5.7.0',
+            'reference' => '3ed458056ded9eaede0d1ca370755a358cb45b9b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../storeengine/wordpress-sdk',
             'aliases' => array(),

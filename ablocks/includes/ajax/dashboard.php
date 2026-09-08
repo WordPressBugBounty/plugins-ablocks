@@ -19,27 +19,27 @@ class Dashboard extends AbstractAjaxHandler {
 		$this->actions = array(
 			'get_admin_menu_items'      => array(
 				'callback' => array( $this, 'get_admin_menu_items' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_access',
 			),
 			'regenerate_assets'      => array(
 				'callback' => array( $this, 'regenerate_assets' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_performance',
 			),
 			'page_cache_status'      => array(
 				'callback' => array( $this, 'page_cache_status' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_performance',
 			),
 			'purge_page_cache'      => array(
 				'callback' => array( $this, 'purge_page_cache' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_performance',
 			),
 			'run_scanner'      => array(
 				'callback' => array( $this, 'run_scanner' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_run_scanner',
 			),
 			'scanner_dismiss'      => array(
 				'callback' => array( $this, 'scanner_dismiss' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_run_scanner',
 				'fields' => array(
 					'id'      => 'string',
 					'dismiss' => 'boolean',
@@ -47,18 +47,18 @@ class Dashboard extends AbstractAjaxHandler {
 			),
 			'scanner_apply_fix'      => array(
 				'callback' => array( $this, 'scanner_apply_fix' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_run_scanner',
 				'fields' => array(
 					'field' => 'string',
 				),
 			),
 			'image_stats'      => array(
 				'callback' => array( $this, 'image_stats' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_performance',
 			),
 			'image_optimize_batch'      => array(
 				'callback' => array( $this, 'image_optimize_batch' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_performance',
 				'fields' => array(
 					'level' => 'string',
 					'webp'  => 'boolean',
@@ -67,36 +67,36 @@ class Dashboard extends AbstractAjaxHandler {
 			),
 			'image_discard_originals'      => array(
 				'callback' => array( $this, 'image_discard_originals' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_performance',
 			),
 			'image_restore_all'      => array(
 				'callback' => array( $this, 'image_restore_all' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_performance',
 			),
 			'image_scan_unused'      => array(
 				'callback' => array( $this, 'image_scan_unused' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_performance',
 				'fields' => array(
 					'offset' => 'integer',
 				),
 			),
 			'image_scan_duplicates'      => array(
 				'callback' => array( $this, 'image_scan_duplicates' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_performance',
 				'fields' => array(
 					'offset' => 'integer',
 				),
 			),
 			'image_quarantine'      => array(
 				'callback' => array( $this, 'image_quarantine' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_performance',
 				'fields' => array(
 					'ids' => 'json',
 				),
 			),
 			'image_quarantine_action'      => array(
 				'callback' => array( $this, 'image_quarantine_action' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_performance',
 				'fields' => array(
 					'do' => 'string',
 					'id' => 'integer',
@@ -104,30 +104,31 @@ class Dashboard extends AbstractAjaxHandler {
 			),
 			'clear_demo_transients'      => array(
 				'callback' => array( $this, 'clear_demo_transients' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_import_templates',
 			),
 			'install_academy_lms'      => array(
 				'callback' => array( $this, 'install_academy_lms' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'install_plugins',
 			),
 			'install_storeengine'      => array(
 				'callback' => array( $this, 'install_storeengine' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'install_plugins',
 			),
 			'install_ecm'      => array(
 				'callback' => array( $this, 'install_ecm' ),
+				'capability'    => 'install_plugins',
 			),
 			'download_google_fonts'      => array(
 				'callback' => array( $this, 'download_google_fonts' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_global_styles',
 			),
 			'font_audit'      => array(
 				'callback' => array( $this, 'font_audit' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_global_styles',
 			),
 			'design_audit'      => array(
 				'callback' => array( $this, 'design_audit' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_global_styles',
 			),
 		);
 	}

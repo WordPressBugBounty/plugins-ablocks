@@ -13,8 +13,10 @@ class AssetsGenerator {
 		$style_depends = [];
 		$scripts_depends = [];
 		$aBlocks = [];
+		$seen_refs = [];
+		$global_classes = [];
 
-		self::recursive_block_parser( $parse_blocks_content, $aBlocks, $style_depends, $scripts_depends );
+		self::recursive_block_parser( $parse_blocks_content, $aBlocks, $style_depends, $scripts_depends, $seen_refs, $global_classes );
 
 		// Dedupe once, after the whole block tree has been walked.
 		$style_depends = array_unique( $style_depends );
@@ -63,16 +65,23 @@ class AssetsGenerator {
 			$dynamic_css = CssDedupe::process( $dynamic_css );
 		}
 
+		// Global classes, narrowed to the ones this page uses. They sit between
+		// the blocks' static CSS and their per-instance rules so a block's own
+		// styles still win over a class it carries.
+		$global_css = GlobalClasses::compiled_css_for(
+			array_values( array_unique( $global_classes ) )
+		);
+
 		$FileUpload = new FileUpload();
 		$destination_folder = $FileUpload->get_upload_dir();
 		self::copy_build_image_folder_to_uploads( $destination_folder );
-		$FileUpload->create_file( $file_name . '.min.css', $library_css . $static_css . $dynamic_css );
+		$FileUpload->create_file( $file_name . '.min.css', $library_css . $static_css . $global_css . $dynamic_css );
 		$FileUpload->create_file( $file_name . '.min.js', $library_js . $static_js );
 
 		return $aBlocks;
 	}
 
-	public static function recursive_block_parser( $parse_content, &$aBlocks, &$style_depends, &$scripts_depends, &$seen_refs = [] ) {
+	public static function recursive_block_parser( $parse_content, &$aBlocks, &$style_depends, &$scripts_depends, &$seen_refs = [], &$global_classes = [] ) {
 		if ( count( $parse_content ) > 0 ) {
 			foreach ( $parse_content as $item ) {
 				if ( ! empty( $item['blockName'] ) ) {
@@ -87,9 +96,19 @@ class AssetsGenerator {
 						$ref_post = get_post( $ref_post_id ); // Get the reusable block or pattern
 						if ( $ref_post ) {
 							$ref_content = parse_blocks( $ref_post->post_content ); // Parse the reusable block's content
-							self::recursive_block_parser( $ref_content, $aBlocks, $style_depends, $scripts_depends, $seen_refs ); // Recursively parse the referenced block/pattern
+							self::recursive_block_parser( $ref_content, $aBlocks, $style_depends, $scripts_depends, $seen_refs, $global_classes ); // Recursively parse the referenced block/pattern
 						}
 					} elseif ( strpos( $item['blockName'], 'ablocks' ) !== false ) {
+						// Which global classes this page actually needs. Collected
+						// from the walk rather than from a stored per-post index:
+						// the walk is happening anyway, and an index would be one
+						// more thing to keep in sync with the content.
+						if ( ! empty( $item['attrs']['globalClasses'] ) && is_array( $item['attrs']['globalClasses'] ) ) {
+							foreach ( $item['attrs']['globalClasses'] as $global_class_id ) {
+								$global_classes[] = (string) $global_class_id;
+							}
+						}
+
 						$block_name_class = str_replace( ' ', '', ucwords( str_replace( '-', ' ', explode( '/', $item['blockName'] )[1] ) ) );
 
 						$dynamic_class = '\\ABlocks\\Blocks\\' . $block_name_class . '\\Block';
@@ -121,20 +140,34 @@ class AssetsGenerator {
 							$style_depends = array_merge( $style_depends, $instance->get_style_depends() );
 							$scripts_depends = array_merge( $scripts_depends, $instance->get_script_depends() );
 
-							// Capture dynamic CSS
+							// Capture dynamic CSS.
+							//
+							// A block can be reached twice in one walk: on an FSE theme
+							// `pre_render_block` collects EVERY block — parents and their
+							// children alike — and this parser also recurses into
+							// `innerBlocks`, so a nested block is seen once as a child and
+							// once as a collected top-level entry. Compiling it a second
+							// time is not idempotent for blocks whose CSS is emitted
+							// through a per-request dedupe (the atomic blocks' hashed
+							// `ablocks-s-*` rules): the repeat build returns an empty
+							// string because the rule was already emitted, and writing
+							// that over the first result stripped every nested atomic
+							// block's styles from the page. Keep the first result.
 							if ( isset( $item['attrs']['ref'] ) || isset( $item['attrs']['block_id'] ) ) {
 								$block_id_or_ref = ! empty( $item['attrs']['block_id'] ) ? $item['attrs']['block_id'] : 'core_pattern_ref_' . $item['attrs']['ref'];
-								$aBlocks[ $block_id_or_ref ] = [
-									'block_name' => $item['blockName'],
-									'dynamic_style' => $instance->build_css( $attributes ),
-								];
+								if ( ! isset( $aBlocks[ $block_id_or_ref ]['dynamic_style'] ) ) {
+									$aBlocks[ $block_id_or_ref ] = [
+										'block_name' => $item['blockName'],
+										'dynamic_style' => $instance->build_css( $attributes ),
+									];
+								}
 							}
 						}//end if
 					}//end if
 
 					// Check for inner blocks and recursively process them
 					if ( is_array( $item['innerBlocks'] ) && count( $item['innerBlocks'] ) ) {
-						self::recursive_block_parser( $item['innerBlocks'], $aBlocks, $style_depends, $scripts_depends, $seen_refs );
+						self::recursive_block_parser( $item['innerBlocks'], $aBlocks, $style_depends, $scripts_depends, $seen_refs, $global_classes );
 					}
 				}//end if
 			}//end foreach

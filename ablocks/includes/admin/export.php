@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Admin\Settings\Base;
 use ABlocks\Helper;
+use ABlocks\Classes\GlobalClasses;
 
 class Export {
 
@@ -64,7 +65,11 @@ class Export {
 			'ablocks_global_h6_color'              => Helper::get_settings( 'global_h6_color', $default_settings['global_h6_color'] ),
 			'ablocks_global_h6_typography'         => $this->process_ablocks_json_data( 'global_h6_typography' ),
 			'ablocks_frontend_dashboard_page'      => $this->process_ablocks_json_data( 'frontend_dashboard_page' ),
-			'ablocks_frontend_dashboard_sub_pages' => base64_encode( get_option( 'ablocks_frontend_dashboard_sub_pages', '' ) )
+			'ablocks_frontend_dashboard_sub_pages' => base64_encode( get_option( 'ablocks_frontend_dashboard_sub_pages', '' ) ),
+			// The atomic global-class library. Blocks save only class ids, so
+			// without this the imported blocks resolve them to nothing and
+			// render unstyled — silently, since nothing errors.
+			'ablocks_global_classes'               => base64_encode( wp_json_encode( GlobalClasses::get_all() ) ),
 		);
 
 		if ( class_exists( 'StoreEngine' ) ) {

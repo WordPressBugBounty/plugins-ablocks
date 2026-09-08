@@ -126,6 +126,12 @@ class Blocks {
 		new \ABlocks\Blocks\Container\Block();
 		new \ABlocks\Blocks\Heading\Block();
 		new \ABlocks\Blocks\Paragraph\Block();
+		new \ABlocks\Blocks\AtomicText\Block();
+		new \ABlocks\Blocks\AtomicImage\Block();
+		new \ABlocks\Blocks\AtomicSvg\Block();
+		new \ABlocks\Blocks\AtomicDiv\Block();
+		new \ABlocks\Blocks\AtomicFlex\Block();
+		new \ABlocks\Blocks\AtomicGrid\Block();
 		new \ABlocks\Blocks\Image\Block();
 		new \ABlocks\Blocks\Button\Block();
 		new \ABlocks\Blocks\DualButton\Block();
@@ -220,6 +226,10 @@ class Blocks {
 	public function register_block_category( $categories, $post ) {
 		return array_merge(
 			[
+				[
+					'slug' => 'ablocks-atomic',
+					'title' => __( 'aBlocks Atomic', 'ablocks' ),
+				],
 				[
 					'slug' => 'ablocks',
 					'title' => __( 'ABlocks', 'ablocks' ),

@@ -98,11 +98,12 @@ class GlobalCssGenerator {
 	}
 
 	public function get_breakpoint( $media_query ) {
+		$bp = \ABlocks\Helper::get_breakpoints();
 		switch ( $media_query ) {
 			case 'tablet':
-				return '800px';
+				return $bp['tablet'] . 'px';
 			case 'mobile':
-				return '480px';
+				return $bp['mobile'] . 'px';
 			default:
 				return '1200px';
 		}

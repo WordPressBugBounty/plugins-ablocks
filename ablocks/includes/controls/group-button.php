@@ -45,7 +45,7 @@ class GroupButton extends ControlBaseAbstract {
 			return [];
 		}
 		$value = array_merge(
-			self::get_attribute_default_value( $device ? true : false ),
+			$device ? self::responsive_defaults() : self::get_attribute_default_value( false ),
 			$attribute_value
 		);
 

@@ -40,7 +40,7 @@ class AdminBar {
 	 * @return bool
 	 */
 	public static function user_can() {
-		$capability = (string) apply_filters( 'ablocks/perf/page_cache/manage_capability', 'manage_options' );
+		$capability = (string) apply_filters( 'ablocks/perf/page_cache/manage_capability', 'ablocks_manage_performance' );
 		return current_user_can( $capability );
 	}
 

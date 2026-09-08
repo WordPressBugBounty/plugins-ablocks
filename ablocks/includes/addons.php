@@ -21,6 +21,7 @@ class Addons {
 		$Autoload = Autoload::get_instance();
 		$addons = apply_filters('ablocks/addons/loader_args', [
 			'theme-builder' => 'ThemeBuilder',
+			'cookie-consent' => 'CookieConsent',
 		]);
 
 		foreach ( $addons as $addon_name => $addon_class_name ) {
@@ -37,7 +38,7 @@ class Addons {
 
 	public function get_all_addons() {
 		check_ajax_referer( 'ablocks_nonce', 'security' );
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( ! current_user_can( 'ablocks_manage_addons' ) ) {
 			wp_die();
 		}
 		$ablocks_addons = json_decode( get_option( ABLOCKS_ADDONS_SETTINGS_NAME, '{}' ) );
@@ -46,7 +47,9 @@ class Addons {
 
 	public function saved_addon_status() {
 		check_ajax_referer( 'ablocks_nonce', 'security' );
-		if ( ! current_user_can( 'manage_options' ) ) {
+		// ablocks_manage_addons is only ever granted to somebody who already holds
+		// install_plugins, because turning an add-on on can install one.
+		if ( ! current_user_can( 'ablocks_manage_addons' ) ) {
 			wp_die();
 		}
 		// phpcs:ignore  WordPress.Security.ValidatedSanitizedInput.MissingUnslash 

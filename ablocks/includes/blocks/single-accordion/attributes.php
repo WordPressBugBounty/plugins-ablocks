@@ -23,7 +23,7 @@ $attributes = [
 	),
 	'accordionTitle' => [
 		'type' => 'string',
-		'default' => 'Accordion Title'
+		'default' => ''
 	],
 	'headerTextColor' => [
 		'type' => 'string',

@@ -9,11 +9,16 @@ use ABlocks\Classes\FileUpload;
 use ABlocks\Classes\AssetsGenerator;
 use ABlocks\Classes\RegisterScripts;
 use ABlocks\Classes\GlobalCssGenerator;
+use ABlocks\Classes\GlobalClasses;
 use ABlocks\Classes\FontLoadLocally;
 use ABlocks\Admin\Menu;
 use ABlocks\Helper;
 
 class Assets {
+
+	/** Records which plugin version last generated the page stylesheets. */
+	const BUILD_OPTION = 'ablocks_assets_build';
+
 	public $current_page_template_part = [];
 	public $current_page_blocks = [];
 	private $FileUpload;
@@ -107,16 +112,30 @@ class Assets {
 			'is_pro'                => (bool) Helper::is_active_ablocks_pro(),
 			'is_archive' => (bool) is_archive(),
 			'archive_post_type' => $this->get_current_archive_post_type(),
+			// Responsive breakpoint widths (px) shared with the JS CSS generators
+			// and the block editor so media queries match the frontend.
+			'breakpoints'           => Helper::get_breakpoints(),
+			// Ordered device list (Desktop + built-ins + custom breakpoints) for
+			// the atomic block's responsive device switcher. Widest-first, so
+			// the editor and the frontend agree on breakpoint precedence.
+			'responsive_devices'    => Helper::get_responsive_devices(),
+			// Whether breakpoint queries overlap (cascade) or are exclusive
+			// bands (strict). The editor preview builds matching queries.
+			'breakpoint_mode'       => Helper::get_breakpoint_mode(),
 		];
 	}
 
 	public function get_localize_dashboard_data() {
-		if ( ! current_user_can( 'manage_options' ) ) {
+		// Anyone permitted to reach an aBlocks screen needs the nonce, or the
+		// dashboard loads and then 403s on every request it makes.
+		if ( ! current_user_can( Permissions::ACCESS ) ) {
 			return $this->get_localize_script_data();
 		}
 		return array_merge($this->get_localize_script_data(), [
 			'nonce'                 => wp_create_nonce( 'wp_rest' ),
 			'ablocks_nonce'         => wp_create_nonce( 'ablocks_nonce' ),
+			'permissions'           => Permissions::for_user(),
+			'is_admin_user'         => Permissions::is_real_admin(),
 		]);
 	}
 	public function get_localize_editor_data() {
@@ -230,6 +249,9 @@ class Assets {
 				'global_typography' => (array) Helper::get_settings( 'global_typography', [] ),
 				'global_typography_list' => wp_list_pluck( Helper::get_settings( 'global_typography', [] ), 'value', 'id' ),
 				'global_font_family_fallback' => (string) Helper::get_settings( 'global_font_family_fallback', 'Sans-serif' ),
+				// Editor paste — see includes/api/paste-controller.php.
+				'paste_google_docs' => (bool) Helper::get_settings( 'paste_google_docs', true ),
+				'paste_convert_webp' => (bool) Helper::get_settings( 'paste_convert_webp', true ),
 				// Theme.json + Font Library families, so uploaded/theme fonts are
 				// selectable next to the Google catalog.
 				'theme_fonts' => \ABlocks\Classes\FontStack::get_theme_font_families(),
@@ -244,7 +266,11 @@ class Assets {
 				'easy_content_manager' => Helper::is_active_easy_content_manager(),
 			],
 			'blocks_status' => $ablocks_blocks,
-			'post_types' => $post_types
+			'post_types' => $post_types,
+			// What this user may do inside the editor. Read by
+			// src/utils/permissions.js to hide controls they cannot use.
+			'permissions' => Permissions::for_user(),
+			'is_admin_user' => Permissions::is_real_admin(),
 		);
 		return apply_filters(
 			'ablocks/assets/editor_scripts_data',
@@ -808,7 +834,70 @@ class Assets {
 	public function is_assets_generated() {
 		$file_name = $this->current_page_slug;
 		$css_file_path = $this->FileUpload->get_file_path( $file_name . '.min.css' );
-		return file_exists( $css_file_path );
+
+		if ( ! file_exists( $css_file_path ) ) {
+			return false;
+		}
+
+		// The file embeds the global-class CSS this page needs, so editing a
+		// class has to make every generated stylesheet stale. Comparing the
+		// file's mtime against the library's change stamp rebuilds them lazily,
+		// one page at a time on next visit, without stamping a revision into
+		// every file name (which the per-post delete in Blocks relies on).
+		//
+		// Strictly greater, not >=: mtime has one-second resolution, so a file
+		// written in the same second as a class edit is indistinguishable from
+		// one written just after it. Treating that tie as stale costs one extra
+		// regeneration; treating it as fresh would serve the old CSS until the
+		// next edit.
+		return filemtime( $css_file_path ) > max(
+			GlobalClasses::get_revision(),
+			self::build_revision()
+		);
+	}
+
+	/**
+	 * When this plugin's own CSS last changed, as a timestamp.
+	 *
+	 * The generated file bakes in each block's static stylesheet (see
+	 * AssetsGenerator, which concatenates get_static_css() into it), so a CSS
+	 * fix shipped in an update reached nobody whose pages were generated before
+	 * it: the file still existed, still parsed, and nothing about it looked
+	 * stale, so it was served unchanged forever. Verified by planting a
+	 * stylesheet carrying the previous release's rules — it survived every
+	 * subsequent page load untouched. That is why a fix could land in the
+	 * editor, which loads each block's style.css directly, and never appear on
+	 * the front end.
+	 *
+	 * Keyed on the version rather than a file scan: it is one option read on
+	 * the common path, and every shipped CSS change comes with a version bump.
+	 * Each page then rebuilds once, on its next visit, exactly the way a
+	 * global-class edit already makes them rebuild.
+	 *
+	 * @return int Timestamp of the running version's first request.
+	 */
+	public static function build_revision() {
+		$stamp = get_option( self::BUILD_OPTION );
+
+		if (
+			is_array( $stamp ) &&
+			isset( $stamp['version'], $stamp['time'] ) &&
+			ABLOCKS_VERSION === $stamp['version']
+		) {
+			return (int) $stamp['time'];
+		}
+
+		$now = time();
+		update_option(
+			self::BUILD_OPTION,
+			[
+				'version' => ABLOCKS_VERSION,
+				'time'    => $now,
+			],
+			true
+		);
+
+		return $now;
 	}
 
 	public function set_current_page_template_part( $content, $block ) {

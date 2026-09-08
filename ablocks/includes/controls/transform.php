@@ -188,7 +188,7 @@ class Transform extends ControlBaseAbstract {
 	public static function get_css( $attributeValue, $property = '', $device = '' ) {
 		$value = wp_parse_args(
 			$attributeValue,
-			self::get_attribute_default_value( (bool) $device )
+			$device ? self::responsive_defaults() : self::get_attribute_default_value( false )
 		);
 
 		$css = [];
@@ -290,7 +290,7 @@ class Transform extends ControlBaseAbstract {
 	}
 
 	public static function get_hover_css( $attribute_value, $property = '', $device = '' ) {
-		$value = wp_parse_args( $attribute_value, self::get_attribute_default_value( (bool) $device ) );
+		$value = wp_parse_args( $attribute_value, $device ? self::responsive_defaults() : self::get_attribute_default_value( false ) );
 		$transformations = [];
 		$transformOrigin = '';
 		$x_offset_hover_unit = self::get_unit(

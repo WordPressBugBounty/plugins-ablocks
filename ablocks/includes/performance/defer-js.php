@@ -83,30 +83,36 @@ class DeferJs {
 		if ( false !== strpos( $tag, 'ablocks/delayed' ) ) {
 			return $tag;
 		}
-		// Never defer a script that carries inline before/after data. WordPress
-		// prints that inline as a plain (non-deferred) <script> right beside the
-		// tag, so it executes during parse — before the deferred external file
-		// runs. The canonical break is `wp-i18n`: its `wp-i18n-js-after` inline
-		// calls `wp.i18n.setLocaleData()` before the deferred i18n.js defines
-		// `wp.i18n`, throwing and taking every downstream `__()` call (checkout,
-		// storefront bundles) down with it.
-		if ( $this->has_inline_data( $handle ) ) {
+		// Never defer a script that has a blocking inline `after` script. That
+		// inline runs synchronously while the document parses, so deferring the
+		// external src makes the inline execute BEFORE the library it depends on.
+		// wp-i18n is the canonical case: core prints
+		// `wp.i18n.setLocaleData( … )` as wp-i18n's inline `after`, and deferring
+		// wp-i18n leaves `wp.i18n` undefined for the whole page (breaking every
+		// script that calls `wp.i18n.__`). This mirrors WordPress core, whose own
+		// strategy API declares such scripts ineligible for defer/async.
+		if ( $this->has_blocking_inline( $handle ) ) {
 			return $tag;
 		}
 		return preg_replace( '/^<script\s/', '<script defer ', $tag, 1 );
 	}
 
 	/**
-	 * Whether the handle has inline `before`/`after` script data queued, which
-	 * WordPress emits as non-deferrable inline <script> tags.
+	 * Whether a registered script carries an inline `after` script — which must
+	 * run synchronously right after the external file and therefore blocks safe
+	 * deferral of that file.
+	 *
+	 * @param string $handle
+	 *
+	 * @return bool
 	 */
-	private function has_inline_data( $handle ) {
-		$wp_scripts = wp_scripts();
-		if ( ! $wp_scripts ) {
+	private function has_blocking_inline( $handle ) {
+		$scripts = wp_scripts();
+		if ( ! $scripts ) {
 			return false;
 		}
-		return (bool) $wp_scripts->get_data( $handle, 'before' )
-			|| (bool) $wp_scripts->get_data( $handle, 'after' );
+
+		return ! empty( $scripts->get_data( $handle, 'after' ) );
 	}
 
 	private function should_defer( $handle ) {

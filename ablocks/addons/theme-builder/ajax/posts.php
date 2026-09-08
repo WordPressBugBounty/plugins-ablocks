@@ -14,6 +14,7 @@ class Posts extends AbstractAjaxHandler {
 		$this->actions = array(
 			'search_anything'      => array(
 				'callback' => array( $this, 'search_anything' ),
+				'capability' => 'ablocks_manage_theme_builder',
 				'fields' => array(
 					'keyword' => 'string'
 				)

@@ -1,0 +1,116 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ablocks/atomic-svg",
+  "version": "0.1.0",
+  "title": "Atomic SVG",
+  "category": "ablocks-atomic",
+  "description": "Inline SVG markup you can size, colour (fill / stroke) and style with the full atomic system.",
+  "keywords": [
+    "ablocks",
+    "svg",
+    "icon",
+    "vector",
+    "shape",
+    "atomic"
+  ],
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "className": false
+  },
+  "textdomain": "ablocks",
+  "editorStyle": [
+    "ablocks-common-style",
+    "file:./style.css"
+  ],
+  "style": [
+    "file:./style.css"
+  ],
+  "editorScript": [
+    "ablocks-common-script"
+  ],
+  "viewScript": [
+    "file:./view.js"
+  ],
+  "attributes": {
+    "block_id": {
+      "type": "string",
+      "default": ""
+    },
+    "blockVersion": {
+      "type": "number",
+      "default": 3
+    },
+    "svgCode": {
+      "type": "string",
+      "default": "<svg viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path fill=\"currentColor\" d=\"M12 2l2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 17.3 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6L12 2z\"/></svg>"
+    },
+    "svgUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "svgId": {
+      "type": "number",
+      "default": 0
+    },
+    "link": {
+      "type": "object",
+      "default": {
+        "url": "",
+        "newTab": false,
+        "noFollow": false
+      }
+    },
+    "globalClasses": {
+      "type": "array",
+      "default": []
+    },
+    "htmlId": {
+      "type": "string",
+      "default": ""
+    },
+    "animation": {
+      "type": "object",
+      "default": {
+        "type": "",
+        "duration": "0.6",
+        "delay": "0"
+      }
+    },
+    "animations": {
+      "type": "array",
+      "default": []
+    },
+    "transitionDuration": {
+      "type": "string",
+      "default": ""
+    },
+    "alignment": {
+      "type": "object",
+      "default": {
+        "value": "",
+        "valueTablet": "",
+        "valueMobile": ""
+      }
+    },
+    "styles": {
+      "type": "object",
+      "default": {
+        "v": 3
+      }
+    },
+    "customCSS": {
+      "type": "string",
+      "default": ""
+    },
+    "hideOn": {
+      "type": "object",
+      "default": {
+        "desktop": false,
+        "tablet": false,
+        "mobile": false
+      }
+    }
+  }
+}

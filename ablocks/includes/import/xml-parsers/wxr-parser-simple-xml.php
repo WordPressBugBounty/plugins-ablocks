@@ -363,6 +363,7 @@ class WXR_Parser_SimpleXML {
 			'global_h6_typography'         => 'json',
 			'frontend_dashboard_page'      => null,
 			'frontend_dashboard_sub_pages' => 'json',
+			'global_classes'               => 'json',
 		];
 
 		foreach ( array_keys( $ablocks_options ) as $page_key ) {

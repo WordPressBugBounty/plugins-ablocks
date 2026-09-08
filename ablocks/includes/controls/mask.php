@@ -90,45 +90,49 @@ class Mask extends ControlBaseAbstract {
 			$css['-webkit-mask-repeat'] = 'no-repeat';
 		}
 
+		// Device-specific overrides. Read through device_member(): a custom
+		// breakpoint (or the generator's value-less probe suffix) has no key of
+		// its own in the control's defaults, and indexing it directly is what
+		// produced "Undefined array key …" notices on every page.
+		$mask_size     = self::device_member( $value, 'maskSize', $device );
+		$mask_position = self::device_member( $value, 'maskPosition', $device );
+		$mask_repeat   = self::device_member( $value, 'maskRepeat', $device );
+
 		// Device-specific size: named value (contain / cover)
-		if ( $value[ 'maskSize' . $device ] && 'custom' !== $value[ 'maskSize' . $device ] ) {
-			$css['mask-size'] = $value[ 'maskSize' . $device ];
+		if ( $mask_size && 'custom' !== $mask_size ) {
+			$css['mask-size'] = $mask_size;
 			$css['-webkit-mask-size'] = $css['mask-size'];
 		}
 
 		// Device-specific size: custom px/em/% value
-		if (
-			$value[ 'maskSize' . $device ] &&
-			'custom' === $value[ 'maskSize' . $device ] &&
-			$value[ 'scaleUnit' . $device ]
-		) {
-			$css['mask-size'] = $value[ 'scale' . $device ] . $value[ 'scaleUnit' . $device ];
+		$scale_unit = self::device_member( $value, 'scaleUnit', $device );
+		if ( $mask_size && 'custom' === $mask_size && $scale_unit ) {
+			$css['mask-size'] = self::device_member( $value, 'scale', $device ) . $scale_unit;
 			$css['-webkit-mask-size'] = $css['mask-size'];
 		}
 
 		// Device-specific position: named value (e.g. top left, center center)
-		if (
-			$value[ 'maskPosition' . $device ] &&
-			'custom' !== $value[ 'maskPosition' . $device ]
-		) {
-			$css['mask-position'] = $value[ 'maskPosition' . $device ];
+		if ( $mask_position && 'custom' !== $mask_position ) {
+			$css['mask-position'] = $mask_position;
 			$css['-webkit-mask-position'] = $css['mask-position'];
 		}
 
 		// Device-specific position: custom X Y values
 		// Use !== '' rather than truthy so a value of '0' is not skipped.
-		if ( 'custom' === $value[ 'maskPosition' . $device ] ) {
-			$x_val  = $value[ 'xPosition' . $device ] !== '' ? $value[ 'xPosition' . $device ] : '0';
-			$y_val  = $value[ 'yPosition' . $device ] !== '' ? $value[ 'yPosition' . $device ] : '0';
-			$x_unit = $value[ 'xPositionUnit' . $device ];
-			$y_unit = $value[ 'yPositionUnit' . $device ];
+		if ( 'custom' === $mask_position ) {
+			$x_pos  = self::device_member( $value, 'xPosition', $device );
+			$y_pos  = self::device_member( $value, 'yPosition', $device );
+			$x_val  = '' !== $x_pos ? $x_pos : '0';
+			$y_val  = '' !== $y_pos ? $y_pos : '0';
+			$x_unit = self::device_member( $value, 'xPositionUnit', $device );
+			$y_unit = self::device_member( $value, 'yPositionUnit', $device );
 			$css['mask-position'] = $x_val . $x_unit . ' ' . $y_val . $y_unit;
 			$css['-webkit-mask-position'] = $css['mask-position'];
 		}
 
 		// Device-specific repeat override
-		if ( $value[ 'maskRepeat' . $device ] ) {
-			$css['mask-repeat'] = $value[ 'maskRepeat' . $device ];
+		if ( $mask_repeat ) {
+			$css['mask-repeat'] = $mask_repeat;
 			$css['-webkit-mask-repeat'] = $css['mask-repeat'];
 		}
 

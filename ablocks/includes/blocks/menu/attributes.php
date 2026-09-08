@@ -64,6 +64,10 @@ $attributes = [
 		'type' => 'string',
 		'default' => 'mobile'
 	],
+	'enableTabletHamburger' => [
+		'type' => 'boolean',
+		'default' => false,
+	],
 	'mobileMenuPosition' => [
 		'type' => 'string',
 		'default' => 'below-header'

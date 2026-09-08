@@ -29,7 +29,10 @@ class CssGenerator {
 				'{{WRAPPER}}',
 				BlockGlobal::get_wrapper_css( $attributes ),
 				BlockGlobal::get_wrapper_css( $attributes, 'Tablet' ),
-				BlockGlobal::get_wrapper_css( $attributes, 'Mobile' )
+				BlockGlobal::get_wrapper_css( $attributes, 'Mobile' ),
+				$this->custom_device_map( function ( $device ) use ( $attributes ) {
+					return BlockGlobal::get_wrapper_css( $attributes, $device );
+				} )
 			);
 			$this->add_class_styles(
 				'{{WRAPPER}}:hover',
@@ -53,18 +56,72 @@ class CssGenerator {
 				'{{WRAPPER}} > .ablocks-block-container',
 				BlockGlobal::get_container_css( $attributes ),
 				BlockGlobal::get_container_css( $attributes, 'Tablet' ),
-				BlockGlobal::get_container_css( $attributes, 'Mobile' )
+				BlockGlobal::get_container_css( $attributes, 'Mobile' ),
+				$this->custom_device_map( function ( $device ) use ( $attributes ) {
+					return BlockGlobal::get_container_css( $attributes, $device );
+				} )
 			);
 		}//end if
 	}
 
-	public function add_class_styles( $class_name, $desktop_styles, $tablet_styles = [], $mobile_styles = [] ) {
+	public function add_class_styles( $class_name, $desktop_styles, $tablet_styles = [], $mobile_styles = [], $responsive_styles = [] ) {
 		$this->class_styles[] = [
 			'class_name' => $class_name,
 			'desktop_styles' => $desktop_styles,
 			'tablet_styles' => $tablet_styles,
-			'mobile_styles' => $mobile_styles
+			'mobile_styles' => $mobile_styles,
+			'responsive_styles' => $responsive_styles,
 		];
+	}
+
+	/**
+	 * Custom-breakpoint style map from a per-device builder (excludes the
+	 * built-in Tablet/Mobile so the standard path is untouched).
+	 */
+	public function custom_device_map( $builder ) {
+		$map = [];
+
+		// Nothing to build when the site registers no custom breakpoints — and
+		// running the phantom probe anyway is not free: it hands every control a
+		// device suffix that has no stored keys, which is what made controls that
+		// read `$value[ 'x' . $device ]` unguarded spray "Undefined array key
+		// …___ablocksphantom___" notices on every page under WP_DEBUG.
+		$custom_devices = [];
+		foreach ( \ABlocks\Helper::get_responsive_devices() as $d ) {
+			if ( $d['width'] <= 0 || 'Tablet' === $d['id'] || 'Mobile' === $d['id'] ) {
+				continue;
+			}
+			$custom_devices[] = $d;
+		}
+		if ( empty( $custom_devices ) ) {
+			return $map;
+		}
+
+		// Subtract a "phantom" baseline (builder run against a value-less suffix)
+		// so controls that only default Tablet/Mobile don't leak phantom
+		// declarations into custom breakpoints. Leaves only real overrides.
+		$phantom = (array) call_user_func( $builder, '__ablocksphantom__' );
+		foreach ( $custom_devices as $d ) {
+			if ( $d['width'] <= 0 || 'Tablet' === $d['id'] || 'Mobile' === $d['id'] ) {
+				continue;
+			}
+			$actual = (array) call_user_func( $builder, $d['suffix'] );
+			$real   = [];
+			foreach ( $actual as $prop => $val ) {
+				if ( ! array_key_exists( $prop, $phantom ) || $phantom[ $prop ] !== $val ) {
+					$real[ $prop ] = $val;
+				}
+			}
+			if ( ! empty( $real ) ) {
+				$map[ $d['suffix'] ] = [
+					'width'  => (int) $d['width'],
+					'min'    => isset( $d['min'] ) ? (int) $d['min'] : 0,
+					'max'    => isset( $d['max'] ) ? (int) $d['max'] : (int) $d['width'],
+					'styles' => $real,
+				];
+			}
+		}
+		return $map;
 	}
 
 	public function generate_css() {
@@ -95,14 +152,46 @@ class CssGenerator {
 			// Always add desktop CSS
 			$addToCssBlocks( '', '', $desktop_css );
 
-			// Only add tablet CSS if it differs from desktop
-			if ( $tablet_raw !== $desktop_raw ) {
-				$addToCssBlocks( 'tablet', $this->get_breakpoint( 'tablet' ), $tablet_css );
-			}
-
-			// Only add mobile CSS if it differs from desktop AND tablet
-			if ( $mobile_raw !== $tablet_raw ) {
-				$addToCssBlocks( 'mobile', $this->get_breakpoint( 'mobile' ), $mobile_css );
+			if ( empty( $class_style['responsive_styles'] ) ) {
+				// Standard path (no custom breakpoints) — unchanged output.
+				if ( $tablet_raw !== $desktop_raw ) {
+					$addToCssBlocks( 'tablet', $this->get_breakpoint( 'tablet' ), $tablet_css );
+				}
+				if ( $mobile_raw !== $tablet_raw ) {
+					$addToCssBlocks( 'mobile', $this->get_breakpoint( 'mobile' ), $mobile_css );
+				}
+			} else {
+				// Custom breakpoints present: emit every breakpoint width-descending
+				// (narrowest last so it wins), each deduped against desktop.
+				$bp_defaults = \ABlocks\Helper::get_breakpoints();
+				$bp_list     = [
+					[ 'width' => $bp_defaults['tablet'], 'min' => 0, 'max' => $bp_defaults['tablet'], 'styles' => $class_style['tablet_styles'] ],
+					[ 'width' => $bp_defaults['mobile'], 'min' => 0, 'max' => $bp_defaults['mobile'], 'styles' => $class_style['mobile_styles'] ],
+				];
+				foreach ( $class_style['responsive_styles'] as $bp ) {
+					$bp_list[] = [
+						'width'  => (int) $bp['width'],
+						'min'    => isset( $bp['min'] ) ? (int) $bp['min'] : 0,
+						'max'    => isset( $bp['max'] ) ? (int) $bp['max'] : (int) $bp['width'],
+						'styles' => $bp['styles'],
+					];
+				}
+				usort( $bp_list, function ( $a, $b ) {
+					return (int) $b['width'] - (int) $a['width'];
+				} );
+				foreach ( $bp_list as $bp ) {
+					$bp_styles = $this->filter_responsive_styles( $desktop_styles, $bp['styles'] );
+					$bp_raw    = $this->generate_css_for_media_query( 'bp', $bp_styles );
+					if ( $bp_raw === $desktop_raw || '' === trim( $bp_raw ) ) {
+						continue;
+					}
+					$bp_css = AssetsGenerator::minify_css( $bp_raw );
+					$media  = \ABlocks\Helper::breakpoint_media_condition( $bp['min'], $bp['max'] );
+					if ( '' === $bp_css || '' === $media ) {
+						continue;
+					}
+					$css_blocks[] = "@media screen and $media {\n$parent_selector {\n$bp_css\n}\n}";
+				}
 			}
 
 			$css_output .= implode( "\n\n", $css_blocks ) . "\n\n";
@@ -121,6 +210,10 @@ class CssGenerator {
 		}
 		$css_string = implode("\n", array_map(
 			function ( $property, $value ) {
+				// See Helper::esc_css_value(): these values come from block
+				// attributes and land inside an inline <style> element.
+				$property = \ABlocks\Helper::esc_css_value( $property );
+				$value    = \ABlocks\Helper::esc_css_value( $value );
 				return "$property: $value;";
 			},
 			array_keys( $styles ),
@@ -131,11 +224,12 @@ class CssGenerator {
 	}
 
 	public function get_breakpoint( $media_query ) {
+		$bp = \ABlocks\Helper::get_breakpoints();
 		switch ( $media_query ) {
 			case 'tablet':
-				return '800px';
+				return $bp['tablet'] . 'px';
 			case 'mobile':
-				return '480px';
+				return $bp['mobile'] . 'px';
 			default:
 				return '1200px';
 		}

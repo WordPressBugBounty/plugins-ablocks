@@ -31,7 +31,8 @@ class Installer {
 			add_option( 'ablocks_fonts', '{}' );
 			// Save Default activated addon
 			$addons_default_settings = [
-				'theme-builder' => false
+				'theme-builder' => false,
+				'cookie-consent' => false
 			];
 			add_option( ABLOCKS_ADDONS_SETTINGS_NAME, wp_json_encode( $addons_default_settings ) );
 		}

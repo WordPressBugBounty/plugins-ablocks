@@ -54,7 +54,15 @@ class Ajax {
 
 	public function get_storeengine_terms() {
 		check_ajax_referer( 'ablocks_nonce', 'security' );
-				$cats = Helper::get_terms_list( 'storeengine_product_category' );
+
+		// The nonce alone only proves the request came from an aBlocks screen,
+		// not that this user may read the catalogue — and every logged-in user
+		// is handed that nonce. Matches get_academy_terms() above.
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			die();
+		}
+
+		$cats = Helper::get_terms_list( 'storeengine_product_category' );
 		$tags = Helper::get_terms_list( 'storeengine_product_tag' );
 
 		wp_send_json_success(array(

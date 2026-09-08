@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Helper;
+use ABlocks\Permissions;
 
 class Menu {
 
@@ -23,7 +24,7 @@ class Menu {
 	public function admin_menu() {
 		$icon_url = $this->get_toplevel_menu_icon_url();
 		$page_title = $this->get_toplevel_menu_title();
-		add_menu_page( $page_title, $page_title, 'manage_options', ABLOCKS_PLUGIN_SLUG, [ $this, 'load_main_template' ], $icon_url, 30 );
+		add_menu_page( $page_title, $page_title, Permissions::ACCESS, ABLOCKS_PLUGIN_SLUG, [ $this, 'load_main_template' ], $icon_url, 30 );
 		foreach ( Helper::get_admin_menu_list() as $item_key => $item ) {
 			add_submenu_page( $item['parent_slug'], $item['title'], $item['title'], $item['capability'], $item_key, [ $this, 'load_main_template' ] );
 		}
@@ -62,7 +63,7 @@ class Menu {
 			'themes.php',
 			$demo_config['page_title'],
 			$demo_config['menu_title'],
-			'manage_options',
+			'ablocks_import_templates',
 			$demo_config['menu_slug'],
 			[ $this, 'load_demo_importer_template' ]
 		);

@@ -10,17 +10,18 @@ use ABlocks\Classes\AbstractAjaxHandler;
 use ABlocks\Classes\Sanitizer;
 use ABlocks\Helper;
 use ABlocks\Admin\Settings\Base as BaseSettings;
+use ABlocks\Permissions\SettingsGuard;
 
 class Settings extends AbstractAjaxHandler {
 	public function __construct() {
 		$this->actions = array(
 			'get_blocks_visibility'      => array(
 				'callback'      => array( $this, 'get_blocks_visibility' ),
-				'capability'    => 'manage_options'
+				'capability'    => 'ablocks_manage_settings'
 			),
 			'save_block_visibility'      => array(
 				'callback' => array( $this, 'save_block_visibility' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_settings',
 				'fields' => array(
 					'block_name'        => 'string',
 					'status'            => 'boolean',
@@ -28,18 +29,18 @@ class Settings extends AbstractAjaxHandler {
 			),
 			'save_bulk_block_visibility'      => array(
 				'callback' => array( $this, 'save_bulk_block_visibility' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_settings',
 				'fields' => array(
 					'blocks'        => 'json',
 				)
 			),
 			'get_settings'      => array(
 				'callback' => array( $this, 'get_settings' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_access',
 			),
 			'save_settings'      => array(
 				'callback' => array( $this, 'save_settings' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_save_settings',
 				'fields' => array(
 					'default_container_width' => 'integer',
 					'container_padding' => 'integer',
@@ -84,6 +85,10 @@ class Settings extends AbstractAjaxHandler {
 					'perf_disable_jquery_migrate' => 'boolean',
 					'perf_control_heartbeat' => 'boolean',
 					'perf_heartbeat_frequency' => 'integer',
+					// Editor paste
+					'paste_google_docs' => 'boolean',
+					'paste_convert_webp' => 'boolean',
+					'paste_webp_quality' => 'integer',
 					// Performance Suite — full-page cache.
 					'perf_page_cache' => 'boolean',
 					'perf_page_cache_scope' => 'string',
@@ -141,7 +146,7 @@ class Settings extends AbstractAjaxHandler {
 			),
 			'fetch_posts'      => array(
 				'callback' => array( $this, 'fetch_posts' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_access',
 				'fields' => array(
 					'postId'   => 'integer',
 					'postType' => 'string',
@@ -150,11 +155,11 @@ class Settings extends AbstractAjaxHandler {
 			),
 			'get_fronted_dashboard_pages'      => array(
 				'callback' => array( $this, 'get_fronted_dashboard_pages' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_settings',
 			),
 			'create_fronted_dashboard_page'      => array(
 				'callback' => array( $this, 'create_fronted_dashboard_page' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_settings',
 				'fields' => [
 					'label'     => 'string',
 					'slug'      => 'string',
@@ -166,7 +171,7 @@ class Settings extends AbstractAjaxHandler {
 			),
 			'create_fronted_dashboard_link'      => array(
 				'callback' => array( $this, 'create_fronted_dashboard_link' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_settings',
 				'fields' => [
 					'label'     => 'string',
 					'link'      => 'string',
@@ -178,7 +183,7 @@ class Settings extends AbstractAjaxHandler {
 			),
 			'edit_fronted_dashboard_link'      => array(
 				'callback' => array( $this, 'edit_fronted_dashboard_link' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_settings',
 				'fields' => [
 					'label'     => 'string',
 					'link'      => 'string',
@@ -190,14 +195,14 @@ class Settings extends AbstractAjaxHandler {
 			),
 			'delete_fronted_dashboard_link'      => array(
 				'callback' => array( $this, 'delete_fronted_dashboard_link' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_settings',
 				'fields' => array(
 					'page_id' => 'string',
 				)
 			),
 			'edit_fronted_dashboard_page'      => array(
 				'callback' => array( $this, 'edit_fronted_dashboard_page' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_settings',
 				'fields' => [
 					'label'     => 'string',
 					'slug'      => 'string',
@@ -210,14 +215,14 @@ class Settings extends AbstractAjaxHandler {
 			),
 			'move_fronted_dashboard_page'      => array(
 				'callback' => array( $this, 'move_fronted_dashboard_page' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_settings',
 				'fields' => [
 					'reordered_items'  => 'string',
 				]
 			),
 			'delete_fronted_dashboard_page'      => array(
 				'callback' => array( $this, 'delete_fronted_dashboard_page' ),
-				'capability'    => 'manage_options',
+				'capability'    => 'ablocks_manage_settings',
 				'fields' => array(
 					'slug'   => 'string',
 					'page_id' => 'integer',
@@ -281,6 +286,12 @@ class Settings extends AbstractAjaxHandler {
 	}
 
 	public function save_settings( $payload ) {
+		// The design system, the performance suite and site configuration are
+		// three separate permissions but one endpoint. Keys this user may not
+		// change are rewritten back to what is already saved, so the save
+		// succeeds and simply leaves them alone.
+		$payload = SettingsGuard::filter_payload( $payload );
+
         // phpcs:ignore WordPress.Security.NonceVerification.Missing
 		do_action( 'ablocks/before_save_settings', $payload, 'base' );
 		$json_payload = Sanitizer::sanitize_payload([
@@ -300,6 +311,11 @@ class Settings extends AbstractAjaxHandler {
 			'global_h5_typography' => 'json',
 			'global_h6_typography' => 'json',
 		], $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+
+		// The JSON fields are read straight from $_POST rather than the sanitized
+		// payload, so they need the same guard — the global colour and typography
+		// presets live in here, and they are the design system.
+		$json_payload = SettingsGuard::filter_payload( $json_payload );
 
 		$default = BaseSettings::get_default_data();
 		$is_update = BaseSettings::save_settings( [
@@ -334,6 +350,10 @@ class Settings extends AbstractAjaxHandler {
 			'perf_async_css' => $payload['perf_async_css'] ?? $default['perf_async_css'],
 			'perf_critical_css' => $payload['perf_critical_css'] ?? $default['perf_critical_css'],
 			'perf_defer_js' => $payload['perf_defer_js'] ?? $default['perf_defer_js'],
+			// Editor paste.
+			'paste_google_docs' => $payload['paste_google_docs'] ?? $default['paste_google_docs'],
+			'paste_convert_webp' => $payload['paste_convert_webp'] ?? $default['paste_convert_webp'],
+			'paste_webp_quality' => $payload['paste_webp_quality'] ?? $default['paste_webp_quality'],
 			// Performance Suite — full-page cache.
 			'perf_page_cache' => $payload['perf_page_cache'] ?? $default['perf_page_cache'],
 			'perf_page_cache_scope' => $payload['perf_page_cache_scope'] ?? $default['perf_page_cache_scope'],
@@ -427,7 +447,8 @@ class Settings extends AbstractAjaxHandler {
 			if ( ! empty( $keyword ) ) {
 				$args['s'] = $keyword;
 			}
-			if ( ! current_user_can( 'manage_options' ) ) {
+			// Anyone who cannot edit other people's posts only picks from their own.
+			if ( ! current_user_can( 'edit_others_posts' ) ) {
 				$args['author'] = get_current_user_id();
 			}
 		}

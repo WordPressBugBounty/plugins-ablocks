@@ -4,7 +4,7 @@
  * Description:       The WordPress plugin for creating beautiful and functional websites using the Gutenberg editor, with a variety of customizable blocks to design website pages.
  * Requires at least: 6.8
  * Requires PHP:      7.4
- * Version:           2.11.1
+ * Version:           2.12.0
  * Author:            Kodezen LLC
  * Author URI:        https://ablocks.pro/
  * License:           GPL-3.0+
@@ -45,7 +45,7 @@ final class ABlocks {
 	 * Define the plugin constants
 	 */
 	private function define_constants() {
-		define( 'ABLOCKS_VERSION', '2.11.1' );
+		define( 'ABLOCKS_VERSION', '2.12.0' );
 		define( 'ABLOCKS_PLUGIN_SLUG', 'ablocks' );
 		define( 'ABLOCKS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 		define( 'ABLOCKS_ROOT_URL', plugin_dir_url( __FILE__ ) );
@@ -95,7 +95,14 @@ final class ABlocks {
 
 	public function set_global_settings() {
 		$GLOBALS['ablocks_fonts'] = json_decode( get_option( ABLOCKS_FONTS_SETTINGS_NAME, '{}' ), true );
-		$GLOBALS['ablocks_blocks'] = json_decode( get_option( ABLOCKS_BLOCKS_VISIBILITY_SETTINGS_NAME, '{}' ) );
+		// Merge the saved visibility over the default registry so blocks added in
+		// a new version default to enabled (the user's saved toggles still win).
+		$saved_blocks   = json_decode( get_option( ABLOCKS_BLOCKS_VISIBILITY_SETTINGS_NAME, '{}' ), true );
+		$default_blocks = \ABlocks\Admin\Settings\Blocks::get_default_data();
+		$GLOBALS['ablocks_blocks'] = (object) array_merge(
+			is_array( $default_blocks ) ? $default_blocks : [],
+			is_array( $saved_blocks ) ? $saved_blocks : []
+		);
 		$GLOBALS['ablocks_settings'] = json_decode( get_option( ABLOCKS_SETTINGS_NAME, '{}' ) );
 		$GLOBALS['ablocks_addons'] = json_decode( get_option( ABLOCKS_ADDONS_SETTINGS_NAME, '{}' ) );
 	}
@@ -114,11 +121,20 @@ final class ABlocks {
 
 	public function init_plugin() {
 		ABlocks\Migration::init();
+		// Before anything that registers a menu, an ajax action or a REST route,
+		// so the capabilities those gate on already answer correctly.
+		ABlocks\Permissions::init();
 		ABlocks\PermalinkRewrite::init();
 		ABlocks\Addons::init();
+		// Ahead of every block registration on `init` — aBlocks' own and any
+		// other plugin's — so the attribute the editor adds to every block is
+		// on the server's copy of it too.
+		ABlocks\Classes\FlexItem::init();
 		ABlocks\Blocks::init();
 		ABlocks\Assets::init();
 		ABlocks\Classes\CoreFontRegistry::init();
+		ABlocks\Classes\GlobalClasses::init();
+		ABlocks\Classes\Breakpoints::init();
 		ABlocks\Performance\Optimizations::init();
 		ABlocks\Performance\DelayJs::init();
 		ABlocks\Performance\DeferJs::init();

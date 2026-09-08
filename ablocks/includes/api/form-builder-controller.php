@@ -222,7 +222,7 @@ class FormBuilderController {
 		$post_id = $params['current_post_id'];
 
 		if ( is_numeric( $post_id ) &&
-			! current_user_can( 'manage_options' ) &&
+			! current_user_can( 'edit_post', $post_id ) &&
 			get_post_status( $post_id ) !== 'publish'
 		) {
 			return new WP_REST_Response(
@@ -693,12 +693,25 @@ class FormBuilderController {
 			'delete_users',
 			'create_users',
 			'promote_users',
+			'edit_theme_options',
 		];
 		foreach ( $privileged_caps as $cap ) {
 			if ( ! empty( $role_obj->capabilities[ $cap ] ) ) {
 				return false;
 			}
 		}
+
+		// The checks above read the role's stored capabilities, which never
+		// include anything the permission map grants — those are added per
+		// request and are invisible here. A role configured for the Site Editor
+		// would sail through, so a self-registration form could hand a visitor
+		// edit_theme_options. Ask the permission map directly.
+		$bridged = \ABlocks\Permissions\Caps::native_bridge();
+		$grants  = \ABlocks\Permissions::get_role_grants( $role );
+		if ( array_intersect( array_keys( $bridged ), $grants ) ) {
+			return false;
+		}
+
 		return true;
 	}
 
