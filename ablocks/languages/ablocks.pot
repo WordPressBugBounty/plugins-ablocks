@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 2.12.0\n"
+"Project-Id-Version: aBlocks 2.13.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-08T12:20:15+00:00\n"
+"POT-Creation-Date: 2026-09-15T14:33:26+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ablocks\n"
@@ -40,7 +40,7 @@ msgstr ""
 
 #: addons/cookie-consent/admin.php:34
 #: src/dashboard/pages/dashboard/addons/index.js:31
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:179
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:202
 msgid "Cookie Consent"
 msgstr ""
 
@@ -48,8 +48,34 @@ msgstr ""
 msgid "You are not allowed to do that."
 msgstr ""
 
-#: addons/cookie-consent/ajax.php:162
+#: addons/cookie-consent/ajax.php:169
 msgid "Consent records are a Pro feature."
+msgstr ""
+
+#: addons/cookie-consent/embeds.php:254
+msgid "external"
+msgstr ""
+
+#. translators: %s: name of the embed provider, e.g. YouTube.
+#: addons/cookie-consent/embeds.php:273
+#, php-format
+msgid "%s content is blocked"
+msgstr ""
+
+#. translators: %s: name of the embed provider, e.g. YouTube.
+#: addons/cookie-consent/embeds.php:280
+#, php-format
+msgid "Loading this would let %s set cookies on your device. Nothing has been sent to them yet."
+msgstr ""
+
+#: addons/cookie-consent/embeds.php:284
+msgid "Load this once"
+msgstr ""
+
+#. translators: %s: name of the embed provider, e.g. YouTube.
+#: addons/cookie-consent/embeds.php:288
+#, php-format
+msgid "Always allow %s"
 msgstr ""
 
 #: addons/cookie-consent/form-consent.php:141
@@ -72,12 +98,12 @@ msgstr ""
 msgid "Consent — reference"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:184
+#: addons/cookie-consent/frontend.php:185
 #: src/dashboard/pages/dashboard/cookieConsent/Preview.js:347
 msgid "Close without accepting"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:368
+#: addons/cookie-consent/frontend.php:369
 #: src/components/dynamic-content/index.js:186
 #: src/dashboard/pages/dashboard/cookieConsent/Preview.js:111
 #: src/dashboard/pages/settings/Dashboard/RouteModal.js:43
@@ -85,29 +111,29 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:487
+#: addons/cookie-consent/frontend.php:488
 #: src/dashboard/pages/dashboard/cookieConsent/Preview.js:63
 msgid "Cookie"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:488
+#: addons/cookie-consent/frontend.php:489
 #: src/dashboard/pages/dashboard/cookieConsent/CategoriesTab.js:14
 #: src/dashboard/pages/dashboard/cookieConsent/Preview.js:64
 msgid "Provider"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:489
+#: addons/cookie-consent/frontend.php:490
 #: src/dashboard/pages/dashboard/cookieConsent/Preview.js:65
 msgid "Expires"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:490
+#: addons/cookie-consent/frontend.php:491
 #: src/dashboard/pages/dashboard/cookieConsent/CategoriesTab.js:18
 #: src/dashboard/pages/dashboard/cookieConsent/Preview.js:66
 msgid "Purpose"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:518
+#: addons/cookie-consent/frontend.php:519
 #: addons/cookie-consent/helper.php:229
 #: addons/cookie-consent/helper.php:262
 msgid "Cookie preferences"
@@ -138,8 +164,6 @@ msgid "Remember choices you make, such as language or region, and enable embedde
 msgstr ""
 
 #: addons/cookie-consent/helper.php:62
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:179
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:199
 msgid "Analytics"
 msgstr ""
 
@@ -148,7 +172,6 @@ msgid "Help us understand how the site is used, so we can improve it. The data i
 msgstr ""
 
 #: addons/cookie-consent/helper.php:70
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:212
 msgid "Marketing"
 msgstr ""
 
@@ -170,7 +193,7 @@ msgstr ""
 
 #: addons/cookie-consent/helper.php:225
 #: addons/cookie-consent/helper.php:287
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:677
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:692
 msgid "Accept all"
 msgstr ""
 
@@ -180,13 +203,13 @@ msgstr ""
 
 #: addons/cookie-consent/helper.php:227
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:67
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:325
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:340
 #: src/dashboard/pages/dashboard/cookieConsent/Preview.js:312
 msgid "Preferences"
 msgstr ""
 
 #: addons/cookie-consent/helper.php:228
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:348
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:363
 msgid "Save choices"
 msgstr ""
 
@@ -222,7 +245,7 @@ msgstr ""
 #: src/blocks/advance-list-item/settings.js:56
 #: src/blocks/advance-lists/settings.js:39
 #: src/blocks/advance-lists/settings.js:57
-#: src/blocks/atomic-shared/inspector.js:687
+#: src/blocks/atomic-shared/inspector.js:693
 #: src/blocks/atomic-shared/typography-field.js:64
 #: src/blocks/atomic-shared/typography-field.js:83
 #: src/blocks/container/helper.js:398
@@ -351,7 +374,7 @@ msgstr ""
 #: src/blocks/loop-filter/settings.js:88
 #: src/blocks/taxonomy-listing/settings.js:845
 #: src/controls/icon-upload/index.js:430
-#: src/dashboard/pages/dashboard/addons/index.js:48
+#: src/dashboard/pages/dashboard/addons/index.js:61
 #: src/dashboard/pages/dashboard/blocks/index.js:30
 #: src/dashboard/pages/dashboard/demo-importer/index.js:160
 #: src/dashboard/pages/dashboard/submission/index.js:29
@@ -372,16 +395,16 @@ msgid "Logged Out"
 msgstr ""
 
 #: addons/theme-builder/assets.php:214
-#: src/blocks/atomic-shared/inspector.js:2589
+#: src/blocks/atomic-shared/inspector.js:2757
 #: src/components/dynamic-tags/index.js:832
 #: src/components/inspector-tabs/index.js:53
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:31
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:43
 msgid "Advanced"
 msgstr ""
 
 #: addons/theme-builder/database.php:21
 #: addons/theme-builder/database.php:22
-#: includes/helper.php:367
+#: includes/helper.php:375
 #: includes/permissions.php:136
 #: src/dashboard/pages/dashboard/addons/index.js:17
 #: src/dashboard/pages/dashboard/themeBuilder/builder/index.js:93
@@ -409,7 +432,7 @@ msgstr ""
 msgid "Theme Builder archives"
 msgstr ""
 
-#: includes/addons.php:63
+#: includes/addons.php:64
 msgid "Addon Name missing"
 msgstr ""
 
@@ -446,7 +469,7 @@ msgid "Rate the plugin."
 msgstr ""
 
 #: includes/admin.php:126
-#: includes/helper.php:383
+#: includes/helper.php:391
 #: includes/permissions.php:153
 #: src/blocks/atomic-shared/animation-card.js:282
 #: src/blocks/image-comparison/settings.js:66
@@ -599,15 +622,15 @@ msgstr ""
 #: includes/ajax/form-builder.php:72
 #: src/blocks/advance-list-item/data.js:110
 #: src/blocks/atomic-shared/flex-item-filter.js:40
-#: src/blocks/atomic-shared/inspector.js:451
-#: src/blocks/atomic-shared/inspector.js:1166
-#: src/blocks/atomic-shared/inspector.js:1298
+#: src/blocks/atomic-shared/inspector.js:457
+#: src/blocks/atomic-shared/inspector.js:1172
 #: src/blocks/atomic-shared/inspector.js:1304
 #: src/blocks/atomic-shared/inspector.js:1310
+#: src/blocks/atomic-shared/inspector.js:1316
 #: src/blocks/atomic-shared/size-field.js:81
 #: src/blocks/atomic-shared/size-field.js:99
-#: src/blocks/atomic-shared/typography-field.js:196
-#: src/blocks/atomic-shared/typography-field.js:243
+#: src/blocks/atomic-shared/typography-field.js:231
+#: src/blocks/atomic-shared/typography-field.js:303
 #: src/blocks/button/settings.js:134
 #: src/blocks/carousel/settings.js:324
 #: src/blocks/counter/helper.js:22
@@ -774,7 +797,7 @@ msgstr ""
 msgid "That image type is not allowed on this site."
 msgstr ""
 
-#: includes/assets.php:396
+#: includes/assets.php:399
 msgctxt "Google font: on or off"
 msgid "on"
 msgstr ""
@@ -898,7 +921,7 @@ msgstr ""
 
 #: includes/blocks/frontend-dashboard/block.php:280
 #: includes/blocks/frontend-dashboard/block.php:340
-#: includes/helper.php:354
+#: includes/helper.php:362
 msgid "Dashboard"
 msgstr ""
 
@@ -1727,38 +1750,38 @@ msgstr ""
 msgid "Verification successful."
 msgstr ""
 
-#: includes/helper.php:360
+#: includes/helper.php:368
 msgid "Submissions"
 msgstr ""
 
-#: includes/helper.php:373
+#: includes/helper.php:381
 #: includes/permissions.php:173
 msgid "Add-ons"
 msgstr ""
 
-#: includes/helper.php:378
+#: includes/helper.php:386
 #: includes/permissions.php:169
 #: src/dashboard/pages/scanner/Overview.js:176
 msgid "Site Scanner"
 msgstr ""
 
-#: includes/helper.php:389
+#: includes/helper.php:397
 #: src/dashboard/AdminMenu/index.js:102
 #: src/dashboard/pages/dashboard/cookieConsent/pro.js:130
 msgid "Get Pro"
 msgstr ""
 
-#: includes/helper.php:399
+#: includes/helper.php:407
 msgid "Loading..."
 msgstr ""
 
 #. translators: %s template
-#: includes/helper.php:840
+#: includes/helper.php:848
 #, php-format
 msgid "%s does not exist."
 msgstr ""
 
-#: includes/helper.php:858
+#: includes/helper.php:866
 msgid "action_args should not be overwritten when calling ablocks/get_template."
 msgstr ""
 
@@ -1977,7 +2000,7 @@ msgid "This does not appear to be a WXR file, missing/invalid WXR version number
 msgstr ""
 
 #: includes/permissions.php:104
-#: src/blocks/atomic-shared/inspector.js:2289
+#: src/blocks/atomic-shared/inspector.js:2457
 msgid "Editing"
 msgstr ""
 
@@ -2114,7 +2137,7 @@ msgstr ""
 #: src/blocks/form-radio/settings.js:265
 #: src/blocks/form-select/settings.js:153
 #: src/blocks/form-textarea/settings.js:121
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:253
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:329
 msgid "Name"
 msgstr ""
 
@@ -2222,19 +2245,23 @@ msgstr ""
 msgid "Some Blocks Still Broken – Retry"
 msgstr ""
 
-#: src/addons/block-settings-menu/index.js:77
+#: src/addons/block-settings-menu/helper.js:120
+msgid "Copy styles from an atomic block first. Styles from other blocks cannot be pasted here."
+msgstr ""
+
+#: src/addons/block-settings-menu/index.js:80
 msgid "Copy Block Styles"
 msgstr ""
 
-#: src/addons/block-settings-menu/index.js:87
+#: src/addons/block-settings-menu/index.js:90
 msgid "Paste Block Styles"
 msgstr ""
 
-#: src/addons/block-settings-menu/index.js:110
+#: src/addons/block-settings-menu/index.js:113
 msgid "aBlocks Copy Styles"
 msgstr ""
 
-#: src/addons/block-settings-menu/index.js:116
+#: src/addons/block-settings-menu/index.js:119
 msgid "aBlocks Paste Styles"
 msgstr ""
 
@@ -2255,13 +2282,13 @@ msgstr ""
 #: src/blocks/atomic-shared/background.js:51
 #: src/blocks/atomic-shared/background.js:54
 #: src/blocks/atomic-shared/effects.js:119
-#: src/blocks/atomic-shared/inspector.js:86
-#: src/blocks/atomic-shared/inspector.js:93
-#: src/blocks/atomic-shared/inspector.js:95
-#: src/blocks/atomic-shared/inspector.js:106
-#: src/blocks/atomic-shared/inspector.js:114
-#: src/blocks/atomic-shared/inspector.js:117
-#: src/blocks/atomic-shared/inspector.js:1319
+#: src/blocks/atomic-shared/inspector.js:87
+#: src/blocks/atomic-shared/inspector.js:94
+#: src/blocks/atomic-shared/inspector.js:96
+#: src/blocks/atomic-shared/inspector.js:107
+#: src/blocks/atomic-shared/inspector.js:115
+#: src/blocks/atomic-shared/inspector.js:118
+#: src/blocks/atomic-shared/inspector.js:1325
 #: src/blocks/atomic-shared/size-field.js:69
 #: src/blocks/container/helper.js:67
 #: src/components/dynamic-tags/dynamic-date-settings.js:22
@@ -2278,8 +2305,8 @@ msgid "custom"
 msgstr ""
 
 #: src/addons/formats/dynamic-content/dynamic-tags/dynamic-date-settings.js:35
-#: src/blocks/atomic-shared/inspector.js:263
-#: src/blocks/atomic-shared/inspector.js:269
+#: src/blocks/atomic-shared/inspector.js:264
+#: src/blocks/atomic-shared/inspector.js:270
 #: src/blocks/container/settings.js:205
 #: src/blocks/featured-image/helper.js:8
 #: src/blocks/featured-image/helper.js:13
@@ -2725,7 +2752,7 @@ msgstr ""
 #: src/blocks/accordion/settings.js:160
 #: src/blocks/advance-list-item/settings.js:471
 #: src/blocks/advance-lists/settings.js:594
-#: src/blocks/atomic-shared/inspector.js:527
+#: src/blocks/atomic-shared/inspector.js:533
 #: src/blocks/breadcrumb/settings.js:124
 #: src/blocks/button/settings.js:268
 #: src/blocks/countdown/settings.js:451
@@ -2885,7 +2912,7 @@ msgstr ""
 
 #: src/addons/global-settings/globalThemeStyle.js:130
 #: src/blocks/advance-list-item/settings.js:402
-#: src/blocks/atomic-shared/inspector.js:552
+#: src/blocks/atomic-shared/inspector.js:558
 #: src/blocks/button/settings.js:141
 #: src/blocks/button/settings.js:246
 #: src/blocks/container/settings.js:977
@@ -2969,7 +2996,7 @@ msgid "aBlocks Settings"
 msgstr ""
 
 #: src/addons/global-settings/utils.js:83
-#: src/blocks/atomic-shared/inspector.js:2140
+#: src/blocks/atomic-shared/inspector.js:2308
 msgid "Saving…"
 msgstr ""
 
@@ -3222,9 +3249,9 @@ msgstr ""
 #: src/blocks/advance-lists/settings.js:669
 #: src/blocks/atomic-shared/effect-field.js:151
 #: src/blocks/atomic-shared/effect-field.js:169
-#: src/blocks/atomic-shared/inspector.js:423
-#: src/blocks/atomic-shared/inspector.js:473
-#: src/blocks/atomic-svg/edit.js:198
+#: src/blocks/atomic-shared/inspector.js:429
+#: src/blocks/atomic-shared/inspector.js:479
+#: src/blocks/atomic-svg/edit.js:265
 #: src/blocks/breadcrumb/settings.js:134
 #: src/blocks/button/settings.js:284
 #: src/blocks/button/settings.js:292
@@ -3627,7 +3654,7 @@ msgstr ""
 #: src/blocks/academy-container/settings.js:72
 #: src/blocks/academy-courses/settings.js:320
 #: src/blocks/academy-courses/settings.js:338
-#: src/blocks/atomic-shared/inspector.js:677
+#: src/blocks/atomic-shared/inspector.js:683
 #: src/blocks/counter/settings.js:230
 #: src/blocks/counter/settings.js:273
 #: src/blocks/filterable-cards/settings.js:763
@@ -3671,7 +3698,7 @@ msgstr ""
 #: src/blocks/academy-student-registration-form/settings.js:250
 #: src/blocks/accordion/settings.js:124
 #: src/blocks/accordion/settings.js:278
-#: src/blocks/atomic-shared/inspector.js:612
+#: src/blocks/atomic-shared/inspector.js:618
 #: src/blocks/button/settings.js:381
 #: src/blocks/carousel/settings.js:632
 #: src/blocks/carousel/settings.js:963
@@ -3770,7 +3797,7 @@ msgstr ""
 #: src/blocks/taxonomy-listing/settings.js:1217
 #: src/blocks/taxonomy-listing/settings.js:1329
 #: src/blocks/toggle/settings.js:353
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:702
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:717
 #: src/global/AdvancedSettings/index.js:204
 msgid "Border"
 msgstr ""
@@ -3974,7 +4001,7 @@ msgstr ""
 #: src/blocks/tabs/settings.js:717
 #: src/blocks/taxonomy-listing/settings.js:145
 #: src/blocks/text-path/settings.js:62
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:204
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:219
 #: src/dashboard/pages/dashboard/themeBuilder/builder/FormInner.js:28
 #: src/dashboard/pages/dashboard/themeBuilder/index.js:263
 msgid "Title"
@@ -4216,8 +4243,8 @@ msgstr ""
 #: src/blocks/academy-review-form/settings.js:538
 #: src/blocks/academy-student-registration-form/settings.js:201
 #: src/blocks/academy-student-registration-form/settings.js:224
-#: src/blocks/atomic-shared/inspector.js:433
-#: src/blocks/atomic-shared/inspector.js:463
+#: src/blocks/atomic-shared/inspector.js:439
+#: src/blocks/atomic-shared/inspector.js:469
 #: src/blocks/button/settings.js:306
 #: src/blocks/button/settings.js:339
 #: src/blocks/content-timeline/settings.js:179
@@ -4308,7 +4335,7 @@ msgstr ""
 #: src/blocks/tabs/settings.js:366
 #: src/controls/background/options/index.js:28
 #: src/controls/background/options/index.js:71
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:699
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:714
 #: src/global/AdvancedSettings/index.js:180
 msgid "Background"
 msgstr ""
@@ -4431,7 +4458,7 @@ msgid "Instructor Name Style"
 msgstr ""
 
 #: src/blocks/academy-course-media/settings.js:39
-#: src/blocks/atomic-shared/inspector.js:2579
+#: src/blocks/atomic-shared/inspector.js:2747
 #: src/blocks/form-builder/form-setting/index.js:23
 #: src/blocks/form-builder/form-setting/index.js:43
 #: src/blocks/form-builder/settings.js:135
@@ -4537,8 +4564,8 @@ msgstr ""
 #: src/blocks/academy-course-media/settings.js:128
 #: src/blocks/atomic-shared/effects.js:230
 #: src/blocks/atomic-shared/effects.js:331
-#: src/blocks/atomic-shared/inspector.js:1488
 #: src/blocks/atomic-shared/inspector.js:1494
+#: src/blocks/atomic-shared/inspector.js:1500
 #: src/blocks/featured-image/settings.js:461
 #: src/blocks/featured-image/settings.js:486
 #: src/blocks/image-scroll/settings.js:366
@@ -4705,7 +4732,7 @@ msgstr ""
 #: src/blocks/academy-student-registration-form/settings.js:242
 #: src/blocks/accordion/settings.js:270
 #: src/blocks/accordion/settings.js:497
-#: src/blocks/atomic-shared/inspector.js:678
+#: src/blocks/atomic-shared/inspector.js:684
 #: src/blocks/breadcrumb/settings.js:174
 #: src/blocks/breadcrumb/settings.js:366
 #: src/blocks/button/settings.js:392
@@ -5069,8 +5096,8 @@ msgstr ""
 
 #: src/blocks/academy-courses/settings.js:160
 #: src/blocks/atomic-shared/flex-item-filter.js:156
-#: src/blocks/atomic-shared/inspector.js:1024
-#: src/blocks/atomic-shared/inspector.js:1037
+#: src/blocks/atomic-shared/inspector.js:1030
+#: src/blocks/atomic-shared/inspector.js:1043
 #: src/blocks/storeengine-products/settings.js:138
 msgid "Order"
 msgstr ""
@@ -5573,7 +5600,7 @@ msgstr ""
 #: src/blocks/accordion/settings.js:317
 #: src/blocks/atomic-shared/animations.js:46
 #: src/blocks/atomic-shared/border-field.js:34
-#: src/blocks/atomic-shared/inspector.js:1275
+#: src/blocks/atomic-shared/inspector.js:1281
 #: src/blocks/atomic-shared/spacing-field.js:30
 #: src/blocks/atomic-shared/typography-field.js:126
 #: src/blocks/content-timeline/helper.js:5
@@ -5603,14 +5630,14 @@ msgstr ""
 #: src/blocks/stripe-button/helper.js:5
 #: src/blocks/tabs/helper.js:120
 #: src/blocks/tabs/helper.js:192
-#: src/controls/dimensions/Fields.js:218
+#: src/controls/dimensions/Fields.js:229
 msgid "Left"
 msgstr ""
 
 #: src/blocks/accordion/settings.js:321
 #: src/blocks/atomic-shared/animations.js:47
 #: src/blocks/atomic-shared/border-field.js:32
-#: src/blocks/atomic-shared/inspector.js:1273
+#: src/blocks/atomic-shared/inspector.js:1279
 #: src/blocks/atomic-shared/spacing-field.js:28
 #: src/blocks/atomic-shared/typography-field.js:136
 #: src/blocks/content-timeline/helper.js:15
@@ -5640,7 +5667,7 @@ msgstr ""
 #: src/blocks/stripe-button/helper.js:15
 #: src/blocks/tabs/helper.js:124
 #: src/blocks/tabs/helper.js:196
-#: src/controls/dimensions/Fields.js:175
+#: src/controls/dimensions/Fields.js:186
 msgid "Right"
 msgstr ""
 
@@ -5747,7 +5774,7 @@ msgid "x"
 msgstr ""
 
 #: src/blocks/advance-list-item/data.js:105
-#: src/blocks/atomic-shared/inspector.js:428
+#: src/blocks/atomic-shared/inspector.js:434
 #: src/blocks/breadcrumb/settings.js:318
 #: src/blocks/button/settings.js:192
 #: src/blocks/divider/data.js:111
@@ -5767,14 +5794,14 @@ msgstr ""
 #: src/blocks/loop-load-more/settings.js:103
 #: src/blocks/news-ticker/settings.js:499
 #: src/blocks/paypal-button/settings.js:294
-#: src/blocks/search/render.js:186
-#: src/blocks/search/render.js:229
+#: src/blocks/search/render.js:184
+#: src/blocks/search/render.js:226
 #: src/blocks/search/settings.js:301
 #: src/blocks/search/settings.js:320
 #: src/blocks/social-shares/helper.js:90
 #: src/blocks/storeengine-checkout-form/settings.js:289
 #: src/blocks/stripe-button/settings.js:284
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:700
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:715
 msgid "Text"
 msgstr ""
 
@@ -5945,7 +5972,7 @@ msgstr ""
 #: src/blocks/advance-lists/settings.js:288
 #: src/blocks/advance-lists/settings.js:358
 #: src/blocks/atomic-shared/effect-field.js:216
-#: src/blocks/atomic-shared/inspector.js:648
+#: src/blocks/atomic-shared/inspector.js:654
 #: src/blocks/carousel/settings.js:470
 #: src/blocks/carousel/settings.js:564
 #: src/blocks/carousel/settings.js:756
@@ -6081,7 +6108,7 @@ msgstr ""
 
 #: src/blocks/advance-list-item/settings.js:509
 #: src/blocks/advance-lists/settings.js:629
-#: src/blocks/atomic-shared/inspector.js:2584
+#: src/blocks/atomic-shared/inspector.js:2752
 #: src/blocks/coupon/settings.js:87
 #: src/blocks/divider/settings.js:155
 #: src/blocks/lists/settings.js:930
@@ -6092,7 +6119,7 @@ msgstr ""
 #: src/blocks/storeengine-order-details/settings.js:78
 #: src/components/content-style-tabs/index.js:18
 #: src/controls/typography/components/Custom.js:257
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:109
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:124
 msgid "Style"
 msgstr ""
 
@@ -6102,7 +6129,7 @@ msgid "Advance lists"
 msgstr ""
 
 #: src/blocks/advance-lists/settings.js:395
-#: src/blocks/atomic-shared/inspector.js:1128
+#: src/blocks/atomic-shared/inspector.js:1134
 #: src/blocks/counter/settings.js:92
 #: src/blocks/dual-button/settings.js:63
 #: src/blocks/filterable-cards/settings.js:492
@@ -6113,7 +6140,7 @@ msgstr ""
 #: src/blocks/storeengine-coupon-form/settings.js:54
 #: src/blocks/storeengine-product-filter/settings.js:37
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:64
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:103
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:118
 #: src/global/AdvancedSettings/index.js:46
 msgid "Layout"
 msgstr ""
@@ -6188,7 +6215,7 @@ msgstr ""
 msgid "Add item"
 msgstr ""
 
-#: src/blocks/atomic-image/edit.js:121
+#: src/blocks/atomic-image/edit.js:156
 #: src/blocks/atomic-shared/background.js:18
 #: src/blocks/atomic-shared/background.js:131
 #: src/blocks/image-scroll/settings.js:448
@@ -6200,36 +6227,36 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: src/blocks/atomic-image/edit.js:132
+#: src/blocks/atomic-image/edit.js:167
 msgid "Resolution"
 msgstr ""
 
-#: src/blocks/atomic-image/edit.js:137
+#: src/blocks/atomic-image/edit.js:172
 msgid "Full size"
 msgstr ""
 
-#: src/blocks/atomic-image/edit.js:143
+#: src/blocks/atomic-image/edit.js:178
 msgid "Alt text"
 msgstr ""
 
-#: src/blocks/atomic-image/edit.js:146
+#: src/blocks/atomic-image/edit.js:181
 msgid "Leave empty when the image is decorative."
 msgstr ""
 
-#: src/blocks/atomic-image/edit.js:153
+#: src/blocks/atomic-image/edit.js:188
 #: src/blocks/atomic-shared/container.js:64
-#: src/blocks/atomic-svg/edit.js:185
+#: src/blocks/atomic-svg/edit.js:252
 #: src/blocks/atomic-text/edit.js:74
 msgid "HTML anchor (ID)"
 msgstr ""
 
-#: src/blocks/atomic-image/edit.js:181
+#: src/blocks/atomic-image/edit.js:216
 #: src/blocks/atomic-shared/media-field.js:94
 #: src/blocks/lottie-animation/settings.js:151
 msgid "Replace"
 msgstr ""
 
-#: src/blocks/atomic-image/edit.js:210
+#: src/blocks/atomic-image/edit.js:245
 msgid "Atomic Image"
 msgstr ""
 
@@ -6256,8 +6283,8 @@ msgid "Effect"
 msgstr ""
 
 #: src/blocks/atomic-shared/animation-card.js:172
-#: src/blocks/atomic-shared/inspector.js:785
-#: src/blocks/atomic-shared/typography-field.js:353
+#: src/blocks/atomic-shared/inspector.js:791
+#: src/blocks/atomic-shared/typography-field.js:417
 #: src/blocks/container/settings.js:387
 #: src/blocks/countdown/settings.js:103
 #: src/blocks/logout/settings.js:81
@@ -6270,9 +6297,9 @@ msgstr ""
 
 #: src/blocks/atomic-shared/animation-card.js:185
 #: src/blocks/atomic-shared/flex-item-filter.js:42
-#: src/blocks/atomic-shared/inspector.js:150
-#: src/blocks/atomic-shared/inspector.js:182
-#: src/blocks/atomic-shared/inspector.js:276
+#: src/blocks/atomic-shared/inspector.js:151
+#: src/blocks/atomic-shared/inspector.js:183
+#: src/blocks/atomic-shared/inspector.js:277
 #: src/blocks/chart/settings.js:1324
 #: src/blocks/chart/settings.js:1575
 #: src/blocks/chart/settings.js:1822
@@ -6292,9 +6319,9 @@ msgstr ""
 
 #: src/blocks/atomic-shared/animation-card.js:193
 #: src/blocks/atomic-shared/flex-item-filter.js:44
-#: src/blocks/atomic-shared/inspector.js:160
-#: src/blocks/atomic-shared/inspector.js:192
-#: src/blocks/atomic-shared/inspector.js:286
+#: src/blocks/atomic-shared/inspector.js:161
+#: src/blocks/atomic-shared/inspector.js:193
+#: src/blocks/atomic-shared/inspector.js:287
 #: src/blocks/chart/settings.js:1340
 #: src/blocks/chart/settings.js:1591
 #: src/blocks/chart/settings.js:1838
@@ -6443,7 +6470,7 @@ msgstr ""
 
 #: src/blocks/atomic-shared/animations.js:44
 #: src/blocks/atomic-shared/border-field.js:31
-#: src/blocks/atomic-shared/inspector.js:1272
+#: src/blocks/atomic-shared/inspector.js:1278
 #: src/blocks/atomic-shared/spacing-field.js:27
 #: src/blocks/carousel/settings.js:274
 #: src/blocks/container/settings.js:665
@@ -6465,7 +6492,7 @@ msgstr ""
 #: src/blocks/modal/helper.js:45
 #: src/blocks/tabs/helper.js:112
 #: src/blocks/tabs/helper.js:200
-#: src/controls/dimensions/Fields.js:152
+#: src/controls/dimensions/Fields.js:163
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:53
 msgid "Top"
 msgstr ""
@@ -6478,13 +6505,13 @@ msgstr ""
 #: src/blocks/atomic-shared/animations.js:51
 #: src/blocks/atomic-shared/border-field.js:47
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:56
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:454
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:469
 msgid "Bottom left"
 msgstr ""
 
 #: src/blocks/atomic-shared/animations.js:53
 #: src/blocks/atomic-shared/border-field.js:33
-#: src/blocks/atomic-shared/inspector.js:1274
+#: src/blocks/atomic-shared/inspector.js:1280
 #: src/blocks/atomic-shared/spacing-field.js:29
 #: src/blocks/carousel/settings.js:285
 #: src/blocks/container/settings.js:666
@@ -6503,7 +6530,7 @@ msgstr ""
 #: src/blocks/modal/helper.js:55
 #: src/blocks/tabs/helper.js:116
 #: src/blocks/tabs/helper.js:204
-#: src/controls/dimensions/Fields.js:195
+#: src/controls/dimensions/Fields.js:206
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:52
 msgid "Bottom"
 msgstr ""
@@ -6511,7 +6538,7 @@ msgstr ""
 #: src/blocks/atomic-shared/animations.js:57
 #: src/blocks/atomic-shared/border-field.js:52
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:57
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:458
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:473
 msgid "Bottom right"
 msgstr ""
 
@@ -6614,7 +6641,7 @@ msgstr ""
 #: src/components/content-style-tabs/index.js:17
 #: src/components/dynamic-tags/index.js:72
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:65
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:198
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:213
 #: src/dashboard/pages/settings/EditorOptions/DesignAudit.js:146
 msgid "Content"
 msgstr ""
@@ -6624,8 +6651,8 @@ msgstr ""
 msgid "HTML tag"
 msgstr ""
 
-#: src/blocks/atomic-shared/container.js:134
-#: src/blocks/atomic-shared/inspector.js:128
+#: src/blocks/atomic-shared/container.js:138
+#: src/blocks/atomic-shared/inspector.js:129
 #: src/blocks/container/settings.js:390
 #: src/blocks/countdown/helper.js:79
 #: src/blocks/form-builder/settings.js:143
@@ -6636,8 +6663,8 @@ msgstr ""
 msgid "Row"
 msgstr ""
 
-#: src/blocks/atomic-shared/container.js:140
-#: src/blocks/atomic-shared/inspector.js:133
+#: src/blocks/atomic-shared/container.js:144
+#: src/blocks/atomic-shared/inspector.js:134
 #: src/blocks/container/settings.js:397
 #: src/blocks/countdown/helper.js:84
 #: src/blocks/form-builder/settings.js:150
@@ -6648,38 +6675,38 @@ msgstr ""
 msgid "Column"
 msgstr ""
 
-#: src/blocks/atomic-shared/container.js:146
-#: src/blocks/atomic-shared/container.js:166
+#: src/blocks/atomic-shared/container.js:150
+#: src/blocks/atomic-shared/container.js:170
 msgid "2 columns"
 msgstr ""
 
-#: src/blocks/atomic-shared/container.js:152
-#: src/blocks/atomic-shared/container.js:172
+#: src/blocks/atomic-shared/container.js:156
+#: src/blocks/atomic-shared/container.js:176
 msgid "3 columns"
 msgstr ""
 
-#: src/blocks/atomic-shared/container.js:158
-#: src/blocks/atomic-shared/container.js:178
+#: src/blocks/atomic-shared/container.js:162
+#: src/blocks/atomic-shared/container.js:182
 msgid "4 columns"
 msgstr ""
 
-#: src/blocks/atomic-shared/container.js:184
+#: src/blocks/atomic-shared/container.js:188
 msgid "6 columns"
 msgstr ""
 
-#: src/blocks/atomic-shared/container.js:196
+#: src/blocks/atomic-shared/container.js:200
 msgid "Remove block"
 msgstr ""
 
-#: src/blocks/atomic-shared/container.js:201
+#: src/blocks/atomic-shared/container.js:205
 msgid "Choose a grid to start"
 msgstr ""
 
-#: src/blocks/atomic-shared/container.js:202
+#: src/blocks/atomic-shared/container.js:206
 msgid "Choose a layout to start"
 msgstr ""
 
-#: src/blocks/atomic-shared/container.js:226
+#: src/blocks/atomic-shared/container.js:230
 msgid "Start blank"
 msgstr ""
 
@@ -6702,8 +6729,8 @@ msgstr ""
 
 #: src/blocks/atomic-shared/effect-field.js:175
 #: src/blocks/atomic-shared/effect-field.js:222
-#: src/blocks/atomic-shared/inspector.js:1347
 #: src/blocks/atomic-shared/inspector.js:1353
+#: src/blocks/atomic-shared/inspector.js:1359
 #: src/blocks/button/settings.js:68
 #: src/blocks/counter/settings.js:435
 #: src/blocks/divider/settings.js:284
@@ -6721,7 +6748,7 @@ msgstr ""
 #: src/blocks/taxonomy-listing/settings.js:1016
 #: src/blocks/taxonomy-listing/settings.js:1262
 #: src/controls/image-control/index.js:102
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:131
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:146
 #: src/global/AdvancedSettings/index.js:72
 #: src/global/mask/options/position/index.js:97
 #: src/global/positions/index.js:94
@@ -6769,9 +6796,9 @@ msgstr ""
 
 #: src/blocks/atomic-shared/effect-field.js:286
 #: src/blocks/atomic-shared/flex-item-filter.js:43
-#: src/blocks/atomic-shared/inspector.js:155
-#: src/blocks/atomic-shared/inspector.js:187
-#: src/blocks/atomic-shared/inspector.js:281
+#: src/blocks/atomic-shared/inspector.js:156
+#: src/blocks/atomic-shared/inspector.js:188
+#: src/blocks/atomic-shared/inspector.js:282
 #: src/blocks/atomic-shared/typography-field.js:131
 #: src/blocks/carousel/settings.js:278
 #: src/blocks/chart/settings.js:1332
@@ -6858,13 +6885,13 @@ msgid "Disable"
 msgstr ""
 
 #: src/blocks/atomic-shared/effect-field.js:578
-#: src/blocks/atomic-shared/inspector.js:1818
+#: src/blocks/atomic-shared/inspector.js:1824
 msgid "Duplicate"
 msgstr ""
 
 #: src/blocks/atomic-shared/effect-field.js:586
-#: src/blocks/atomic-shared/inspector.js:1831
-#: src/blocks/atomic-shared/inspector.js:2391
+#: src/blocks/atomic-shared/inspector.js:1837
+#: src/blocks/atomic-shared/inspector.js:2559
 #: src/blocks/atomic-shared/media-field.js:104
 #: src/components/breakpoint-manager/index.js:148
 msgid "Remove"
@@ -7001,7 +7028,7 @@ msgid "Backdrop filters"
 msgstr ""
 
 #: src/blocks/atomic-shared/flex-item-filter.js:41
-#: src/blocks/atomic-shared/inspector.js:273
+#: src/blocks/atomic-shared/inspector.js:274
 #: src/blocks/container/settings.js:373
 #: src/blocks/featured-image/settings.js:317
 #: src/blocks/featured-image/settings.js:330
@@ -7012,8 +7039,8 @@ msgid "Auto"
 msgstr ""
 
 #: src/blocks/atomic-shared/flex-item-filter.js:45
-#: src/blocks/atomic-shared/inspector.js:197
-#: src/blocks/atomic-shared/inspector.js:291
+#: src/blocks/atomic-shared/inspector.js:198
+#: src/blocks/atomic-shared/inspector.js:292
 #: src/blocks/container/helper.js:59
 #: src/blocks/container/settings.js:489
 #: src/blocks/countdown/helper.js:158
@@ -7033,7 +7060,7 @@ msgid "Flex item"
 msgstr ""
 
 #: src/blocks/atomic-shared/flex-item-filter.js:146
-#: src/blocks/atomic-shared/inspector.js:1017
+#: src/blocks/atomic-shared/inspector.js:1023
 msgid "Align self"
 msgstr ""
 
@@ -7049,33 +7076,33 @@ msgstr ""
 msgid "Flex basis"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:138
+#: src/blocks/atomic-shared/inspector.js:139
 msgid "Row reversed"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:143
+#: src/blocks/atomic-shared/inspector.js:144
 msgid "Column reversed"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:165
+#: src/blocks/atomic-shared/inspector.js:166
 #: src/blocks/social-shares/settings.js:836
 msgid "Space between"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:170
+#: src/blocks/atomic-shared/inspector.js:171
 msgid "Space around"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:175
+#: src/blocks/atomic-shared/inspector.js:176
 msgid "Space evenly"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:204
+#: src/blocks/atomic-shared/inspector.js:205
 msgid "No wrap"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:207
-#: src/blocks/atomic-shared/inspector.js:804
+#: src/blocks/atomic-shared/inspector.js:208
+#: src/blocks/atomic-shared/inspector.js:810
 #: src/blocks/container/settings.js:626
 #: src/blocks/container/settings.js:629
 #: src/blocks/countdown/helper.js:167
@@ -7085,79 +7112,79 @@ msgstr ""
 msgid "Wrap"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:259
+#: src/blocks/atomic-shared/inspector.js:260
 msgid "First"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:262
+#: src/blocks/atomic-shared/inspector.js:263
 msgid "Last"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:267
-#: src/blocks/atomic-shared/inspector.js:1064
+#: src/blocks/atomic-shared/inspector.js:268
+#: src/blocks/atomic-shared/inspector.js:1070
 #: src/global/Integrations/helper.js:408
 msgid "Grow"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:268
-#: src/blocks/atomic-shared/inspector.js:1072
+#: src/blocks/atomic-shared/inspector.js:269
+#: src/blocks/atomic-shared/inspector.js:1078
 #: src/global/Integrations/helper.js:410
 msgid "Shrink"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:338
+#: src/blocks/atomic-shared/inspector.js:339
 msgid "Inherited"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:478
+#: src/blocks/atomic-shared/inspector.js:484
 msgid "Clipping"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:484
+#: src/blocks/atomic-shared/inspector.js:490
 msgid "Clipping to text only shows once the text colour is transparent."
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:494
+#: src/blocks/atomic-shared/inspector.js:500
 msgid "Gradient / image (CSS)"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:498
+#: src/blocks/atomic-shared/inspector.js:504
 msgid "Legacy raw CSS value. Any overlay layer above replaces it."
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:554
+#: src/blocks/atomic-shared/inspector.js:560
 #: src/blocks/form-input/helper.js:21
 #: src/blocks/form-input/settings.js:62
 #: src/blocks/form-input/settings.js:81
 msgid "URL"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:563
+#: src/blocks/atomic-shared/inspector.js:569
 #: src/blocks/featured-image/settings.js:397
 #: src/blocks/image/settings.js:472
 msgid "Open in new tab"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:569
+#: src/blocks/atomic-shared/inspector.js:575
 #: src/controls/link-control/index.js:86
 msgid "Add nofollow"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:624
+#: src/blocks/atomic-shared/inspector.js:630
 #: src/controls/border/index.js:132
 #: src/controls/border/index.js:208
 msgid "Border color"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:629
+#: src/blocks/atomic-shared/inspector.js:635
 msgid "Border type"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:635
+#: src/blocks/atomic-shared/inspector.js:641
 msgid "A double border needs a width of at least 3px to draw two lines."
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:672
+#: src/blocks/atomic-shared/inspector.js:678
 #: src/blocks/divider/settings.js:315
 #: src/blocks/divider/settings.js:426
 #: src/blocks/form-builder/settings.js:474
@@ -7169,55 +7196,55 @@ msgstr ""
 msgid "Spacing"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:684
+#: src/blocks/atomic-shared/inspector.js:690
 #: src/blocks/modal/deprecated/helper.js:10
 #: src/blocks/modal/helper.js:10
 msgid "Block"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:685
+#: src/blocks/atomic-shared/inspector.js:691
 msgid "Flex"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:686
+#: src/blocks/atomic-shared/inspector.js:692
 #: src/blocks/container/settings.js:173
 #: src/blocks/filterable-cards/settings.js:478
 #: src/blocks/loop-template/settings.js:42
 msgid "Grid"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:693
+#: src/blocks/atomic-shared/inspector.js:699
 msgid "Inline-block"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:694
+#: src/blocks/atomic-shared/inspector.js:700
 msgid "Inline-flex"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:695
+#: src/blocks/atomic-shared/inspector.js:701
 msgid "Inline-grid"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:725
+#: src/blocks/atomic-shared/inspector.js:731
 #: src/blocks/loop-builder/settings.js:282
 msgid "Display"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:744
+#: src/blocks/atomic-shared/inspector.js:750
 msgid "More displays"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:792
+#: src/blocks/atomic-shared/inspector.js:798
 msgid "Justify content"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:798
-#: src/blocks/atomic-shared/inspector.js:854
+#: src/blocks/atomic-shared/inspector.js:804
+#: src/blocks/atomic-shared/inspector.js:860
 msgid "Align items"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:810
-#: src/blocks/atomic-shared/inspector.js:843
+#: src/blocks/atomic-shared/inspector.js:816
+#: src/blocks/atomic-shared/inspector.js:849
 #: src/blocks/carousel/settings.js:186
 #: src/blocks/divider/settings.js:97
 #: src/blocks/dual-button/settings.js:160
@@ -7236,88 +7263,88 @@ msgstr ""
 msgid "Gap"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:822
+#: src/blocks/atomic-shared/inspector.js:828
 msgid "Template columns"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:829
+#: src/blocks/atomic-shared/inspector.js:835
 msgid "Template rows"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:837
+#: src/blocks/atomic-shared/inspector.js:843
 msgid "Auto flow"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:848
+#: src/blocks/atomic-shared/inspector.js:854
 msgid "Justify items"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1012
+#: src/blocks/atomic-shared/inspector.js:1018
 msgid "Flex child"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1050
+#: src/blocks/atomic-shared/inspector.js:1056
 msgid "Flex size"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1080
+#: src/blocks/atomic-shared/inspector.js:1086
 msgid "Basis"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1320
+#: src/blocks/atomic-shared/inspector.js:1326
 msgid "pointer"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1321
+#: src/blocks/atomic-shared/inspector.js:1327
 msgid "arrow (default)"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1322
+#: src/blocks/atomic-shared/inspector.js:1328
 msgid "text"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1323
+#: src/blocks/atomic-shared/inspector.js:1329
 msgid "move"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1324
+#: src/blocks/atomic-shared/inspector.js:1330
 msgid "grab"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1325
+#: src/blocks/atomic-shared/inspector.js:1331
 msgid "not-allowed"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1326
+#: src/blocks/atomic-shared/inspector.js:1332
 msgid "wait"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1327
+#: src/blocks/atomic-shared/inspector.js:1333
 msgid "help"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1328
+#: src/blocks/atomic-shared/inspector.js:1334
 msgid "zoom-in"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1329
+#: src/blocks/atomic-shared/inspector.js:1335
 msgid "crosshair"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1366
+#: src/blocks/atomic-shared/inspector.js:1372
 msgid "Sticky needs an offset below, and it only sticks inside its own parent — a parent that is no taller than this block, or any ancestor with overflow set, gives it nothing to stick against."
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1388
-#: src/blocks/atomic-shared/inspector.js:1393
+#: src/blocks/atomic-shared/inspector.js:1394
+#: src/blocks/atomic-shared/inspector.js:1399
 msgid "Z-index"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1402
+#: src/blocks/atomic-shared/inspector.js:1408
 msgid "Anchor offset"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1461
+#: src/blocks/atomic-shared/inspector.js:1467
 #: src/global/Integrations/index.js:369
 #: src/global/Integrations/index.js:373
 #: src/global/Integrations/index.js:513
@@ -7325,144 +7352,200 @@ msgstr ""
 msgid "Effects"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1467
+#: src/blocks/atomic-shared/inspector.js:1473
 #: src/controls/background/overlay/options/index.js:133
 #: src/controls/background/overlay/options/index.js:180
 #: src/controls/blend-mode/index.js:18
 msgid "Blend mode"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1475
+#: src/blocks/atomic-shared/inspector.js:1481
 msgid "Isolation"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1481
+#: src/blocks/atomic-shared/inspector.js:1487
 msgid "A blend mode mixes this element with what is painted behind it. Set Isolation to \"isolate\" on the parent to keep the mix inside that container."
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1499
+#: src/blocks/atomic-shared/inspector.js:1505
 msgid "Cursor"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1517
-#: src/blocks/atomic-shared/inspector.js:1526
+#: src/blocks/atomic-shared/inspector.js:1523
+#: src/blocks/atomic-shared/inspector.js:1532
 msgid "Transform origin"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1556
+#: src/blocks/atomic-shared/inspector.js:1562
 msgid "Transitions set here apply only while this state is active. Add them on Normal so the change eases both ways."
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1575
+#: src/blocks/atomic-shared/inspector.js:1581
 msgid "Hide on desktop"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1576
+#: src/blocks/atomic-shared/inspector.js:1582
 msgid "Hide on tablet"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1577
+#: src/blocks/atomic-shared/inspector.js:1583
 msgid "Hide on mobile"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1589
+#: src/blocks/atomic-shared/inspector.js:1595
 msgid "Responsive visibility"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1593
+#: src/blocks/atomic-shared/inspector.js:1599
 msgid "Hide this block on the chosen devices (front end only)."
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1609
+#: src/blocks/atomic-shared/inspector.js:1615
 #: src/global/AdvancedSettings/index.js:245
 msgid "Custom CSS"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1622
+#: src/blocks/atomic-shared/inspector.js:1628
 msgid "Use"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1623
+#: src/blocks/atomic-shared/inspector.js:1629
 msgid "to target this block (or its own class)."
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1754
+#: src/blocks/atomic-shared/inspector.js:1760
 msgid "Back to normal"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1769
-#: src/blocks/atomic-shared/inspector.js:2028
+#: src/blocks/atomic-shared/inspector.js:1775
+#: src/blocks/atomic-shared/inspector.js:2181
 msgid "Options"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1777
+#: src/blocks/atomic-shared/inspector.js:1783
 msgid "Class"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1790
+#: src/blocks/atomic-shared/inspector.js:1796
 msgid "Convert to global"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1805
-#: src/blocks/atomic-shared/inspector.js:2061
+#: src/blocks/atomic-shared/inspector.js:1811
+#: src/blocks/atomic-shared/inspector.js:2214
 #: src/dashboard/pages/settings/GlobalClasses/index.js:132
 msgid "Rename"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1838
+#: src/blocks/atomic-shared/inspector.js:1844
 msgid "States"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1874
+#: src/blocks/atomic-shared/inspector.js:1880
 msgid "Has styles"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1931
-#: src/blocks/atomic-shared/inspector.js:2147
+#. translators: %d: number of classes.
+#: src/blocks/atomic-shared/inspector.js:1980
+#, js-format
+msgid "Delete %d class? This cannot be undone."
+msgid_plural "Delete %d classes? This cannot be undone."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/blocks/atomic-shared/inspector.js:1998
+#: src/blocks/atomic-shared/inspector.js:2315
 msgid "Class manager"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1937
+#: src/blocks/atomic-shared/inspector.js:2004
 msgid "Global classes are shared by every block that applies them — editing one here changes all of them."
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1950
+#: src/blocks/atomic-shared/inspector.js:2017
 msgid "Search classes…"
 msgstr ""
 
 #. translators: %d: number of global classes listed.
-#: src/blocks/atomic-shared/inspector.js:1958
+#: src/blocks/atomic-shared/inspector.js:2025
 #, js-format
 msgid "%d class"
 msgid_plural "%d classes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/blocks/atomic-shared/inspector.js:1967
+#. translators: %d: number of classes.
+#: src/blocks/atomic-shared/inspector.js:2035
+#, js-format
+msgid "%d selected"
+msgid_plural "%d selected"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of classes.
+#: src/blocks/atomic-shared/inspector.js:2048
+#, js-format
+msgid "%d still in use and will be kept"
+msgid_plural "%d still in use and will be kept"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/blocks/atomic-shared/inspector.js:2063
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:67
+msgid "Clear"
+msgstr ""
+
+#. translators: %d: number of classes.
+#: src/blocks/atomic-shared/inspector.js:2073
+#, js-format
+msgid "Delete %d"
+msgid_plural "Delete %d"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/blocks/atomic-shared/inspector.js:2088
 msgid "No classes match."
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:1968
+#: src/blocks/atomic-shared/inspector.js:2089
 msgid "No global classes yet."
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2002
+#. translators: %s: class name.
+#: src/blocks/atomic-shared/inspector.js:2107
+#, js-format
+msgid "Select %s for deletion"
+msgstr ""
+
+#: src/blocks/atomic-shared/inspector.js:2135
 msgid "Apply to the selected block"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2016
+#: src/blocks/atomic-shared/inspector.js:2149
 msgid "Applied"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2045
+#: src/blocks/atomic-shared/inspector.js:2155
+#: src/blocks/atomic-shared/inspector.js:2227
+msgid "Still in use, so it cannot be deleted."
+msgstr ""
+
+#. translators: %d: number of blocks.
+#: src/blocks/atomic-shared/inspector.js:2162
+#, js-format
+msgid "%d block"
+msgid_plural "%d blocks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/blocks/atomic-shared/inspector.js:2198
 msgid "Apply to selection"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2072
+#: src/blocks/atomic-shared/inspector.js:2240
 msgid "Delete this class everywhere? This cannot be undone."
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2085
+#: src/blocks/atomic-shared/inspector.js:2253
 #: src/blocks/form-builder/form-setting/ActionAfterSubmission/FormEmailNotifications/index.js:332
 #: src/blocks/table-cell/toolbar.js:21
 #: src/dashboard/pages/dashboard/themeBuilder/index.js:440
@@ -7472,95 +7555,95 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2130
+#: src/blocks/atomic-shared/inspector.js:2298
 msgid "Classes & state"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2136
+#: src/blocks/atomic-shared/inspector.js:2304
 msgid "Classes"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2155
+#: src/blocks/atomic-shared/inspector.js:2323
 msgid "local"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2175
+#: src/blocks/atomic-shared/inspector.js:2343
 msgid "Add class"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2209
+#: src/blocks/atomic-shared/inspector.js:2377
 msgid "Apply a global class"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2225
+#: src/blocks/atomic-shared/inspector.js:2393
 #: src/dashboard/pages/scanner/Fonts.js:142
 msgid "global"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2232
+#: src/blocks/atomic-shared/inspector.js:2400
 msgid "Create a new class"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2248
+#: src/blocks/atomic-shared/inspector.js:2416
 msgid "Create"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2262
+#: src/blocks/atomic-shared/inspector.js:2430
 msgid "Global class name"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2281
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:167
+#: src/blocks/atomic-shared/inspector.js:2449
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:190
 #: src/dashboard/pages/settings/Dashboard/RouteModal.js:355
 #: src/dashboard/pages/settings/GlobalClasses/index.js:117
 #: src/dashboard/pages/settings/settings.js:287
 msgid "Save"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2292
+#: src/blocks/atomic-shared/inspector.js:2460
 msgid "Editing this block"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2335
+#: src/blocks/atomic-shared/inspector.js:2503
 msgid "Interactions"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2338
+#: src/blocks/atomic-shared/inspector.js:2506
 #: src/blocks/image-hotspot/settings.js:248
 #: src/controls/icon-upload/helper.js:22
 #: src/utils/deprecated/icon-upload/helper.js:11
 msgid "Animations"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2348
+#: src/blocks/atomic-shared/inspector.js:2516
 msgid "Animation limit reached"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2349
+#: src/blocks/atomic-shared/inspector.js:2517
 msgid "Add animation"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2359
+#: src/blocks/atomic-shared/inspector.js:2527
 msgid "Add one or more animations. Each can run on a page-load, scroll, hover or click trigger, and per breakpoint."
 msgstr ""
 
 #. translators: %s: interaction state name, e.g. Hover.
-#: src/blocks/atomic-shared/inspector.js:2479
+#: src/blocks/atomic-shared/inspector.js:2647
 #, js-format
 msgid "Editing the %s state"
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2488
+#: src/blocks/atomic-shared/inspector.js:2656
 msgid "Back to Normal"
 msgstr ""
 
 #. translators: 1: global class name, 2: comma-separated style property names.
-#: src/blocks/atomic-shared/inspector.js:2539
+#: src/blocks/atomic-shared/inspector.js:2707
 #, js-format
 msgid "This block sets %2$s itself, so “%1$s” cannot change it here."
 msgstr ""
 
-#: src/blocks/atomic-shared/inspector.js:2552
+#: src/blocks/atomic-shared/inspector.js:2720
 msgid "Clear the block value"
 msgid_plural "Clear the block values"
 msgstr[0] ""
@@ -7574,19 +7657,19 @@ msgstr ""
 msgid "Select image"
 msgstr ""
 
-#: src/blocks/atomic-shared/quick-actions.js:236
+#: src/blocks/atomic-shared/quick-actions.js:275
 msgid "Drag block"
 msgstr ""
 
-#: src/blocks/atomic-shared/quick-actions.js:237
+#: src/blocks/atomic-shared/quick-actions.js:276
 msgid "Select block"
 msgstr ""
 
-#: src/blocks/atomic-shared/quick-actions.js:280
+#: src/blocks/atomic-shared/quick-actions.js:320
 msgid "Add block above"
 msgstr ""
 
-#: src/blocks/atomic-shared/quick-actions.js:342
+#: src/blocks/atomic-shared/quick-actions.js:382
 msgid "Delete block"
 msgstr ""
 
@@ -7628,12 +7711,12 @@ msgid "Overflow"
 msgstr ""
 
 #: src/blocks/atomic-shared/size-field.js:175
-#: src/blocks/atomic-shared/typography-field.js:300
+#: src/blocks/atomic-shared/typography-field.js:360
 msgid "Show less"
 msgstr ""
 
 #: src/blocks/atomic-shared/size-field.js:176
-#: src/blocks/atomic-shared/typography-field.js:301
+#: src/blocks/atomic-shared/typography-field.js:361
 msgid "Show more"
 msgstr ""
 
@@ -7712,11 +7795,15 @@ msgstr ""
 msgid "Justify"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:234
+#: src/blocks/atomic-shared/typography-field.js:288
+msgid "Showing values inherited from a wider breakpoint or state. A change here applies to this one only."
+msgstr ""
+
+#: src/blocks/atomic-shared/typography-field.js:294
 msgid "Font family"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:251
+#: src/blocks/atomic-shared/typography-field.js:311
 #: src/blocks/chart/settings.js:1455
 #: src/blocks/chart/settings.js:1706
 #: src/blocks/chart/settings.js:1937
@@ -7724,7 +7811,7 @@ msgstr ""
 msgid "Font weight"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:263
+#: src/blocks/atomic-shared/typography-field.js:323
 #: src/blocks/chart/settings.js:1411
 #: src/blocks/chart/settings.js:1662
 #: src/blocks/chart/settings.js:1899
@@ -7732,11 +7819,11 @@ msgstr ""
 msgid "Font size"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:270
+#: src/blocks/atomic-shared/typography-field.js:330
 msgid "Text align"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:276
+#: src/blocks/atomic-shared/typography-field.js:336
 #: src/blocks/lists/settings.js:698
 #: src/blocks/storeengine-checkout-form/settings.js:74
 #: src/blocks/storeengine-checkout-form/settings.js:84
@@ -7749,21 +7836,21 @@ msgstr ""
 msgid "Text color"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:306
+#: src/blocks/atomic-shared/typography-field.js:366
 msgid "Line height"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:311
+#: src/blocks/atomic-shared/typography-field.js:371
 msgid "Letter spacing"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:319
+#: src/blocks/atomic-shared/typography-field.js:379
 #: src/controls/typography/components/Custom.js:319
 msgid "Word spacing"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:324
-#: src/blocks/atomic-shared/typography-field.js:331
+#: src/blocks/atomic-shared/typography-field.js:384
+#: src/blocks/atomic-shared/typography-field.js:395
 #: src/blocks/filterable-cards/settings.js:466
 #: src/blocks/loop-template/settings.js:46
 #: src/blocks/table/helper.js:73
@@ -7773,79 +7860,79 @@ msgstr ""
 msgid "Columns"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:341
+#: src/blocks/atomic-shared/typography-field.js:405
 msgid "Line decoration"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:347
+#: src/blocks/atomic-shared/typography-field.js:411
 msgid "Text transform"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:359
+#: src/blocks/atomic-shared/typography-field.js:423
 msgid "Font style"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:367
+#: src/blocks/atomic-shared/typography-field.js:431
 msgid "Text stroke"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:376
+#: src/blocks/atomic-shared/typography-field.js:440
 msgid "Remove text stroke"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:377
+#: src/blocks/atomic-shared/typography-field.js:441
 msgid "Add text stroke"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:395
-#: src/blocks/atomic-svg/edit.js:220
+#: src/blocks/atomic-shared/typography-field.js:459
+#: src/blocks/atomic-svg/edit.js:287
 #: src/controls/textStroke/index.js:158
 msgid "Stroke width"
 msgstr ""
 
-#: src/blocks/atomic-shared/typography-field.js:403
+#: src/blocks/atomic-shared/typography-field.js:467
 #: src/blocks/svg-draw/settings.js:105
 #: src/controls/textStroke/index.js:129
 msgid "Stroke color"
 msgstr ""
 
-#: src/blocks/atomic-svg/edit.js:106
+#: src/blocks/atomic-svg/edit.js:173
 msgid "That file did not contain an <svg> element."
 msgstr ""
 
-#: src/blocks/atomic-svg/edit.js:120
+#: src/blocks/atomic-svg/edit.js:187
 msgid "Could not read that file. Paste the SVG code instead."
 msgstr ""
 
-#: src/blocks/atomic-svg/edit.js:141
+#: src/blocks/atomic-svg/edit.js:208
 msgid "SVG"
 msgstr ""
 
-#: src/blocks/atomic-svg/edit.js:150
+#: src/blocks/atomic-svg/edit.js:217
 msgid "Select or upload SVG"
 msgstr ""
 
-#: src/blocks/atomic-svg/edit.js:165
+#: src/blocks/atomic-svg/edit.js:232
 msgid "Hide SVG code"
 msgstr ""
 
-#: src/blocks/atomic-svg/edit.js:166
+#: src/blocks/atomic-svg/edit.js:233
 msgid "Edit SVG code"
 msgstr ""
 
-#: src/blocks/atomic-svg/edit.js:170
+#: src/blocks/atomic-svg/edit.js:237
 msgid "SVG code"
 msgstr ""
 
-#: src/blocks/atomic-svg/edit.js:176
+#: src/blocks/atomic-svg/edit.js:243
 msgid "Use fill=\"currentColor\" so the colours below apply."
 msgstr ""
 
-#: src/blocks/atomic-svg/edit.js:205
+#: src/blocks/atomic-svg/edit.js:272
 msgid "Current color"
 msgstr ""
 
-#: src/blocks/atomic-svg/edit.js:210
+#: src/blocks/atomic-svg/edit.js:277
 #: src/blocks/featured-image/helper.js:23
 #: src/blocks/image-scroll/helper.js:19
 #: src/blocks/image/helper.js:24
@@ -7853,11 +7940,11 @@ msgstr ""
 msgid "Fill"
 msgstr ""
 
-#: src/blocks/atomic-svg/edit.js:215
+#: src/blocks/atomic-svg/edit.js:282
 msgid "Stroke"
 msgstr ""
 
-#: src/blocks/atomic-svg/edit.js:260
+#: src/blocks/atomic-svg/edit.js:327
 msgid "Select or upload an SVG in the block settings →"
 msgstr ""
 
@@ -8958,7 +9045,7 @@ msgstr ""
 
 #: src/blocks/counter/settings.js:242
 #: src/blocks/info-box/components/heading/settings.js:33
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:513
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:528
 #: src/dashboard/pages/dashboard/free-vs-pro/index.js:28
 #: src/utils/block-lists.js:22
 msgid "Heading"
@@ -9815,7 +9902,6 @@ msgstr ""
 #: src/blocks/form-builder/form-setting/ActionAfterSubmission/actions/DripAction.js:104
 #: src/blocks/form-builder/form-setting/ActionAfterSubmission/actions/MailchimpAction.js:233
 #: src/blocks/form-builder/form-setting/ActionAfterSubmission/actions/MailchimpAction.js:358
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:28
 msgid "Tags"
 msgstr ""
 
@@ -10054,7 +10140,7 @@ msgid "Subject"
 msgstr ""
 
 #: src/blocks/form-builder/form-setting/ActionAfterSubmission/FormEmailNotifications/index.js:639
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:210
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:225
 msgid "Message"
 msgstr ""
 
@@ -10756,8 +10842,8 @@ msgstr ""
 msgid "Sliding Down"
 msgstr ""
 
-#: src/blocks/heading/render.js:318
-#: src/blocks/heading/render.js:409
+#: src/blocks/heading/render.js:344
+#: src/blocks/heading/render.js:435
 #: src/blocks/info-box/components/heading/render.js:14
 msgid "Enter your heading.."
 msgstr ""
@@ -11670,9 +11756,9 @@ msgstr ""
 msgid "Show More"
 msgstr ""
 
-#: src/blocks/loop-builder/loop.js:135
+#: src/blocks/loop-builder/loop.js:134
 #: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:75
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:62
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:74
 #: src/dashboard/pages/settings/GlobalClasses/index.js:79
 msgid "Loading…"
 msgstr ""
@@ -12476,7 +12562,7 @@ msgstr ""
 msgid "Content Height"
 msgstr ""
 
-#: src/blocks/notice/render.js:55
+#: src/blocks/notice/render.js:53
 msgid "Notice Title"
 msgstr ""
 
@@ -13026,8 +13112,8 @@ msgstr ""
 msgid "The Visible Control is only for the editor view. It does not affect the frontend display. Used for user convenience while designing"
 msgstr ""
 
-#: src/blocks/search/render.js:181
-#: src/blocks/search/render.js:234
+#: src/blocks/search/render.js:179
+#: src/blocks/search/render.js:231
 msgid "write"
 msgstr ""
 
@@ -14296,7 +14382,7 @@ msgstr ""
 msgid "Alphabet"
 msgstr ""
 
-#: src/blocks/table-of-content/render.js:58
+#: src/blocks/table-of-content/render.js:55
 msgid "Add title"
 msgstr ""
 
@@ -14859,7 +14945,7 @@ msgstr ""
 #: src/blocks/toggle/settings.js:177
 #: src/blocks/toggle/settings.js:276
 #: src/components/normal-active-tabs/index.js:33
-#: src/dashboard/pages/dashboard/addons/index.js:52
+#: src/dashboard/pages/dashboard/addons/index.js:65
 #: src/dashboard/pages/dashboard/blocks/index.js:34
 #: src/dashboard/pages/settings/License/index.js:161
 msgid "Active"
@@ -15365,7 +15451,7 @@ msgstr ""
 msgid "No global colors available"
 msgstr ""
 
-#: src/controls/dimensions/Fields.js:228
+#: src/controls/dimensions/Fields.js:239
 msgid "Link Value Together"
 msgstr ""
 
@@ -15759,16 +15845,24 @@ msgstr ""
 msgid "Ask before third-party scripts run. Blocks trackers until consent is given, records the decision, and speaks Google Consent Mode v2."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/addons/index.js:56
+#: src/dashboard/pages/dashboard/addons/index.js:44
+msgid "Link Guard"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/addons/index.js:47
+msgid "Hides links to posts that are not live yet — scheduled, draft, private or deleted — and shows them again the moment the post is published."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/addons/index.js:69
 #: src/dashboard/pages/dashboard/blocks/index.js:38
 msgid "Inactive"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/addons/index.js:115
+#: src/dashboard/pages/dashboard/addons/index.js:128
 msgid "Search Add-ons"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/addons/index.js:155
+#: src/dashboard/pages/dashboard/addons/index.js:169
 msgid "No Addons Found!"
 msgstr ""
 
@@ -15920,13 +16014,13 @@ msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:84
 #: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:99
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:417
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:432
 #: src/dashboard/pages/dashboard/cookieConsent/RecordsTab.js:122
 msgid "DAYS"
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:89
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:404
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:419
 msgid "Ask again after"
 msgstr ""
 
@@ -15962,15 +16056,23 @@ msgstr ""
 msgid "How long Google’s tags hold before acting on the defaults, giving the decision time to arrive."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:159
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:157
+msgid "Protect ad measurement"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:158
+msgid "Sends ads_data_redaction and url_passthrough. Google Ads stops receiving ad identifiers while marketing is refused, and carries the click ID in the URL instead of a cookie — so a refusal costs the visitor’s privacy nothing and the site’s conversion reporting much less."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:173
 msgid "While you build"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:160
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:174
 msgid "Hiding the banner from administrators makes the site easier to work on, and makes it easy to forget the banner is broken. Turn it off before you launch."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:165
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:179
 msgid "Hide from administrators"
 msgstr ""
 
@@ -16011,299 +16113,299 @@ msgid "Centre"
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:66
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:267
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:282
 msgid "Buttons"
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:68
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:691
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:706
 msgid "Colours"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:104
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:119
 msgid "Where the banner sits and how much of the screen it takes."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:139
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:154
 msgid "Dim the page behind"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:140
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:155
 msgid "Makes the choice unavoidable. Effective, and heavy-handed — most sites should leave this off."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:150
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:165
 msgid "Drop shadow"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:156
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:171
 msgid "Maximum width"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:167
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:182
 msgid "Corner radius"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:177
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:192
 msgid "Show after"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:178
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:193
 msgid "A delay only postpones the banner. It does not postpone the blocking, which has already happened server-side."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:199
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:214
 msgid "Say what you actually collect and why. A vague notice is a notice nobody can consent to."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:217
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:232
 msgid "Privacy policy URL"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:227
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:242
 msgid "Policy link text"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:236
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:251
 msgid "Cookie policy URL"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:237
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:252
 msgid "A separate document from the privacy policy: this one lists what is stored and for how long. Leave it empty if the privacy policy covers both."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:252
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:267
 msgid "Cookie policy link text"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:268
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:283
 msgid "Refusing must be as easy as agreeing. Hiding Reject behind Preferences is the single most commonly enforced-against dark pattern."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:273
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:288
 msgid "Accept"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:282
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:642
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:297
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:657
 msgid "Show \"Reject all\""
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:285
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:300
 msgid "With Preferences and the close button off as well, the banner offers nothing but Accept — a visitor who will not accept has no way past it, on any page. Turn on any one of the three."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:299
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:314
 msgid "Reject"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:308
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:323
 msgid "Show \"Preferences\""
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:311
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:326
 msgid "The floating button reopens the categories, but only once a decision exists — which is too late to be the way one is made."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:334
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:349
 msgid "Preferences style"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:335
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:350
 msgid "How much weight it carries next to Accept. A link is the quietest; an outline reads as a real button without pulling as hard."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:358
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:373
 msgid "Closing without answering"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:359
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:374
 msgid "A visitor who will not accept needs somewhere to go. Without this the banner stays in front of them on every page until they agree — which is not a choice, and it is worth more to you as a working site than as a wall."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:365
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:537
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:380
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:552
 msgid "Show a close button"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:366
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:381
 msgid "A small × in the corner of the banner. Closing never grants anything — every refusable category stays blocked either way."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:381
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:396
 msgid "Closing means"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:384
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:399
 msgid "Writes a refusal and stops asking for as long as any other decision would last. Cleaner, and the visitor is not asked again on their next visit."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:388
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:403
 msgid "Stores no decision at all — it only stops asking. They are asked again, so a visitor who was merely busy still gets the chance to agree later."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:408
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:423
 msgid "0 waits until the browser closes — they are not nagged for the rest of this visit, and the question is still open on the next one."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:428
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:443
 msgid "The way back in"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:429
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:444
 msgid "Withdrawal has to be as easy as granting, so there has to be a way back to the toggles. You can also drop the shortcode [ablocks_cookie_preferences] into a privacy policy page."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:434
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:449
 msgid "Show floating button"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:440
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:455
 msgid "Button text"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:448
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:463
 msgid "Button position"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:472
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:487
 msgid "Preferences panel"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:473
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:488
 msgid "What the visitor sees when they open the category toggles."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:479
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:494
 msgid "Opens as"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:482
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:497
 msgid "A centred dialog, with the banner still visible behind it. Use this when the banner is a small corner notice: the categories need more room than it has."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:486
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:501
 msgid "The banner swaps its own contents for the category list. Simple, and it keeps everything in one place — but the panel is only ever as wide as the banner."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:501
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:516
 msgid "Dialog width"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:522
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:537
 msgid "Introduction"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:523
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:538
 msgid "Basic HTML is allowed here, so you can link out mid-sentence. The two policy links above are added underneath either way."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:538
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:553
 msgid "Closes the panel and goes back to the banner. It never dismisses the banner and never records a decision — closing a dialog is not an answer."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:552
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:567
 msgid "Categories in the panel"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:553
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:568
 msgid "How each category is drawn. The wording lives on the Categories tab; this is only its presentation."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:559
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:574
 msgid "Collapse descriptions"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:560
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:575
 msgid "Each category becomes a row you can expand. Worth it once the descriptions are long enough that the panel scrolls."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:574
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:589
 msgid "Open the first one"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:585
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:600
 msgid "List the cookies"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:586
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:601
 msgid "Shows the name, provider, lifetime and purpose of each cookie in a category — filled in on the Categories tab. This is the disclosure regulators ask for by name."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:599
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:614
 msgid "Toggle style"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:600
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:615
 msgid "A switch can read as something already on; a checkbox as something to tick. Neither is wrong — pick the one your audience will read correctly."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:613
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:724
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:628
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:739
 msgid "\"Always on\" text"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:621
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:636
 msgid "\"Always on\" style"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:632
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:647
 msgid "Buttons under the categories"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:636
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:651
 msgid "The preferences panel has its own row of buttons. Save is always there; the other two are yours to decide on."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:646
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:661
 msgid "Reject is now switched off in both places, which leaves a visitor no one-click way to refuse. That is the pattern regulators act on most often."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:650
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:665
 msgid "Refusing everything from inside the panel, without having to switch four things off by hand."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:664
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:679
 msgid "Show \"Accept all\""
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:665
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:680
 msgid "Lets someone who opened the panel out of curiosity agree to everything without going back."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:692
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:707
 msgid "Each one is a CSS custom property on the banner, so a theme can override any of them without touching these."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:701
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:716
 msgid "Secondary text"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:703
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:718
 msgid "Accept button"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:706
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:721
 msgid "Accept label"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:710
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:725
 msgid "Reject button"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:714
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:729
 msgid "Reject label"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:716
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:731
 msgid "Save button"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:717
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:732
 msgid "Save label"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:720
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:735
 msgid "\"Always on\" badge"
 msgstr ""
 
@@ -16322,10 +16424,6 @@ msgstr ""
 #: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:61
 #: src/dashboard/pages/dashboard/cookieConsent/RecordsTab.js:143
 msgid "Refresh"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:67
-msgid "Clear"
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:80
@@ -16352,76 +16450,92 @@ msgstr ""
 msgid "Pro lets you write your own matchers — a tracker we do not ship a rule for, a plugin that enqueues its own, anything on the \"not classified\" list below."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:159
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:235
 msgid "Mode"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:160
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:236
 msgid "Opt-in holds scripts back until their category is granted. Notice shows the banner and gates nothing — honest for a site that only sets its own cookies, and not enough for one that runs analytics."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:165
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:241
 msgid "Behaviour"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:171
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:247
 msgid "Opt-in — block until granted"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:178
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:254
 msgid "Notice only — inform, block nothing"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:188
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:264
 msgid "Scan inline and pasted tags"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:189
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:265
 msgid "GTM, GA4 and the Meta Pixel are almost never enqueued — they are pasted into a header hook. Without this, they are not covered."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:202
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:278
 msgid "Dry run"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:203
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:279
 msgid "Match everything, block nothing, and report what would have happened. Turn this on first on any site that already has tags on it."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:216
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:292
 msgid "Rules"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:217
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:293
 msgid "Patterns are regular expressions matched against a script URL or the contents of an inline script. A rule that fires on something it does not understand takes a site down, so leave the shipped ones alone unless you have a reason."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:225
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:301
 msgid "Add rule"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:235
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:311
 msgid "Tracking something we have no rule for?"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:272
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:348
 msgid "Remove rule"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:288
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:364
 msgid "URL pattern"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:302
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:378
 msgid "Inline pattern"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:317
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:393
 msgid "Script handles"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:318
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:394
 msgid "Comma separated. For a plugin that enqueues its tracker properly."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:416
+msgid "Embedded content and pixels"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:417
+msgid "A YouTube embed sets its cookies while the page is still parsing, without running a line of the site’s own JavaScript — which is why blocking every script and leaving the video is not a partial job but a broken one. A blocked embed is replaced by a card offering to load it; a tracking pixel is simply not fetched, because a 1×1 image is not content anyone is missing. Only the providers listed here are ever touched, so a payment form or a captcha cannot be caught by accident."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:423
+msgid "Block embeds and pixels"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:424
+msgid "Independent of the script buffer above — a site can hold scripts back and leave its videos alone, or the reverse."
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/CategoriesTab.js:15
@@ -16449,7 +16563,7 @@ msgid "Remove this cookie"
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/CategoriesTab.js:125
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:27
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:40
 msgid "Categories"
 msgstr ""
 
@@ -16461,40 +16575,86 @@ msgstr ""
 msgid "Offer this category"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/fields.js:147
+#: src/dashboard/pages/dashboard/cookieConsent/fields.js:162
 msgid "Colour"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:26
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:33
+msgid "Google Tag Manager"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:34
+msgid "Google Analytics 4"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:35
+msgid "Meta Pixel"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:39
 #: src/dashboard/pages/dashboard/cookieConsent/Preview.js:305
 msgid "Banner"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:29
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:41
 msgid "Script blocking"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:30
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:42
 msgid "Records"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:93
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:105
 msgid "Settings saved."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:101
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:113
 msgid "Could not save those settings."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:182
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:205
 msgid "This blocks scripts before consent, records decisions, and speaks Google Consent Mode v2. Whether a given configuration satisfies GDPR, ePrivacy or a US state law is a question for you and your counsel — the feature makes a compliant setup possible, it does not certify one."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:190
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:213
 msgid "Banner switched off"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/index.js:220
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:222
+msgid "aBlocks no longer adds tracking tags"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:228
+msgid "Site Kit and Meta’s own plugin place these, and keep up with ID formats this never accepted. Blocking them until consent has not changed and does not depend on the tag being added here — the Script blocking tab catches them wherever they come from."
+msgstr ""
+
+#. translators: %s: name of the plugin already placing this tag.
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:241
+#, js-format
+msgid "— not being printed, because %s already places it. Safe to clear."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:247
+msgid "— still printed by aBlocks. Add it in the plugin that owns it first, then clear this."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:257
+msgid "Clear these"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:273
+msgid "The banner cannot be refused"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:279
+msgid "Reject, Preferences and the close button are all switched off, so Accept is the only thing a visitor can do — on every page, with no way past it. Scripts are being blocked correctly until they accept, which makes this the one thing standing between this setup and a working one."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:291
+msgid "Turn on “Reject all”"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/index.js:322
 msgid "Show the banner"
 msgstr ""
 
@@ -16580,78 +16740,6 @@ msgstr ""
 msgid "none"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:53
-msgid "That does not look like a valid ID, so nothing will be added to the page until it is corrected."
-msgstr ""
-
-#. translators: %1$s: name of the plugin already adding this tag.
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:64
-#, js-format
-msgid "%1$s adds this tag as well, so it is on the page twice and every page view is counted twice. Clear this field, or turn the tag off in %1$s."
-msgstr ""
-
-#. translators: %s: name of the plugin already adding this tag.
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:75
-#, js-format
-msgid "Added by %s, so there is nothing to enter here. It is still held back until consent — the Script blocking tab catches it."
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:120
-msgid "Where to find it"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:135
-msgid "Added elsewhere"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:151
-msgid "Check the format"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:164
-msgid "Tags aBlocks adds"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:165
-msgid "Enter an ID and aBlocks writes the tag into the page for you, already blocked — there is no moment at which it could run before the visitor has answered. Leave a field empty if you add that tag some other way; the Script blocking tab still catches it."
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:173
-msgid "Google Tag Manager"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:174
-msgid "Container ID. Everything you load through GTM inherits this consent decision."
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:186
-msgid "Google Analytics 4"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:189
-msgid "You have a GTM container as well. If GA4 is also configured inside that container, every page view is counted twice — pick one place for it."
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:193
-msgid "Measurement ID, from Admin → Data streams in Google Analytics."
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:206
-msgid "Meta Pixel"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:207
-msgid "Pixel ID, from Events Manager. Fires a PageView once released."
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:219
-msgid "What is left out"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/TagsTab.js:220
-msgid "Google’s and Meta’s copy-paste snippets each end with a <noscript> beacon — a bare iframe or image that fires without JavaScript and therefore cannot be held back by anything. Those are deliberately not added. Visitors with JavaScript disabled are not measured, which is the only version of this that respects a refusal."
-msgstr ""
-
 #: src/dashboard/pages/dashboard/demo-importer/components/card.js:50
 #: src/demo-importer/components/card.js:50
 msgid "Start Import"
@@ -16675,87 +16763,87 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:34
-#: src/demo-importer/components/dependencyModal.js:34
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:35
+#: src/demo-importer/components/dependencyModal.js:35
 #: src/template-importer/components/dependencyModal.js:104
 msgid "Import Now"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:35
-#: src/demo-importer/components/dependencyModal.js:35
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:36
+#: src/demo-importer/components/dependencyModal.js:36
 msgid "Install and Activate →"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:46
-#: src/demo-importer/components/dependencyModal.js:46
-msgid "Importing Successful"
 msgstr ""
 
 #: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:47
 #: src/demo-importer/components/dependencyModal.js:47
+msgid "Importing Successful"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:48
+#: src/demo-importer/components/dependencyModal.js:48
 msgid "Import Failed"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:49
-#: src/demo-importer/components/dependencyModal.js:49
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:50
+#: src/demo-importer/components/dependencyModal.js:50
 msgid "Your Theme is Importing"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:96
-#: src/demo-importer/components/dependencyModal.js:96
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:97
+#: src/demo-importer/components/dependencyModal.js:97
 msgid "Theme Importing in progress. Please do not refresh or go back. This may take a few minutes."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:103
-#: src/demo-importer/components/dependencyModal.js:103
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:104
+#: src/demo-importer/components/dependencyModal.js:104
 msgid "Theme Importing is complete. You can visite website now."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:108
-#: src/demo-importer/components/dependencyModal.js:108
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:109
+#: src/demo-importer/components/dependencyModal.js:109
 msgid "Theme Importing Failed. Please try again!"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:118
-#: src/demo-importer/components/dependencyModal.js:118
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:119
+#: src/demo-importer/components/dependencyModal.js:119
 msgid "Importing in Progress Please wait…"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:185
-#: src/demo-importer/components/dependencyModal.js:191
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:186
+#: src/demo-importer/components/dependencyModal.js:192
 msgid "Required Plugins for Theme Import"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:192
-#: src/demo-importer/components/dependencyModal.js:198
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:193
+#: src/demo-importer/components/dependencyModal.js:199
 msgid "Install and activate the recommended plugins to ensure a smooth theme import and full functionality."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:214
-#: src/demo-importer/components/dependencyModal.js:220
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:215
+#: src/demo-importer/components/dependencyModal.js:221
 #: src/template-importer/components/dependencyModal.js:34
 msgid "Installed and Activated"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:218
-#: src/demo-importer/components/dependencyModal.js:224
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:219
+#: src/demo-importer/components/dependencyModal.js:225
 #: src/template-importer/components/dependencyModal.js:35
 msgid "Install and Activate"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:288
-#: src/demo-importer/components/dependencyModal.js:294
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:291
+#: src/demo-importer/components/dependencyModal.js:297
 msgid "Visit Website"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:345
-#: src/demo-importer/components/dependencyModal.js:363
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:348
+#: src/demo-importer/components/dependencyModal.js:366
 #: src/template-importer/components/Content/index.js:351
 msgid "Import with Image"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:360
-#: src/demo-importer/components/dependencyModal.js:378
+#: src/dashboard/pages/dashboard/demo-importer/components/dependencyModal.js:363
+#: src/demo-importer/components/dependencyModal.js:381
 msgid "Importing this demo will replace your current header, footer, and homepage. Continue?"
 msgstr ""
 
@@ -18829,7 +18917,7 @@ msgid "Disable Emojis"
 msgstr ""
 
 #: src/dashboard/pages/settings/Performance/sections/Platform.js:21
-msgid "Remove the WordPress emoji detection script and styles from every page."
+msgid "Remove the WordPress emoji detection script and styles from front-end pages. The admin area keeps them, so emojis still render there."
 msgstr ""
 
 #: src/dashboard/pages/settings/Performance/sections/Platform.js:30

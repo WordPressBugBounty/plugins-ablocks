@@ -31,75 +31,111 @@ class Block extends BlockBaseAbstract {
 			$this->get_carousel_css( $attributes ),
 			$this->get_carousel_css( $attributes, 'Tablet' ),
 			$this->get_carousel_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_carousel_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button',
 			$this->get_navigation_button_css( $attributes ),
 			$this->get_navigation_button_css( $attributes, 'Tablet' ),
 			$this->get_navigation_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_navigation_button_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button--next',
 			$this->get_navigation_next_button_css( $attributes ),
 			$this->get_navigation_next_button_css( $attributes, 'Tablet' ),
 			$this->get_navigation_next_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_navigation_next_button_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button--prev',
 			$this->get_navigation_prev_button_css( $attributes ),
 			$this->get_navigation_prev_button_css( $attributes, 'Tablet' ),
 			$this->get_navigation_prev_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_navigation_prev_button_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button .ablocks-icon-wrap',
 			$this->get_navigation_icon_css( $attributes ),
 			$this->get_navigation_icon_css( $attributes, 'Tablet' ),
 			$this->get_navigation_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_navigation_icon_css( $attributes, $device );
+			} )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-pagination',
 			$this->get_pagination_parent_css( $attributes ),
 			$this->get_pagination_parent_css( $attributes, 'Tablet' ),
-			$this->get_pagination_parent_css( $attributes, 'Mobile' )
+			$this->get_pagination_parent_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_pagination_parent_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .swiper-pagination-bullet',
 			$this->get_pagination_color_css( $attributes ),
 			$this->get_pagination_color_css( $attributes, 'Tablet' ),
-			$this->get_pagination_color_css( $attributes, 'Mobile' )
+			$this->get_pagination_color_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_pagination_color_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .swiper-pagination-bullet:hover',
 			$this->get_pagination_color_hover_css( $attributes ),
 			$this->get_pagination_color_hover_css( $attributes, 'Tablet' ),
-			$this->get_pagination_color_hover_css( $attributes, 'Mobile' )
+			$this->get_pagination_color_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_pagination_color_hover_css( $attributes, $device );
+			} )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .swiper-pagination-bullet.swiper-pagination-bullet-active',
 			$this->get_pagination_active_color_css( $attributes ),
 			$this->get_pagination_active_color_css( $attributes, 'Tablet' ),
-			$this->get_pagination_active_color_css( $attributes, 'Mobile' )
+			$this->get_pagination_active_color_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_pagination_active_color_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .swiper-pagination-bullet.swiper-pagination-bullet-active:hover',
 			$this->get_pagination_active_color_hover_css( $attributes ),
 			$this->get_pagination_active_color_hover_css( $attributes, 'Tablet' ),
-			$this->get_pagination_active_color_hover_css( $attributes, 'Mobile' )
+			$this->get_pagination_active_color_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_pagination_active_color_hover_css( $attributes, $device );
+			} )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button .ablocks-svg-icon',
 			$this->get_navigation_icon_svg_css( $attributes ),
 			$this->get_navigation_icon_svg_css( $attributes, 'Tablet' ),
-			$this->get_navigation_icon_svg_css( $attributes, 'Mobile' )
+			$this->get_navigation_icon_svg_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_navigation_icon_svg_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button .ablocks-svg-icon:hover',
 			$this->get_navigation_icon_svg_hover_css( $attributes ),
 			$this->get_navigation_icon_svg_hover_css( $attributes, 'Tablet' ),
-			$this->get_navigation_icon_svg_hover_css( $attributes, 'Mobile' )
+			$this->get_navigation_icon_svg_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_navigation_icon_svg_hover_css( $attributes, $device );
+			} )
 		);
 		return $css_generator->generate_css();
 	}
@@ -113,75 +149,111 @@ class Block extends BlockBaseAbstract {
 			$this->get_carousel_css( $attributes ),
 			$this->get_carousel_css( $attributes, 'Tablet' ),
 			$this->get_carousel_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_carousel_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button',
 			$this->get_navigation_button_css( $attributes ),
 			$this->get_navigation_button_css( $attributes, 'Tablet' ),
 			$this->get_navigation_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_navigation_button_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button--next',
 			$this->get_navigation_next_button_css( $attributes ),
 			$this->get_navigation_next_button_css( $attributes, 'Tablet' ),
 			$this->get_navigation_next_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_navigation_next_button_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button--prev',
 			$this->get_navigation_prev_button_css( $attributes ),
 			$this->get_navigation_prev_button_css( $attributes, 'Tablet' ),
 			$this->get_navigation_prev_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_navigation_prev_button_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button .ablocks-icon-wrap',
 			$this->get_navigation_icon_css( $attributes ),
 			$this->get_navigation_icon_css( $attributes, 'Tablet' ),
 			$this->get_navigation_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_navigation_icon_css( $attributes, $device );
+			} )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-pagination',
 			$this->get_pagination_parent_css( $attributes ),
 			$this->get_pagination_parent_css( $attributes, 'Tablet' ),
-			$this->get_pagination_parent_css( $attributes, 'Mobile' )
+			$this->get_pagination_parent_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_pagination_parent_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .swiper-pagination-bullet',
 			$this->get_pagination_color_css( $attributes ),
 			$this->get_pagination_color_css( $attributes, 'Tablet' ),
-			$this->get_pagination_color_css( $attributes, 'Mobile' )
+			$this->get_pagination_color_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_pagination_color_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .swiper-pagination-bullet:hover',
 			$this->get_pagination_color_hover_css( $attributes ),
 			$this->get_pagination_color_hover_css( $attributes, 'Tablet' ),
-			$this->get_pagination_color_hover_css( $attributes, 'Mobile' )
+			$this->get_pagination_color_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_pagination_color_hover_css( $attributes, $device );
+			} )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .swiper-pagination-bullet.swiper-pagination-bullet-active',
 			$this->get_pagination_active_color_css( $attributes ),
 			$this->get_pagination_active_color_css( $attributes, 'Tablet' ),
-			$this->get_pagination_active_color_css( $attributes, 'Mobile' )
+			$this->get_pagination_active_color_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_pagination_active_color_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .swiper-pagination-bullet.swiper-pagination-bullet-active:hover',
 			$this->get_pagination_active_color_hover_css( $attributes ),
 			$this->get_pagination_active_color_hover_css( $attributes, 'Tablet' ),
-			$this->get_pagination_active_color_hover_css( $attributes, 'Mobile' )
+			$this->get_pagination_active_color_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_pagination_active_color_hover_css( $attributes, $device );
+			} )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button .ablocks-svg-icon',
 			$this->get_navigation_icon_svg_css( $attributes ),
 			$this->get_navigation_icon_svg_css( $attributes, 'Tablet' ),
-			$this->get_navigation_icon_svg_css( $attributes, 'Mobile' )
+			$this->get_navigation_icon_svg_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_navigation_icon_svg_css( $attributes, $device );
+			} )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button .ablocks-svg-icon:hover',
 			$this->get_navigation_icon_svg_hover_css( $attributes ),
 			$this->get_navigation_icon_svg_hover_css( $attributes, 'Tablet' ),
-			$this->get_navigation_icon_svg_hover_css( $attributes, 'Mobile' )
+			$this->get_navigation_icon_svg_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_navigation_icon_svg_hover_css( $attributes, $device );
+			} )
 		);
 		return $css_generator->generate_css();
 	}
@@ -316,7 +388,7 @@ class Block extends BlockBaseAbstract {
 		};
 		return array_merge(
 			$navigation_icon_svg_css,
-			Dimensions::get_css( $attributes['navigationIconPadding'], 'padding', $device ),
+			Dimensions::get_css( $this->with_custom_device_dimension_keys( $attributes['navigationIconPadding'], $device ), 'padding', $device ),
 			Border::get_css( $attributes['navigationIconBorder'], '', $device ),
 			BoxShadow::get_css( $attributes['navigationIconBoxShadow'], $device ),
 		);
@@ -559,6 +631,29 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			]) ),
 			Border::get_hover_css( $attributes['activePaginationBorder'], '', $device ),
+		);
+	}
+
+	/**
+	 * Dimensions only knows the Tablet/Mobile members, so a custom breakpoint
+	 * suffix (or the generator's probe suffix) reads keys that were never
+	 * stored and raises "Undefined array key" notices. Seed those members as
+	 * unset; stored values still win, so the emitted CSS is unchanged.
+	 */
+	private function with_custom_device_dimension_keys( $value, $device ) {
+		if ( ! is_array( $value ) || in_array( $device, [ '', 'Tablet', 'Mobile' ], true ) ) {
+			return $value;
+		}
+		return array_merge(
+			[
+				'isLinked' . $device => false,
+				'common' . $device   => '',
+				'top' . $device      => '',
+				'right' . $device    => '',
+				'bottom' . $device   => '',
+				'left' . $device     => '',
+			],
+			$value
 		);
 	}
 

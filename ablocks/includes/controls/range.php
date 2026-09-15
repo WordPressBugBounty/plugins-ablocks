@@ -111,13 +111,23 @@ class Range {
 		$tablet_key  = $args['attributeObjectKey'] . 'Tablet';
 		$mobile_key  = $args['attributeObjectKey'] . 'Mobile';
 
-		$desktop_val = ! empty( $value[ $desktop_key ] ) ? $value[ $desktop_key ] : '';
-		$tablet_val  = ! empty( $value[ $tablet_key ] ) ? $value[ $tablet_key ] : '';
-		$mobile_val  = ! empty( $value[ $mobile_key ] ) ? $value[ $mobile_key ] : '';
+		// A stored 0 is a real value (e.g. "top: 0" at Tablet), so only a missing
+		// or empty-string key counts as unset — matching the editor helper.
+		$desktop_val = self::get_filled_value( $value, $desktop_key );
+		$tablet_val  = self::get_filled_value( $value, $tablet_key );
+		$mobile_val  = self::get_filled_value( $value, $mobile_key );
 
 		$device_value = '';
 
 		switch ( $args['device'] ) {
+			case '':
+				if ( $desktop_val !== '' ) {
+					$device_value = $desktop_val;
+				} else {
+					$device_value = $args['defaultValue'];
+				}
+				break;
+
 			case 'Mobile':
 				if ( $mobile_val !== '' ) {
 					$device_value = $mobile_val;
@@ -146,8 +156,11 @@ class Range {
 				}
 				break;
 
-			default: // Desktop
-				if ( $desktop_val !== '' ) {
+			default: // Custom breakpoint suffix (e.g. "Bp1024")
+				$custom_val = self::get_filled_value( $value, $desktop_key . $args['device'] );
+				if ( $custom_val !== '' ) {
+					$device_value = $custom_val;
+				} elseif ( $desktop_val !== '' ) {
 					$device_value = $desktop_val;
 				} else {
 					$device_value = $args['defaultValue'];
@@ -200,6 +213,23 @@ class Range {
 			return $unitMobile; // Mobile
 		}
 
+		if ( is_string( $device ) && '' !== $device ) {
+			// Custom breakpoint inherits the desktop unit when it has none of its own.
+			$unitCustom = self::get_filled_value( $value, $keyPrefix . $device );
+			return '' !== $unitCustom ? $unitCustom : $unitDesktop;
+		}
+
 		return $defaultUnit; // Default fallback
+	}
+
+	/**
+	 * A stored responsive member, or '' when it is missing, null or an empty
+	 * string. Unlike empty(), a 0 value is kept.
+	 */
+	private static function get_filled_value( $value, $key ) {
+		if ( ! is_array( $value ) || ! isset( $value[ $key ] ) || is_array( $value[ $key ] ) || '' === (string) $value[ $key ] ) {
+			return '';
+		}
+		return $value[ $key ];
 	}
 }

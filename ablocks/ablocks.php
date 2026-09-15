@@ -4,7 +4,7 @@
  * Description:       The WordPress plugin for creating beautiful and functional websites using the Gutenberg editor, with a variety of customizable blocks to design website pages.
  * Requires at least: 6.8
  * Requires PHP:      7.4
- * Version:           2.12.0
+ * Version:           2.13.1
  * Author:            Kodezen LLC
  * Author URI:        https://ablocks.pro/
  * License:           GPL-3.0+
@@ -45,7 +45,7 @@ final class ABlocks {
 	 * Define the plugin constants
 	 */
 	private function define_constants() {
-		define( 'ABLOCKS_VERSION', '2.12.0' );
+		define( 'ABLOCKS_VERSION', '2.13.1' );
 		define( 'ABLOCKS_PLUGIN_SLUG', 'ablocks' );
 		define( 'ABLOCKS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 		define( 'ABLOCKS_ROOT_URL', plugin_dir_url( __FILE__ ) );
@@ -130,6 +130,9 @@ final class ABlocks {
 		// other plugin's — so the attribute the editor adds to every block is
 		// on the server's copy of it too.
 		ABlocks\Classes\FlexItem::init();
+		// Keeps the server-side previews of dynamic blocks rendering when another
+		// plugin adds attributes to every block in JavaScript only.
+		ABlocks\Classes\BlockRendererAttributes::init();
 		ABlocks\Blocks::init();
 		ABlocks\Assets::init();
 		ABlocks\Classes\CoreFontRegistry::init();

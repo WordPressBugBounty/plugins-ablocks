@@ -32,7 +32,8 @@ class Installer {
 			// Save Default activated addon
 			$addons_default_settings = [
 				'theme-builder' => false,
-				'cookie-consent' => false
+				'cookie-consent' => false,
+				'link-guard' => false,
 			];
 			add_option( ABLOCKS_ADDONS_SETTINGS_NAME, wp_json_encode( $addons_default_settings ) );
 		}

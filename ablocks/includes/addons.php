@@ -22,6 +22,7 @@ class Addons {
 		$addons = apply_filters('ablocks/addons/loader_args', [
 			'theme-builder' => 'ThemeBuilder',
 			'cookie-consent' => 'CookieConsent',
+			'link-guard' => 'LinkGuard',
 		]);
 
 		foreach ( $addons as $addon_name => $addon_class_name ) {

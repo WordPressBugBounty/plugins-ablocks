@@ -55,7 +55,9 @@ class BoxShadow extends ControlBaseAbstract {
 				$css['box-shadow'] = $value['horizontal'] . 'px ' . $value['vertical'] . 'px ' . $value['blur'] . 'px ' . $value['spread'] . 'px ' . $color;
 			}
 		} else {
-			if ( ! empty( $value['horizontal'] ) && ! empty( $value['vertical'] ) ) {
+			// A 0 offset is a valid shadow (e.g. a centered glow); only an unset
+			// value skips it, matching the editor's '' / undefined check.
+			if ( self::is_offset_set( $value['horizontal'] ) && self::is_offset_set( $value['vertical'] ) ) {
 				$css['box-shadow'] = $value['horizontal'] . 'px ' . $value['vertical'] . 'px ' . $value['blur'] . 'px ' . $value['spread'] . 'px ' . $color;
 			}
 		}
@@ -86,11 +88,19 @@ class BoxShadow extends ControlBaseAbstract {
 				$css['box-shadow'] = $value['horizontalH'] . 'px ' . $value['verticalH'] . 'px ' . $value['blurH'] . 'px ' . $value['spreadH'] . 'px ' . $colorH;
 			}
 		} else {
-			if ( ! empty( $value['horizontalH'] ) && ! empty( $value['verticalH'] ) ) {
+			if ( self::is_offset_set( $value['horizontalH'] ) && self::is_offset_set( $value['verticalH'] ) ) {
 				$css['box-shadow'] = $value['horizontalH'] . 'px ' . $value['verticalH'] . 'px ' . $value['blurH'] . 'px ' . $value['spreadH'] . 'px ' . $colorH;
 			}
 		}
 		return $css;
+	}
+
+	/**
+	 * Whether a shadow offset is set. 0 / "0" count as set; only null and ''
+	 * mean "not configured".
+	 */
+	private static function is_offset_set( $value ) {
+		return null !== $value && '' !== $value;
 	}
 
 }

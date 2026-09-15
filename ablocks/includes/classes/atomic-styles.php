@@ -175,6 +175,98 @@ class AtomicStyles {
 				$declarations .= Helper::esc_css_value( $pair[0] ) . ':' . Helper::esc_css_value( $pair[1] ) . ';';
 			}
 			$body = $selector_base . $state . '{' . $declarations . '}';
+
+			// A wrapping container's own children must size from their content,
+			// or the line can never be over-subscribed and `flex-wrap` never
+			// breaks one. That is a statement about THIS container's children,
+			// so it is emitted as a child rule here rather than as an inherited
+			// custom property: a custom property inherits down the whole tree,
+			// so a wrapping container silently re-sized the children of every
+			// non-wrapping container nested inside it — measured, a
+			// non-wrapping inner container's children came out `flex-basis:
+			// auto` (content-sized) instead of `0%` (equal share).
+			//
+			// Derived from the pairs rather than stored, so it costs nothing in
+			// the bucket tree, and — because this runs after style_hash() has
+			// read $rules — the hash in already-saved markup is unaffected.
+			$body .= self::wrap_child_css( $pairs, $selector_base . $state );
+
+			$css .= ( '' !== $media ) ? $media . '{' . $body . '}' : $body;
+		}
+		return $css;
+	}
+
+	/**
+	 * The child rule a wrapping container needs, or ''.
+	 *
+	 * Scoped to container children only, matching the base stylesheets — a leaf
+	 * block is sized by its own block, not by the row it sits in. `:where()`
+	 * keeps the selector at the same specificity as those base rules, and this
+	 * <style> is injected after them, so it wins on order alone.
+	 *
+	 * Mirrors wrapChildCss() in atomic-shared/styles.js.
+	 *
+	 * @param array  $pairs    The bucket's declaration pairs.
+	 * @param string $selector The already-composed selector for this bucket.
+	 * @return string A CSS rule, or ''.
+	 */
+	public static function wrap_child_css( $pairs, $selector ) {
+		$wraps = false;
+		foreach ( $pairs as $pair ) {
+			if ( 'flex-wrap' === $pair[0]
+				&& ( 'wrap' === $pair[1] || 'wrap-reverse' === $pair[1] ) ) {
+				$wraps = true;
+			}
+		}
+		if ( ! $wraps ) {
+			return '';
+		}
+		return $selector . self::WRAP_CHILD_SELECTOR . '{flex-basis:auto;}';
+	}
+
+	/** The child combinator both compilers append for a wrapping container. */
+	const WRAP_CHILD_SELECTOR = '>:where(.ablocks-atomic-div,.ablocks-atomic-flex,.ablocks-atomic-grid)';
+
+	/**
+	 * A block-specific rule emitted only for the buckets that compile a given
+	 * CSS property — media query and state preserved.
+	 *
+	 * Lets one block react to a declaration the shared compiler produced
+	 * without that reaction leaking to every other atomic block, and without a
+	 * second copy of the bucket/breakpoint walk. Used by the SVG block, whose
+	 * graphic must stop filling its wrapper once the author has asked for the
+	 * wrapper to position it.
+	 *
+	 * @param array       $styles          The block's styles object.
+	 * @param string      $selector_base   The block's own selector.
+	 * @param string      $property        The compiled CSS property to look for.
+	 * @param string      $suffix          Appended to the selector (e.g. ' svg').
+	 * @param string      $declarations    The declarations to emit.
+	 * @param string|null $unless_property Skip a bucket that ALSO compiles this
+	 *                                     property — an explicit value there is
+	 *                                     more specific than the reaction being
+	 *                                     conditioned on, and must win outright
+	 *                                     rather than being overridden by it.
+	 * @return string CSS, or ''.
+	 */
+	public static function conditional_rules( $styles, $selector_base, $property, $suffix, $declarations, $unless_property = null ) {
+		$css = '';
+		foreach ( self::compile_rules( $styles ) as $rule ) {
+			list( $media, $state, $pairs ) = $rule;
+			$found  = false;
+			$skip   = false;
+			foreach ( $pairs as $pair ) {
+				if ( $pair[0] === $property ) {
+					$found = true;
+				}
+				if ( null !== $unless_property && $pair[0] === $unless_property ) {
+					$skip = true;
+				}
+			}
+			if ( ! $found || $skip ) {
+				continue;
+			}
+			$body = $selector_base . $state . $suffix . '{' . $declarations . '}';
 			$css .= ( '' !== $media ) ? $media . '{' . $body . '}' : $body;
 		}
 		return $css;
@@ -306,9 +398,9 @@ class AtomicStyles {
 		$has_max_width = '' !== self::read_range( $props, 'maxWidth' );
 
 		if ( $has_width ) {
-			if ( '' === self::read_scalar( $props, 'flexShrink' ) ) {
-				$css['flex-shrink'] = '0';
-			}
+			// No `flex-shrink: 0` — see the JS note. Pinning shrink to 0 is
+			// what let a child escape its parent, and `flex-basis: auto` below
+			// already holds the width whenever the row has room for it.
 			if ( '' === self::read_scalar( $props, 'flexGrow' ) ) {
 				$css['flex-grow'] = '0';
 			}

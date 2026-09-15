@@ -93,11 +93,29 @@ class ConsentMode {
 			)
 		);
 		$map     = self::signal_map();
+		$ads     = (bool) Helper::get( 'consent_mode_ads', true );
 		?>
 <script id="ablocks-consent-mode" data-ablocks-consent-skip="1">
 /* aBlocks Consent Mode v2 — must stay the first script in the document. */
 window.dataLayer = window.dataLayer || [];
 function gtag(){ dataLayer.push( arguments ); }
+<?php if ( $ads ) : ?>
+	<?php
+	// The two settings Google pairs with denied defaults, and the reason a
+	// refusal need not cost the site its conversion reporting.
+	//
+	// `ads_data_redaction` strips ad identifiers from the requests Google Ads
+	// still makes while `ad_storage` is denied. `url_passthrough` carries the
+	// click id in the URL between pages instead of a cookie, so a visitor who
+	// refused is still attributed to the ad they arrived from.
+	//
+	// Both are `set` calls, not consent signals: they have to be in place
+	// before the first tag reads them, which is why they sit here rather than
+	// in the update the banner sends.
+	?>
+gtag( 'set', 'ads_data_redaction', true );
+gtag( 'set', 'url_passthrough', true );
+<?php endif; ?>
 gtag( 'consent', 'default', <?php echo wp_json_encode( $defaults ); ?> );
 ( function () {
 	var names = <?php echo wp_json_encode( $cookies ); ?>;
@@ -120,6 +138,10 @@ gtag( 'consent', 'default', <?php echo wp_json_encode( $defaults ); ?> );
 		map[ category ].forEach( function ( signal ) { update[ signal ] = state; } );
 	} );
 	gtag( 'consent', 'update', update );
+	<?php if ( $ads ) : ?>
+	<?php // Redaction is only wanted while ads are refused; leaving it on after a grant would quietly degrade the reporting the visitor agreed to. ?>
+	if ( 'granted' === update.ad_storage ) { gtag( 'set', 'ads_data_redaction', false ); }
+	<?php endif; ?>
 	<?php // Recorded so the main script does not send the same state a second time on every page view of a visitor who already decided. ?>
 	window.ABlocksConsentSignals = update;
 } )();

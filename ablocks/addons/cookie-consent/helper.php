@@ -342,11 +342,22 @@ class Helper {
 			// feature covers only enqueued scripts, which is most of what a
 			// site owner would consider "not covered".
 			'buffer_gating'         => true,
+			// The iframe and pixel layer. Separate from `buffer_gating`
+			// because it is the one that can change what the visitor sees: a
+			// site that wants scripts held back but its videos left alone can
+			// say so without giving up the rest.
+			'embed_gating'          => true,
+			'embed_rules'           => [],
+			'pixel_rules'           => [],
 			// Report what would be gated, gate nothing. The way to find out
 			// what breaks before it breaks.
 			'dry_run'               => false,
 			'consent_mode'          => true,
 			'consent_mode_wait'     => 500,
+			// `ads_data_redaction` and `url_passthrough`. On by default: they
+			// only change what happens once something has been refused, and
+			// what they change is the cost of the refusal.
+			'consent_mode_ads'      => true,
 			'record_enabled'        => true,
 			'record_ip'             => false,
 			'record_retention_days' => 730,
@@ -462,6 +473,25 @@ class Helper {
 	}
 
 	/**
+	 * Whether a category exists and is switched on.
+	 *
+	 * A rule pointing at a category the site has deleted would gate against a
+	 * choice the visitor is never offered — for a script that means it never
+	 * runs, and for an embed it means a card that can never be dismissed.
+	 *
+	 * @param string $slug Category slug.
+	 * @return bool
+	 */
+	public static function category_is_active( $slug ) {
+		foreach ( self::active_categories() as $category ) {
+			if ( isset( $category['slug'] ) && $category['slug'] === $slug ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Category slugs that a visitor can actually refuse.
 	 */
 	public static function refusable_slugs() {
@@ -499,9 +529,20 @@ class Helper {
 	 *
 	 * Dry run counts as "running": it walks the same rules, it just reports
 	 * instead of rewriting.
+	 *
+	 * This has to answer false wherever `should_render_banner()` does, because
+	 * the two halves are one mechanism: gating holds a tag back, and the banner
+	 * is the only thing that ever lets it go. Gate without a banner and the tag
+	 * is frozen for the rest of that visitor's session, with nothing on the
+	 * page able to release it.
 	 */
 	public static function is_gating_active() {
 		if ( ! self::get( 'enabled', true ) || 'optin' !== self::get( 'mode', 'optin' ) ) {
+			return false;
+		}
+		// The earliest caller registers on `wp`, so the current user is
+		// resolved by the time this runs and the capability check is safe here.
+		if ( self::get( 'hide_for_admins', false ) && current_user_can( 'manage_options' ) ) {
 			return false;
 		}
 		if ( is_admin() || wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {

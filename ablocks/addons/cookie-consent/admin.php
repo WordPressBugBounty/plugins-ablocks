@@ -65,7 +65,13 @@ class Admin {
 			'pro'             => Helper::pro_features(),
 			'record_count'    => Record::count(),
 			'table_ready'     => Database::table_exists(),
+			// Still needed by the notice that asks a site to move a tag it
+			// entered before aBlocks stopped placing them.
 			'tag_providers'   => Tags::detected_providers(),
+			'embed_defaults'  => [
+				'embed' => Embeds::default_rules(),
+				'pixel' => Embeds::default_pixel_rules(),
+			],
 		];
 		return $data;
 	}

@@ -44,10 +44,16 @@
     },
     "src": {
       "type": "string",
+      "source": "attribute",
+      "selector": "img",
+      "attribute": "src",
       "default": ""
     },
     "alt": {
       "type": "string",
+      "source": "attribute",
+      "selector": "img",
+      "attribute": "alt",
       "default": ""
     },
     "imageId": {

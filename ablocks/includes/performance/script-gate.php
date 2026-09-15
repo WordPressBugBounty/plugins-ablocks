@@ -112,8 +112,16 @@ class ScriptGate {
 			$tag    = preg_replace( '/\stype=["\'][^"\']*["\']/i', '', $tag, 1 );
 		}
 
+		// `\b` rather than `\s`. Stripping the type above can leave the tag as
+		// a bare `<script>` — that is the whole of a Meta Pixel snippet's
+		// opening tag once `type='text/javascript'` is taken out — and a
+		// pattern demanding whitespace after the name silently matches
+		// nothing, returning the tag ungated with no error anywhere. A tag
+		// that merely also carried an `id` was rewritten fine, which is why
+		// this survived: it only ever missed the scripts whose sole attribute
+		// was the type.
 		return preg_replace(
-			'/^<script\s/',
+			'/^<script\b/i',
 			sprintf( '<script type="%s" %s', esc_attr( $type ), $extra ),
 			$tag,
 			1

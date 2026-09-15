@@ -22,6 +22,20 @@ class Optimizations {
 	}
 
 	public function apply() {
+		// Heartbeat is the one optimization aimed at wp-admin — the API polls
+		// hardest in the editor — so it is wired up before the frontend guard.
+		if ( $this->enabled( 'perf_control_heartbeat' ) ) {
+			add_filter( 'heartbeat_settings', [ $this, 'heartbeat_frequency' ] );
+		}
+
+		// Everything below only shaves weight off what a visitor downloads. No
+		// page-speed tool measures wp-admin, so there is nothing to win there
+		// and plenty to break — stripping core assets from the admin costs the
+		// editor its emoji, icons and scripts for zero benefit. Frontend only.
+		if ( is_admin() ) {
+			return;
+		}
+
 		if ( $this->enabled( 'perf_disable_emojis' ) ) {
 			$this->disable_emojis();
 		}
@@ -37,9 +51,6 @@ class Optimizations {
 			// because it can fire before this callback is registered.
 			add_action( 'wp_enqueue_scripts', [ $this, 'remove_jquery_migrate' ], 100 );
 		}
-		if ( $this->enabled( 'perf_control_heartbeat' ) ) {
-			add_filter( 'heartbeat_settings', [ $this, 'heartbeat_frequency' ] );
-		}
 	}
 
 	private function enabled( $key ) {
@@ -49,22 +60,19 @@ class Optimizations {
 
 	/**
 	 * Remove the WordPress emoji detection script + styles.
+	 *
+	 * Frontend only — see the guard in apply(). wp-admin keeps core's emoji
+	 * support: the detection script is what draws the emoji the viewer's
+	 * platform has no glyph for, so unhooking it there just leaves blanks in
+	 * the editor, menus and list tables.
 	 */
 	public function disable_emojis() {
 		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-		remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+		// Unhooking the back-compat action is also how wp_enqueue_emoji_styles()
+		// (WP 6.4+) decides to skip the inline stylesheet.
 		remove_action( 'wp_print_styles', 'print_emoji_styles' );
-		remove_action( 'admin_print_styles', 'print_emoji_styles' );
 		remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
 		remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
-		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
-		add_filter( 'emoji_svg_url', '__return_false' );
-		add_filter(
-			'tiny_mce_plugins',
-			function ( $plugins ) {
-				return is_array( $plugins ) ? array_diff( $plugins, [ 'wpemoji' ] ) : [];
-			}
-		);
 	}
 
 	/**

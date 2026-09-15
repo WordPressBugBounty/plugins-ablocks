@@ -6,25 +6,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * The tags the site owner asks aBlocks to add.
+ * Tags aBlocks used to add, kept alive for the sites that already asked it to.
  *
- * Everything else in this addon takes tags that are already on the page and
- * holds them back. This does the opposite end of the same job: you give it a
- * measurement ID and it writes the tag for you — already gated, so there is no
- * window in which it could run before the visitor has answered.
+ * Placing a measurement tag is not this plugin's job. The plugins built for it
+ * — Site Kit for Google's tags, Meta's own for the Pixel — do it better, stay
+ * current with formats this never accepted (a `GT-` Google tag ID matched
+ * neither field here), and are where a site owner already looks. aBlocks holds
+ * tags back; it no longer places them, and there is no screen to enter one.
  *
- * That is the whole reason to add tags here rather than paste them into a
- * header hook. A pasted snippet has to be recognised by a rule and rewritten
- * before it executes, which works but depends on the rule matching. A tag
- * printed from here is emitted in its blocked form to begin with, so there is
- * nothing to catch.
+ * What remains is the promise made to sites that entered an ID before that was
+ * decided: their tag keeps being printed, still gated, so nobody's measurement
+ * stops because the feature moved. The screen tells them to move it and clear
+ * the field, and once the field is clear this prints nothing for ever.
  *
- * Two deliberate omissions. Google's and Meta's copy-paste snippets both carry
- * a `<noscript>` beacon — a bare `<iframe>` or `<img>` that fires without
- * JavaScript and therefore cannot be gated by anything. They are not printed:
- * a beacon that ignores consent is worse than no beacon. And GTM is not given
- * its own dataLayer bootstrap beyond the standard snippet, because Consent
- * Mode has already created `dataLayer` and `gtag()` further up the head.
+ * The provider check earns its keep either way — more, in fact, than it did as
+ * a greyed-out field. With no UI left to stop someone entering an ID that Site
+ * Kit is already placing, refusing to print it is the only thing standing
+ * between a legacy value and every page view being counted twice.
+ *
+ * Two deliberate omissions, unchanged. Google's and Meta's copy-paste snippets
+ * both carry a `<noscript>` beacon — a bare `<iframe>` or `<img>` that fires
+ * without JavaScript. They are not printed: a beacon that ignores consent is
+ * worse than no beacon. (The `Embeds` layer now strips those when another
+ * plugin puts them in the page.) And GTM gets no dataLayer bootstrap beyond
+ * the standard snippet, because Consent Mode created `dataLayer` and `gtag()`
+ * further up the head.
  */
 class Tags {
 
@@ -331,9 +337,15 @@ class Tags {
 			return;
 		}
 
-		$gtm   = self::id( 'tag_gtm' );
-		$ga4   = self::id( 'tag_ga4' );
-		$pixel = self::id( 'tag_meta_pixel' );
+		// A tag something else is already placing is not printed. This used to
+		// be enforced by disabling the field; with the field gone it has to be
+		// enforced here, or a value saved before Site Kit was installed would
+		// silently double every figure the site reports.
+		$providers = self::detected_providers();
+
+		$gtm   = isset( $providers['tag_gtm'] ) ? '' : self::id( 'tag_gtm' );
+		$ga4   = isset( $providers['tag_ga4'] ) ? '' : self::id( 'tag_ga4' );
+		$pixel = isset( $providers['tag_meta_pixel'] ) ? '' : self::id( 'tag_meta_pixel' );
 
 		if ( $gtm ) {
 			$this->print_inline( self::TAGS['tag_gtm']['category'], self::GTM_BODY, $gtm );

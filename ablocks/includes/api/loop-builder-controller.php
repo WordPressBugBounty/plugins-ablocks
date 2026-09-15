@@ -2,7 +2,6 @@
 
 namespace ABlocks\API;
 
-use ABlocks\Helper;
 use WP_REST_Server;
 use WP_REST_Response;
 
@@ -82,10 +81,22 @@ class LoopBuilderController {
 		$page                   = (int) ( isset( $payload['page'] ) ? $payload['page'] : 1 );
 		$is_archive             = (bool) ( isset( $payload['is_archive'] ) ? $payload['is_archive'] : false );
 
+		// This route is public, so the request may only narrow the loop to a
+		// post type or taxonomy the site already exposes to visitors. sanitize_key
+		// fixes the spelling, not the visibility: without this an anonymous
+		// request could point an archive loop at an internal post type.
+		if ( ! empty( $payload['archive_post_type'] ) && ! is_post_type_viewable( (string) $payload['archive_post_type'] ) ) {
+			return $this->empty_response( $term_id, $post_id, 400 );
+		}
+		if ( ! empty( $taxonomy ) && ! is_taxonomy_viewable( (string) $taxonomy ) ) {
+			return $this->empty_response( $term_id, $post_id, 400 );
+		}
+
 		/* ---------------- ARCHIVE LOGIC (UNCHANGED) ---------------- */
 
 		if ( $is_archive ) {
 
+			$template_slug = '';
 			if ( ! empty( $payload['archive_post_type'] ) ) {
 				$template_slug = 'archive-' . $payload['archive_post_type'];
 
@@ -114,27 +125,28 @@ class LoopBuilderController {
 				],
 			]);
 
-			$post_content = current( $template_posts )->post_content;
-			$blocks       = parse_blocks( $post_content );
-
-			$block_data = Helper::get_block_attributes_recursive(
-				$loop_builder_block_id,
-				'ablocks/loop-builder',
-				$blocks
-			);
+			$template_post = current( $template_posts );
+			$blocks        = $template_post ? parse_blocks( $template_post->post_content ) : [];
 
 		} else {
 
-			$block_data = Helper::get_block_attributes(
-				$post_id,
-				$loop_builder_block_id,
-				'ablocks/loop-builder'
-			);
-
-			$post         = get_post( $post_id );
-			$post_content = $post->post_content;
-			$blocks       = parse_blocks( $post_content );
+			$post   = get_post( $post_id );
+			$blocks = $this->is_post_readable( $post ) ? parse_blocks( $post->post_content ) : [];
 		}//end if
+
+		// The loop may sit inside a synced pattern or template part referenced
+		// from the content, or in the theme template rendered around the post.
+		$loop_builder_block = $this->find_block( $blocks, $loop_builder_block_id, 'ablocks/loop-builder' );
+		if ( ! $loop_builder_block ) {
+			$loop_builder_block = $this->find_block_in_theme_templates( $loop_builder_block_id, 'ablocks/loop-builder' );
+		}
+
+		if ( ! $loop_builder_block ) {
+			return $this->empty_response( $term_id, $post_id, 404 );
+		}
+
+		$block_data = [ 'parentAttributes' => $loop_builder_block['attrs'] ];
+		$blocks     = [ $loop_builder_block ];
 
 		/* ---------------- QUERY LOGIC (UNCHANGED) ---------------- */
 
@@ -150,7 +162,21 @@ class LoopBuilderController {
 			$query_vars['post_type'] = $payload['archive_post_type'];
 		}
 
-		$query_vars['posts_per_page'] = $query_vars['posts_per_page'] * $page;
+		// "Load more" asks for page N and receives the first N pages at once, so
+		// the request's page number multiplies the stored page size. It comes
+		// from an anonymous request, so bound the result: at most
+		// `ablocks/loop_builder/max_posts_per_request` posts (never fewer than
+		// one stored page), however large the page number.
+		$per_page  = (int) $query_vars['posts_per_page'];
+		$max_posts = (int) apply_filters( 'ablocks/loop_builder/max_posts_per_request', 100, $block_data['parentAttributes'] );
+		if ( $per_page < 1 ) {
+			// A loop set to show every post still gets the bound.
+			$query_vars['posts_per_page'] = max( 1, $max_posts );
+		} else {
+			$max_posts                    = max( $per_page, $max_posts );
+			$page                         = max( 1, min( $page, (int) ceil( $max_posts / $per_page ) ) );
+			$query_vars['posts_per_page'] = min( $per_page * $page, $max_posts );
+		}
 
 		if ( ! empty( $taxonomy ) && $term_id ) {
 			$query_vars['tax_query'] = [
@@ -162,11 +188,6 @@ class LoopBuilderController {
 				],
 			];
 		}
-
-		$blocks = $this->get_loop_builder_blocks_by_block_id(
-			$blocks,
-			$loop_builder_block_id
-		);
 
 		$updated_blocks = $this->update_loop_builder_query(
 			$blocks,
@@ -181,7 +202,14 @@ class LoopBuilderController {
 			$html .= serialize_block( $block );
 		}
 
-		$rendered = apply_filters( 'the_content', do_blocks( $html ) );
+		// Render the fragment the way block templates are rendered. Running the
+		// already-rendered markup through the_content re-applied wpautop (stray
+		// <p> tags) and let other plugins append their post-content extras.
+		$rendered = do_shortcode( shortcode_unautop( $html ) );
+		$rendered = do_blocks( $rendered );
+		$rendered = wptexturize( $rendered );
+		$rendered = convert_smilies( $rendered );
+		$rendered = wp_filter_content_tags( $rendered, 'template' );
 
 		/* ---------------- REST RESPONSE (ONLY CHANGE) ---------------- */
 
@@ -196,6 +224,111 @@ class LoopBuilderController {
 			],
 			200
 		);
+	}
+
+	/**
+	 * The response for a request that cannot be rendered.
+	 */
+	private function empty_response( $term_id, $post_id, $status ) {
+		return new WP_REST_Response(
+			[
+				'success' => false,
+				'data'    => [
+					'html'    => '',
+					'term_id' => $term_id,
+					'post_id' => $post_id,
+				],
+			],
+			$status
+		);
+	}
+
+	/**
+	 * Only published, non-password-protected content is public; anything else
+	 * needs the current user to be able to read it.
+	 */
+	private function is_post_readable( $post ) {
+		if ( ! $post instanceof \WP_Post ) {
+			return false;
+		}
+		if ( 'publish' === $post->post_status && ! post_password_required( $post ) ) {
+			return true;
+		}
+		return current_user_can( 'read_post', $post->ID );
+	}
+
+	/**
+	 * Find a block by name + block_id, following synced pattern references
+	 * (core/block) and template parts (core/template-part).
+	 */
+	private function find_block( array $blocks, $block_id, $block_name, array $visited = [] ) {
+		foreach ( $blocks as $block ) {
+			$name = isset( $block['blockName'] ) ? $block['blockName'] : '';
+
+			if ( $name === $block_name && ( isset( $block['attrs']['block_id'] ) ? $block['attrs']['block_id'] : '' ) === $block_id ) {
+				return $block;
+			}
+
+			if ( ! empty( $block['innerBlocks'] ) ) {
+				$found = $this->find_block( $block['innerBlocks'], $block_id, $block_name, $visited );
+				if ( $found ) {
+					return $found;
+				}
+			}
+
+			$ref_key = '';
+			$content = null;
+			if ( 'core/block' === $name && ! empty( $block['attrs']['ref'] ) ) {
+				$ref_key = 'wp_block:' . (int) $block['attrs']['ref'];
+				if ( ! isset( $visited[ $ref_key ] ) ) {
+					$ref_post = get_post( (int) $block['attrs']['ref'] );
+					if ( $ref_post && 'wp_block' === $ref_post->post_type && $this->is_post_readable( $ref_post ) ) {
+						$content = $ref_post->post_content;
+					}
+				}
+			} elseif ( 'core/template-part' === $name && ! empty( $block['attrs']['slug'] ) ) {
+				$theme   = ! empty( $block['attrs']['theme'] ) ? $block['attrs']['theme'] : get_stylesheet();
+				$ref_key = 'wp_template_part:' . $theme . '//' . $block['attrs']['slug'];
+				if ( ! isset( $visited[ $ref_key ] ) ) {
+					$part = get_block_template( $theme . '//' . $block['attrs']['slug'], 'wp_template_part' );
+					if ( $part && 'publish' === $part->status ) {
+						$content = $part->content;
+					}
+				}
+			}
+
+			if ( is_string( $content ) && '' !== $content ) {
+				$visited[ $ref_key ] = true;
+				$found = $this->find_block( parse_blocks( $content ), $block_id, $block_name, $visited );
+				if ( $found ) {
+					return $found;
+				}
+			}
+		}//end foreach
+		return null;
+	}
+
+	/**
+	 * Fallback for loops placed in the active theme's templates or template
+	 * parts rather than in the post content itself.
+	 */
+	private function find_block_in_theme_templates( $block_id, $block_name ) {
+		foreach ( [ 'wp_template', 'wp_template_part' ] as $template_type ) {
+			foreach ( get_block_templates( [], $template_type ) as $template ) {
+				$content = (string) $template->content;
+				if (
+					'publish' !== $template->status ||
+					( false === strpos( $content, $block_id ) && false === strpos( $content, '<!-- wp:block ' ) && false === strpos( $content, '<!-- wp:template-part ' ) )
+				) {
+					continue;
+				}
+				$found = $this->find_block( parse_blocks( $content ), $block_id, $block_name );
+				if ( $found ) {
+					return $found;
+				}
+			}
+		}
+		return null;
 	}
 
 	public function get_loop_builder_blocks_by_block_id( $blocks, $target_block_id ) {

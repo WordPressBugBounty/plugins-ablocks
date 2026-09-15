@@ -85,6 +85,7 @@ class Frontend {
 			'mode'          => Helper::get( 'mode', 'optin' ),
 			'categories'    => $categories,
 			'consentMode'   => (bool) Helper::get( 'consent_mode', true ),
+			'consentModeAds' => (bool) Helper::get( 'consent_mode_ads', true ),
 			'signals'       => ConsentMode::signal_map(),
 			'record'        => (bool) Helper::get( 'record_enabled', true ),
 			'endpoint'      => rest_url( ABLOCKS_REST_NAMESPACE . '/consent' ),

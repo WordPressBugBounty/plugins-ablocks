@@ -50,8 +50,10 @@ class SearchController {
 						'type'              => 'string',
 						'description'       => 'Post type to search.',
 						'sanitize_callback' => 'sanitize_key',
+						// Public route: only a post type visitors can already
+						// see may be searched, never an internal one.
 						'validate_callback' => function( $param ) {
-							return $param === 'any' || post_type_exists( $param );
+							return 'any' === $param || is_post_type_viewable( (string) $param );
 						},
 					),
 				),
@@ -67,7 +69,9 @@ class SearchController {
 
 		$args = array(
 			's'              => $searchQuery,
-			'posts_per_page' => -1,
+			// A public, repeatable request must not render every matching post.
+			'posts_per_page' => max( 1, (int) apply_filters( 'ablocks/search/max_results', 20, $source ) ),
+			'no_found_rows'  => true,
 			'post_type'      => $source,
 			'post_status'    => 'publish',
 		);

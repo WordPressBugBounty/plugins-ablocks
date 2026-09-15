@@ -294,6 +294,7 @@ class Block extends BlockBaseAbstract {
 			$css['max-height'] = $marker_size . 'px';
 			$css['min-width'] = $marker_size . 'px';
 			$css['min-height'] = $marker_size . 'px';
+			$css['margin-top'] = 'calc((1lh - ' . $marker_size . 'px) / 2)';
 		}
 
 		return $css;

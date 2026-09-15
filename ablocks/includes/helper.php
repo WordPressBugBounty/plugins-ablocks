@@ -310,6 +310,14 @@ class Helper {
 	public static function is_active_quizpress() {
 		return class_exists( 'QuizPress' );
 	}
+	public static function is_active_zencommunity() {
+		$zencommunity = 'zencommunity/zencommunity.php';
+		return self::is_plugin_active( $zencommunity );
+	}
+	public static function is_active_gemboards() {
+		$gemboards = 'gemboards/gemboards.php';
+		return self::is_plugin_active( $gemboards );
+	}
 	public static function is_active_easy_content_manager() {
 		return class_exists( 'EasyContentManager' );
 	}

@@ -45,7 +45,13 @@ class Buffer {
 	];
 
 	public static function init() {
-		if ( ! Helper::is_gating_active() || ! Helper::get( 'buffer_gating', true ) ) {
+		if ( ! Helper::is_gating_active() ) {
+			return;
+		}
+		// Two independent reasons to buffer. A site can hold scripts back and
+		// leave its videos alone, or the reverse, so neither switch may speak
+		// for the other.
+		if ( ! Helper::get( 'buffer_gating', true ) && ! Helper::get( 'embed_gating', true ) ) {
 			return;
 		}
 
@@ -72,7 +78,9 @@ class Buffer {
 			return $html;
 		}
 		// Cheap bail-outs first: this callback runs on every page.
-		if ( false === stripos( $html, '<script' ) ) {
+		if ( false === stripos( $html, '<script' )
+			&& false === stripos( $html, '<iframe' )
+			&& false === stripos( $html, '<img' ) ) {
 			return $html;
 		}
 		if ( ! $this->is_html_response() ) {
@@ -81,17 +89,200 @@ class Buffer {
 
 		$dry_run = (bool) Helper::get( 'dry_run', false );
 
-		$filtered = preg_replace_callback(
-			'#<script\b([^>]*)>(.*?)</script\s*>#is',
-			function ( $match ) use ( $dry_run ) {
-				return $this->process( $match, $dry_run );
-			},
-			$html
+		if ( Helper::get( 'buffer_gating', true ) ) {
+			$filtered = preg_replace_callback(
+				'#<script\b([^>]*)>(.*?)</script\s*>#is',
+				function ( $match ) use ( $dry_run ) {
+					return $this->process( $match, $dry_run );
+				},
+				$html
+			);
+
+			// A backtrack limit or a catastrophic pattern returns null.
+			// Serving the original page ungated is bad; serving an empty page
+			// is worse.
+			$html = null === $filtered ? $html : $filtered;
+		}
+
+		if ( Helper::get( 'embed_gating', true ) ) {
+			$html = $this->gate_elements( $html, $dry_run );
+		}
+
+		return $html;
+	}
+
+	/**
+	 * The iframe and pixel pass.
+	 *
+	 * Runs on everything *between* the script elements rather than on the whole
+	 * document. An inline script is perfectly entitled to contain the text
+	 * `<img src="…facebook.com/tr…">` — in a template string, in a JSON blob,
+	 * in an example — and rewriting it there would not gate a request, it would
+	 * corrupt the script. Splitting on script blocks and skipping the captured
+	 * halves costs one more pass and removes the whole class of problem.
+	 *
+	 * @param string $html    The document.
+	 * @param bool   $dry_run Report instead of rewrite.
+	 * @return string
+	 */
+	private function gate_elements( $html, $dry_run ) {
+		$has_iframe = false !== stripos( $html, '<iframe' );
+		$has_img    = false !== stripos( $html, '<img' );
+
+		if ( ! $has_iframe && ! $has_img ) {
+			return $html;
+		}
+
+		$parts = preg_split(
+			'#(<script\b[^>]*>.*?</script\s*>)#is',
+			$html,
+			-1,
+			PREG_SPLIT_DELIM_CAPTURE
 		);
 
-		// A backtrack limit or a catastrophic pattern returns null. Serving the
-		// original page ungated is bad; serving an empty page is worse.
-		return null === $filtered ? $html : $filtered;
+		if ( ! is_array( $parts ) ) {
+			return $html;
+		}
+
+		foreach ( $parts as $index => $part ) {
+			// Odd indices are the captured script blocks themselves.
+			if ( 1 === $index % 2 || '' === $part ) {
+				continue;
+			}
+
+			if ( $has_iframe ) {
+				$done = preg_replace_callback(
+					'#<iframe\b([^>]*)>(.*?)</iframe\s*>#is',
+					function ( $match ) use ( $dry_run ) {
+						return $this->process_embed( $match, $dry_run );
+					},
+					$part
+				);
+				$part = null === $done ? $part : $done;
+			}
+
+			if ( $has_img ) {
+				$done = preg_replace_callback(
+					'#<img\b([^>]*?)/?>#is',
+					function ( $match ) use ( $dry_run ) {
+						return $this->process_pixel( $match, $dry_run );
+					},
+					$part
+				);
+				$part = null === $done ? $part : $done;
+			}
+
+			$parts[ $index ] = $part;
+		}
+
+		return implode( '', $parts );
+	}
+
+	/**
+	 * One iframe: leave it, or stand a consent card where it was.
+	 *
+	 * @param array $match   Regex match: 0 whole, 1 attributes, 2 contents.
+	 * @param bool  $dry_run Report instead of rewrite.
+	 * @return string
+	 */
+	private function process_embed( $match, $dry_run ) {
+		$whole = $match[0];
+		$attrs = $match[1];
+
+		if ( false !== stripos( $attrs, 'data-ablocks-consent' ) ) {
+			return $whole;
+		}
+
+		$src = $this->attribute( $attrs, 'src' );
+		if ( '' === (string) $src ) {
+			return $whole;
+		}
+
+		$rule = Embeds::match( $src, 'embed' );
+
+		if ( ! $rule ) {
+			// An unrecognised third-party iframe is the same kind of gap as an
+			// unrecognised third-party script, and worth the same report.
+			if ( Gating::is_third_party( $src ) ) {
+				Report::add( $src, '', 'iframe' );
+			}
+			return $whole;
+		}
+
+		if ( $dry_run ) {
+			Report::add( $src, $rule['category'], 'iframe' );
+			return $whole;
+		}
+
+		// An invisible beacon is stripped the way a pixel is. It occupies no
+		// space, so there is no gap to explain and nothing to offer to load.
+		if ( ! empty( $rule['beacon'] ) ) {
+			return $this->strip_source( $whole, 'iframe', $rule['category'] );
+		}
+
+		return Embeds::placeholder( $whole, $rule );
+	}
+
+	/**
+	 * One image: leave it, or take its source away.
+	 *
+	 * No placeholder and no announcement. A tracking pixel is not content the
+	 * visitor is missing, and drawing a consent card where a 1×1 beacon used to
+	 * be would invent a loss to apologise for.
+	 *
+	 * @param array $match   Regex match: 0 whole, 1 attributes.
+	 * @param bool  $dry_run Report instead of rewrite.
+	 * @return string
+	 */
+	private function process_pixel( $match, $dry_run ) {
+		$whole = $match[0];
+		$attrs = $match[1];
+
+		if ( false !== stripos( $attrs, 'data-ablocks-consent' ) ) {
+			return $whole;
+		}
+
+		$src = $this->attribute( $attrs, 'src' );
+		if ( '' === (string) $src ) {
+			return $whole;
+		}
+
+		$rule = Embeds::match( $src, 'pixel' );
+		if ( ! $rule ) {
+			return $whole;
+		}
+
+		if ( $dry_run ) {
+			Report::add( $src, $rule['category'], 'pixel' );
+			return $whole;
+		}
+
+		return $this->strip_source( $whole, 'img', $rule['category'] );
+	}
+
+	/**
+	 * Move an element's `src` aside and label it with its category.
+	 *
+	 * Renaming the attribute is the whole mechanism: a browser does not fetch
+	 * `data-ablocks-src`, and the element stays exactly where the author put
+	 * it, keeping whatever size and styling it had.
+	 *
+	 * @param string $tag      The whole element.
+	 * @param string $name     Tag name, `img` or `iframe`.
+	 * @param string $category Category slug.
+	 * @return string
+	 */
+	private function strip_source( $tag, $name, $category ) {
+		$rewritten = preg_replace( '/\ssrc=/i', ' data-ablocks-src=', $tag, 1 );
+
+		// `\b`, not `\s`: the same trap that made `ScriptGate` silently skip a
+		// `<script>` whose only attribute was its type.
+		return preg_replace(
+			'/^<' . $name . '\b/i',
+			sprintf( '<%s data-ablocks-consent="%s" ', $name, esc_attr( $category ) ),
+			$rewritten,
+			1
+		);
 	}
 
 	/**

@@ -49,7 +49,7 @@ class Ajax {
 		$defaults = Helper::defaults();
 		$saved    = [];
 
-		foreach ( [ 'enabled', 'buffer_gating', 'dry_run', 'consent_mode', 'record_enabled', 'record_ip', 'hide_for_admins' ] as $key ) {
+		foreach ( [ 'enabled', 'buffer_gating', 'embed_gating', 'dry_run', 'consent_mode', 'consent_mode_ads', 'record_enabled', 'record_ip', 'hide_for_admins' ] as $key ) {
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 			$saved[ $key ] = isset( $_POST[ $key ] ) ? \ABlocks\Helper::sanitize_checkbox_field( $_POST[ $key ] ) : $defaults[ $key ];
 		}
@@ -101,6 +101,13 @@ class Ajax {
 
 		$saved['categories'] = $this->sanitize_categories( $this->post_json( 'categories' ), $defaults['categories'] );
 		$saved['rules']      = $this->sanitize_rules( $this->post_json( 'rules' ) );
+
+		// Embeds carry no pattern: the shipped list is the whole list and only
+		// the two decisions the screen offers can come back from the browser.
+		// Anything else in the payload is dropped rather than merged, so a
+		// crafted request cannot introduce a matcher of its own.
+		$saved['embed_rules'] = $this->sanitize_provider_rules( $this->post_json( 'embed_rules' ) );
+		$saved['pixel_rules'] = $this->sanitize_provider_rules( $this->post_json( 'pixel_rules' ) );
 		$saved['banner']     = $this->sanitize_banner( $this->post_json( 'banner' ), $defaults['banner'] );
 
 		Helper::save_settings( $saved );
@@ -259,6 +266,36 @@ class Ajax {
 	 * @param array $input Submitted rules.
 	 * @return array
 	 */
+	/**
+	 * Embed and pixel overrides: an id, whether it is on, and which category.
+	 *
+	 * Nothing else survives. The pattern that decides what a rule matches is
+	 * not editable and is never read from the request, which is the reason a
+	 * mis-typed setting here cannot blank a payment iframe.
+	 *
+	 * @param array $rules Raw rules from the request.
+	 * @return array
+	 */
+	private function sanitize_provider_rules( $rules ) {
+		if ( ! is_array( $rules ) ) {
+			return [];
+		}
+
+		$clean = [];
+		foreach ( $rules as $rule ) {
+			if ( empty( $rule['id'] ) ) {
+				continue;
+			}
+			$clean[] = [
+				'id'       => sanitize_key( $rule['id'] ),
+				'enabled'  => ! empty( $rule['enabled'] ),
+				'category' => isset( $rule['category'] ) ? sanitize_key( $rule['category'] ) : '',
+			];
+		}
+
+		return $clean;
+	}
+
 	private function sanitize_rules( $input ) {
 		$can_author = Helper::can( 'custom_rules' );
 		$shipped    = Helper::shipped_rule_ids();

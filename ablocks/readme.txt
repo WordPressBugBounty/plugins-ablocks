@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.12.0
+Stable tag: 2.13.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -308,6 +308,50 @@ Privacy: https://policies.google.com/privacy
 Our external packages use [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT. Additionally, we incorporate [FontAwesome v6](https://fontawesome.com/license/free) under the CC BY 4.0 License, and [dnd kit](https://github.com/clauderic/dnd-kit) licensed under the MIT License.
 
 == Changelog ==
+
+= 2.13.1 - 15/09/2026 =
+* Security – Loop Builder: the public loop request now limits how many posts one request can render (100 by default, filterable with `ablocks/loop_builder/max_posts_per_request`), and only accepts post types and taxonomies that are publicly viewable
+* Security – Search block: the public search request only searches publicly viewable post types and returns at most 20 results (filterable with `ablocks/search/max_results`)
+* Security – Template importer: plugin dependency names are shown as plain text instead of HTML
+* Improved – Built JavaScript files and bundled libraries no longer contain extremely long single lines, so they can be reviewed line by line
+
+= 2.13.0 - 15/09/2026 =
+* Added – Link Guard addon (off by default): links to scheduled, draft, private, trashed or deleted posts are unwrapped when the page renders, keeping their text, and come back as soon as the linked post is published
+* Added – Cookie Consent: third-party embeds such as video players and maps are blocked until the visitor consents, the same as scripts
+* Added – Cookie Consent: preferences open as a dialog that works with every banner layout, and visitors can close the banner without accepting
+* Added – Copy Styles and Paste Styles for atomic blocks: copy the look of any atomic block, including its global classes and animations, and paste it onto any other atomic block
+* Improved – Cookie Consent: the Banner settings are split into Layout, Content, Buttons, Preferences and Colours sub-tabs, and the live preview stays in view while you edit
+* Improved – Cookie Consent: the Tags tab checks whether another plugin actually places a tag before disabling its field, and sites behind a CDN or reverse proxy can say where the visitor's real IP address is
+* Improved – On tablet, mobile and custom breakpoints, settings show the values inherited from wider breakpoints, including every typography field, instead of empty fields
+* Improved – Children of an atomic Flex row share the row equally, a container narrower than its parent is centred, and an aBlocks Container inside a Div, Flex or Grid fills the row like an atomic container
+* Improved – Atomic SVG: Justify content and Align items position the icon, and a custom width keeps resizing it
+* Improved – Carousel: responsive navigation and pagination settings apply at custom breakpoints, and slides per view follows the site's breakpoint widths
+* Improved – Custom breakpoints show an icon in the device switcher, with their width on hover
+* Improved – Logout block custom URL controls
+* Improved – Updated the StoreEngine SDK to 1.5.7
+* Fixed – Editing a global class had no visible effect when the block kept its own value for the same setting, such as the direction or gap set by a layout preset
+* Fixed – Side-by-side atomic containers holding text overflowed the page instead of shrinking to fit
+* Fixed – Atomic blocks could break out of the theme's content width
+* Fixed – A linked atomic Div, Flex or Grid that contained other links broke the page layout on the frontend
+* Fixed – Flex wrap had no effect on atomic containers
+* Fixed – An empty Atomic Text collapsed on the frontend
+* Fixed – A value set on tablet was not inherited on mobile
+* Fixed – A container's drag handle covered the text inside it
+* Fixed – The mouse wheel did not scroll the page while the pointer was over a small atomic block such as an SVG icon
+* Fixed – Choosing a background overlay image opened an empty media library
+* Fixed – Pasting a sentence from Google Docs added a new block instead of pasting inline, and pasting a document into an empty Atomic Text left the empty block behind
+* Fixed – Atomic blocks pasted over an Atomic Text lost their styles and classes, and outdated style classes built up on copied blocks
+* Fixed – Carousel slides moved when selecting or dragging content inside a slide in the editor
+* Fixed – A value of 0 set on tablet or mobile fell back to the desktop value on the frontend
+* Fixed – Box shadows with a 0 offset did not render on the frontend, and a shadow on a container inside a Loop Template was clipped
+* Fixed – Loop Filter: button labels wrapped after clicking a filter, filters did nothing when the loop came from a synced pattern or template, and the reloaded results lost their styling
+* Fixed – Pages whose content is only a synced pattern loaded no aBlocks styles or scripts
+* Fixed – List item markers were not aligned with the first line of text
+* Fixed – Dynamic blocks showed "Error loading block" in the editor when another plugin added its own attributes to every block
+* Fixed – Opening a page with a Heading or atomic blocks marked it as edited before any change
+* Fixed – The plugin install link on the welcome page
+* Fixed – A console error when aBlocks Pro is active, and duplicate block IDs on the text of several blocks in the editor
+* Security – Loop Filter requests only return content the visitor is allowed to read
 
 = 2.12.0 - 03/09/2026 =
 * Added – Atomic blocks: a new family of primitives — Text, Div, Flex, Grid, Image and SVG — that render one semantic tag with no wrapper markup, share a single style system, and emit one small stylesheet per unique design instead of one per block

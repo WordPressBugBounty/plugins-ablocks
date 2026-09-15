@@ -216,6 +216,9 @@ class Assets {
 				'storeengine' => Helper::is_active_storeengine(),
 				'wp_map_block' => Helper::is_active_wp_map_block(),
 				'easy_content_manager' => Helper::is_active_easy_content_manager(),
+				'zencommunity' => Helper::is_active_zencommunity(),
+				'gemboards' => Helper::is_active_gemboards(),
+				'quizpress' => Helper::is_active_quizpress(),
 			]
 		);
 		return apply_filters(
@@ -903,15 +906,37 @@ class Assets {
 	public function set_current_page_template_part( $content, $block ) {
 		if ( ! isset( $block['blockName'] ) && is_array( $block ) ) {
 			foreach ( $block as $block_item ) {
-				if ( ! empty( $block_item['blockName'] ) && strpos( $block_item['blockName'], 'ablocks/' ) !== false ) {
+				if ( $this->is_page_asset_block( $block_item ) ) {
 					$this->current_page_blocks[] = $block_item;
 				}
 			}
 		}
-		if ( ! empty( $block['blockName'] ) && strpos( $block['blockName'], 'ablocks/' ) !== false ) {
+		if ( $this->is_page_asset_block( $block ) ) {
 			$this->current_page_blocks[] = $block;
 		}
 		return $content;
+	}
+
+	/**
+	 * Whether a top-level block contributes to the page's generated assets.
+	 *
+	 * A synced pattern counts too: AssetsGenerator::recursive_block_parser()
+	 * already expands its reference. Collecting only `ablocks/*` names left a
+	 * page whose content is just a pattern with no combined CSS/JS at all — so a
+	 * Loop Filter placed from a pattern rendered unstyled and did nothing when
+	 * clicked.
+	 *
+	 * @param mixed $block Parsed block.
+	 * @return bool
+	 */
+	private function is_page_asset_block( $block ) {
+		if ( ! is_array( $block ) || empty( $block['blockName'] ) ) {
+			return false;
+		}
+		if ( 'core/block' === $block['blockName'] ) {
+			return ! empty( $block['attrs']['ref'] );
+		}
+		return strpos( $block['blockName'], 'ablocks/' ) !== false;
 	}
 
 	public function set_theme_builder_locations( $args ) {

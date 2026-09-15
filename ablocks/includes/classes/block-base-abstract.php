@@ -153,7 +153,10 @@ abstract class BlockBaseAbstract {
 			// When called from the editor's ServerSideRender (REST API), RenderContainer (JS) already
 			// provides the outer ablocks-block-{blockId} wrapper via useBlockProps. Including it here
 			// too causes the Advanced-settings CSS selector to match two elements → double border/padding.
-			if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			// Only that preview render (it always sends context=edit): front-end REST endpoints such as the
+			// loop filter re-render blocks into the page, where the wrapper and its scoped styles are needed.
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( defined( 'REST_REQUEST' ) && REST_REQUEST && 'edit' === ( $_REQUEST['context'] ?? '' ) ) {
 				ob_start();
 				echo $this->render_block_content( $attributes, $content, $block_instance );
 				$content = ob_get_clean();
