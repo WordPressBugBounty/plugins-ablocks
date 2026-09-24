@@ -26,21 +26,24 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .storeengine-products--grid .storeengine-products__body .storeengine-row .storeengine-product',
 			$this->get_products_card_css( $attributes ),
 			$this->get_products_card_css( $attributes, 'Tablet' ),
-			$this->get_products_card_css( $attributes, 'Mobile' )
+			$this->get_products_card_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_products_card_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-products--grid .storeengine-products__body .storeengine-row .storeengine-product:hover',
 			$this->get_products_card_hover_css( $attributes ),
 			$this->get_products_card_hover_css( $attributes, 'Tablet' ),
-			$this->get_products_card_hover_css( $attributes, 'Mobile' )
+			$this->get_products_card_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_products_card_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-products--grid .storeengine-row .storeengine-product .storeengine-product__body .storeengine-product__title, 
             {{WRAPPER}} .storeengine-products--grid .storeengine-row .storeengine-product .storeengine-product__body .storeengine-product__title a',
 			$this->get_products_card_title_css( $attributes ),
 			$this->get_products_card_title_css( $attributes, 'Tablet' ),
-			$this->get_products_card_title_css( $attributes, 'Mobile' )
+			$this->get_products_card_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_products_card_title_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-products--grid .storeengine-row .storeengine-product .storeengine-product__body .storeengine-product__title:hover, 
@@ -51,20 +54,23 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .storeengine-ajax__amount .storeengine-product__simple-price',
 			$this->get_products_price_css( $attributes ),
 			$this->get_products_price_css( $attributes, 'Tablet' ),
-			$this->get_products_price_css( $attributes, 'Mobile' )
+			$this->get_products_price_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_products_price_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-add-to-cart-buttons .storeengine-btn',
 			$this->get_products_cart_button_css( $attributes ),
 			$this->get_products_cart_button_css( $attributes, 'Tablet' ),
-			$this->get_products_cart_button_css( $attributes, 'Mobile' )
+			$this->get_products_cart_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_products_cart_button_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-add-to-cart-buttons .storeengine-btn:hover',
 			$this->get_products_cart_button_hover_css( $attributes ),
 			$this->get_products_cart_button_hover_css( $attributes, 'Tablet' ),
-			$this->get_products_cart_button_hover_css( $attributes, 'Mobile' )
+			$this->get_products_cart_button_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_products_cart_button_hover_css( $attributes, $device ); } )
 		);
 		return $css_generator->generate_css();
 

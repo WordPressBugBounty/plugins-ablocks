@@ -28,13 +28,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container',
 			$this->get_info_box( $attributes ),
 			$this->get_info_box( $attributes, 'Tablet' ),
-			$this->get_info_box( $attributes, 'Mobile' )
+			$this->get_info_box( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_info_box( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-block--info-box__content',
 			$this->get_info_box_content( $attributes ),
 			$this->get_info_box_content( $attributes, 'Tablet' ),
-			$this->get_info_box_content( $attributes, 'Mobile' )
+			$this->get_info_box_content( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_info_box_content( $attributes, $device ); } )
 		);
 
 		// badge starts
@@ -42,13 +44,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-info-box-badge-link',
 			$this->get_badge_css( $attributes ),
 			$this->get_badge_css( $attributes, 'Tablet' ),
-			$this->get_badge_css( $attributes, 'Mobile' )
+			$this->get_badge_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_badge_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-info-box-badge-link:hover',
 			$this->get_badge_hover_css( $attributes ),
 			$this->get_badge_hover_css( $attributes, 'Tablet' ),
-			$this->get_badge_hover_css( $attributes, 'Mobile' )
+			$this->get_badge_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_badge_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-info-box-badge-link > .ablocks-info-box-badge-link-text',
@@ -60,13 +64,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--info-box .ablocks-block-container > .ablocks-icon-wrap, {{WRAPPER}}.ablocks-block--info-box .ablocks-block-container > a .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box .ablocks-block-container > .ablocks-icon-wrap, {{WRAPPER}}.ablocks-block--info-box .ablocks-block-container > a .ablocks-icon-wrap',
 			$this->get_icon_wrapper_extra_css( $attributes ),
 			$this->get_icon_wrapper_extra_css( $attributes, 'Tablet' ),
-			$this->get_icon_wrapper_extra_css( $attributes, 'Mobile' )
+			$this->get_icon_wrapper_extra_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_icon_wrapper_extra_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-icon-wrap > img.ablocks-image-icon, {{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > a .ablocks-icon-wrap > img.ablocks-image-icon',
@@ -110,13 +116,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-block--info-box__content > .ablocks-info-box-heading',
 			$desktop_heading_text_styles,
 			$this->get_heading_text_css( $attributes, 'Tablet' ),
-			$this->get_heading_text_css( $attributes, 'Mobile' )
+			$this->get_heading_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_heading_text_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block-container > .ablocks-block--info-box__content > .ablocks-info-box-heading',
 			$this->get_heading_text_css_hover( $attributes ),
 			$this->get_heading_text_css_hover( $attributes, 'Tablet' ),
-			$this->get_heading_text_css_hover( $attributes, 'Mobile' )
+			$this->get_heading_text_css_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_heading_text_css_hover( $attributes, $device ); } )
 		);
 
 		// Sub Heading starts
@@ -128,13 +136,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-block--info-box__content > .ablocks-info-box-sub-heading',
 			$desktop_sub_heading_text_styles,
 			$this->get_sub_heading_text_css( $attributes, 'Tablet' ),
-			$this->get_sub_heading_text_css( $attributes, 'Mobile' )
+			$this->get_sub_heading_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_sub_heading_text_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block-container > .ablocks-block--info-box__content > .ablocks-info-box-sub-heading',
 			$this->get_sub_heading_text_css_hover( $attributes ),
 			$this->get_sub_heading_text_css_hover( $attributes, 'Tablet' ),
-			$this->get_sub_heading_text_css_hover( $attributes, 'Mobile' )
+			$this->get_sub_heading_text_css_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_sub_heading_text_css_hover( $attributes, $device ); } )
 		);
 
 		// Description starts
@@ -152,7 +162,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block-container > .ablocks-block--info-box__content > .ablocks-info-box-text',
 			$this->get_des_text_css_hover( $attributes ),
 			$this->get_des_text_css_hover( $attributes, 'Tablet' ),
-			$this->get_des_text_css_hover( $attributes, 'Mobile' )
+			$this->get_des_text_css_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_des_text_css_hover( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-block--info-box__content > .ablocks-info-box-text-drop-caps::first-letter',
@@ -178,7 +189,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__fill > .ablocks-icon-wrap, {{WRAPPER}} .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__unfill > .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes, '', 'starIcon' ),
 			Icon::get_wrapper_css( $attributes, 'Tablet', 'starIcon' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile', 'starIcon' )
+			Icon::get_wrapper_css( $attributes, 'Mobile', 'starIcon' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device, 'starIcon' ); } )
 		);
 		// rating icon spacing css
 		$css_generator->add_class_styles(
@@ -224,7 +236,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-block--info-box__content > .ablocks-info-box-btn-link',
 			$this->get_button_css( $attributes ),
 			$this->get_button_css( $attributes, 'Tablet' ),
-			$this->get_button_css( $attributes, 'Mobile' )
+			$this->get_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_css( $attributes, $device ); } )
 		);
 		// Generate button CSS end
 		// Generate button hover CSS start
@@ -232,14 +245,16 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-block--info-box__content > .ablocks-info-box-btn-link:hover',
 			$this->get_button_hover_css( $attributes ),
 			$this->get_button_hover_css( $attributes, 'Tablet' ),
-			$this->get_button_hover_css( $attributes, 'Mobile' )
+			$this->get_button_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_hover_css( $attributes, $device ); } )
 		);
 		// Generate button icon hover CSS
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container > .ablocks-block--info-box__content > .ablocks-info-box-btn-link:hover > .ablocks-icon-wrap > svg.ablocks-svg-icon',
 			$this->get_button_icon_hover_css( $attributes ),
 			$this->get_button_icon_hover_css( $attributes, 'Tablet' ),
-			$this->get_button_icon_hover_css( $attributes, 'Mobile' )
+			$this->get_button_icon_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_icon_hover_css( $attributes, $device ); } )
 		);
 		// Generate button text CSS start
 		$css_generator->add_class_styles(
@@ -251,7 +266,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-info-box-btn-link > .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes, '', 'btnIcon' ),
 			Icon::get_wrapper_css( $attributes, 'Tablet', 'btnIcon' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile', 'btnIcon' )
+			Icon::get_wrapper_css( $attributes, 'Mobile', 'btnIcon' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device, 'btnIcon' ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-info-box-btn-link > .ablocks-icon-wrap > svg.ablocks-svg-icon',
@@ -295,13 +311,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}:not(.ablocks-has-block-container), {{WRAPPER}}.ablocks-block--info-box > .ablocks-block-container',
 			$this->get_info_box( $attributes ),
 			$this->get_info_box( $attributes, 'Tablet' ),
-			$this->get_info_box( $attributes, 'Mobile' )
+			$this->get_info_box( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_info_box( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--info-box__content',
 			$this->get_info_box_content( $attributes ),
 			$this->get_info_box_content( $attributes, 'Tablet' ),
-			$this->get_info_box_content( $attributes, 'Mobile' )
+			$this->get_info_box_content( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_info_box_content( $attributes, $device ); } )
 		);
 
 		// badge starts
@@ -309,13 +327,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-info-box-badge-link',
 			$this->get_badge_css( $attributes ),
 			$this->get_badge_css( $attributes, 'Tablet' ),
-			$this->get_badge_css( $attributes, 'Mobile' )
+			$this->get_badge_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_badge_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-info-box-badge-link:hover',
 			$this->get_badge_hover_css( $attributes ),
 			$this->get_badge_hover_css( $attributes, 'Tablet' ),
-			$this->get_badge_hover_css( $attributes, 'Mobile' )
+			$this->get_badge_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_badge_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-info-box-badge-link > .ablocks-info-box-badge-link-text',
@@ -330,7 +350,8 @@ class Block extends BlockBaseAbstract {
 			 {{WRAPPER}} > .ablocks-block-container > a .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device ); } )
 		);
 			// Icon Style
 		$css_generator->add_class_styles(
@@ -340,7 +361,8 @@ class Block extends BlockBaseAbstract {
 			 {{WRAPPER}} > .ablocks-block-container > a .ablocks-icon-wrap:hover',
 			Icon::get_wrapper_hover_css( $attributes ),
 			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}:not(.ablocks-has-block-container) > .ablocks-icon-wrap,
@@ -349,31 +371,36 @@ class Block extends BlockBaseAbstract {
 			 {{WRAPPER}} > .ablocks-block-container > a .ablocks-icon-wrap',
 			$this->get_icon_wrapper_extra_css( $attributes ),
 			$this->get_icon_wrapper_extra_css( $attributes, 'Tablet' ),
-			$this->get_icon_wrapper_extra_css( $attributes, 'Mobile' )
+			$this->get_icon_wrapper_extra_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_icon_wrapper_extra_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}:not(.ablocks-has-block-container) > .ablocks-icon-wrap > img.ablocks-image-icon, {{WRAPPER}} > .ablocks-block-container > .ablocks-icon-wrap > img.ablocks-image-icon, {{WRAPPER}} > a .ablocks-icon-wrap > img.ablocks-image-icon',
 			Icon::get_element_image_css( $attributes ),
 			Icon::get_element_image_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}:not(.ablocks-has-block-container):hover > .ablocks-icon-wrap > img.ablocks-image-icon, {{WRAPPER}}:hover > .ablocks-block-container > .ablocks-icon-wrap > img.ablocks-image-icon , {{WRAPPER}}:hover > a .ablocks-icon-wrap > img.ablocks-image-icon',
 			Icon::get_element_image_hover_css( $attributes ),
 			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}:not(.ablocks-has-block-container) > .ablocks-icon-wrap > svg.ablocks-svg-icon, {{WRAPPER}} > .ablocks-block-container > .ablocks-icon-wrap > svg.ablocks-svg-icon',
 			Icon::get_element_css( $attributes ),
 			Icon::get_element_css( $attributes, 'Tablet' ),
 			Icon::get_element_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}:not(.ablocks-has-block-container):hover > .ablocks-icon-wrap > svg.ablocks-svg-icon, {{WRAPPER}} > .ablocks-block-container > .ablocks-icon-wrap > svg.ablocks-svg-icon',
 			Icon::get_element_image_hover_css( $attributes ),
 			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}:not(.ablocks-has-block-container).ablocks-block--info-box:hover > .ablocks-icon-wrap svg.ablocks-svg-icon ,
@@ -395,13 +422,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-heading',
 			$this->get_heading_text_css( $attributes ),
 			$this->get_heading_text_css( $attributes, 'Tablet' ),
-			$this->get_heading_text_css( $attributes, 'Mobile' )
+			$this->get_heading_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_heading_text_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block--info-box__content > .ablocks-info-box-heading',
 			$this->get_heading_text_css_hover( $attributes ),
 			$this->get_heading_text_css_hover( $attributes, 'Tablet' ),
-			$this->get_heading_text_css_hover( $attributes, 'Mobile' )
+			$this->get_heading_text_css_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_heading_text_css_hover( $attributes, $device ); } )
 		);
 
 		// Sub Heading starts
@@ -409,13 +438,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-sub-heading',
 			$this->get_sub_heading_text_css( $attributes ),
 			$this->get_sub_heading_text_css( $attributes, 'Tablet' ),
-			$this->get_sub_heading_text_css( $attributes, 'Mobile' )
+			$this->get_sub_heading_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_sub_heading_text_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block--info-box__content > .ablocks-info-box-sub-heading',
 			$this->get_sub_heading_text_css_hover( $attributes ),
 			$this->get_sub_heading_text_css_hover( $attributes, 'Tablet' ),
-			$this->get_sub_heading_text_css_hover( $attributes, 'Mobile' )
+			$this->get_sub_heading_text_css_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_sub_heading_text_css_hover( $attributes, $device ); } )
 		);
 
 		// Description starts
@@ -424,18 +455,21 @@ class Block extends BlockBaseAbstract {
 			$this->get_des_text_css( $attributes ),
 			$this->get_des_text_css( $attributes, 'Tablet' ),
 			$this->get_des_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_des_text_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block--info-box__content > .ablocks-info-box-text',
 			$this->get_des_text_css_hover( $attributes ),
 			$this->get_des_text_css_hover( $attributes, 'Tablet' ),
-			$this->get_des_text_css_hover( $attributes, 'Mobile' )
+			$this->get_des_text_css_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_des_text_css_hover( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-text-drop-caps::first-letter',
 			$this->get_des_drop_text_css( $attributes ),
 			$this->get_des_drop_text_css( $attributes, 'Tablet' ),
 			$this->get_des_drop_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_des_drop_text_css( $attributes, $device ); } )
 		);
 
 		// rating icon css
@@ -444,18 +478,21 @@ class Block extends BlockBaseAbstract {
 			$this->get_container_css( $attributes ),
 			$this->get_container_css( $attributes, 'Tablet' ),
 			$this->get_container_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_container_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-info-box-star-ratings',
 			$this->get_rating_css( $attributes ),
 			$this->get_rating_css( $attributes, 'Tablet' ),
 			$this->get_rating_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__fill > .ablocks-icon-wrap, {{WRAPPER}} .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__unfill > .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes, '', 'starIcon' ),
 			Icon::get_wrapper_css( $attributes, 'Tablet', 'starIcon' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile', 'starIcon' )
+			Icon::get_wrapper_css( $attributes, 'Mobile', 'starIcon' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device, 'starIcon' ); } )
 		);
 		// rating icon spacing css
 		$css_generator->add_class_styles(
@@ -463,30 +500,35 @@ class Block extends BlockBaseAbstract {
 			$this->get_rating_icon_spacing_css( $attributes ),
 			$this->get_rating_icon_spacing_css( $attributes, 'Tablet' ),
 			$this->get_rating_icon_spacing_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_icon_spacing_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__fill > .ablocks-icon-wrap > svg',
 			$this->get_fill_rating_css( $attributes ),
 			$this->get_fill_rating_css( $attributes, 'Tablet' ),
 			$this->get_fill_rating_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_fill_rating_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__unfill > .ablocks-icon-wrap > svg',
 			$this->get_unfill_rating_css( $attributes ),
 			$this->get_unfill_rating_css( $attributes, 'Tablet' ),
 			$this->get_unfill_rating_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_unfill_rating_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block--info-box__content > .ablocks-info-box-star-ratings > .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__fill > .ablocks-icon-wrap > svg',
 			$this->get_fill_rating_css_hover( $attributes ),
 			$this->get_fill_rating_css_hover( $attributes, 'Tablet' ),
 			$this->get_fill_rating_css_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_fill_rating_css_hover( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--info-box:hover > .ablocks-block--info-box__content > .ablocks-info-box-star-ratings > .ablocks-info-box-star-ratings-icons > .ablocks-info-box-rating > .ablocks-info-box-rating__unfill > .ablocks-icon-wrap > svg',
 			$this->get_unfill_rating_css_hover( $attributes ),
 			$this->get_unfill_rating_css_hover( $attributes, 'Tablet' ),
 			$this->get_unfill_rating_css_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_unfill_rating_css_hover( $attributes, $device ); } )
 		);
 		// rating number css
 		$css_generator->add_class_styles(
@@ -494,6 +536,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_rating_number_css( $attributes ),
 			$this->get_rating_number_css( $attributes, 'Tablet' ),
 			$this->get_rating_number_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_number_css( $attributes, $device ); } )
 		);
 
 		// Generate button CSS start
@@ -501,7 +544,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-btn-link',
 			$this->get_button_css( $attributes ),
 			$this->get_button_css( $attributes, 'Tablet' ),
-			$this->get_button_css( $attributes, 'Mobile' )
+			$this->get_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_css( $attributes, $device ); } )
 		);
 		// Generate button CSS end
 		// Generate button hover CSS start
@@ -509,14 +553,16 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-btn-link:hover',
 			$this->get_button_hover_css( $attributes ),
 			$this->get_button_hover_css( $attributes, 'Tablet' ),
-			$this->get_button_hover_css( $attributes, 'Mobile' )
+			$this->get_button_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_hover_css( $attributes, $device ); } )
 		);
 		// Generate button icon hover CSS
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--info-box__content > .ablocks-info-box-btn-link:hover > .ablocks-icon-wrap > svg.ablocks-svg-icon',
 			$this->get_button_icon_hover_css( $attributes ),
 			$this->get_button_icon_hover_css( $attributes, 'Tablet' ),
-			$this->get_button_icon_hover_css( $attributes, 'Mobile' )
+			$this->get_button_icon_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_icon_hover_css( $attributes, $device ); } )
 		);
 		// Generate button text CSS start
 		$css_generator->add_class_styles(
@@ -528,25 +574,29 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-info-box-btn-link > .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes, '', 'btnIcon' ),
 			Icon::get_wrapper_css( $attributes, 'Tablet', 'btnIcon' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile', 'btnIcon' )
+			Icon::get_wrapper_css( $attributes, 'Mobile', 'btnIcon' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device, 'btnIcon' ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-info-box-btn-link > .ablocks-icon-wrap > svg.ablocks-svg-icon',
 			Icon::get_element_css( $attributes, '', 'btnIcon' ),
 			Icon::get_element_css( $attributes, 'Tablet', 'btnIcon' ),
 			Icon::get_element_css( $attributes, 'Mobile', 'btnIcon' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_css( $attributes, $device, 'btnIcon' ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-info-box-btn-link > .ablocks-icon-wrap > svg.ablocks-svg-icon:hover',
 			Icon::get_element_image_hover_css( $attributes, '', 'btnIcon' ),
 			Icon::get_element_image_hover_css( $attributes, 'Tablet', 'btnIcon' ),
 			Icon::get_element_image_hover_css( $attributes, 'Mobile', 'btnIcon' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_hover_css( $attributes, $device, 'btnIcon' ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-info-box-btn-link > .ablocks-icon-wrap:hover',
 			Icon::get_wrapper_hover_css( $attributes, '', 'btnIcon' ),
 			Icon::get_wrapper_hover_css( $attributes, 'Tablet', 'btnIcon' ),
 			Icon::get_wrapper_hover_css( $attributes, 'Mobile', 'btnIcon' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_hover_css( $attributes, $device, 'btnIcon' ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}:not(.ablocks-has-block-container).ablocks-hide-on-desktop,{{WRAPPER}}:not(.ablocks-has-block-container).ablocks-hide-on-tablet,{{WRAPPER}}:not(.ablocks-has-block-container).ablocks-hide-on-mobile',

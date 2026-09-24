@@ -28,73 +28,85 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .academy-single-course__content-item--curriculum .academy-curriculum-title',
 			$this->get_curriculum_heading_css( $attributes ),
 			$this->get_curriculum_heading_css( $attributes, 'Tablet' ),
-			$this->get_curriculum_heading_css( $attributes, 'Mobile' )
+			$this->get_curriculum_heading_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_curriculum_heading_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--curriculum .academy-curriculum-title:hover',
 			$this->get_curriculum_heading_hover_css( $attributes ),
 			$this->get_curriculum_heading_hover_css( $attributes, 'Tablet' ),
-			$this->get_curriculum_heading_hover_css( $attributes, 'Mobile' )
+			$this->get_curriculum_heading_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_curriculum_heading_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-accordion a.academy-accordion__title',
 			$this->get_sub_heading_css( $attributes ),
 			$this->get_sub_heading_css( $attributes, 'Tablet' ),
-			$this->get_sub_heading_css( $attributes, 'Mobile' )
+			$this->get_sub_heading_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_sub_heading_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-accordion a.academy-accordion__title:hover',
 			$this->get_sub_heading_hover_css( $attributes ),
 			$this->get_sub_heading_hover_css( $attributes, 'Tablet' ),
-			$this->get_sub_heading_hover_css( $attributes, 'Mobile' )
+			$this->get_sub_heading_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_sub_heading_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-lesson-list__item .academy-entry-content .academy-entry-title',
 			$this->get_lesson_title_css( $attributes ),
 			$this->get_lesson_title_css( $attributes, 'Tablet' ),
-			$this->get_lesson_title_css( $attributes, 'Mobile' )
+			$this->get_lesson_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_lesson_title_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-lesson-list__item .academy-entry-content .academy-entry-title:hover',
 			$this->get_lesson_title_hover_css( $attributes ),
 			$this->get_lesson_title_hover_css( $attributes, 'Tablet' ),
-			$this->get_lesson_title_hover_css( $attributes, 'Mobile' )
+			$this->get_lesson_title_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_lesson_title_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-lesson-list__item',
 			$this->get_lesson_list_css( $attributes ),
 			$this->get_lesson_list_css( $attributes, 'Tablet' ),
-			$this->get_lesson_list_css( $attributes, 'Mobile' )
+			$this->get_lesson_list_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_lesson_list_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-lesson-list__item:hover',
 			$this->get_lesson_list_hover_css( $attributes ),
 			$this->get_lesson_list_hover_css( $attributes, 'Tablet' ),
-			$this->get_lesson_list_hover_css( $attributes, 'Mobile' )
+			$this->get_lesson_list_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_lesson_list_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-lesson-list__item .academy-entry-control .academy-btn-play i',
 			$this->get_icon_css( $attributes, '' ),
 			$this->get_icon_css( $attributes, 'Tablet' ),
-			$this->get_icon_css( $attributes, 'Mobile' )
+			$this->get_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_icon_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-lesson-list__item .academy-entry-control .academy-btn-play i:hover',
 			$this->get_icon_hover_css( $attributes, '' ),
 			$this->get_icon_hover_css( $attributes, 'Tablet' ),
-			$this->get_icon_hover_css( $attributes, 'Mobile' )
+			$this->get_icon_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_icon_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-lesson-list__item .academy-entry-content .academy-icon::before',
 			$this->get_read_icon_css( $attributes, '' ),
 			$this->get_read_icon_css( $attributes, 'Tablet' ),
-			$this->get_read_icon_css( $attributes, 'Mobile' )
+			$this->get_read_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_read_icon_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-lesson-list__item .academy-entry-content .academy-icon:hover::before',
 			$this->get_read_icon_hover_css( $attributes, '' ),
 			$this->get_read_icon_hover_css( $attributes, 'Tablet' ),
-			$this->get_read_icon_hover_css( $attributes, 'Mobile' )
+			$this->get_read_icon_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_read_icon_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

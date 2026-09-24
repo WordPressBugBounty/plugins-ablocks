@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.13.1
+Stable tag: 2.14.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -308,6 +308,22 @@ Privacy: https://policies.google.com/privacy
 Our external packages use [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT. Additionally, we incorporate [FontAwesome v6](https://fontawesome.com/license/free) under the CC BY 4.0 License, and [dnd kit](https://github.com/clauderic/dnd-kit) licensed under the MIT License.
 
 == Changelog ==
+
+= 2.14.0 - 24/09/2026 =
+* Added – Content Timeline: Top and Bottom content positions lay the items out in a horizontal row, with the connector line and scroll animation running between the markers and items stacking on small screens
+* Added – Image Hotspot: each hotspot can show an icon inside its pin, with Icon Color and Icon Size settings
+* Improved – Content Timeline: in the Top and Bottom layouts, Arrow Alignment reads Start, Center and End and places the arrow under the marker, including on small screens
+* Improved – Content Timeline: the connector line re-measures when items are added, removed or reordered, when the content changes size and when images finish loading
+* Improved – Heading: animated headings get their own HTML Tag (H1–H6), Alignment, Typography and Text Shadow settings in every animation type, and the animated text inherits the heading typography
+* Improved – Heading: the Typing, Slide Down and Swirl animations keep the heading the same size while they run, so the text around them no longer shifts or re-wraps, and the slide animations stay inside the phrase
+* Improved – Heading: typing holds the full phrase before the next one starts, the caret follows the last typed letter, and hidden padding letters no longer show as blank pauses
+* Improved – Tabs: the active tab's icon takes the title's active colour
+* Fixed – Heading: an animated heading could keep running twice after its settings changed in the editor or after switching browser tabs
+* Improved – Atomic Border: on tablet, mobile and custom breakpoints, Border width and Border radius show the value and unit inherited from wider breakpoints on every side and corner, instead of empty `0 PX` fields, and a value typed there keeps the inherited unit
+* Improved – Atomic Border: clearing a Border width or radius set on a breakpoint shows the inherited value again instead of `0`
+* Improved – Atomic Border: an inherited Border color shows a colour chip next to its code, and an inherited Border type shows as inherited, including the hint that a double border needs at least 3px
+* Fixed – Atomic Border: a breakpoint or hover/focus state that only changed the border width or colour turned an inherited dashed, dotted or double border into a solid one
+* Fixed – Atomic Border: the editor and the frontend now resolve the inherited border type the same way, including at custom breakpoints, and pages saved before this update pick up the corrected styles without being re-saved
 
 = 2.13.1 - 15/09/2026 =
 * Security – Loop Builder: the public loop request now limits how many posts one request can render (100 by default, filterable with `ablocks/loop_builder/max_posts_per_request`), and only accepts post types and taxonomies that are publicly viewable

@@ -23,7 +23,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-map-block',
 			$this->get_map_size_css( $attributes ),
 			$this->get_map_size_css( $attributes, 'Tablet' ),
-			$this->get_map_size_css( $attributes, 'Mobile' )
+			$this->get_map_size_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_map_size_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -35,7 +36,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-map-block',
 			$this->get_map_size_css( $attributes ),
 			$this->get_map_size_css( $attributes, 'Tablet' ),
-			$this->get_map_size_css( $attributes, 'Mobile' )
+			$this->get_map_size_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_map_size_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

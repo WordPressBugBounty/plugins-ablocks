@@ -172,4 +172,87 @@ class StyleBuckets {
 		}
 		return $level[ $state ];
 	}
+
+	/**
+	 * What a device/state inherits for one prop: the nearest value up the
+	 * cascade, not counting the bucket itself, stepping over value-less
+	 * remnants (a Range cleared down to its unit). Mirror of the JS
+	 * `inheritedProp()`.
+	 *
+	 * @param array  $styles  Stored styles array.
+	 * @param string $bucket  Breakpoint bucket key ('' for base).
+	 * @param string $state   State key.
+	 * @param string $prop    Prop name.
+	 * @param array  $devices Devices applying here, widest-first.
+	 * @return mixed The inherited value, or null.
+	 */
+	public static function inherited_prop( $styles, $bucket, $state, $prop, $devices ) {
+		foreach ( self::resolve_buckets( $bucket, $devices ) as $b ) {
+			foreach ( '' === $state ? [ '' ] : [ $state, '' ] as $s ) {
+				if ( $b === $bucket && $s === $state ) {
+					continue;
+				}
+				$props = self::read_bucket( $styles, $b, $s );
+				$value = isset( $props[ $prop ] ) ? $props[ $prop ] : null;
+				if ( self::has_value( $value ) ) {
+					return $value;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * The buckets to consult for one device, nearest first. Mirror of the JS
+	 * `resolveBuckets()`.
+	 *
+	 * @param string $bucket  The bucket being resolved for.
+	 * @param array  $devices Devices applying at that one, widest-first.
+	 * @return string[] Bucket keys, nearest first.
+	 */
+	private static function resolve_buckets( $bucket, $devices ) {
+		if ( empty( $devices ) ) {
+			return '' === $bucket ? [ '' ] : [ $bucket, '' ];
+		}
+		$out = [ $bucket ];
+		foreach ( array_reverse( $devices ) as $device ) {
+			$key = self::device_bucket_key( $device );
+			if ( ! in_array( $key, $out, true ) ) {
+				$out[] = $key;
+			}
+		}
+		if ( ! in_array( '', $out, true ) ) {
+			$out[] = '';
+		}
+		return $out;
+	}
+
+	/**
+	 * Whether a stored value counts as set. Mirror of the JS `hasValue()`:
+	 * unit / isLinked bookkeeping members are not values.
+	 *
+	 * @param mixed $value Stored value.
+	 * @return bool Whether anything was actually entered.
+	 */
+	private static function has_value( $value ) {
+		if ( null === $value || '' === $value || false === $value ) {
+			return false;
+		}
+		if ( is_array( $value ) ) {
+			if ( array_keys( $value ) === range( 0, count( $value ) - 1 ) ) {
+				return count( $value ) > 0;
+			}
+			foreach ( $value as $key => $member ) {
+				$key = (string) $key;
+				if ( 'isLinked' === $key || 'unit' === $key || 'Unit' === substr( $key, -4 ) ) {
+					continue;
+				}
+				if ( self::has_value( $member ) ) {
+					return true;
+				}
+			}
+			return false;
+		}
+		return true;
+	}
 }

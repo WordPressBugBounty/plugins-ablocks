@@ -27,19 +27,22 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .wp-block-ablocks-loop-template',
 			$this->loop_template_wrapper( $attributes ),
 			$this->loop_template_wrapper( $attributes, 'Tablet' ),
-			$this->loop_template_wrapper( $attributes, 'Mobile' )
+			$this->loop_template_wrapper( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->loop_template_wrapper( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-loop-template-item',
 			$this->template_card_style_css( $attributes ),
 			$this->template_card_style_css( $attributes, 'Tablet' ),
-			$this->template_card_style_css( $attributes, 'Mobile' )
+			$this->template_card_style_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->template_card_style_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-loop-template-item:hover',
 			$this->template_card_style_hover_css( $attributes ),
 			$this->template_card_style_hover_css( $attributes, 'Tablet' ),
-			$this->template_card_style_hover_css( $attributes, 'Mobile' )
+			$this->template_card_style_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->template_card_style_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

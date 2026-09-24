@@ -25,66 +25,76 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .storeengine-ajax-checkout-form__billing-address .storeengine-checkout-form-section-heading',
 			$this->get_Cheackout_form_css( $attributes ),
 			$this->get_Cheackout_form_css( $attributes, 'Tablet' ),
-			$this->get_Cheackout_form_css( $attributes, 'Mobile' )
+			$this->get_Cheackout_form_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Cheackout_form_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-ajax-checkout-form__contact-information .storeengine-checkout-form-section-heading:hover,
 			{{WRAPPER}} .storeengine-ajax-checkout-form__billing-address .storeengine-checkout-form-section-heading:hover',
 			$this->get_Cheackout_form_hover_css( $attributes ),
 			$this->get_Cheackout_form_hover_css( $attributes, 'Tablet' ),
-			$this->get_Cheackout_form_hover_css( $attributes, 'Mobile' )
+			$this->get_Cheackout_form_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Cheackout_form_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-form-group .storeengine-form__inner label,
 			{{WRAPPER}} .storeengine-ajax-checkout-form__contact-information .storeengine-form-field  .storeengine-form-field__inner label',
 			$this->get_Cheackout_form_label_css( $attributes ),
 			$this->get_Cheackout_form_label_css( $attributes, 'Tablet' ),
-			$this->get_Cheackout_form_label_css( $attributes, 'Mobile' )
+			$this->get_Cheackout_form_label_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Cheackout_form_label_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-form-group .storeengine-form__inner label:hover,
 			{{WRAPPER}} .storeengine-ajax-checkout-form__contact-information .storeengine-form-field  .storeengine-form-field__inner label:hover',
 			$this->get_Cheackout_form_label_hover_css( $attributes ),
 			$this->get_Cheackout_form_label_hover_css( $attributes, 'Tablet' ),
-			$this->get_Cheackout_form_label_hover_css( $attributes, 'Mobile' )
+			$this->get_Cheackout_form_label_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Cheackout_form_label_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-form-group .storeengine-form__inner input,
 			{{WRAPPER}} .storeengine-ajax-checkout-form input',
 			$this->get_Cheackout_form_input_css( $attributes ),
 			$this->get_Cheackout_form_input_css( $attributes, 'Tablet' ),
-			$this->get_Cheackout_form_input_css( $attributes, 'Mobile' )
+			$this->get_Cheackout_form_input_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Cheackout_form_input_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-form-group .storeengine-form__inner input:hover,
 			{{WRAPPER}} .storeengine-ajax-checkout-form input:hover',
 			$this->get_Cheackout_form_input_hover_css( $attributes ),
 			$this->get_Cheackout_form_input_hover_css( $attributes, 'Tablet' ),
-			$this->get_Cheackout_form_input_hover_css( $attributes, 'Mobile' )
+			$this->get_Cheackout_form_input_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Cheackout_form_input_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-form-group .storeengine-form__inner select',
 			$this->get_cheackout_form_select_css( $attributes ),
 			$this->get_cheackout_form_select_css( $attributes, 'Tablet' ),
-			$this->get_cheackout_form_select_css( $attributes, 'Mobile' )
+			$this->get_cheackout_form_select_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cheackout_form_select_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-form-group .storeengine-form__inner select:hover',
 			$this->get_cheackout_form_select_hover_css( $attributes ),
 			$this->get_cheackout_form_select_hover_css( $attributes, 'Tablet' ),
-			$this->get_cheackout_form_select_hover_css( $attributes, 'Mobile' )
+			$this->get_cheackout_form_select_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cheackout_form_select_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-ajax-checkout-form .storeengine-checkout__order-btn button',
 			$this->get_cheackout_form_button_css( $attributes ),
 			$this->get_cheackout_form_button_css( $attributes, 'Tablet' ),
-			$this->get_cheackout_form_button_css( $attributes, 'Mobile' )
+			$this->get_cheackout_form_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cheackout_form_button_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-ajax-checkout-form .storeengine-checkout__order-btn button:hover',
 			$this->get_cheackout_form_button_hover_css( $attributes ),
 			$this->get_cheackout_form_button_hover_css( $attributes, 'Tablet' ),
-			$this->get_cheackout_form_button_hover_css( $attributes, 'Mobile' )
+			$this->get_cheackout_form_button_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cheackout_form_button_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

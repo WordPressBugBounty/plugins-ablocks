@@ -28,14 +28,16 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .plyr--video',
 			$this->get_featured_image_css( $attributes ),
 			$this->get_featured_image_css( $attributes, 'Tablet' ),
-			$this->get_featured_image_css( $attributes, 'Mobile' )
+			$this->get_featured_image_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_featured_image_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--academy-course-media:not(.ablocks-block-container),
 			{{WRAPPER}}.ablocks-block--academy-course-media .ablocks-block-container',
 			$this->get_featured_image_container_css( $attributes ),
 			$this->get_featured_image_container_css( $attributes, 'Tablet' ),
-			$this->get_featured_image_container_css( $attributes, 'Mobile' )
+			$this->get_featured_image_container_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_featured_image_container_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--academy-course-image:not(.ablocks-block-container),
@@ -43,7 +45,8 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .plyr--video:hover',
 			$this->get_featured_image_hover_css( $attributes ),
 			$this->get_featured_image_hover_css( $attributes, 'Tablet' ),
-			$this->get_featured_image_hover_css( $attributes, 'Mobile' )
+			$this->get_featured_image_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_featured_image_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

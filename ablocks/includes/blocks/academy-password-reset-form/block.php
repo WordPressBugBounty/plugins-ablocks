@@ -38,58 +38,67 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .academy-password-reset-form-wrapper',
 			$this->getResetFormCss( $attributes ),
 			$this->getResetFormCss( $attributes, 'Tablet' ),
-			$this->getResetFormCss( $attributes, 'Mobile' )
+			$this->getResetFormCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getResetFormCss( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-password-reset-form-wrapper:hover',
 			$this->getResetFormHoverCss( $attributes ),
 			$this->getResetFormHoverCss( $attributes, 'Tablet' ),
-			$this->getResetFormHoverCss( $attributes, 'Mobile' )
+			$this->getResetFormHoverCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getResetFormHoverCss( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-password-reset-form-wrapper .academy-password-reset-form .academy-form-group label',
 			$this->getResetFormLabelCss( $attributes ),
 			$this->getResetFormLabelCss( $attributes, 'Tablet' ),
-			$this->getResetFormLabelCss( $attributes, 'Mobile' )
+			$this->getResetFormLabelCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getResetFormLabelCss( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-password-reset-form-wrapper .academy-password-reset-form .academy-form-group input',
 			$this->getResetFormInputCss( $attributes ),
 			$this->getResetFormInputCss( $attributes, 'Tablet' ),
-			$this->getResetFormInputCss( $attributes, 'Mobile' )
+			$this->getResetFormInputCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getResetFormInputCss( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-password-reset-form-wrapper .academy-password-reset-form .academy-form-group input:hover',
 			$this->getResetFormInputHoverCss( $attributes ),
 			$this->getResetFormInputHoverCss( $attributes, 'Tablet' ),
-			$this->getResetFormInputHoverCss( $attributes, 'Mobile' )
+			$this->getResetFormInputHoverCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getResetFormInputHoverCss( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-password-reset-form-wrapper .academy-password-reset-form .academy-form-group  button',
 			$this->getResetFormButtonCss( $attributes ),
 			$this->getResetFormButtonCss( $attributes, 'Tablet' ),
-			$this->getResetFormButtonCss( $attributes, 'Mobile' )
+			$this->getResetFormButtonCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getResetFormButtonCss( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-password-reset-form-wrapper .academy-password-reset-form .academy-form-group  button:hover',
 			$this->getResetFormButtonHoverCss( $attributes ),
 			$this->getResetFormButtonHoverCss( $attributes, 'Tablet' ),
-			$this->getResetFormButtonHoverCss( $attributes, 'Mobile' )
+			$this->getResetFormButtonHoverCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getResetFormButtonHoverCss( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-password-reset-form-wrapper h2.academy-password-reset-form-heading',
 			$this->getResetFormHeaderCss( $attributes ),
 			$this->getResetFormHeaderCss( $attributes, 'Tablet' ),
-			$this->getResetFormHeaderCss( $attributes, 'Mobile' )
+			$this->getResetFormHeaderCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getResetFormHeaderCss( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-password-reset-form-wrapper .academy-password-reset-form-info a',
 			$this->getResetFormFooterCss( $attributes ),
 			$this->getResetFormFooterCss( $attributes, 'Tablet' ),
-			$this->getResetFormFooterCss( $attributes, 'Mobile' )
+			$this->getResetFormFooterCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getResetFormFooterCss( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

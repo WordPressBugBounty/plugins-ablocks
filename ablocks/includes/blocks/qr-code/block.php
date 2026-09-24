@@ -29,7 +29,8 @@ class Block extends BlockBaseAbstract {
    			 {{WRAPPER}}.ablocks-block--qr-code .ablocks-block-container',
 				$this->get_qr_code_css( $attributes ),
 				$this->get_qr_code_css( $attributes, 'Tablet' ),
-				$this->get_qr_code_css( $attributes, 'Mobile' )
+				$this->get_qr_code_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_qr_code_css( $attributes, $device ); } )
 			);
 			return $css_generator->generate_css();
 

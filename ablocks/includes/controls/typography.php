@@ -92,7 +92,8 @@ class Typography extends ControlBaseAbstract {
 		$add_prop = function( $prop, $local_val, $local_unit, $global_key, $css_var_name ) use ( $attribute_global_name, $global_value, &$css ) {
 			if ( ! empty( $global_value[ $global_key ] ) ) {
 				$css[ $prop ] = "var(--ablocks-{$attribute_global_name}-{$css_var_name})";
-			} elseif ( ! empty( $local_val ) ) {
+			} elseif ( \ABlocks\Helper::has_responsive_value( $local_val ) ) {
+				// A stored 0 is a real value (matches the editor's addProp()).
 				$css[ $prop ] = $local_unit ? $local_val . $local_unit : $local_val;
 			}
 		};
@@ -146,6 +147,15 @@ class Typography extends ControlBaseAbstract {
 		foreach ( $map as $prop => $css_prop ) {
 			$local_val  = $value[ $prop . $device ] ?? '';
 			$local_unit = $value[ $prop . 'Unit' . $device ] ?? '';
+			// A custom breakpoint has no unit default, so a value set there
+			// without touching the unit compiled unitless. Cascade like the
+			// editor's unit selector does, else px. Native devices unchanged.
+			if ( '' === $local_unit && ! in_array( $device, [ '', 'Tablet', 'Mobile' ], true ) ) {
+				$local_unit = \ABlocks\Helper::get_responsive_value( (array) $attribute_value, $prop . 'Unit', $device );
+				if ( ! $local_unit ) {
+					$local_unit = 'px';
+				}
+			}
 			$global_key = $prop . $device;
 
 			$css_var_name = $css_prop . ( $device ? '-' . strtolower( $device ) : '' );

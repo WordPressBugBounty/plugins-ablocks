@@ -29,38 +29,44 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}  .ablocks-toc__header-title',
 			$this->get_toc_title_css( $attributes ),
 			$this->get_toc_title_css( $attributes, 'Tablet' ),
-			$this->get_toc_title_css( $attributes, 'Mobile' )
+			$this->get_toc_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toc_title_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-toc__header',
 			$this->get_toc_header_css( $attributes ),
 			$this->get_toc_header_css( $attributes, 'Tablet' ),
-			$this->get_toc_header_css( $attributes, 'Mobile' )
+			$this->get_toc_header_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toc_header_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-toc-body',
 			$this->get_toc_body_css( $attributes ),
 			$this->get_toc_body_css( $attributes, 'Tablet' ),
-			$this->get_toc_body_css( $attributes, 'Mobile' )
+			$this->get_toc_body_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toc_body_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-toc__header-toggle-icon .ablocks-toc__show',
 			$this->get_toc_header_icon_css( $attributes ),
 			$this->get_toc_header_icon_css( $attributes, 'Tablet' ),
-			$this->get_toc_header_icon_css( $attributes, 'Mobile' )
+			$this->get_toc_header_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toc_header_icon_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-toc__header-toggle-icon .ablocks-toc__show:hover',
 			$this->get_toc_header_icon_hover_css( $attributes ),
 			$this->get_toc_header_icon_hover_css( $attributes, 'Tablet' ),
-			$this->get_toc_header_icon_hover_css( $attributes, 'Mobile' )
+			$this->get_toc_header_icon_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toc_header_icon_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-block-container .ablocks-toc-list,
 		    {{WRAPPER}}  .ablocks-block-container .ablocks-toc-list li a',
 			$this->get_list_item_css( $attributes ),
 			$this->get_list_item_css( $attributes, 'Tablet' ),
-			$this->get_list_item_css( $attributes, 'Mobile' )
+			$this->get_list_item_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_list_item_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -72,56 +78,65 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}  .ablocks-toc__header-title',
 			$this->get_toc_title_css( $attributes ),
 			$this->get_toc_title_css( $attributes, 'Tablet' ),
-			$this->get_toc_title_css( $attributes, 'Mobile' )
+			$this->get_toc_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toc_title_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-toc__header',
 			$this->get_toc_header_css( $attributes ),
 			$this->get_toc_header_css( $attributes, 'Tablet' ),
-			$this->get_toc_header_css( $attributes, 'Mobile' )
+			$this->get_toc_header_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toc_header_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-toc-body',
 			$this->get_toc_body_css( $attributes ),
 			$this->get_toc_body_css( $attributes, 'Tablet' ),
-			$this->get_toc_body_css( $attributes, 'Mobile' )
+			$this->get_toc_body_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toc_body_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-toc__header-toggle-icon .ablocks-toc__show',
 			$this->get_toc_header_icon_css( $attributes ),
 			$this->get_toc_header_icon_css( $attributes, 'Tablet' ),
-			$this->get_toc_header_icon_css( $attributes, 'Mobile' )
+			$this->get_toc_header_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toc_header_icon_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-toc__header-toggle-icon .ablocks-toc__show:hover',
 			$this->get_toc_header_icon_hover_css( $attributes ),
 			$this->get_toc_header_icon_hover_css( $attributes, 'Tablet' ),
-			$this->get_toc_header_icon_hover_css( $attributes, 'Mobile' )
+			$this->get_toc_header_icon_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toc_header_icon_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-toc-body .ablocks-toc-list',
 			$this->get_marker_list_style_css( $attributes ),
 			$this->get_marker_list_style_css( $attributes, 'Tablet' ),
-			$this->get_marker_list_style_css( $attributes, 'Mobile' )
+			$this->get_marker_list_style_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_marker_list_style_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-toc-list,
 		    {{WRAPPER}} .ablocks-toc-list li a',
 			$this->get_list_item_css( $attributes ),
 			$this->get_list_item_css( $attributes, 'Tablet' ),
-			$this->get_list_item_css( $attributes, 'Mobile' )
+			$this->get_list_item_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_list_item_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-toc-body .ablocks-toc-list li a',
 			$this->get_list_item_gap_css( $attributes ),
 			$this->get_list_item_gap_css( $attributes, 'Tablet' ),
-			$this->get_list_item_gap_css( $attributes, 'Mobile' )
+			$this->get_list_item_gap_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_list_item_gap_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} a.ablocks-toc-item-link.active',
 			$this->get_active_list_item_css( $attributes ),
 			$this->get_active_list_item_css( $attributes, 'Tablet' ),
-			$this->get_active_list_item_css( $attributes, 'Mobile' )
+			$this->get_active_list_item_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_active_list_item_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

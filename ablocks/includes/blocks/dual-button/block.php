@@ -24,13 +24,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--dual-button > .ablocks-block-container',
 			$this->getDualButtonCss( $attributes ),
 			$this->getDualButtonCss( $attributes, 'Tablet' ),
-			$this->getDualButtonCss( $attributes, 'Mobile' )
+			$this->getDualButtonCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getDualButtonCss( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-button',
 			$this->get_button_css( $attributes ),
 			$this->get_button_css( $attributes, 'Tablet' ),
-			$this->get_button_css( $attributes, 'Mobile' )
+			$this->get_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -43,13 +45,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}:not(.ablocks-has-block-container), {{WRAPPER}}.ablocks-block--dual-button > .ablocks-block-container',
 			$this->getDualButtonCss( $attributes ),
 			$this->getDualButtonCss( $attributes, 'Tablet' ),
-			$this->getDualButtonCss( $attributes, 'Mobile' )
+			$this->getDualButtonCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getDualButtonCss( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-button',
 			$this->get_button_css( $attributes ),
 			$this->get_button_css( $attributes, 'Tablet' ),
-			$this->get_button_css( $attributes, 'Mobile' )
+			$this->get_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

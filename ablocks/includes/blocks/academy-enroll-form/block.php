@@ -27,7 +27,8 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .academy-enroll-form-shortcode__continue a',
 			$this->getStartButtonCss( $attributes ),
 			$this->getStartButtonCss( $attributes, 'Tablet' ),
-			$this->getStartButtonCss( $attributes, 'Mobile' )
+			$this->getStartButtonCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getStartButtonCss( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -36,7 +37,8 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .academy-enroll-form-shortcode__continue a:hover',
 			$this->getStartButtonHoverCss( $attributes ),
 			$this->getStartButtonHoverCss( $attributes, 'Tablet' ),
-			$this->getStartButtonHoverCss( $attributes, 'Mobile' )
+			$this->getStartButtonHoverCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getStartButtonHoverCss( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -51,7 +53,8 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .academy-widget-enroll__add-to-cart form button',
 			$this->getEnrollButtonCss( $attributes ),
 			$this->getEnrollButtonCss( $attributes, 'Tablet' ),
-			$this->getEnrollButtonCss( $attributes, 'Mobile' )
+			$this->getEnrollButtonCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getEnrollButtonCss( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -65,37 +68,43 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .academy-widget-enroll__complete-form .academy-btn:hover',
 			$this->getEnrollButtonHoverCss( $attributes ),
 			$this->getEnrollButtonHoverCss( $attributes, 'Tablet' ),
-			$this->getEnrollButtonHoverCss( $attributes, 'Mobile' )
+			$this->getEnrollButtonHoverCss( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getEnrollButtonHoverCss( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-enroll-form-shortcode__prerequisite .academy-shortcode-prerequisites-message',
 			$this->get_massage_title_css( $attributes, '' ),
 			$this->get_massage_title_css( $attributes, 'Tablet' ),
-			$this->get_massage_title_css( $attributes, 'Mobile' )
+			$this->get_massage_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_massage_title_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-enroll-form-shortcode__prerequisite .academy-shortcode-prerequisites-message:hover',
 			$this->get_massage_title_hover_css( $attributes, '' ),
 			$this->get_massage_title_hover_css( $attributes, 'Tablet' ),
-			$this->get_massage_title_hover_css( $attributes, 'Mobile' )
+			$this->get_massage_title_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_massage_title_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-enroll-form-shortcode__prerequisite',
 			$this->get_modal_css( $attributes, '' ),
 			$this->get_modal_css( $attributes, 'Tablet' ),
-			$this->get_modal_css( $attributes, 'Mobile' )
+			$this->get_modal_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_modal_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-enroll-form-shortcode__prerequisite .academy-shortcode-prerequisites-lists li a',
 			$this->get_modal_list_css( $attributes, '' ),
 			$this->get_modal_list_css( $attributes, 'Tablet' ),
-			$this->get_modal_list_css( $attributes, 'Mobile' )
+			$this->get_modal_list_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_modal_list_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-enroll-form-shortcode__prerequisite .academy-shortcode-prerequisites-lists li a:hover',
 			$this->get_modal_list_hover_css( $attributes, '' ),
 			$this->get_modal_list_hover_css( $attributes, 'Tablet' ),
-			$this->get_modal_list_hover_css( $attributes, 'Mobile' )
+			$this->get_modal_list_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_modal_list_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-enroll-form-shortcode__price,
@@ -104,7 +113,8 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .academy-widget-enroll__head .academy-course-price ins',
 			$this->get_price_css( $attributes, '' ),
 			$this->get_price_css( $attributes, 'Tablet' ),
-			$this->get_price_css( $attributes, 'Mobile' )
+			$this->get_price_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_price_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-enroll-form-shortcode__price:hover,
@@ -113,31 +123,36 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .academy-widget-enroll__head .academy-course-price ins:hover',
 			$this->get_price_hover_css( $attributes, '' ),
 			$this->get_price_hover_css( $attributes, 'Tablet' ),
-			$this->get_price_hover_css( $attributes, 'Mobile' )
+			$this->get_price_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_price_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__head .title',
 			$this->get_price_title_css( $attributes, '' ),
 			$this->get_price_title_css( $attributes, 'Tablet' ),
-			$this->get_price_title_css( $attributes, 'Mobile' )
+			$this->get_price_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_price_title_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__head .title',
 			$this->get_price_title_hover_css( $attributes, '' ),
 			$this->get_price_title_hover_css( $attributes, 'Tablet' ),
-			$this->get_price_title_hover_css( $attributes, 'Mobile' )
+			$this->get_price_title_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_price_title_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__enrolled-info',
 			$this->get_enroll_info_css( $attributes, '' ),
 			$this->get_enroll_info_css( $attributes, 'Tablet' ),
-			$this->get_enroll_info_css( $attributes, 'Mobile' )
+			$this->get_enroll_info_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_enroll_info_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__enrolled-info:hover',
 			$this->get_enroll_info_hover_css( $attributes, '' ),
 			$this->get_enroll_info_hover_css( $attributes, 'Tablet' ),
-			$this->get_enroll_info_hover_css( $attributes, 'Mobile' )
+			$this->get_enroll_info_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_enroll_info_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

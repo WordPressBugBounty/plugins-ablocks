@@ -21,13 +21,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}',
 			$this->get_wrapper_css( $attributes ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--form-input',
 			$this->get_input_block_main_wrapper( $attributes ),
 			$this->get_input_block_main_wrapper( $attributes, 'Tablet' ),
-			$this->get_input_block_main_wrapper( $attributes, 'Mobile' )
+			$this->get_input_block_main_wrapper( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_input_block_main_wrapper( $attributes, $device ); } )
 		);
 
 		// Generate button icon CSS start
@@ -35,13 +37,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}  .ablocks-icon-wrap',
 			$this->get_icon_wrapper_css( $attributes ),
 			$this->get_icon_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_icon_wrapper_css( $attributes, 'Mobile' )
+			$this->get_icon_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_icon_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-form-builder__input-show-icon',
 			$this->get_icon_space_css( $attributes ),
 			$this->get_icon_space_css( $attributes, 'Tablet' ),
-			$this->get_icon_space_css( $attributes, 'Mobile' )
+			$this->get_icon_space_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_icon_space_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -79,16 +83,13 @@ class Block extends BlockBaseAbstract {
 		$css = [];
 		$css['box-sizing'] = 'border-box';
 
-		$valueKey = $device === 'Tablet' ? 'valueTablet' : ( $device === 'Mobile' ? 'valueMobile' : 'value' );
-		$unitKey = $device === 'Tablet' ? 'valueUnitTablet' : ( $device === 'Mobile' ? 'valueUnitMobile' : 'valueUnit' );
-
-		$widthValue = isset( $attributes['inputWidth'][ $valueKey ] ) && $attributes['inputWidth'][ $valueKey ] !== ''
-		? $attributes['inputWidth'][ $valueKey ]
-		: ( isset( $attributes['inputWidth']['value'] ) ? $attributes['inputWidth']['value'] : 100 );
-
-		$widthUnit = isset( $attributes['inputWidth'][ $unitKey ] ) && $attributes['inputWidth'][ $unitKey ] !== ''
-		? $attributes['inputWidth'][ $unitKey ]
-		: '%';
+		// The device's own width, else the nearest containing wider device's
+		// (custom breakpoints included), else Desktop's.
+		$input_width = isset( $attributes['inputWidth'] ) ? (array) $attributes['inputWidth'] : [];
+		$widthValue  = \ABlocks\Helper::get_responsive_value( $input_width, 'value', $device );
+		$widthValue  = false === $widthValue ? 100 : $widthValue;
+		$widthUnit   = \ABlocks\Helper::get_responsive_value( $input_width, 'valueUnit', $device );
+		$widthUnit   = false === $widthUnit ? '%' : $widthUnit;
 
 		if ( is_numeric( $widthValue ) ) {
 			$widthValue = max( 0, floatval( $widthValue ) - 1 );

@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\ControlBaseAbstract;
+use ABlocks\Helper;
 
 class Position extends ControlBaseAbstract {
 	public static function get_attribute_default_value( $is_responsive = false ) {
@@ -55,22 +56,8 @@ class Position extends ControlBaseAbstract {
 		$value = wp_parse_args( $attribute_value, $default_attr_value );
 		$css = [];
 
-		$h_offset_unit = self::get_unit(
-			[
-				'unit' => ! empty( $value['hOffsetUnit'] ) ? $value['hOffsetUnit'] : '',
-				'unitTablet' => ! empty( $value['hOffsetUnitTablet'] ) ? $value['hOffsetUnitTablet'] : '',
-				'unitMobile' => ! empty( $value['hOffsetUnitMobile'] ) ? $value['hOffsetUnitMobile'] : '',
-			],
-			$device
-		);
-		$v_offset_unit = self::get_unit(
-			[
-				'unit' => ! empty( $value['vOffsetUnit'] ) ? $value['vOffsetUnit'] : '',
-				'unitTablet' => ! empty( $value['vOffsetUnitTablet'] ) ? $value['vOffsetUnitTablet'] : '',
-				'unitMobile' => ! empty( $value['vOffsetUnitMobile'] ) ? $value['vOffsetUnitMobile'] : '',
-			],
-			$device
-		);
+		$h_offset_unit = Helper::get_responsive_value( $value, 'hOffsetUnit', $device );
+		$v_offset_unit = Helper::get_responsive_value( $value, 'vOffsetUnit', $device );
 
 		if ( ! empty( $value['positionType'] ) ) {
 			$css[ $property ] = $value['positionType'];

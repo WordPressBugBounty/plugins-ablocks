@@ -24,35 +24,40 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block-news-ticker__label',
 			$this->get_label_css( $attributes ),
 			$this->get_label_css( $attributes, 'Tablet' ),
-			$this->get_label_css( $attributes, 'Mobile' )
+			$this->get_label_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_label_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-news-ticker__label:hover',
 			$this->get_label_color_hover_css( $attributes ),
 			$this->get_label_color_hover_css( $attributes, 'Tablet' ),
-			$this->get_label_color_hover_css( $attributes, 'Mobile' )
+			$this->get_label_color_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_label_color_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-news-ticker',
 			$this->get_ticker_content_css( $attributes ),
 			$this->get_ticker_content_css( $attributes, 'Tablet' ),
-			$this->get_ticker_content_css( $attributes, 'Mobile' )
+			$this->get_ticker_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_ticker_content_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-news-ticker__marquee',
 			$this->get_ticker_color_css( $attributes ),
 			$this->get_ticker_color_css( $attributes, 'Tablet' ),
-			$this->get_ticker_color_css( $attributes, 'Mobile' )
+			$this->get_ticker_color_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_ticker_color_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-news-ticker__marquee:hover',
 			$this->get_ticker_color_hover_css( $attributes ),
 			$this->get_ticker_color_hover_css( $attributes, 'Tablet' ),
-			$this->get_ticker_color_hover_css( $attributes, 'Mobile' )
+			$this->get_ticker_color_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_ticker_color_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -79,7 +84,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block-news-ticker__list',
 			$this->get_ticker_list_styles_css( $attributes ),
 			$this->get_ticker_list_styles_css( $attributes, 'Tablet' ),
-			$this->get_ticker_list_styles_css( $attributes, 'Mobile' )
+			$this->get_ticker_list_styles_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_ticker_list_styles_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(

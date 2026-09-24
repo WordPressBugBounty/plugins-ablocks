@@ -41,7 +41,10 @@ class TextStroke extends ControlBaseAbstract {
 		if ( empty( $attribute_value ) ) {
 			return [];
 		}
-		$default_attar_value = self::get_attribute_default_value( (bool) $device );
+		// responsive_defaults(), not get_attribute_default_value( true ): the
+		// compilers also pass custom-breakpoint suffixes and the phantom probe,
+		// which the plain responsive defaults have no keys for.
+		$default_attar_value = $device ? self::responsive_defaults() : self::get_attribute_default_value( false );
 		$value = wp_parse_args( $attribute_value, $default_attar_value );
 		$css = [];
 

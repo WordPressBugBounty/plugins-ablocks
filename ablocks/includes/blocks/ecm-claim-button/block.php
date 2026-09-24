@@ -29,40 +29,46 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ecm-shortcode--claim',
 			$this->get_coutineu_button_wrapper_css( $attributes ),
 			$this->get_coutineu_button_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_coutineu_button_wrapper_css( $attributes, 'Mobile' )
+			$this->get_coutineu_button_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_coutineu_button_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ecm-shortcode--claim button',
 			$this->get_coutineu_button_css( $attributes ),
 			$this->get_coutineu_button_css( $attributes, 'Tablet' ),
-			$this->get_coutineu_button_css( $attributes, 'Mobile' )
+			$this->get_coutineu_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_coutineu_button_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ecm-shortcode--claim button:hover',
 			$this->get_coutineu_button_hover_css( $attributes ),
 			$this->get_coutineu_button_hover_css( $attributes, 'Tablet' ),
-			$this->get_coutineu_button_hover_css( $attributes, 'Mobile' )
+			$this->get_coutineu_button_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_coutineu_button_hover_css( $attributes, $device ); } )
 		);
 		foreach ( [ '.ecm-shortcode--tooltip', '.ecm-shortcode--tooltip svg', '.ecm-shortcode--tooltip svg path' ] as $selector ) {
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} ' . $selector,
 				$this->get_badge_css( $attributes, 'pendingBadgeFillColor', 'pendingBadgeSize' ),
 				$this->get_badge_css( $attributes, 'pendingBadgeFillColor', 'pendingBadgeSize', 'Tablet' ),
-				$this->get_badge_css( $attributes, 'pendingBadgeFillColor', 'pendingBadgeSize', 'Mobile' )
+				$this->get_badge_css( $attributes, 'pendingBadgeFillColor', 'pendingBadgeSize', 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_badge_css( $attributes, 'pendingBadgeFillColor', 'pendingBadgeSize', $device ); } )
 			);
 		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--ecm-claim-button',
 			$this->get_list_alignment_css( $attributes ),
 			$this->get_list_alignment_css( $attributes, 'Tablet' ),
-			$this->get_list_alignment_css( $attributes, 'Mobile' )
+			$this->get_list_alignment_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_list_alignment_css( $attributes, $device ); } )
 		);
 		foreach ( [ '.ecm-shortcode--claim__message', '.ecm-shortcode--claim__message svg', '.ecm-shortcode--claim__message svg path' ] as $selector ) {
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} ' . $selector,
 				$this->get_badge_css( $attributes, 'confirmationBandageFillColor', 'confirmationBandageSize', '', true ),
 				$this->get_badge_css( $attributes, 'confirmationBandageFillColor', 'confirmationBandageSize', 'Tablet', true ),
-				$this->get_badge_css( $attributes, 'confirmationBandageFillColor', 'confirmationBandageSize', 'Mobile', true )
+				$this->get_badge_css( $attributes, 'confirmationBandageFillColor', 'confirmationBandageSize', 'Mobile', true ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_badge_css( $attributes, 'confirmationBandageFillColor', 'confirmationBandageSize', $device, true ); } )
 			);
 		}
 

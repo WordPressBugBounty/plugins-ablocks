@@ -51,13 +51,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap:hover',
 			Icon::get_wrapper_hover_css( $attributes ),
 			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap img.ablocks-image-icon',

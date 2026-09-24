@@ -22,14 +22,16 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}',
 			$this->get_wrapper_css( $attributes ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-chart-canvas',
 			$this->get_chart_css( $attributes ),
 			$this->get_chart_css( $attributes, 'Tablet' ),
-			$this->get_chart_css( $attributes, 'Mobile' )
+			$this->get_chart_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_chart_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -40,14 +42,16 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}',
 			$this->get_wrapper_css( $attributes ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-chart-canvas',
 			$this->get_chart_css( $attributes ),
 			$this->get_chart_css( $attributes, 'Tablet' ),
-			$this->get_chart_css( $attributes, 'Mobile' )
+			$this->get_chart_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_chart_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

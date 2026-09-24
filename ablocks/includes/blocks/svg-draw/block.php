@@ -23,7 +23,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block-container',
 			$this->get_wrapper_css( $attributes ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 
 		// Icon Style
@@ -31,19 +32,22 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap:hover',
 			Icon::get_wrapper_hover_css( $attributes ),
 			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} svg > path',
 			$this->get_svg_css( $attributes ),
 			$this->get_svg_css( $attributes, 'Tablet' ),
-			$this->get_svg_css( $attributes, 'Mobile' )
+			$this->get_svg_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_svg_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -81,7 +85,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}',
 			$this->get_wrapper_css( $attributes ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 
 		// Icon Style
@@ -89,19 +94,22 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap:hover',
 			Icon::get_wrapper_hover_css( $attributes ),
 			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} svg > path',
 			$this->get_svg_css( $attributes ),
 			$this->get_svg_css( $attributes, 'Tablet' ),
-			$this->get_svg_css( $attributes, 'Mobile' )
+			$this->get_svg_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_svg_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -109,24 +117,28 @@ class Block extends BlockBaseAbstract {
 			Icon::get_element_image_css( $attributes ),
 			Icon::get_element_image_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap img.ablocks-image-icon:hover',
 			Icon::get_element_image_hover_css( $attributes ),
 			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap svg.ablocks-svg-icon',
 			Icon::get_element_css( $attributes ),
 			Icon::get_element_css( $attributes, 'Tablet' ),
 			Icon::get_element_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap svg.ablocks-svg-icon:hover',
 			Icon::get_element_image_hover_css( $attributes ),
 			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

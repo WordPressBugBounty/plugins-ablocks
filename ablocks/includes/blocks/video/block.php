@@ -40,6 +40,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_video_container_css( $attributes ),
 			$this->get_video_container_css( $attributes, 'Tablet' ),
 			$this->get_video_container_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_video_container_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

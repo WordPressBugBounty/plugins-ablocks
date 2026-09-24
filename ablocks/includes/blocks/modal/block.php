@@ -33,26 +33,30 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap',
 			$this->get_panel_main_wrapper_css( $attributes ),
 			$this->get_panel_main_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_panel_main_wrapper_css( $attributes, 'Mobile' )
+			$this->get_panel_main_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_panel_main_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap .ablocks-modal-popup-content-wrap',
 			$this->get_panel_content_wrap_css( $attributes ),
 			$this->get_panel_content_wrap_css( $attributes, 'Tablet' ),
-			$this->get_panel_content_wrap_css( $attributes, 'Mobile' )
+			$this->get_panel_content_wrap_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_panel_content_wrap_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap .ablocks-modal-popup-content-wrap:hover',
 			$this->get_panel_content_wrap_hover_css( $attributes ),
 			$this->get_panel_content_wrap_hover_css( $attributes, 'Tablet' ),
-			$this->get_panel_content_wrap_hover_css( $attributes, 'Mobile' )
+			$this->get_panel_content_wrap_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_panel_content_wrap_hover_css( $attributes, $device ); } )
 		);
 		if ( empty( $attributes['disableCloseButton'] ) ) {
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap .ablocks-modal-popup-close',
 				$this->get_panel_close_button_css( $attributes ),
 				$this->get_panel_close_button_css( $attributes, 'Tablet' ),
-				$this->get_panel_close_button_css( $attributes, 'Mobile' )
+				$this->get_panel_close_button_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_panel_close_button_css( $attributes, $device ); } )
 			);
 
 			if ( ! empty( $attributes['closeBtnColor'] ) ) {
@@ -76,26 +80,30 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap',
 			$this->get_panel_main_wrapper_css( $attributes ),
 			$this->get_panel_main_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_panel_main_wrapper_css( $attributes, 'Mobile' )
+			$this->get_panel_main_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_panel_main_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap .ablocks-modal-popup-content-wrap',
 			$this->get_panel_content_wrap_css( $attributes ),
 			$this->get_panel_content_wrap_css( $attributes, 'Tablet' ),
-			$this->get_panel_content_wrap_css( $attributes, 'Mobile' )
+			$this->get_panel_content_wrap_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_panel_content_wrap_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap .ablocks-modal-popup-content-wrap:hover',
 			$this->get_panel_content_wrap_hover_css( $attributes ),
 			$this->get_panel_content_wrap_hover_css( $attributes, 'Tablet' ),
-			$this->get_panel_content_wrap_hover_css( $attributes, 'Mobile' )
+			$this->get_panel_content_wrap_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_panel_content_wrap_hover_css( $attributes, $device ); } )
 		);
 		if ( empty( $attributes['disableCloseButton'] ) ) {
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap.ablocks-block-modal---panel-wrap .ablocks-modal-popup-close',
 				$this->get_panel_close_button_css( $attributes ),
 				$this->get_panel_close_button_css( $attributes, 'Tablet' ),
-				$this->get_panel_close_button_css( $attributes, 'Mobile' )
+				$this->get_panel_close_button_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_panel_close_button_css( $attributes, $device ); } )
 			);
 
 			if ( ! empty( $attributes['closeBtnColor'] ) ) {

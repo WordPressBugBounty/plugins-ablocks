@@ -29,7 +29,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--container',
 			$this->get_main_wrapper_css( $attributes ),
 			$this->get_main_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_main_wrapper_css( $attributes, 'Mobile' )
+			$this->get_main_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_main_wrapper_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -49,20 +50,23 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} > .ablocks-block-container',
 			$this->get_block_container_css( $attributes ),
 			$this->get_block_container_css( $attributes, 'Tablet' ),
-			$this->get_block_container_css( $attributes, 'Mobile' )
+			$this->get_block_container_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_block_container_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} > .ablocks-block-container',
 			$this->get_inner_blocks_closest_parent_css( $attributes ),
 			$this->get_inner_blocks_closest_parent_css( $attributes, 'Tablet' ),
-			$this->get_inner_blocks_closest_parent_css( $attributes, 'Mobile' )
+			$this->get_inner_blocks_closest_parent_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_inner_blocks_closest_parent_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} > .ablocks-block-container > *:not(style,.ablocks-block--container)',
 			$this->get_container_inner_blocks_row_column_display_css( $attributes ),
 			$this->get_container_inner_blocks_row_column_display_css( $attributes, 'Tablet' ),
-			$this->get_container_inner_blocks_row_column_display_css( $attributes, 'Mobile' )
+			$this->get_container_inner_blocks_row_column_display_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_container_inner_blocks_row_column_display_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -114,13 +118,15 @@ class Block extends BlockBaseAbstract {
 				$this->reset_static_css( $attributes ),
 				$this->reset_static_css( $attributes, 'Tablet' ),
 				$this->reset_static_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->reset_static_css( $attributes, $device ); } )
 			);
 		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--container',
 			$this->get_main_wrapper_css( $attributes ),
 			$this->get_main_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_main_wrapper_css( $attributes, 'Mobile' )
+			$this->get_main_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_main_wrapper_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -141,27 +147,31 @@ class Block extends BlockBaseAbstract {
 			$attributes['isRootContainer'] ? '{{WRAPPER}} > .ablocks-block-container' : '{{WRAPPER}}',
 			$this->get_block_container_css( $attributes ),
 			$this->get_block_container_css( $attributes, 'Tablet' ),
-			$this->get_block_container_css( $attributes, 'Mobile' )
+			$this->get_block_container_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_block_container_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			$attributes['isRootContainer'] ? '{{WRAPPER}} > .ablocks-block-container' : '{{WRAPPER}}',
 			$this->get_inner_blocks_closest_parent_css( $attributes ),
 			$this->get_inner_blocks_closest_parent_css( $attributes, 'Tablet' ),
-			$this->get_inner_blocks_closest_parent_css( $attributes, 'Mobile' )
+			$this->get_inner_blocks_closest_parent_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_inner_blocks_closest_parent_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-has-block-container > .ablocks-block-container',
 			$this->get_inner_blocks_closest_parent_css( $attributes ),
 			$this->get_inner_blocks_closest_parent_css( $attributes, 'Tablet' ),
-			$this->get_inner_blocks_closest_parent_css( $attributes, 'Mobile' )
+			$this->get_inner_blocks_closest_parent_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_inner_blocks_closest_parent_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			$attributes['isRootContainer'] ? '{{WRAPPER}} > .ablocks-block-container > *:not(style,.ablocks-block--container)' : '{{WRAPPER}}',
 			$this->get_container_inner_blocks_row_column_display_css_2( $attributes ),
 			$this->get_container_inner_blocks_row_column_display_css_2( $attributes, 'Tablet' ),
-			$this->get_container_inner_blocks_row_column_display_css_2( $attributes, 'Mobile' )
+			$this->get_container_inner_blocks_row_column_display_css_2( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_container_inner_blocks_row_column_display_css_2( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -169,24 +179,28 @@ class Block extends BlockBaseAbstract {
 			$this->get_container_before_css( $attributes ),
 			$this->get_container_before_css( $attributes, 'Tablet' ),
 			$this->get_container_before_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_container_before_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}:hover::before',
 			$this->get_container_before_hover_css( $attributes ),
 			$this->get_container_before_hover_css( $attributes, 'Tablet' ),
 			$this->get_container_before_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_container_before_hover_css( $attributes, $device ); } )
 		);
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-container-shape-top > svg',
 				$this->getContainerShapeTopSvgCSS( $attributes ),
 				$this->getContainerShapeTopSvgCSS( $attributes, 'Tablet' ),
 				$this->getContainerShapeTopSvgCSS( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getContainerShapeTopSvgCSS( $attributes, $device ); } )
 			);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-container-shape-bottom > svg',
 			$this->getContainerShapeBottomSvgCSS( $attributes ),
 			$this->getContainerShapeBottomSvgCSS( $attributes, 'Tablet' ),
 			$this->getContainerShapeBottomSvgCSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getContainerShapeBottomSvgCSS( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -194,12 +208,14 @@ class Block extends BlockBaseAbstract {
 			$this->getContainerShapeTopCSS( $attributes ),
 			$this->getContainerShapeTopCSS( $attributes, 'Tablet' ),
 			$this->getContainerShapeTopCSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getContainerShapeTopCSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-container-shape-bottom',
 			$this->getContainerShapeBottomCSS( $attributes ),
 			$this->getContainerShapeBottomCSS( $attributes, 'Tablet' ),
 			$this->getContainerShapeBottomCSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getContainerShapeBottomCSS( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

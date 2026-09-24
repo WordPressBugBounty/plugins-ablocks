@@ -28,61 +28,71 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .feedback-title',
 			$this->get_feedback_heading_css( $attributes ),
 			$this->get_feedback_heading_css( $attributes, 'Tablet' ),
-			$this->get_feedback_heading_css( $attributes, 'Mobile' )
+			$this->get_feedback_heading_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_feedback_heading_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .feedback-title:hover',
 			$this->get_feedback_heading_hover_css( $attributes ),
 			$this->get_feedback_heading_hover_css( $attributes, 'Tablet' ),
-			$this->get_feedback_heading_hover_css( $attributes, 'Mobile' )
+			$this->get_feedback_heading_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_feedback_heading_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings',
 			$this->get_feedback_section_css( $attributes ),
 			$this->get_feedback_section_css( $attributes, 'Tablet' ),
-			$this->get_feedback_section_css( $attributes, 'Mobile' )
+			$this->get_feedback_section_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_feedback_section_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings:hover',
 			$this->get_feedback_section_hover_css( $attributes ),
 			$this->get_feedback_section_hover_css( $attributes, 'Tablet' ),
-			$this->get_feedback_section_hover_css( $attributes, 'Mobile' )
+			$this->get_feedback_section_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_feedback_section_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-avg-rating',
 			$this->get_avg_rating_css( $attributes ),
 			$this->get_avg_rating_css( $attributes, 'Tablet' ),
-			$this->get_avg_rating_css( $attributes, 'Mobile' )
+			$this->get_avg_rating_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_avg_rating_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-avg-rating:hover',
 			$this->get_avg_rating_hover_css( $attributes, '' ),
 			$this->get_avg_rating_hover_css( $attributes, 'Tablet' ),
-			$this->get_avg_rating_hover_css( $attributes, 'Mobile' )
+			$this->get_avg_rating_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_avg_rating_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-avg-rating-html .academy-icon::before',
 			$this->get_rating_star_css( $attributes ),
 			$this->get_rating_star_css( $attributes, 'Tablet' ),
-			$this->get_rating_star_css( $attributes, 'Mobile' )
+			$this->get_rating_star_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_star_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-avg-rating-html .academy-icon:hover::before',
 			$this->get_rating_star_hover_css( $attributes, '' ),
 			$this->get_rating_star_hover_css( $attributes, 'Tablet' ),
-			$this->get_rating_star_hover_css( $attributes, 'Mobile' )
+			$this->get_rating_star_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_star_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-avg-rating-total',
 			$this->get_total_rating_css( $attributes, '' ),
 			$this->get_total_rating_css( $attributes, 'Tablet' ),
-			$this->get_total_rating_css( $attributes, 'Mobile' )
+			$this->get_total_rating_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_total_rating_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-avg-rating-total:hover',
 			$this->get_total_rating_hover_css( $attributes, '' ),
 			$this->get_total_rating_hover_css( $attributes, 'Tablet' ),
-			$this->get_total_rating_hover_css( $attributes, 'Mobile' )
+			$this->get_total_rating_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_total_rating_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-ratings-list-item .academy-ratings-list-item-col,
@@ -90,7 +100,8 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-ratings-list-item .academy-ratings-list-item-label span',
 			$this->get_feedback_css( $attributes, '' ),
 			$this->get_feedback_css( $attributes, 'Tablet' ),
-			$this->get_feedback_css( $attributes, 'Mobile' )
+			$this->get_feedback_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_feedback_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-ratings-list-item .academy-ratings-list-item-col:hover,
@@ -98,43 +109,50 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-ratings-list-item .academy-ratings-list-item-label span:hover',
 			$this->get_feedback_hover_css( $attributes, '' ),
 			$this->get_feedback_hover_css( $attributes, 'Tablet' ),
-			$this->get_feedback_hover_css( $attributes, 'Mobile' )
+			$this->get_feedback_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_feedback_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-ratings-list-item .academy-icon',
 			$this->get_start_css( $attributes, '' ),
 			$this->get_start_css( $attributes, 'Tablet' ),
-			$this->get_start_css( $attributes, 'Mobile' )
+			$this->get_start_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_start_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-ratings-list-item .academy-icon:hover',
 			$this->get_start_hover_css( $attributes, '' ),
 			$this->get_start_hover_css( $attributes, 'Tablet' ),
-			$this->get_start_hover_css( $attributes, 'Mobile' )
+			$this->get_start_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_start_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-ratings-list-item .academy-ratings-list-item-fill',
 			$this->get_fill_css( $attributes, '' ),
 			$this->get_fill_css( $attributes, 'Tablet' ),
-			$this->get_fill_css( $attributes, 'Mobile' )
+			$this->get_fill_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_fill_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-ratings-list-item .academy-ratings-list-item-fill:hover',
 			$this->get_fill_hover_css( $attributes, '' ),
 			$this->get_fill_hover_css( $attributes, 'Tablet' ),
-			$this->get_fill_hover_css( $attributes, 'Mobile' )
+			$this->get_fill_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_fill_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-ratings-list-item .academy-ratings-list-item-fill-bar',
 			$this->get_active_fill_css( $attributes, '' ),
 			$this->get_active_fill_css( $attributes, 'Tablet' ),
-			$this->get_active_fill_css( $attributes, 'Mobile' )
+			$this->get_active_fill_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_active_fill_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--feedback .academy-student-course-feedback-ratings .academy-ratings-list-item .academy-ratings-list-item-fill-bar:hover',
 			$this->get_active_fill_hover_css( $attributes, '' ),
 			$this->get_active_fill_hover_css( $attributes, 'Tablet' ),
-			$this->get_active_fill_hover_css( $attributes, 'Mobile' )
+			$this->get_active_fill_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_active_fill_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

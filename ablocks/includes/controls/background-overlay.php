@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Classes\ControlBaseAbstract;
 use ABlocks\Controls\Color;
+use ABlocks\Helper;
 
 class BackgroundOverlay extends ControlBaseAbstract {
 
@@ -151,32 +152,11 @@ class BackgroundOverlay extends ControlBaseAbstract {
 		);
 
 		// Get the units for X and Y position, and display size width
-		$unitX_position_unit = self::get_unit(
-			[
-				'unit' => $value['imgXPositionUnit'],
-				'unitTablet' => $value['imgXPositionUnitTablet'],
-				'unitMobile' => $value['imgXPositionUnitMobile'],
-			],
-			$device
-		);
+		$unitX_position_unit = Helper::get_responsive_value( $value, 'imgXPositionUnit', $device );
 
-		$unitY_position_unit = self::get_unit(
-			[
-				'unit' => $value['imgYPositionUnit'],
-				'unitTablet' => $value['imgYPositionUnitTablet'],
-				'unitMobile' => $value['imgYPositionUnitMobile'],
-			],
-			$device
-		);
+		$unitY_position_unit = Helper::get_responsive_value( $value, 'imgYPositionUnit', $device );
 
-		$display_size_width_unit = self::get_unit(
-			[
-				'unit' => $value['imgDisplaySizeWidthUnit'],
-				'unitTablet' => $value['imgDisplaySizeWidthUnitTablet'],
-				'unitMobile' => $value['imgDisplaySizeWidthUnitMobile'],
-			],
-			$device
-		);
+		$display_size_width_unit = Helper::get_responsive_value( $value, 'imgDisplaySizeWidthUnit', $device );
 
 		$css = [];
 
@@ -270,12 +250,11 @@ class BackgroundOverlay extends ControlBaseAbstract {
 				}
 
 				// Handle opacity
-				if ( $device === 'Tablet' && isset( $value['opacityTablet'] ) ) {
-					$css['opacity'] = $value['opacityTablet'];
-				} elseif ( $device === 'Mobile' && isset( $value['opacityMobile'] ) ) {
-					$css['opacity'] = $value['opacityMobile'];
-				} elseif ( isset( $value['opacity'] ) ) {
-					$css['opacity'] = $value['opacity'];
+				// The device's own opacity, else the nearest containing wider
+				// device's (custom breakpoints included).
+				$opacity_value = Helper::get_responsive_value( $value, 'opacity', $device );
+				if ( false !== $opacity_value ) {
+					$css['opacity'] = $opacity_value;
 				}
 
 				// Handle blend mode
@@ -305,12 +284,11 @@ class BackgroundOverlay extends ControlBaseAbstract {
 
 				// Handle opacity
 
-				if ( $device === 'Tablet' && isset( $value['opacityTablet'] ) ) {
-					$css['opacity'] = $value['opacityTablet'];
-				} elseif ( $device === 'Mobile' && isset( $value['opacityMobile'] ) ) {
-					$css['opacity'] = $value['opacityMobile'];
-				} elseif ( isset( $value['opacity'] ) ) {
-					$css['opacity'] = $value['opacity'];
+				// The device's own opacity, else the nearest containing wider
+				// device's (custom breakpoints included).
+				$opacity_value = Helper::get_responsive_value( $value, 'opacity', $device );
+				if ( false !== $opacity_value ) {
+					$css['opacity'] = $opacity_value;
 				}
 
 				// Handle blend mode
@@ -354,32 +332,11 @@ class BackgroundOverlay extends ControlBaseAbstract {
 			$attribute_value
 		);
 		// Get the units for X and Y position hover states and display size hover width
-		$unit_x_position_unit_h = self::get_unit(
-			[
-				'unit' => $value['imgXPositionUnitH'],
-				'unitTablet' => $value['imgXPositionUnitHTablet'],
-				'unitMobile' => $value['imgXPositionUnitHMobile'],
-			],
-			$device
-		);
+		$unit_x_position_unit_h = Helper::get_responsive_value( $value, 'imgXPositionUnitH', $device );
 
-		$unit_y_position_unit_h = self::get_unit(
-			[
-				'unit' => $value['imgYPositionUnitH'],
-				'unitTablet' => $value['imgYPositionUnitHTablet'],
-				'unitMobile' => $value['imgYPositionUnitHMobile'],
-			],
-			$device
-		);
+		$unit_y_position_unit_h = Helper::get_responsive_value( $value, 'imgYPositionUnitH', $device );
 
-		$img_display_size_width_h_unit = self::get_unit(
-			[
-				'unit' => $value['imgDisplaySizeWidthHUnit'],
-				'unitTablet' => $value['imgDisplaySizeWidthHUnitTablet'],
-				'unitMobile' => $value['imgDisplaySizeWidthHMobile'],
-			],
-			$device
-		);
+		$img_display_size_width_h_unit = Helper::get_responsive_value( $value, 'imgDisplaySizeWidthHUnit', $device );
 
 		$css = [];
 		$topDiffH = ! empty( $extra_border_value['commonWidthH'] ) ? intval( $extra_border_value['commonWidthH'] ) : intval( $extra_border_value['topWidth'] ?? 0 );
@@ -470,12 +427,11 @@ class BackgroundOverlay extends ControlBaseAbstract {
 					}
 				}
 				// Handle opacity on hover
-				if ( $device === 'Tablet' && isset( $value['opacityHTablet'] ) ) {
-					$css['opacity'] = $value['opacityHTablet'];
-				} elseif ( $device === 'Mobile' && isset( $value['opacityHMobile'] ) ) {
-					$css['opacity'] = $value['opacityHMobile'];
-				} elseif ( isset( $value['opacityH'] ) ) {
-					$css['opacity'] = $value['opacityH'];
+				// The device's own opacity, else the nearest containing wider
+				// device's (custom breakpoints included).
+				$opacity_h_value = Helper::get_responsive_value( $value, 'opacityH', $device );
+				if ( false !== $opacity_h_value ) {
+					$css['opacity'] = $opacity_h_value;
 				}
 				// Handle blend mode on hover
 				if ( ! empty( $value['blendModeH'] ) ) {
@@ -497,12 +453,11 @@ class BackgroundOverlay extends ControlBaseAbstract {
 				$css['height'] = '100%';
 				$css[ $property ] = Color::get_css( esc_attr( $value[ $background_color_h_key ] ) );
 
-				if ( $device === 'Tablet' && isset( $value['opacityHTablet'] ) ) {
-					$css['opacity'] = $value['opacityHTablet'];
-				} elseif ( $device === 'Mobile' && isset( $value['opacityHMobile'] ) ) {
-					$css['opacity'] = $value['opacityHMobile'];
-				} elseif ( isset( $value['opacityH'] ) ) {
-					$css['opacity'] = $value['opacityH'];
+				// The device's own opacity, else the nearest containing wider
+				// device's (custom breakpoints included).
+				$opacity_h_value = Helper::get_responsive_value( $value, 'opacityH', $device );
+				if ( false !== $opacity_h_value ) {
+					$css['opacity'] = $opacity_h_value;
 				}
 
 				// Handle blend mode on hover

@@ -24,14 +24,16 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-image-hotspot__tooltip--active',
 			$this->get_active_content_css( $attributes ),
 			$this->get_active_content_css( $attributes, 'Tablet' ),
-			$this->get_active_content_css( $attributes, 'Mobile' )
+			$this->get_active_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_active_content_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-hotspot__tooltip--active:hover',
 			$this->get_active_content_hover_css( $attributes ),
 			$this->get_active_content_hover_css( $attributes, 'Tablet' ),
-			$this->get_active_content_hover_css( $attributes, 'Mobile' )
+			$this->get_active_content_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_active_content_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

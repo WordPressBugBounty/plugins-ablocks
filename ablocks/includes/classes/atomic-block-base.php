@@ -43,6 +43,19 @@ abstract class AtomicBlockBase extends BlockBaseAbstract {
 		return true;
 	}
 
+	/**
+	 * Keep saved markup pointing at the style class build_css() emits — see
+	 * AtomicStyles::refresh_style_class().
+	 */
+	public function render_callback( $attributes, $content, $block_instance ) {
+		$content = AtomicStyles::refresh_style_class(
+			$content,
+			isset( $attributes['styles'] ) && is_array( $attributes['styles'] ) ? $attributes['styles'] : [],
+			$this->supports_alignment() && isset( $attributes['alignment'] ) && is_array( $attributes['alignment'] ) ? $attributes['alignment'] : []
+		);
+		return parent::render_callback( $attributes, $content, $block_instance );
+	}
+
 	/** Block-specific declarations, appended after the shared style rules. */
 	protected function extra_css( $base, $attributes ) {
 		return '';

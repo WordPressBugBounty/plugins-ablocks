@@ -25,13 +25,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .academy-widget-enroll__content-lists',
 			$this->get_content_css( $attributes, '' ),
 			$this->get_content_css( $attributes, 'Tablet' ),
-			$this->get_content_css( $attributes, 'Mobile' )
+			$this->get_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__content-lists:hover',
 			$this->get_content_hover_css( $attributes, '' ),
 			$this->get_content_hover_css( $attributes, 'Tablet' ),
-			$this->get_content_hover_css( $attributes, 'Mobile' )
+			$this->get_content_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__content-lists li .academy-icon,
@@ -39,7 +41,8 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .academy-icon--video-lesson:before',
 			$this->get_content_icon_css( $attributes, '' ),
 			$this->get_content_icon_css( $attributes, 'Tablet' ),
-			$this->get_content_icon_css( $attributes, 'Mobile' )
+			$this->get_content_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_icon_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__content-lists li .academy-icon:hover,
@@ -47,49 +50,57 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .academy-icon--video-lesson:hover::before',
 			$this->get_content_icon_hover_css( $attributes, '' ),
 			$this->get_content_icon_hover_css( $attributes, 'Tablet' ),
-			$this->get_content_icon_hover_css( $attributes, 'Mobile' )
+			$this->get_content_icon_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_icon_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__content-lists li',
 			$this->get_content_list_css( $attributes, '' ),
 			$this->get_content_list_css( $attributes, 'Tablet' ),
-			$this->get_content_list_css( $attributes, 'Mobile' )
+			$this->get_content_list_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_list_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__content-lists li:hover',
 			$this->get_content_list_hover_css( $attributes, '' ),
 			$this->get_content_list_hover_css( $attributes, 'Tablet' ),
-			$this->get_content_list_hover_css( $attributes, 'Mobile' )
+			$this->get_content_list_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_list_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__wishlist-and-share .academy-btn',
 			$this->get_share_button_css( $attributes, '' ),
 			$this->get_share_button_css( $attributes, 'Tablet' ),
-			$this->get_share_button_css( $attributes, 'Mobile' )
+			$this->get_share_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_share_button_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__wishlist-and-share .academy-btn:hover',
 			$this->get_share_button_hover_css( $attributes, '' ),
 			$this->get_share_button_hover_css( $attributes, 'Tablet' ),
-			$this->get_share_button_hover_css( $attributes, 'Mobile' )
+			$this->get_share_button_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_share_button_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__wishlist-and-share .academy-course__wishlist',
 			$this->get_wishlist_button_css( $attributes, '' ),
 			$this->get_wishlist_button_css( $attributes, 'Tablet' ),
-			$this->get_wishlist_button_css( $attributes, 'Mobile' )
+			$this->get_wishlist_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wishlist_button_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__wishlist-and-share .academy-course__wishlist:hover',
 			$this->get_wishlist_button_hover_css( $attributes, '' ),
 			$this->get_wishlist_button_hover_css( $attributes, 'Tablet' ),
-			$this->get_wishlist_button_hover_css( $attributes, 'Mobile' )
+			$this->get_wishlist_button_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wishlist_button_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-widget-enroll__wishlist-and-share .academy-btn i.academy-icon',
 			$this->get_button_icon_css( $attributes, '' ),
 			$this->get_button_icon_css( $attributes, 'Tablet' ),
-			$this->get_button_icon_css( $attributes, 'Mobile' )
+			$this->get_button_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_icon_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

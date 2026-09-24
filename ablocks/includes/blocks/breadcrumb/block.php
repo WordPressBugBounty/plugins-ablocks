@@ -23,7 +23,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-breadcrumbs',
 			$this->get_wrapper_css( $attributes ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 
 		// Normal link color
@@ -31,7 +32,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} div.ablocks-breadcrumbs span a',
 			$this->get_breadcrumb_normal_title_css( $attributes ),
 			$this->get_breadcrumb_normal_title_css( $attributes, 'Tablet' ),
-			$this->get_breadcrumb_normal_title_css( $attributes, 'Mobile' )
+			$this->get_breadcrumb_normal_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_breadcrumb_normal_title_css( $attributes, $device ); } )
 		);
 
 		// Hover link color
@@ -39,7 +41,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} div.ablocks-breadcrumbs span a:hover',
 			$this->get_breadcrumb_hover_title_css( $attributes ),
 			$this->get_breadcrumb_hover_title_css( $attributes, 'Tablet' ),
-			$this->get_breadcrumb_hover_title_css( $attributes, 'Mobile' )
+			$this->get_breadcrumb_hover_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_breadcrumb_hover_title_css( $attributes, $device ); } )
 		);
 
 		// Title (typography + color + direction)
@@ -47,7 +50,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-breadcrumbs__item',
 			$this->get_breadcrumb_title_css( $attributes ),
 			$this->get_breadcrumb_title_css( $attributes, 'Tablet' ),
-			$this->get_breadcrumb_title_css( $attributes, 'Mobile' )
+			$this->get_breadcrumb_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_breadcrumb_title_css( $attributes, $device ); } )
 		);
 
 		// Separator (color + font-size)
@@ -55,13 +59,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-breadcrumbs__separator',
 			$this->get_breadcrumb_separator_css( $attributes ),
 			$this->get_breadcrumb_separator_css( $attributes, 'Tablet' ),
-			$this->get_breadcrumb_separator_css( $attributes, 'Mobile' )
+			$this->get_breadcrumb_separator_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_breadcrumb_separator_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-breadcrumbs___before-image , {{WRAPPER}} .ablocks-breadcrumbs__before-text',
 			$this->get_breadcrumb_before_text_image_css( $attributes ),
 			$this->get_breadcrumb_before_text_image_css( $attributes, 'Tablet' ),
-			$this->get_breadcrumb_before_text_image_css( $attributes, 'Mobile' )
+			$this->get_breadcrumb_before_text_image_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_breadcrumb_before_text_image_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

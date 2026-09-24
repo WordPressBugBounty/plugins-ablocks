@@ -25,25 +25,29 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--menu-child-sub',
 			$this->get_wrapper_css( $attributes, '' ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--menu-child-sub:hover',
 			$this->get_wrapper_hover_css( $attributes, '' ),
 			$this->get_wrapper_hover_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_hover_css( $attributes, 'Mobile' )
+			$this->get_wrapper_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--menu-child-sub .ablocks-block--menu-item',
 			$this->get_menu_item_css( $attributes, '' ),
 			$this->get_menu_item_css( $attributes, 'Tablet' ),
-			$this->get_menu_item_css( $attributes, 'Mobile' )
+			$this->get_menu_item_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_menu_item_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--menu-child-sub .ablocks-block--menu-item:hover',
 			$this->get_menu_item_hover_css( $attributes, '' ),
 			$this->get_menu_item_hover_css( $attributes, 'Tablet' ),
-			$this->get_menu_item_hover_css( $attributes, 'Mobile' )
+			$this->get_menu_item_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_menu_item_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} > .ablocks-menu-item > .ablocks-menu-item__link',

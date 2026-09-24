@@ -33,28 +33,32 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}}.ablocks-block--text-path .ablocks-block-container',
 			$this->get_text_path_container_css( $attributes ),
 			$this->get_text_path_container_css( $attributes, 'Tablet' ),
-			$this->get_text_path_container_css( $attributes, 'Mobile' )
+			$this->get_text_path_container_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_text_path_container_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-text-path-text',
 			$this->get_text_css( $attributes ),
 			$this->get_text_css( $attributes, 'Tablet' ),
-			$this->get_text_css( $attributes, 'Mobile' )
+			$this->get_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_text_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-text-path-text:hover',
 			$this->get_text_hover_css( $attributes ),
 			$this->get_text_hover_css( $attributes, 'Tablet' ),
-			$this->get_text_hover_css( $attributes, 'Mobile' )
+			$this->get_text_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_text_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-path-text-path',
 			$this->get_text_path_css( $attributes ),
 			$this->get_text_path_css( $attributes, 'Tablet' ),
-			$this->get_text_path_css( $attributes, 'Mobile' )
+			$this->get_text_path_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_text_path_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -67,28 +71,32 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}}.ablocks-block--text-path .ablocks-block-container',
 			$this->get_text_path_container_css( $attributes ),
 			$this->get_text_path_container_css( $attributes, 'Tablet' ),
-			$this->get_text_path_container_css( $attributes, 'Mobile' )
+			$this->get_text_path_container_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_text_path_container_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-text-path-text',
 			$this->get_text_css( $attributes ),
 			$this->get_text_css( $attributes, 'Tablet' ),
-			$this->get_text_css( $attributes, 'Mobile' )
+			$this->get_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_text_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-text-path-text:hover',
 			$this->get_text_hover_css( $attributes ),
 			$this->get_text_hover_css( $attributes, 'Tablet' ),
-			$this->get_text_hover_css( $attributes, 'Mobile' )
+			$this->get_text_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_text_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-path-text-path',
 			$this->get_text_path_css( $attributes ),
 			$this->get_text_path_css( $attributes, 'Tablet' ),
-			$this->get_text_path_css( $attributes, 'Mobile' )
+			$this->get_text_path_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_text_path_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

@@ -33,27 +33,31 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .storeengine-order-shipping-shortcode .storeengine-order-shipping-heading',
 			$this->get_shipping_heading_css( $attributes, '' ),
 			$this->get_shipping_heading_css( $attributes, 'Tablet' ),
-			$this->get_shipping_heading_css( $attributes, 'Mobile' )
+			$this->get_shipping_heading_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_shipping_heading_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-order-shipping-shortcode .storeengine-order-shipping-heading:hover',
 			$this->get_shipping_heading_hover_css( $attributes, '' ),
 			$this->get_shipping_heading_hover_css( $attributes, 'Tablet' ),
-			$this->get_shipping_heading_hover_css( $attributes, 'Mobile' )
+			$this->get_shipping_heading_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_shipping_heading_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-order-shipping-shortcode .storeengine-order-shipping-address p',
 			$this->get_shipping_address_css( $attributes, '' ),
 			$this->get_shipping_address_css( $attributes, 'Tablet' ),
-			$this->get_shipping_address_css( $attributes, 'Mobile' )
+			$this->get_shipping_address_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_shipping_address_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-order-shipping-shortcode .storeengine-order-shipping-address p:hover',
 			$this->get_shipping_address_hover_css( $attributes, '' ),
 			$this->get_shipping_address_hover_css( $attributes, 'Tablet' ),
-			$this->get_shipping_address_hover_css( $attributes, 'Mobile' )
+			$this->get_shipping_address_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_shipping_address_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

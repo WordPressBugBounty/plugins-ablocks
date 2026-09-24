@@ -29,89 +29,102 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block-tabs',
 			$this->get_tabs_css( $attributes ),
 			$this->get_tabs_css( $attributes, 'Tablet' ),
-			$this->get_tabs_css( $attributes, 'Mobile' )
+			$this->get_tabs_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab-panel',
 			$this->get_tabs_panel_css( $attributes ),
 			$this->get_tabs_panel_css( $attributes, 'Tablet' ),
-			$this->get_tabs_panel_css( $attributes, 'Mobile' )
+			$this->get_tabs_panel_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_panel_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab-panel:hover',
 			$this->get_tabs_panel_hover_css( $attributes ),
 			$this->get_tabs_panel_hover_css( $attributes, 'Tablet' ),
-			$this->get_tabs_panel_hover_css( $attributes, 'Mobile' )
+			$this->get_tabs_panel_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_panel_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab',
 			$this->get_tabs_menu_content_css( $attributes ),
 			$this->get_tabs_menu_content_css( $attributes, 'Tablet' ),
-			$this->get_tabs_menu_content_css( $attributes, 'Mobile' )
+			$this->get_tabs_menu_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_menu_content_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-block-tabs__tab--active',
 			$this->get_tabs_menu_content_active_css( $attributes ),
 			$this->get_tabs_menu_content_active_css( $attributes, 'Tablet' ),
-			$this->get_tabs_menu_content_active_css( $attributes, 'Mobile' )
+			$this->get_tabs_menu_content_active_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_menu_content_active_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-block-tabs__tab:hover',
 			$this->get_tabs_menu_content_hover_css( $attributes ),
 			$this->get_tabs_menu_content_hover_css( $attributes, 'Tablet' ),
-			$this->get_tabs_menu_content_hover_css( $attributes, 'Mobile' )
+			$this->get_tabs_menu_content_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_menu_content_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab-menu-title',
 			$this->get_tabs_title_css( $attributes ),
 			$this->get_tabs_title_css( $attributes, 'Tablet' ),
-			$this->get_tabs_title_css( $attributes, 'Mobile' )
+			$this->get_tabs_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_title_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab--active .ablocks-block-tabs__tab-menu-title',
 			$this->get_tabs_active_title_css( $attributes ),
 			$this->get_tabs_active_title_css( $attributes, 'Tablet' ),
-			$this->get_tabs_active_title_css( $attributes, 'Mobile' )
+			$this->get_tabs_active_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_active_title_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab-menu-subtitle',
 			$this->get_tabs_subtitle_css( $attributes ),
 			$this->get_tabs_subtitle_css( $attributes, 'Tablet' ),
-			$this->get_tabs_subtitle_css( $attributes, 'Mobile' )
+			$this->get_tabs_subtitle_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_subtitle_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-block-tabs__tab--active .ablocks-block-tabs__tab-menu-subtitle',
 			$this->get_tabs_active_subtitle_text_css( $attributes ),
 			$this->get_tabs_active_subtitle_text_css( $attributes, 'Tablet' ),
-			$this->get_tabs_active_subtitle_text_css( $attributes, 'Mobile' )
+			$this->get_tabs_active_subtitle_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_active_subtitle_text_css( $attributes, $device ); } )
 		);
 		if ( isset( $attributes['showActiveSubTitle'] ) && $attributes['showActiveSubTitle'] === false ) {
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-block-tabs__icon',
 				$this->get_icon_position_css( $attributes ),
 				$this->get_icon_position_css( $attributes, 'Tablet' ),
-				$this->get_icon_position_css( $attributes, 'Mobile' )
+				$this->get_icon_position_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_icon_position_css( $attributes, $device ); } )
 			);
 		} else {
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-block-tabs__tab--active .ablocks-block-tabs__icon',
 				$this->get_icon_position_css( $attributes ),
 				$this->get_icon_position_css( $attributes, 'Tablet' ),
-				$this->get_icon_position_css( $attributes, 'Mobile' )
+				$this->get_icon_position_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_icon_position_css( $attributes, $device ); } )
 			);
 		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab--active .ablocks-block-tabs__progressbar',
 			$this->progress_bar_style_css( $attributes ),
 			$this->progress_bar_style_css( $attributes, 'Tablet' ),
-			$this->progress_bar_style_css( $attributes, 'Mobile' )
+			$this->progress_bar_style_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->progress_bar_style_css( $attributes, $device ); } )
 		);
 		$tabs_element_icon_wrapper_styles = Icon::get_wrapper_css( $attributes );
 
@@ -215,6 +228,10 @@ class Block extends BlockBaseAbstract {
 			Icon::get_element_css( $attributes, 'Mobile' ),
 		);
 		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab--active .ablocks-block-tabs__icon .ablocks-icon-wrap svg.ablocks-svg-icon',
+			$this->get_tabs_active_icon_css( $attributes )
+		);
+		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap svg.ablocks-svg-icon:hover',
 			Icon::get_element_image_hover_css( $attributes ),
 			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
@@ -225,32 +242,37 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}  .ablocks-block-tabs__body',
 			$this->get_tabs_content_css( $attributes ),
 			$this->get_tabs_content_css( $attributes, 'Tablet' ),
-			$this->get_tabs_content_css( $attributes, 'Mobile' )
+			$this->get_tabs_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_content_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__body:hover',
 			$this->get_tabs_content_hover_css( $attributes ),
 			$this->get_tabs_content_hover_css( $attributes, 'Tablet' ),
-			$this->get_tabs_content_hover_css( $attributes, 'Mobile' )
+			$this->get_tabs_content_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_content_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab-menu-content',
 			$this->get_content_css( $attributes ),
 			$this->get_content_css( $attributes, 'Tablet' ),
-			$this->get_content_css( $attributes, 'Mobile' )
+			$this->get_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab-panel',
 			$this->get_tabs_width_css( $attributes ),
 			$this->get_tabs_width_css( $attributes, 'Tablet' ),
-			$this->get_tabs_width_css( $attributes, 'Mobile' )
+			$this->get_tabs_width_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_width_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__body',
 			$this->get_content_width_css( $attributes ),
 			$this->get_content_width_css( $attributes, 'Tablet' ),
-			$this->get_content_width_css( $attributes, 'Mobile' )
+			$this->get_content_width_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_width_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -262,108 +284,124 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block-tabs',
 			$this->get_tabs_css( $attributes ),
 			$this->get_tabs_css( $attributes, 'Tablet' ),
-			$this->get_tabs_css( $attributes, 'Mobile' )
+			$this->get_tabs_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab-panel',
 			$this->get_tabs_panel_css( $attributes ),
 			$this->get_tabs_panel_css( $attributes, 'Tablet' ),
-			$this->get_tabs_panel_css( $attributes, 'Mobile' )
+			$this->get_tabs_panel_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_panel_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab-panel:hover',
 			$this->get_tabs_panel_hover_css( $attributes ),
 			$this->get_tabs_panel_hover_css( $attributes, 'Tablet' ),
-			$this->get_tabs_panel_hover_css( $attributes, 'Mobile' )
+			$this->get_tabs_panel_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_panel_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab',
 			$this->get_tabs_menu_content_css( $attributes ),
 			$this->get_tabs_menu_content_css( $attributes, 'Tablet' ),
-			$this->get_tabs_menu_content_css( $attributes, 'Mobile' )
+			$this->get_tabs_menu_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_menu_content_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-block-tabs__tab--active',
 			$this->get_tabs_menu_content_active_css( $attributes ),
 			$this->get_tabs_menu_content_active_css( $attributes, 'Tablet' ),
-			$this->get_tabs_menu_content_active_css( $attributes, 'Mobile' )
+			$this->get_tabs_menu_content_active_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_menu_content_active_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-block-tabs__tab:hover',
 			$this->get_tabs_menu_content_hover_css( $attributes ),
 			$this->get_tabs_menu_content_hover_css( $attributes, 'Tablet' ),
-			$this->get_tabs_menu_content_hover_css( $attributes, 'Mobile' )
+			$this->get_tabs_menu_content_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_menu_content_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab-menu-title',
 			$this->get_tabs_title_css( $attributes ),
 			$this->get_tabs_title_css( $attributes, 'Tablet' ),
-			$this->get_tabs_title_css( $attributes, 'Mobile' )
+			$this->get_tabs_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_title_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab--active .ablocks-block-tabs__tab-menu-title',
 			$this->get_tabs_active_title_css( $attributes ),
 			$this->get_tabs_active_title_css( $attributes, 'Tablet' ),
-			$this->get_tabs_active_title_css( $attributes, 'Mobile' )
+			$this->get_tabs_active_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_active_title_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab-menu-subtitle',
 			$this->get_tabs_subtitle_css( $attributes ),
 			$this->get_tabs_subtitle_css( $attributes, 'Tablet' ),
-			$this->get_tabs_subtitle_css( $attributes, 'Mobile' )
+			$this->get_tabs_subtitle_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_subtitle_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-block-tabs__tab--active .ablocks-block-tabs__tab-menu-subtitle',
 			$this->get_tabs_active_subtitle_text_css( $attributes ),
 			$this->get_tabs_active_subtitle_text_css( $attributes, 'Tablet' ),
-			$this->get_tabs_active_subtitle_text_css( $attributes, 'Mobile' )
+			$this->get_tabs_active_subtitle_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_active_subtitle_text_css( $attributes, $device ); } )
 		);
 		if ( isset( $attributes['showActiveSubTitle'] ) && $attributes['showActiveSubTitle'] === false ) {
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-block-tabs__icon',
 				$this->get_icon_position_css( $attributes ),
 				$this->get_icon_position_css( $attributes, 'Tablet' ),
-				$this->get_icon_position_css( $attributes, 'Mobile' )
+				$this->get_icon_position_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_icon_position_css( $attributes, $device ); } )
 			);
 		} else {
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-block-tabs__tab--active .ablocks-block-tabs__icon',
 				$this->get_icon_position_css( $attributes ),
 				$this->get_icon_position_css( $attributes, 'Tablet' ),
-				$this->get_icon_position_css( $attributes, 'Mobile' )
+				$this->get_icon_position_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_icon_position_css( $attributes, $device ); } )
 			);
 		}
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab--active .ablocks-block-tabs__progressbar',
 			$this->progress_bar_style_css( $attributes ),
 			$this->progress_bar_style_css( $attributes, 'Tablet' ),
-			$this->progress_bar_style_css( $attributes, 'Mobile' )
+			$this->progress_bar_style_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->progress_bar_style_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap:hover',
 			Icon::get_wrapper_hover_css( $attributes ),
 			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
 			Icon::get_wrapper_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap',
 			$this->get_icon_spacing_css( $attributes ),
 			$this->get_icon_spacing_css( $attributes, 'Tablet' ),
 			$this->get_icon_spacing_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_icon_spacing_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -371,56 +409,69 @@ class Block extends BlockBaseAbstract {
 			Icon::get_element_image_css( $attributes ),
 			Icon::get_element_image_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap img.ablocks-image-icon:hover',
 			Icon::get_element_image_hover_css( $attributes ),
 			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap svg.ablocks-svg-icon',
 			Icon::get_element_css( $attributes ),
 			Icon::get_element_css( $attributes, 'Tablet' ),
 			Icon::get_element_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_css( $attributes, $device ); } )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-block-tabs__tab--active .ablocks-block-tabs__icon .ablocks-icon-wrap svg.ablocks-svg-icon',
+			$this->get_tabs_active_icon_css( $attributes )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__icon .ablocks-icon-wrap svg.ablocks-svg-icon:hover',
 			Icon::get_element_image_hover_css( $attributes ),
 			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-block-tabs__body',
 			$this->get_tabs_content_css( $attributes ),
 			$this->get_tabs_content_css( $attributes, 'Tablet' ),
-			$this->get_tabs_content_css( $attributes, 'Mobile' )
+			$this->get_tabs_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_content_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__body:hover',
 			$this->get_tabs_content_hover_css( $attributes ),
 			$this->get_tabs_content_hover_css( $attributes, 'Tablet' ),
-			$this->get_tabs_content_hover_css( $attributes, 'Mobile' )
+			$this->get_tabs_content_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_content_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab-menu-content',
 			$this->get_content_css( $attributes ),
 			$this->get_content_css( $attributes, 'Tablet' ),
-			$this->get_content_css( $attributes, 'Mobile' )
+			$this->get_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__tab-panel',
 			$this->get_tabs_width_css( $attributes ),
 			$this->get_tabs_width_css( $attributes, 'Tablet' ),
-			$this->get_tabs_width_css( $attributes, 'Mobile' )
+			$this->get_tabs_width_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_tabs_width_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-tabs__body',
 			$this->get_content_width_css( $attributes ),
 			$this->get_content_width_css( $attributes, 'Tablet' ),
-			$this->get_content_width_css( $attributes, 'Mobile' )
+			$this->get_content_width_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_width_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -704,19 +755,12 @@ class Block extends BlockBaseAbstract {
 		$iconViewCSS );
 	}
 
+	// The active tab's icon follows the title active colour.
 	public function get_tabs_active_icon_css( $attributes ) {
 		$css = [];
-
-		// Check for active icon color
-		if ( isset( $attributes['iconActiveColor'] ) ) {
-			$css['fill'] = Color::get_css( isset( $attributes['iconActiveColor'] ) ? $attributes['iconActiveColor'] : '' );
+		if ( ! empty( $attributes['titleTextActiveColor'] ) ) {
+			$css['fill'] = Color::get_css( $attributes['titleTextActiveColor'] );
 		}
-
-		// Check for icon type and active background color
-		if ( isset( $attributes['iconType'] ) && $attributes['iconType'] !== 'default' && $attributes['iconType'] !== 'framed' ) {
-				$css['background-color'] = Color::get_css( isset( $attributes['iconActiveBackground'] ) ? $attributes['iconActiveBackground'] : '' );
-		}
-
 		return $css;
 	}
 

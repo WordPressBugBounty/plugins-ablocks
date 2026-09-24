@@ -23,13 +23,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-dynamic-text-output',
 			$this->get_dynamic_text_css( $attributes ),
 			$this->get_dynamic_text_css( $attributes, 'Tablet' ),
-			$this->get_dynamic_text_css( $attributes, 'Mobile' )
+			$this->get_dynamic_text_css( $attributes, 'Mobile' ),
+			$dynamic_text_css->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_dynamic_text_css( $attributes, $device ); } )
 		);
 		$dynamic_text_css->add_class_styles(
 			'{{WRAPPER}} .ablocks-dynamic-text-output a',
 			$this->get_dynamic_text_css( $attributes ),
 			$this->get_dynamic_text_css( $attributes, 'Tablet' ),
-			$this->get_dynamic_text_css( $attributes, 'Mobile' )
+			$this->get_dynamic_text_css( $attributes, 'Mobile' ),
+			$dynamic_text_css->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_dynamic_text_css( $attributes, $device ); } )
 		);
 
 		return $dynamic_text_css->generate_css();

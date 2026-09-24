@@ -20,8 +20,12 @@ $attributes = [
 		'default' => '',
 	),
 	'alignment' => [
-		'type' => 'string',
-		'default' => 'left'
+		'type' => 'object',
+		'default' => [
+			'value' => 'left',
+			'valueTablet' => '',
+			'valueMobile' => '',
+		],
 	],
 
 	'menuItemTextColor' => [
@@ -30,7 +34,7 @@ $attributes = [
 	],
 	'menuItemTextColorH' => [
 		'type' => 'string',
-		'default' => '#000000',
+		'default' => '',
 	],
 	'menuItemBackground' => [
 		'type' => 'string',

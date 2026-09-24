@@ -33,56 +33,64 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}  .ablocks-image-comparison__images-container .ablocks-image-comparison__slider-line',
 			$this->get_slider_line_horizontal_css( $attributes ),
 			$this->get_slider_line_horizontal_css( $attributes, 'Tablet' ),
-			$this->get_slider_line_horizontal_css( $attributes, 'Mobile' )
+			$this->get_slider_line_horizontal_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_slider_line_horizontal_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-image-comparison__images-container-vertical .ablocks-image-comparison__slider-line',
 			$this->get_slider_line_vertical_css( $attributes ),
 			$this->get_slider_line_vertical_css( $attributes, 'Tablet' ),
-			$this->get_slider_line_vertical_css( $attributes, 'Mobile' )
+			$this->get_slider_line_vertical_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_slider_line_vertical_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-comparison__images-container .ablocks-image-comparison__slider-icon',
 			$this->get_horizontal_slider_icon_css( $attributes ),
 			$this->get_horizontal_slider_icon_css( $attributes, 'Tablet' ),
-			$this->get_horizontal_slider_icon_css( $attributes, 'Mobile' )
+			$this->get_horizontal_slider_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_horizontal_slider_icon_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-comparison__images-container-vertical .ablocks-image-comparison__slider-icon',
 			$this->get_vertical_slider_icon_css( $attributes ),
 			$this->get_vertical_slider_icon_css( $attributes, 'Tablet' ),
-			$this->get_vertical_slider_icon_css( $attributes, 'Mobile' )
+			$this->get_vertical_slider_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_vertical_slider_icon_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-comparison__beforeImage-label',
 			$this->get_image_overlay_css( $attributes ),
 			$this->get_image_overlay_css( $attributes, 'Tablet' ),
-			$this->get_image_overlay_css( $attributes, 'Mobile' )
+			$this->get_image_overlay_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_image_overlay_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-comparison__beforeImage-label:hover',
 			$this->get_image_overlay_hover_css( $attributes ),
 			$this->get_image_overlay_hover_css( $attributes, 'Tablet' ),
-			$this->get_image_overlay_hover_css( $attributes, 'Mobile' )
+			$this->get_image_overlay_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_image_overlay_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-comparison__afterImage-label',
 			$this->get_image_overlay_css( $attributes ),
 			$this->get_image_overlay_css( $attributes, 'Tablet' ),
-			$this->get_image_overlay_css( $attributes, 'Mobile' )
+			$this->get_image_overlay_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_image_overlay_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-comparison__afterImage-label:hover',
 			$this->get_image_overlay_hover_css( $attributes ),
 			$this->get_image_overlay_hover_css( $attributes, 'Tablet' ),
-			$this->get_image_overlay_hover_css( $attributes, 'Mobile' )
+			$this->get_image_overlay_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_image_overlay_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -132,56 +140,64 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}  .ablocks-image-comparison__images-container .ablocks-image-comparison__slider-line',
 			$this->get_slider_line_horizontal_css( $attributes ),
 			$this->get_slider_line_horizontal_css( $attributes, 'Tablet' ),
-			$this->get_slider_line_horizontal_css( $attributes, 'Mobile' )
+			$this->get_slider_line_horizontal_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_slider_line_horizontal_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-image-comparison__images-container-vertical .ablocks-image-comparison__slider-line',
 			$this->get_slider_line_vertical_css( $attributes ),
 			$this->get_slider_line_vertical_css( $attributes, 'Tablet' ),
-			$this->get_slider_line_vertical_css( $attributes, 'Mobile' )
+			$this->get_slider_line_vertical_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_slider_line_vertical_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-comparison__images-container .ablocks-image-comparison__slider-icon',
 			$this->get_horizontal_slider_icon_css( $attributes ),
 			$this->get_horizontal_slider_icon_css( $attributes, 'Tablet' ),
-			$this->get_horizontal_slider_icon_css( $attributes, 'Mobile' )
+			$this->get_horizontal_slider_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_horizontal_slider_icon_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-comparison__images-container-vertical .ablocks-image-comparison__slider-icon',
 			$this->get_vertical_slider_icon_css( $attributes ),
 			$this->get_vertical_slider_icon_css( $attributes, 'Tablet' ),
-			$this->get_vertical_slider_icon_css( $attributes, 'Mobile' )
+			$this->get_vertical_slider_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_vertical_slider_icon_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-comparison__beforeImage-label',
 			$this->get_image_overlay_css( $attributes ),
 			$this->get_image_overlay_css( $attributes, 'Tablet' ),
-			$this->get_image_overlay_css( $attributes, 'Mobile' )
+			$this->get_image_overlay_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_image_overlay_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-comparison__beforeImage-label:hover',
 			$this->get_image_overlay_hover_css( $attributes ),
 			$this->get_image_overlay_hover_css( $attributes, 'Tablet' ),
-			$this->get_image_overlay_hover_css( $attributes, 'Mobile' )
+			$this->get_image_overlay_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_image_overlay_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-comparison__afterImage-label',
 			$this->get_image_overlay_css( $attributes ),
 			$this->get_image_overlay_css( $attributes, 'Tablet' ),
-			$this->get_image_overlay_css( $attributes, 'Mobile' )
+			$this->get_image_overlay_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_image_overlay_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-comparison__afterImage-label:hover',
 			$this->get_image_overlay_hover_css( $attributes ),
 			$this->get_image_overlay_hover_css( $attributes, 'Tablet' ),
-			$this->get_image_overlay_hover_css( $attributes, 'Mobile' )
+			$this->get_image_overlay_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_image_overlay_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(

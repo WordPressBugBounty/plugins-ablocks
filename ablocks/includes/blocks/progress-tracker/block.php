@@ -29,28 +29,32 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block-progress-circle',
 			$this->get_wrapper_css( $attributes ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-progress__text',
 			$this->get_content_css( $attributes ),
 			$this->get_content_css( $attributes, 'Tablet' ),
-			$this->get_content_css( $attributes, 'Mobile' )
+			$this->get_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_css( $attributes, $device ); } )
 		);
 		// Progress Bar Background CSS
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-progress-bar-track',
 			$this->get_progress_bar_track_css( $attributes ),
 			$this->get_progress_bar_track_css( $attributes, 'Tablet' ),
-			$this->get_progress_bar_track_css( $attributes, 'Mobile' )
+			$this->get_progress_bar_track_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_progress_bar_track_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-progress-bar-track:hover',
 			$this->get_progress_bar_hover_css( $attributes ),
 			$this->get_progress_bar_hover_css( $attributes, 'Tablet' ),
-			$this->get_progress_bar_hover_css( $attributes, 'Mobile' )
+			$this->get_progress_bar_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_progress_bar_hover_css( $attributes, $device ); } )
 		);
 
 		// Progress Bar Progress CSS
@@ -80,28 +84,32 @@ class Block extends BlockBaseAbstract {
 				'{{WRAPPER}} .ablocks-block-progress-circle',
 				$this->get_wrapper_css( $attributes ),
 				$this->get_wrapper_css( $attributes, 'Tablet' ),
-				$this->get_wrapper_css( $attributes, 'Mobile' )
+				$this->get_wrapper_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 			);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-progress__text',
 			$this->get_content_css( $attributes ),
 			$this->get_content_css( $attributes, 'Tablet' ),
-			$this->get_content_css( $attributes, 'Mobile' )
+			$this->get_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_css( $attributes, $device ); } )
 		);
 		// Progress Bar Background CSS
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-progress-bar-track',
 			$this->get_progress_bar_track_css( $attributes ),
 			$this->get_progress_bar_track_css( $attributes, 'Tablet' ),
-			$this->get_progress_bar_track_css( $attributes, 'Mobile' )
+			$this->get_progress_bar_track_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_progress_bar_track_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-progress-bar-track:hover',
 			$this->get_progress_bar_hover_css( $attributes ),
 			$this->get_progress_bar_hover_css( $attributes, 'Tablet' ),
-			$this->get_progress_bar_hover_css( $attributes, 'Mobile' )
+			$this->get_progress_bar_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_progress_bar_hover_css( $attributes, $device ); } )
 		);
 
 		// Progress Bar Progress CSS

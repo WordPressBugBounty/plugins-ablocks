@@ -40,61 +40,70 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .academy-reg-form--student .academy-form-group label',
 			$this->get_form_input_label_css( $attributes ),
 			$this->get_form_input_label_css( $attributes, 'Tablet' ),
-			$this->get_form_input_label_css( $attributes, 'Mobile' )
+			$this->get_form_input_label_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_input_label_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-reg-form--student .academy-form-group label:hover',
 			$this->get_form_input_label_hover_css( $attributes ),
 			$this->get_form_input_label_hover_css( $attributes, 'Tablet' ),
-			$this->get_form_input_label_hover_css( $attributes, 'Mobile' )
+			$this->get_form_input_label_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_input_label_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-reg-form--student .academy-form-group input',
 			$this->get_form_input_field_css( $attributes ),
 			$this->get_form_input_field_css( $attributes, 'Tablet' ),
-			$this->get_form_input_field_css( $attributes, 'Mobile' )
+			$this->get_form_input_field_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_input_field_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-reg-form--student .academy-form-group input:hover',
 			$this->get_form_input_field_hover_css( $attributes ),
 			$this->get_form_input_field_hover_css( $attributes, 'Tablet' ),
-			$this->get_form_input_field_hover_css( $attributes, 'Mobile' )
+			$this->get_form_input_field_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_input_field_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-reg-form--student .academy-form-group input::placeholder',
 			$this->get_form_input_field_placeholder_css( $attributes ),
 			$this->get_form_input_field_placeholder_css( $attributes, 'Tablet' ),
-			$this->get_form_input_field_placeholder_css( $attributes, 'Mobile' )
+			$this->get_form_input_field_placeholder_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_input_field_placeholder_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-reg-form--student .academy-form-group button',
 			$this->get_form_button_css( $attributes ),
 			$this->get_form_button_css( $attributes, 'Tablet' ),
-			$this->get_form_button_css( $attributes, 'Mobile' )
+			$this->get_form_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_button_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-reg-form--student .academy-form-group button:hover',
 			$this->get_form_button_hover_css( $attributes ),
 			$this->get_form_button_hover_css( $attributes, 'Tablet' ),
-			$this->get_form_button_hover_css( $attributes, 'Mobile' )
+			$this->get_form_button_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_button_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-reg-form',
 			$this->get_form_css( $attributes ),
 			$this->get_form_css( $attributes, 'Tablet' ),
-			$this->get_form_css( $attributes, 'Mobile' )
+			$this->get_form_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-reg-form:hover',
 			$this->get_form_hover_css( $attributes ),
 			$this->get_form_hover_css( $attributes, 'Tablet' ),
-			$this->get_form_hover_css( $attributes, 'Mobile' )
+			$this->get_form_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

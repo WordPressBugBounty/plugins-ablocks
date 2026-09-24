@@ -84,15 +84,9 @@ class Width extends ControlBaseAbstract {
 					self::get_attribute_default_value()
 				);
 
-				// Get responsive unit (delegates to your get_unit function)
-				$unit = self::get_unit(
-					[
-						'unit'       => Helper::get_responsive_value( $attribute_value, 'customWidthUnit', 'Desktop' ),
-						'unitTablet' => Helper::get_responsive_value( $attribute_value, 'customWidthUnit', 'Tablet' ),
-						'unitMobile' => Helper::get_responsive_value( $attribute_value, 'customWidthUnit', 'Mobile' ),
-					],
-					$device
-				);
+				// The device's own unit, else the nearest containing wider
+				// device's (custom breakpoints included), else Desktop's.
+				$unit = Helper::get_responsive_value( $attribute_value, 'customWidthUnit', $device );
 
 				$css[ $property ] = $custom_width . $unit;
 			}//end if

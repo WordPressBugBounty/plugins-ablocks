@@ -25,7 +25,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__meta--categroy a',
 			$this->get_course_card_category_css( $attributes ),
 			$this->get_course_card_category_css( $attributes, 'Tablet' ),
-			$this->get_course_card_category_css( $attributes, 'Mobile' )
+			$this->get_course_card_category_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_course_card_category_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -37,7 +38,8 @@ class Block extends BlockBaseAbstract {
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__title a',
 			$this->get_course_card_title_css( $attributes ),
 			$this->get_course_card_title_css( $attributes, 'Tablet' ),
-			$this->get_course_card_title_css( $attributes, 'Mobile' )
+			$this->get_course_card_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_course_card_title_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__title:hover, 
@@ -50,7 +52,8 @@ class Block extends BlockBaseAbstract {
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__author .author a',
 			$this->get_course_card_author_css( $attributes ),
 			$this->get_course_card_author_css( $attributes, 'Tablet' ),
-			$this->get_course_card_author_css( $attributes, 'Mobile' )
+			$this->get_course_card_author_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_course_card_author_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__author:hover,
@@ -65,7 +68,8 @@ class Block extends BlockBaseAbstract {
             {{WRAPPER}} .academy-courses--grid .academy-course .academy-course__rating .academy-course__rating-count',
 			$this->get_course_card_rating_css( $attributes ),
 			$this->get_course_card_rating_css( $attributes, 'Tablet' ),
-			$this->get_course_card_rating_css( $attributes, 'Mobile' )
+			$this->get_course_card_rating_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_course_card_rating_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__rating:hover,
@@ -78,7 +82,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__price',
 			$this->get_course_card_price_css( $attributes ),
 			$this->get_course_card_price_css( $attributes, 'Tablet' ),
-			$this->get_course_card_price_css( $attributes, 'Mobile' )
+			$this->get_course_card_price_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_course_card_price_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses--grid .academy-course .academy-course__price:hover',
@@ -92,7 +97,8 @@ class Block extends BlockBaseAbstract {
             {{WRAPPER}} .academy-courses--grid .academy-row .academy-course',
 			$this->get_course_card_css( $attributes ),
 			$this->get_course_card_css( $attributes, 'Tablet' ),
-			$this->get_course_card_css( $attributes, 'Mobile' )
+			$this->get_course_card_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_course_card_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -102,21 +108,24 @@ class Block extends BlockBaseAbstract {
             {{WRAPPER}} .academy-courses--grid .academy-row .academy-course:hover',
 			$this->get_course_card_hover_css( $attributes ),
 			$this->get_course_card_hover_css( $attributes, 'Tablet' ),
-			$this->get_course_card_hover_css( $attributes, 'Mobile' )
+			$this->get_course_card_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_course_card_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses .academy-course__header .academy-course-header-meta .academy-course__wishlist',
 			$this->get_wish_icon_css( $attributes ),
 			$this->get_wish_icon_css( $attributes, 'Tablet' ),
-			$this->get_wish_icon_css( $attributes, 'Mobile' )
+			$this->get_wish_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wish_icon_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-courses .academy-course__header .academy-course-header-meta .academy-course__wishlist:hover',
 			$this->get_wish_icon_hover_css( $attributes ),
 			$this->get_wish_icon_hover_css( $attributes, 'Tablet' ),
-			$this->get_wish_icon_hover_css( $attributes, 'Mobile' )
+			$this->get_wish_icon_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wish_icon_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

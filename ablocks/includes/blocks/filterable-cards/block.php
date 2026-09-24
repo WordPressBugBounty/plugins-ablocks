@@ -27,31 +27,36 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .filterable-cards_filter , {{WRAPPER}} .filterable-cards-filter-wrap',
 			$this->get_filter_wrap_CSS( $attributes ),
 			$this->get_filter_wrap_CSS( $attributes, 'Tablet' ),
-			$this->get_filter_wrap_CSS( $attributes, 'Mobile' )
+			$this->get_filter_wrap_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_filter_wrap_CSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards_filter .filterable-filter-button',
 			$this->get_filter_CSS( $attributes ),
 			$this->get_filter_CSS( $attributes, 'Tablet' ),
-			$this->get_filter_CSS( $attributes, 'Mobile' )
+			$this->get_filter_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_filter_CSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards_filter .filterable-filter-button:hover',
 			$this->get_filter_hover_CSS( $attributes ),
 			$this->get_filter_hover_CSS( $attributes, 'Tablet' ),
-			$this->get_filter_hover_CSS( $attributes, 'Mobile' )
+			$this->get_filter_hover_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_filter_hover_CSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards-filter-wrap .filterable-cards_filter .filterable-search-toggle-btn , {{WRAPPER}} .filterable-cards-filter-wrap .filterable-searchInput',
 			$this->get_search_menu_CSS( $attributes ),
 			$this->get_search_menu_CSS( $attributes, 'Tablet' ),
-			$this->get_search_menu_CSS( $attributes, 'Mobile' )
+			$this->get_search_menu_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_menu_CSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards_filter .filterable-search-toggle-btn:hover , {{WRAPPER}} .filterable-cards-filter-wrap .filterable-searchInput:hover',
 			$this->get_search_menu_hover_CSS( $attributes ),
 			$this->get_search_menu_hover_CSS( $attributes, 'Tablet' ),
-			$this->get_search_menu_hover_CSS( $attributes, 'Mobile' )
+			$this->get_search_menu_hover_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_menu_hover_CSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards-filter-wrap .filterable-searchInput::placeholder ',
@@ -73,7 +78,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .filterable-cards-wrap',
 			$this->filterable_cards_WrapCSS( $attributes ),
 			$this->filterable_cards_WrapCSS( $attributes, 'Tablet' ),
-			$this->filterable_cards_WrapCSS( $attributes, 'Mobile' )
+			$this->filterable_cards_WrapCSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->filterable_cards_WrapCSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards-wrap > .ablocks-block--filterable-cards-item',
@@ -92,13 +98,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .filterable-cards-showMore-button',
 			$this->filterable_loadMore_button( $attributes ),
 			$this->filterable_loadMore_button( $attributes, 'Tablet' ),
-			$this->filterable_loadMore_button( $attributes, 'Mobile' )
+			$this->filterable_loadMore_button( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->filterable_loadMore_button( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards-showMore-button:hover',
 			$this->filterable_loadMore_button_hover( $attributes ),
 			$this->filterable_loadMore_button_hover( $attributes, 'Tablet' ),
-			$this->filterable_loadMore_button_hover( $attributes, 'Mobile' )
+			$this->filterable_loadMore_button_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->filterable_loadMore_button_hover( $attributes, $device ); } )
 		);
 		return $css_generator->generate_css();
 	}
@@ -109,31 +117,36 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .filterable-cards_filter , {{WRAPPER}} .filterable-cards-filter-wrap',
 			$this->get_filter_wrap_CSS( $attributes ),
 			$this->get_filter_wrap_CSS( $attributes, 'Tablet' ),
-			$this->get_filter_wrap_CSS( $attributes, 'Mobile' )
+			$this->get_filter_wrap_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_filter_wrap_CSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards_filter .filterable-filter-button',
 			$this->get_filter_CSS( $attributes ),
 			$this->get_filter_CSS( $attributes, 'Tablet' ),
-			$this->get_filter_CSS( $attributes, 'Mobile' )
+			$this->get_filter_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_filter_CSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards_filter .filterable-filter-button:hover',
 			$this->get_filter_hover_CSS( $attributes ),
 			$this->get_filter_hover_CSS( $attributes, 'Tablet' ),
-			$this->get_filter_hover_CSS( $attributes, 'Mobile' )
+			$this->get_filter_hover_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_filter_hover_CSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards-filter-wrap .filterable-cards_filter .filterable-search-toggle-btn , {{WRAPPER}} .filterable-cards-filter-wrap .filterable-searchInput',
 			$this->get_search_menu_CSS( $attributes ),
 			$this->get_search_menu_CSS( $attributes, 'Tablet' ),
-			$this->get_search_menu_CSS( $attributes, 'Mobile' )
+			$this->get_search_menu_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_menu_CSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards_filter .filterable-search-toggle-btn:hover , {{WRAPPER}} .filterable-cards-filter-wrap .filterable-searchInput:hover',
 			$this->get_search_menu_hover_CSS( $attributes ),
 			$this->get_search_menu_hover_CSS( $attributes, 'Tablet' ),
-			$this->get_search_menu_hover_CSS( $attributes, 'Mobile' )
+			$this->get_search_menu_hover_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_menu_hover_CSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards-filter-wrap .filterable-searchInput::placeholder ',
@@ -144,24 +157,28 @@ class Block extends BlockBaseAbstract {
 			$this->get_Filter_active_class_CSS( $attributes ),
 			$this->get_Filter_active_class_CSS( $attributes, 'Tablet' ),
 			$this->get_Filter_active_class_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Filter_active_class_CSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards_filter .filterable-filter-button.filterable-filter-button-active:hover',
 			$this->get_Filter_active_class_hover_CSS( $attributes ),
 			$this->get_Filter_active_class_hover_CSS( $attributes, 'Tablet' ),
 			$this->get_Filter_active_class_hover_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Filter_active_class_hover_CSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards-wrap',
 			$this->filterable_cards_WrapCSS( $attributes ),
 			$this->filterable_cards_WrapCSS( $attributes, 'Tablet' ),
-			$this->filterable_cards_WrapCSS( $attributes, 'Mobile' )
+			$this->filterable_cards_WrapCSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->filterable_cards_WrapCSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards-wrap > .ablocks-block--filterable-cards-item',
 			$this->filterable_cards_items( $attributes ),
 			$this->filterable_cards_items( $attributes, 'Tablet' ),
 			$this->filterable_cards_items( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->filterable_cards_items( $attributes, $device ); } )
 		);
 		// button style
 		$css_generator->add_class_styles(
@@ -169,18 +186,21 @@ class Block extends BlockBaseAbstract {
 			$this->filterable_Cards_More_Wrapper( $attributes ),
 			$this->filterable_Cards_More_Wrapper( $attributes, 'Tablet' ),
 			$this->filterable_Cards_More_Wrapper( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->filterable_Cards_More_Wrapper( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards-showMore-button',
 			$this->filterable_loadMore_button( $attributes ),
 			$this->filterable_loadMore_button( $attributes, 'Tablet' ),
-			$this->filterable_loadMore_button( $attributes, 'Mobile' )
+			$this->filterable_loadMore_button( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->filterable_loadMore_button( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .filterable-cards-showMore-button:hover',
 			$this->filterable_loadMore_button_hover( $attributes ),
 			$this->filterable_loadMore_button_hover( $attributes, 'Tablet' ),
-			$this->filterable_loadMore_button_hover( $attributes, 'Mobile' )
+			$this->filterable_loadMore_button_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->filterable_loadMore_button_hover( $attributes, $device ); } )
 		);
 		return $css_generator->generate_css();
 	}

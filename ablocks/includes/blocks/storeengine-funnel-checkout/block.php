@@ -34,85 +34,98 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .storeengine-funnel-checkout-shortcode .storeengine-order-summary .storeengine-ajax-checkout-form__title',
 			$this->get_order_details_css( $attributes ),
 			$this->get_order_details_css( $attributes, 'Tablet' ),
-			$this->get_order_details_css( $attributes, 'Mobile' )
+			$this->get_order_details_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_order_details_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-funnel-checkout-shortcode .storeengine-order-summary .storeengine-ajax-checkout-form__title:hover',
 			$this->get_order_details_hover_css( $attributes ),
 			$this->get_order_details_hover_css( $attributes, 'Tablet' ),
-			$this->get_order_details_hover_css( $attributes, 'Mobile' )
+			$this->get_order_details_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_order_details_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-funnel-checkout-shortcode .storeengine-order-item-entry-left img',
 			$this->get_order_details_image_css( $attributes ),
 			$this->get_order_details_image_css( $attributes, 'Tablet' ),
-			$this->get_order_details_image_css( $attributes, 'Mobile' )
+			$this->get_order_details_image_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_order_details_image_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-funnel-checkout-shortcode .storeengine-order-item h6 a',
 			$this->get_order_details_product_title_css( $attributes ),
 			$this->get_order_details_product_title_css( $attributes, 'Tablet' ),
-			$this->get_order_details_product_title_css( $attributes, 'Mobile' )
+			$this->get_order_details_product_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_order_details_product_title_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-funnel-checkout-shortcode .storeengine-order-item h6 a:hover',
 			$this->get_order_details_product_title_hover_css( $attributes ),
 			$this->get_order_details_product_title_hover_css( $attributes, 'Tablet' ),
-			$this->get_order_details_product_title_hover_css( $attributes, 'Mobile' )
+			$this->get_order_details_product_title_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_order_details_product_title_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-funnel-checkout-shortcode .storeengine-order-item__price',
 			$this->get_order_details_price_css( $attributes ),
 			$this->get_order_details_price_css( $attributes, 'Tablet' ),
-			$this->get_order_details_price_css( $attributes, 'Mobile' )
+			$this->get_order_details_price_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_order_details_price_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-funnel-checkout-shortcode .storeengine-order-item__price:hover',
 			$this->get_order_details_price_hover_css( $attributes ),
 			$this->get_order_details_price_hover_css( $attributes, 'Tablet' ),
-			$this->get_order_details_price_hover_css( $attributes, 'Mobile' )
+			$this->get_order_details_price_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_order_details_price_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-order-summary-shortcode .storeengine-order-summary__item .storeengine-order-item-entry-right .storeengine-order-item__price .storeengine-order-item__price-regular',
 			$this->get_order_details_regular_price_css( $attributes ),
 			$this->get_order_details_regular_price_css( $attributes, 'Tablet' ),
-			$this->get_order_details_regular_price_css( $attributes, 'Mobile' )
+			$this->get_order_details_regular_price_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_order_details_regular_price_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-order-summary-shortcode .storeengine-order-summary__item .storeengine-order-item-entry-right .storeengine-order-item__price .storeengine-order-item__price-regular:hover',
 			$this->get_order_details_price_regular_hover_css( $attributes ),
 			$this->get_order_details_price_regular_hover_css( $attributes, 'Tablet' ),
-			$this->get_order_details_price_regular_hover_css( $attributes, 'Mobile' )
+			$this->get_order_details_price_regular_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_order_details_price_regular_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-funnel-checkout-shortcode .storeengine-order-item__qty,
 			 {{WRAPPER}} .storeengine-funnel-checkout-shortcode .storeengine-order-item__qty span',
 			$this->get_order_details_quality_css( $attributes ),
 			$this->get_order_details_quality_css( $attributes, 'Tablet' ),
-			$this->get_order_details_quality_css( $attributes, 'Mobile' )
+			$this->get_order_details_quality_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_order_details_quality_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-order-summary-shortcode .storeengine-order-summary__item .storeengine-order-item-entry-right .storeengine-order-item__qty:hover,
 			 {{WRAPPER}} .storeengine-order-summary-shortcode .storeengine-order-summary__item .storeengine-order-item-entry-right .storeengine-order-item__qty span:hover',
 			$this->get_order_details_quality_hover_css( $attributes ),
 			$this->get_order_details_quality_hover_css( $attributes, 'Tablet' ),
-			$this->get_order_details_quality_hover_css( $attributes, 'Mobile' )
+			$this->get_order_details_quality_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_order_details_quality_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-funnel-checkout-shortcode .storeengine-cart-sub-total-table,
 			 {{WRAPPER}} .storeengine-funnel-checkout-shortcode .storeengine-cart-sub-total-table td',
 			$this->get_table_text_css( $attributes ),
 			$this->get_table_text_css( $attributes, 'Tablet' ),
-			$this->get_table_text_css( $attributes, 'Mobile' )
+			$this->get_table_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_table_text_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-funnel-checkout-shortcode .storeengine-cart-sub-total-table:hover,
 			 {{WRAPPER}} .storeengine-funnel-checkout-shortcode .storeengine-cart-sub-total-table td:hover',
 			$this->get_table_text_hover_css( $attributes ),
 			$this->get_table_text_hover_css( $attributes, 'Tablet' ),
-			$this->get_table_text_hover_css( $attributes, 'Mobile' )
+			$this->get_table_text_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_table_text_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

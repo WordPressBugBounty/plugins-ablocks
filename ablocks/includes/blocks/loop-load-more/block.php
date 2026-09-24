@@ -34,13 +34,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-loop-load-more__text',
 			$this->loop_load_More_button( $attributes ),
 			$this->loop_load_More_button( $attributes, 'Tablet' ),
-			$this->loop_load_More_button( $attributes, 'Mobile' )
+			$this->loop_load_More_button( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->loop_load_More_button( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-loop-load-more__text:hover',
 			$this->loop_load_More_button_hover( $attributes ),
 			$this->loop_load_More_button_hover( $attributes, 'Tablet' ),
-			$this->loop_load_More_button_hover( $attributes, 'Mobile' )
+			$this->loop_load_More_button_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->loop_load_More_button_hover( $attributes, $device ); } )
 		);
 		return $css_generator->generate_css();
 	}

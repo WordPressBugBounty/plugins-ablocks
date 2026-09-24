@@ -161,6 +161,7 @@ class Block extends BlockBaseAbstract {
 					$this->get_row_column_displayCss( $attributes ),
 					$this->get_row_column_displayCss( $attributes, 'Tablet' ),
 					$this->get_row_column_displayCss( $attributes, 'Mobile' ),
+					$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_row_column_displayCss( $attributes, $device ); } )
 				);
 
 		$css_generator->add_class_styles(
@@ -168,6 +169,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_field_css( $attributes ),
 			$this->get_field_css( $attributes, 'Tablet' ),
 			$this->get_field_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_field_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -175,12 +177,14 @@ class Block extends BlockBaseAbstract {
 			$this->get_label_css( $attributes ),
 			$this->get_label_css( $attributes, 'Tablet' ),
 			$this->get_label_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_label_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-form-builder__helper-text',
 			$this->get_helper_text_css( $attributes ),
 			$this->get_helper_text_css( $attributes, 'Tablet' ),
 			$this->get_helper_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_helper_text_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -191,18 +195,21 @@ class Block extends BlockBaseAbstract {
 			$this->get_input_css( $attributes ),
 			$this->get_input_css( $attributes, 'Tablet' ),
 			$this->get_input_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_input_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-form-builder__input:hover',
 			$this->get_input_hover_css( $attributes ),
 			$this->get_input_hover_css( $attributes, 'Tablet' ),
 			$this->get_input_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_input_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-form-builder__input:focus',
 			$this->get_input_focus_css( $attributes ),
 			$this->get_input_focus_css( $attributes, 'Tablet' ),
 			$this->get_input_focus_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_input_focus_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -210,12 +217,14 @@ class Block extends BlockBaseAbstract {
 			$this->get_input_placeholder_css( $attributes ),
 			$this->get_input_placeholder_css( $attributes, 'Tablet' ),
 			$this->get_input_placeholder_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_input_placeholder_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-form-builder__input-icon,{{WRAPPER}} .ablocks-form-builder__input-toggle-password',
 			$this->get_input_position_css( $attributes ),
 			$this->get_input_position_css( $attributes, 'Tablet' ),
 			$this->get_input_position_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_input_position_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -223,6 +232,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_alignment_button_css( $attributes ),
 			$this->get_alignment_button_css( $attributes, 'Tablet' ),
 			$this->get_alignment_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_alignment_button_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -230,6 +240,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_submit_button_css( $attributes ),
 			$this->get_submit_button_css( $attributes, 'Tablet' ),
 			$this->get_submit_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_submit_button_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -237,36 +248,42 @@ class Block extends BlockBaseAbstract {
 			$this->get_submit_button_hover_css( $attributes ),
 			$this->get_submit_button_hover_css( $attributes, 'Tablet' ),
 			$this->get_submit_button_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_submit_button_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--form-builder__navigator',
 			$this->get_navigator_css( $attributes ),
 			$this->get_navigator_css( $attributes, 'Tablet' ),
 			$this->get_navigator_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_navigator_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--form-builder__navigator-redirect-page',
 			$this->get_navigator_spacing_css( $attributes ),
 			$this->get_navigator_spacing_css( $attributes, 'Tablet' ),
 			$this->get_navigator_spacing_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_navigator_spacing_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--form-builder__success',
 			$this->get_succsss_styles_css( $attributes ),
 			$this->get_succsss_styles_css( $attributes, 'Tablet' ),
 			$this->get_succsss_styles_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_succsss_styles_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--form-builder__error',
 			$this->get_error_styles_css( $attributes ),
 			$this->get_error_styles_css( $attributes, 'Tablet' ),
 			$this->get_error_styles_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_error_styles_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--form-builder__feedback-message',
 			$this->get_success_error_common_styles_css( $attributes ),
 			$this->get_success_error_common_styles_css( $attributes, 'Tablet' ),
 			$this->get_success_error_common_styles_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_success_error_common_styles_css( $attributes, $device ); } )
 		);
 		return $css_generator->generate_css();
 	}

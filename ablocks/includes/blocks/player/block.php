@@ -24,43 +24,50 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block-youtube-container > .plyr--video > .plyr__controls',
 			$this->get_youtube_progress_style_css( $attributes ),
 			$this->get_youtube_progress_style_css( $attributes, 'Tablet' ),
-			$this->get_youtube_progress_style_css( $attributes, 'Mobile' )
+			$this->get_youtube_progress_style_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_youtube_progress_style_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-youtube-container > .plyr--youtube > .plyr__control--overlaid',
 			$this->get_youtube_play_pause__button_style_css( $attributes ),
 			$this->get_youtube_play_pause__button_style_css( $attributes, 'Tablet' ),
-			$this->get_youtube_play_pause__button_style_css( $attributes, 'Mobile' )
+			$this->get_youtube_play_pause__button_style_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_youtube_play_pause__button_style_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-selfhosted-container > .plyr--video  > .plyr__controls',
 			$this->get_self_video_style_css( $attributes ),
 			$this->get_self_video_style_css( $attributes, 'Tablet' ),
-			$this->get_self_video_style_css( $attributes, 'Mobile' )
+			$this->get_self_video_style_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_self_video_style_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-selfhosted-container > .plyr--html5 > .plyr__control--overlaid',
 			$this->get_self_host_control_style_css( $attributes ),
 			$this->get_self_host_control_style_css( $attributes, 'Tablet' ),
-			$this->get_self_host_control_style_css( $attributes, 'Mobile' )
+			$this->get_self_host_control_style_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_self_host_control_style_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-vimeo-container > .plyr--video  > .plyr__controls',
 			$this->get_vimeo_video_style_css( $attributes ),
 			$this->get_vimeo_video_style_css( $attributes, 'Tablet' ),
-			$this->get_vimeo_video_style_css( $attributes, 'Mobile' )
+			$this->get_vimeo_video_style_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_vimeo_video_style_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-vimeo-container > .plyr--vimeo > .plyr__control--overlaid',
 			$this->get_vimeo_player_control_style_css( $attributes ),
 			$this->get_vimeo_player_control_style_css( $attributes, 'Tablet' ),
-			$this->get_vimeo_player_control_style_css( $attributes, 'Mobile' )
+			$this->get_vimeo_player_control_style_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_vimeo_player_control_style_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .plyr__poster',
 			$this->get_poster_image( $attributes ),
 			$this->get_poster_image( $attributes, 'Tablet' ),
-			$this->get_poster_image( $attributes, 'Mobile' )
+			$this->get_poster_image( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_poster_image( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

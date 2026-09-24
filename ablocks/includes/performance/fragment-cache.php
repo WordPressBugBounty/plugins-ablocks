@@ -388,6 +388,9 @@ class FragmentCache {
 			$this->signature( $parsed_block ),
 			get_stylesheet(),
 			CacheBackend::generation( self::VERSION_OPTION ),
+			// A cached fragment's atomic style classes are only valid for the
+			// compiler output they were rendered against.
+			\ABlocks\Classes\AtomicStyles::OUTPUT_REVISION,
 			determine_locale(),
 			is_user_logged_in() ? 'u' . get_current_user_id() : 'anon',
 		];

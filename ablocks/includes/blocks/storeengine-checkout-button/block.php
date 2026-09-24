@@ -26,19 +26,22 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .storeengine-proceed-to-checkout-shortcode',
 			$this->get_checkout_button_wrapper_css( $attributes ),
 			$this->get_checkout_button_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_checkout_button_wrapper_css( $attributes, 'Mobile' )
+			$this->get_checkout_button_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_checkout_button_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-proceed-to-checkout-shortcode a',
 			$this->get_checkout_button_css( $attributes ),
 			$this->get_checkout_button_css( $attributes, 'Tablet' ),
-			$this->get_checkout_button_css( $attributes, 'Mobile' )
+			$this->get_checkout_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_checkout_button_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-proceed-to-checkout-shortcode a:hover',
 			$this->get_checkout_button_hover_css( $attributes ),
 			$this->get_checkout_button_hover_css( $attributes, 'Tablet' ),
-			$this->get_checkout_button_hover_css( $attributes, 'Mobile' )
+			$this->get_checkout_button_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_checkout_button_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

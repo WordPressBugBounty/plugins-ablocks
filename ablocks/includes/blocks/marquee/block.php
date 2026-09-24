@@ -22,7 +22,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block-marquee .ablocks-block-marquee__children',
 			$this->get_inner_block_css( $attributes ),
 			$this->get_inner_block_css( $attributes, 'Tablet' ),
-			$this->get_inner_block_css( $attributes, 'Mobile' )
+			$this->get_inner_block_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_inner_block_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -35,7 +36,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block-marquee .ablocks-block-marquee__children',
 			$this->get_inner_block_css( $attributes ),
 			$this->get_inner_block_css( $attributes, 'Tablet' ),
-			$this->get_inner_block_css( $attributes, 'Mobile' )
+			$this->get_inner_block_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_inner_block_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

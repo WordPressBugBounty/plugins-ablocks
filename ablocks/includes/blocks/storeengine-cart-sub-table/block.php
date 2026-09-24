@@ -27,65 +27,75 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .storeengine-cart-sub-total-table-shortcode table',
 			$this->get_cart_sub_wrapper_css( $attributes ),
 			$this->get_cart_sub_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_cart_sub_wrapper_css( $attributes, 'Mobile' )
+			$this->get_cart_sub_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_sub_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-sub-total-table-shortcode',
 			$this->get_cart_sub_css( $attributes ),
 			$this->get_cart_sub_css( $attributes, 'Tablet' ),
-			$this->get_cart_sub_css( $attributes, 'Mobile' )
+			$this->get_cart_sub_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_sub_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-sub-total-table-shortcode .storeengine-cart-sub-total-table tr:first-child',
 			$this->get_cart_sub_row_css( $attributes ),
 			$this->get_cart_sub_row_css( $attributes, 'Tablet' ),
-			$this->get_cart_sub_row_css( $attributes, 'Mobile' )
+			$this->get_cart_sub_row_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_sub_row_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-sub-total-table-shortcode .storeengine-cart-sub-total-table tr:first-child:hover',
 			$this->get_cart_sub_row_hover_css( $attributes ),
 			$this->get_cart_sub_row_hover_css( $attributes, 'Tablet' ),
-			$this->get_cart_sub_row_hover_css( $attributes, 'Mobile' )
+			$this->get_cart_sub_row_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_sub_row_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-sub-total-table-shortcode .storeengine-cart-sub-total-table tr:first-child td,
 			{{WRAPPER}} .storeengine-cart-sub-total-table-shortcode .storeengine-cart-sub-total-table tr:first-child th',
 			$this->get_cart_sub_row_text_css( $attributes ),
 			$this->get_cart_sub_row_text_css( $attributes, 'Tablet' ),
-			$this->get_cart_sub_row_text_css( $attributes, 'Mobile' )
+			$this->get_cart_sub_row_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_sub_row_text_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-sub-total-table-shortcode .storeengine-cart-sub-total-table tr:first-child td:hover,
 			 {{WRAPPER}} .storeengine-cart-sub-total-table-shortcode .storeengine-cart-sub-total-table tr:first-child th:hover',
 			$this->get_cart_sub_row_text_hover_css( $attributes ),
 			$this->get_cart_sub_row_text_hover_css( $attributes, 'Tablet' ),
-			$this->get_cart_sub_row_text_hover_css( $attributes, 'Mobile' )
+			$this->get_cart_sub_row_text_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_sub_row_text_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-sub-total-table-shortcode .storeengine-cart-sub-total-table tr',
 			$this->get_cart_sub_row_last_css( $attributes ),
 			$this->get_cart_sub_row_last_css( $attributes, 'Tablet' ),
-			$this->get_cart_sub_row_last_css( $attributes, 'Mobile' )
+			$this->get_cart_sub_row_last_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_sub_row_last_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-sub-total-table-shortcode .storeengine-cart-sub-total-table tr:hover',
 			$this->get_cart_sub_row_last_hover_css( $attributes ),
 			$this->get_cart_sub_row_last_hover_css( $attributes, 'Tablet' ),
-			$this->get_cart_sub_row_last_hover_css( $attributes, 'Mobile' )
+			$this->get_cart_sub_row_last_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_sub_row_last_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-sub-total-table-shortcode .storeengine-cart-sub-total-table tr td,
 			{{WRAPPER}} .storeengine-cart-sub-total-table-shortcode .storeengine-cart-sub-total-table tr th',
 			$this->get_cart_sub_row_last_text_css( $attributes ),
 			$this->get_cart_sub_row_last_text_css( $attributes, 'Tablet' ),
-			$this->get_cart_sub_row_last_text_css( $attributes, 'Mobile' )
+			$this->get_cart_sub_row_last_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_sub_row_last_text_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-sub-total-table-shortcode .storeengine-cart-sub-total-table tr td:hover,
 			 {{WRAPPER}} .storeengine-cart-sub-total-table-shortcode .storeengine-cart-sub-total-table tr th:hover',
 			$this->get_cart_sub_row_last_text_hover_css( $attributes ),
 			$this->get_cart_sub_row_last_text_hover_css( $attributes, 'Tablet' ),
-			$this->get_cart_sub_row_last_text_hover_css( $attributes, 'Mobile' )
+			$this->get_cart_sub_row_last_text_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_sub_row_last_text_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

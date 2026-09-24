@@ -65,7 +65,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}',
 			$this->getListNotFoundCSS($attributes),
 			$this->getListNotFoundCSS($attributes, 'Tablet'),
-			$this->getListNotFoundCSS($attributes, 'Mobile')
+			$this->getListNotFoundCSS($attributes, 'Mobile'),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getListNotFoundCSS($attributes, $device); } )
 		);
 
 		return $css_generator->generate_css();

@@ -90,6 +90,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_wrapper_css( $attributes, '' ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
 			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 		// List CSS
 		$css_generator->add_class_styles(
@@ -97,6 +98,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_list_css( $attributes, '' ),
 			$this->get_list_css( $attributes, 'Tablet' ),
 			$this->get_list_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_list_css( $attributes, $device ); } )
 		);
 		// List Wrapper CSS
 		$css_generator->add_class_styles(
@@ -104,6 +106,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_list_wrapper_css( $attributes, '' ),
 			$this->get_list_wrapper_css( $attributes, 'Tablet' ),
 			$this->get_list_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_list_wrapper_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -111,6 +114,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_Divider_Wrapper_css( $attributes, '' ),
 			$this->get_Divider_Wrapper_css( $attributes, 'Tablet' ),
 			$this->get_Divider_Wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Divider_Wrapper_css( $attributes, $device ); } )
 		);
 		// Marker CSS
 		$css_generator->add_class_styles(
@@ -118,6 +122,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_marker_css( $attributes, '' ),
 			$this->get_marker_css( $attributes, 'Tablet' ),
 			$this->get_marker_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_marker_css( $attributes, $device ); } )
 		);
 		// Icon CSS
 		$css_generator->add_class_styles(
@@ -125,6 +130,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_icon_css( $attributes, '' ),
 			$this->get_icon_css( $attributes, 'Tablet' ),
 			$this->get_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_icon_css( $attributes, $device ); } )
 		);
 		// Icon hover css
 		$css_generator->add_class_styles(
@@ -132,6 +138,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_icon_hover_css( $attributes, '' ),
 			$this->get_icon_hover_css( $attributes, 'Tablet' ),
 			$this->get_icon_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_icon_hover_css( $attributes, $device ); } )
 		);
 
 		// List text CSS
@@ -140,6 +147,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_list_text_css( $attributes ),
 			$this->get_list_text_css( $attributes, 'Tablet' ),
 			$this->get_list_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_list_text_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

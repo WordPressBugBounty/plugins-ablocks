@@ -106,70 +106,22 @@ class Range {
 			return $css;
 		}
 
-		// ✅ Get values per device
-		$desktop_key = $args['attributeObjectKey'];
-		$tablet_key  = $args['attributeObjectKey'] . 'Tablet';
-		$mobile_key  = $args['attributeObjectKey'] . 'Mobile';
-
-		// A stored 0 is a real value (e.g. "top: 0" at Tablet), so only a missing
-		// or empty-string key counts as unset — matching the editor helper.
-		$desktop_val = self::get_filled_value( $value, $desktop_key );
-		$tablet_val  = self::get_filled_value( $value, $tablet_key );
-		$mobile_val  = self::get_filled_value( $value, $mobile_key );
-
-		$device_value = '';
-
-		switch ( $args['device'] ) {
-			case '':
-				if ( $desktop_val !== '' ) {
-					$device_value = $desktop_val;
-				} else {
-					$device_value = $args['defaultValue'];
-				}
-				break;
-
-			case 'Mobile':
-				if ( $mobile_val !== '' ) {
-					$device_value = $mobile_val;
-				} elseif ( $args['defaultValueMobile'] !== '' ) {
-					$device_value = $args['defaultValueMobile'];
-				} elseif ( $tablet_val !== '' ) {
-					$device_value = $tablet_val;
-				} elseif ( $args['defaultValueTablet'] !== '' ) {
-					$device_value = $args['defaultValueTablet'];
-				} elseif ( $desktop_val !== '' ) {
-					$device_value = $desktop_val;
-				} else {
-					$device_value = $args['defaultValue'];
-				}
-				break;
-
-			case 'Tablet':
-				if ( $tablet_val !== '' ) {
-					$device_value = $tablet_val;
-				} elseif ( $args['defaultValueTablet'] !== '' ) {
-					$device_value = $args['defaultValueTablet'];
-				} elseif ( $desktop_val !== '' ) {
-					$device_value = $desktop_val;
-				} else {
-					$device_value = $args['defaultValue'];
-				}
-				break;
-
-			default: // Custom breakpoint suffix (e.g. "Bp1024")
-				$custom_val = self::get_filled_value( $value, $desktop_key . $args['device'] );
-				if ( $custom_val !== '' ) {
-					$device_value = $custom_val;
-				} elseif ( $desktop_val !== '' ) {
-					$device_value = $desktop_val;
-				} else {
-					$device_value = $args['defaultValue'];
-				}
-				break;
-		}//end switch
+		// ✅ Resolve value by device and inheritance: the device's own value, then
+		// its declared default (defaultValue / defaultValueTablet / …Mobile), then
+		// the same for each containing wider device — custom breakpoints included.
+		// Mirrors getCSS() in src/controls/range/helper.js.
+		$device_defaults = [
+			''       => $args['defaultValue'],
+			'Tablet' => $args['defaultValueTablet'],
+			'Mobile' => $args['defaultValueMobile'],
+		];
+		$device_value = self::resolve( $args['device'], function ( $suffix ) use ( $value, $args, $device_defaults ) {
+			$stored = self::get_filled_value( $value, $args['attributeObjectKey'] . $suffix );
+			return Helper::has_responsive_value( $stored ) ? $stored : ( $device_defaults[ $suffix ] ?? '' );
+		} );
 
 		// ✅ If value exists, apply unit and return
-		if ( $device_value !== '' ) {
+		if ( Helper::has_responsive_value( $device_value ) ) {
 			$unit = self::get_unit( [
 				'attributeValue'      => $value,
 				'attributeObjectKey'  => $args['attributeObjectKey'],
@@ -190,36 +142,28 @@ class Range {
 
 
 	public static function get_unit( $args ) {
-		$defaultUnit = $args['unitDefaultValue'];
-		$value = $args['attributeValue'];
-		$device = $args['device'];
-		$keyPrefix = $args['attributeObjectKey'] . 'Unit';
+		$key_prefix = $args['attributeObjectKey'] . 'Unit';
+		$value      = $args['attributeValue'];
+		$unit       = self::resolve( $args['device'], function ( $suffix ) use ( $value, $key_prefix ) {
+			return self::get_filled_value( $value, $key_prefix . $suffix );
+		} );
+		return Helper::has_responsive_value( $unit ) ? $unit : $args['unitDefaultValue'];
+	}
 
-		// Retrieve units with fallback to default
-		$unitDesktop = Helper::get_array_value( $value, $keyPrefix, $defaultUnit ); // Desktop
-		$unitTablet = Helper::get_array_value( $value, $keyPrefix . 'Tablet', $unitDesktop ); // Tablet inherits from Desktop
-		$unitMobile = Helper::get_array_value( $value, $keyPrefix . 'Mobile', $unitTablet ); // Mobile inherits from Tablet
-
-		// Return the appropriate unit based on the device
-		if ( '' === $device ) {
-			return $unitDesktop; // Desktop
+	/**
+	 * The device's own value, else the nearest containing wider device's (see
+	 * Helper::get_responsive_ancestors()), as read by $read_at( $suffix ).
+	 * Returns null when nothing is set.
+	 */
+	private static function resolve( $device, $read_at ) {
+		$target = 'Desktop' === $device ? '' : (string) $device;
+		foreach ( array_merge( [ $target ], Helper::get_responsive_ancestors( $target ) ) as $suffix ) {
+			$v = $read_at( $suffix );
+			if ( Helper::has_responsive_value( $v ) ) {
+				return $v;
+			}
 		}
-
-		if ( 'Tablet' === $device ) {
-			return $unitTablet; // Tablet
-		}
-
-		if ( 'Mobile' === $device ) {
-			return $unitMobile; // Mobile
-		}
-
-		if ( is_string( $device ) && '' !== $device ) {
-			// Custom breakpoint inherits the desktop unit when it has none of its own.
-			$unitCustom = self::get_filled_value( $value, $keyPrefix . $device );
-			return '' !== $unitCustom ? $unitCustom : $unitDesktop;
-		}
-
-		return $defaultUnit; // Default fallback
+		return null;
 	}
 
 	/**

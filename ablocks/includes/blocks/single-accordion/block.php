@@ -32,7 +32,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--single-accordion:hover',
 			$this->get_item_hover_css( $attributes ),
 			$this->get_item_hover_css( $attributes, 'Tablet' ),
-			$this->get_item_hover_css( $attributes, 'Mobile' )
+			$this->get_item_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_item_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--single-accordion__heading .ablocks-block-accordion-title',
@@ -43,19 +44,22 @@ class Block extends BlockBaseAbstract {
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--single-accordion__heading:hover  .ablocks-block-accordion-title', $this->get_title_hover_css( $attributes ),
 			$this->get_title_hover_css( $attributes, 'Tablet' ),
-			$this->get_title_hover_css( $attributes, 'Mobile' )
+			$this->get_title_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_title_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--single-accordion-is-selected .ablocks-block-accordion-title',
 			$this->get_title_active_css( $attributes ),
 			$this->get_title_active_css( $attributes, 'Tablet' ),
-			$this->get_title_active_css( $attributes, 'Mobile' )
+			$this->get_title_active_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_title_active_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--single-accordion__heading',
 			$this->get_panel_css( $attributes ),
 			$this->get_panel_css( $attributes, 'Tablet' ),
-			$this->get_panel_css( $attributes, 'Mobile' )
+			$this->get_panel_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_panel_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--single-accordion__heading:hover',
@@ -67,7 +71,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--single-accordion-is-selected .ablocks-block--single-accordion__heading',
 			$this->get_panel_active_css( $attributes ),
 			$this->get_panel_active_css( $attributes, 'Tablet' ),
-			$this->get_panel_active_css( $attributes, 'Mobile' )
+			$this->get_panel_active_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_panel_active_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--single-accordion__heading svg.ablocks-svg-icon',
@@ -81,13 +86,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block--single-accordion__body-content',
 			$this->get_content_css( $attributes ),
 			$this->get_content_css( $attributes, 'Tablet' ),
-			$this->get_content_css( $attributes, 'Mobile' )
+			$this->get_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--single-accordion__body-content:hover',
 			$this->get_content_hover_css( $attributes ),
 			$this->get_content_hover_css( $attributes, 'Tablet' ),
-			$this->get_content_hover_css( $attributes, 'Mobile' )
+			$this->get_content_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_hover_css( $attributes, $device ); } )
 		);
 		return $css_generator->generate_css();
 	}

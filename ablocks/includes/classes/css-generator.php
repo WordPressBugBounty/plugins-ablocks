@@ -100,12 +100,12 @@ class CssGenerator {
 		// Subtract a "phantom" baseline (builder run against a value-less suffix)
 		// so controls that only default Tablet/Mobile don't leak phantom
 		// declarations into custom breakpoints. Leaves only real overrides.
-		$phantom = (array) call_user_func( $builder, '__ablocksphantom__' );
+		$phantom = \ABlocks\Helper::call_device_builder( $builder, '__ablocksphantom__' );
 		foreach ( $custom_devices as $d ) {
 			if ( $d['width'] <= 0 || 'Tablet' === $d['id'] || 'Mobile' === $d['id'] ) {
 				continue;
 			}
-			$actual = (array) call_user_func( $builder, $d['suffix'] );
+			$actual = \ABlocks\Helper::call_device_builder( $builder, $d['suffix'] );
 			$real   = [];
 			foreach ( $actual as $prop => $val ) {
 				if ( ! array_key_exists( $prop, $phantom ) || $phantom[ $prop ] !== $val ) {
@@ -162,7 +162,7 @@ class CssGenerator {
 				}
 			} else {
 				// Custom breakpoints present: emit every breakpoint width-descending
-				// (narrowest last so it wins), each deduped against desktop.
+				// (narrowest last so it wins), each deduped against what it inherits.
 				$bp_defaults = \ABlocks\Helper::get_breakpoints();
 				$bp_list     = [
 					[ 'width' => $bp_defaults['tablet'], 'min' => 0, 'max' => $bp_defaults['tablet'], 'styles' => $class_style['tablet_styles'] ],
@@ -179,10 +179,22 @@ class CssGenerator {
 				usort( $bp_list, function ( $a, $b ) {
 					return (int) $b['width'] - (int) $a['width'];
 				} );
-				foreach ( $bp_list as $bp ) {
-					$bp_styles = $this->filter_responsive_styles( $desktop_styles, $bp['styles'] );
-					$bp_raw    = $this->generate_css_for_media_query( 'bp', $bp_styles );
-					if ( $bp_raw === $desktop_raw || '' === trim( $bp_raw ) ) {
+				$emitted = [];
+				foreach ( $bp_list as $i => $bp ) {
+					// Dedupe against what this breakpoint inherits — desktop plus every
+					// wider breakpoint whose range contains it — not desktop alone, so an
+					// explicit value that equals desktop's still overrides a wider
+					// custom breakpoint's.
+					$parent = $desktop_styles;
+					for ( $j = 0; $j < $i; $j++ ) {
+						if ( \ABlocks\Helper::breakpoint_contains( $bp_list[ $j ], $bp ) ) {
+							$parent = array_merge( $parent, $emitted[ $j ] );
+						}
+					}
+					$bp_styles     = $this->filter_responsive_styles( $parent, $bp['styles'] );
+					$emitted[ $i ] = $bp_styles;
+					$bp_raw        = $this->generate_css_for_media_query( 'bp', $bp_styles );
+					if ( '' === trim( $bp_raw ) ) {
 						continue;
 					}
 					$bp_css = AssetsGenerator::minify_css( $bp_raw );

@@ -41,7 +41,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}  .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -89,6 +90,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_container_css( $attributes ),
 			$this->get_container_css( $attributes, 'Tablet' ),
 			$this->get_container_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_container_css( $attributes, $device ); } )
 		);
 		// rating icon css
 		$css_generator->add_class_styles(
@@ -96,13 +98,15 @@ class Block extends BlockBaseAbstract {
 			$this->get_rating_css( $attributes ),
 			$this->get_rating_css( $attributes, 'Tablet' ),
 			$this->get_rating_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -110,6 +114,7 @@ class Block extends BlockBaseAbstract {
 			Icon::get_element_image_css( $attributes ),
 			Icon::get_element_image_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_css( $attributes, $device ); } )
 		);
 
 		// rating icon spacing css
@@ -118,6 +123,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_rating_icon_spacing_css( $attributes ),
 			$this->get_rating_icon_spacing_css( $attributes, 'Tablet' ),
 			$this->get_rating_icon_spacing_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_icon_spacing_css( $attributes, $device ); } )
 		);
 		// rating number css
 		$css_generator->add_class_styles(
@@ -125,6 +131,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_rating_number_css( $attributes ),
 			$this->get_rating_number_css( $attributes, 'Tablet' ),
 			$this->get_rating_number_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_number_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

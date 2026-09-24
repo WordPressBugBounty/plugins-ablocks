@@ -23,14 +23,16 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}',
 			$this->get_wrapper_css( $attributes ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-heading-text',
 			$this->get_heading_text_css( $attributes ),
 			$this->get_heading_text_css( $attributes, 'Tablet' ),
-			$this->get_heading_text_css( $attributes, 'Mobile' )
+			$this->get_heading_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_heading_text_css( $attributes, $device ); } )
 		);
 
 		$desktop_heading_a_styles = $this->get_heading_a_css( $attributes );
@@ -43,21 +45,24 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-animated-text path',
 			$this->get_svg_path_css( $attributes ),
 			$this->get_svg_path_css( $attributes, 'Tablet' ),
-			$this->get_svg_path_css( $attributes, 'Mobile' )
+			$this->get_svg_path_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_svg_path_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-animated-text',
 			$this->get_heading_general_css( $attributes ),
 			$this->get_heading_general_css( $attributes, 'Tablet' ),
-			$this->get_heading_general_css( $attributes, 'Mobile' )
+			$this->get_heading_general_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_heading_general_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-animated-text-wrapper',
 			$this->get_heading_animated_css( $attributes ),
 			$this->get_heading_animated_css( $attributes, 'Tablet' ),
-			$this->get_heading_animated_css( $attributes, 'Mobile' )
+			$this->get_heading_animated_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_heading_animated_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -68,14 +73,16 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}',
 			$this->get_wrapper_css( $attributes ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-heading-text',
 			$this->get_heading_text_css( $attributes ),
 			$this->get_heading_text_css( $attributes, 'Tablet' ),
-			$this->get_heading_text_css( $attributes, 'Mobile' )
+			$this->get_heading_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_heading_text_css( $attributes, $device ); } )
 		);
 		$desktop_heading_a_styles = $this->get_heading_a_css( $attributes );
 		$css_generator->add_class_styles(
@@ -87,21 +94,24 @@ class Block extends BlockBaseAbstract {
 				'{{WRAPPER}} .ablocks-animated-text path',
 				$this->get_svg_path_css( $attributes ),
 				$this->get_svg_path_css( $attributes, 'Tablet' ),
-				$this->get_svg_path_css( $attributes, 'Mobile' )
+				$this->get_svg_path_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_svg_path_css( $attributes, $device ); } )
 			);
 
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-animated-text',
 				$this->get_heading_general_css( $attributes ),
 				$this->get_heading_general_css( $attributes, 'Tablet' ),
-				$this->get_heading_general_css( $attributes, 'Mobile' )
+				$this->get_heading_general_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_heading_general_css( $attributes, $device ); } )
 			);
 
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-animated-text-wrapper',
 				$this->get_heading_animated_css( $attributes ),
 				$this->get_heading_animated_css( $attributes, 'Tablet' ),
-				$this->get_heading_animated_css( $attributes, 'Mobile' )
+				$this->get_heading_animated_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_heading_animated_css( $attributes, $device ); } )
 			);
 		}//end if
 

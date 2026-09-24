@@ -26,67 +26,78 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .storeengine-cart-table',
 			$this->get_cart_list_table_css( $attributes ),
 			$this->get_cart_list_table_css( $attributes, 'Tablet' ),
-			$this->get_cart_list_table_css( $attributes, 'Mobile' )
+			$this->get_cart_list_table_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_list_table_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-table:hover',
 			$this->get_cart_list_table_hover_css( $attributes ),
 			$this->get_cart_list_table_hover_css( $attributes, 'Tablet' ),
-			$this->get_cart_list_table_hover_css( $attributes, 'Mobile' )
+			$this->get_cart_list_table_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_list_table_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-table .storeengine-cart-table__head tr',
 			$this->get_cart_list_table_header_css( $attributes ),
 			$this->get_cart_list_table_header_css( $attributes, 'Tablet' ),
-			$this->get_cart_list_table_header_css( $attributes, 'Mobile' )
+			$this->get_cart_list_table_header_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_list_table_header_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-table .storeengine-cart-table__head tr:hover',
 			$this->get_cart_list_table_header_hover_css( $attributes ),
 			$this->get_cart_list_table_header_hover_css( $attributes, 'Tablet' ),
-			$this->get_cart_list_table_header_hover_css( $attributes, 'Mobile' )
+			$this->get_cart_list_table_header_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_list_table_header_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-list-table-shortcode .storeengine-cart-table__head tr th',
 			$this->get_cart_list_table_header_text_css( $attributes ),
 			$this->get_cart_list_table_header_text_css( $attributes, 'Tablet' ),
-			$this->get_cart_list_table_header_text_css( $attributes, 'Mobile' )
+			$this->get_cart_list_table_header_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_list_table_header_text_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-product .storeengine-cart-product__content .storeengine-cart-product-title a',
 			$this->get_cart_list_product_title( $attributes ),
 			$this->get_cart_list_product_title( $attributes, 'Tablet' ),
-			$this->get_cart_list_product_title( $attributes, 'Mobile' )
+			$this->get_cart_list_product_title( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_list_product_title( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-product .storeengine-cart-product__content .storeengine-cart-product-title a:hover',
 			$this->get_cart_list_product_title_hover_css( $attributes ),
 			$this->get_cart_list_product_title_hover_css( $attributes, 'Tablet' ),
-			$this->get_cart_list_product_title_hover_css( $attributes, 'Mobile' )
+			$this->get_cart_list_product_title_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_list_product_title_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-product__content .storeengine-cart-product-price',
 			$this->get_cart_list_subtitle_css( $attributes ),
 			$this->get_cart_list_subtitle_css( $attributes, 'Tablet' ),
-			$this->get_cart_list_subtitle_css( $attributes, 'Mobile' )
+			$this->get_cart_list_subtitle_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_list_subtitle_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-product__content .storeengine-cart-product-price:hover',
 			$this->get_cart_list_subtitle_hover_css( $attributes ),
 			$this->get_cart_list_subtitle_hover_css( $attributes, 'Tablet' ),
-			$this->get_cart_list_subtitle_hover_css( $attributes, 'Mobile' )
+			$this->get_cart_list_subtitle_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_list_subtitle_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-list-table-shortcode .storeengine-cart-table__body-td .storeengine-price bdi',
 			$this->get_cart_list_product_price_css( $attributes ),
 			$this->get_cart_list_product_price_css( $attributes, 'Tablet' ),
-			$this->get_cart_list_product_price_css( $attributes, 'Mobile' )
+			$this->get_cart_list_product_price_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_list_product_price_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-cart-list-table-shortcode .storeengine-cart-table__body-td .storeengine-price bdi:hover',
 			$this->get_cart_list_product_price_hover_css( $attributes ),
 			$this->get_cart_list_product_price_hover_css( $attributes, 'Tablet' ),
-			$this->get_cart_list_product_price_hover_css( $attributes, 'Mobile' )
+			$this->get_cart_list_product_price_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_cart_list_product_price_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

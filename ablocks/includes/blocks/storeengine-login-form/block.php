@@ -43,7 +43,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .storeengine-login-form-heading',
 			$this->get_form_title_css( $attributes ),
 			$this->get_form_title_css( $attributes, 'Tablet' ),
-			$this->get_form_title_css( $attributes, 'Mobile' )
+			$this->get_form_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_title_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -56,7 +57,8 @@ class Block extends BlockBaseAbstract {
 			label',
 			$this->get_input_field_label_css( $attributes ),
 			$this->get_input_field_label_css( $attributes, 'Tablet' ),
-			$this->get_input_field_label_css( $attributes, 'Mobile' )
+			$this->get_input_field_label_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_input_field_label_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -64,62 +66,71 @@ class Block extends BlockBaseAbstract {
 			label:hover',
 			$this->get_input_field_label_hover_css( $attributes ),
 			$this->get_input_field_label_hover_css( $attributes, 'Tablet' ),
-			$this->get_input_field_label_hover_css( $attributes, 'Mobile' )
+			$this->get_input_field_label_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_input_field_label_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-login-form-wrapper .storeengine-login-form .storeengine-form-group input',
 			$this->get_input_field_css( $attributes ),
 			$this->get_input_field_css( $attributes, 'Tablet' ),
-			$this->get_input_field_css( $attributes, 'Mobile' )
+			$this->get_input_field_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_input_field_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-login-form-wrapper .storeengine-login-form .storeengine-form-group input:hover',
 			$this->get_input_field_hover_css( $attributes ),
 			$this->get_input_field_hover_css( $attributes, 'Tablet' ),
-			$this->get_input_field_hover_css( $attributes, 'Mobile' )
+			$this->get_input_field_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_input_field_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-login-form-wrapper .storeengine-login-form .storeengine-form-group input::placeholder',
 			$this->get_input_field_placeholder_css( $attributes ),
 			$this->get_input_field_placeholder_css( $attributes, 'Tablet' ),
-			$this->get_input_field_placeholder_css( $attributes, 'Mobile' )
+			$this->get_input_field_placeholder_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_input_field_placeholder_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-login-form-wrapper .storeengine-form-group button',
 			$this->get_login_form_button_css( $attributes ),
 			$this->get_login_form_button_css( $attributes, 'Tablet' ),
-			$this->get_login_form_button_css( $attributes, 'Mobile' )
+			$this->get_login_form_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_login_form_button_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-login-form-wrapper .storeengine-form-group button:hover',
 			$this->get_login_btn_hover_css( $attributes ),
 			$this->get_login_btn_hover_css( $attributes, 'Tablet' ),
-			$this->get_login_btn_hover_css( $attributes, 'Mobile' )
+			$this->get_login_btn_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_login_btn_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-login-form-wrapper .storeengine-login-form-info p,
 			{{WRAPPER}} .storeengine-login-form-wrapper .storeengine-login-form-info p a ',
 			$this->get_login_form_footer_css( $attributes ),
 			$this->get_login_form_footer_css( $attributes, 'Tablet' ),
-			$this->get_login_form_footer_css( $attributes, 'Mobile' )
+			$this->get_login_form_footer_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_login_form_footer_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-login-form-wrapper',
 			$this->get_form_card_css( $attributes ),
 			$this->get_form_card_css( $attributes, 'Tablet' ),
-			$this->get_form_card_css( $attributes, 'Mobile' )
+			$this->get_form_card_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_card_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-login-form-wrapper:hover',
 			$this->get_form_card_hover_css( $attributes ),
 			$this->get_form_card_hover_css( $attributes, 'Tablet' ),
-			$this->get_form_card_hover_css( $attributes, 'Mobile' )
+			$this->get_form_card_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_card_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

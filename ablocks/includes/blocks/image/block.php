@@ -67,6 +67,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_wrapper_css( $attributes ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
 			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 
 		// Image container css
@@ -75,6 +76,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_image_container_css( $attributes ),
 			$this->get_image_container_css( $attributes, 'Tablet' ),
 			$this->get_image_container_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_image_container_css( $attributes, $device ); } )
 		);
 		// Image css
 		$css_generator->add_class_styles(
@@ -82,6 +84,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_image_css( $attributes ),
 			$this->get_image_css( $attributes, 'Tablet' ),
 			$this->get_image_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_image_css( $attributes, $device ); } )
 		);
 
 		// Image hover css
@@ -90,6 +93,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_image_hover_css( $attributes ),
 			$this->get_image_hover_css( $attributes, 'Tablet' ),
 			$this->get_image_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_image_hover_css( $attributes, $device ); } )
 		);
 		// Image caption css
 		$css_generator->add_class_styles(
@@ -97,6 +101,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_image_caption_css( $attributes ),
 			$this->get_image_caption_css( $attributes, 'Tablet' ),
 			$this->get_image_caption_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_image_caption_css( $attributes, $device ); } )
 		);
 
 		// Image caption hover css
@@ -104,7 +109,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-image-figure .ablocks-image-caption:hover',
 			$this->get_image_caption_hover_css( $attributes ),
 			$this->get_image_caption_hover_css( $attributes, 'Tablet' ),
-			$this->get_image_caption_hover_css( $attributes, 'Mobile' )
+			$this->get_image_caption_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_image_caption_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

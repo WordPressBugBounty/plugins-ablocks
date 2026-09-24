@@ -26,48 +26,55 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}',
 			$this->get_wrapper_css( $attributes ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-container',
 			$this->get_countdown_items_css( $attributes ),
 			$this->get_countdown_items_css( $attributes, 'Tablet' ),
-			$this->get_countdown_items_css( $attributes, 'Mobile' )
+			$this->get_countdown_items_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_countdown_items_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-countdown__item',
 			$this->get_countdown_item_css( $attributes ),
 			$this->get_countdown_item_css( $attributes, 'Tablet' ),
-			$this->get_countdown_item_css( $attributes, 'Mobile' )
+			$this->get_countdown_item_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_countdown_item_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-countdown__item:hover',
 			$this->get_countdown_item_hover_css( $attributes ),
 			$this->get_countdown_item_hover_css( $attributes, 'Tablet' ),
-			$this->get_countdown_item_hover_css( $attributes, 'Mobile' )
+			$this->get_countdown_item_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_countdown_item_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-countdown__item .ablocks-countdown-label',
 			$this->get_label_css( $attributes ),
 			$this->get_label_css( $attributes, 'Tablet' ),
-			$this->get_label_css( $attributes, 'Mobile' )
+			$this->get_label_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_label_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-countdown__item .ablocks-countdown-value',
 			$this->get_number_css( $attributes ),
 			$this->get_number_css( $attributes, 'Tablet' ),
-			$this->get_number_css( $attributes, 'Mobile' )
+			$this->get_number_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_number_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-countdown__separator',
 			$this->get_separator_css( $attributes ),
 			$this->get_separator_css( $attributes, 'Tablet' ),
-			$this->get_separator_css( $attributes, 'Mobile' )
+			$this->get_separator_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_separator_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -79,48 +86,55 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}',
 			$this->get_wrapper_css( $attributes ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--countdown:not(.ablocks-has-container),
 			{{WRAPPER}}.ablocks-block--countdown .ablocks-block-container',
 			$this->get_countdown_items_css( $attributes, '' ),
 			$this->get_countdown_items_css( $attributes, 'Tablet' ),
-			$this->get_countdown_items_css( $attributes, 'Mobile' )
+			$this->get_countdown_items_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_countdown_items_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-countdown__item',
 			$this->get_countdown_item_css( $attributes ),
 			$this->get_countdown_item_css( $attributes, 'Tablet' ),
-			$this->get_countdown_item_css( $attributes, 'Mobile' )
+			$this->get_countdown_item_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_countdown_item_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-countdown__item:hover',
 			$this->get_countdown_item_hover_css( $attributes ),
 			$this->get_countdown_item_hover_css( $attributes, 'Tablet' ),
-			$this->get_countdown_item_hover_css( $attributes, 'Mobile' )
+			$this->get_countdown_item_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_countdown_item_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-countdown__item .ablocks-countdown-label',
 			$this->get_label_css( $attributes ),
 			$this->get_label_css( $attributes, 'Tablet' ),
-			$this->get_label_css( $attributes, 'Mobile' )
+			$this->get_label_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_label_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-countdown__item .ablocks-countdown-value',
 			$this->get_number_css( $attributes ),
 			$this->get_number_css( $attributes, 'Tablet' ),
-			$this->get_number_css( $attributes, 'Mobile' )
+			$this->get_number_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_number_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-countdown__separator',
 			$this->get_separator_css( $attributes ),
 			$this->get_separator_css( $attributes, 'Tablet' ),
-			$this->get_separator_css( $attributes, 'Mobile' )
+			$this->get_separator_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_separator_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

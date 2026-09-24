@@ -24,26 +24,30 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .academy-search-form-wrap .academy-search-form__field-input',
 			$this->get_search_form_css( $attributes ),
 			$this->get_search_form_css( $attributes, 'Tablet' ),
-			$this->get_search_form_css( $attributes, 'Mobile' )
+			$this->get_search_form_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_form_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-search-form-wrap .academy-search-form__field-input:hover',
 			$this->get_search_form_hover_css( $attributes ),
 			$this->get_search_form_hover_css( $attributes, 'Tablet' ),
-			$this->get_search_form_hover_css( $attributes, 'Mobile' )
+			$this->get_search_form_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_form_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-search-form-wrap .academy-search-form__field-icon span',
 			$this->get_search_box_icon_css( $attributes ),
 			$this->get_search_box_icon_css( $attributes, 'Tablet' ),
-			$this->get_search_box_icon_css( $attributes, 'Mobile' )
+			$this->get_search_box_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_box_icon_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-search-form-wrap .academy-search-form__field-input::placeholder',
 			$this->get_search_box_placeholder_css( $attributes ),
 			$this->get_search_box_placeholder_css( $attributes, 'Tablet' ),
-			$this->get_search_box_placeholder_css( $attributes, 'Mobile' )
+			$this->get_search_box_placeholder_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_box_placeholder_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

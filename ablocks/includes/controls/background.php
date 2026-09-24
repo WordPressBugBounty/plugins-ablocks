@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Classes\ControlBaseAbstract;
 use ABlocks\Controls\Color;
+use ABlocks\Helper;
 
 class Background extends ControlBaseAbstract {
 	public static function get_attribute_default_value( $is_responsive = false ) {
@@ -173,30 +174,9 @@ class Background extends ControlBaseAbstract {
 		$css = [];
 
 		if ( $device ) {
-			$unitXPositionUnit = self::get_unit(
-				[
-					'unit' => isset( $value['imgXPositionUnit'] ) ? $value['imgXPositionUnit'] : '',
-					'unitTablet' => isset( $value['imgXPositionUnitTablet'] ) ? $value['imgXPositionUnitTablet'] : '',
-					'unitMobile' => isset( $value['imgXPositionUnitMobile'] ) ? $value['imgXPositionUnitMobile'] : '',
-				],
-				$device
-			);
-			$unitYPositionUnit = self::get_unit(
-				[
-					'unit' => isset( $value['imgYPositionUnit'] ) ? $value['imgYPositionUnit'] : '',
-					'unitTablet' => isset( $value['imgYPositionUnitTablet'] ) ? $value['imgYPositionUnitTablet'] : '',
-					'unitMobile' => isset( $value['imgYPositionUnitMobile'] ) ? $value['imgYPositionUnitMobile'] : '',
-				],
-				$device
-			);
-			$imgDisplaySizeWidthUnit = self::get_unit(
-				[
-					'unit' => isset( $value['imgDisplaySizeWidthUnit'] ) ? $value['imgDisplaySizeWidthUnit'] : '',
-					'unitTablet' => isset( $value['imgDisplaySizeWidthUnitTablet'] ) ? $value['imgDisplaySizeWidthUnitTablet'] : '',
-					'unitMobile' => isset( $value['imgDisplaySizeWidthUnitMobile'] ) ? $value['imgDisplaySizeWidthUnitMobile'] : '',
-				],
-				$device
-			);
+			$unitXPositionUnit = Helper::get_responsive_value( $value, 'imgXPositionUnit', $device );
+			$unitYPositionUnit = Helper::get_responsive_value( $value, 'imgYPositionUnit', $device );
+			$imgDisplaySizeWidthUnit = Helper::get_responsive_value( $value, 'imgDisplaySizeWidthUnit', $device );
 		} else {
 			$unitXPositionUnit = isset( $value['imgXPositionUnit'] ) ? $value['imgXPositionUnit'] : '';
 			$unitYPositionUnit = isset( $value['imgYPositionUnit'] ) ? $value['imgYPositionUnit'] : '';
@@ -251,30 +231,9 @@ class Background extends ControlBaseAbstract {
 		$css = [];
 
 		if ( $device ) {
-			$unitXPositionUnitH = self::get_unit(
-				[
-					'unit' => isset( $value['imgXPositionUnitH'] ) ? $value['imgXPositionUnitH'] : '',
-					'unitTablet' => isset( $value['imgXPositionUnitHTablet'] ) ? $value['imgXPositionUnitHTablet'] : '',
-					'unitMobile' => isset( $value['imgXPositionUnitHMobile'] ) ? $value['imgXPositionUnitHMobile'] : '',
-				],
-				$device
-			);
-			$unitYPositionUnitH = self::get_unit(
-				[
-					'unit' => isset( $value['imgYPositionUnitH'] ) ? $value['imgYPositionUnitH'] : '',
-					'unitTablet' => isset( $value['imgYPositionUnitHTablet'] ) ? $value['imgYPositionUnitHTablet'] : '',
-					'unitMobile' => isset( $value['imgYPositionUnitHMobile'] ) ? $value['imgYPositionUnitHMobile'] : '',
-				],
-				$device
-			);
-			$imgDisplaySizeWidthUnitH = self::get_unit(
-				[
-					'unit' => isset( $value['imgDisplaySizeWidthHUnit'] ) ? $value['imgDisplaySizeWidthHUnit'] : '',
-					'unitTablet' => isset( $value['imgDisplaySizeWidthHUnitTablet'] ) ? $value['imgDisplaySizeWidthHUnitTablet'] : '',
-					'unitMobile' => isset( $value['imgDisplaySizeWidthHUnitMobile'] ) ? $value['imgDisplaySizeWidthHUnitMobile'] : '',
-				],
-				$device
-			);
+			$unitXPositionUnitH = Helper::get_responsive_value( $value, 'imgXPositionUnitH', $device );
+			$unitYPositionUnitH = Helper::get_responsive_value( $value, 'imgYPositionUnitH', $device );
+			$imgDisplaySizeWidthUnitH = Helper::get_responsive_value( $value, 'imgDisplaySizeWidthHUnit', $device );
 		} else {
 			$unitXPositionUnitH = isset( $value['imgXPositionUnitH'] ) ? $value['imgXPositionUnitH'] : '';
 			$unitYPositionUnitH = isset( $value['imgYPositionUnitH'] ) ? $value['imgYPositionUnitH'] : '';

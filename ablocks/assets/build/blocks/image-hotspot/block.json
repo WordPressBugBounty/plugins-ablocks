@@ -66,6 +66,14 @@
             "type": "number",
             "default": 1.5
         },
+        "pinIconColor": {
+            "type": "string",
+            "default": "#ffffff"
+        },
+        "pinIconSize": {
+            "type": "number",
+            "default": 60
+        },
         "lists": {
             "type": "array",
             "default": [

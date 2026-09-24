@@ -24,13 +24,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--table table, {{WRAPPER}}.ablocks-block--table-header .ablocks-block--table-cell , {{WRAPPER}}.ablocks-block--table .ablocks-block--table-cell',
 			$this->get_table_border_css( $attributes ),
 			$this->get_table_border_css( $attributes, 'Tablet' ),
-			$this->get_table_border_css( $attributes, 'Mobile' )
+			$this->get_table_border_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_table_border_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--table table:hover, {{WRAPPER}}.ablocks-block--table-header .ablocks-block--table-cell:hover, {{WRAPPER}}.ablocks-block--table .ablocks-block--table-cell:hover',
 			$this->get_table_border_hover_css( $attributes ),
 			$this->get_table_border_hover_css( $attributes, 'Tablet' ),
-			$this->get_table_border_hover_css( $attributes, 'Mobile' )
+			$this->get_table_border_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_table_border_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--table-body .ablocks-table-row--odd',
@@ -88,13 +90,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--table table, {{WRAPPER}}.ablocks-block--table-header .ablocks-block--table-cell , {{WRAPPER}}.ablocks-block--table .ablocks-block--table-cell',
 			$this->get_table_border_css( $attributes ),
 			$this->get_table_border_css( $attributes, 'Tablet' ),
-			$this->get_table_border_css( $attributes, 'Mobile' )
+			$this->get_table_border_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_table_border_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--table table:hover, {{WRAPPER}}.ablocks-block--table-header .ablocks-block--table-cell:hover, {{WRAPPER}}.ablocks-block--table .ablocks-block--table-cell:hover',
 			$this->get_table_border_hover_css( $attributes ),
 			$this->get_table_border_hover_css( $attributes, 'Tablet' ),
-			$this->get_table_border_hover_css( $attributes, 'Mobile' )
+			$this->get_table_border_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_table_border_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--table-body .ablocks-table-row--odd',

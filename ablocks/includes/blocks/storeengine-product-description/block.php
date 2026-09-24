@@ -27,28 +27,32 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}  .storeengine-product-single__content-item h2',
 			$this->get_title_css( $attributes ),
 			$this->get_title_css( $attributes, 'Tablet' ),
-			$this->get_title_css( $attributes, 'Mobile' )
+			$this->get_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_title_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .storeengine-product-single__content-item h2:hover',
 			$this->get_title_hover_css( $attributes ),
 			$this->get_title_hover_css( $attributes, 'Tablet' ),
-			$this->get_title_hover_css( $attributes, 'Mobile' )
+			$this->get_title_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_title_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-product-single__content-item p',
 			$this->get_description_css( $attributes ),
 			$this->get_description_css( $attributes, 'Tablet' ),
-			$this->get_description_css( $attributes, 'Mobile' )
+			$this->get_description_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_description_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-product-single__content-item p:hover',
 			$this->get_description_hover_css( $attributes ),
 			$this->get_description_hover_css( $attributes, 'Tablet' ),
-			$this->get_description_hover_css( $attributes, 'Mobile' )
+			$this->get_description_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_description_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

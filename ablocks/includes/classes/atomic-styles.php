@@ -23,6 +23,24 @@ use ABlocks\Helper;
 class AtomicStyles {
 
 	/**
+	 * Revision of the CSS this compiler emits. Bump it whenever the emitted
+	 * output changes for the same stored styles.
+	 *
+	 * Front-end pages do not compile per request: each page is baked once
+	 * into an uploads stylesheet, and Assets::build_revision() decides when
+	 * that file is stale. It was keyed on ABLOCKS_VERSION alone, so an
+	 * emission change with no version bump never reached pages baked before
+	 * it. The centring-margin fix (emitted_value() / flex_child_css()) showed
+	 * up in the editor, which compiles live, while every existing page kept
+	 * serving the old `margin-left:auto` and its wide flex-row gap.
+	 *
+	 * 2: centring margins resolved per parent layout.
+	 * 3: a bucket that sets a border width/colour but no type keeps the type it
+	 *    inherits instead of `solid`.
+	 */
+	const OUTPUT_REVISION = 3;
+
+	/**
 	 * Compile a full bucket tree for one selector base into CSS.
 	 *
 	 * The stored state key IS the pseudo-selector, so it is appended directly;
@@ -53,9 +71,12 @@ class AtomicStyles {
 		$devices    = Helper::get_responsive_devices();
 		$has_styles = StyleBuckets::has_schema_version( $styles );
 
-		foreach ( $devices as $device ) {
+		$devices    = array_values( $devices );
+
+		foreach ( $devices as $index => $device ) {
 			$media      = Helper::breakpoint_media_query( $device );
 			$bucket_key = StyleBuckets::device_bucket_key( $device );
+			$cascade    = self::cascade_devices( $devices, $index );
 
 			foreach ( StyleBuckets::state_keys() as $state ) {
 				$declarations = [];
@@ -63,8 +84,12 @@ class AtomicStyles {
 				if ( $has_styles ) {
 					$props = StyleBuckets::read_bucket( $styles, $bucket_key, $state );
 					if ( ! empty( $props ) ) {
-						$declarations = self::apply_background_reset(
-							self::state_declarations( $props ),
+						// The border type in force from the rest of the cascade,
+						// so a bucket that only changes width/colour keeps it
+						// rather than falling back to `solid`.
+						$inherited_style = StyleBuckets::inherited_prop( $styles, $bucket_key, $state, 'borderStyle', $cascade );
+						$declarations    = self::apply_background_reset(
+							self::state_declarations( $props, is_scalar( $inherited_style ) ? (string) $inherited_style : '' ),
 							'' === $state && '' === $bucket_key
 						);
 					}
@@ -98,6 +123,33 @@ class AtomicStyles {
 		}
 
 		return $rules;
+	}
+
+	/**
+	 * The devices a device's rules cascade from on the page: those that also
+	 * apply at its width and are emitted before it, widest-first, ending at the
+	 * device itself. Mirror of the JS `cascadeDevices()` (atomic-shared/hash.js),
+	 * which builds it from `devicesApplyingAt( representativeWidth() )`.
+	 *
+	 * @param array $devices Ordered device list (widest-first, base first).
+	 * @param int   $index   The device's position in it.
+	 * @return array Devices to inherit from.
+	 */
+	private static function cascade_devices( $devices, $index ) {
+		$own = (array) $devices[ $index ];
+		// A device's representative width: its upper bound, else its lower
+		// bound, else "very wide" for the base device.
+		$width = ! empty( $own['max'] ) ? (int) $own['max'] : ( ! empty( $own['min'] ) ? (int) $own['min'] : 99999 );
+
+		$out = [];
+		foreach ( array_slice( $devices, 0, $index + 1 ) as $device ) {
+			list( $min, $max ) = Helper::breakpoint_bounds( $device );
+			if ( ( $min > 0 && $width < $min ) || ( $max > 0 && $width > $max ) ) {
+				continue;
+			}
+			$out[] = $device;
+		}
+		return $out;
 	}
 
 	/**
@@ -160,6 +212,43 @@ class AtomicStyles {
 		return [ 'class' => $class, 'css' => self::rules_to_css( $rules, '.' . $class . '.' . $class ) ];
 	}
 
+	/**
+	 * Point a block's saved markup at its current style class.
+	 *
+	 * The editor stamps `ablocks-s-{hash}` into the markup at save time, but the
+	 * front end emits rules for the hash of what the compiler produces NOW. When
+	 * the compiled output changes for the same stored styles (OUTPUT_REVISION),
+	 * a post saved before carries a class no rule targets any more and the
+	 * block renders unstyled until someone re-saves it. Only the block's own
+	 * opening tag is touched — inner blocks are rendered, and fixed, on their
+	 * own — and only when it lacks the current class.
+	 *
+	 * @param string $content   The block's saved markup.
+	 * @param array  $styles    The block's styles attribute.
+	 * @param array  $alignment The block's alignment attribute.
+	 * @return string The markup, with a stale style class replaced.
+	 */
+	public static function refresh_style_class( $content, $styles, $alignment = [] ) {
+		if ( ! is_string( $content ) || false === strpos( $content, 'ablocks-s-' ) ) {
+			return $content;
+		}
+		if ( ! preg_match( '/^\s*<[a-zA-Z][^>]*>/', $content, $tag ) ) {
+			return $content;
+		}
+		$open = $tag[0];
+		if ( ! preg_match( '/(?<=[\s"\'])ablocks-s-[0-9a-z]+(?=[\s"\'])/', $open, $stale ) ) {
+			return $content;
+		}
+
+		$current = self::style_class( $styles, $alignment );
+		if ( '' === $current || preg_match( '/(?<=[\s"\'])' . preg_quote( $current, '/' ) . '(?=[\s"\'])/', $open ) ) {
+			return $content;
+		}
+
+		$fixed = preg_replace( '/(?<=[\s"\'])' . preg_quote( $stale[0], '/' ) . '(?=[\s"\'])/', $current, $open, 1 );
+		return substr_replace( $content, $fixed, strpos( $content, $open ), strlen( $open ) );
+	}
+
 	/** Render a normalised rule list against a selector base. */
 	public static function rules_to_css( $rules, $selector_base ) {
 		$css = '';
@@ -172,7 +261,7 @@ class AtomicStyles {
 				// through one guard on its way out. This runs after style_hash()
 				// has already read $rules, so the hash the editor writes into
 				// the markup is unaffected.
-				$declarations .= Helper::esc_css_value( $pair[0] ) . ':' . Helper::esc_css_value( $pair[1] ) . ';';
+				$declarations .= Helper::esc_css_value( $pair[0] ) . ':' . Helper::esc_css_value( self::emitted_value( $pair[0], $pair[1] ) ) . ';';
 			}
 			$body = $selector_base . $state . '{' . $declarations . '}';
 
@@ -190,10 +279,85 @@ class AtomicStyles {
 			// the bucket tree, and — because this runs after style_hash() has
 			// read $rules — the hash in already-saved markup is unaffected.
 			$body .= self::wrap_child_css( $pairs, $selector_base . $state );
+			$body .= self::flex_child_css( $pairs, $selector_base . $state );
 
 			$css .= ( '' !== $media ) ? $media . '{' . $body . '}' : $body;
 		}
 		return $css;
+	}
+
+	/**
+	 * The value a declaration is emitted with, which is its compiled value
+	 * except for the centring guard's auto margins (see state_declarations()).
+	 *
+	 * Those centre a width-capped box in normal flow, but in a flex row an
+	 * auto margin swallows the free space on the main axis and overrides the
+	 * parent's justify-content: two 180px children of a centred, 24px-gap row
+	 * came out ~116px apart, the leftover space split into all four margins.
+	 * Emitted through a custom property instead, which the parent resolves
+	 * for its own children (flex_child_css()) and which falls back to the
+	 * same `auto` everywhere else. An `auto` here can only be the guard's: the
+	 * Dimensions control always appends a unit, and the guard stands down
+	 * when the author set a horizontal margin.
+	 *
+	 * Rewritten at emission, after style_hash() has read the pairs, so the
+	 * class in already-saved markup is unaffected.
+	 *
+	 * Mirrors emittedValue() in atomic-shared/styles.js.
+	 *
+	 * @param string $property The CSS property.
+	 * @param string $value    The compiled value.
+	 * @return string The value to emit.
+	 */
+	public static function emitted_value( $property, $value ) {
+		if ( 'auto' === $value && ( 'margin-left' === $property || 'margin-right' === $property ) ) {
+			return 'var(--ablocks-center-margin,auto)';
+		}
+		return $value;
+	}
+
+	/**
+	 * The child rule a bucket that sets `display` or `flex-direction` needs,
+	 * or ''. Resolves --ablocks-center-margin (see emitted_value()) for this
+	 * container's own children: 0 across a flex row's main axis, the `auto`
+	 * fallback in a flex column (where horizontal is the cross axis and
+	 * centring cannot open a gap) and in any other display.
+	 *
+	 * Display and direction are separate variables because they may come
+	 * from different breakpoints — a row at Desktop turned into a column at
+	 * Tablet only compiles `flex-direction` there — and the cascade has to
+	 * combine them. The inner var() is substituted on the child itself, so
+	 * it reads the direction set for that same child.
+	 *
+	 * Custom properties inherit, so the grandchildren are reset to the
+	 * guaranteed-invalid value; `:where()` keeps that at 0-0-0, below any
+	 * nested container's own child rule. Grid is left alone on purpose: an
+	 * auto margin there centres an item in its own cell and opens no gap.
+	 *
+	 * Mirrors flexChildCss() in atomic-shared/styles.js.
+	 *
+	 * @param array  $pairs    The bucket's declaration pairs.
+	 * @param string $selector The already-composed selector for this bucket.
+	 * @return string A CSS rule, or ''.
+	 */
+	public static function flex_child_css( $pairs, $selector ) {
+		$declarations = '';
+		foreach ( $pairs as $pair ) {
+			if ( 'display' === $pair[0] ) {
+				$declarations .= ( 'flex' === $pair[1] || 'inline-flex' === $pair[1] )
+					? '--ablocks-center-margin:var(--ablocks-column-margin,0);'
+					: '--ablocks-center-margin:initial;';
+			} elseif ( 'flex-direction' === $pair[0] ) {
+				$declarations .= ( 'column' === $pair[1] || 'column-reverse' === $pair[1] )
+					? '--ablocks-column-margin:auto;'
+					: '--ablocks-column-margin:initial;';
+			}
+		}
+		if ( '' === $declarations ) {
+			return '';
+		}
+		return $selector . '>*{' . $declarations . '}'
+			. ':where(' . $selector . '>*>*){--ablocks-center-margin:initial;--ablocks-column-margin:initial;}';
 	}
 
 	/**
@@ -279,6 +443,18 @@ class AtomicStyles {
 	}
 
 	/**
+	 * Whether a backgroundColor value is itself a gradient function (the
+	 * Background tab's Color control can now produce one — see
+	 * ABlocksColorControl's `isGradient` picker). Such a value is not valid
+	 * CSS under `background-color`; it belongs under `background-image`
+	 * instead, the same property the legacy `backgroundGradient` scalar and
+	 * `backgroundOverlay` layers already use. Mirrors JS `isGradientValue()`.
+	 */
+	public static function is_gradient_value( $value ) {
+		return is_string( $value ) && ( 0 === strpos( $value, 'linear-gradient(' ) || 0 === strpos( $value, 'radial-gradient(' ) );
+	}
+
+	/**
 	 * A bucket that sets a solid background colour and no gradient of its own
 	 * must clear any gradient inherited from a lower-precedence bucket:
 	 * `background-color` and `background-image` are separate properties, so the
@@ -313,7 +489,7 @@ class AtomicStyles {
 	 * one cannot drift on which props exist, what CSS property each maps to, or
 	 * what order they emit in.
 	 */
-	public static function state_declarations( $props ) {
+	public static function state_declarations( $props, $inherited_border_style = '' ) {
 		$css = [];
 		if ( ! is_array( $props ) ) {
 			return $css;
@@ -336,7 +512,15 @@ class AtomicStyles {
 				case 'color':
 					$value = self::read_scalar( $props, $prop );
 					if ( '' !== $value ) {
-						$css[ $entry['css'] ] = Color::get_css( $value );
+						$css_value = Color::get_css( $value );
+						// backgroundColor is the one colour prop whose value can be
+						// a gradient function; every other colour prop (textColor,
+						// borderColor) keeps writing its own CSS property as before.
+						if ( 'backgroundColor' === $prop && self::is_gradient_value( $css_value ) ) {
+							$css['background-image'] = $css_value;
+						} else {
+							$css[ $entry['css'] ] = $css_value;
+						}
 					}
 					break;
 
@@ -378,7 +562,7 @@ class AtomicStyles {
 					break;
 
 				case 'border':
-					$css = array_merge( $css, self::border_css( $props ) );
+					$css = array_merge( $css, self::border_css( $props, $inherited_border_style ) );
 					break;
 
 				case 'dimensions':
@@ -471,7 +655,7 @@ class AtomicStyles {
 	 * bucket that recolours an existing border — and it rendered nothing before
 	 * this fallback covered it.
 	 */
-	private static function border_css( $props ) {
+	private static function border_css( $props, $inherited_style = '' ) {
 		$css = [];
 
 		$width  = self::read_range( $props, 'borderWidth' );
@@ -502,7 +686,16 @@ class AtomicStyles {
 
 		// A width on any single side needs a style too, or it paints nothing.
 		if ( '' !== $width || $has_side_width || '' !== $color ) {
-			$css['border-style'] = '' !== $style ? $style : 'solid';
+			// Without a type of its own the bucket carries the one it inherits:
+			// this rule's border-style would otherwise override a wider
+			// device's (or the normal state's) `dashed` with a `solid` nobody
+			// chose. `solid` is only the default when nothing up the cascade
+			// sets a type either.
+			if ( '' !== $style ) {
+				$css['border-style'] = $style;
+			} else {
+				$css['border-style'] = '' !== $inherited_style ? $inherited_style : 'solid';
+			}
 		} elseif ( '' !== $style ) {
 			// A style on its own is meaningful (e.g. `none` to remove a border).
 			$css['border-style'] = $style;

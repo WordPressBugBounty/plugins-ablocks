@@ -30,64 +30,74 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .academy-review-form--open-form .comment-respond',
 			$this->get_review_form_css( $attributes, '' ),
 			$this->get_review_form_css( $attributes, 'Tablet' ),
-			$this->get_review_form_css( $attributes, 'Mobile' )
+			$this->get_review_form_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_review_form_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-review-form:hover,
 		{{WRAPPER}} .academy-review-form--open-form .comment-respond:hover',
 			$this->get_review_form_hover_css( $attributes, '' ),
 			$this->get_review_form_hover_css( $attributes, 'Tablet' ),
-			$this->get_review_form_hover_css( $attributes, 'Mobile' )
+			$this->get_review_form_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_review_form_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-review-form__add-review .academy-btn-add-review',
 			$this->get_review_button_css( $attributes, '' ),
 			$this->get_review_button_css( $attributes, 'Tablet' ),
-			$this->get_review_button_css( $attributes, 'Mobile' )
+			$this->get_review_button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_review_button_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-review-form__add-review .academy-btn-add-review:hover',
 			$this->get_review_button_hover_css( $attributes, '' ),
 			$this->get_review_button_hover_css( $attributes, 'Tablet' ),
-			$this->get_review_button_hover_css( $attributes, 'Mobile' )
+			$this->get_review_button_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_review_button_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-review-form .academy-review-form-rating p.stars a,
 			{{WRAPPER}} .academy-review-form .academy-review-form-rating p.stars a::before',
 			$this->get_start_review_css( $attributes, '' ),
 			$this->get_start_review_css( $attributes, 'Tablet' ),
-			$this->get_start_review_css( $attributes, 'Mobile' )
+			$this->get_start_review_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_start_review_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-review-form .academy-review-form-rating p.stars a:hover,
 		{{WRAPPER}} .academy-review-form .academy-review-form-rating p.stars a:hover::before',
 			$this->get_start_review_hover_css( $attributes, '' ),
 			$this->get_start_review_hover_css( $attributes, 'Tablet' ),
-			$this->get_start_review_hover_css( $attributes, 'Mobile' )
+			$this->get_start_review_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_start_review_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-review-form .comment-respond form.comment-form .academy-review-form-review textarea',
 			$this->get_form_css( $attributes, '' ),
 			$this->get_form_css( $attributes, 'Tablet' ),
-			$this->get_form_css( $attributes, 'Mobile' )
+			$this->get_form_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-review-form .comment-respond form.comment-form .academy-review-form-review textarea:hover',
 			$this->get_form_hover_css( $attributes, '' ),
 			$this->get_form_hover_css( $attributes, 'Tablet' ),
-			$this->get_form_hover_css( $attributes, 'Mobile' )
+			$this->get_form_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_form_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-review-form input[type=submit]',
 			$this->get_submit_css( $attributes, '' ),
 			$this->get_submit_css( $attributes, 'Tablet' ),
-			$this->get_submit_css( $attributes, 'Mobile' )
+			$this->get_submit_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_submit_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-review-form input[type=submit]:hover',
 			$this->get_submit_hover_css( $attributes, '' ),
 			$this->get_submit_hover_css( $attributes, 'Tablet' ),
-			$this->get_submit_hover_css( $attributes, 'Mobile' )
+			$this->get_submit_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_submit_hover_css( $attributes, $device ); } )
 		);
 		return $css_generator->generate_css();
 	}

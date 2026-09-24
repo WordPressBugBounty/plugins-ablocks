@@ -29,7 +29,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .academy-single-course__content-item--instructors .course-single-instructor .instructor-info__thumbnail img',
 			$this->get_avatar_image_css( $attributes, '' ),
 			$this->get_avatar_image_css( $attributes, 'Tablet' ),
-			$this->get_avatar_image_css( $attributes, 'Mobile' )
+			$this->get_avatar_image_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_avatar_image_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -37,7 +38,8 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .academy-single-course__content-item--instructors .course-single-instructor .instructor-info__content .instructor-title',
 			$this->get_title_css( $attributes, '' ),
 			$this->get_title_css( $attributes, 'Tablet' ),
-			$this->get_title_css( $attributes, 'Mobile' )
+			$this->get_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_title_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -45,45 +47,52 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .academy-single-course__content-item--instructors .course-single-instructor .instructor-info__content .instructor-title:hover',
 			$this->get_title_hover_css( $attributes, '' ),
 			$this->get_title_hover_css( $attributes, 'Tablet' ),
-			$this->get_title_hover_css( $attributes, 'Mobile' )
+			$this->get_title_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_title_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--instructors .course-single-instructor .instructor-review__rating span',
 			$this->get_review_text_css( $attributes, '' ),
 			$this->get_review_text_css( $attributes, 'Tablet' ),
-			$this->get_review_text_css( $attributes, 'Mobile' )
+			$this->get_review_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_review_text_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--instructors .course-single-instructor .instructor-review__rating span:hover',
 			$this->get_review_text_hover_css( $attributes, '' ),
 			$this->get_review_text_hover_css( $attributes, 'Tablet' ),
-			$this->get_review_text_hover_css( $attributes, 'Mobile' )
+			$this->get_review_text_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_review_text_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--instructors .course-single-instructor .instructor-review__rating .academy-group-star .academy-icon:before',
 			$this->get_review_icon_css( $attributes, '' ),
 			$this->get_review_icon_css( $attributes, 'Tablet' ),
-			$this->get_review_icon_css( $attributes, 'Mobile' )
+			$this->get_review_icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_review_icon_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--instructors .course-single-instructor .instructor-review__rating .academy-group-star .academy-icon:hover:before',
 			$this->get_review_icon_hover_css( $attributes, '' ),
 			$this->get_review_icon_hover_css( $attributes, 'Tablet' ),
-			$this->get_review_icon_hover_css( $attributes, 'Mobile' )
+			$this->get_review_icon_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_review_icon_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--instructors .course-single-instructor .instructor-info__content .instructor-name a',
 			$this->get_instructor_css( $attributes, '' ),
 			$this->get_instructor_css( $attributes, 'Tablet' ),
-			$this->get_instructor_css( $attributes, 'Mobile' )
+			$this->get_instructor_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_instructor_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--instructors .course-single-instructor .instructor-info__content .instructor-name a:hover',
 			$this->get_instructor_hover_css( $attributes, '' ),
 			$this->get_instructor_hover_css( $attributes, 'Tablet' ),
-			$this->get_instructor_hover_css( $attributes, 'Mobile' )
+			$this->get_instructor_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_instructor_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

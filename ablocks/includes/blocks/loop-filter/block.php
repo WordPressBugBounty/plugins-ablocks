@@ -26,31 +26,36 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}',
 			$this->filter_button_alignment( $attributes ),
 			$this->filter_button_alignment( $attributes, 'Tablet' ),
-			$this->filter_button_alignment( $attributes, 'Mobile' )
+			$this->filter_button_alignment( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->filter_button_alignment( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-loop-term-filter',
 			$this->get_button_style( $attributes ),
 			$this->get_button_style( $attributes, 'Tablet' ),
-			$this->get_button_style( $attributes, 'Mobile' )
+			$this->get_button_style( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_style( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-loop-term-filter:hover',
 			$this->get_button_style_hover( $attributes ),
 			$this->get_button_style_hover( $attributes, 'Tablet' ),
-			$this->get_button_style_hover( $attributes, 'Mobile' )
+			$this->get_button_style_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_style_hover( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-loop-term-filter--active',
 			$this->get_active_button_style( $attributes ),
 			$this->get_active_button_style( $attributes, 'Tablet' ),
-			$this->get_active_button_style( $attributes, 'Mobile' )
+			$this->get_active_button_style( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_active_button_style( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-loop-term-filter--active:hover',
 			$this->get_active_button_style_hover( $attributes ),
 			$this->get_active_button_style_hover( $attributes, 'Tablet' ),
-			$this->get_active_button_style_hover( $attributes, 'Mobile' )
+			$this->get_active_button_style_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_active_button_style_hover( $attributes, $device ); } )
 		);
 		return $css_generator->generate_css();
 	}

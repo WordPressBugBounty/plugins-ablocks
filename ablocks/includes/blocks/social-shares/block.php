@@ -24,7 +24,8 @@ class Block extends BlockBaseAbstract {
 				'{{WRAPPER}}.ablocks-block--social-shares .ablocks-block-container',
 				$this->get_share_css( $attributes, '' ),
 				$this->get_share_css( $attributes, 'Tablet' ),
-				$this->get_share_css( $attributes, 'Mobile' )
+				$this->get_share_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_share_css( $attributes, $device ); } )
 			);
 			// Social Button Styles
 			$css_generator->add_class_styles(
@@ -38,7 +39,8 @@ class Block extends BlockBaseAbstract {
 				'{{WRAPPER}} .ablocks-block-container .ablocks-social-share:hover',
 				$this->get_share_border_hover_css( $attributes, '' ),
 				$this->get_share_border_hover_css( $attributes, 'Tablet' ),
-				$this->get_share_border_hover_css( $attributes, 'Mobile' )
+				$this->get_share_border_hover_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_share_border_hover_css( $attributes, $device ); } )
 			);
 			// share Icon Size
 			$css_generator->add_class_styles(
@@ -58,13 +60,15 @@ class Block extends BlockBaseAbstract {
 				'{{WRAPPER}} .ablocks-social-share-item',
 				$this->get_item_border_css( $attributes ),
 				$this->get_item_border_css( $attributes, 'Tablet' ),
-				$this->get_item_border_css( $attributes, 'Mobile' )
+				$this->get_item_border_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_item_border_css( $attributes, $device ); } )
 			);
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-block-container .ablocks-social-share-item:hover',
 				$this->get_Item_border_hover_css( $attributes ),
 				$this->get_Item_border_hover_css( $attributes, 'Tablet' ),
-				$this->get_Item_border_hover_css( $attributes, 'Mobile' )
+				$this->get_Item_border_hover_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Item_border_hover_css( $attributes, $device ); } )
 			);
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-social-share-item--icon',
@@ -82,7 +86,8 @@ class Block extends BlockBaseAbstract {
 				'{{WRAPPER}} .ablocks-social-share-item--text',
 				$this->get_share_item_text_css( $attributes, '' ),
 				$this->get_share_item_text_css( $attributes, 'Tablet' ),
-				$this->get_share_item_text_css( $attributes, 'Mobile' )
+				$this->get_share_item_text_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_share_item_text_css( $attributes, $device ); } )
 			);
 		return $css_generator->generate_css();
 	}
@@ -93,7 +98,8 @@ class Block extends BlockBaseAbstract {
                    {{WRAPPER}}.ablocks-block--social-shares .ablocks-block-container',
 				$this->get_share_css( $attributes, '' ),
 				$this->get_share_css( $attributes, 'Tablet' ),
-				$this->get_share_css( $attributes, 'Mobile' )
+				$this->get_share_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_share_css( $attributes, $device ); } )
 			);
 			// Social Button Styles
 			$css_generator->add_class_styles(
@@ -107,7 +113,8 @@ class Block extends BlockBaseAbstract {
 				'{{WRAPPER}} .ablocks-social-share:hover',
 				$this->get_share_border_hover_css( $attributes, '' ),
 				$this->get_share_border_hover_css( $attributes, 'Tablet' ),
-				$this->get_share_border_hover_css( $attributes, 'Mobile' )
+				$this->get_share_border_hover_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_share_border_hover_css( $attributes, $device ); } )
 			);
 
 			// share Icon Size
@@ -128,31 +135,36 @@ class Block extends BlockBaseAbstract {
 				'{{WRAPPER}} .ablocks-social-share-item',
 				$this->get_item_border_css( $attributes ),
 				$this->get_item_border_css( $attributes, 'Tablet' ),
-				$this->get_item_border_css( $attributes, 'Mobile' )
+				$this->get_item_border_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_item_border_css( $attributes, $device ); } )
 			);
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-social-share-item:hover',
 				$this->get_Item_border_hover_css( $attributes ),
 				$this->get_Item_border_hover_css( $attributes, 'Tablet' ),
-				$this->get_Item_border_hover_css( $attributes, 'Mobile' )
+				$this->get_Item_border_hover_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Item_border_hover_css( $attributes, $device ); } )
 			);
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-social-share-item--icon',
 				$this->get_share_item_css( $attributes ),
 				$this->get_share_item_css( $attributes, 'Tablet' ),
 				$this->get_share_item_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_share_item_css( $attributes, $device ); } )
 			);
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-social-share-item--icon>.ablocks-svg-icon',
 				$this->shareItemIconSVG( $attributes ),
 				$this->shareItemIconSVG( $attributes, 'Tablet' ),
 				$this->shareItemIconSVG( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->shareItemIconSVG( $attributes, $device ); } )
 			);
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-social-share-item--text',
 				$this->get_share_item_text_css( $attributes, '' ),
 				$this->get_share_item_text_css( $attributes, 'Tablet' ),
-				$this->get_share_item_text_css( $attributes, 'Mobile' )
+				$this->get_share_item_text_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_share_item_text_css( $attributes, $device ); } )
 			);
 		return $css_generator->generate_css();
 	}

@@ -28,25 +28,29 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} p.ecm-shortcode--reaction__list-title',
 			$this->getTitleTextCSS( $attributes ),
 			$this->getTitleTextCSS( $attributes, 'Tablet' ),
-			$this->getTitleTextCSS( $attributes, 'Mobile' )
+			$this->getTitleTextCSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getTitleTextCSS( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} ul.ecm-shortcode--reaction__list',
 			$this->get_alignment_css( $attributes ),
 			$this->get_alignment_css( $attributes, 'Tablet' ),
-			$this->get_alignment_css( $attributes, 'Mobile' )
+			$this->get_alignment_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_alignment_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} p.ecm-shortcode--reaction__list-meta',
 			$this->getListTextCSS( $attributes ),
 			$this->getListTextCSS( $attributes, 'Tablet' ),
-			$this->getListTextCSS( $attributes, 'Mobile' )
+			$this->getListTextCSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->getListTextCSS( $attributes, $device ); } )
 		);	
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} div.ecm-shortcode--reaction',
 			$this->nobookmarksTextCSS( $attributes ),
 			$this->nobookmarksTextCSS( $attributes, 'Tablet' ),
-			$this->nobookmarksTextCSS( $attributes, 'Mobile' )
+			$this->nobookmarksTextCSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->nobookmarksTextCSS( $attributes, $device ); } )
 		);				
 		return $css_generator->generate_css();
 	}

@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Classes\ControlBaseAbstract;
+use ABlocks\Helper;
 
 class Transform extends ControlBaseAbstract {
 	public static function get_attribute_default_value( $is_responsive = false ) {
@@ -195,32 +196,18 @@ class Transform extends ControlBaseAbstract {
 		$transformations = [];
 		$transformOrigin = '';
 
-		$x_offset_unit = self::get_unit(
-			[
-				'unit' => ! empty( $value['offsetXUnit'] ) ? $value['offsetXUnit'] : 'px',
-				'unitTablet' => ! empty( $value['offsetXUnitTablet'] ) ? $value['offsetXUnitTablet'] : 'px',
-				'unitMobile' => ! empty( $value['offsetXUnitMobile'] ) ? $value['offsetXUnitMobile'] : 'px',
-			],
-			$device
-		);
-		$y_offset_unit = self::get_unit(
-			[
-				'unit' => ! empty( $value['offsetYUnit'] ) ? $value['offsetYUnit'] : 'px',
-				'unitTablet' => ! empty( $value['offsetYUnitTablet'] ) ? $value['offsetYUnitTablet'] : 'px',
-				'unitMobile' => ! empty( $value['offsetYUnitMobile'] ) ? $value['offsetYUnitMobile'] : 'px',
-			],
-			$device
-		);
+		$x_offset_unit = ( Helper::get_responsive_value( $value, 'offsetXUnit', $device ) ?: 'px' );
+		$y_offset_unit = ( Helper::get_responsive_value( $value, 'offsetYUnit', $device ) ?: 'px' );
 
-		if ( ! empty( $value[ 'rotate' . $device ] ) ) {
+		if ( Helper::has_responsive_value( $value[ 'rotate' . $device ] ?? null ) ) {
 			$transformations[] = 'rotate(' . $value[ 'rotate' . $device ] . 'deg)';
 		}
 
-		if ( ! empty( $value[ 'rotateX' . $device ] ) ) {
+		if ( Helper::has_responsive_value( $value[ 'rotateX' . $device ] ?? null ) ) {
 			$transformations[] = 'rotateX(' . $value[ 'rotateX' . $device ] . 'deg)';
 		}
 
-		if ( ! empty( $value[ 'rotateY' . $device ] ) ) {
+		if ( Helper::has_responsive_value( $value[ 'rotateY' . $device ] ?? null ) ) {
 			$transformations[] = 'rotateY(' . $value[ 'rotateY' . $device ] . 'deg)';
 		}
 
@@ -234,15 +221,15 @@ class Transform extends ControlBaseAbstract {
 			$transformations[] = 'perspective(' . $perspective . 'px)';
 		}
 
-		if ( ! empty( $value[ 'scale' . $device ] ) ) {
+		if ( Helper::has_responsive_value( $value[ 'scale' . $device ] ?? null ) ) {
 			$transformations[] = 'scale(' . $value[ 'scale' . $device ] . ')';
 		}
 
-		if ( ! empty( $value[ 'scaleX' . $device ] ) ) {
+		if ( Helper::has_responsive_value( $value[ 'scaleX' . $device ] ?? null ) ) {
 			$transformations[] = 'scaleX(' . $value[ 'scaleX' . $device ] . ')';
 		}
 
-		if ( ! empty( $value[ 'scaleY' . $device ] ) ) {
+		if ( Helper::has_responsive_value( $value[ 'scaleY' . $device ] ?? null ) ) {
 			$transformations[] = 'scaleY(' . $value[ 'scaleY' . $device ] . ')';
 		}
 
@@ -254,19 +241,19 @@ class Transform extends ControlBaseAbstract {
 			$transformations[] = 'scaleY(-1)';
 		}
 
-		if ( ! empty( $value[ 'offsetX' . $device ] ) ) {
+		if ( Helper::has_responsive_value( $value[ 'offsetX' . $device ] ?? null ) ) {
 			$transformations[] = 'translateX(' . $value[ 'offsetX' . $device ] . $x_offset_unit . ')';
 		}
 
-		if ( ! empty( $value[ 'offsetY' . $device ] ) ) {
+		if ( Helper::has_responsive_value( $value[ 'offsetY' . $device ] ?? null ) ) {
 			$transformations[] = 'translateY(' . $value[ 'offsetY' . $device ] . $y_offset_unit . ')';
 		}
 
-		if ( ! empty( $value[ 'skewX' . $device ] ) ) {
+		if ( Helper::has_responsive_value( $value[ 'skewX' . $device ] ?? null ) ) {
 			$transformations[] = 'skewX(' . $value[ 'skewX' . $device ] . 'deg)';
 		}
 
-		if ( ! empty( $value[ 'skewY' . $device ] ) ) {
+		if ( Helper::has_responsive_value( $value[ 'skewY' . $device ] ?? null ) ) {
 			$transformations[] = 'skewY(' . $value[ 'skewY' . $device ] . 'deg)';
 		}
 
@@ -293,22 +280,8 @@ class Transform extends ControlBaseAbstract {
 		$value = wp_parse_args( $attribute_value, $device ? self::responsive_defaults() : self::get_attribute_default_value( false ) );
 		$transformations = [];
 		$transformOrigin = '';
-		$x_offset_hover_unit = self::get_unit(
-			[
-				'unit' => ! empty( $value['offsetXHUnit'] ) ? $value['offsetXHUnit'] : 'px',
-				'unitTablet' => ! empty( $value['offsetXHUnitTablet'] ) ? $value['offsetXHUnitTablet'] : 'px',
-				'unitMobile' => ! empty( $value['offsetXHUnitMobile'] ) ? $value['offsetXHUnitMobile'] : 'px',
-			],
-			$device
-		);
-		$y_offset_hover_unit = self::get_unit(
-			[
-				'unit' => ! empty( $value['offsetYHUnit'] ) ? $value['offsetYHUnit'] : 'px',
-				'unitTablet' => ! empty( $value['offsetYHUnitTablet'] ) ? $value['offsetYHUnitTablet'] : 'px',
-				'unitMobile' => ! empty( $value['offsetYHUnitMobile'] ) ? $value['offsetYHUnitMobile'] : 'px',
-			],
-			$device
-		);
+		$x_offset_hover_unit = ( Helper::get_responsive_value( $value, 'offsetXHUnit', $device ) ?: 'px' );
+		$y_offset_hover_unit = ( Helper::get_responsive_value( $value, 'offsetYHUnit', $device ) ?: 'px' );
 
 		if ( '' !== $value[ 'rotateH' . $device ] ) {
 			$rotateH = isset( $value[ 'rotateH' . $device ] ) ? $value[ 'rotateH' . $device ] : 0;

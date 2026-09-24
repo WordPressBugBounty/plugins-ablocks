@@ -52,6 +52,17 @@ class Block extends BlockBaseAbstract {
 			}//end foreach
 		}//end if
 
+		if ( $this->has_pin_icon( $attributes ) ) {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-image-hotspot__pin--has-icon .ablocks-icon-wrap',
+				$this->get_pin_icon_css( $attributes )
+			);
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-image-hotspot__pin--has-icon .ablocks-icon-wrap svg.ablocks-svg-icon',
+				$this->get_pin_icon_svg_css( $attributes )
+			);
+		}
+
 		// Tooltip content animation
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-hotspot__tooltip-content',
@@ -62,14 +73,16 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-image-hotspot__tooltip--active',
 			$this->get_active_content_css( $attributes ),
 			$this->get_active_content_css( $attributes, 'Tablet' ),
-			$this->get_active_content_css( $attributes, 'Mobile' )
+			$this->get_active_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_active_content_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-hotspot__tooltip--active:hover',
 			$this->get_active_content_hover_css( $attributes ),
 			$this->get_active_content_hover_css( $attributes, 'Tablet' ),
-			$this->get_active_content_hover_css( $attributes, 'Mobile' )
+			$this->get_active_content_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_active_content_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -109,6 +122,17 @@ class Block extends BlockBaseAbstract {
 			}//end foreach
 		}//end if
 
+		if ( $this->has_pin_icon( $attributes ) ) {
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-image-hotspot__pin--has-icon .ablocks-icon-wrap',
+				$this->get_pin_icon_css( $attributes )
+			);
+			$css_generator->add_class_styles(
+				'{{WRAPPER}} .ablocks-image-hotspot__pin--has-icon .ablocks-icon-wrap svg.ablocks-svg-icon',
+				$this->get_pin_icon_svg_css( $attributes )
+			);
+		}
+
 		// Tooltip content animation
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-hotspot__tooltip-content',
@@ -119,14 +143,16 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-image-hotspot__tooltip--active',
 			$this->get_active_content_css( $attributes ),
 			$this->get_active_content_css( $attributes, 'Tablet' ),
-			$this->get_active_content_css( $attributes, 'Mobile' )
+			$this->get_active_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_active_content_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-image-hotspot__tooltip--active:hover',
 			$this->get_active_content_hover_css( $attributes ),
 			$this->get_active_content_hover_css( $attributes, 'Tablet' ),
-			$this->get_active_content_hover_css( $attributes, 'Mobile' )
+			$this->get_active_content_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_active_content_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -136,6 +162,31 @@ class Block extends BlockBaseAbstract {
 			return $this->build_css_v2( $attributes );
 		}
 		return $this->build_css_v1( $attributes );
+	}
+	// Mirrors hasHotspotIcon() in the editor: a removed icon keeps iconClass 'Empty'.
+	public function has_pin_icon( $attributes ) {
+		foreach ( $attributes['lists'] ?? [] as $list ) {
+			$icon = $list['icon'] ?? [];
+			if ( ( $icon['iconClass'] ?? '' ) !== 'Empty' && ( ! empty( $icon['iconSvgPath'] ) || ! empty( $icon['iconImageUrl'] ) ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public function get_pin_icon_css( $attributes ) {
+		$css = [];
+		if ( ! empty( $attributes['pinIconSize'] ) ) {
+			$css['width']  = $attributes['pinIconSize'] . '%';
+			$css['height'] = $attributes['pinIconSize'] . '%';
+		}
+		return $css;
+	}
+	public function get_pin_icon_svg_css( $attributes ) {
+		$css = [];
+		if ( ! empty( $attributes['pinIconColor'] ) ) {
+			$css['fill'] = Color::get_css( $attributes['pinIconColor'] );
+		}
+		return $css;
 	}
 	public function get_pin_css( $attributes, $list ) {
 		return [

@@ -31,28 +31,32 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-flipbox__front > div:nth-child(1)',
 			$this->get_front_card_css( $attributes ),
 			$this->get_front_card_css( $attributes, 'Tablet' ),
-			$this->get_front_card_css( $attributes, 'Mobile' )
+			$this->get_front_card_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_front_card_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-flipbox__back > div:nth-child(1)',
 			$this->get_back_card_css( $attributes ),
 			$this->get_back_card_css( $attributes, 'Tablet' ),
-			$this->get_back_card_css( $attributes, 'Mobile' )
+			$this->get_back_card_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_back_card_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-flipbox__front:hover > div:nth-child(1)',
 			$this->get_front_card_hover_css( $attributes ),
 			$this->get_front_card_hover_css( $attributes, 'Tablet' ),
-			$this->get_front_card_hover_css( $attributes, 'Mobile' )
+			$this->get_front_card_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_front_card_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-flipbox__back:hover > div:nth-child(1)',
 			$this->get_back_card_hover_css( $attributes ),
 			$this->get_back_card_hover_css( $attributes, 'Tablet' ),
-			$this->get_back_card_hover_css( $attributes, 'Mobile' )
+			$this->get_back_card_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_back_card_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

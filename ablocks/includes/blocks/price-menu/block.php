@@ -101,30 +101,35 @@ class Block extends BlockBaseAbstract {
 			$this->get_all_menu_css( $attributes, '' ),
 			$this->get_all_menu_css( $attributes, 'Tablet' ),
 			$this->get_all_menu_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_all_menu_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-price-menu-item, {{WRAPPER}} .ablocks-price-menu-item-details',
 			$this->get_gap_around_css( $attributes, '' ),
 			$this->get_gap_around_css( $attributes, 'Tablet' ),
 			$this->get_gap_around_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_gap_around_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-price-menu-item-details-brief',
 			$this->get_details_brief_css( $attributes, '' ),
 			$this->get_details_brief_css( $attributes, 'Tablet' ),
 			$this->get_details_brief_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_details_brief_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--price-menu-item',
 			$this->get_item_css( $attributes, '' ),
 			$this->get_item_css( $attributes, 'Tablet' ),
 			$this->get_item_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_item_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--price-menu-item:hover',
 			$this->get_item_hover_css( $attributes, '' ),
 			$this->get_item_hover_css( $attributes, 'Tablet' ),
 			$this->get_item_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_item_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -132,6 +137,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_inner_item_css( $attributes, '' ),
 			$this->get_inner_item_css( $attributes, 'Tablet' ),
 			$this->get_inner_item_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_inner_item_css( $attributes, $device ); } )
 		);
 
 		// TitleText CSS
@@ -140,6 +146,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_title_text_css( $attributes, '' ),
 			$this->get_title_text_css( $attributes, 'Tablet' ),
 			$this->get_title_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_title_text_css( $attributes, $device ); } )
 		);
 		// DescriptionText CSS
 		$css_generator->add_class_styles(
@@ -147,6 +154,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_description_text_css( $attributes, '' ),
 			$this->get_description_text_css( $attributes, 'Tablet' ),
 			$this->get_description_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_description_text_css( $attributes, $device ); } )
 		);
 		// SeparatorText CSS
 		$css_generator->add_class_styles(
@@ -154,6 +162,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_divider_css( $attributes, '' ),
 			$this->get_divider_css( $attributes, 'Tablet' ),
 			$this->get_divider_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_divider_css( $attributes, $device ); } )
 		);
 		// PriceText CSS
 		$css_generator->add_class_styles(
@@ -161,6 +170,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_price_text_css( $attributes, '' ),
 			$this->get_price_text_css( $attributes, 'Tablet' ),
 			$this->get_price_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_price_text_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

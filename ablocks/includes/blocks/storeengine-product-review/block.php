@@ -27,76 +27,88 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings',
 			$this->get_feedback_section_css( $attributes ),
 			$this->get_feedback_section_css( $attributes, 'Tablet' ),
-			$this->get_feedback_section_css( $attributes, 'Mobile' )
+			$this->get_feedback_section_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_feedback_section_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings:hover',
 			$this->get_feedback_section_hover_css( $attributes ),
 			$this->get_feedback_section_hover_css( $attributes, 'Tablet' ),
-			$this->get_feedback_section_hover_css( $attributes, 'Mobile' )
+			$this->get_feedback_section_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_feedback_section_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item h2',
 			$this->get_heading_css( $attributes ),
 			$this->get_heading_css( $attributes, 'Tablet' ),
-			$this->get_heading_css( $attributes, 'Mobile' )
+			$this->get_heading_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_heading_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item h2:hover',
 			$this->get_heading_hover_css( $attributes ),
 			$this->get_heading_hover_css( $attributes, 'Tablet' ),
-			$this->get_heading_hover_css( $attributes, 'Mobile' )
+			$this->get_heading_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_heading_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-avg-rating',
 			$this->get_avarage_css( $attributes, '' ),
 			$this->get_avarage_css( $attributes, 'Tablet' ),
-			$this->get_avarage_css( $attributes, 'Mobile' )
+			$this->get_avarage_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_avarage_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-avg-rating:hover',
 			$this->get_avarage_hover_css( $attributes, '' ),
 			$this->get_avarage_hover_css( $attributes, 'Tablet' ),
-			$this->get_avarage_hover_css( $attributes, 'Mobile' )
+			$this->get_avarage_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_avarage_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-avg-rating-html .storeengine-icon,
 			{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-avg-rating-html .storeengine-icon:before',
 			$this->get_rating_css( $attributes, '' ),
 			$this->get_rating_css( $attributes, 'Tablet' ),
-			$this->get_rating_css( $attributes, 'Mobile' )
+			$this->get_rating_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-avg-rating-html .storeengine-icon:hover,
 			{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-avg-rating-html .storeengine-icon:hover::before',
 			$this->get_rating_hover_css( $attributes, '' ),
 			$this->get_rating_hover_css( $attributes, 'Tablet' ),
-			$this->get_rating_hover_css( $attributes, 'Mobile' )
+			$this->get_rating_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-avg-review',
 			$this->get_review_text_css( $attributes, '' ),
 			$this->get_review_text_css( $attributes, 'Tablet' ),
-			$this->get_review_text_css( $attributes, 'Mobile' )
+			$this->get_review_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_review_text_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-avg-review:hover',
 			$this->get_review_text_hover_css( $attributes, '' ),
 			$this->get_review_text_hover_css( $attributes, 'Tablet' ),
-			$this->get_review_text_hover_css( $attributes, 'Mobile' )
+			$this->get_review_text_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_review_text_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-ratings-list-item .storeengine-ratings-list-item-fill',
 			$this->get_rating_fill_css( $attributes, '' ),
 			$this->get_rating_fill_css( $attributes, 'Tablet' ),
-			$this->get_rating_fill_css( $attributes, 'Mobile' )
+			$this->get_rating_fill_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_fill_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-ratings-list-item .storeengine-ratings-list-item-fill:hover',
 			$this->get_rating_fill_hover_css( $attributes, '' ),
 			$this->get_rating_fill_hover_css( $attributes, 'Tablet' ),
-			$this->get_rating_fill_hover_css( $attributes, 'Mobile' )
+			$this->get_rating_fill_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_fill_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-ratings-list-item .storeengine-ratings-list-item-fill,
@@ -105,7 +117,8 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-ratings-list-item .storeengine-ratings-list-item-col',
 			$this->get_rating_text_css( $attributes, '' ),
 			$this->get_rating_text_css( $attributes, 'Tablet' ),
-			$this->get_rating_text_css( $attributes, 'Mobile' )
+			$this->get_rating_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_text_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-ratings-list-item .storeengine-ratings-list-item-fill:hover,
@@ -114,19 +127,22 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-ratings-list-item .storeengine-ratings-list-item-col:hover',
 			$this->get_rating_text_hover_css( $attributes, '' ),
 			$this->get_rating_text_hover_css( $attributes, 'Tablet' ),
-			$this->get_rating_text_hover_css( $attributes, 'Mobile' )
+			$this->get_rating_text_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_rating_text_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-ratings-list-item .storeengine-icon',
 			$this->get_feedback_star_css( $attributes, '' ),
 			$this->get_feedback_star_css( $attributes, 'Tablet' ),
-			$this->get_feedback_star_css( $attributes, 'Mobile' )
+			$this->get_feedback_star_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_feedback_star_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-single-product__content-item--feedback .storeengine-product-feedback-ratings .storeengine-ratings-list-item .storeengine-icon:hover',
 			$this->get_feedback_star_hover_css( $attributes, '' ),
 			$this->get_feedback_star_hover_css( $attributes, 'Tablet' ),
-			$this->get_feedback_star_hover_css( $attributes, 'Mobile' )
+			$this->get_feedback_star_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_feedback_star_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

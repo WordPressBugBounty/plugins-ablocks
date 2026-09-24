@@ -182,12 +182,10 @@ class Border extends ControlBaseAbstract {
 		$css = [];
 
 		// Separate handling of width units
+		// Resolved from the full value so a custom breakpoint's own unit key
+		// takes part; for Tablet/Mobile this reads the same three keys as before.
 		if ( $device ) {
-			$widthUnit = self::get_unit([
-				'unit' => $value['unitWidth'],
-				'unitTablet' => $value['unitWidthTablet'],
-				'unitMobile' => $value['unitWidthMobile'],
-			], $device);
+			$widthUnit = \ABlocks\Helper::get_responsive_value( $value, 'unitWidth', $device );
 		} else {
 			$widthUnit = $value['unitWidth'];
 		}
@@ -232,11 +230,7 @@ class Border extends ControlBaseAbstract {
 
 		// Separate handling of radius units
 		if ( $device ) {
-			$radiusUnit = self::get_unit([
-				'unit' => $value['unitRadius'],
-				'unitTablet' => $value['unitRadiusTablet'],
-				'unitMobile' => $value['unitRadiusMobile'],
-			], $device);
+			$radiusUnit = \ABlocks\Helper::get_responsive_value( $value, 'unitRadius', $device );
 		} else {
 			$radiusUnit = $value['unitRadius'];
 		}

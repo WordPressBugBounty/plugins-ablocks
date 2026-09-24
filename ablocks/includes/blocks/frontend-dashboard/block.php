@@ -35,7 +35,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--frontend-dashboard',
 			$get_gaps_css,
 			$this->get_wrapper_gap_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_gap_css( $attributes, 'Mobile' )
+			$this->get_wrapper_gap_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_gap_css( $attributes, $device ); } )
 		);
 
 		$get_setting_css = $this->get_setting_css( $attributes );
@@ -44,7 +45,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-frontend-dashboard-sidebar',
 			$get_setting_css,
 			$this->get_setting_css( $attributes, 'Tablet' ),
-			$this->get_setting_css( $attributes, 'Mobile' )
+			$this->get_setting_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_setting_css( $attributes, $device ); } )
 		);
 
 		$get_user_setting_css = $this->get_user_setting_css( $attributes );
@@ -53,7 +55,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-frontend-dashboard-user',
 			$get_user_setting_css,
 			$this->get_user_setting_css( $attributes, 'Tablet' ),
-			$this->get_user_setting_css( $attributes, 'Mobile' )
+			$this->get_user_setting_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_user_setting_css( $attributes, $device ); } )
 		);
 
 		$get_menu_list_css = $this->get_menu_list_css( $attributes );
@@ -62,7 +65,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-frontend-dashboard-menu__item a',
 			$get_menu_list_css,
 			$this->get_menu_list_css( $attributes, 'Tablet' ),
-			$this->get_menu_list_css( $attributes, 'Mobile' )
+			$this->get_menu_list_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_menu_list_css( $attributes, $device ); } )
 		);
 
 		$get_menu_hover_list_css = $this->get_menu_hover_list_css( $attributes );
@@ -71,7 +75,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-frontend-dashboard-menu__item a:hover',
 			$get_menu_hover_list_css,
 			$this->get_menu_hover_list_css( $attributes, 'Tablet' ),
-			$this->get_menu_hover_list_css( $attributes, 'Mobile' )
+			$this->get_menu_hover_list_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_menu_hover_list_css( $attributes, $device ); } )
 		);
 
 		$get_menu_active_list_css = $this->get_menu_active_list_css( $attributes );
@@ -80,7 +85,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-frontend-dashboard-menu__item--current > a',
 			$get_menu_active_list_css,
 			$this->get_menu_active_list_css( $attributes, 'Tablet' ),
-			$this->get_menu_active_list_css( $attributes, 'Mobile' )
+			$this->get_menu_active_list_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_menu_active_list_css( $attributes, $device ); } )
 		);
 
 		$get_breadcrumb_css = $this->get_breadcrumb_css( $attributes );
@@ -89,7 +95,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-frontend-dashboard-breadcrumb li',
 			$get_breadcrumb_css,
 			$this->get_breadcrumb_css( $attributes, 'Tablet' ),
-			$this->get_breadcrumb_css( $attributes, 'Mobile' )
+			$this->get_breadcrumb_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_breadcrumb_css( $attributes, $device ); } )
 		);
 
 		$get_breadcrumb_css = $this->get_breadcrumb_css( $attributes );
@@ -98,7 +105,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-frontend-dashboard-breadcrumb li + li::before',
 			$get_breadcrumb_css,
 			$this->get_breadcrumb_css( $attributes, 'Tablet' ),
-			$this->get_breadcrumb_css( $attributes, 'Mobile' )
+			$this->get_breadcrumb_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_breadcrumb_css( $attributes, $device ); } )
 		);
 
 		$get_content_css = $this->get_content_css( $attributes );
@@ -107,7 +115,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-frontend-dashboard-content',
 			$get_content_css,
 			$this->get_content_css( $attributes, 'Tablet' ),
-			$this->get_content_css( $attributes, 'Mobile' )
+			$this->get_content_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_css( $attributes, $device ); } )
 		);
 
 		$get_content_hover_css = $this->get_content_hover_css( $attributes );
@@ -116,7 +125,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-frontend-dashboard-content:hover',
 			$get_content_hover_css,
 			$this->get_content_hover_css( $attributes, 'Tablet' ),
-			$this->get_content_hover_css( $attributes, 'Mobile' )
+			$this->get_content_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

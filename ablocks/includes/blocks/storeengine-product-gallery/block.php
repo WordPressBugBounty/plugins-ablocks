@@ -29,19 +29,22 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .is-layout-constrained .storeengine-gallery_wrapper .carousel-main .flickity-slider img',
 			$this->get_gallary_image_css( $attributes ),
 			$this->get_gallary_image_css( $attributes, 'Tablet' ),
-			$this->get_gallary_image_css( $attributes, 'Mobile' )
+			$this->get_gallary_image_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_gallary_image_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-gallery_wrapper .storeengine-row .storeengine-col-12',
 			$this->get_gallary_image_container_css( $attributes ),
 			$this->get_gallary_image_container_css( $attributes, 'Tablet' ),
-			$this->get_gallary_image_container_css( $attributes, 'Mobile' )
+			$this->get_gallary_image_container_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_gallary_image_container_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-gallery_wrapper .storeengine-col-12 .storeengine-placeholder:hover',
 			$this->get_gallary_image_hover_css( $attributes ),
 			$this->get_gallary_image_hover_css( $attributes, 'Tablet' ),
-			$this->get_gallary_image_hover_css( $attributes, 'Mobile' )
+			$this->get_gallary_image_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_gallary_image_hover_css( $attributes, $device ); } )
 		);
 		return $css_generator->generate_css();
 	}

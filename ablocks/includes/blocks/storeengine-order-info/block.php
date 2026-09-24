@@ -31,21 +31,24 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .storeengine-thankyou-order-info-shortcode .storeengine-thankyou-order-info-success__content h4',
 			$this->get_status_title_css( $attributes ),
 			$this->get_status_title_css( $attributes, 'Tablet' ),
-			$this->get_status_title_css( $attributes, 'Mobile' )
+			$this->get_status_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_status_title_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-thankyou-order-info-shortcode .storeengine-thankyou-order-info-success__content h4:hover',
 			$this->get_status_title_hover_css( $attributes ),
 			$this->get_status_title_hover_css( $attributes, 'Tablet' ),
-			$this->get_status_title_hover_css( $attributes, 'Mobile' )
+			$this->get_status_title_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_status_title_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-thankyou-order-info-shortcode .storeengine-thankyou-order-info-success__content p span,
 			 {{WRAPPER}} .storeengine-thankyou-order-info-shortcode .storeengine-thankyou-order-info-success__content p time',
 			$this->get_deatils_title_css( $attributes ),
 			$this->get_deatils_title_css( $attributes, 'Tablet' ),
-			$this->get_deatils_title_css( $attributes, 'Mobile' )
+			$this->get_deatils_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_deatils_title_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -53,21 +56,24 @@ class Block extends BlockBaseAbstract {
 			 {{WRAPPER}} .storeengine-thankyou-order-info-shortcode .storeengine-thankyou-order-info-success__content p time:hover',
 			$this->get_deatils_title_hover_css( $attributes ),
 			$this->get_deatils_title_hover_css( $attributes, 'Tablet' ),
-			$this->get_deatils_title_hover_css( $attributes, 'Mobile' )
+			$this->get_deatils_title_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_deatils_title_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-thankyou-order-info-shortcode .storeengine-thankyou-order-info-success .storeengine-thankyou-order-info-success__email p span,
 			{{WRAPPER}} .storeengine-thankyou-order-info-shortcode .storeengine-thankyou-order-info-success .storeengine-thankyou-order-info-success__email p a',
 			$this->get_email_css( $attributes ),
 			$this->get_email_css( $attributes, 'Tablet' ),
-			$this->get_email_css( $attributes, 'Mobile' )
+			$this->get_email_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_email_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-thankyou-order-info-shortcode .storeengine-thankyou-order-info-success .storeengine-thankyou-order-info-success__email p span:hover,
 			{{WRAPPER}} .storeengine-thankyou-order-info-shortcode .storeengine-thankyou-order-info-success .storeengine-thankyou-order-info-success__email p a:hover',
 			$this->get_email_hover_css( $attributes ),
 			$this->get_email_hover_css( $attributes, 'Tablet' ),
-			$this->get_email_hover_css( $attributes, 'Mobile' )
+			$this->get_email_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_email_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

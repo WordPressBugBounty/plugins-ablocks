@@ -23,13 +23,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .storeengine-products__filter .storeengine__header-ordering select',
 			$this->get_product_filter_select_css( $attributes ),
 			$this->get_product_filter_select_css( $attributes, 'Tablet' ),
-			$this->get_product_filter_select_css( $attributes, 'Mobile' )
+			$this->get_product_filter_select_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_product_filter_select_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-products__filter .storeengine__header-ordering select:hover',
 			$this->get_product_filter_select_hover_css( $attributes ),
 			$this->get_product_filter_select_hover_css( $attributes, 'Tablet' ),
-			$this->get_product_filter_select_hover_css( $attributes, 'Mobile' )
+			$this->get_product_filter_select_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_product_filter_select_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

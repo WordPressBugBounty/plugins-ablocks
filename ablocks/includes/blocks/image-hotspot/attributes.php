@@ -55,6 +55,14 @@ $attributes = [
 		'type' => 'number',
 		'default' => 1.5,
 	),
+	'pinIconColor' => array(
+		'type' => 'string',
+		'default' => '#ffffff',
+	),
+	'pinIconSize' => array(
+		'type' => 'number',
+		'default' => 60,
+	),
 	'lists' => array(
 		'type' => 'array',
 		'default' => array(

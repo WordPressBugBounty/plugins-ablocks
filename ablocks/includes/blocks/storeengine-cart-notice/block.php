@@ -27,20 +27,23 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .storeengine-notice--info',
 			$this->get_notice_css( $attributes ),
 			$this->get_notice_css( $attributes, 'Tablet' ),
-			$this->get_notice_css( $attributes, 'Mobile' )
+			$this->get_notice_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_notice_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-notice--info:hover',
 			$this->get_notice_Hover_css( $attributes ),
 			$this->get_notice_Hover_css( $attributes, 'Tablet' ),
-			$this->get_notice_Hover_css( $attributes, 'Mobile' )
+			$this->get_notice_Hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_notice_Hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-notice .storeengine-notice--message p,
 			{{WRAPPER}} .storeengine-notice .storeengine-notice--message i',
 			$this->get_notice_massage_css( $attributes ),
 			$this->get_notice_massage_css( $attributes, 'Tablet' ),
-			$this->get_notice_massage_css( $attributes, 'Mobile' )
+			$this->get_notice_massage_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_notice_massage_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -48,7 +51,8 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .storeengine-notice button',
 			$this->get_notice_link_css( $attributes ),
 			$this->get_notice_link_css( $attributes, 'Tablet' ),
-			$this->get_notice_link_css( $attributes, 'Mobile' )
+			$this->get_notice_link_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_notice_link_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -56,14 +60,16 @@ class Block extends BlockBaseAbstract {
 			{{WRAPPER}} .storeengine-notice button:hover',
 			$this->get_notice_link_hover_css( $attributes ),
 			$this->get_notice_link_hover_css( $attributes, 'Tablet' ),
-			$this->get_notice_link_hover_css( $attributes, 'Mobile' )
+			$this->get_notice_link_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_notice_link_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--storeengine-cart-notice:not(.ablocks-block-container),
 			{{WRAPPER}}.ablocks-block--storeengine-cart-notice .ablocks-block-container',
 			$this->get_notice_wrapper_css( $attributes ),
 			$this->get_notice_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_notice_wrapper_css( $attributes, 'Mobile' )
+			$this->get_notice_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_notice_wrapper_css( $attributes, $device ); } )
 		);
 		return $css_generator->generate_css();
 	}

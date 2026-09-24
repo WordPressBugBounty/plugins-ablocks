@@ -27,20 +27,23 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block--search-form',
 			$this->get_SearchBar_css( $attributes ),
 			$this->get_SearchBar_css( $attributes, 'Tablet' ),
-			$this->get_SearchBar_css( $attributes, 'Mobile' )
+			$this->get_SearchBar_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_SearchBar_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-form:hover',
 			$this->get_SearchBar_Hover_CSS( $attributes ),
 			$this->get_SearchBar_Hover_CSS( $attributes, 'Tablet' ),
-			$this->get_SearchBar_Hover_CSS( $attributes, 'Mobile' )
+			$this->get_SearchBar_Hover_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_SearchBar_Hover_CSS( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-input',
 			$this->get_Input_css( $attributes ),
 			$this->get_Input_css( $attributes, 'Tablet' ),
-			$this->get_Input_css( $attributes, 'Mobile' )
+			$this->get_Input_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Input_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -52,56 +55,65 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block--search-button > span',
 			$this->get_Button_css( $attributes ),
 			$this->get_Button_css( $attributes, 'Tablet' ),
-			$this->get_Button_css( $attributes, 'Mobile' )
+			$this->get_Button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Button_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-button:hover > span',
 			$this->get_Button_hover_css( $attributes ),
 			$this->get_Button_hover_css( $attributes, 'Tablet' ),
-			$this->get_Button_hover_css( $attributes, 'Mobile' )
+			$this->get_Button_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Button_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-button > span > svg',
 			$this->get_Icon_css( $attributes ),
 			$this->get_Icon_css( $attributes, 'Tablet' ),
-			$this->get_Icon_css( $attributes, 'Mobile' )
+			$this->get_Icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Icon_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-result',
 			$this->get_search_result_list( $attributes ),
 			$this->get_search_result_list( $attributes, 'Tablet' ),
-			$this->get_search_result_list( $attributes, 'Mobile' )
+			$this->get_search_result_list( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_result_list( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-result:hover',
 			$this->get_search_result_list_hover( $attributes ),
 			$this->get_search_result_list_hover( $attributes, 'Tablet' ),
-			$this->get_search_result_list_hover( $attributes, 'Mobile' )
+			$this->get_search_result_list_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_result_list_hover( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-result__list',
 			$this->get_search_result_item( $attributes ),
 			$this->get_search_result_item( $attributes, 'Tablet' ),
-			$this->get_search_result_item( $attributes, 'Mobile' )
+			$this->get_search_result_item( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_result_item( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-result__list:hover',
 			$this->get_search_result_item_hover( $attributes ),
 			$this->get_search_result_item_hover( $attributes, 'Tablet' ),
-			$this->get_search_result_item_hover( $attributes, 'Mobile' )
+			$this->get_search_result_item_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_result_item_hover( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} a.ablocks-block--search-result__list-title',
 			$this->get_search_result_title_css( $attributes ),
 			$this->get_search_result_title_css( $attributes, 'Tablet' ),
-			$this->get_search_result_title_css( $attributes, 'Mobile' )
+			$this->get_search_result_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_result_title_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-search-block__spin',
 			$this->get_loading_spinner_css( $attributes ),
 			$this->get_loading_spinner_css( $attributes, 'Tablet' ),
-			$this->get_loading_spinner_css( $attributes, 'Mobile' )
+			$this->get_loading_spinner_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_loading_spinner_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -113,20 +125,23 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block--search-form',
 			$this->get_SearchBar_css( $attributes ),
 			$this->get_SearchBar_css( $attributes, 'Tablet' ),
-			$this->get_SearchBar_css( $attributes, 'Mobile' )
+			$this->get_SearchBar_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_SearchBar_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-form:hover',
 			$this->get_SearchBar_Hover_CSS( $attributes ),
 			$this->get_SearchBar_Hover_CSS( $attributes, 'Tablet' ),
-			$this->get_SearchBar_Hover_CSS( $attributes, 'Mobile' )
+			$this->get_SearchBar_Hover_CSS( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_SearchBar_Hover_CSS( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-input',
 			$this->get_Input_css( $attributes ),
 			$this->get_Input_css( $attributes, 'Tablet' ),
-			$this->get_Input_css( $attributes, 'Mobile' )
+			$this->get_Input_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Input_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
@@ -138,80 +153,93 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-block--search-button > span',
 			$this->get_Button_css( $attributes ),
 			$this->get_Button_css( $attributes, 'Tablet' ),
-			$this->get_Button_css( $attributes, 'Mobile' )
+			$this->get_Button_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Button_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-button:hover > span',
 			$this->get_Button_hover_css( $attributes ),
 			$this->get_Button_hover_css( $attributes, 'Tablet' ),
-			$this->get_Button_hover_css( $attributes, 'Mobile' )
+			$this->get_Button_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Button_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-button',
 			$this->get_button_bg_css( $attributes ),
 			$this->get_button_bg_css( $attributes, 'Tablet' ),
-			$this->get_button_bg_css( $attributes, 'Mobile' )
+			$this->get_button_bg_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_bg_css( $attributes, $device ); } )
 		);
 			$css_generator->add_class_styles(
 				'{{WRAPPER}} .ablocks-block--search-button',
 				$this->get_button_bg_css( $attributes ),
 				$this->get_button_bg_css( $attributes, 'Tablet' ),
-				$this->get_button_bg_css( $attributes, 'Mobile' )
+				$this->get_button_bg_css( $attributes, 'Mobile' ),
+				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_bg_css( $attributes, $device ); } )
 			);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-button:hover',
 			$this->get_button_bg_hover_css( $attributes ),
 			$this->get_button_bg_hover_css( $attributes, 'Tablet' ),
-			$this->get_button_bg_hover_css( $attributes, 'Mobile' )
+			$this->get_button_bg_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_bg_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-button:hover',
 			$this->get_button_bg_hover_css( $attributes ),
 			$this->get_button_bg_hover_css( $attributes, 'Tablet' ),
-			$this->get_button_bg_hover_css( $attributes, 'Mobile' )
+			$this->get_button_bg_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_button_bg_hover_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-button > span > svg',
 			$this->get_Icon_css( $attributes ),
 			$this->get_Icon_css( $attributes, 'Tablet' ),
-			$this->get_Icon_css( $attributes, 'Mobile' )
+			$this->get_Icon_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_Icon_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-result',
 			$this->get_search_result_list( $attributes ),
 			$this->get_search_result_list( $attributes, 'Tablet' ),
-			$this->get_search_result_list( $attributes, 'Mobile' )
+			$this->get_search_result_list( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_result_list( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-result:hover',
 			$this->get_search_result_list_hover( $attributes ),
 			$this->get_search_result_list_hover( $attributes, 'Tablet' ),
-			$this->get_search_result_list_hover( $attributes, 'Mobile' )
+			$this->get_search_result_list_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_result_list_hover( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-result__list',
 			$this->get_search_result_item( $attributes ),
 			$this->get_search_result_item( $attributes, 'Tablet' ),
-			$this->get_search_result_item( $attributes, 'Mobile' )
+			$this->get_search_result_item( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_result_item( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block--search-result__list:hover',
 			$this->get_search_result_item_hover( $attributes ),
 			$this->get_search_result_item_hover( $attributes, 'Tablet' ),
-			$this->get_search_result_item_hover( $attributes, 'Mobile' )
+			$this->get_search_result_item_hover( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_result_item_hover( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} a.ablocks-block--search-result__list-title',
 			$this->get_search_result_title_css( $attributes ),
 			$this->get_search_result_title_css( $attributes, 'Tablet' ),
-			$this->get_search_result_title_css( $attributes, 'Mobile' )
+			$this->get_search_result_title_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_search_result_title_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-search-block__spin',
 			$this->get_loading_spinner_css( $attributes ),
 			$this->get_loading_spinner_css( $attributes, 'Tablet' ),
-			$this->get_loading_spinner_css( $attributes, 'Mobile' )
+			$this->get_loading_spinner_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_loading_spinner_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

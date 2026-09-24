@@ -10,6 +10,7 @@ use ABlocks\Classes\AssetsGenerator;
 use ABlocks\Classes\RegisterScripts;
 use ABlocks\Classes\GlobalCssGenerator;
 use ABlocks\Classes\GlobalClasses;
+use ABlocks\Classes\AtomicStyles;
 use ABlocks\Classes\FontLoadLocally;
 use ABlocks\Admin\Menu;
 use ABlocks\Helper;
@@ -882,10 +883,15 @@ class Assets {
 	public static function build_revision() {
 		$stamp = get_option( self::BUILD_OPTION );
 
+		// The compiler's output revision is part of the key, so an emission
+		// change stales every baked page even without a version bump. See
+		// AtomicStyles::OUTPUT_REVISION.
+		$build = ABLOCKS_VERSION . '+' . AtomicStyles::OUTPUT_REVISION;
+
 		if (
 			is_array( $stamp ) &&
 			isset( $stamp['version'], $stamp['time'] ) &&
-			ABLOCKS_VERSION === $stamp['version']
+			$build === $stamp['version']
 		) {
 			return (int) $stamp['time'];
 		}
@@ -894,7 +900,7 @@ class Assets {
 		update_option(
 			self::BUILD_OPTION,
 			[
-				'version' => ABLOCKS_VERSION,
+				'version' => $build,
 				'time'    => $now,
 			],
 			true

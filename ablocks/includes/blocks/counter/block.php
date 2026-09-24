@@ -53,13 +53,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--counter--bar .ablocks-bar-counter__progress',
 			$this->get_counter_bar_progress_css( $attributes ),
 			$this->get_counter_bar_progress_css( $attributes, 'Tablet' ),
-			$this->get_counter_bar_progress_css( $attributes, 'Mobile' )
+			$this->get_counter_bar_progress_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_counter_bar_progress_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--counter--circle',
 			$this->get_counter_circle_css( $attributes ),
 			$this->get_counter_circle_css( $attributes, 'Tablet' ),
-			$this->get_counter_circle_css( $attributes, 'Mobile' )
+			$this->get_counter_circle_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_counter_circle_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--counter--circle .ablocks-circle-counter__background',
@@ -75,13 +77,15 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}  .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device ); } )
 		);
 				$css_generator->add_class_styles(
 					'{{WRAPPER}} .ablocks-icon-wrap:hover',
 					Icon::get_wrapper_hover_css( $attributes ),
 					Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
-					Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+					Icon::get_wrapper_hover_css( $attributes, 'Mobile' ),
+					$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_hover_css( $attributes, $device ); } )
 				);
 
 		$css_generator->add_class_styles(
@@ -120,6 +124,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_counter_bar_css( $attributes ),
 			$this->get_counter_bar_css( $attributes, 'Tablet' ),
 			$this->get_counter_bar_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_counter_bar_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--counter--number:not(.ablocks-has-container),
@@ -127,6 +132,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_number_wrapper_css( $attributes ),
 			$this->get_number_wrapper_css( $attributes, 'Tablet' ),
 			$this->get_number_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_number_wrapper_css( $attributes, $device ); } )
 		);
 		// number text css
 		$css_generator->add_class_styles(
@@ -134,6 +140,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_number_text_css( $attributes ),
 			$this->get_number_text_css( $attributes, 'Tablet' ),
 			$this->get_number_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_number_text_css( $attributes, $device ); } )
 		);
 		// heading text css
 		$css_generator->add_class_styles(
@@ -141,6 +148,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_heading_text_css( $attributes ),
 			$this->get_heading_text_css( $attributes, 'Tablet' ),
 			$this->get_heading_text_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_heading_text_css( $attributes, $device ); } )
 		);
 		// counter bar css
 
@@ -154,7 +162,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--counter--bar .ablocks-bar-counter__progress',
 			$this->get_counter_bar_progress_css( $attributes ),
 			$this->get_counter_bar_progress_css( $attributes, 'Tablet' ),
-			$this->get_counter_bar_progress_css( $attributes, 'Mobile' )
+			$this->get_counter_bar_progress_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_counter_bar_progress_css( $attributes, $device ); } )
 		);
 
 		// double for transform rotate issue in frontend
@@ -162,14 +171,16 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}.ablocks-block--counter--circle:not(.ablocks-has-block-container)',
 			$this->get_counter_circle_css( $attributes ),
 			$this->get_counter_circle_css( $attributes, 'Tablet' ),
-			$this->get_counter_circle_css( $attributes, 'Mobile' )
+			$this->get_counter_circle_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_counter_circle_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-container',
 			$this->get_counter_circle_css( $attributes ),
 			$this->get_counter_circle_css( $attributes, 'Tablet' ),
-			$this->get_counter_circle_css( $attributes, 'Mobile' )
+			$this->get_counter_circle_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_counter_circle_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}.ablocks-block--counter--circle .ablocks-circle-counter__background',
@@ -185,37 +196,43 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}}  .ablocks-icon-wrap',
 			Icon::get_wrapper_css( $attributes ),
 			Icon::get_wrapper_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-icon-wrap:hover',
 			Icon::get_wrapper_hover_css( $attributes ),
 			Icon::get_wrapper_hover_css( $attributes, 'Tablet' ),
-			Icon::get_wrapper_hover_css( $attributes, 'Mobile' )
+			Icon::get_wrapper_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_wrapper_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-icon-wrap img.ablocks-image-icon',
 			Icon::get_element_image_css( $attributes ),
 			Icon::get_element_image_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-icon-wrap img.ablocks-image-icon:hover',
 			Icon::get_element_image_hover_css( $attributes ),
 			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-icon-wrap svg.ablocks-svg-icon',
 			Icon::get_element_css( $attributes ),
 			Icon::get_element_css( $attributes, 'Tablet' ),
 			Icon::get_element_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}}  .ablocks-icon-wrap svg.ablocks-svg-icon:hover',
 			Icon::get_element_image_hover_css( $attributes ),
 			Icon::get_element_image_hover_css( $attributes, 'Tablet' ),
 			Icon::get_element_image_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return Icon::get_element_image_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

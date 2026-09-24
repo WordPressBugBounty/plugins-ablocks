@@ -32,25 +32,29 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .storeengine-order-billing-shortcode .storeengine-order-billing-heading',
 			$this->get_billing_heading_css( $attributes, '' ),
 			$this->get_billing_heading_css( $attributes, 'Tablet' ),
-			$this->get_billing_heading_css( $attributes, 'Mobile' )
+			$this->get_billing_heading_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_billing_heading_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-order-billing-shortcode .storeengine-order-billing-heading:hover',
 			$this->get_billing_heading_hover_css( $attributes, '' ),
 			$this->get_billing_heading_hover_css( $attributes, 'Tablet' ),
-			$this->get_billing_heading_hover_css( $attributes, 'Mobile' )
+			$this->get_billing_heading_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_billing_heading_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-order-billing-shortcode .storeengine-order-billing-address p',
 			$this->get_billing_address_css( $attributes, '' ),
 			$this->get_billing_address_css( $attributes, 'Tablet' ),
-			$this->get_billing_address_css( $attributes, 'Mobile' )
+			$this->get_billing_address_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_billing_address_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .storeengine-order-billing-shortcode .storeengine-order-billing-address p:hover',
 			$this->get_billing_address_hover_css( $attributes, '' ),
 			$this->get_billing_address_hover_css( $attributes, 'Tablet' ),
-			$this->get_billing_address_hover_css( $attributes, 'Mobile' )
+			$this->get_billing_address_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_billing_address_hover_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();

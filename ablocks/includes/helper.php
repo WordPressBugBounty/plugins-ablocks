@@ -221,13 +221,27 @@ class Helper {
 	 * animations already behaved this way, style rules did not.
 	 */
 	public static function breakpoint_media_query( $device ) {
-		$device = (array) $device;
-		$min    = isset( $device['min'] ) ? (int) $device['min'] : 0;
-		$max    = isset( $device['max'] ) ? (int) $device['max'] : 0;
+		list( $min, $max ) = self::breakpoint_bounds( $device );
 
 		if ( $min < 1 && $max < 1 ) {
 			return '';
 		}
+
+		$condition = self::breakpoint_media_condition( $min, $max );
+		return '' === $condition ? '' : '@media screen and ' . $condition;
+	}
+
+	/**
+	 * The [ min, max ] a device's media query actually covers. Mirror of the
+	 * JS `effectiveBounds()`.
+	 *
+	 * @param array $device A device entry.
+	 * @return int[] [ min, max ], 0 meaning unbounded.
+	 */
+	public static function breakpoint_bounds( $device ) {
+		$device = (array) $device;
+		$min    = isset( $device['min'] ) ? (int) $device['min'] : 0;
+		$max    = isset( $device['max'] ) ? (int) $device['max'] : 0;
 
 		/*
 		 * Strict mode bounds a max-width breakpoint from below with the next
@@ -242,8 +256,7 @@ class Helper {
 			}
 		}
 
-		$condition = self::breakpoint_media_condition( $min, $max );
-		return '' === $condition ? '' : '@media screen and ' . $condition;
+		return [ $min, $max ];
 	}
 
 	/** The largest max-width bound narrower than $max, or 0 if none. */
@@ -416,41 +429,133 @@ class Helper {
 		return ( isset( $array[ $key ] ) && ! empty( $array[ $key ] ) ) ? $array[ $key ] : $default;
 	}
 
-	public static function get_responsive_value( $attribute, $attribute_object_key, $device, $attribute_default_value = [] ) {
-		// Closure to "clean" a value (similar to your JS clean() helper)
-		$clean = function( $value ) {
-			return self::has_value( $value ) ? $value : null;
-		};
-
-		// Desktop value (fallback to default, or false if nothing found)
-		$desktop_value =
-			$clean( $attribute[ $attribute_object_key ] ?? null ) ??
-			$clean( $attribute_default_value[ $attribute_object_key ] ?? null ) ??
-			false;
-
-		// Tablet value (fallback to desktop if nothing found)
-		$tablet_key = $attribute_object_key . 'Tablet';
-		$tablet_value =
-			$clean( $attribute[ $tablet_key ] ?? null ) ??
-			$clean( $attribute_default_value[ $tablet_key ] ?? null ) ??
-			$desktop_value;
-
-		// Mobile value (fallback to tablet if nothing found)
-		$mobile_key = $attribute_object_key . 'Mobile';
-		$mobile_value =
-			$clean( $attribute[ $mobile_key ] ?? null ) ??
-			$clean( $attribute_default_value[ $mobile_key ] ?? null ) ??
-			$tablet_value;
-
-		// Return based on device
-		switch ( $device ) {
-			case 'Mobile':
-				return $mobile_value;
-			case 'Tablet':
-				return $tablet_value;
-			default:
-				return $desktop_value;
+	/**
+	 * Whether a stored responsive value is set — the mirror of the editor's
+	 * hasValue(). 0 and '0' are set; null, '' and blank strings are unset (they
+	 * inherit); arrays/objects are set when non-empty. Unlike has_value(), which
+	 * many unrelated callers rely on, this never treats 0 as missing.
+	 *
+	 * @param mixed $value Stored value.
+	 * @return bool
+	 */
+	public static function has_responsive_value( $value ) {
+		if ( null === $value ) {
+			return false;
 		}
+		if ( is_string( $value ) ) {
+			return '' !== trim( $value );
+		}
+		if ( is_array( $value ) ) {
+			return ! empty( $value );
+		}
+		if ( is_object( $value ) ) {
+			return ! empty( get_object_vars( $value ) );
+		}
+		return true;
+	}
+
+	/**
+	 * The devices a device inherits from, nearest first, ending with Desktop ('')
+	 * — the mirror of the editor's getDeviceAncestors().
+	 *
+	 * A wider device is an ancestor only when its range contains the device's own
+	 * width, i.e. exactly when the frontend cascade applies its rule there, so a
+	 * min-only (≥1400) or banded (900–1200) breakpoint is never inherited by
+	 * Tablet. With the built-in devices this is Tablet ← Desktop, Mobile ← Tablet.
+	 * Desktop has no ancestors; an unknown suffix (e.g. the phantom probe)
+	 * inherits Desktop only.
+	 *
+	 * @param string $device Device suffix ('' | 'Desktop' | 'Tablet' | 'Bp…').
+	 * @return string[] Ancestor suffixes, nearest first.
+	 */
+	public static function get_responsive_ancestors( $device ) {
+		$target = 'Desktop' === $device ? '' : (string) $device;
+		if ( '' === $target ) {
+			return [];
+		}
+		$devices = array_values( self::get_responsive_devices() );
+		$index   = array_search( $target, array_column( $devices, 'suffix' ), true );
+		if ( false === $index ) {
+			return [ '' ];
+		}
+		$ancestors = [];
+		for ( $i = $index - 1; $i >= 0; $i-- ) {
+			if ( empty( $devices[ $i ]['min'] ) && empty( $devices[ $i ]['max'] ) ) {
+				continue; // the base is always last
+			}
+			if ( self::breakpoint_contains( $devices[ $i ], $devices[ $index ] ) ) {
+				$ancestors[] = $devices[ $i ]['suffix'];
+			}
+		}
+		$ancestors[] = '';
+		return $ancestors;
+	}
+
+	/**
+	 * Whether breakpoint $outer's range contains breakpoint $inner, judged at
+	 * $inner's own width (its max, else its min) — i.e. whether $outer's rule
+	 * still applies where $inner starts. The base device contains everything.
+	 * Shared by inheritance (get_responsive_ancestors) and CSS dedupe.
+	 *
+	 * @param array $outer Breakpoint with `min` / `max` bounds.
+	 * @param array $inner Breakpoint with `min` / `max` bounds.
+	 * @return bool
+	 */
+	/**
+	 * Run a per-device CSS builder for a custom-breakpoint (or phantom probe)
+	 * suffix. Block builders read `$attributes[ 'x' . $device ]` directly, and
+	 * attribute defaults only declare the built-in suffixes, so a custom suffix
+	 * key is missing — which is exactly "unset" for the caller
+	 * (custom_device_map() subtracts the phantom baseline). Only those
+	 * missing-key warnings are silenced, and only while the builder runs.
+	 *
+	 * @param callable $builder `( $device ) => styles`.
+	 * @param string   $device  Device suffix.
+	 * @return array Styles.
+	 */
+	public static function call_device_builder( $builder, $device ) {
+		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_set_error_handler
+		set_error_handler(
+			function ( $errno, $errstr ) {
+				return (bool) preg_match( '/^Undefined (array key|index|offset)/', $errstr );
+			},
+			E_WARNING | E_NOTICE
+		);
+		try {
+			return (array) call_user_func( $builder, $device );
+		} finally {
+			restore_error_handler();
+		}
+	}
+
+	public static function breakpoint_contains( $outer, $inner ) {
+		$o_min = isset( $outer['min'] ) ? (int) $outer['min'] : 0;
+		$o_max = isset( $outer['max'] ) ? (int) $outer['max'] : 0;
+		$i_min = isset( $inner['min'] ) ? (int) $inner['min'] : 0;
+		$i_max = isset( $inner['max'] ) ? (int) $inner['max'] : 0;
+		$width = $i_max ? $i_max : $i_min;
+		return ( ! $o_min || $width >= $o_min ) && ( ! $o_max || $width <= $o_max );
+	}
+
+	/**
+	 * A device's value for a key: its own, else the nearest containing wider
+	 * device's (see get_responsive_ancestors()), else Desktop's — the mirror of
+	 * the editor's getResponsiveValue(). Stored values win over declared
+	 * defaults per device. Returns false when nothing is set anywhere.
+	 */
+	public static function get_responsive_value( $attribute, $attribute_object_key, $device, $attribute_default_value = [] ) {
+		$target   = 'Desktop' === $device ? '' : (string) $device;
+		$suffixes = array_merge( [ $target ], self::get_responsive_ancestors( $target ) );
+		foreach ( $suffixes as $suffix ) {
+			$key = $attribute_object_key . $suffix;
+			if ( isset( $attribute[ $key ] ) && self::has_responsive_value( $attribute[ $key ] ) ) {
+				return $attribute[ $key ];
+			}
+			if ( isset( $attribute_default_value[ $key ] ) && self::has_responsive_value( $attribute_default_value[ $key ] ) ) {
+				return $attribute_default_value[ $key ];
+			}
+		}
+		return false;
 	}
 
 	public static function is_gutenberg_editor() {

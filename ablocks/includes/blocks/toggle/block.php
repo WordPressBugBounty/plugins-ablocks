@@ -26,25 +26,29 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-toggle__topbar',
 			$this->get_toggle_bar_css( $attributes ),
 			$this->get_toggle_bar_css( $attributes, 'Tablet' ),
-			$this->get_toggle_bar_css( $attributes, 'Mobile' )
+			$this->get_toggle_bar_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toggle_bar_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-toggle__topbar:hover',
 			$this->get_toggle_bar_hover_css( $attributes ),
 			$this->get_toggle_bar_hover_css( $attributes, 'Tablet' ),
-			$this->get_toggle_bar_hover_css( $attributes, 'Mobile' )
+			$this->get_toggle_bar_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toggle_bar_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-toggle__topbar-wrapper',
 			$this->get_toggle_bar_wrapper_css( $attributes ),
 			$this->get_toggle_bar_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_toggle_bar_wrapper_css( $attributes, 'Mobile' )
+			$this->get_toggle_bar_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toggle_bar_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-toggle__label',
 			$this->get_toggle_label_css( $attributes ),
 			$this->get_toggle_label_css( $attributes, 'Tablet' ),
-			$this->get_toggle_label_css( $attributes, 'Mobile' )
+			$this->get_toggle_label_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toggle_label_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-toggle__label--active',
@@ -88,25 +92,29 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .ablocks-toggle__topbar',
 			$this->get_toggle_bar_css( $attributes ),
 			$this->get_toggle_bar_css( $attributes, 'Tablet' ),
-			$this->get_toggle_bar_css( $attributes, 'Mobile' )
+			$this->get_toggle_bar_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toggle_bar_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-toggle__topbar:hover',
 			$this->get_toggle_bar_hover_css( $attributes ),
 			$this->get_toggle_bar_hover_css( $attributes, 'Tablet' ),
-			$this->get_toggle_bar_hover_css( $attributes, 'Mobile' )
+			$this->get_toggle_bar_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toggle_bar_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-toggle__topbar-wrapper',
 			$this->get_toggle_bar_wrapper_css( $attributes ),
 			$this->get_toggle_bar_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_toggle_bar_wrapper_css( $attributes, 'Mobile' )
+			$this->get_toggle_bar_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toggle_bar_wrapper_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-toggle__label',
 			$this->get_toggle_label_css( $attributes ),
 			$this->get_toggle_label_css( $attributes, 'Tablet' ),
-			$this->get_toggle_label_css( $attributes, 'Mobile' )
+			$this->get_toggle_label_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_toggle_label_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-toggle__label--active',

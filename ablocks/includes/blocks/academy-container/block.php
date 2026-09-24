@@ -23,7 +23,8 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .academy-inner-container > div ',
 			$this->get_wrapper_css( $attributes ),
 			$this->get_wrapper_css( $attributes, 'Tablet' ),
-			$this->get_wrapper_css( $attributes, 'Mobile' )
+			$this->get_wrapper_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_wrapper_css( $attributes, $device ); } )
 		);
 		return $css_generator->generate_css();
 	}

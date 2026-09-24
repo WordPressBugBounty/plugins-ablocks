@@ -28,28 +28,32 @@ class Block extends BlockBaseAbstract {
 			'{{WRAPPER}} .academy-single-course__content-item--description-title',
 			$this->get_overview_heading_css( $attributes, '' ),
 			$this->get_overview_heading_css( $attributes, 'Tablet' ),
-			$this->get_overview_heading_css( $attributes, 'Mobile' )
+			$this->get_overview_heading_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_overview_heading_css( $attributes, $device ); } )
 		);
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--description-title:hover',
 			$this->get_overview_heading_hover_css( $attributes, '' ),
 			$this->get_overview_heading_hover_css( $attributes, 'Tablet' ),
-			$this->get_overview_heading_hover_css( $attributes, 'Mobile' )
+			$this->get_overview_heading_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_overview_heading_hover_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--description p,
 		{{WRAPPER}} .academy-single-course__content-item--description',
 			$this->get_description_css( $attributes, '' ),
 			$this->get_description_css( $attributes, 'Tablet' ),
-			$this->get_description_css( $attributes, 'Mobile' )
+			$this->get_description_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_description_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .academy-single-course__content-item--description p:hover,
 		{{WRAPPER}} .academy-single-course__content-item--description:hover',
 			$this->get_description_hover_css( $attributes, '' ),
 			$this->get_description_hover_css( $attributes, 'Tablet' ),
-			$this->get_description_hover_css( $attributes, 'Mobile' )
+			$this->get_description_hover_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_description_hover_css( $attributes, $device ); } )
 		);
 		return $css_generator->generate_css();
 	}
