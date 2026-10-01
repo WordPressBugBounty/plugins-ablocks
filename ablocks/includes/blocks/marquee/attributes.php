@@ -55,6 +55,14 @@ $attributes = array_merge(
 		'hasUnit' => false,
 		'unitDefaultValue' => 'px',
 		'defaultValue' => 12,
+	]),
+	Range::get_attribute([
+		'attributeName' => 'marqueeHeight',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+		'defaultValue' => 200,
 	])
 );
 

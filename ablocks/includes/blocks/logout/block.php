@@ -19,6 +19,95 @@ use ABlocks\Controls\Color;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'logout';
 
+	/**
+	 * Query arg carrying the signature of a block-issued logout redirect URL.
+	 */
+	const REDIRECT_SIGNATURE_ARG = 'ablocks_rs';
+
+	public function __construct( $keep_silent = false ) {
+		parent::__construct( $keep_silent );
+
+		if ( $this->is_enabled_block() && ! $keep_silent ) {
+			add_filter( 'allowed_redirect_hosts', array( $this, 'allow_signed_logout_redirect_host' ) );
+		}
+	}
+
+	/**
+	 * wp-login.php ends a logout with wp_safe_redirect(), which swaps any host
+	 * outside `allowed_redirect_hosts` for admin_url() — so a custom URL on
+	 * another domain never took effect. Allow that host for this one request,
+	 * and only when the redirect carries a signature this block produced from
+	 * the site's secret salts: a hand-made or edited `redirect_to` stays
+	 * rejected, so this is not an open redirect.
+	 *
+	 * @param string[] $hosts Allowed hosts.
+	 * @return string[]
+	 */
+	public function allow_signed_logout_redirect_host( $hosts ) {
+		global $pagenow;
+
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- wp-login.php verifies the log-out nonce itself; this only reads the redirect target.
+		if (
+			'wp-login.php' !== $pagenow ||
+			! isset( $_REQUEST['action'], $_REQUEST['redirect_to'], $_REQUEST[ self::REDIRECT_SIGNATURE_ARG ] ) ||
+			'logout' !== $_REQUEST['action'] ||
+			! is_string( $_REQUEST['redirect_to'] ) ||
+			! is_string( $_REQUEST[ self::REDIRECT_SIGNATURE_ARG ] )
+		) {
+			return $hosts;
+		}
+
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- compared against an HMAC, never output.
+		$redirect  = wp_unslash( $_REQUEST['redirect_to'] );
+		$signature = sanitize_text_field( wp_unslash( $_REQUEST[ self::REDIRECT_SIGNATURE_ARG ] ) );
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
+		if ( ! hash_equals( self::sign_redirect_url( $redirect ), $signature ) ) {
+			return $hosts;
+		}
+
+		$host = wp_parse_url( $redirect, PHP_URL_HOST );
+		if ( $host ) {
+			$hosts[] = $host;
+		}
+
+		return $hosts;
+	}
+
+	private static function sign_redirect_url( $url ) {
+		return wp_hash( 'ablocks-logout-redirect|' . $url, 'nonce' );
+	}
+
+	/**
+	 * Normalize the configured custom URL, falling back to the home URL for an
+	 * empty, non-HTTP(S) or malformed value.
+	 *
+	 * @param string $url Configured URL.
+	 * @return string
+	 */
+	private static function sanitize_custom_redirect_url( $url ) {
+		$url = esc_url_raw( trim( (string) $url ), array( 'http', 'https' ) );
+		if ( '' === $url ) {
+			return home_url();
+		}
+
+		$parts = wp_parse_url( $url );
+		if ( false === $parts ) {
+			return home_url();
+		}
+
+		// esc_url_raw() turns bare text such as "not a url" into "http://notaurl";
+		// a real destination is either this site's host or a dotted domain name.
+		if ( isset( $parts['host'] ) ) {
+			$home_host = wp_parse_url( home_url(), PHP_URL_HOST );
+			if ( $parts['host'] !== $home_host && false === strpos( $parts['host'], '.' ) ) {
+				return home_url();
+			}
+		}
+
+		return $url;
+	}
+
 	public function build_css( $attributes ) {
 		$css_generator = new CssGeneratorV2( $attributes, $this->block_name );
 
@@ -141,9 +230,7 @@ class Block extends BlockBaseAbstract {
 			// phpcs:ignore  WordPress.Security.ValidatedSanitizedInput.InputNotValidated, WordPress.Security.ValidatedSanitizedInput.MissingUnslash 
 			$logout_redirect_url = ( is_ssl() ? 'https://' : 'http://' ) . sanitize_text_field( $_SERVER['HTTP_HOST'] ) . sanitize_text_field( $_SERVER['REQUEST_URI'] );
 		} elseif ( $logout_redirect_option === 'custom-url' ) {
-			$logout_redirect_url = isset( $attributes['logoutCustomUrl'] ) && ! empty( $attributes['logoutCustomUrl'] )
-				? esc_url( $attributes['logoutCustomUrl'] )
-				: home_url();
+			$logout_redirect_url = self::sanitize_custom_redirect_url( isset( $attributes['logoutCustomUrl'] ) ? $attributes['logoutCustomUrl'] : '' );
 		}
 
 		$login_redirect_option = isset( $attributes['loginRedirect'] ) ? $attributes['loginRedirect'] : 'current-url';
@@ -175,6 +262,16 @@ class Block extends BlockBaseAbstract {
 			: ( isset( $attributes['logInLabel'] ) ? sanitize_text_field( $attributes['logInLabel'] ) : __( '(Log In)', 'ablocks' ) );
 
 		$action_url = $is_logged_in ? wp_logout_url( $logout_redirect_url ) : wp_login_url( $login_redirect_url );
+
+		if ( $is_logged_in && 'custom-url' === $logout_redirect_option ) {
+			// wp_logout_url() returns an HTML-escaped URL; decode it before adding
+			// the arg, the anchor below escapes it again.
+			$action_url = add_query_arg(
+				self::REDIRECT_SIGNATURE_ARG,
+				self::sign_redirect_url( $logout_redirect_url ),
+				html_entity_decode( $action_url, ENT_QUOTES )
+			);
+		}
 
 		ob_start();
 		?>

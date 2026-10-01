@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use ABlocks\Classes\AbstractAjaxHandler;
 use ABlocks\Classes\Sanitizer;
+use ABlocks\Classes\Breakpoints;
 use ABlocks\Helper;
 use ABlocks\Admin\Settings\Base as BaseSettings;
 use ABlocks\Permissions\SettingsGuard;
@@ -89,6 +90,11 @@ class Settings extends AbstractAjaxHandler {
 					'paste_google_docs' => 'boolean',
 					'paste_convert_webp' => 'boolean',
 					'paste_webp_quality' => 'integer',
+					// Responsive breakpoints
+					'breakpoint_tablet' => 'integer',
+					'breakpoint_mobile' => 'integer',
+					'breakpoint_mode' => 'string',
+					'breakpoint_custom' => 'json',
 					// Performance Suite — full-page cache.
 					'perf_page_cache' => 'boolean',
 					'perf_page_cache_scope' => 'string',
@@ -310,6 +316,7 @@ class Settings extends AbstractAjaxHandler {
 			'global_h4_typography' => 'json',
 			'global_h5_typography' => 'json',
 			'global_h6_typography' => 'json',
+			'breakpoint_custom' => 'json',
 		], $_POST ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 		// The JSON fields are read straight from $_POST rather than the sanitized
@@ -317,8 +324,23 @@ class Settings extends AbstractAjaxHandler {
 		// presets live in here, and they are the design system.
 		$json_payload = SettingsGuard::filter_payload( $json_payload );
 
+		// Breakpoints are only written when the request carries them, so a save
+		// that omits them keeps the stored list rather than resetting it.
+		$breakpoints = [];
+		foreach ( [ 'breakpoint_tablet', 'breakpoint_mobile' ] as $key ) {
+			if ( isset( $payload[ $key ] ) && $payload[ $key ] > 0 ) {
+				$breakpoints[ $key ] = $payload[ $key ];
+			}
+		}
+		if ( isset( $payload['breakpoint_mode'] ) ) {
+			$breakpoints['breakpoint_mode'] = 'strict' === $payload['breakpoint_mode'] ? 'strict' : 'cascade';
+		}
+		if ( isset( $json_payload['breakpoint_custom'] ) && is_array( $json_payload['breakpoint_custom'] ) ) {
+			$breakpoints['breakpoint_custom'] = Breakpoints::sanitize( $json_payload['breakpoint_custom'] );
+		}
+
 		$default = BaseSettings::get_default_data();
-		$is_update = BaseSettings::save_settings( [
+		$is_update = BaseSettings::save_settings( $breakpoints + [
 			'default_container_width' => $payload['default_container_width'] ?? $default['default_container_width'],
 			'container_padding' => $payload['container_padding'] ?? $default['container_padding'],
 			'container_element_gap' => $payload['container_element_gap'] ?? $default['container_element_gap'],

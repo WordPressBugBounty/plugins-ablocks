@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.14.0
+Stable tag: 2.15.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -308,6 +308,21 @@ Privacy: https://policies.google.com/privacy
 Our external packages use [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT. Additionally, we incorporate [FontAwesome v6](https://fontawesome.com/license/free) under the CC BY 4.0 License, and [dnd kit](https://github.com/clauderic/dnd-kit) licensed under the MIT License.
 
 == Changelog ==
+
+= 2.15.0 - 01/10/2026 =
+* Added – Marquee: a responsive Height setting (px, vh, em or rem) for the Up and Down directions, and the editor shows those directions as a scrollable column so the items stay editable
+* Improved – Atomic Text: inline Code formatting is available in the text toolbar
+* Improved – Atomic Text: a block holding only blank lines shows its "Type text…" placeholder in the editor instead of an empty outline
+* Improved – Logout: the Custom URL redirect can point to another domain. The logout link is signed, so the redirect target cannot be swapped for a different site, and an invalid URL falls back to the home page
+* Fixed – Marquee: the Up and Down directions scroll the way they are named, and a block saved with the older Right direction scrolls to the right again
+* Fixed – Marquee: the loop no longer jumps once images or web fonts finish loading, and a set loop count no longer stops the animation after half the loops
+* Fixed – Atomic Text: on block themes, the spacing between Atomic Text blocks on the frontend matches the editor and follows the theme's block gap. Existing pages pick up the fix without being re-saved
+* Fixed – Atomic Text: the toolbar alignment and Typography → Text align now control the same setting, so changing either one takes effect
+* Fixed – Google Docs paste: blank lines in the pasted document no longer become empty text blocks with extra spacing around them
+* Fixed – List: a custom Marker size is saved and applied, and can be set separately for tablet and mobile
+* Fixed – Modal: the block could fail to render in the editor unless it used the Popup position with a top offset
+* Fixed – Atomic blocks: the quick-actions bar stays on the block's top edge while the editor scrolls instead of jumping to the other side of it
+* Fixed – Settings: breakpoint changes made on the aBlocks settings page are saved, and custom breakpoints are stored the same way as from the editor
 
 = 2.14.0 - 24/09/2026 =
 * Added – Content Timeline: Top and Bottom content positions lay the items out in a horizontal row, with the connector line and scroll animation running between the markers and items stacking on small screens

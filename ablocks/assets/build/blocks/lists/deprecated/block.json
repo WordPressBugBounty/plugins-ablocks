@@ -290,10 +290,6 @@
         "valueUnitMobile": ""
       }
     },
-    "markerSize": {
-      "type": "number",
-      "default": 10
-    },
     "textIndent": {
       "type": "object",
       "default": {

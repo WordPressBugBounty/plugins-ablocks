@@ -37,8 +37,11 @@ class AtomicStyles {
 	 * 2: centring margins resolved per parent layout.
 	 * 3: a bucket that sets a border width/colour but no type keeps the type it
 	 *    inherits instead of `solid`.
+	 * 4: Atomic Text's static top-margin reset yields to WordPress's layout
+	 *    block gap. Baked pages embed each block's static style.css as well,
+	 *    so a change there needs this bump just like a compiler change does.
 	 */
-	const OUTPUT_REVISION = 3;
+	const OUTPUT_REVISION = 4;
 
 	/**
 	 * Compile a full bucket tree for one selector base into CSS.

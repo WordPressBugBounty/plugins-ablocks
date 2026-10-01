@@ -66,6 +66,17 @@
                 "valueMobile": ""
             }
         },
+        "marqueeHeight": {
+            "type": "object",
+            "default": {
+                "value": 200,
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
         "_margin": {
             "type": "object",
             "default": {

@@ -26,6 +26,14 @@ class Block extends BlockBaseAbstract {
 			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_inner_block_css( $attributes, $device ); } )
 		);
 
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}',
+			$this->get_marquee_height_css( $attributes ),
+			$this->get_marquee_height_css( $attributes, 'Tablet' ),
+			$this->get_marquee_height_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_marquee_height_css( $attributes, $device ); } )
+		);
+
 		return $css_generator->generate_css();
 	}
 	public function build_css_v2( $attributes ) {
@@ -38,6 +46,14 @@ class Block extends BlockBaseAbstract {
 			$this->get_inner_block_css( $attributes, 'Tablet' ),
 			$this->get_inner_block_css( $attributes, 'Mobile' ),
 			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_inner_block_css( $attributes, $device ); } )
+		);
+
+		$css_generator->add_class_styles(
+			'{{WRAPPER}}',
+			$this->get_marquee_height_css( $attributes ),
+			$this->get_marquee_height_css( $attributes, 'Tablet' ),
+			$this->get_marquee_height_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_marquee_height_css( $attributes, $device ); } )
 		);
 
 		return $css_generator->generate_css();
@@ -73,6 +89,28 @@ class Block extends BlockBaseAbstract {
 			]),
 			$css
 		);
+	}
+
+	/**
+	 * Viewport height of an Up/Down marquee, read by style.css through
+	 * --ablocks-marquee-height (falls back to 200px there). Mirrors
+	 * getMarqueeHeightCSS() in src/blocks/marquee/styling.js.
+	 */
+	public function get_marquee_height_css( $attributes, $device = '' ) {
+		$direction = isset( $attributes['marqueeDirection'] ) ? $attributes['marqueeDirection'] : '';
+		if ( 'up' !== $direction && 'down' !== $direction ) {
+			return [];
+		}
+		return Range::get_css([
+			'attributeValue'     => isset( $attributes['marqueeHeight'] ) ? $attributes['marqueeHeight'] : [],
+			'attributeObjectKey' => 'value',
+			'isResponsive'       => true,
+			'defaultValue'       => 200,
+			'hasUnit'            => true,
+			'unitDefaultValue'   => 'px',
+			'property'           => '--ablocks-marquee-height',
+			'device'             => $device,
+		]);
 	}
 
 }

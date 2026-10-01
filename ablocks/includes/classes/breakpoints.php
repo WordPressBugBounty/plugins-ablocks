@@ -52,7 +52,7 @@ class Breakpoints {
 		if ( isset( $_POST['breakpoints'] ) ) {
 			$decoded = json_decode( wp_unslash( $_POST['breakpoints'] ), true );
 			if ( is_array( $decoded ) ) {
-				$list = $this->sanitize( $decoded );
+				$list = self::sanitize( $decoded );
 			}
 		}
 
@@ -73,7 +73,11 @@ class Breakpoints {
 		wp_send_json_success( self::payload() );
 	}
 
-	private function sanitize( $list ) {
+	/**
+	 * Normalise a raw breakpoint list. Shared with Ajax\Settings::save_settings()
+	 * so the editor modal and the admin settings page store the same shape.
+	 */
+	public static function sanitize( $list ) {
 		$out  = [];
 		$seen = [];
 		foreach ( $list as $item ) {

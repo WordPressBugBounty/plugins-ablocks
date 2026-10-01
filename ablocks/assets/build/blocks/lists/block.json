@@ -299,8 +299,12 @@
             }
         },
         "markerSize": {
-            "type": "number",
-            "default": 10
+            "type": "object",
+            "default": {
+                "value": 10,
+                "valueTablet": "",
+                "valueMobile": ""
+            }
         },
         "textIndent": {
             "type": "object",

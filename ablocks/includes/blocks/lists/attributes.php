@@ -128,9 +128,9 @@ $attributes = array_merge(
 	Range::get_attribute([
 		'attributeName' => 'markerSize',
 		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
 		'defaultValue' => 10,
-		'defaultValueTablet' => 10,
-		'defaultValueMobile' => 10,
+		'hasUnit' => false,
 	]),
 	Range::get_attribute([
 		'attributeName' => 'textIndent',
