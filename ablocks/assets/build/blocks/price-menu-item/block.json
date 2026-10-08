@@ -63,7 +63,10 @@
             "default": ""
         },
         "placeDivider": {
-            "type": "string",
+            "type": [
+                "string",
+                "object"
+            ],
             "default": "near title"
         },
         "dividerPatternUrl": {
@@ -85,7 +88,10 @@
             "default": "$15.00"
         },
         "placePrice": {
-            "type": "string",
+            "type": [
+                "string",
+                "object"
+            ],
             "default": "right"
         },
         "priceTag": {
@@ -95,6 +101,10 @@
         "priceColor": {
             "type": "string",
             "default": ""
+        },
+        "priceAlignmentCustom": {
+            "type": "boolean",
+            "default": false
         },
         "titleTypographyGlobal": {
             "type": "string",
@@ -547,7 +557,10 @@
             "default": {
                 "value": null,
                 "valueTablet": null,
-                "valueMobile": null
+                "valueMobile": null,
+                "valueUnit": "",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
             }
         },
         "weight": {

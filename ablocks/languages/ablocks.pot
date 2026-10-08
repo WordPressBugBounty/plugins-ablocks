@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 2.15.0\n"
+"Project-Id-Version: aBlocks 2.16.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-01T14:36:28+00:00\n"
+"POT-Creation-Date: 2026-10-08T15:50:15+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ablocks\n"
@@ -107,7 +107,7 @@ msgstr ""
 #: src/components/dynamic-content/index.js:186
 #: src/dashboard/pages/dashboard/cookieConsent/Preview.js:111
 #: src/dashboard/pages/settings/Dashboard/RouteModal.js:43
-#: src/utils/helper.js:769
+#: src/utils/helper.js:859
 msgid "Close"
 msgstr ""
 
@@ -640,7 +640,7 @@ msgstr ""
 #: src/blocks/atomic-shared/typography-field.js:231
 #: src/blocks/atomic-shared/typography-field.js:303
 #: src/blocks/button/settings.js:134
-#: src/blocks/carousel/settings.js:324
+#: src/blocks/carousel/settings.js:427
 #: src/blocks/counter/helper.js:22
 #: src/blocks/counter/helper.js:81
 #: src/blocks/coupon/helper.js:4
@@ -658,7 +658,7 @@ msgstr ""
 #: src/blocks/lists/helper.js:86
 #: src/blocks/paypal-button/settings.js:264
 #: src/blocks/price-menu-item/data.js:110
-#: src/blocks/price-menu-item/settings.js:27
+#: src/blocks/price-menu-item/settings.js:37
 #: src/blocks/price-menu/data.js:110
 #: src/blocks/search/settings.js:27
 #: src/blocks/stripe-button/settings.js:254
@@ -817,7 +817,7 @@ msgstr ""
 msgid "That image type is not allowed on this site."
 msgstr ""
 
-#: includes/assets.php:400
+#: includes/assets.php:440
 msgctxt "Google font: on or off"
 msgid "on"
 msgstr ""
@@ -2234,7 +2234,7 @@ msgstr ""
 #: src/blocks/form-textarea/settings.js:139
 #: src/blocks/image-comparison/settings.js:128
 #: src/blocks/logout/settings.js:219
-#: src/blocks/menu-item/settings.js:45
+#: src/blocks/menu-item/settings.js:52
 #: src/components/breakpoint-manager/index.js:75
 #: src/dashboard/pages/dashboard/cookieConsent/CategoriesTab.js:151
 #: src/dashboard/pages/settings/Dashboard/RouteModal.js:222
@@ -2356,7 +2356,7 @@ msgid "Time Format"
 msgstr ""
 
 #: src/addons/formats/dynamic-content/dynamic-tags/dynamic-date-settings.js:78
-#: src/blocks/content-timeline/settings.js:241
+#: src/blocks/content-timeline/settings.js:244
 #: src/components/dynamic-tags/dynamic-date-settings.js:94
 msgid "Date Format"
 msgstr ""
@@ -2857,12 +2857,12 @@ msgstr ""
 #: src/blocks/notice/settings.js:131
 #: src/blocks/paragraph/settings.js:111
 #: src/blocks/paypal-button/settings.js:337
-#: src/blocks/price-menu-item/settings.js:214
-#: src/blocks/price-menu-item/settings.js:291
-#: src/blocks/price-menu-item/settings.js:485
-#: src/blocks/price-menu/settings.js:412
-#: src/blocks/price-menu/settings.js:468
-#: src/blocks/price-menu/settings.js:605
+#: src/blocks/price-menu-item/settings.js:232
+#: src/blocks/price-menu-item/settings.js:309
+#: src/blocks/price-menu-item/settings.js:548
+#: src/blocks/price-menu/settings.js:475
+#: src/blocks/price-menu/settings.js:531
+#: src/blocks/price-menu/settings.js:685
 #: src/blocks/progress-tracker/settings.js:304
 #: src/blocks/scroll-to-top/settings.js:205
 #: src/blocks/search/settings.js:265
@@ -2970,7 +2970,7 @@ msgstr ""
 #: src/blocks/info-box/components/icon/settings.js:34
 #: src/blocks/interactive-circle-infographic/settings.js:1228
 #: src/blocks/lists/settings.js:665
-#: src/blocks/menu-item/settings.js:60
+#: src/blocks/menu-item/settings.js:67
 #: src/blocks/news-ticker/settings.js:525
 #: src/blocks/player/settings.js:125
 #: src/blocks/player/settings.js:139
@@ -3076,8 +3076,8 @@ msgstr ""
 #: src/blocks/accordion/settings.js:520
 #: src/blocks/breadcrumb/settings.js:162
 #: src/blocks/breadcrumb/settings.js:354
-#: src/blocks/carousel/settings.js:886
-#: src/blocks/carousel/settings.js:916
+#: src/blocks/carousel/settings.js:1019
+#: src/blocks/carousel/settings.js:1049
 #: src/blocks/chart/settings.js:477
 #: src/blocks/chart/settings.js:999
 #: src/blocks/countdown/settings.js:372
@@ -3101,8 +3101,8 @@ msgstr ""
 #: src/blocks/news-ticker/settings.js:783
 #: src/blocks/news-ticker/settings.js:927
 #: src/blocks/news-ticker/settings.js:1000
-#: src/blocks/price-menu/settings.js:312
-#: src/blocks/price-menu/settings.js:329
+#: src/blocks/price-menu/settings.js:375
+#: src/blocks/price-menu/settings.js:392
 #: src/blocks/progress-tracker/settings.js:185
 #: src/blocks/progress-tracker/settings.js:247
 #: src/blocks/search/settings.js:256
@@ -3306,10 +3306,10 @@ msgstr ""
 #: src/blocks/button/settings.js:284
 #: src/blocks/button/settings.js:292
 #: src/blocks/button/settings.js:325
-#: src/blocks/carousel/settings.js:444
-#: src/blocks/carousel/settings.js:538
-#: src/blocks/carousel/settings.js:873
-#: src/blocks/carousel/settings.js:903
+#: src/blocks/carousel/settings.js:547
+#: src/blocks/carousel/settings.js:671
+#: src/blocks/carousel/settings.js:1006
+#: src/blocks/carousel/settings.js:1036
 #: src/blocks/chart/settings.js:1378
 #: src/blocks/chart/settings.js:1629
 #: src/blocks/chart/settings.js:1871
@@ -3428,14 +3428,14 @@ msgstr ""
 #: src/blocks/paypal-button/settings.js:353
 #: src/blocks/paypal-button/settings.js:361
 #: src/blocks/paypal-button/settings.js:392
-#: src/blocks/price-menu-item/settings.js:208
-#: src/blocks/price-menu-item/settings.js:279
-#: src/blocks/price-menu-item/settings.js:415
-#: src/blocks/price-menu-item/settings.js:479
-#: src/blocks/price-menu/settings.js:406
-#: src/blocks/price-menu/settings.js:461
-#: src/blocks/price-menu/settings.js:566
-#: src/blocks/price-menu/settings.js:599
+#: src/blocks/price-menu-item/settings.js:226
+#: src/blocks/price-menu-item/settings.js:297
+#: src/blocks/price-menu-item/settings.js:451
+#: src/blocks/price-menu-item/settings.js:542
+#: src/blocks/price-menu/settings.js:469
+#: src/blocks/price-menu/settings.js:524
+#: src/blocks/price-menu/settings.js:631
+#: src/blocks/price-menu/settings.js:679
 #: src/blocks/progress-tracker/settings.js:298
 #: src/blocks/scroll-to-top/settings.js:132
 #: src/blocks/scroll-to-top/settings.js:155
@@ -3755,9 +3755,9 @@ msgstr ""
 #: src/blocks/accordion/settings.js:278
 #: src/blocks/atomic-shared/inspector.js:685
 #: src/blocks/button/settings.js:381
-#: src/blocks/carousel/settings.js:632
-#: src/blocks/carousel/settings.js:963
-#: src/blocks/content-timeline/settings.js:320
+#: src/blocks/carousel/settings.js:765
+#: src/blocks/carousel/settings.js:1096
+#: src/blocks/content-timeline/settings.js:323
 #: src/blocks/countdown/settings.js:353
 #: src/blocks/coupon/settings.js:169
 #: src/blocks/coupon/settings.js:251
@@ -3809,7 +3809,7 @@ msgstr ""
 #: src/blocks/menu/settings.js:587
 #: src/blocks/modal/settings.js:269
 #: src/blocks/paypal-button/settings.js:446
-#: src/blocks/price-menu/settings.js:374
+#: src/blocks/price-menu/settings.js:437
 #: src/blocks/progress-tracker/settings.js:219
 #: src/blocks/scroll-to-top/settings.js:252
 #: src/blocks/search/settings.js:682
@@ -3981,7 +3981,9 @@ msgstr ""
 #: src/blocks/notice/settings.js:78
 #: src/blocks/paragraph/settings.js:58
 #: src/blocks/paypal-button/settings.js:249
-#: src/blocks/price-menu/settings.js:188
+#: src/blocks/price-menu-item/settings.js:515
+#: src/blocks/price-menu/settings.js:201
+#: src/blocks/price-menu/settings.js:660
 #: src/blocks/progress-tracker/settings.js:74
 #: src/blocks/qr-code/settings.js:89
 #: src/blocks/scroll-to-top/settings.js:67
@@ -4058,8 +4060,8 @@ msgstr ""
 #: src/blocks/notice/settings.js:62
 #: src/blocks/paragraph/settings.js:42
 #: src/blocks/paragraph/settings.js:49
-#: src/blocks/price-menu-item/settings.js:182
-#: src/blocks/price-menu-item/settings.js:189
+#: src/blocks/price-menu-item/settings.js:200
+#: src/blocks/price-menu-item/settings.js:207
 #: src/blocks/single-accordion/settings.js:103
 #: src/blocks/table-of-content/settings.js:81
 #: src/blocks/tabs/settings.js:717
@@ -4085,7 +4087,7 @@ msgstr ""
 #: src/blocks/interactive-circle-infographic/settings.js:1030
 #: src/blocks/notice/settings.js:66
 #: src/blocks/paragraph/settings.js:53
-#: src/blocks/price-menu-item/settings.js:193
+#: src/blocks/price-menu-item/settings.js:211
 #: src/blocks/text-path/settings.js:66
 msgid "Enter your title"
 msgstr ""
@@ -4099,12 +4101,12 @@ msgstr ""
 #: src/blocks/info-box/components/heading/settings.js:49
 #: src/blocks/info-box/components/sub-heading/settings.js:49
 #: src/blocks/notice/settings.js:70
-#: src/blocks/price-menu-item/settings.js:196
-#: src/blocks/price-menu-item/settings.js:262
-#: src/blocks/price-menu-item/settings.js:467
-#: src/blocks/price-menu/settings.js:394
-#: src/blocks/price-menu/settings.js:446
-#: src/blocks/price-menu/settings.js:587
+#: src/blocks/price-menu-item/settings.js:214
+#: src/blocks/price-menu-item/settings.js:280
+#: src/blocks/price-menu-item/settings.js:530
+#: src/blocks/price-menu/settings.js:457
+#: src/blocks/price-menu/settings.js:509
+#: src/blocks/price-menu/settings.js:652
 msgid "HTML Tag"
 msgstr ""
 
@@ -4138,12 +4140,12 @@ msgstr ""
 #: src/blocks/notice/settings.js:149
 #: src/blocks/paragraph/settings.js:119
 #: src/blocks/paypal-button/settings.js:345
-#: src/blocks/price-menu-item/settings.js:222
-#: src/blocks/price-menu-item/settings.js:304
-#: src/blocks/price-menu-item/settings.js:493
-#: src/blocks/price-menu/settings.js:420
-#: src/blocks/price-menu/settings.js:481
-#: src/blocks/price-menu/settings.js:613
+#: src/blocks/price-menu-item/settings.js:240
+#: src/blocks/price-menu-item/settings.js:322
+#: src/blocks/price-menu-item/settings.js:556
+#: src/blocks/price-menu/settings.js:483
+#: src/blocks/price-menu/settings.js:544
+#: src/blocks/price-menu/settings.js:693
 #: src/blocks/progress-tracker/settings.js:312
 #: src/blocks/scroll-to-top/settings.js:216
 #: src/blocks/search/settings.js:273
@@ -4178,12 +4180,12 @@ msgstr ""
 #: src/blocks/news-ticker/settings.js:969
 #: src/blocks/notice/settings.js:156
 #: src/blocks/paragraph/settings.js:126
-#: src/blocks/price-menu-item/settings.js:229
-#: src/blocks/price-menu-item/settings.js:316
-#: src/blocks/price-menu-item/settings.js:500
-#: src/blocks/price-menu/settings.js:427
-#: src/blocks/price-menu/settings.js:493
-#: src/blocks/price-menu/settings.js:620
+#: src/blocks/price-menu-item/settings.js:247
+#: src/blocks/price-menu-item/settings.js:334
+#: src/blocks/price-menu-item/settings.js:563
+#: src/blocks/price-menu/settings.js:490
+#: src/blocks/price-menu/settings.js:556
+#: src/blocks/price-menu/settings.js:700
 #: src/blocks/progress-tracker/settings.js:319
 #: src/blocks/scroll-to-top/settings.js:226
 #: src/blocks/search/settings.js:280
@@ -4346,7 +4348,7 @@ msgstr ""
 #: src/blocks/icon/settings.js:56
 #: src/blocks/image/settings.js:371
 #: src/blocks/info-box/components/star-rating/settings.js:256
-#: src/blocks/price-menu-item/settings.js:451
+#: src/blocks/price-menu-item/settings.js:486
 #: src/blocks/progress-tracker/helper.js:15
 #: src/blocks/scroll-to-top/settings.js:84
 #: src/blocks/star-ratings/settings.js:107
@@ -4431,7 +4433,7 @@ msgstr ""
 #: src/blocks/atomic-shared/inspector.js:525
 #: src/blocks/button/settings.js:306
 #: src/blocks/button/settings.js:339
-#: src/blocks/content-timeline/settings.js:193
+#: src/blocks/content-timeline/settings.js:196
 #: src/blocks/coupon/settings.js:144
 #: src/blocks/coupon/settings.js:226
 #: src/blocks/coupon/settings.js:368
@@ -4578,7 +4580,7 @@ msgstr ""
 #: src/blocks/academy-course-reviews/settings.js:632
 #: src/blocks/academy-enroll-content/settings.js:58
 #: src/blocks/accordion/settings.js:336
-#: src/blocks/content-timeline/settings.js:358
+#: src/blocks/content-timeline/settings.js:361
 #: src/blocks/ecm-reaction/settings.js:101
 #: src/blocks/image-scroll/settings.js:271
 #: src/blocks/single-accordion/settings.js:263
@@ -4708,8 +4710,8 @@ msgstr ""
 #: src/blocks/menu-child-sub/settings.js:69
 #: src/blocks/menu/settings.js:471
 #: src/blocks/modal/settings.js:112
-#: src/blocks/price-menu-item/settings.js:390
-#: src/blocks/price-menu/settings.js:541
+#: src/blocks/price-menu-item/settings.js:424
+#: src/blocks/price-menu/settings.js:604
 #: src/blocks/storeengine-cart-button/settings.js:201
 #: src/blocks/storeengine-cart-button/settings.js:367
 #: src/blocks/storeengine-cart-notice/settings.js:119
@@ -4795,8 +4797,8 @@ msgstr ""
 #: src/blocks/atomic-shared/effects.js:358
 #: src/blocks/button/settings.js:400
 #: src/blocks/button/settings.js:405
-#: src/blocks/carousel/settings.js:975
-#: src/blocks/carousel/settings.js:983
+#: src/blocks/carousel/settings.js:1108
+#: src/blocks/carousel/settings.js:1116
 #: src/blocks/countdown/settings.js:382
 #: src/blocks/ecm-bookmark-badge/settings.js:147
 #: src/blocks/ecm-bookmark-badge/settings.js:152
@@ -4888,7 +4890,7 @@ msgstr ""
 #: src/blocks/academy-review-form/settings.js:480
 #: src/blocks/academy-review-form/settings.js:566
 #: src/blocks/button/settings.js:354
-#: src/blocks/carousel/settings.js:929
+#: src/blocks/carousel/settings.js:1062
 #: src/blocks/filterable-cards/settings.js:376
 #: src/blocks/loop-load-more/settings.js:219
 #: src/blocks/news-ticker/settings.js:796
@@ -4941,11 +4943,11 @@ msgstr ""
 #: src/blocks/breadcrumb/settings.js:174
 #: src/blocks/breadcrumb/settings.js:366
 #: src/blocks/button/settings.js:392
-#: src/blocks/carousel/settings.js:954
+#: src/blocks/carousel/settings.js:1087
 #: src/blocks/chart/settings.js:1999
 #: src/blocks/chart/settings.js:2255
-#: src/blocks/content-timeline/settings.js:222
-#: src/blocks/content-timeline/settings.js:306
+#: src/blocks/content-timeline/settings.js:225
+#: src/blocks/content-timeline/settings.js:309
 #: src/blocks/countdown/settings.js:364
 #: src/blocks/coupon/settings.js:157
 #: src/blocks/coupon/settings.js:239
@@ -4996,7 +4998,7 @@ msgstr ""
 #: src/blocks/news-ticker/settings.js:692
 #: src/blocks/notice/settings.js:163
 #: src/blocks/paypal-button/settings.js:457
-#: src/blocks/price-menu/settings.js:366
+#: src/blocks/price-menu/settings.js:429
 #: src/blocks/scroll-to-top/settings.js:237
 #: src/blocks/scroll-to-top/settings.js:242
 #: src/blocks/search/settings.js:674
@@ -5101,7 +5103,7 @@ msgstr ""
 #: src/blocks/academy-course-search/settings.js:80
 #: src/blocks/academy-enroll-content/settings.js:155
 #: src/blocks/academy-review-list/settings.js:389
-#: src/blocks/content-timeline/settings.js:498
+#: src/blocks/content-timeline/settings.js:448
 #: src/blocks/ecm-reaction/settings.js:222
 #: src/blocks/image-hotspot/settings.js:356
 #: src/blocks/image-scroll/settings.js:343
@@ -5200,7 +5202,7 @@ msgid "Paid"
 msgstr ""
 
 #: src/blocks/academy-courses/helper.js:54
-#: src/blocks/content-timeline/settings.js:234
+#: src/blocks/content-timeline/settings.js:237
 #: src/blocks/storeengine-products/helper.js:54
 #: src/blocks/taxonomy-listing/settings.js:145
 #: src/dashboard/pages/dashboard/themeBuilder/index.js:392
@@ -5346,8 +5348,8 @@ msgstr ""
 
 #: src/blocks/academy-courses/settings.js:284
 #: src/blocks/paypal-button/settings.js:130
-#: src/blocks/price-menu-item/settings.js:429
-#: src/blocks/price-menu-item/settings.js:436
+#: src/blocks/price-menu-item/settings.js:465
+#: src/blocks/price-menu-item/settings.js:472
 #: src/blocks/storeengine-cart-button/settings.js:361
 #: src/blocks/storeengine-products/settings.js:201
 msgid "Price"
@@ -5811,8 +5813,8 @@ msgstr ""
 
 #: src/blocks/accordion/settings.js:250
 #: src/blocks/accordion/settings.js:479
-#: src/blocks/carousel/settings.js:457
-#: src/blocks/carousel/settings.js:551
+#: src/blocks/carousel/settings.js:560
+#: src/blocks/carousel/settings.js:684
 #: src/blocks/single-accordion/settings.js:214
 #: src/blocks/taxonomy-listing/settings.js:1199
 #: src/controls/color/color-gradient-picker/gradientPicker.js:213
@@ -5841,6 +5843,7 @@ msgstr ""
 #: src/blocks/form-password/settings.js:175
 #: src/blocks/image-scroll/settings.js:264
 #: src/blocks/info-box/components/button/settings.js:89
+#: src/blocks/menu-item/settings.js:80
 #: src/blocks/paypal-button/settings.js:326
 #: src/blocks/stripe-button/settings.js:316
 #: src/blocks/tabs/settings.js:353
@@ -5863,6 +5866,7 @@ msgstr ""
 #: src/blocks/atomic-shared/spacing-field.js:36
 #: src/blocks/atomic-shared/typography-field.js:126
 #: src/blocks/content-timeline/helper.js:5
+#: src/blocks/content-timeline/helper.js:33
 #: src/blocks/content-timeline/settings.js:81
 #: src/blocks/countdown/helper.js:72
 #: src/blocks/coupon/helper.js:18
@@ -5901,6 +5905,7 @@ msgstr ""
 #: src/blocks/atomic-shared/spacing-field.js:34
 #: src/blocks/atomic-shared/typography-field.js:136
 #: src/blocks/content-timeline/helper.js:15
+#: src/blocks/content-timeline/helper.js:43
 #: src/blocks/content-timeline/settings.js:95
 #: src/blocks/countdown/helper.js:64
 #: src/blocks/coupon/helper.js:28
@@ -5939,6 +5944,7 @@ msgstr ""
 #: src/blocks/accordion/settings.js:358
 #: src/blocks/button/settings.js:458
 #: src/blocks/info-box/components/button/settings.js:260
+#: src/blocks/menu-item/settings.js:124
 #: src/blocks/paypal-button/settings.js:518
 #: src/blocks/stripe-button/settings.js:508
 msgid "Icon spacing"
@@ -6081,7 +6087,7 @@ msgstr ""
 #: src/blocks/button/settings.js:424
 #: src/blocks/button/settings.js:485
 #: src/blocks/content-timeline-child/settings.js:72
-#: src/blocks/content-timeline/settings.js:351
+#: src/blocks/content-timeline/settings.js:354
 #: src/blocks/counter/settings.js:428
 #: src/blocks/counter/settings.js:450
 #: src/blocks/counter/settings.js:459
@@ -6109,6 +6115,9 @@ msgstr ""
 #: src/blocks/lists/settings.js:630
 #: src/blocks/lists/settings.js:1030
 #: src/blocks/map/components/modal/index.js:259
+#: src/blocks/menu-item/settings.js:77
+#: src/blocks/menu-item/settings.js:91
+#: src/blocks/menu-item/settings.js:150
 #: src/blocks/notice/settings.js:175
 #: src/blocks/notice/settings.js:182
 #: src/blocks/notice/settings.js:191
@@ -6116,8 +6125,8 @@ msgstr ""
 #: src/blocks/paypal-button/settings.js:490
 #: src/blocks/paypal-button/settings.js:545
 #: src/blocks/price-menu-item/data.js:106
-#: src/blocks/price-menu-item/settings.js:154
-#: src/blocks/price-menu-item/settings.js:161
+#: src/blocks/price-menu-item/settings.js:172
+#: src/blocks/price-menu-item/settings.js:179
 #: src/blocks/price-menu/data.js:106
 #: src/blocks/scroll-to-top/settings.js:96
 #: src/blocks/scroll-to-top/settings.js:268
@@ -6146,7 +6155,7 @@ msgstr ""
 #: src/blocks/interactive-circle-infographic/helper.js:68
 #: src/blocks/lists/helper.js:87
 #: src/blocks/price-menu-item/data.js:111
-#: src/blocks/price-menu-item/settings.js:28
+#: src/blocks/price-menu-item/settings.js:38
 #: src/blocks/price-menu/data.js:111
 #: src/blocks/tabs/helper.js:182
 #: src/controls/icon-upload/index.js:238
@@ -6162,7 +6171,7 @@ msgstr ""
 #: src/blocks/interactive-circle-infographic/helper.js:69
 #: src/blocks/lists/helper.js:88
 #: src/blocks/price-menu-item/data.js:112
-#: src/blocks/price-menu-item/settings.js:29
+#: src/blocks/price-menu-item/settings.js:39
 #: src/blocks/price-menu/data.js:112
 #: src/blocks/tabs/helper.js:186
 #: src/controls/icon-upload/index.js:239
@@ -6270,9 +6279,9 @@ msgstr ""
 #: src/blocks/advance-lists/settings.js:358
 #: src/blocks/atomic-shared/effect-field.js:216
 #: src/blocks/atomic-shared/inspector.js:723
-#: src/blocks/carousel/settings.js:470
-#: src/blocks/carousel/settings.js:564
-#: src/blocks/carousel/settings.js:756
+#: src/blocks/carousel/settings.js:573
+#: src/blocks/carousel/settings.js:697
+#: src/blocks/carousel/settings.js:889
 #: src/blocks/counter/settings.js:366
 #: src/blocks/divider/settings.js:78
 #: src/blocks/ecm-claim-button/settings.js:173
@@ -6282,8 +6291,8 @@ msgstr ""
 #: src/blocks/form-password/settings.js:251
 #: src/blocks/interactive-circle-infographic/settings.js:1732
 #: src/blocks/lists/settings.js:1056
-#: src/blocks/price-menu-item/settings.js:81
-#: src/blocks/price-menu/settings.js:99
+#: src/blocks/price-menu-item/settings.js:99
+#: src/blocks/price-menu/settings.js:112
 #: src/controls/icon-upload/index.js:268
 #: src/controls/icon-upload/index.js:330
 #: src/controls/typography/components/Custom.js:225
@@ -6297,8 +6306,8 @@ msgstr ""
 #: src/blocks/advance-lists/settings.js:218
 #: src/blocks/divider/settings.js:115
 #: src/blocks/lists/settings.js:955
-#: src/blocks/price-menu-item/settings.js:100
-#: src/blocks/price-menu/settings.js:118
+#: src/blocks/price-menu-item/settings.js:118
+#: src/blocks/price-menu/settings.js:131
 #: src/controls/typography/components/Custom.js:241
 msgid "Weight"
 msgstr ""
@@ -6407,7 +6416,7 @@ msgstr ""
 #: src/blocks/divider/index.js:11
 #: src/blocks/divider/settings.js:148
 #: src/blocks/lists/settings.js:922
-#: src/blocks/price-menu-item/settings.js:337
+#: src/blocks/price-menu-item/settings.js:355
 #: src/utils/block-lists.js:94
 msgid "Divider"
 msgstr ""
@@ -6418,8 +6427,8 @@ msgstr ""
 #: src/blocks/coupon/settings.js:87
 #: src/blocks/divider/settings.js:155
 #: src/blocks/lists/settings.js:930
-#: src/blocks/price-menu-item/settings.js:344
-#: src/blocks/price-menu/settings.js:520
+#: src/blocks/price-menu-item/settings.js:362
+#: src/blocks/price-menu/settings.js:583
 #: src/blocks/storeengine-funnel-checkout/settings.js:93
 #: src/blocks/storeengine-funnel-offer/settings.js:100
 #: src/blocks/storeengine-order-details/settings.js:78
@@ -6537,12 +6546,12 @@ msgid "Marker type"
 msgstr ""
 
 #: src/blocks/advance-lists/settings.js:446
-#: src/blocks/price-menu/settings.js:255
+#: src/blocks/price-menu/settings.js:292
 msgid "Allow divider"
 msgstr ""
 
 #: src/blocks/advance-lists/settings.js:455
-#: src/blocks/price-menu/settings.js:156
+#: src/blocks/price-menu/settings.js:169
 msgid "Column gap"
 msgstr ""
 
@@ -6681,7 +6690,7 @@ msgstr ""
 #: src/blocks/chart/settings.js:1822
 #: src/blocks/chart/settings.js:2078
 #: src/blocks/container/settings.js:468
-#: src/blocks/content-timeline/settings.js:130
+#: src/blocks/content-timeline/settings.js:132
 #: src/blocks/countdown/helper.js:143
 #: src/blocks/interactive-circle-infographic/helper.js:45
 #: src/blocks/lists/helper.js:64
@@ -6707,7 +6716,7 @@ msgstr ""
 #: src/blocks/chart/settings.js:2094
 #: src/blocks/container/helper.js:54
 #: src/blocks/container/settings.js:482
-#: src/blocks/content-timeline/settings.js:143
+#: src/blocks/content-timeline/settings.js:145
 #: src/blocks/countdown/helper.js:153
 #: src/blocks/interactive-circle-infographic/helper.js:49
 #: src/blocks/lists/helper.js:68
@@ -6787,13 +6796,13 @@ msgid "Click"
 msgstr ""
 
 #: src/blocks/atomic-shared/animations.js:16
-#: src/blocks/carousel/settings.js:131
+#: src/blocks/carousel/settings.js:170
 #: src/global/Integrations/helper.js:405
 msgid "Fade"
 msgstr ""
 
 #: src/blocks/atomic-shared/animations.js:17
-#: src/blocks/carousel/settings.js:124
+#: src/blocks/carousel/settings.js:163
 #: src/blocks/featured-image/helper.js:31
 #: src/blocks/heading/helper.js:217
 #: src/blocks/image-scroll/helper.js:53
@@ -6854,10 +6863,11 @@ msgstr ""
 #: src/blocks/atomic-shared/border-field.js:31
 #: src/blocks/atomic-shared/inspector.js:1348
 #: src/blocks/atomic-shared/spacing-field.js:33
-#: src/blocks/carousel/settings.js:274
+#: src/blocks/carousel/settings.js:377
 #: src/blocks/container/settings.js:665
+#: src/blocks/content-timeline/helper.js:20
 #: src/blocks/content-timeline/settings.js:102
-#: src/blocks/content-timeline/settings.js:131
+#: src/blocks/content-timeline/settings.js:133
 #: src/blocks/countdown/helper.js:60
 #: src/blocks/counter/helper.js:51
 #: src/blocks/counter/helper.js:70
@@ -6898,10 +6908,11 @@ msgstr ""
 #: src/blocks/atomic-shared/border-field.js:33
 #: src/blocks/atomic-shared/inspector.js:1350
 #: src/blocks/atomic-shared/spacing-field.js:35
-#: src/blocks/carousel/settings.js:285
+#: src/blocks/carousel/settings.js:388
 #: src/blocks/container/settings.js:666
+#: src/blocks/content-timeline/helper.js:25
 #: src/blocks/content-timeline/settings.js:109
-#: src/blocks/content-timeline/settings.js:144
+#: src/blocks/content-timeline/settings.js:146
 #: src/blocks/countdown/helper.js:68
 #: src/blocks/counter/helper.js:55
 #: src/blocks/counter/helper.js:74
@@ -6934,7 +6945,7 @@ msgid "Once"
 msgstr ""
 
 #: src/blocks/atomic-shared/animations.js:62
-#: src/blocks/carousel/settings.js:202
+#: src/blocks/carousel/settings.js:296
 #: src/blocks/marquee/settings.js:126
 #: src/blocks/player/settings.js:115
 #: src/blocks/video/settings.js:300
@@ -7207,7 +7218,7 @@ msgstr ""
 #: src/blocks/atomic-shared/inspector.js:289
 #: src/blocks/atomic-shared/typography-field.js:131
 #: src/blocks/breadcrumb/settings.js:87
-#: src/blocks/carousel/settings.js:278
+#: src/blocks/carousel/settings.js:381
 #: src/blocks/chart/settings.js:1332
 #: src/blocks/chart/settings.js:1583
 #: src/blocks/chart/settings.js:1830
@@ -7216,8 +7227,9 @@ msgstr ""
 #: src/blocks/container/helper.js:49
 #: src/blocks/container/settings.js:475
 #: src/blocks/content-timeline/helper.js:10
+#: src/blocks/content-timeline/helper.js:38
 #: src/blocks/content-timeline/settings.js:88
-#: src/blocks/content-timeline/settings.js:135
+#: src/blocks/content-timeline/settings.js:137
 #: src/blocks/countdown/helper.js:108
 #: src/blocks/countdown/helper.js:148
 #: src/blocks/coupon/helper.js:23
@@ -7241,7 +7253,7 @@ msgstr ""
 #: src/blocks/modal/deprecated/helper.js:50
 #: src/blocks/modal/helper.js:50
 #: src/blocks/paypal-button/helper.js:10
-#: src/blocks/price-menu/settings.js:199
+#: src/blocks/price-menu/settings.js:212
 #: src/blocks/social-shares/helper.js:420
 #: src/blocks/social-shares/settings.js:242
 #: src/blocks/social-shares/settings.js:286
@@ -7334,7 +7346,7 @@ msgid "Skew"
 msgstr ""
 
 #: src/blocks/atomic-shared/effects.js:99
-#: src/blocks/carousel/settings.js:145
+#: src/blocks/carousel/settings.js:184
 #: src/blocks/container/settings.js:787
 #: src/blocks/container/settings.js:928
 #: src/blocks/heading/helper.js:205
@@ -7657,7 +7669,7 @@ msgstr ""
 
 #: src/blocks/atomic-shared/inspector.js:886
 #: src/blocks/atomic-shared/inspector.js:919
-#: src/blocks/carousel/settings.js:186
+#: src/blocks/carousel/settings.js:280
 #: src/blocks/divider/settings.js:97
 #: src/blocks/dual-button/settings.js:160
 #: src/blocks/filterable-cards/settings.js:274
@@ -8573,6 +8585,7 @@ msgstr ""
 
 #: src/blocks/button/settings.js:429
 #: src/blocks/info-box/components/button/settings.js:231
+#: src/blocks/menu-item/settings.js:96
 #: src/blocks/paypal-button/settings.js:495
 #: src/blocks/stripe-button/settings.js:485
 msgid "Icon position"
@@ -8583,6 +8596,7 @@ msgstr ""
 #: src/blocks/image-comparison/render.js:243
 #: src/blocks/image-comparison/save.js:50
 #: src/blocks/info-box/components/button/settings.js:234
+#: src/blocks/menu-item/settings.js:102
 #: src/blocks/paypal-button/settings.js:501
 #: src/blocks/stripe-button/settings.js:491
 #: src/components/dynamic-tags/index.js:841
@@ -8594,6 +8608,7 @@ msgstr ""
 #: src/blocks/image-comparison/render.js:277
 #: src/blocks/image-comparison/save.js:55
 #: src/blocks/info-box/components/button/settings.js:238
+#: src/blocks/menu-item/settings.js:109
 #: src/blocks/paypal-button/settings.js:505
 #: src/blocks/stripe-button/settings.js:495
 #: src/components/dynamic-tags/index.js:851
@@ -8613,136 +8628,160 @@ msgid "Carousel blocks settings for customizing slides effortlessly."
 msgstr ""
 
 #: src/blocks/carousel/index.js:13
-#: src/blocks/carousel/settings.js:100
+#: src/blocks/carousel/settings.js:137
 #: src/dashboard/pages/dashboard/free-vs-pro/index.js:26
 #: src/utils/block-lists.js:230
 msgid "Carousel"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:118
+#: src/blocks/carousel/settings.js:150
+msgid "Autoplay, loop and transition effects preview on the frontend only."
+msgstr ""
+
+#: src/blocks/carousel/settings.js:157
 msgid "Choose Effect"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:138
+#: src/blocks/carousel/settings.js:177
 msgid "Cube"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:158
+#: src/blocks/carousel/settings.js:197
 msgid "Reverse Direction"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:168
-msgid "Slides Per View"
+#: src/blocks/carousel/settings.js:207
+msgid "Slides to Show"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:208
+#: src/blocks/carousel/settings.js:226
+msgid "Slides to Scroll"
+msgstr ""
+
+#: src/blocks/carousel/settings.js:246
+msgid "Centered Slides"
+msgstr ""
+
+#: src/blocks/carousel/settings.js:257
+msgid "Active Slide Offset"
+msgstr ""
+
+#: src/blocks/carousel/settings.js:304
+msgid "Loop needs at least Slides to Show + Slides to Scroll slides; with fewer, the carousel will not loop."
+msgstr ""
+
+#: src/blocks/carousel/settings.js:311
 msgid "Speed (ms)"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:221
+#: src/blocks/carousel/settings.js:324
 msgid "Grab Cursor"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:229
+#: src/blocks/carousel/settings.js:332
 msgid "Mousewheel"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:239
+#: src/blocks/carousel/settings.js:342
 msgid "Carousel Height"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:265
+#: src/blocks/carousel/settings.js:368
 msgid "Vertical Alignment"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:300
-#: src/blocks/carousel/settings.js:308
+#: src/blocks/carousel/settings.js:403
+#: src/blocks/carousel/settings.js:411
 msgid "Pagination"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:318
+#: src/blocks/carousel/settings.js:421
 msgid "Pagination Type"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:331
+#: src/blocks/carousel/settings.js:434
 msgid "Border 1"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:338
+#: src/blocks/carousel/settings.js:441
 msgid "Border 2"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:345
+#: src/blocks/carousel/settings.js:448
 msgid "Border 3"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:360
+#: src/blocks/carousel/settings.js:463
 msgid "Pagination Clickable"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:371
-#: src/blocks/carousel/settings.js:779
+#: src/blocks/carousel/settings.js:474
+#: src/blocks/carousel/settings.js:912
 #: src/blocks/qr-code/settings.js:221
 msgid "Position Y"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:403
+#: src/blocks/carousel/settings.js:506
 #: src/blocks/qr-code/settings.js:205
 msgid "Position X"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:502
-#: src/blocks/carousel/settings.js:596
+#: src/blocks/carousel/settings.js:605
+#: src/blocks/carousel/settings.js:729
 msgid "Active Size"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:644
+#: src/blocks/carousel/settings.js:639
+msgid "Active Width"
+msgstr ""
+
+#: src/blocks/carousel/settings.js:777
 msgid "Active Border"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:663
-#: src/blocks/carousel/settings.js:681
+#: src/blocks/carousel/settings.js:796
+#: src/blocks/carousel/settings.js:814
 #: src/blocks/player/settings.js:98
 #: src/blocks/video/settings.js:276
 #: src/controls/video-control/options/video-options/index.js:46
 msgid "Autoplay"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:673
+#: src/blocks/carousel/settings.js:806
 #: src/blocks/marquee/settings.js:119
 msgid "These feature will only works in frontend"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:688
+#: src/blocks/carousel/settings.js:821
 msgid "Autoplay Reverse"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:696
+#: src/blocks/carousel/settings.js:829
 msgid "Autoplay Delay (ms)"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:708
+#: src/blocks/carousel/settings.js:841
 msgid "Autoplay Pause On Hover"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:721
-#: src/blocks/carousel/settings.js:726
+#: src/blocks/carousel/settings.js:854
+#: src/blocks/carousel/settings.js:859
 msgid "Navigation"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:736
+#: src/blocks/carousel/settings.js:869
 msgid "Left Icon"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:746
+#: src/blocks/carousel/settings.js:879
 msgid "Right Icon"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:808
+#: src/blocks/carousel/settings.js:941
 msgid "Nav Next X"
 msgstr ""
 
-#: src/blocks/carousel/settings.js:837
+#: src/blocks/carousel/settings.js:970
 msgid "Nav Prev X"
 msgstr ""
 
@@ -8991,7 +9030,7 @@ msgstr ""
 #: src/blocks/lists/settings.js:466
 #: src/blocks/logout/helper.js:29
 #: src/blocks/menu-child-sub/settings.js:212
-#: src/blocks/price-menu/settings.js:191
+#: src/blocks/price-menu/settings.js:204
 #: src/blocks/social-shares/settings.js:278
 msgid "Flex Start"
 msgstr ""
@@ -9005,7 +9044,7 @@ msgstr ""
 #: src/blocks/lists/settings.js:482
 #: src/blocks/logout/helper.js:39
 #: src/blocks/menu-child-sub/settings.js:226
-#: src/blocks/price-menu/settings.js:207
+#: src/blocks/price-menu/settings.js:220
 #: src/blocks/social-shares/settings.js:294
 msgid "Flex End"
 msgstr ""
@@ -9248,7 +9287,7 @@ msgid "Change Icon"
 msgstr ""
 
 #: src/blocks/content-timeline/index.js:11
-#: src/blocks/content-timeline/settings.js:66
+#: src/blocks/content-timeline/settings.js:65
 #: src/utils/block-lists.js:270
 msgid "Content Timeline"
 msgstr ""
@@ -9258,76 +9297,64 @@ msgstr ""
 msgid "Content Position"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:123
+#: src/blocks/content-timeline/settings.js:125
 msgid "Arrow Alignment"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:155
-#: src/blocks/content-timeline/settings.js:167
-#: src/blocks/content-timeline/settings.js:179
+#: src/blocks/content-timeline/settings.js:158
+#: src/blocks/content-timeline/settings.js:170
+#: src/blocks/content-timeline/settings.js:182
 msgid "Show Date"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:201
+#: src/blocks/content-timeline/settings.js:204
 #: src/blocks/ecm-reaction/settings.js:121
 #: src/blocks/filterable-cards/settings.js:541
 #: src/blocks/loop-template/settings.js:62
 msgid "Item Gap"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:256
+#: src/blocks/content-timeline/settings.js:259
 msgid "Date Alignment"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:271
+#: src/blocks/content-timeline/settings.js:274
 msgid "Date Typography"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:282
+#: src/blocks/content-timeline/settings.js:285
 msgid "Date Color"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:293
+#: src/blocks/content-timeline/settings.js:296
 msgid "Date Background"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:344
+#: src/blocks/content-timeline/settings.js:347
 msgid "Connectors"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:373
+#: src/blocks/content-timeline/settings.js:376
 msgid "Icon Background Size"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:392
-msgid "Line Left"
-msgstr ""
-
-#: src/blocks/content-timeline/settings.js:415
-msgid "Right Line"
-msgstr ""
-
-#: src/blocks/content-timeline/settings.js:437
+#: src/blocks/content-timeline/settings.js:394
 msgid "Connector Thickness"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:457
+#: src/blocks/content-timeline/settings.js:414
 msgid "Connector Color"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:467
+#: src/blocks/content-timeline/settings.js:424
 msgid "Show Animation"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:478
+#: src/blocks/content-timeline/settings.js:435
 msgid "Connector Animation Color"
 msgstr ""
 
-#: src/blocks/content-timeline/settings.js:489
-msgid "Animation color only work at frontend."
-msgstr ""
-
-#: src/blocks/content-timeline/settings.js:504
+#: src/blocks/content-timeline/settings.js:454
 msgid "Icon Background Color"
 msgstr ""
 
@@ -9645,7 +9672,7 @@ msgstr ""
 #: src/blocks/menu-child-sub/settings.js:146
 #: src/blocks/menu/settings.js:375
 #: src/blocks/menu/settings.js:555
-#: src/blocks/price-menu/settings.js:342
+#: src/blocks/price-menu/settings.js:405
 #: src/controls/background/options/index.js:108
 msgid "Transition Duration"
 msgstr ""
@@ -9697,7 +9724,7 @@ msgid "End Symbol"
 msgstr ""
 
 #: src/blocks/dynamic-text/settings.js:158
-#: src/blocks/menu-item/settings.js:52
+#: src/blocks/menu-item/settings.js:59
 msgid "Enable Link"
 msgstr ""
 
@@ -11878,8 +11905,8 @@ msgstr ""
 
 #: src/blocks/info-box/components/description/settings.js:35
 #: src/blocks/interactive-circle-infographic/settings.js:1081
-#: src/blocks/price-menu-item/settings.js:242
-#: src/blocks/price-menu-item/settings.js:249
+#: src/blocks/price-menu-item/settings.js:260
+#: src/blocks/price-menu-item/settings.js:267
 #: src/dashboard/pages/dashboard/cookieConsent/CategoriesTab.js:157
 msgid "Description"
 msgstr ""
@@ -12188,7 +12215,7 @@ msgid "item Button Transition"
 msgstr ""
 
 #: src/blocks/interactive-circle-infographic/settings.js:1100
-#: src/blocks/price-menu-item/settings.js:256
+#: src/blocks/price-menu-item/settings.js:274
 msgid "Enter your description"
 msgstr ""
 
@@ -12867,13 +12894,13 @@ msgstr ""
 
 #: src/blocks/menu-child-mega/settings.js:35
 #: src/blocks/menu-child-sub/settings.js:46
-#: src/blocks/menu-item/settings.js:23
+#: src/blocks/menu-item/settings.js:30
 msgid "Explore Menu Blocks Options"
 msgstr ""
 
 #: src/blocks/menu-child-mega/settings.js:41
 #: src/blocks/menu-child-sub/settings.js:52
-#: src/blocks/menu-item/settings.js:29
+#: src/blocks/menu-item/settings.js:36
 msgid "Access the Menu block setting to customize menus for easy navigation."
 msgstr ""
 
@@ -12900,7 +12927,7 @@ msgstr ""
 
 #: src/blocks/menu-child-sub/settings.js:203
 #: src/blocks/menu-item/index.js:10
-#: src/blocks/menu-item/settings.js:41
+#: src/blocks/menu-item/settings.js:48
 #: src/blocks/menu/settings.js:312
 msgid "Menu Item"
 msgstr ""
@@ -12909,11 +12936,11 @@ msgstr ""
 msgid "Add New Item"
 msgstr ""
 
-#: src/blocks/menu-item/render.js:86
+#: src/blocks/menu-item/render.js:94
 msgid "Add Submenu"
 msgstr ""
 
-#: src/blocks/menu-item/render.js:102
+#: src/blocks/menu-item/render.js:110
 msgid "Add Mega Menu"
 msgstr ""
 
@@ -13592,84 +13619,88 @@ msgstr ""
 msgid "ProgressBar Color"
 msgstr ""
 
-#: src/blocks/price-menu-item/settings.js:127
+#: src/blocks/price-menu-item/settings.js:145
 msgid "Explore Price Menu Options"
 msgstr ""
 
-#: src/blocks/price-menu-item/settings.js:133
+#: src/blocks/price-menu-item/settings.js:151
 msgid "Access the price menu settings to customize its styles effortlessly."
 msgstr ""
 
-#: src/blocks/price-menu-item/settings.js:367
-#: src/blocks/price-menu/settings.js:261
+#: src/blocks/price-menu-item/settings.js:384
+#: src/blocks/price-menu/settings.js:298
 msgid "Place divider"
 msgstr ""
 
-#: src/blocks/price-menu-item/settings.js:373
-#: src/blocks/price-menu/settings.js:267
+#: src/blocks/price-menu-item/settings.js:390
+#: src/blocks/price-menu/settings.js:304
 msgid "near title"
 msgstr ""
 
-#: src/blocks/price-menu-item/settings.js:378
+#: src/blocks/price-menu-item/settings.js:395
 msgid "under title"
 msgstr ""
 
-#: src/blocks/price-menu-item/settings.js:440
+#: src/blocks/price-menu-item/settings.js:476
 msgid "Enter your price"
 msgstr ""
 
-#: src/blocks/price-menu-item/settings.js:445
-#: src/blocks/price-menu/settings.js:287
+#: src/blocks/price-menu-item/settings.js:480
+#: src/blocks/price-menu/settings.js:337
 msgid "Place price"
 msgstr ""
 
-#: src/blocks/price-menu-item/settings.js:456
-#: src/blocks/price-menu/settings.js:295
+#: src/blocks/price-menu-item/settings.js:491
+#: src/blocks/price-menu/settings.js:345
 msgid "bottom"
 msgstr ""
 
-#: src/blocks/price-menu/settings.js:149
+#: src/blocks/price-menu/settings.js:162
 msgid "Price menu"
 msgstr ""
 
-#: src/blocks/price-menu/settings.js:177
+#: src/blocks/price-menu/settings.js:190
 msgid "Items Direction"
 msgstr ""
 
-#: src/blocks/price-menu/settings.js:221
+#: src/blocks/price-menu/settings.js:234
 msgid "Gap around elements"
 msgstr ""
 
-#: src/blocks/price-menu/settings.js:241
+#: src/blocks/price-menu/settings.js:252
+msgid "Title & price gap"
+msgstr ""
+
+#: src/blocks/price-menu/settings.js:278
 #: src/blocks/taxonomy-listing/settings.js:898
 msgid "Allow icon"
 msgstr ""
 
-#: src/blocks/price-menu/settings.js:248
+#: src/blocks/price-menu/settings.js:285
 msgid "Allow description"
 msgstr ""
 
-#: src/blocks/price-menu/settings.js:272
+#: src/blocks/price-menu/settings.js:309
 msgid "under price"
 msgstr ""
 
-#: src/blocks/price-menu/settings.js:277
+#: src/blocks/price-menu/settings.js:314
 msgid "under description"
 msgstr ""
 
-#: src/blocks/price-menu/settings.js:387
+#: src/blocks/price-menu/settings.js:450
 msgid "Titles"
 msgstr ""
 
-#: src/blocks/price-menu/settings.js:439
+#: src/blocks/price-menu/settings.js:502
 msgid "Descriptions"
 msgstr ""
 
-#: src/blocks/price-menu/settings.js:513
+#: src/blocks/price-menu/settings.js:576
 msgid "Dividers"
 msgstr ""
 
-#: src/blocks/price-menu/settings.js:580
+#: src/blocks/price-menu/settings.js:645
 msgid "Prices"
 msgstr ""
 
@@ -16786,7 +16817,7 @@ msgstr ""
 
 #: src/dashboard/pages/dashboard/blocks/AcademyBlock.js:35
 #: src/dashboard/pages/dashboard/blocks/block.js:69
-#: src/dashboard/pages/dashboard/blocks/ECMBlocks.js:33
+#: src/dashboard/pages/dashboard/blocks/ECMBlocks.js:36
 #: src/dashboard/pages/dashboard/blocks/StoreEngine.js:36
 msgid "Plugin Required"
 msgstr ""
@@ -16844,19 +16875,19 @@ msgstr ""
 msgid "Disable All"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/blocks/ECMBlocks.js:20
+#: src/dashboard/pages/dashboard/blocks/ECMBlocks.js:21
 msgid "Easy Content Manager Integration Blocks"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/blocks/ECMBlocks.js:36
+#: src/dashboard/pages/dashboard/blocks/ECMBlocks.js:39
 msgid "Install Easy Content Manager to unlock this Block!"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/blocks/ECMBlocks.js:43
+#: src/dashboard/pages/dashboard/blocks/ECMBlocks.js:46
 msgid "Install Easy Content Manager"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/blocks/ECMBlocks.js:52
+#: src/dashboard/pages/dashboard/blocks/ECMBlocks.js:55
 msgid "Easy Content Manager Integration Blocks not found!"
 msgstr ""
 
@@ -17772,20 +17803,20 @@ msgstr ""
 msgid "successfully installed and activated"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/index.js:306
+#: src/dashboard/pages/dashboard/demo-importer/index.js:308
 #: src/demo-importer/index.js:312
 msgid "Template sucessfully imported!"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/index.js:368
-#: src/dashboard/pages/dashboard/demo-importer/index.js:408
+#: src/dashboard/pages/dashboard/demo-importer/index.js:370
+#: src/dashboard/pages/dashboard/demo-importer/index.js:410
 #: src/demo-importer/index.js:374
 #: src/demo-importer/index.js:409
 msgid "Something wen wrong! Please try again."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/demo-importer/index.js:530
-#: src/dashboard/pages/dashboard/demo-importer/index.js:536
+#: src/dashboard/pages/dashboard/demo-importer/index.js:532
+#: src/dashboard/pages/dashboard/demo-importer/index.js:538
 #: src/demo-importer/index.js:546
 #: src/demo-importer/index.js:552
 msgid "No item found"
@@ -21167,7 +21198,7 @@ msgstr ""
 msgid "The Google Docs content could not be pasted."
 msgstr ""
 
-#: src/utils/helper.js:322
+#: src/utils/helper.js:323
 msgid "Normal Text"
 msgstr ""
 

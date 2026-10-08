@@ -76,7 +76,7 @@ $attributes = [
 	],
 	// divider related attributes
 	'placeDivider' => [
-		'type' => 'string',
+		'type' => [ 'string', 'object' ],
 		'default' => 'near title',
 	],
 	'dividerPatternUrl' => [
@@ -92,7 +92,7 @@ $attributes = [
 		'default' => '#000000',
 	],
 	'placePrice' => [
-		'type' => 'string',
+		'type' => [ 'string', 'object' ],
 		'default' => 'right',
 	],
 	'priceTag' => [
@@ -102,6 +102,10 @@ $attributes = [
 	'priceColor' => [
 		'type' => 'string',
 		'default' => '#595959',
+	],
+	'priceAlignmentCustom' => [
+		'type' => 'boolean',
+		'default' => false,
 	],
 ];
 
@@ -145,9 +149,10 @@ $attributes = array_merge(
 		'attributeObjectKey' => 'value',
 		'isResponsive' => true,
 		'defaultValue' => 100,
-		'defaultValueMobile' => 100,
-		'defaultValueTablet' => 100,
-		'hasUnit' => false,
+		'defaultValueMobile' => '',
+		'defaultValueTablet' => '',
+		'hasUnit' => true,
+		'unitDefaultValue' => '',
 	] ),
 	Range::get_attribute( [
 		'attributeName' => 'weight',
@@ -166,6 +171,14 @@ $attributes = array_merge(
 		'defaultValue' => 10,
 		'defaultValueMobile' => 3,
 		'defaultValueTablet' => 1,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+	] ),
+	Range::get_attribute( [
+		'attributeName' => 'titlePriceGap',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'defaultValue' => '',
 		'hasUnit' => true,
 		'unitDefaultValue' => 'px',
 	] ),

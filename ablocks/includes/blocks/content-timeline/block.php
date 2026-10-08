@@ -87,15 +87,6 @@ class Block extends BlockBaseAbstract {
 			$this->get_content_timeline_date_alignment_css( $attributes, 'Mobile' ),
 			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_timeline_date_alignment_css( $attributes, $device ); } )
 		);
-		// Conditional CSS generation based on arrowAlignment
-
-		$css_generator->add_class_styles(
-				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-center .ablocks-block-content-timeline-child__arrow',
-				$this->get_content_timeline_arrow_css( $attributes ),
-				$this->get_content_timeline_arrow_css( $attributes, 'Tablet' ),
-				$this->get_content_timeline_arrow_css( $attributes, 'Mobile' ),
-				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_timeline_arrow_css( $attributes, $device ); } )
-			);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-content-timeline-child__date,.ablocks-block-content-timeline-child__inner-content-date',
 			$this->get_content_timeline_date_css( $attributes ),
@@ -124,13 +115,6 @@ class Block extends BlockBaseAbstract {
 			$this->get_content_timeline_show_date_left_right_css( $attributes, 'Tablet' ),
 			$this->get_content_timeline_show_date_left_right_css( $attributes, 'Mobile' ),
 			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_timeline_show_date_left_right_css( $attributes, $device ); } )
-		);
-		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-block-content-timeline--left .ablocks-block-content-timeline__line,.ablocks-block-content-timeline--right .ablocks-block-content-timeline__line',
-			$this->get_content_timeline_show_date_left_right_line_css( $attributes, '' ),
-			$this->get_content_timeline_show_date_left_right_line_css( $attributes, 'Tablet' ),
-			$this->get_content_timeline_show_date_left_right_line_css( $attributes, 'Mobile' ),
-			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_timeline_show_date_left_right_line_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-content-timeline-child__inner-content-date',
@@ -209,15 +193,6 @@ class Block extends BlockBaseAbstract {
 			$this->get_content_timeline_date_alignment_css( $attributes, 'Mobile' ),
 			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_timeline_date_alignment_css( $attributes, $device ); } )
 		);
-		// Conditional CSS generation based on arrowAlignment
-
-			$css_generator->add_class_styles(
-				'{{WRAPPER}} .ablocks-block-content-timeline-child--line-center .ablocks-block-content-timeline-child__arrow',
-				$this->get_content_timeline_arrow_css( $attributes ),
-				$this->get_content_timeline_arrow_css( $attributes, 'Tablet' ),
-				$this->get_content_timeline_arrow_css( $attributes, 'Mobile' ),
-				$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_timeline_arrow_css( $attributes, $device ); } )
-			);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-content-timeline-child__date,.ablocks-block-content-timeline-child__inner-content-date',
 			$this->get_content_timeline_date_css( $attributes ),
@@ -246,13 +221,6 @@ class Block extends BlockBaseAbstract {
 			$this->get_content_timeline_show_date_left_right_css( $attributes, 'Tablet' ),
 			$this->get_content_timeline_show_date_left_right_css( $attributes, 'Mobile' ),
 			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_timeline_show_date_left_right_css( $attributes, $device ); } )
-		);
-		$css_generator->add_class_styles(
-			'{{WRAPPER}} .ablocks-block-content-timeline--left .ablocks-block-content-timeline__line,.ablocks-block-content-timeline--right .ablocks-block-content-timeline__line',
-			$this->get_content_timeline_show_date_left_right_line_css( $attributes, '' ),
-			$this->get_content_timeline_show_date_left_right_line_css( $attributes, 'Tablet' ),
-			$this->get_content_timeline_show_date_left_right_line_css( $attributes, 'Mobile' ),
-			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_content_timeline_show_date_left_right_line_css( $attributes, $device ); } )
 		);
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-block-content-timeline-child__inner-content-date',
@@ -339,37 +307,6 @@ class Block extends BlockBaseAbstract {
 
 		return $css;
 	}
-	public function get_content_timeline_show_date_left_right_line_css( $attribute, $device ) {
-		$css = [];
-		$showDate = $attribute[ "showDate{$device}" ] ?? null;
-		if ( $device === 'Mobile' ) {
-			// Specific case for mobile content position left/right without date
-			if ( $attribute['contentPosition'] === 'left' ) {
-				$css['left'] = 'calc(35px / 2) !important'; // fallback for left without date
-			} elseif ( $attribute['contentPosition'] === 'right' ) {
-				$css['right'] = 'calc(35px / 2) !important'; // fallback for right without date
-			}
-		} elseif ( $device ) {
-			// Non-mobile styles (if needed)
-			if ( $attribute['contentPosition'] === 'left' ) {
-				$css['left'] = $showDate ? 'calc(30% / 2) !important' : 'calc(61px / 2) !important';
-				$css['right'] = 'auto !important';
-			} elseif ( $attribute['contentPosition'] === 'right' ) {
-				$css['right'] = $showDate ? 'calc(30% / 2) !important' : 'calc(61px / 2) !important';
-				$css['left'] = 'auto !important';
-			}
-		} else {
-			if ( $attribute['contentPosition'] === 'left' ) {
-				$css['left'] = $showDate ? 'calc(30% / 2) !important' : 'calc(61px / 2) !important';
-				$css['right'] = 'auto !important';
-			} elseif ( $attribute['contentPosition'] === 'right' ) {
-				$css['right'] = $showDate ? 'calc(30% / 2) !important' : 'calc(61px / 2) !important';
-				$css['left'] = 'auto !important';
-			}
-		}//end if
-
-		return $css;
-	}
 	public function get_content_timeline_icon_css( $attributes, $device = '' ) {
 		$css = [];
 		return array_merge(
@@ -425,34 +362,15 @@ class Block extends BlockBaseAbstract {
 				'defaultValue' => 3,
 				'property' => 'width',
 			]),
-			Range::get_css([
-				'attributeValue' => $attributes['lineLeft'],
-				'attribute_object_key' => 'value',
-				'isResponsive' => true,
-				'hasUnit' => true,
-				'defaultValue' => 0,
-				'unitDefaultValue' => 'px',
-				'property' => 'margin-left',
-				'device' => $device,
-			]),
-			Range::get_css([
-				'attributeValue' => $attributes['lineRight'],
-				'attribute_object_key' => 'value',
-				'isResponsive' => true,
-				'hasUnit' => true,
-				'defaultValue' => 0,
-				'unitDefaultValue' => 'px',
-				'property' => 'margin-right',
-				'device' => $device,
-			]),
 		);
 	}
 
 	public function get_content_timeline_item_gap_css( $attributes, $device = '' ) {
+		$icon_size_css = [ '--ablocks-content-timeline-icon-size' => ( ! empty( $attributes['iconBackgroundSize'] ) ? $attributes['iconBackgroundSize'] : 48 ) . 'px' ];
 		if ( $this->is_horizontal_timeline( $attributes ) ) {
-			return [ '--ablocks-content-timeline-icon-size' => ( ! empty( $attributes['iconBackgroundSize'] ) ? $attributes['iconBackgroundSize'] : 48 ) . 'px' ];
+			return $icon_size_css;
 		}
-		$css = [];
+		$css = '' === $device ? $icon_size_css : [];
 		return array_merge(
 			Range::get_css([
 				'attributeValue' => $attributes['itemGap'],
@@ -487,52 +405,6 @@ class Block extends BlockBaseAbstract {
 			isset( $attributes['contentBackgroundColor'] ) ? $attributes['contentBackgroundColor'] : '');
 		}
 		return $css;
-	}
-	// public function get_content_timeline_arrow_css( $attributes, $device = '' ) {
-	// 	$css = [];
-	// 	$arrowAlignment = $attributes['arrowAlignment'] ?? '';
-	// 	$iconBackgroundSize = $attributes['iconBackgroundSize'] ?? '';
-
-	// 	if ( $arrowAlignment === 'top' ) {
-	// 		$css['height'] = '0px';
-	// 		$css['top'] = $iconBackgroundSize ? ( $iconBackgroundSize / 2 ) . 'px' : '0';
-	// 	} elseif ( $arrowAlignment === 'bottom' ) {
-	// 		$css['height'] = $iconBackgroundSize ? ( $iconBackgroundSize / 2 ) . 'px' : '0';
-	// 		$css['bottom'] = '0';
-	// 	}
-
-	// 	return $css;
-	// }
-
-	public function get_content_timeline_arrow_css( $attributes, $device = '' ) {
-			$css = [];
-			if ( $this->is_horizontal_timeline( $attributes ) ) {
-				return $css;
-			}
-			$arrowAlignment = $attributes['arrowAlignment'] ?? '';
-			$iconBackgroundSize = $attributes['iconBackgroundSize'] ?? '';
-
-			// Existing logic + updated styles
-			if ( $arrowAlignment === 'top' ) {
-				$css['height'] = '35px';
-				$css['top'] = '10%';
-				$css['transform'] = 'translateY(-50%)';
-				$css['-webkit-transform'] = 'translateY(-50%)';
-
-			} elseif ( $arrowAlignment === 'bottom' ) {
-				$css['height'] = '35px';
-				$css['top'] = '90%';
-				$css['transform'] = 'translateY(-50%)';
-				$css['-webkit-transform'] = 'translateY(-50%)';
-
-			} elseif ( $arrowAlignment === 'centre' ) {
-				$css['height'] = '35px';
-				$css['top'] = '50%';
-				$css['transform'] = 'translateY(-50%)';
-				$css['-webkit-transform'] = 'translateY(-50%)';
-			}
-
-			return $css;
 	}
 	public function get_content_timeline_connector_alignment_css( $attributes, $device = '' ) {
 		$css = [];

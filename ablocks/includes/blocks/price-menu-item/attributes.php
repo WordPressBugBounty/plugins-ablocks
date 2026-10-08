@@ -60,7 +60,7 @@ $attributes = [
 	],
 	// divider related attributes
 	'placeDivider' => [
-		'type' => 'string',
+		'type' => [ 'string', 'object' ],
 		'default' => 'near title',
 	],
 	'dividerPatternUrl' => [
@@ -82,7 +82,7 @@ $attributes = [
 		'default' => '$15.00',
 	],
 	'placePrice' => [
-		'type' => 'string',
+		'type' => [ 'string', 'object' ],
 		'default' => 'right',
 	],
 	'priceTag' => [
@@ -92,6 +92,10 @@ $attributes = [
 	'priceColor' => [
 		'type' => 'string',
 		'default' => '',
+	],
+	'priceAlignmentCustom' => [
+		'type' => 'boolean',
+		'default' => false,
 	],
 ];
 
@@ -127,7 +131,8 @@ $attributes = array_merge(
 		'defaultValue' => null,
 		'defaultValueMobile' => null,
 		'defaultValueTablet' => null,
-		'hasUnit' => false,
+		'hasUnit' => true,
+		'unitDefaultValue' => '',
 	] ),
 	Range::get_attribute( [
 		'attributeName' => 'weight',

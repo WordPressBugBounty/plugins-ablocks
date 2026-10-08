@@ -31,6 +31,10 @@ $attributes = [
 		'type' => 'number',
 		'default' => 1
 	],
+	'centeredSlides' => [
+		'type' => 'boolean',
+		'default' => false
+	],
 	'isLoop' => [
 		'type' => 'boolean',
 		'default' => false
@@ -218,6 +222,30 @@ $attributes = array_merge(
 		'defaultValueMobile' => 0,
 		'defaultValueTablet' => 0,
 		'hasUnit' => false,
+	]),
+	Range::get_attribute([
+		'attributeName' => 'slidesPerGroup',
+		'isResponsive' => true,
+		'defaultValue' => 1,
+		'defaultValueMobile' => 1,
+		'defaultValueTablet' => 1,
+		'hasUnit' => false,
+	]),
+	Range::get_attribute([
+		'attributeName' => 'activeSlideOffset',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+		'defaultValue' => '',
+	]),
+	Range::get_attribute([
+		'attributeName' => 'paginationActiveWidth',
+		'attributeObjectKey' => 'value',
+		'isResponsive' => true,
+		'hasUnit' => true,
+		'unitDefaultValue' => 'px',
+		'defaultValue' => '',
 	]),
 	Range::get_attribute([
 		'attributeName' => 'navigationIconPositionY',

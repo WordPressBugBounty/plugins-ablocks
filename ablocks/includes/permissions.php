@@ -181,15 +181,37 @@ class Permissions {
 	/**
 	 * Flat list of every capability slug.
 	 *
+	 * Deliberately does NOT walk catalogue(): that one calls __() on every
+	 * label, and the capability bridge fires on `user_has_cap` which can run
+	 * before the `init` action. Translating that early triggers WordPress 6.7's
+	 * `_load_textdomain_just_in_time was called incorrectly` warning. Slugs are
+	 * identifiers, not UI copy — they live here, labels live in catalogue().
+	 *
 	 * @return string[]
 	 */
 	public static function all_slugs() {
 		static $slugs = null;
 		if ( null === $slugs ) {
-			$slugs = [];
-			foreach ( self::catalogue() as $group ) {
-				$slugs = array_merge( $slugs, array_keys( $group['permissions'] ) );
-			}
+			$slugs = apply_filters( 'ablocks/permissions/slugs', [
+				// editing
+				'ablocks_use_editor',
+				'ablocks_edit_style',
+				'ablocks_edit_advanced',
+				'ablocks_edit_custom_css',
+				'ablocks_copy_paste_style',
+				// design
+				'ablocks_manage_global_styles',
+				'ablocks_manage_theme_builder',
+				'ablocks_access_site_editor',
+				'ablocks_import_templates',
+				// admin screens
+				'ablocks_manage_settings',
+				'ablocks_manage_performance',
+				'ablocks_manage_forms',
+				'ablocks_view_submissions',
+				'ablocks_run_scanner',
+				'ablocks_manage_addons',
+			] );
 		}
 		return $slugs;
 	}

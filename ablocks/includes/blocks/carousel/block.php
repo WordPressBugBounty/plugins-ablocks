@@ -36,6 +36,24 @@ class Block extends BlockBaseAbstract {
 			} )
 		);
 		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-swiper > .swiper-wrapper > .swiper-slide',
+			$this->get_slide_css( $attributes ),
+			$this->get_slide_css( $attributes, 'Tablet' ),
+			$this->get_slide_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_slide_css( $attributes, $device );
+			} )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-swiper > .swiper-wrapper > .swiper-slide-active',
+			$this->get_active_slide_css( $attributes ),
+			$this->get_active_slide_css( $attributes, 'Tablet' ),
+			$this->get_active_slide_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_active_slide_css( $attributes, $device );
+			} )
+		);
+		$css_generator->add_class_styles(
 			'{{WRAPPER}} .ablocks-carousel-navigation__button',
 			$this->get_navigation_button_css( $attributes ),
 			$this->get_navigation_button_css( $attributes, 'Tablet' ),
@@ -151,6 +169,24 @@ class Block extends BlockBaseAbstract {
 			$this->get_carousel_css( $attributes, 'Mobile' ),
 			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
 				return $this->get_carousel_css( $attributes, $device );
+			} )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-swiper > .swiper-wrapper > .swiper-slide',
+			$this->get_slide_css( $attributes ),
+			$this->get_slide_css( $attributes, 'Tablet' ),
+			$this->get_slide_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_slide_css( $attributes, $device );
+			} )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-carousel-swiper > .swiper-wrapper > .swiper-slide-active',
+			$this->get_active_slide_css( $attributes ),
+			$this->get_active_slide_css( $attributes, 'Tablet' ),
+			$this->get_active_slide_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) {
+				return $this->get_active_slide_css( $attributes, $device );
 			} )
 		);
 		$css_generator->add_class_styles(
@@ -285,6 +321,12 @@ class Block extends BlockBaseAbstract {
 
 		if ( ! empty( $attributes['verticalAlign'][ 'value' . $device ] ) ) {
 			$carousel_css['align-items'] = $attributes['verticalAlign'][ 'value' . $device ];
+		}
+
+		// Room below the track for the offset active slide (wrapper is content-box).
+		$offset = $this->get_active_slide_offset( $attributes, $device );
+		if ( '' !== $offset ) {
+			$carousel_css['padding-bottom'] = $offset;
 		}
 
 		return array_merge(
@@ -583,6 +625,7 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			]) ),
 			Border::get_css( $attributes['activePaginationBorder'], '', $device ),
+			$this->get_pagination_active_width_css( $attributes, $device ),
 		);
 	}
 	public function get_pagination_active_color_hover_css( $attributes, $device = '' ) {
@@ -631,7 +674,65 @@ class Block extends BlockBaseAbstract {
 				'device' => $device,
 			]) ),
 			Border::get_hover_css( $attributes['activePaginationBorder'], '', $device ),
+			$this->get_pagination_active_width_css( $attributes, $device ),
 		);
+	}
+
+	/**
+	 * Active-slide offset for a device ('' when unused). Only centered Slide
+	 * carousels use it; an explicit 0 is kept so it can override a wider
+	 * device. Mirrors getActiveSlideOffset() in styling.js.
+	 */
+	public function get_active_slide_offset( $attributes, $device = '' ) {
+		if (
+			( $attributes['effect'] ?? 'slide' ) !== 'slide'
+			|| empty( $attributes['centeredSlides'] )
+		) {
+			return '';
+		}
+		$css = Range::get_css([
+			'attributeValue' => $attributes['activeSlideOffset'] ?? '',
+			'isResponsive' => true,
+			'hasUnit' => true,
+			'unitDefaultValue' => 'px',
+			'property' => 'offset',
+			'device' => $device,
+		]);
+		return $css['offset'] ?? '';
+	}
+
+	public function get_slide_css( $attributes, $device = '' ) {
+		return '' !== $this->get_active_slide_offset( $attributes, $device )
+			? [ 'transition' => 'transform 0.4s ease' ]
+			: [];
+	}
+
+	public function get_active_slide_css( $attributes, $device = '' ) {
+		$offset = $this->get_active_slide_offset( $attributes, $device );
+		return '' !== $offset ? [ 'transform' => 'translateY(' . $offset . ')' ] : [];
+	}
+
+	// Pill-shaped active bullet: own width, height stays the Active Size.
+	private function get_pagination_active_width_css( $attributes, $device = '' ) {
+		if ( ( $attributes['paginationType'] ?? 'default' ) !== 'default' ) {
+			return [];
+		}
+		$css = Range::get_css([
+			'attributeValue' => $attributes['paginationActiveWidth'] ?? '',
+			'isResponsive' => true,
+			'hasUnit' => true,
+			'unitDefaultValue' => 'px',
+			'property' => 'width',
+			'device' => $device,
+		]);
+		if ( empty( $css['width'] ) ) {
+			return [];
+		}
+		return [
+			'width' => $css['width'],
+			'border-radius' => '9999px',
+			'transition' => 'width 0.3s ease',
+		];
 	}
 
 	/**

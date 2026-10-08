@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use ABlocks\Admin\Settings;
+use ABlocks\Helper;
 
 class Migration {
 
@@ -17,6 +18,9 @@ class Migration {
 
 	public function run_migration() {
 		$this->migrate_font_stack();
+		// Must run BEFORE Settings::save_settings() so the raw option still
+		// shows which keys were never persisted (old "missing = enabled" sites).
+		$this->migrate_integration_block_defaults();
 
 		$ablocks_version = get_option( 'ablocks_version' );
 		// Save Version Number, flash role management and save permalink
@@ -26,6 +30,79 @@ class Migration {
 			$this->migrate_1_8_0( $ablocks_version );
 			update_option( 'ablocks_version', ABLOCKS_VERSION );
 		}
+	}
+
+	/**
+	 * Academy LMS, StoreEngine and ECM blocks used to default to enabled, and
+	 * old versions only persisted the "off" state — a block without an entry in
+	 * the visibility option was treated as enabled by the reader. The reader
+	 * now treats missing keys as disabled, so an old sparse save would silently
+	 * turn integration blocks off after upgrade.
+	 *
+	 * Once per integration: for every block without an explicit entry, write
+	 * `true` when the companion plugin is active (preserve the old on-by-
+	 * default behavior for sites that actually use the integration) and
+	 * `false` otherwise (new installs and sites that never had the plugin).
+	 * Blocks that already have an explicit value are the user's choice and are
+	 * left alone. No post_content scan — this is O(number of blocks).
+	 */
+	public function migrate_integration_block_defaults() {
+		$integrations = [
+			'academy'     => 'academy/academy.php',
+			'storeengine' => 'storeengine/storeengine.php',
+			'ecm'         => 'easy-content-manager/easy-content-manager.php',
+		];
+		// _v2: an earlier version of this migration treated any `true` already
+		// in the option as a user choice and left stale installer defaults in
+		// place. Bump the tracker so sites that ran the old pass re-migrate.
+		$option_key = 'ablocks_integration_blocks_migrated_v2';
+		$done       = (array) get_option( $option_key, [] );
+		if ( ! array_diff( array_keys( $integrations ), $done ) ) {
+			return;
+		}
+
+		$raw          = get_option( ABLOCKS_BLOCKS_VISIBILITY_SETTINGS_NAME );
+		$saved_blocks = $raw ? (array) json_decode( $raw, true ) : [];
+		$block_names  = array_keys( Settings\Blocks::get_default_data() );
+		$changed      = false;
+
+		foreach ( $integrations as $prefix => $plugin_file ) {
+			if ( in_array( $prefix, $done, true ) ) {
+				continue;
+			}
+			$done[]        = $prefix;
+			$plugin_active = Helper::is_plugin_active( $plugin_file );
+			$names         = array_filter( $block_names, function ( $name ) use ( $prefix ) {
+				return 0 === strpos( $name, $prefix . '-' );
+			} );
+			foreach ( $names as $name ) {
+				if ( $plugin_active ) {
+					// Preserve the user's choice when they have the companion
+					// plugin. Missing keys mean the old "missing = enabled"
+					// behavior, so write true to keep those blocks on.
+					if ( ! array_key_exists( $name, $saved_blocks ) ) {
+						$saved_blocks[ $name ] = true;
+						$changed               = true;
+					}
+					continue;
+				}
+				// Companion plugin not active → the blocks cannot render.
+				// Force-disable, including any `true` left behind by the old
+				// installer which saved on-by-default values into the option.
+				if ( ! array_key_exists( $name, $saved_blocks ) || $saved_blocks[ $name ] ) {
+					$saved_blocks[ $name ] = false;
+					$changed               = true;
+				}
+			}
+		}
+
+		if ( $changed ) {
+			update_option( ABLOCKS_BLOCKS_VISIBILITY_SETTINGS_NAME, wp_json_encode( $saved_blocks ) );
+			// Block classes read this global when they're constructed later in the request.
+			$existing                  = isset( $GLOBALS['ablocks_blocks'] ) ? (array) $GLOBALS['ablocks_blocks'] : [];
+			$GLOBALS['ablocks_blocks'] = (object) array_merge( $existing, $saved_blocks );
+		}
+		update_option( $option_key, $done );
 	}
 
 	/**

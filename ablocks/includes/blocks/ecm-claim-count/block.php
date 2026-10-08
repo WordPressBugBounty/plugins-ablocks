@@ -29,7 +29,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_coutineu_button_wrapper_css( $attributes, 'Mobile' ),
 			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_coutineu_button_wrapper_css( $attributes, $device ); } )
 		);
-		$wrapper_class = ! empty( $attributes['wrapper_class'] ) ? $attributes['wrapper_class'] : 'claim-count-wrapper';
+		$wrapper_class = sanitize_html_class( $attributes['wrapper_class'] ?? '', 'claim-count-wrapper' );
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .' . $wrapper_class,
 			$this->get_coutineu_button_css( $attributes ),

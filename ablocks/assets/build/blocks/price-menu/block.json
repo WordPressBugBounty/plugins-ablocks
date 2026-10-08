@@ -85,7 +85,10 @@
             "default": "#595959"
         },
         "placeDivider": {
-            "type": "string",
+            "type": [
+                "string",
+                "object"
+            ],
             "default": "near title"
         },
         "dividerPatternUrl": {
@@ -101,7 +104,10 @@
             "default": "#000000"
         },
         "placePrice": {
-            "type": "string",
+            "type": [
+                "string",
+                "object"
+            ],
             "default": "right"
         },
         "priceTag": {
@@ -111,6 +117,10 @@
         "priceColor": {
             "type": "string",
             "default": "#595959"
+        },
+        "priceAlignmentCustom": {
+            "type": "boolean",
+            "default": false
         },
         "titleTypographyGlobal": {
             "type": "string",
@@ -682,8 +692,11 @@
             "type": "object",
             "default": {
                 "value": 100,
-                "valueTablet": 100,
-                "valueMobile": 100
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
             }
         },
         "weight": {
@@ -700,6 +713,17 @@
                 "value": 10,
                 "valueTablet": 1,
                 "valueMobile": 3,
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "titlePriceGap": {
+            "type": "object",
+            "default": {
+                "value": "",
+                "valueTablet": "",
+                "valueMobile": "",
                 "valueUnit": "px",
                 "valueUnitTablet": "",
                 "valueUnitMobile": ""

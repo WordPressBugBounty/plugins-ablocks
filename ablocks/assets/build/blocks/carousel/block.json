@@ -44,6 +44,10 @@
             "type": "number",
             "default": 1
         },
+        "centeredSlides": {
+            "type": "boolean",
+            "default": false
+        },
         "isLoop": {
             "type": "boolean",
             "default": false
@@ -574,6 +578,36 @@
                 "value": 0,
                 "valueTablet": 0,
                 "valueMobile": 0
+            }
+        },
+        "slidesPerGroup": {
+            "type": "object",
+            "default": {
+                "value": 1,
+                "valueTablet": 1,
+                "valueMobile": 1
+            }
+        },
+        "activeSlideOffset": {
+            "type": "object",
+            "default": {
+                "value": "",
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
+            }
+        },
+        "paginationActiveWidth": {
+            "type": "object",
+            "default": {
+                "value": "",
+                "valueTablet": "",
+                "valueMobile": "",
+                "valueUnit": "px",
+                "valueUnitTablet": "",
+                "valueUnitMobile": ""
             }
         },
         "navigationIconPositionY": {

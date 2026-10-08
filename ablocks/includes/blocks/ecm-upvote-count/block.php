@@ -21,7 +21,7 @@ class Block extends BlockBaseAbstract {
 
 	public function build_css( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
-		$wrapper_class = ! empty( $attributes['wrapper_class'] ) ? $attributes['wrapper_class'] : 'upvote-count-wrapper';
+		$wrapper_class = sanitize_html_class( $attributes['wrapper_class'] ?? '', 'upvote-count-wrapper' );
 
 		$css_generator->add_class_styles(
 			'{{WRAPPER}} .' . $wrapper_class,

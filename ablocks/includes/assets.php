@@ -44,6 +44,12 @@ class Assets {
 		add_action( 'enqueue_block_editor_assets', [ $self, 'add_editor_inline_css' ] );
 		add_action( 'enqueue_block_editor_assets', [ $self, 'editor_google_fonts' ] );
 
+		// The localized ablocks_nonce is minted once per page load, so a tab left
+		// open past the nonce lifetime (or across a re-login) 403s on every
+		// aBlocks request. Renew it the way core renews wp_rest.
+		add_filter( 'wp_refresh_nonces', [ $self, 'refresh_heartbeat_nonce' ] );
+		add_action( 'wp_ajax_ablocks/refresh_nonce', [ $self, 'ajax_refresh_nonce' ] );
+
 		// Detect page
 		add_action( 'wp', array( $self, 'detect_page' ) );
 
@@ -158,6 +164,40 @@ class Assets {
 		// frontend script reads it (it is re-exported but never consumed).
 		unset( $data['plugin_root_path'] );
 		return $data;
+	}
+
+	/**
+	 * Whether the current user is issued ablocks_nonce in the editor or the
+	 * dashboard, and so may have it renewed. Mirrors the gates above.
+	 */
+	private function can_renew_nonce() {
+		return is_user_logged_in() && ( current_user_can( 'edit_posts' ) || current_user_can( Permissions::ACCESS ) );
+	}
+
+	/**
+	 * Heartbeat: hand an open page a fresh ablocks_nonce whenever core refreshes
+	 * its own nonces (the page's nonces are ageing, or the session changed).
+	 *
+	 * @param array $response The Heartbeat response.
+	 * @return array
+	 */
+	public function refresh_heartbeat_nonce( $response ) {
+		if ( $this->can_renew_nonce() ) {
+			$response['ablocks_nonce'] = wp_create_nonce( 'ablocks_nonce' );
+		}
+		return $response;
+	}
+
+	/**
+	 * A fresh ablocks_nonce for a request that was rejected with a stale one —
+	 * the aBlocks counterpart of core's `rest-nonce` action. Logged-in only, and
+	 * only for users who would be given the nonce on page load anyway.
+	 */
+	public function ajax_refresh_nonce() {
+		if ( ! $this->can_renew_nonce() ) {
+			wp_send_json_error( [ 'message' => 'forbidden' ], 403 );
+		}
+		wp_send_json_success( [ 'nonce' => wp_create_nonce( 'ablocks_nonce' ) ] );
 	}
 
 	/**

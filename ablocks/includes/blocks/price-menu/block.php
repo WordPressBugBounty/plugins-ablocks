@@ -16,6 +16,7 @@ use ABlocks\Controls\TextShadow;
 use ABlocks\Controls\TextStroke;
 use ABlocks\Controls\Range;
 use ABlocks\Controls\Color;
+use ABlocks\Blocks\PriceMenuItem\Block as PriceMenuItemBlock;
 class Block extends BlockBaseAbstract {
 	protected $block_name = 'price-menu';
 
@@ -89,6 +90,7 @@ class Block extends BlockBaseAbstract {
 			$this->get_price_text_css( $attributes, 'Tablet' ),
 			$this->get_price_text_css( $attributes, 'Mobile' ),
 		);
+		$this->add_layout_styles( $css_generator, $attributes );
 
 		return $css_generator->generate_css();
 	}
@@ -172,8 +174,36 @@ class Block extends BlockBaseAbstract {
 			$this->get_price_text_css( $attributes, 'Mobile' ),
 			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_price_text_css( $attributes, $device ); } )
 		);
+		$this->add_layout_styles( $css_generator, $attributes );
 
 		return $css_generator->generate_css();
+	}
+
+	// Divider width and Price alignment layout; shared with the items (see
+	// PriceMenuItem\Block and src/blocks/price-menu/edit.js).
+	private function add_layout_styles( $css_generator, $attributes ) {
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-divider',
+			$this->get_divider_width_css( $attributes, '' ),
+			$this->get_divider_width_css( $attributes, 'Tablet' ),
+			$this->get_divider_width_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return $this->get_divider_width_css( $attributes, $device ); } )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-price-menu-item',
+			PriceMenuItemBlock::get_item_width_css( $attributes, '' ),
+			PriceMenuItemBlock::get_item_width_css( $attributes, 'Tablet' ),
+			PriceMenuItemBlock::get_item_width_css( $attributes, 'Mobile' ),
+			$css_generator->custom_device_map( function ( $device ) use ( $attributes ) { return PriceMenuItemBlock::get_item_width_css( $attributes, $device ); } )
+		);
+		$css_generator->add_class_styles(
+			'{{WRAPPER}} .ablocks-price-menu-item-details-brief > .ablocks-price-menu-item-price',
+			PriceMenuItemBlock::get_price_row_css( $attributes )
+		);
+	}
+
+	public function get_divider_width_css( $attributes, $device = '' ) {
+		return PriceMenuItemBlock::get_divider_width_css( $attributes, $device, '--ablocks-pm-divider-width', 100 );
 	}
 	public function build_css( $attributes ) {
 		if ( isset( $attributes['blockVersion'] ) && (int) $attributes['blockVersion'] === 2 ) {
@@ -249,19 +279,48 @@ class Block extends BlockBaseAbstract {
 			}
 		}
 
-		return array_merge(
-			Range::get_css([
-				'attributeValue' => $attributes['gap'],
-				'attribute_object_key' => 'value',
-				'isResponsive' => true,
-				'hasUnit' => true,
-				'defaultValue' => 10,
-				'unitDefaultValue' => 'px',
-				'property' => 'gap',
-				'device' => $device,
-			]),
-			$css
-		);
+		$gap = Range::get_css([
+			'attributeValue' => $attributes['gap'],
+			'attribute_object_key' => 'value',
+			'isResponsive' => true,
+			'hasUnit' => true,
+			'defaultValue' => 10,
+			'unitDefaultValue' => 'px',
+			'property' => 'gap',
+			'device' => $device,
+		]);
+		// Title & price gap; unset falls back to the gap above. Longhands only: a
+		// `gap` shorthand at a narrower breakpoint would reset an inherited
+		// column-gap that the generator dedupes away.
+		$title_price_gap = Range::get_css([
+			'attributeValue' => isset( $attributes['titlePriceGap'] ) ? $attributes['titlePriceGap'] : [],
+			'attributeObjectKey' => 'value',
+			'isResponsive' => true,
+			'hasUnit' => true,
+			'unitDefaultValue' => 'px',
+			'property' => 'column-gap',
+			'device' => $device,
+		]);
+		$gap_css = [];
+		if ( isset( $gap['gap'] ) ) {
+			$gap_css['row-gap'] = $gap['gap'];
+		}
+		// A % gap is rigid and would crush the title once it outgrows the free
+		// space, so it becomes shrinkable spacers (style.css) that yield first.
+		if ( PriceMenuItemBlock::is_percent_title_price_gap( $attributes, $device ) ) {
+			$gap_css['column-gap'] = '0px';
+			$gap_css['--ablocks-pm-tp-gap'] = $title_price_gap['column-gap'];
+			$gap_css['--ablocks-pm-tp-spacer'] = 'block';
+			return array_merge( $gap_css, $css );
+		}
+		if ( isset( $title_price_gap['column-gap'] ) || isset( $gap['gap'] ) ) {
+			$gap_css['column-gap'] = isset( $title_price_gap['column-gap'] ) ? $title_price_gap['column-gap'] : $gap['gap'];
+		}
+		if ( $device && PriceMenuItemBlock::has_percent_title_price_gap( $attributes ) ) {
+			$gap_css['--ablocks-pm-tp-spacer'] = 'none';
+		}
+
+		return array_merge( $gap_css, $css );
 	}
 
 	public function get_all_menu_css( $attributes, $device = '' ) {
@@ -276,7 +335,7 @@ class Block extends BlockBaseAbstract {
 				'attributeValue' => $attributes['columnGap'],
 				'attribute_object_key' => 'value',
 				'isResponsive' => true,
-				'isResponsive' => true,
+				'hasUnit' => true,
 				'defaultValue' => 20,
 				'unitDefaultValue' => 'px',
 				'property' => 'gap',
@@ -307,8 +366,6 @@ class Block extends BlockBaseAbstract {
 	}
 	public function get_divider_css( $attributes, $device = '' ) {
 		$css = [];
-		$divider_width = isset( $attributes['width'][ 'value' . $device ] ) ? $attributes['width'][ 'value' . $device ] : 60;
-		$default_Unit = $attributes['allowDescription'] === true ? '%' : 'px';
 		$css['--ablocks-divider-pattern-color'] = Color::get_css(
 		isset( $attributes['color'] ) ? $attributes['color'] : '#000000');
 
@@ -345,16 +402,6 @@ class Block extends BlockBaseAbstract {
 
 		return array_merge(
 			$css,
-			Range::get_css([
-				'attributeValue' => $attributes['width'],
-				'attribute_object_key' => 'value',
-				'isResponsive' => true,
-				'defaultValue' => 100,
-				'hasUnit' => false,
-				'unitDefaultValue' => $attributes['allowDescription'] === true ? '%' : 'px',
-				'property' => 'width',
-				'device' => $device,
-			]),
 			$moreRangeCSS,
 		);
 	}
