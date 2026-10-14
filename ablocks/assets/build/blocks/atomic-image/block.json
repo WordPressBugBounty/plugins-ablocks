@@ -17,7 +17,14 @@
   "supports": {
     "html": false,
     "anchor": true,
-    "className": false
+    "className": false,
+    "align": [
+      "left",
+      "center",
+      "right",
+      "wide",
+      "full"
+    ]
   },
   "textdomain": "ablocks",
   "editorStyle": [

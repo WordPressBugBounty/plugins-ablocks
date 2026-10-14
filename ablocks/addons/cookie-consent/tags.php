@@ -71,14 +71,14 @@ class Tags {
 	 */
 	const PROVIDERS = [
 		'google-site-kit/google-site-kit.php'                              => [ 'tag_ga4', 'tag_gtm' ],
-		'duracelltomi-google-tag-manager/duracelltomi-google-tag-manager.php' => [ 'tag_gtm' ],
+		'duracelltomi-google-tag-manager/duracelltomi-google-tag-manager-for-wordpress.php' => [ 'tag_gtm' ],
 		'google-analytics-for-wordpress/googleanalytics.php'               => [ 'tag_ga4' ],
 		'google-analytics-premium/googleanalytics-premium.php'             => [ 'tag_ga4' ],
 		'google-analytics-dashboard-for-wp/gadwp.php'                      => [ 'tag_ga4' ],
 		'exactmetrics-premium/exactmetrics-premium.php'                    => [ 'tag_ga4' ],
 		'pixelyoursite/facebook-pixel-master.php'                          => [ 'tag_ga4', 'tag_meta_pixel' ],
 		'pixelyoursite-pro/pixelyoursite-pro.php'                          => [ 'tag_ga4', 'tag_meta_pixel' ],
-		'official-facebook-pixel/facebook-pixel.php'                       => [ 'tag_meta_pixel' ],
+		'official-facebook-pixel/facebook-for-wordpress.php'               => [ 'tag_meta_pixel' ],
 		'facebook-for-woocommerce/facebook-for-woocommerce.php'            => [ 'tag_meta_pixel' ],
 	];
 

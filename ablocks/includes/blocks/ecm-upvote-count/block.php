@@ -21,6 +21,11 @@ class Block extends BlockBaseAbstract {
 
 	public function build_css( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
+		// CVE-2026-40804: the wrapper class lands verbatim inside a CSS selector
+		// written into an inline `<style>`, so a value containing `</style>` or
+		// whitespace would break out of the style tag and run as HTML. Sanitize
+		// through core's `sanitize_html_class()` (and fall back to the block's
+		// default) before concatenation.
 		$wrapper_class = sanitize_html_class( $attributes['wrapper_class'] ?? '', 'upvote-count-wrapper' );
 
 		$css_generator->add_class_styles(

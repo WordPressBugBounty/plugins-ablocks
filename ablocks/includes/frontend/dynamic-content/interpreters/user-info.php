@@ -52,6 +52,15 @@ class UserInfo extends Abstracts\Interpreter {
 					$this->content = get_user_meta( $current_user->ID, $this->setting[1] ?? '', true );
 				break;
 		}//end switch
-		return $this->pre . ( $this->content === '' ? $this->default : $this->content ) . $this->post;
+		// Profile fields and user meta are written by the user, not the site.
+		if ( $this->content === '' ) {
+			$value = $this->esc_label( $this->default );
+		} elseif ( 'bio' === $this->field ) {
+			// The bio is allowed formatting; it is filtered, not flattened.
+			$value = $this->esc_label( $this->content );
+		} else {
+			$value = $this->esc_value( $this->content );
+		}
+		return $this->esc_label( $this->pre ) . $value . $this->esc_label( $this->post );
 	}
 }

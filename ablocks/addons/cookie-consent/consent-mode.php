@@ -131,6 +131,9 @@ gtag( 'consent', 'default', <?php echo wp_json_encode( $defaults ); ?> );
 	try { saved = JSON.parse( decodeURIComponent( raw ) ); } catch ( e ) { return; }
 		<?php // Number() rather than a bare strict compare: a cookie written by an older build may hold the version as a string. ?>
 	if ( ! saved || Number( saved.v ) !== <?php echo (int) Helper::get( 'policy_version', 1 ); ?> ) { return; }
+	<?php // The banner treats an expired decision as no decision, so Google must too — otherwise a visitor being re-asked is still reported as granted on every page until they answer. ?>
+	var maxAge = <?php echo (int) Helper::get( 'reconsent_days', 0 ); ?>;
+	if ( maxAge > 0 && saved.t && ( Date.now() / 1000 - saved.t ) / 86400 > maxAge ) { return; }
 	var granted = saved.c || [];
 	var update = {};
 	Object.keys( map ).forEach( function ( category ) {

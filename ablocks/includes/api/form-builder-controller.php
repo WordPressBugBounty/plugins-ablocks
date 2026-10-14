@@ -348,7 +348,8 @@ class FormBuilderController {
 			! empty( $role ) &&
 			strtolower( $role ) !== 'default' &&
 			array_key_exists( $role, wp_roles()->roles ) &&
-			$this->is_safe_registration_role( $role )
+			$this->is_safe_registration_role( $role ) &&
+			$this->form_owner_can_assign_roles( $params['current_post_id'] ?? '' )
 		) {
 			( new \WP_User( $user_id ) )->set_role( $role );
 		}
@@ -682,21 +683,73 @@ class FormBuilderController {
 	}
 
 
+	/**
+	 * Whether the form's role setting came from someone allowed to hand out roles.
+	 *
+	 * The save-time sanitizer strips `roleSlug` for non-admins, but it asks who
+	 * is saving, not who wrote the form: an administrator publishing a
+	 * contributor's draft carries the contributor's role choice through. The
+	 * post author is the one fact that does not change on review, so the role
+	 * is honoured only when that author could have assigned it themselves.
+	 *
+	 * Template parts (a non-numeric id) can only be edited by users who manage
+	 * the theme, so they are trusted as they are.
+	 *
+	 * @param string $post_id Post id or template-part slug the form lives in.
+	 * @return bool
+	 */
+	private function form_owner_can_assign_roles( $post_id ) : bool {
+		if ( ! is_numeric( $post_id ) ) {
+			return '' !== (string) $post_id;
+		}
+		$author = (int) get_post_field( 'post_author', (int) $post_id );
+		return $author > 0 && user_can( $author, 'promote_users' );
+	}
+
 	private function is_safe_registration_role( string $role ) : bool {
 		$role_obj = get_role( $role );
 		if ( ! $role_obj ) {
 			return false;
 		}
+		// Anything that lets an account take over the site, directly or by
+		// planting script: a self-registration form must never hand these out.
 		$privileged_caps = [
 			'manage_options',
 			'edit_users',
 			'delete_users',
 			'create_users',
 			'promote_users',
+			'list_users',
+			'remove_users',
 			'edit_theme_options',
+			'unfiltered_html',
+			'unfiltered_upload',
+			'edit_others_posts',
+			'edit_others_pages',
+			'install_plugins',
+			'activate_plugins',
+			'edit_plugins',
+			'update_plugins',
+			'delete_plugins',
+			'install_themes',
+			'switch_themes',
+			'edit_themes',
+			'update_themes',
+			'delete_themes',
+			'edit_files',
+			'update_core',
+			'import',
+			'export',
 		];
 		foreach ( $privileged_caps as $cap ) {
 			if ( ! empty( $role_obj->capabilities[ $cap ] ) ) {
+				return false;
+			}
+		}
+		// Editing other people's content of any type — posts, pages, products,
+		// courses — whatever the post type calls the capability.
+		foreach ( $role_obj->capabilities as $cap => $granted ) {
+			if ( $granted && 0 === strpos( (string) $cap, 'edit_others_' ) ) {
 				return false;
 			}
 		}

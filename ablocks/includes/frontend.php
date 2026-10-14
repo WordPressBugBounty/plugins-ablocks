@@ -17,6 +17,7 @@ class Frontend {
 		Frontend\LinkPassthrough::init();
 		if ( ! is_admin() || defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			add_filter( 'render_block', [ Frontend\DynamicContent\Interpreter::class, 'init' ], 10, 3 );
+			Frontend\DynamicContent\Interpreter::protect_untrusted_text();
 		}
 	}
 

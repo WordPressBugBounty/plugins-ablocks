@@ -21,6 +21,8 @@ class Block extends BlockBaseAbstract {
 
 	public function build_css( $attributes ) {
 		$css_generator = new CssGenerator( $attributes, $this->block_name );
+		// the wrapper class is inlined into a `<style>` selector, so an
+		// attribute containing `</style>` or whitespace would escape it.
 		$wrapper_class = sanitize_html_class( $attributes['wrapper_class'] ?? '', 'wrapper' );
 
 		$css_generator->add_class_styles(

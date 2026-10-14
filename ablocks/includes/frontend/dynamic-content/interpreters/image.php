@@ -32,6 +32,6 @@ class Image extends Abstracts\Interpreter {
 				$this->content = is_user_logged_in() ? get_avatar_url( get_current_user_id() ) : '';
 				break;
 		}
-		return $this->content;
+		return $this->esc_url_value( $this->content );
 	}
 }

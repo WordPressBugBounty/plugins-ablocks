@@ -65,6 +65,51 @@ class Helper {
 		return str_replace( [ '<', '>', '{', '}' ], '', (string) $value );
 	}
 
+	/**
+	 * Strip the characters a CSS selector must never contain when it is about
+	 * to be emitted inside an inline `<style>` tag.
+	 *
+	 * The block CSS pipeline composes selector strings like
+	 * `{{WRAPPER}} .${some_attribute}` and hands them to `add_class_styles()`;
+	 * the generator later emits that string verbatim into inline CSS. A value
+	 * that slips in `</style>`, `{`, `}` or `;` would break out of the style
+	 * block and run as HTML (CVE-2026-40804). Every block author is expected
+	 * to `sanitize_html_class()` their attribute first — this is a sink-side
+	 * safety net so that forgetting it cannot be exploited.
+	 *
+	 * The grammar left intact covers everything an aBlocks block legitimately
+	 * writes: whitespace / descendant combinator, child / sibling combinators
+	 * (`>` `+` `~`), class and id markers (`.` `#`), the `[attr=value]`
+	 * attribute selector, pseudo-class / pseudo-element colons (`:` `::`),
+	 * commas for selector lists, parentheses for `:is()` / `:not()`, dashes
+	 * and underscores inside identifiers, and the `{{WRAPPER}}` placeholder.
+	 * Angle brackets, braces, semicolons, backslashes, backticks and newlines
+	 * are stripped — none of them are needed in a selector and all of them
+	 * are the characters that let an attacker escape the surrounding `<style>`.
+	 *
+	 * @param mixed $selector The selector string, as composed by a block.
+	 * @return string The selector with escape characters removed.
+	 */
+	public static function esc_css_selector( $selector ) {
+		if ( ! is_scalar( $selector ) ) {
+			return '';
+		}
+
+		// Protect the `{{WRAPPER}}` placeholder so stripping braces doesn't
+		// destroy it — the frontend replaces that literal string with the
+		// block's own class, and losing it would blank the selector.
+		$placeholder = "\x00WRAPPER\x00";
+		$selector    = str_replace( '{{WRAPPER}}', $placeholder, (string) $selector );
+
+		$selector = str_replace(
+			[ '<', '{', '}', ';', '\\', '`', "\r", "\n" ],
+			'',
+			$selector
+		);
+
+		return str_replace( $placeholder, '{{WRAPPER}}', $selector );
+	}
+
 	public static function get_breakpoints() {
 		$tablet = (int) self::get_settings( 'breakpoint_tablet', 800 );
 		$mobile = (int) self::get_settings( 'breakpoint_mobile', 480 );

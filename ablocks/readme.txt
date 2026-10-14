@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.16.0
+Stable tag: 2.17.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -308,6 +308,18 @@ Privacy: https://policies.google.com/privacy
 Our external packages use [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT. Additionally, we incorporate [FontAwesome v6](https://fontawesome.com/license/free) under the CC BY 4.0 License, and [dnd kit](https://github.com/clauderic/dnd-kit) licensed under the MIT License.
 
 == Changelog ==
+
+= 2.17.0 - 14/10/2026 =
+* Security – CSS generator: a sink-side sanitizer now strips `<`, `{`, `}`, `;`, `\`, backtick and newlines from every selector before it reaches an inline `<style>`, so a block author who forgets to sanitize an attribute reused in a selector cannot reintroduce a stored-XSS of the CVE-2026-40804 class. Legitimate selector syntax (`.`, `#`, `>`, `+`, `~`, `,`, `:`, `::`, `[attr=val]`) and the `{{WRAPPER}}` placeholder pass through unchanged
+* Security – ECM Bookmark Count, ECM Claim Count and ECM Upvote Count: `wrapper_class` is sanitized through `sanitize_html_class()` on both the server and the editor, so a value crafted to break out of the inline `<style>` is reduced to a safe class name and the block's default class is used when nothing valid remains
+* Security – Dynamic Content: the resolved value is escaped by context (attribute, URL, HTML, raw) at the output point so an author's formatting survives but injected markup cannot execute, and the registration role flow refuses roles outside the form owner's own capability set
+* Added – Google Docs paste: pictures referenced through `*.googleusercontent.com` are now fetched at their stored original size (`=s0`) instead of the display-size render that Docs inlines, and an `<img>` wrapped in a googleusercontent `<a href>` is preferred over the clipboard's downscaled `data:` URI — the WebP re-encode runs on the original bytes, so the quality setting under aBlocks → Settings → Editor Options → "Pasting from Google Docs" actually governs the output
+* Added – Atomic Image: a core-style alignment toolbar (None / Left / Center / Right / Wide / Full) powered by `supports.align`, and an alignfull image inside a container with global padding now reaches both viewport edges instead of stopping at the container's content width
+* Added – Cookie Consent: typography controls, built-in presets, and settings import / export, with the audit view surfacing newly-detected scripts
+* Improved – Atomic block panel: control labels, input padding and row rhythm now have breathing room — labels bumped to 12 px / weight 500, inputs get 32 px min-height with 6/8 px padding, URL and email inputs join the shared reset, and row gutter widens from 12 to 16 px
+* Improved – Atomic Image: images inside a constrained layout now honour the theme's content-size cap by default and only widen when the author explicitly picks Wide or Full, instead of filling the container minus global padding
+* Improved – Integration blocks: blocks that depend on StoreEngine, Academy, GemBooking or similar companions are force-disabled when the companion plugin is inactive, so the editor no longer shows blocks that would render nothing on the frontend
+* Fixed – Textdomain: the permission catalogue no longer triggers `_load_textdomain_just_in_time` before `init`, so WordPress 6.7+ stops reporting that aBlocks loads translations too early
 
 = 2.16.0 - 07/10/2026 =
 * Security – Price Menu Item: divider and price placement values are sanitized before they are used in the block's styles, fixing a stored XSS issue

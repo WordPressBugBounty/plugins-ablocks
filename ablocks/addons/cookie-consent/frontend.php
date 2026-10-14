@@ -21,6 +21,7 @@ class Frontend {
 	public static function init() {
 		$self = new self();
 		add_action( 'wp_enqueue_scripts', [ $self, 'enqueue' ] );
+		add_action( 'wp_head', [ $self, 'print_injection_guard' ], -9998 );
 		add_action( 'wp_footer', [ $self, 'render' ], 20 );
 		add_shortcode( 'ablocks_cookie_preferences', [ $self, 'preferences_shortcode' ] );
 	}
@@ -69,10 +70,21 @@ class Frontend {
 	 */
 	private function script_config() {
 		$categories = [];
+		$known      = Helper::known_cookies();
 		foreach ( Helper::active_categories() as $category ) {
+			$cookies = isset( $known[ $category['slug'] ] ) ? (array) $known[ $category['slug'] ] : [];
+			foreach ( isset( $category['cookies'] ) ? (array) $category['cookies'] : [] as $row ) {
+				if ( ! empty( $row['name'] ) ) {
+					$cookies[] = (string) $row['name'];
+				}
+			}
+
 			$categories[] = [
-				'slug'   => $category['slug'],
-				'locked' => ! empty( $category['locked'] ),
+				'slug'    => $category['slug'],
+				'locked'  => ! empty( $category['locked'] ),
+				// Deleted when this category is withdrawn. Never for a locked
+				// one: that list holds the consent cookie itself.
+				'cookies' => empty( $category['locked'] ) ? array_values( array_unique( $cookies ) ) : [],
 			];
 		}
 
@@ -90,10 +102,14 @@ class Frontend {
 			'record'        => (bool) Helper::get( 'record_enabled', true ),
 			'endpoint'      => rest_url( ABLOCKS_REST_NAMESPACE . '/consent' ),
 			'delay'         => (int) Helper::banner( 'delay', 0 ),
-			'reopen'        => (bool) Helper::banner( 'reopen', true ),
+			'reopen'        => self::shows_reopen(),
+			// `heading` on a classic theme has nothing in theme.json to read,
+			// so the client measures the page's own heading instead.
+			'fontSource'    => Helper::banner( 'font_source', 'theme' ),
 			'canClose'      => (bool) Helper::banner( 'show_banner_close', false ),
 			'closeAction'   => Helper::banner( 'close_behaviour', 'dismiss' ),
 			'dismissDays'   => (int) Helper::banner( 'dismiss_days', 0 ),
+			'respectGpc'    => (bool) Helper::get( 'respect_gpc', true ),
 		];
 	}
 
@@ -125,13 +141,223 @@ class Frontend {
 			'--ablocks-cc-radius'          => (int) $banner['radius'] . 'px',
 			'--ablocks-cc-max-width'       => (int) $banner['max_width'] . 'px',
 			'--ablocks-cc-prefs-max-width' => (int) $banner['prefs_max_width'] . 'px',
+			'--ablocks-cc-font-size'       => (int) $banner['font_size'] . 'px',
+			'--ablocks-cc-weight'          => (int) $banner['font_weight'],
+			'--ablocks-cc-title-weight'    => (int) $banner['title_weight'],
+			'--ablocks-cc-btn-weight'      => (int) $banner['button_weight'],
 		];
+
+		$font = self::font_family( $banner );
+		if ( '' !== $font ) {
+			$vars['--ablocks-cc-font'] = $font;
+		}
 
 		$out = '';
 		foreach ( $vars as $name => $value ) {
 			$out .= sprintf( '%s:%s;', $name, esc_attr( $value ) );
 		}
 		return $out;
+	}
+
+	/**
+	 * Hold back trackers that are injected by JavaScript rather than printed.
+	 *
+	 * The two gating layers only see the HTML the server sends. A first-party
+	 * script that creates `<script src=fbevents.js>` at runtime — a pixel
+	 * plugin's own loader, a lazy video facade — never passes through them.
+	 * This patches `document.createElement` so a script or iframe whose source
+	 * matches a rule is born blocked, in exactly the shape the gating layers
+	 * produce, and the banner's existing release path lets it go on consent.
+	 *
+	 * Printed straight after Consent Mode's defaults, ahead of anything that
+	 * could inject a tag. It has to read the cookie itself: the main script
+	 * loads in the footer, long after an early loader may have run.
+	 */
+	public function print_injection_guard() {
+		if ( ! Helper::should_render_banner() || ! Helper::is_gating_active() || Helper::get( 'dry_run', false ) ) {
+			return;
+		}
+
+		$scripts = [];
+		foreach ( Helper::active_rules() as $rule ) {
+			if ( ! empty( $rule['src'] ) ) {
+				$scripts[] = [ $rule['category'], (string) $rule['src'] ];
+			}
+		}
+
+		$embeds = [];
+		if ( Helper::get( 'embed_gating', true ) ) {
+			foreach ( [ 'embed', 'pixel' ] as $kind ) {
+				foreach ( Embeds::active_rules( $kind ) as $rule ) {
+					if ( ! empty( $rule['src'] ) ) {
+						$embeds[] = [ $rule['category'], (string) $rule['src'] ];
+					}
+				}
+			}
+		}
+
+		if ( ! $scripts && ! $embeds ) {
+			return;
+		}
+
+		$config = [
+			'names'   => array_values( array_filter( [ Helper::get( 'cookie_name', 'ablocks_consent' ), Helper::get( 'cookie_name_previous', '' ) ] ) ),
+			'version' => (int) Helper::get( 'policy_version', 1 ),
+			'maxAge'  => (int) Helper::get( 'reconsent_days', 0 ),
+			'scripts' => $scripts,
+			'embeds'  => $embeds,
+		];
+		?>
+<script id="ablocks-consent-guard" data-ablocks-consent-skip="1">
+( function ( cfg ) {
+	var compile = function ( list ) {
+		return list.map( function ( rule ) {
+			try { return [ rule[ 0 ], new RegExp( rule[ 1 ], 'i' ) ]; } catch ( e ) { return null; }
+		} ).filter( Boolean );
+	};
+	var scripts = compile( cfg.scripts ), embeds = compile( cfg.embeds );
+	var granted = function () {
+		var raw = null;
+		document.cookie.split( ';' ).forEach( function ( part ) {
+			var pair = part.split( '=' ), key = pair.shift().trim();
+			if ( null === raw && cfg.names.indexOf( key ) > -1 ) { raw = pair.join( '=' ); }
+		} );
+		if ( ! raw ) { return []; }
+		try { var saved = JSON.parse( decodeURIComponent( raw ) ); } catch ( e ) { return []; }
+		if ( ! saved || Number( saved.v ) !== cfg.version || ! saved.c ) { return []; }
+		if ( cfg.maxAge > 0 && saved.t && ( Date.now() / 1000 - saved.t ) / 86400 > cfg.maxAge ) { return []; }
+		return saved.c;
+	};
+	var blockedCategory = function ( src, rules ) {
+		src = String( src || '' );
+		for ( var i = 0; i < rules.length; i++ ) {
+			if ( rules[ i ][ 1 ].test( src ) ) {
+				return granted().indexOf( rules[ i ][ 0 ] ) > -1 ? '' : rules[ i ][ 0 ];
+			}
+		}
+		return '';
+	};
+	var create = document.createElement;
+	document.createElement = function ( tag ) {
+		var el = create.apply( document, arguments );
+		var name = String( tag ).toLowerCase();
+		if ( 'script' !== name && 'iframe' !== name ) { return el; }
+		var isScript = 'script' === name;
+		var proto = isScript ? window.HTMLScriptElement.prototype : window.HTMLIFrameElement.prototype;
+		var srcDesc = Object.getOwnPropertyDescriptor( proto, 'src' );
+		var typeDesc = isScript ? Object.getOwnPropertyDescriptor( proto, 'type' ) : null;
+		var setAttr = el.setAttribute;
+		if ( ! srcDesc ) { return el; }
+		var block = function ( category, value ) {
+			setAttr.call( el, 'data-ablocks-consent', category );
+			if ( isScript ) {
+				setAttr.call( el, 'type', 'text/plain' );
+				setAttr.call( el, 'src', value );
+			} else {
+				setAttr.call( el, 'data-ablocks-src', value );
+			}
+		};
+		var setSrc = function ( value ) {
+			var category = blockedCategory( value, isScript ? scripts : embeds );
+			if ( category ) { block( category, value ); return true; }
+			return false;
+		};
+		try {
+			Object.defineProperty( el, 'src', {
+				configurable: true,
+				get: function () { return srcDesc.get.call( el ); },
+				set: function ( value ) { if ( ! setSrc( value ) ) { srcDesc.set.call( el, value ); } }
+			} );
+			if ( typeDesc ) {
+				Object.defineProperty( el, 'type', {
+					configurable: true,
+					get: function () { return typeDesc.get.call( el ); },
+					set: function ( value ) {
+						if ( el.getAttribute( 'data-ablocks-consent' ) ) { setAttr.call( el, 'data-ablocks-type', value ); return; }
+						typeDesc.set.call( el, value );
+					}
+				} );
+			}
+		} catch ( e ) { return el; }
+		el.setAttribute = function ( attr, value ) {
+			var lower = String( attr ).toLowerCase();
+			if ( 'src' === lower && setSrc( value ) ) { return; }
+			if ( 'type' === lower && el.getAttribute( 'data-ablocks-consent' ) ) { return setAttr.call( el, 'data-ablocks-type', value ); }
+			return setAttr.apply( el, arguments );
+		};
+		return el;
+	};
+} )( <?php echo wp_json_encode( $config ); ?> );
+</script>
+		<?php
+	}
+
+	/**
+	 * Whether the floating "Cookie preferences" button is printed.
+	 *
+	 * It opens the category list, so with Preferences switched off it is the
+	 * same menu by another door — a site that turned Preferences off and still
+	 * found it on every page reasonably read that as the switch not working.
+	 * The shortcode and `aBlocksConsent.open()` still reach the panel for a
+	 * site that wants withdrawal somewhere quieter, such as its privacy page.
+	 *
+	 * @return bool
+	 */
+	public static function shows_reopen() {
+		return (bool) Helper::banner( 'reopen', true ) && (bool) Helper::banner( 'show_settings', true );
+	}
+
+	/**
+	 * The font-family the banner uses, or '' to inherit from the page.
+	 *
+	 * @param array $banner Banner settings.
+	 * @return string
+	 */
+	public static function font_family( $banner ) {
+		$source = isset( $banner['font_source'] ) ? $banner['font_source'] : 'theme';
+
+		if ( 'system' === $source ) {
+			return '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+		}
+
+		if ( 'custom' === $source ) {
+			return isset( $banner['font_family'] ) ? (string) $banner['font_family'] : '';
+		}
+
+		if ( ! function_exists( 'wp_get_global_styles' ) ) {
+			return '';
+		}
+
+		$path = 'heading' === $source
+			? [ 'elements', 'heading', 'typography', 'fontFamily' ]
+			: [ 'typography', 'fontFamily' ];
+		$value = wp_get_global_styles( $path );
+
+		if ( 'heading' === $source && ( ! is_string( $value ) || '' === $value ) ) {
+			$value = wp_get_global_styles( [ 'elements', 'h1', 'typography', 'fontFamily' ] );
+		}
+
+		return self::css_font_value( $value );
+	}
+
+	/**
+	 * Turn a theme.json value into something CSS understands.
+	 *
+	 * Theme.json stores preset references as `var:preset|font-family|inter`,
+	 * which only the block editor knows how to read.
+	 *
+	 * @param mixed $value Raw global-styles value.
+	 * @return string
+	 */
+	private static function css_font_value( $value ) {
+		if ( ! is_string( $value ) || '' === $value ) {
+			return '';
+		}
+		if ( 0 === strpos( $value, 'var:' ) ) {
+			$parts = explode( '|', substr( $value, 4 ) );
+			return 'var(--wp--' . implode( '--', array_map( 'sanitize_key', $parts ) ) . ')';
+		}
+		return $value;
 	}
 
 	public function render() {
@@ -279,7 +505,7 @@ class Frontend {
 			</div>
 		<?php endif; ?>
 
-		<?php if ( ! empty( $banner['reopen'] ) ) : ?>
+		<?php if ( self::shows_reopen() ) : ?>
 			<?php // Withdrawal has to be as easy as granting, so the way back in is always on screen once a decision exists. ?>
 			<button
 				type="button"

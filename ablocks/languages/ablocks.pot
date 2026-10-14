@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 2.16.0\n"
+"Project-Id-Version: aBlocks 2.17.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-08T15:50:15+00:00\n"
+"POT-Creation-Date: 2026-10-14T10:54:35+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ablocks\n"
@@ -98,42 +98,42 @@ msgstr ""
 msgid "Consent — reference"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:185
-#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:347
+#: addons/cookie-consent/frontend.php:411
+#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:359
 msgid "Close without accepting"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:369
+#: addons/cookie-consent/frontend.php:595
 #: src/components/dynamic-content/index.js:186
-#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:111
+#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:123
 #: src/dashboard/pages/settings/Dashboard/RouteModal.js:43
 #: src/utils/helper.js:859
 msgid "Close"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:488
-#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:63
+#: addons/cookie-consent/frontend.php:714
+#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:75
 msgid "Cookie"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:489
+#: addons/cookie-consent/frontend.php:715
 #: src/dashboard/pages/dashboard/cookieConsent/CategoriesTab.js:14
-#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:64
+#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:76
 msgid "Provider"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:490
-#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:65
+#: addons/cookie-consent/frontend.php:716
+#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:77
 msgid "Expires"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:491
+#: addons/cookie-consent/frontend.php:717
 #: src/dashboard/pages/dashboard/cookieConsent/CategoriesTab.js:18
-#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:66
+#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:78
 msgid "Purpose"
 msgstr ""
 
-#: addons/cookie-consent/frontend.php:519
+#: addons/cookie-consent/frontend.php:745
 #: addons/cookie-consent/helper.php:229
 #: addons/cookie-consent/helper.php:262
 msgid "Cookie preferences"
@@ -193,7 +193,7 @@ msgstr ""
 
 #: addons/cookie-consent/helper.php:225
 #: addons/cookie-consent/helper.php:287
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:692
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:804
 msgid "Accept all"
 msgstr ""
 
@@ -202,14 +202,14 @@ msgid "Reject all"
 msgstr ""
 
 #: addons/cookie-consent/helper.php:227
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:67
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:340
-#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:312
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:68
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:440
+#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:324
 msgid "Preferences"
 msgstr ""
 
 #: addons/cookie-consent/helper.php:228
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:363
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:463
 msgid "Save choices"
 msgstr ""
 
@@ -295,7 +295,7 @@ msgid "Decision"
 msgstr ""
 
 #: addons/cookie-consent/record.php:190
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:108
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:297
 msgid "Policy version"
 msgstr ""
 
@@ -411,7 +411,7 @@ msgstr ""
 
 #: addons/theme-builder/database.php:21
 #: addons/theme-builder/database.php:22
-#: includes/helper.php:388
+#: includes/helper.php:433
 #: includes/permissions.php:136
 #: src/dashboard/pages/dashboard/addons/index.js:17
 #: src/dashboard/pages/dashboard/themeBuilder/builder/index.js:93
@@ -476,7 +476,7 @@ msgid "Rate the plugin."
 msgstr ""
 
 #: includes/admin.php:126
-#: includes/helper.php:404
+#: includes/helper.php:449
 #: includes/permissions.php:153
 #: src/blocks/atomic-shared/animation-card.js:282
 #: src/blocks/image-comparison/settings.js:66
@@ -622,7 +622,7 @@ msgstr ""
 
 #: includes/ajax/form-builder.php:59
 #: includes/api/form-builder-controller.php:134
-#: includes/api/form-builder-controller.php:532
+#: includes/api/form-builder-controller.php:533
 msgid "Form successfully submitted!"
 msgstr ""
 
@@ -677,7 +677,7 @@ msgstr ""
 #: src/controls/typography/helper.js:529
 #: src/controls/typography/helper.js:547
 #: src/controls/typography/systemFonts.js:11
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:47
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:236
 #: src/global/positions/helper.js:5
 #: src/global/width/helper.js:5
 msgid "Default"
@@ -764,28 +764,28 @@ msgstr ""
 msgid "Password must be at least 6 characters."
 msgstr ""
 
-#: includes/api/form-builder-controller.php:380
+#: includes/api/form-builder-controller.php:381
 msgid "Registration completed successfully. Redirecting..."
 msgstr ""
 
-#: includes/api/form-builder-controller.php:410
-#: includes/api/form-builder-controller.php:501
+#: includes/api/form-builder-controller.php:411
+#: includes/api/form-builder-controller.php:502
 msgid "Invalid form block."
 msgstr ""
 
-#: includes/api/form-builder-controller.php:432
+#: includes/api/form-builder-controller.php:433
 msgid "Email field is required"
 msgstr ""
 
-#: includes/api/form-builder-controller.php:446
+#: includes/api/form-builder-controller.php:447
 msgid "Provide a valid email"
 msgstr ""
 
-#: includes/api/form-builder-controller.php:462
+#: includes/api/form-builder-controller.php:463
 msgid "If an account exists for that email, a password reset link has been sent."
 msgstr ""
 
-#: includes/api/form-builder-controller.php:549
+#: includes/api/form-builder-controller.php:550
 msgid "Action is not defined."
 msgstr ""
 
@@ -809,11 +809,11 @@ msgstr ""
 msgid "That image host is not allowed for pasted content."
 msgstr ""
 
-#: includes/api/paste-controller.php:301
+#: includes/api/paste-controller.php:356
 msgid "The pasted file is not an image."
 msgstr ""
 
-#: includes/api/paste-controller.php:305
+#: includes/api/paste-controller.php:360
 msgid "That image type is not allowed on this site."
 msgstr ""
 
@@ -941,7 +941,7 @@ msgstr ""
 
 #: includes/blocks/frontend-dashboard/block.php:290
 #: includes/blocks/frontend-dashboard/block.php:350
-#: includes/helper.php:375
+#: includes/helper.php:420
 msgid "Dashboard"
 msgstr ""
 
@@ -1267,6 +1267,7 @@ msgstr ""
 #: includes/classes/scanner/scanner.php:609
 #: includes/classes/scanner/scanner.php:629
 #: includes/classes/scanner/scanner.php:977
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:128
 #: src/dashboard/pages/settings/License/index.js:215
 msgid "Enabled"
 msgstr ""
@@ -1770,38 +1771,38 @@ msgstr ""
 msgid "Verification successful."
 msgstr ""
 
-#: includes/helper.php:381
+#: includes/helper.php:426
 msgid "Submissions"
 msgstr ""
 
-#: includes/helper.php:394
+#: includes/helper.php:439
 #: includes/permissions.php:173
 msgid "Add-ons"
 msgstr ""
 
-#: includes/helper.php:399
+#: includes/helper.php:444
 #: includes/permissions.php:169
 #: src/dashboard/pages/scanner/Overview.js:176
 msgid "Site Scanner"
 msgstr ""
 
-#: includes/helper.php:410
+#: includes/helper.php:455
 #: src/dashboard/AdminMenu/index.js:102
 #: src/dashboard/pages/dashboard/cookieConsent/pro.js:130
 msgid "Get Pro"
 msgstr ""
 
-#: includes/helper.php:420
+#: includes/helper.php:465
 msgid "Loading..."
 msgstr ""
 
 #. translators: %s template
-#: includes/helper.php:953
+#: includes/helper.php:998
 #, php-format
 msgid "%s does not exist."
 msgstr ""
 
-#: includes/helper.php:971
+#: includes/helper.php:1016
 msgid "action_args should not be overwritten when calling ablocks/get_template."
 msgstr ""
 
@@ -2342,7 +2343,8 @@ msgstr ""
 #: src/components/dynamic-tags/dynamic-date-settings.js:35
 #: src/controls/image-control/helper.js:28
 #: src/controls/image-control/helper.js:50
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:51
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:240
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:77
 #: src/global/mask/options/position/index.js:17
 #: src/global/mask/options/shape/index.js:14
 #: src/global/mask/options/size/index.js:10
@@ -2677,6 +2679,7 @@ msgstr ""
 
 #: src/addons/formats/dynamic-content/popover.js:164
 #: src/dashboard/dashboardComponents/ListTable/SortableColumns.js:144
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:211
 msgid "Apply"
 msgstr ""
 
@@ -2941,6 +2944,8 @@ msgstr ""
 #: src/blocks/text-path/settings.js:232
 #: src/blocks/toggle/settings.js:206
 #: src/controls/typography/components/Custom.js:467
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:70
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:869
 msgid "Typography"
 msgstr ""
 
@@ -2982,7 +2987,7 @@ msgstr ""
 #: src/controls/video-control/options/video-source/index.js:37
 #: src/controls/video-control/options/video-source/index.js:50
 #: src/controls/video-control/options/video-source/index.js:77
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:30
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:31
 #: src/dashboard/pages/settings/Dashboard/RouteModal.js:209
 msgid "Link"
 msgstr ""
@@ -3852,7 +3857,7 @@ msgstr ""
 #: src/blocks/taxonomy-listing/settings.js:1219
 #: src/blocks/taxonomy-listing/settings.js:1331
 #: src/blocks/toggle/settings.js:353
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:717
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:829
 #: src/global/AdvancedSettings/index.js:204
 msgid "Border"
 msgstr ""
@@ -4067,7 +4072,7 @@ msgstr ""
 #: src/blocks/tabs/settings.js:717
 #: src/blocks/taxonomy-listing/settings.js:146
 #: src/blocks/text-path/settings.js:62
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:219
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:319
 #: src/dashboard/pages/dashboard/themeBuilder/builder/FormInner.js:29
 #: src/dashboard/pages/dashboard/themeBuilder/index.js:263
 msgid "Title"
@@ -4521,7 +4526,7 @@ msgstr ""
 #: src/blocks/tabs/settings.js:366
 #: src/controls/background/options/index.js:28
 #: src/controls/background/options/index.js:71
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:714
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:826
 #: src/global/AdvancedSettings/index.js:180
 msgid "Background"
 msgstr ""
@@ -6073,7 +6078,7 @@ msgstr ""
 #: src/blocks/social-shares/helper.js:90
 #: src/blocks/storeengine-checkout-form/settings.js:289
 #: src/blocks/stripe-button/settings.js:284
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:715
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:827
 msgid "Text"
 msgstr ""
 
@@ -6434,7 +6439,7 @@ msgstr ""
 #: src/blocks/storeengine-order-details/settings.js:78
 #: src/components/content-style-tabs/index.js:18
 #: src/controls/typography/components/Custom.js:257
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:124
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:224
 msgid "Style"
 msgstr ""
 
@@ -6455,8 +6460,8 @@ msgstr ""
 #: src/blocks/progress-tracker/settings.js:88
 #: src/blocks/storeengine-coupon-form/settings.js:54
 #: src/blocks/storeengine-product-filter/settings.js:37
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:64
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:118
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:65
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:218
 #: src/global/AdvancedSettings/index.js:46
 msgid "Layout"
 msgstr ""
@@ -6887,7 +6892,7 @@ msgstr ""
 #: src/blocks/tabs/helper.js:200
 #: src/controls/color/color-gradient-picker/gradientPicker.js:16
 #: src/controls/dimensions/Fields.js:111
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:53
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:54
 msgid "Top"
 msgstr ""
 
@@ -6899,8 +6904,8 @@ msgstr ""
 #: src/blocks/atomic-shared/animations.js:51
 #: src/blocks/atomic-shared/border-field.js:47
 #: src/controls/image-control/helper.js:26
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:56
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:469
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:57
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:581
 msgid "Bottom left"
 msgstr ""
 
@@ -6929,14 +6934,14 @@ msgstr ""
 #: src/blocks/tabs/helper.js:204
 #: src/controls/color/color-gradient-picker/gradientPicker.js:22
 #: src/controls/dimensions/Fields.js:154
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:52
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:53
 msgid "Bottom"
 msgstr ""
 
 #: src/blocks/atomic-shared/animations.js:57
 #: src/blocks/atomic-shared/border-field.js:52
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:57
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:473
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:58
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:585
 msgid "Bottom right"
 msgstr ""
 
@@ -7056,8 +7061,8 @@ msgstr ""
 #: src/blocks/storeengine-funnel-offer/settings.js:51
 #: src/components/content-style-tabs/index.js:17
 #: src/components/dynamic-tags/index.js:72
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:65
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:213
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:66
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:313
 #: src/dashboard/pages/settings/EditorOptions/DesignAudit.js:146
 msgid "Content"
 msgstr ""
@@ -7165,7 +7170,7 @@ msgstr ""
 #: src/blocks/taxonomy-listing/settings.js:1018
 #: src/blocks/taxonomy-listing/settings.js:1264
 #: src/controls/image-control/index.js:103
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:146
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:246
 #: src/global/AdvancedSettings/index.js:72
 #: src/global/mask/options/position/index.js:103
 #: src/global/positions/index.js:69
@@ -8226,6 +8231,7 @@ msgid "Showing values inherited from a wider breakpoint or state. A change here 
 msgstr ""
 
 #: src/blocks/atomic-shared/typography-field.js:294
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:897
 msgid "Font family"
 msgstr ""
 
@@ -8931,7 +8937,7 @@ msgstr ""
 #: src/blocks/counter/helper.js:41
 #: src/blocks/counter/settings.js:359
 #: src/blocks/progress-tracker/helper.js:24
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:19
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:20
 msgid "Bar"
 msgstr ""
 
@@ -9569,7 +9575,7 @@ msgstr ""
 #: src/blocks/counter/settings.js:242
 #: src/blocks/heading/index.js:12
 #: src/blocks/info-box/components/heading/settings.js:33
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:528
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:640
 #: src/dashboard/pages/dashboard/free-vs-pro/index.js:28
 #: src/utils/block-lists.js:22
 msgid "Heading"
@@ -10737,7 +10743,7 @@ msgid "Subject"
 msgstr ""
 
 #: src/blocks/form-builder/form-setting/ActionAfterSubmission/FormEmailNotifications/index.js:639
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:225
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:325
 msgid "Message"
 msgstr ""
 
@@ -11014,7 +11020,7 @@ msgstr ""
 #: src/blocks/form-checkbox/attributes.js:22
 #: src/blocks/form-checkbox/settings.js:76
 #: src/blocks/form-radio/settings.js:252
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:42
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:43
 msgid "Checkbox"
 msgstr ""
 
@@ -11881,7 +11887,7 @@ msgid "Featured"
 msgstr ""
 
 #: src/blocks/info-box/components/badge/settings.js:37
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:47
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:48
 msgid "Badge"
 msgstr ""
 
@@ -12044,7 +12050,7 @@ msgstr ""
 #: src/blocks/lists/helper.js:45
 #: src/controls/border/helper.js:13
 #: src/controls/icon-upload/index.js:444
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:32
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:33
 #: src/utils/deprecated/icon-upload/index.js:406
 msgid "Solid"
 msgstr ""
@@ -13030,7 +13036,7 @@ msgstr ""
 
 #: src/blocks/modal/deprecated/helper.js:13
 #: src/blocks/modal/helper.js:13
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:21
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:22
 msgid "Popup"
 msgstr ""
 
@@ -13133,7 +13139,7 @@ msgid "Large Shape"
 msgstr ""
 
 #: src/blocks/news-ticker/helper.js:57
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:20
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:21
 msgid "Box"
 msgstr ""
 
@@ -16180,7 +16186,7 @@ msgid "Replace Image"
 msgstr ""
 
 #: src/components/media-upload/index.js:65
-#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:298
+#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:310
 #: src/global/Integrations/components/AblocksTrigger/index.js:101
 #: src/global/Integrations/components/CommonSettings/index.js:230
 msgid "Preview"
@@ -16924,434 +16930,579 @@ msgstr ""
 msgid "StoreEngine Integration Blocks not found!"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:12
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:69
+msgid "That file is not valid JSON."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:79
+msgid "That is not an aBlocks cookie consent export."
+msgstr ""
+
+#. translators: %s: file name.
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:126
+#, js-format
+msgid "Imported %s. Review the settings — policy page links point at the site they were exported from — then click Save."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:143
+msgid "Import / export"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:144
+msgid "Copy this whole setup — banner, categories, blocking rules and Consent Mode — to another site. Importing fills in this screen; nothing changes on the site until you click Save."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:150
+msgid "Export settings"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:151
+msgid "Downloads a JSON file of the settings on this screen, including unsaved changes."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:158
+msgid "Export"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:163
+msgid "Import settings"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:164
+msgid "Pick a file exported from another site. Custom script rules need aBlocks Pro on this site too."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:178
+#: src/dashboard/pages/dashboard/demo-importer/components/card.js:64
+#: src/demo-importer/components/card.js:64
+#: src/template-importer/components/Content/index.js:56
+msgid "Import"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:201
 msgid "Consent cookie"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:13
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:202
 msgid "First-party, read only by the browser. Nothing on the server branches on it while rendering a page — that is what keeps the feature compatible with page caching."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:19
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:208
 #: src/dashboard/pages/dashboard/cookieConsent/CategoriesTab.js:13
 msgid "Cookie name"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:20
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:209
 msgid "The shipped name works for every site. Choose your own only if something else on the site already uses it, or your policy names a specific cookie."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:59
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:248
 msgid "Custom name"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:60
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:249
 msgid "Renaming moves every existing decision across on the visitor’s next page view, and clears the old cookie. Only one rename is carried — change it twice before your visitors return and the older decisions are gone, and everyone is asked again."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:74
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:263
 msgid "Remember for"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:75
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:264
 msgid "Applies to decisions made from now on. Cookies already in visitors’ browsers keep the expiry they were written with — to shorten consent that has already been given, use “Ask again after” below."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:84
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:99
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:432
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:273
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:288
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:532
 #: src/dashboard/pages/dashboard/cookieConsent/RecordsTab.js:122
 msgid "DAYS"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:89
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:419
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:278
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:519
 msgid "Ask again after"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:90
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:279
 msgid "0 means never re-ask on age alone. Unlike the setting above, this applies to decisions already given — set it to 90 and anyone who decided more than 90 days ago is asked again on their next visit. Several regulators expect consent to be refreshed at least every 12 months."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:109
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:298
 msgid "Raising this invalidates every stored decision and shows the banner again. Do it when what you are asking for changes — a new tracker, a new category, materially different wording. It is manual because no heuristic can tell a typo fix from a change of substance."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:114
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:303
 msgid "Current version"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:126
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:315
 msgid "Google Consent Mode v2"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:127
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:316
 msgid "Prints the denied defaults as the first script in the page, then updates them from the decision. This is complementary to blocking, not a substitute — Consent Mode changes what Google’s tags do, blocking stops them loading at all."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:132
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:321
 msgid "Enable Consent Mode"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:139
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:328
 msgid "Wait for update"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:140
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:329
 msgid "How long Google’s tags hold before acting on the defaults, giving the decision time to arrive."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:157
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:346
 msgid "Protect ad measurement"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:158
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:347
 msgid "Sends ads_data_redaction and url_passthrough. Google Ads stops receiving ad identifiers while marketing is refused, and carries the click ID in the URL instead of a cookie — so a refusal costs the visitor’s privacy nothing and the site’s conversion reporting much less."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:173
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:362
 msgid "While you build"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:174
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:363
 msgid "Hiding the banner from administrators makes the site easier to work on, and makes it easy to forget the banner is broken. Turn it off before you launch."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:179
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:369
+msgid "Respect Global Privacy Control"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:370
+msgid "When a visitor’s browser sends the GPC signal, \"Accept all\" leaves Marketing off. Several US state laws, including California’s, require honouring it. Visitors can still turn Marketing on themselves in the preferences."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/AdvancedTab.js:380
 msgid "Hide from administrators"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:25
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:26
 msgid "In the banner"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:26
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:27
 msgid "A dialog"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:31
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:32
 msgid "Outline"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:36
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:37
 msgid "Just close it"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:37
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:38
 msgid "Count as \"Reject all\""
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:41
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:42
 msgid "Switch"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:46
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:47
 msgid "Plain text"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:58
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:59
 msgid "Bottom centre"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:60
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:61
 msgid "Centre"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:66
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:282
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:67
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:382
 msgid "Buttons"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:68
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:706
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:69
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:818
 msgid "Colours"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:119
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:74
+msgid "Theme body font"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:75
+msgid "Theme heading font"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:76
+msgid "System font"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:93
+msgid "Accept, Reject and Preferences"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:94
+msgid "Every choice on the first screen. The safest setup for EU and UK visitors."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:110
+msgid "Customize and Accept (no Reject)"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:111
+msgid "A corner box with Customize and Accept all. Customize opens a dialog where visitors tick categories and save — refusing is one step further away than accepting."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:120
+msgid "Customize"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:131
+msgid "Save my preferences"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:137
+msgid "Accept only (force consent)"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:138
+msgid "Only Accept. The banner stays on every page until the visitor accepts, and scripts stay blocked until then. Not compliant in the EU or UK."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:197
+msgid "Quick setup"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:198
+msgid "Apply a ready-made button setup, then fine-tune it in the other tabs. Colours and wording are kept."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:219
 msgid "Where the banner sits and how much of the screen it takes."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:154
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:254
 msgid "Dim the page behind"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:155
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:255
 msgid "Makes the choice unavoidable. Effective, and heavy-handed — most sites should leave this off."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:165
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:265
 msgid "Drop shadow"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:171
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:271
 msgid "Maximum width"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:182
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:282
 msgid "Corner radius"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:192
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:292
 msgid "Show after"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:193
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:293
 msgid "A delay only postpones the banner. It does not postpone the blocking, which has already happened server-side."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:214
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:314
 msgid "Say what you actually collect and why. A vague notice is a notice nobody can consent to."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:232
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:332
 msgid "Privacy policy URL"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:242
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:342
 msgid "Policy link text"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:251
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:351
 msgid "Cookie policy URL"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:252
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:352
 msgid "A separate document from the privacy policy: this one lists what is stored and for how long. Leave it empty if the privacy policy covers both."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:267
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:367
 msgid "Cookie policy link text"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:283
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:383
 msgid "Refusing must be as easy as agreeing. Hiding Reject behind Preferences is the single most commonly enforced-against dark pattern."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:288
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:388
 msgid "Accept"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:297
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:657
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:397
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:769
 msgid "Show \"Reject all\""
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:300
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:400
 msgid "With Preferences and the close button off as well, the banner offers nothing but Accept — a visitor who will not accept has no way past it, on any page. Turn on any one of the three."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:314
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:414
 msgid "Reject"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:323
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:423
 msgid "Show \"Preferences\""
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:326
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:426
 msgid "The floating button reopens the categories, but only once a decision exists — which is too late to be the way one is made."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:349
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:449
 msgid "Preferences style"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:350
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:450
 msgid "How much weight it carries next to Accept. A link is the quietest; an outline reads as a real button without pulling as hard."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:373
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:473
 msgid "Closing without answering"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:374
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:474
 msgid "A visitor who will not accept needs somewhere to go. Without this the banner stays in front of them on every page until they agree — which is not a choice, and it is worth more to you as a working site than as a wall."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:380
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:552
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:480
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:664
 msgid "Show a close button"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:381
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:481
 msgid "A small × in the corner of the banner. Closing never grants anything — every refusable category stays blocked either way."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:396
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:496
 msgid "Closing means"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:399
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:499
 msgid "Writes a refusal and stops asking for as long as any other decision would last. Cleaner, and the visitor is not asked again on their next visit."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:403
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:503
 msgid "Stores no decision at all — it only stops asking. They are asked again, so a visitor who was merely busy still gets the chance to agree later."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:423
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:523
 msgid "0 waits until the browser closes — they are not nagged for the rest of this visit, and the question is still open on the next one."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:443
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:543
 msgid "The way back in"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:444
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:544
 msgid "Withdrawal has to be as easy as granting, so there has to be a way back to the toggles. You can also drop the shortcode [ablocks_cookie_preferences] into a privacy policy page."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:449
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:550
 msgid "Show floating button"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:455
-msgid "Button text"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:463
-msgid "Button position"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:487
-msgid "Preferences panel"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:488
-msgid "What the visitor sees when they open the category toggles."
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:494
-msgid "Opens as"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:497
-msgid "A centred dialog, with the banner still visible behind it. Use this when the banner is a small corner notice: the categories need more room than it has."
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:501
-msgid "The banner swaps its own contents for the category list. Simple, and it keeps everything in one place — but the panel is only ever as wide as the banner."
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:516
-msgid "Dialog width"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:537
-msgid "Introduction"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:538
-msgid "Basic HTML is allowed here, so you can link out mid-sentence. The two policy links above are added underneath either way."
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:553
-msgid "Closes the panel and goes back to the banner. It never dismisses the banner and never records a decision — closing a dialog is not an answer."
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:554
+msgid "Hidden while \"Preferences\" is off, because the floating button opens the same preferences. The [ablocks_cookie_preferences] shortcode still works."
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:567
-msgid "Categories in the panel"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:568
-msgid "How each category is drawn. The wording lives on the Categories tab; this is only its presentation."
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:574
-msgid "Collapse descriptions"
+msgid "Button text"
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:575
-msgid "Each category becomes a row you can expand. Worth it once the descriptions are long enough that the panel scrolls."
+msgid "Button position"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:589
-msgid "Open the first one"
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:599
+msgid "Preferences panel"
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:600
-msgid "List the cookies"
+msgid "What the visitor sees when they open the category toggles."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:601
-msgid "Shows the name, provider, lifetime and purpose of each cookie in a category — filled in on the Categories tab. This is the disclosure regulators ask for by name."
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:606
+msgid "Opens as"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:614
-msgid "Toggle style"
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:609
+msgid "A centred dialog, with the banner still visible behind it. Use this when the banner is a small corner notice: the categories need more room than it has."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:615
-msgid "A switch can read as something already on; a checkbox as something to tick. Neither is wrong — pick the one your audience will read correctly."
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:613
+msgid "The banner swaps its own contents for the category list. Simple, and it keeps everything in one place — but the panel is only ever as wide as the banner."
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:628
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:739
-msgid "\"Always on\" text"
+msgid "Dialog width"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:636
-msgid "\"Always on\" style"
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:649
+msgid "Introduction"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:647
-msgid "Buttons under the categories"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:651
-msgid "The preferences panel has its own row of buttons. Save is always there; the other two are yours to decide on."
-msgstr ""
-
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:661
-msgid "Reject is now switched off in both places, which leaves a visitor no one-click way to refuse. That is the pattern regulators act on most often."
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:650
+msgid "Basic HTML is allowed here, so you can link out mid-sentence. The two policy links above are added underneath either way."
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:665
-msgid "Refusing everything from inside the panel, without having to switch four things off by hand."
+msgid "Closes the panel and goes back to the banner. It never dismisses the banner and never records a decision — closing a dialog is not an answer."
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:679
-msgid "Show \"Accept all\""
+msgid "Categories in the panel"
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:680
+msgid "How each category is drawn. The wording lives on the Categories tab; this is only its presentation."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:686
+msgid "Collapse descriptions"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:687
+msgid "Each category becomes a row you can expand. Worth it once the descriptions are long enough that the panel scrolls."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:701
+msgid "Open the first one"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:712
+msgid "List the cookies"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:713
+msgid "Shows the name, provider, lifetime and purpose of each cookie in a category — filled in on the Categories tab. This is the disclosure regulators ask for by name."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:726
+msgid "Toggle style"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:727
+msgid "A switch can read as something already on; a checkbox as something to tick. Neither is wrong — pick the one your audience will read correctly."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:740
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:851
+msgid "\"Always on\" text"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:748
+msgid "\"Always on\" style"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:759
+msgid "Buttons under the categories"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:763
+msgid "The preferences panel has its own row of buttons. Save is always there; the other two are yours to decide on."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:773
+msgid "Reject is now switched off in both places, which leaves a visitor no one-click way to refuse. That is the pattern regulators act on most often."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:777
+msgid "Refusing everything from inside the panel, without having to switch four things off by hand."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:791
+msgid "Show \"Accept all\""
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:792
 msgid "Lets someone who opened the panel out of curiosity agree to everything without going back."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:707
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:819
 msgid "Each one is a CSS custom property on the banner, so a theme can override any of them without touching these."
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:716
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:828
 msgid "Secondary text"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:718
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:830
 msgid "Accept button"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:721
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:833
 msgid "Accept label"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:725
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:837
 msgid "Reject button"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:729
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:841
 msgid "Reject label"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:731
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:843
 msgid "Save button"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:732
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:844
 msgid "Save label"
 msgstr ""
 
-#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:735
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:847
 msgid "\"Always on\" badge"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:870
+msgid "By default the banner uses your theme’s body font with fixed weights, so it matches the page rather than whatever the <body> tag happens to carry."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:876
+msgid "Font"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:880
+msgid "Read from your theme on the live site. The preview here uses the dashboard font."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:898
+msgid "Any CSS font-family list, e.g. \"Inter\", sans-serif. The font must already be loaded on the site."
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:911
+msgid "Text size"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:920
+msgid "Text weight"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:931
+msgid "Title weight"
+msgstr ""
+
+#: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:942
+msgid "Button weight"
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/BlockingTab.js:45
@@ -17537,7 +17688,7 @@ msgid "Meta Pixel"
 msgstr ""
 
 #: src/dashboard/pages/dashboard/cookieConsent/index.js:39
-#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:305
+#: src/dashboard/pages/dashboard/cookieConsent/Preview.js:317
 msgid "Banner"
 msgstr ""
 
@@ -17690,12 +17841,6 @@ msgstr ""
 #: src/demo-importer/components/card.js:58
 #: src/template-importer/components/viewTemplates.js:159
 msgid "Live Preview"
-msgstr ""
-
-#: src/dashboard/pages/dashboard/demo-importer/components/card.js:64
-#: src/demo-importer/components/card.js:64
-#: src/template-importer/components/Content/index.js:56
-msgid "Import"
 msgstr ""
 
 #: src/dashboard/pages/dashboard/demo-importer/components/category.js:57

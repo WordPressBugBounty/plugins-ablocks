@@ -35,7 +35,8 @@ class RequestParams extends Abstracts\Interpreter {
 					break;
 
 				case 'query var':
-						$this->content = get_query_var( $this->param, '' );
+						$value         = get_query_var( $this->param, '' );
+						$this->content = is_scalar( $value ) ? sanitize_text_field( (string) $value ) : '';
 					break;
 
 				default:
@@ -43,7 +44,9 @@ class RequestParams extends Abstracts\Interpreter {
 			}
 		}
 
-		return $this->pre . ( $this->content === '' ? $this->default : $this->content ) . $this->post;
+		// The value is the visitor's; the labels are the author's.
+		$value = $this->content === '' ? $this->esc_label( $this->default ) : $this->esc_value( $this->content );
+		return $this->esc_label( $this->pre ) . $value . $this->esc_label( $this->post );
 	}
 	public function req_param_value( array $params ) : string {
 		return sanitize_text_field( $params[ $this->param ] ?? '' );

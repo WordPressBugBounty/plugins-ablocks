@@ -21,7 +21,8 @@ class Link extends Abstracts\Interpreter {
 				break;
 
 			case 'internal-url-taxonomy':
-				$this->content = get_term_link( (int) $this->setting[2] );
+				$term_link     = get_term_link( (int) $this->setting[2] );
+				$this->content = is_string( $term_link ) ? $term_link : '';
 				break;
 
 			case 'internal-url-media':
@@ -57,6 +58,6 @@ class Link extends Abstracts\Interpreter {
 				$this->content = $attachment_id ? get_permalink( $attachment_id ) : '';
 				break;
 		}//end switch
-		return $this->content;
+		return $this->esc_url_value( $this->content );
 	}
 }

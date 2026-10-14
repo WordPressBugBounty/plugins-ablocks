@@ -95,7 +95,8 @@ class PostType extends Abstracts\Interpreter {
 					$type = $this->setting[6] ?? 'category';
 					$sep  = $this->setting[7] ?? ', ';
 				}
-				$this->content = $this->get_post_terms( $type, $sep );
+				// Escaped here, term by term, so an HTML separator survives.
+				$this->content = $this->get_escaped_post_terms( $type, $sep );
 				break;
 
 			case 'author-name':
@@ -111,11 +112,11 @@ class PostType extends Abstracts\Interpreter {
 				break;
 
 			case 'author-posts-url':
-				$this->content = esc_url( get_author_posts_url( get_post_field( 'post_author', $this->ID ) ) );
+				$this->content = get_author_posts_url( get_post_field( 'post_author', $this->ID ) );
 				break;
 
 			case 'author-profile-picture-url':
-				$this->content = esc_url( get_avatar_url( get_post_field( 'post_author', $this->ID ) ) );
+				$this->content = (string) get_avatar_url( get_post_field( 'post_author', $this->ID ) );
 				break;
 
 			case 'author-bio':
@@ -191,7 +192,60 @@ class PostType extends Abstracts\Interpreter {
 			}
 		}
 
-		return $this->pre . ( $this->content === '' ? $this->default : $this->content ) . $this->post;
+		$value = $this->content === '' ? $this->esc_label( $this->default ) : $this->escape_field( $this->content );
+		return $this->esc_label( $this->pre ) . $value . $this->esc_label( $this->post );
+	}
+
+	/**
+	 * Escape a field's value by what it holds. Titles, bios, captions and
+	 * custom fields may carry formatting (a Contributor can write post meta
+	 * with no filtering at all), so they are filtered, not flattened; URLs
+	 * stay URLs; everything else is plain text.
+	 *
+	 * @param string $value Raw value.
+	 * @return string
+	 */
+	protected function escape_field( string $value ) : string {
+		switch ( $this->field ) {
+			case 'post-terms':
+				return $value;
+			case 'post-title':
+			case 'post-custom-field':
+			case 'author-bio':
+			case 'author-meta':
+			case 'featured-image-caption':
+			case 'featured-image-description':
+				return $this->esc_label( $value );
+			case 'author-posts-url':
+			case 'author-profile-picture-url':
+			case 'author-website':
+			case 'featured-image-file-url':
+			case 'featured-image-attachment-url':
+				return $this->esc_url_value( $value );
+			default:
+				return $this->esc_value( $value );
+		}
+	}
+
+	/**
+	 * Term names as escaped values, joined by the author's separator.
+	 *
+	 * @param string $type Taxonomy.
+	 * @param string $sep  Separator.
+	 * @return string
+	 */
+	protected function get_escaped_post_terms( string $type, string $sep ) : string {
+		$terms = get_the_terms( $this->ID, $type );
+		if ( ! is_array( $terms ) ) {
+			return '';
+		}
+		$names = array_map(
+			function ( $term ) {
+				return $this->esc_value( $term->name );
+			},
+			$terms
+		);
+		return implode( $this->esc_label( $sep ), $names );
 	}
 
 	public function get_author_data( string $field, bool $meta = false ) : string {

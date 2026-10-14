@@ -49,7 +49,7 @@ class Ajax {
 		$defaults = Helper::defaults();
 		$saved    = [];
 
-		foreach ( [ 'enabled', 'buffer_gating', 'embed_gating', 'dry_run', 'consent_mode', 'consent_mode_ads', 'record_enabled', 'record_ip', 'hide_for_admins' ] as $key ) {
+		foreach ( [ 'enabled', 'buffer_gating', 'embed_gating', 'dry_run', 'consent_mode', 'consent_mode_ads', 'record_enabled', 'record_ip', 'hide_for_admins', 'respect_gpc' ] as $key ) {
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 			$saved[ $key ] = isset( $_POST[ $key ] ) ? \ABlocks\Helper::sanitize_checkbox_field( $_POST[ $key ] ) : $defaults[ $key ];
 		}
@@ -383,6 +383,15 @@ class Ajax {
 		$clean['dismiss_days']    = min( 365, (int) $clean['dismiss_days'] );
 		$clean['locked_style']    = in_array( $clean['locked_style'], [ 'text', 'badge' ], true ) ? $clean['locked_style'] : 'text';
 		$clean['switch_style']    = in_array( $clean['switch_style'], [ 'switch', 'checkbox' ], true ) ? $clean['switch_style'] : 'switch';
+
+		$clean['font_source'] = in_array( $clean['font_source'], [ 'theme', 'heading', 'system', 'custom' ], true ) ? $clean['font_source'] : 'theme';
+		// Printed into a style attribute, so only what a font-family list is
+		// made of survives: names, commas, quotes and hyphens.
+		$clean['font_family'] = trim( preg_replace( '/[^A-Za-z0-9 ,\'"\-_]/', '', $clean['font_family'] ) );
+		$clean['font_size']   = min( 22, max( 11, (int) $clean['font_size'] ) );
+		foreach ( [ 'font_weight', 'title_weight', 'button_weight' ] as $key ) {
+			$clean[ $key ] = (int) min( 900, max( 100, round( (int) $clean[ $key ] / 100 ) * 100 ) );
+		}
 
 		// A modal that is narrower than the banner it opens from is a modal
 		// nobody asked for; a bar's 1180px is not a dialog width either.

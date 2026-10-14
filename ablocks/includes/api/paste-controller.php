@@ -224,6 +224,8 @@ class PasteController {
 			return new WP_Error( 'ablocks_paste_host_blocked', __( 'That image host is not allowed for pasted content.', 'ablocks' ), array( 'status' => 403 ) );
 		}
 
+		$url = $this->maximize_remote_url( $url );
+
 		// download_url() goes through wp_safe_remote_get(), so redirects into
 		// the local network are rejected for us.
 		$temp = download_url( $url );
@@ -278,6 +280,59 @@ class PasteController {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Rewrite a known image CDN URL to its highest-quality variant.
+	 *
+	 * Google serves Docs images through `*.googleusercontent.com` with a sizing
+	 * suffix appended to the path — `=w624-h476`, `=s1600`, `=w800-no`, and so
+	 * on. Those are server-side renders at the display size the Docs viewer
+	 * asked for, not the original bytes, and the quality floor is well below
+	 * what the user uploaded. The convention for "give me the original" is
+	 * `=s0`: Google returns the stored image unresized and uncompressed, which
+	 * is what the paste importer actually wants before it re-encodes to WebP.
+	 *
+	 * Anything we do not recognise is returned unchanged.
+	 *
+	 * @param string $url Validated absolute URL from the pasted markup.
+	 */
+	private function maximize_remote_url( string $url ): string {
+		$host = strtolower( (string) wp_parse_url( $url, PHP_URL_HOST ) );
+		if ( '' === $host ) {
+			return $url;
+		}
+
+		$is_googleusercontent = $host === 'googleusercontent.com'
+			|| substr( $host, -22 ) === '.googleusercontent.com';
+
+		if ( ! $is_googleusercontent ) {
+			return apply_filters( 'ablocks/paste/image_source_url', $url );
+		}
+
+		$parts = wp_parse_url( $url );
+		if ( empty( $parts['path'] ) ) {
+			return $url;
+		}
+
+		// Strip any existing `=...` sizing suffix on the last path segment and
+		// replace it with `=s0`, the sentinel for "original bytes".
+		$segments            = explode( '/', $parts['path'] );
+		$last                = array_pop( $segments );
+		$last                = preg_replace( '/=[^\/]*$/', '', (string) $last );
+		$last               .= '=s0';
+		$segments[]          = $last;
+		$parts['path']       = implode( '/', $segments );
+
+		// Google ignores the query for serving sizes but may use it for auth
+		// tokens on private documents, so leave it alone.
+		$rebuilt = ( isset( $parts['scheme'] ) ? $parts['scheme'] . '://' : '' )
+			. ( $parts['host'] ?? '' )
+			. ( isset( $parts['port'] ) ? ':' . $parts['port'] : '' )
+			. $parts['path']
+			. ( isset( $parts['query'] ) ? '?' . $parts['query'] : '' );
+
+		return apply_filters( 'ablocks/paste/image_source_url', $rebuilt, $url );
 	}
 
 	/**

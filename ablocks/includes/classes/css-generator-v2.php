@@ -61,8 +61,12 @@ class CssGeneratorV2 {
 	}
 
 	public function add_class_styles( $class_name, $desktop_styles, $tablet_styles = [], $mobile_styles = [], $responsive_styles = [] ) {
+		// Sink-side selector sanitizer. See the matching note in css-generator.php
+		// and \ABlocks\Helper::esc_css_selector() — defense in depth against
+		// CVE-2026-40804 so a forgotten per-attribute sanitization cannot escape
+		// the inline <style>.
 		$this->class_styles[] = [
-			'class_name' => $class_name,
+			'class_name' => \ABlocks\Helper::esc_css_selector( $class_name ),
 			'desktop_styles' => $desktop_styles,
 			'tablet_styles' => $tablet_styles,
 			'mobile_styles' => $mobile_styles,

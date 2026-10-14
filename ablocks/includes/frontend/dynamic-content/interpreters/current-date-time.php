@@ -19,6 +19,6 @@ class CurrentDateTime extends Abstracts\Interpreter {
 		if ( empty( trim( $format ) ) ) {
 			$format = 'd M, Y h:i a';
 		}
-		return $pre . wp_date( empty( $format ) ? $default : $format ) . $post;
+		return $this->esc_label( $pre ) . $this->esc_value( wp_date( empty( $format ) ? $default : $format ) ) . $this->esc_label( $post );
 	}
 }

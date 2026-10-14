@@ -20,7 +20,7 @@ class Shortcode extends Abstracts\Interpreter {
 	}
 	public function content() : string {
 		$this->content = do_shortcode( $this->shortcode );
-		return $this->pre . ( $this->content === '' ? $this->default : $this->content ) . $this->post;
+		return $this->esc_label( $this->pre ) . ( $this->content === '' ? $this->esc_label( $this->default ) : $this->content ) . $this->esc_label( $this->post );
 	}
 	public function req_param_value( array $params ) : string {
 		return sanitize_text_field( $params[ $this->param ] ?? '' );

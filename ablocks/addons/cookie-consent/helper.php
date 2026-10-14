@@ -310,6 +310,23 @@ class Helper {
 			'radius'              => 10,
 			'max_width'           => 1180,
 			'shadow'              => true,
+
+			/*
+			 * Typography.
+			 *
+			 * The banner used to inherit everything from <body>, which is
+			 * often not what a site's visible text uses: a block theme can set
+			 * the body to a light 300 while every paragraph and heading carries
+			 * its own family and weight. `theme` reads the theme's own body
+			 * font from theme.json and pins the weights, so the banner matches
+			 * the page instead of the bare <body>.
+			 */
+			'font_source'         => 'theme',
+			'font_family'         => '',
+			'font_size'           => 14,
+			'font_weight'         => 400,
+			'title_weight'        => 600,
+			'button_weight'       => 500,
 		];
 	}
 
@@ -358,6 +375,10 @@ class Helper {
 			// only change what happens once something has been refused, and
 			// what they change is the cost of the refusal.
 			'consent_mode_ads'      => true,
+			// Global Privacy Control. A browser sending it has already said no
+			// to having data sold or shared, and several US state laws make
+			// that binding — so Accept all leaves marketing off for it.
+			'respect_gpc'           => true,
 			'record_enabled'        => true,
 			'record_ip'             => false,
 			'record_retention_days' => 730,
@@ -444,6 +465,26 @@ class Helper {
 	public static function save_settings( array $settings ) {
 		self::flush();
 		return update_option( ABLOCKS_COOKIE_CONSENT_SETTINGS_NAME, wp_json_encode( $settings ) );
+	}
+
+	/**
+	 * Cookies the well-known tags set, by category.
+	 *
+	 * Withdrawing consent has to stop the tracking, and a tag that already ran
+	 * leaves its identifiers behind. These are deleted when a category is
+	 * refused after being granted, alongside whatever the site lists in the
+	 * category's own cookie table. A trailing `*` matches a prefix.
+	 *
+	 * @return array Category slug => cookie names.
+	 */
+	public static function known_cookies() {
+		return apply_filters(
+			'ablocks/cookie_consent/known_cookies',
+			[
+				'analytics' => [ '_ga', '_ga_*', '_gid', '_gat*', '_hj*', '_clck', '_clsk', '_pk_*', 'mp_*', 'ajs_*' ],
+				'marketing' => [ '_fbp', '_fbc', '_gcl_*', '_ttp', '_tt_*', '_pin_unauth', '_pinterest_*', 'li_fat_id', '_uetsid', '_uetvid', '_twpid', 'muc_ads' ],
+			]
+		);
 	}
 
 	/**
