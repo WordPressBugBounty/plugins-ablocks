@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-3.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: aBlocks 2.17.0\n"
+"Project-Id-Version: aBlocks 2.18.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ablocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-14T10:54:35+00:00\n"
+"POT-Creation-Date: 2026-10-20T13:33:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ablocks\n"
@@ -403,7 +403,7 @@ msgstr ""
 
 #: addons/theme-builder/assets.php:214
 #: src/blocks/atomic-shared/inspector.js:2827
-#: src/components/dynamic-tags/index.js:836
+#: src/components/dynamic-tags/index.js:851
 #: src/components/inspector-tabs/index.js:53
 #: src/dashboard/pages/dashboard/cookieConsent/index.js:43
 msgid "Advanced"
@@ -2213,7 +2213,7 @@ msgstr ""
 #: src/blocks/form-input/settings.js:83
 #: src/blocks/form-input/settings.js:244
 #: src/blocks/form-password/helper.js:13
-#: src/components/dynamic-tags/index.js:779
+#: src/components/dynamic-tags/index.js:794
 msgid "Email"
 msgstr ""
 
@@ -2380,7 +2380,7 @@ msgstr ""
 #: src/blocks/paypal-button/settings.js:261
 #: src/blocks/stripe-button/settings.js:251
 #: src/components/dynamic-tags/dynamic-date-settings.js:78
-#: src/components/dynamic-tags/index.js:696
+#: src/components/dynamic-tags/index.js:711
 #: src/controls/background/overlay/options/index.js:99
 #: src/dashboard/pages/settings/Dashboard/RouteModal.js:149
 #: src/global/Integrations/components/AblocksTrigger/index.js:21
@@ -2400,7 +2400,7 @@ msgstr ""
 #: src/addons/formats/dynamic-content/dynamic-tags/dynamic-post-custom-fields-settings.js:98
 #: src/addons/formats/dynamic-content/dynamic-tags/index.js:238
 #: src/components/dynamic-tags/dynamic-post-custom-fields-settings.js:96
-#: src/components/dynamic-tags/index.js:668
+#: src/components/dynamic-tags/index.js:683
 msgid "Key"
 msgstr ""
 
@@ -2421,7 +2421,7 @@ msgstr ""
 
 #: src/addons/formats/dynamic-content/dynamic-tags/dynamic-post-terms-settings.js:98
 #: src/components/dynamic-tags/dynamic-post-terms-settings.js:91
-#: src/components/dynamic-tags/index.js:74
+#: src/components/dynamic-tags/index.js:75
 msgid "Taxonomy"
 msgstr ""
 
@@ -2453,12 +2453,13 @@ msgstr ""
 
 #: src/addons/formats/dynamic-content/dynamic-tags/helper.js:5
 #: src/components/dynamic-tags/helper.js:33
-#: src/components/dynamic-tags/index.js:704
+#: src/components/dynamic-tags/index.js:719
 msgid "Post"
 msgstr ""
 
 #: src/addons/formats/dynamic-content/dynamic-tags/helper.js:9
 #: src/components/dynamic-tags/helper.js:37
+#: src/components/dynamic-tags/index.js:67
 msgid "Post Custom Field"
 msgstr ""
 
@@ -2532,7 +2533,7 @@ msgstr ""
 #: src/addons/formats/dynamic-content/dynamic-tags/helper.js:51
 #: src/blocks/academy-courses/settings.js:228
 #: src/components/dynamic-tags/helper.js:79
-#: src/components/dynamic-tags/index.js:78
+#: src/components/dynamic-tags/index.js:79
 msgid "Author"
 msgstr ""
 
@@ -2629,13 +2630,13 @@ msgid "Current Date Time"
 msgstr ""
 
 #: src/addons/formats/dynamic-content/dynamic-tags/index.js:80
-#: src/components/dynamic-tags/index.js:535
+#: src/components/dynamic-tags/index.js:550
 msgid "Data Source"
 msgstr ""
 
 #: src/addons/formats/dynamic-content/dynamic-tags/index.js:102
-#: src/components/dynamic-tags/index.js:555
-#: src/components/dynamic-tags/index.js:561
+#: src/components/dynamic-tags/index.js:570
+#: src/components/dynamic-tags/index.js:576
 msgid "Dynamic Tag"
 msgstr ""
 
@@ -2644,23 +2645,23 @@ msgid "Dynamic Tags"
 msgstr ""
 
 #: src/addons/formats/dynamic-content/dynamic-tags/index.js:158
-#: src/components/dynamic-tags/index.js:606
+#: src/components/dynamic-tags/index.js:621
 msgid "Max Number Of Words"
 msgstr ""
 
 #: src/addons/formats/dynamic-content/dynamic-tags/index.js:187
-#: src/components/dynamic-tags/index.js:634
-#: src/components/dynamic-tags/index.js:804
+#: src/components/dynamic-tags/index.js:649
+#: src/components/dynamic-tags/index.js:819
 msgid "Meta Key"
 msgstr ""
 
 #: src/addons/formats/dynamic-content/dynamic-tags/index.js:222
-#: src/components/dynamic-tags/index.js:655
+#: src/components/dynamic-tags/index.js:670
 msgid "Include Context"
 msgstr ""
 
 #: src/addons/formats/dynamic-content/dynamic-tags/index.js:254
-#: src/components/dynamic-tags/index.js:861
+#: src/components/dynamic-tags/index.js:876
 msgid "Fallback"
 msgstr ""
 
@@ -2799,7 +2800,7 @@ msgstr ""
 #: src/blocks/advance-lists/settings.js:594
 #: src/blocks/atomic-shared/inspector.js:600
 #: src/blocks/breadcrumb/settings.js:124
-#: src/blocks/button/settings.js:268
+#: src/blocks/button/settings.js:269
 #: src/blocks/countdown/settings.js:451
 #: src/blocks/countdown/settings.js:480
 #: src/blocks/countdown/settings.js:519
@@ -3308,9 +3309,9 @@ msgstr ""
 #: src/blocks/atomic-shared/inspector.js:545
 #: src/blocks/atomic-svg/edit.js:265
 #: src/blocks/breadcrumb/settings.js:134
-#: src/blocks/button/settings.js:284
-#: src/blocks/button/settings.js:292
-#: src/blocks/button/settings.js:325
+#: src/blocks/button/settings.js:285
+#: src/blocks/button/settings.js:293
+#: src/blocks/button/settings.js:326
 #: src/blocks/carousel/settings.js:547
 #: src/blocks/carousel/settings.js:671
 #: src/blocks/carousel/settings.js:1006
@@ -3759,7 +3760,7 @@ msgstr ""
 #: src/blocks/accordion/settings.js:124
 #: src/blocks/accordion/settings.js:278
 #: src/blocks/atomic-shared/inspector.js:685
-#: src/blocks/button/settings.js:381
+#: src/blocks/button/settings.js:382
 #: src/blocks/carousel/settings.js:765
 #: src/blocks/carousel/settings.js:1096
 #: src/blocks/content-timeline/settings.js:323
@@ -4119,7 +4120,7 @@ msgstr ""
 #: src/blocks/accordion/settings.js:168
 #: src/blocks/advance-list-item/settings.js:479
 #: src/blocks/advance-lists/settings.js:602
-#: src/blocks/button/settings.js:276
+#: src/blocks/button/settings.js:277
 #: src/blocks/coupon/settings.js:121
 #: src/blocks/coupon/settings.js:203
 #: src/blocks/coupon/settings.js:340
@@ -4436,8 +4437,8 @@ msgstr ""
 #: src/blocks/academy-student-registration-form/settings.js:224
 #: src/blocks/atomic-shared/inspector.js:495
 #: src/blocks/atomic-shared/inspector.js:525
-#: src/blocks/button/settings.js:306
-#: src/blocks/button/settings.js:339
+#: src/blocks/button/settings.js:307
+#: src/blocks/button/settings.js:340
 #: src/blocks/content-timeline/settings.js:196
 #: src/blocks/coupon/settings.js:144
 #: src/blocks/coupon/settings.js:226
@@ -4800,8 +4801,8 @@ msgstr ""
 #: src/blocks/academy-review-form/settings.js:231
 #: src/blocks/atomic-shared/effects.js:233
 #: src/blocks/atomic-shared/effects.js:358
-#: src/blocks/button/settings.js:400
-#: src/blocks/button/settings.js:405
+#: src/blocks/button/settings.js:401
+#: src/blocks/button/settings.js:406
 #: src/blocks/carousel/settings.js:1108
 #: src/blocks/carousel/settings.js:1116
 #: src/blocks/countdown/settings.js:382
@@ -4894,7 +4895,7 @@ msgstr ""
 #: src/blocks/academy-review-form/settings.js:400
 #: src/blocks/academy-review-form/settings.js:480
 #: src/blocks/academy-review-form/settings.js:566
-#: src/blocks/button/settings.js:354
+#: src/blocks/button/settings.js:355
 #: src/blocks/carousel/settings.js:1062
 #: src/blocks/filterable-cards/settings.js:376
 #: src/blocks/loop-load-more/settings.js:219
@@ -4947,7 +4948,7 @@ msgstr ""
 #: src/blocks/atomic-shared/inspector.js:754
 #: src/blocks/breadcrumb/settings.js:174
 #: src/blocks/breadcrumb/settings.js:366
-#: src/blocks/button/settings.js:392
+#: src/blocks/button/settings.js:393
 #: src/blocks/carousel/settings.js:1087
 #: src/blocks/chart/settings.js:1999
 #: src/blocks/chart/settings.js:2255
@@ -5692,8 +5693,8 @@ msgstr ""
 #: src/blocks/academy-pdf/settings.js:26
 #: src/blocks/player/settings.js:89
 #: src/blocks/video/settings.js:90
-#: src/components/dynamic-tags/index.js:472
-#: src/components/dynamic-tags/index.js:522
+#: src/components/dynamic-tags/index.js:481
+#: src/components/dynamic-tags/index.js:537
 #: src/controls/video-control/options/video-source/index.js:27
 #: src/dashboard/pages/scanner/Fonts.js:131
 msgid "Source"
@@ -5836,7 +5837,7 @@ msgid "Toggle Icon"
 msgstr ""
 
 #: src/blocks/accordion/settings.js:300
-#: src/blocks/button/settings.js:253
+#: src/blocks/button/settings.js:254
 #: src/blocks/counter/settings.js:108
 #: src/blocks/coupon/settings.js:65
 #: src/blocks/coupon/settings.js:284
@@ -5947,7 +5948,7 @@ msgid "Both Of Side"
 msgstr ""
 
 #: src/blocks/accordion/settings.js:358
-#: src/blocks/button/settings.js:458
+#: src/blocks/button/settings.js:459
 #: src/blocks/info-box/components/button/settings.js:260
 #: src/blocks/menu-item/settings.js:124
 #: src/blocks/paypal-button/settings.js:518
@@ -6088,9 +6089,9 @@ msgstr ""
 #: src/blocks/advance-list-item/settings.js:174
 #: src/blocks/advance-lists/data.js:106
 #: src/blocks/advance-lists/settings.js:43
-#: src/blocks/button/settings.js:417
-#: src/blocks/button/settings.js:424
-#: src/blocks/button/settings.js:485
+#: src/blocks/button/settings.js:418
+#: src/blocks/button/settings.js:425
+#: src/blocks/button/settings.js:486
 #: src/blocks/content-timeline-child/settings.js:72
 #: src/blocks/content-timeline/settings.js:354
 #: src/blocks/counter/settings.js:428
@@ -7060,7 +7061,7 @@ msgstr ""
 #: src/blocks/storeengine-funnel-decline/settings.js:43
 #: src/blocks/storeengine-funnel-offer/settings.js:51
 #: src/components/content-style-tabs/index.js:17
-#: src/components/dynamic-tags/index.js:72
+#: src/components/dynamic-tags/index.js:73
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:66
 #: src/dashboard/pages/dashboard/cookieConsent/BannerTab.js:313
 #: src/dashboard/pages/settings/EditorOptions/DesignAudit.js:146
@@ -7595,7 +7596,7 @@ msgid "Open in new tab"
 msgstr ""
 
 #: src/blocks/atomic-shared/inspector.js:642
-#: src/controls/link-control/index.js:86
+#: src/controls/link-control/index.js:88
 msgid "Add nofollow"
 msgstr ""
 
@@ -8589,7 +8590,7 @@ msgstr ""
 msgid "Extra large"
 msgstr ""
 
-#: src/blocks/button/settings.js:429
+#: src/blocks/button/settings.js:430
 #: src/blocks/info-box/components/button/settings.js:231
 #: src/blocks/menu-item/settings.js:96
 #: src/blocks/paypal-button/settings.js:495
@@ -8597,7 +8598,7 @@ msgstr ""
 msgid "Icon position"
 msgstr ""
 
-#: src/blocks/button/settings.js:435
+#: src/blocks/button/settings.js:436
 #: src/blocks/image-comparison/deprecated/save.js:49
 #: src/blocks/image-comparison/render.js:243
 #: src/blocks/image-comparison/save.js:50
@@ -8605,11 +8606,11 @@ msgstr ""
 #: src/blocks/menu-item/settings.js:102
 #: src/blocks/paypal-button/settings.js:501
 #: src/blocks/stripe-button/settings.js:491
-#: src/components/dynamic-tags/index.js:841
+#: src/components/dynamic-tags/index.js:856
 msgid "Before"
 msgstr ""
 
-#: src/blocks/button/settings.js:442
+#: src/blocks/button/settings.js:443
 #: src/blocks/image-comparison/deprecated/save.js:54
 #: src/blocks/image-comparison/render.js:277
 #: src/blocks/image-comparison/save.js:55
@@ -8617,7 +8618,7 @@ msgstr ""
 #: src/blocks/menu-item/settings.js:109
 #: src/blocks/paypal-button/settings.js:505
 #: src/blocks/stripe-button/settings.js:495
-#: src/components/dynamic-tags/index.js:851
+#: src/components/dynamic-tags/index.js:866
 msgid "After"
 msgstr ""
 
@@ -10141,7 +10142,7 @@ msgstr ""
 
 #: src/blocks/featured-image/index.js:8
 #: src/blocks/featured-image/settings.js:556
-#: src/components/dynamic-tags/index.js:104
+#: src/components/dynamic-tags/index.js:105
 #: src/utils/block-lists.js:367
 msgid "Featured Image"
 msgstr ""
@@ -10497,7 +10498,7 @@ msgid "Field Map"
 msgstr ""
 
 #: src/blocks/form-builder/form-setting/ActionAfterSubmission/actions/ConvertKitAction.js:123
-#: src/components/dynamic-tags/index.js:764
+#: src/components/dynamic-tags/index.js:779
 msgid "First Name"
 msgstr ""
 
@@ -10600,7 +10601,7 @@ msgstr ""
 
 #: src/blocks/form-builder/form-setting/ActionAfterSubmission/actions/WebhookAction.js:42
 #: src/blocks/form-builder/form-setting/ActionAfterSubmission/FormConfirmation/index.js:234
-#: src/controls/link-control/index.js:75
+#: src/controls/link-control/index.js:77
 msgid "Open in new window"
 msgstr ""
 
@@ -11144,7 +11145,7 @@ msgstr ""
 #: src/blocks/form-input/helper.js:13
 #: src/blocks/form-input/settings.js:65
 #: src/blocks/form-input/settings.js:82
-#: src/components/dynamic-tags/index.js:760
+#: src/components/dynamic-tags/index.js:775
 msgid "Username"
 msgstr ""
 
@@ -12408,7 +12409,7 @@ msgid "Only works on the same domain for security reasons."
 msgstr ""
 
 #: src/blocks/logout/settings.js:255
-#: src/components/dynamic-tags/index.js:753
+#: src/components/dynamic-tags/index.js:768
 msgid "Display Name"
 msgstr ""
 
@@ -16059,7 +16060,7 @@ msgid "Request Parameter"
 msgstr ""
 
 #: src/components/dynamic-tags/index.js:39
-#: src/components/dynamic-tags/index.js:822
+#: src/components/dynamic-tags/index.js:837
 #: src/dashboard/pages/dashboard/themeBuilder/builder/FormInner.js:108
 #: src/dashboard/pages/dashboard/themeBuilder/index.js:279
 msgid "Shortcode"
@@ -16085,71 +16086,71 @@ msgstr ""
 msgid "Comments Url"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:69
+#: src/components/dynamic-tags/index.js:70
 msgid "Internal Url"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:77
+#: src/components/dynamic-tags/index.js:78
 msgid "Media"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:105
+#: src/components/dynamic-tags/index.js:106
 msgid "Site Logo"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:107
+#: src/components/dynamic-tags/index.js:108
 msgid "Author Profile Picture"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:111
+#: src/components/dynamic-tags/index.js:112
 msgid "User Profile Picture"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:468
+#: src/components/dynamic-tags/index.js:477
 msgid "Dynamic Link"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:516
+#: src/components/dynamic-tags/index.js:531
 msgid "Select Dynamic image option"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:700
+#: src/components/dynamic-tags/index.js:715
 msgid "Get"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:708
+#: src/components/dynamic-tags/index.js:723
 msgid "Query Var"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:724
+#: src/components/dynamic-tags/index.js:739
 msgid "Parameter Name"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:741
+#: src/components/dynamic-tags/index.js:756
 msgid "Field"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:745
+#: src/components/dynamic-tags/index.js:760
 msgid "Choose"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:749
+#: src/components/dynamic-tags/index.js:764
 msgid "ID"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:771
+#: src/components/dynamic-tags/index.js:786
 msgid "Last Name"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:775
+#: src/components/dynamic-tags/index.js:790
 msgid "Bio"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:783
+#: src/components/dynamic-tags/index.js:798
 msgid "Website"
 msgstr ""
 
-#: src/components/dynamic-tags/index.js:787
+#: src/components/dynamic-tags/index.js:802
 msgid "User Meta"
 msgstr ""
 
@@ -16508,11 +16509,11 @@ msgstr ""
 msgid "Display size"
 msgstr ""
 
-#: src/controls/link-control/index.js:69
+#: src/controls/link-control/index.js:71
 msgid "Link Options"
 msgstr ""
 
-#: src/controls/link-control/index.js:99
+#: src/controls/link-control/index.js:101
 msgid "Custom Attributes"
 msgstr ""
 

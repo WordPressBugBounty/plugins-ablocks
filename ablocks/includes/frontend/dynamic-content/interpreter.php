@@ -53,12 +53,16 @@ class Interpreter {
 					array_pop( $plain );
 				}
 				$in_attribute = self::is_inside_tag( $source, $offset, $scan );
+				$url_start    = $in_attribute && self::starts_url_attribute( $source, $offset );
 				// A tag that is also in this request came from the visitor —
 				// a search box, a page echoing a query arg — not the author.
 				if ( self::is_reflected( $plain[0] ) ) {
 					return self::neutralize( $plain[0] );
 				}
-				return $this->apply_changes( $plain, $in_attribute );
+				$output = $this->apply_changes( $plain, $in_attribute );
+				// esc_attr() keeps `javascript:`; a tag that opens a URL
+				// attribute decides its scheme, so drop unsafe ones.
+				return $url_start ? wp_kses_bad_protocol( $output, wp_allowed_protocols() ) : $output;
 			},
 			$this->content,
 			-1,
@@ -134,6 +138,19 @@ class Interpreter {
 		}//end while
 		$state['pos'] = max( $state['pos'], $offset );
 		return 'tag' === $state['mode'];
+	}
+
+	/**
+	 * Whether the tag at $offset is the first thing in a URL attribute's
+	 * value (href, src, …), where it would choose the URL's scheme.
+	 *
+	 * @param string $html   The block's HTML.
+	 * @param int    $offset Byte offset of the tag.
+	 * @return bool
+	 */
+	private static function starts_url_attribute( string $html, int $offset ) : bool {
+		$before = substr( $html, max( 0, $offset - 64 ), min( $offset, 64 ) );
+		return 1 === preg_match( '~(?:^|[\s"\'/])(?:href|src|action|formaction|poster|cite|background|data|xlink:href|srcset)\s*=\s*["\']?\s*$~i', $before );
 	}
 
 	/**

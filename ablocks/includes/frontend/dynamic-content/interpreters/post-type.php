@@ -33,14 +33,36 @@ class PostType extends Abstracts\Interpreter {
 			$this->default = strval( $this->setting[1] ?? '' );
 		}
 	}
+	/**
+	 * Whether this post's data may be shown to the current visitor. The ID
+	 * comes from the block, so any editor could otherwise print a private
+	 * or draft post's fields, or a password-protected post's meta.
+	 *
+	 * @return bool
+	 */
+	protected function can_read_post() : bool {
+		$post = get_post( $this->ID );
+		if ( ! $post ) {
+			return false;
+		}
+		if ( post_password_required( $post ) && ! in_array( $this->field, [ 'post-title', 'post-id' ], true ) ) {
+			return false;
+		}
+		// read_post also covers drafts (edit rights) and private posts.
+		return is_post_publicly_viewable( $post ) || current_user_can( 'read_post', $post->ID );
+	}
+
 	public function content() : string {
+		if ( ! $this->can_read_post() ) {
+			return $this->esc_label( $this->pre ) . $this->esc_label( $this->default ) . $this->esc_label( $this->post );
+		}
 		$thumbnail_id = (int) get_post_thumbnail_id( $this->ID );
 
 		switch ( $this->field ) {
 			case 'post-custom-field':
 				$key = $this->is_richtext ? ( empty( $this->m_key ) ? ( $this->setting[2] ?? '' ) : $this->m_key ) : ( $this->setting[6] ?? '' );
 				$this->default = $this->is_richtext ? ( $this->setting[1] ?? '' ) : $this->default;
-				$meta_data = empty( $key ) ? '' : get_post_meta( $this->ID, $key, true );
+				$meta_data = ! $this->is_allowed_meta_key( $key, 'post' ) ? '' : get_post_meta( $this->ID, $key, true );
 				$this->content = is_string( $meta_data ) || is_numeric( $meta_data ) ? $meta_data : '';
 				break;
 
@@ -131,7 +153,8 @@ class PostType extends Abstracts\Interpreter {
 				break;
 
 			case 'author-meta':
-				$this->content = $this->get_author_data( $this->is_richtext ? ( $this->setting[2] ?? '' ) : ( $this->setting[6] ?? '' ), true );
+				$meta_key      = $this->is_richtext ? ( $this->setting[2] ?? '' ) : ( $this->setting[6] ?? '' );
+				$this->content = $this->is_allowed_meta_key( $meta_key, 'user' ) ? $this->get_author_data( $meta_key, true ) : '';
 				break;
 
 			case 'author-first-name':
@@ -251,12 +274,13 @@ class PostType extends Abstracts\Interpreter {
 	public function get_author_data( string $field, bool $meta = false ) : string {
 		$id = (int) get_post_field( 'post_author', $this->ID );
 		if ( $meta ) {
-			return get_the_author_meta( $field, $id );
+			$value = get_the_author_meta( $field, $id );
+			return is_scalar( $value ) ? (string) $value : '';
 		}
 
 		if ( $id ) {
 			$user_data = get_userdata( $id );
-			if ( ! property_exists( $user_data, 'data' ) ) {
+			if ( ! $user_data || ! property_exists( $user_data, 'data' ) ) {
 				return '';
 			}
 			$user_data = $user_data->data;
@@ -269,7 +293,7 @@ class PostType extends Abstracts\Interpreter {
 		$id = (int) get_post_thumbnail_id( $this->ID );
 		if ( $id ) {
 			if ( $attacment = get_post( $id ) ) {
-				return property_exists( $attacment, $field ) ? $attacment->{$field} : '';
+				return property_exists( $attacment, $field ) ? (string) $attacment->{$field} : '';
 			}
 		}
 		return '';

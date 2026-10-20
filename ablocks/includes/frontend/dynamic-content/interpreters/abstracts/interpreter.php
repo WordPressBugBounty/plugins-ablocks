@@ -62,5 +62,32 @@ abstract class Interpreter {
 		return $this->in_attribute ? esc_url( $value ) : esc_url_raw( $value );
 	}
 
+	/**
+	 * Whether a meta key may be printed. A tag is written by anyone who can
+	 * edit a post, and its output can be sent anywhere (an image URL, a link),
+	 * so secrets — hashes, tokens, roles, protected `_` keys — never resolve.
+	 *
+	 * @param string $key       Meta key or user field.
+	 * @param string $meta_type 'post' or 'user'.
+	 * @return bool
+	 */
+	protected function is_allowed_meta_key( $key, string $meta_type ) : bool {
+		$key = is_string( $key ) ? trim( $key ) : '';
+		if ( '' === $key || is_protected_meta( $key, $meta_type ) ) {
+			return false;
+		}
+		if ( 'user' === $meta_type ) {
+			global $wpdb;
+			$lower = strtolower( $key );
+			if ( in_array( $lower, [ 'user_pass', 'user_activation_key', 'session_tokens', 'user_level', 'capabilities', 'community-events-location' ], true ) ) {
+				return false;
+			}
+			if ( 0 === strpos( $lower, strtolower( $wpdb->prefix ) ) || 0 === strpos( $lower, strtolower( $wpdb->base_prefix ) ) ) {
+				return false;
+			}
+		}
+		return ! preg_match( '/pass(word|wd)?(_|-|$)|user_pass|token|secret|api[_-]?key|private[_-]?key|nonce|(^|_)otp($|_)|2fa|totp|auth[_-]?(key|code)|salt|hash|activation/i', $key );
+	}
+
 	abstract public function content() : string;
 }

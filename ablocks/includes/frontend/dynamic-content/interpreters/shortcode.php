@@ -20,9 +20,9 @@ class Shortcode extends Abstracts\Interpreter {
 	}
 	public function content() : string {
 		$this->content = do_shortcode( $this->shortcode );
-		return $this->esc_label( $this->pre ) . ( $this->content === '' ? $this->esc_label( $this->default ) : $this->content ) . $this->esc_label( $this->post );
-	}
-	public function req_param_value( array $params ) : string {
-		return sanitize_text_field( $params[ $this->param ] ?? '' );
+		// Shortcode HTML is fine in text, but in an attribute it would end
+		// the attribute; flatten it there.
+		$value = $this->content === '' ? $this->esc_label( $this->default ) : ( $this->in_attribute ? esc_attr( wp_strip_all_tags( $this->content ) ) : $this->content );
+		return $this->esc_label( $this->pre ) . $value . $this->esc_label( $this->post );
 	}
 }

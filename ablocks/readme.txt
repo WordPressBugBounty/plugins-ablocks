@@ -4,7 +4,7 @@ Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.8
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.17.0
+Stable tag: 2.18.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -308,6 +308,9 @@ Privacy: https://policies.google.com/privacy
 Our external packages use [Lottie](https://github.com/chenqingspring/react-lottie) and [Striptags](https://github.com/ericnorris/striptags) is distributed under the terms of the MIT. Additionally, we incorporate [FontAwesome v6](https://fontawesome.com/license/free) under the CC BY 4.0 License, and [dnd kit](https://github.com/clauderic/dnd-kit) licensed under the MIT License.
 
 == Changelog ==
+
+= 2.18.0 - 20/10/2026 =
+* Fixed – Dynamic Content Security issues
 
 = 2.17.0 - 14/10/2026 =
 * Security – CSS generator: a sink-side sanitizer now strips `<`, `{`, `}`, `;`, `\`, backtick and newlines from every selector before it reaches an inline `<style>`, so a block author who forgets to sanitize an attribute reused in a selector cannot reintroduce a stored-XSS of the CVE-2026-40804 class. Legitimate selector syntax (`.`, `#`, `>`, `+`, `~`, `,`, `:`, `::`, `[attr=val]`) and the `{{WRAPPER}}` placeholder pass through unchanged

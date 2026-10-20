@@ -25,7 +25,7 @@ class UserInfo extends Abstracts\Interpreter {
 		$current_user = wp_get_current_user();
 		switch ( $this->field ) {
 			case 'id':
-					$this->content = $current_user->ID;
+					$this->content = (string) $current_user->ID;
 				break;
 			case 'display-name':
 					$this->content = $current_user->display_name;
@@ -49,7 +49,9 @@ class UserInfo extends Abstracts\Interpreter {
 					$this->content = $current_user->user_url;
 				break;
 			case 'user-meta':
-					$this->content = get_user_meta( $current_user->ID, $this->setting[1] ?? '', true );
+					$meta_key      = $this->setting[1] ?? '';
+					$meta_data     = $this->is_allowed_meta_key( $meta_key, 'user' ) ? get_user_meta( $current_user->ID, $meta_key, true ) : '';
+					$this->content = is_scalar( $meta_data ) ? (string) $meta_data : '';
 				break;
 		}//end switch
 		// Profile fields and user meta are written by the user, not the site.

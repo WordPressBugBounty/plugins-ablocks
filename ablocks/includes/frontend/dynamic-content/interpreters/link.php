@@ -9,10 +9,11 @@ class Link extends Abstracts\Interpreter {
 	protected int $post_id;
 	protected string $field;
 
-	public function __construct( string $name, array $setting, bool $is_richtext = false ) {
+	public function __construct( string $name, array $setting, bool $is_richtext = false, $context = [] ) {
 		parent::__construct( $name, $setting, $is_richtext );
-		$this->field   = strval( $this->setting[0] ?? '' );
-		$this->post_id = get_the_ID();
+		$this->field = strval( $this->setting[0] ?? '' );
+		// Inside a loop the block's context names the card's post.
+		$this->post_id = isset( $context['postId'] ) ? (int) $context['postId'] : (int) get_the_ID();
 	}
 	public function content() : string {
 		switch ( $this->field ) {
@@ -56,6 +57,16 @@ class Link extends Abstracts\Interpreter {
 			case 'featured-image-attachment-url':
 				$attachment_id = get_post_meta( $this->post_id, '_thumbnail_id', true );
 				$this->content = $attachment_id ? get_permalink( $attachment_id ) : '';
+				break;
+
+			case 'post-custom-field':
+				$key = strval( $this->setting[1] ?? '' );
+				// Same rules as the text field: no protected or secret keys,
+				// and nothing from a password-protected post until it is unlocked.
+				$meta_data     = $this->is_allowed_meta_key( $key, 'post' ) && ! post_password_required( $this->post_id )
+					? get_post_meta( $this->post_id, $key, true )
+					: '';
+				$this->content = is_string( $meta_data ) ? trim( $meta_data ) : '';
 				break;
 		}//end switch
 		return $this->esc_url_value( $this->content );
